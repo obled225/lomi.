@@ -66,7 +66,7 @@ export default async function Page({ params }: { params: Promise<{ slug?: string
         <LLMCopyButton markdownUrl={`${page.url}.mdx`} />
         <ViewOptions
           markdownUrl={`${page.url}.mdx`}
-          githubUrl={`https://github.com/babacar/developers/blob/main/content/docs/${page.path}`}
+          githubUrl={`https://github.com/lomiafrica/lomi./tree/main/apps/docs/content/docs/${page.path}`}
         />
       </div>
       <div className="prose flex-1 text-fd-foreground/80">

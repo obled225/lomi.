@@ -5,6 +5,7 @@ import { Body } from '@/app/layout.client';
 import { Provider } from './provider';
 import type { ReactNode } from 'react';
 import { Geist, Geist_Mono } from 'next/font/google';
+import { Analytics } from "@vercel/analytics/next";
 
 export const metadata = createMetadata({
   title: {
@@ -41,6 +42,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     >
       <Body>
         <Provider>{children}</Provider>
+        <Analytics />
       </Body>
     </html>
   );
