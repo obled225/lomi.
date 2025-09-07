@@ -1,24 +1,9 @@
-[submodule "apps/shopify"]
-	path = apps/shopify
-	url = https://github.com/lomiafrica/shopify.lomi.africa
-[submodule "apps/admin"]
-	path = apps/admin
-	url = https://github.com/lomiafrica/admin.lomi.africa
-[submodule "apps/commerce"]
-	path = apps/commerce
-	url = https://github.com/lomiafrica/commerce.lomi.africa
-[submodule "apps/store"]
-	path = apps/store
-	url = https://github.com/lomiafrica/store.lomi.africa
 [submodule "apps/website"]
 	path = apps/website
 	url = https://github.com/lomiafrica/website.git
-[submodule "apps/events"]
-	path = apps/events
-	url = https://github.com/lomiafrica/events.git
-[submodule "apps/jumbo"]
-	path = apps/jumbo
-	url = https://github.com/lomiafrica/jumbo.git
-[submodule "apps/dako"]
-	path = apps/dako
-	url = https://github.com/lomiafrica/dako.git
+[submodule "apps/admin"]
+	path = apps/admin
+	url = https://github.com/lomiafrica/admin.lomi.africa
+[submodule "apps/shopify"]
+	path = apps/shopify
+	url = https://github.com/lomiafrica/shopify.lomi.africa
