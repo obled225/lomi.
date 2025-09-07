@@ -17,7 +17,7 @@
 <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
 <a href="https://developers.lomi.africa">Docs</a>
 <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
-<a href="https://developers.lomi.africa/reference/core/overview">API</a>
+<a href="https://docs.lomi.africa/reference/core/overview">API</a>
 <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
 <a href="https://lomi.africa/blog">Blog</a>
 

@@ -35,7 +35,7 @@ export function baseOptions(): BaseLayoutProps {
     nav: {
       title: logo,
     },
-    // see https://developers.lomi.africa/docs/ui/navigation/links
+    // see https://docs.lomi.africa/docs/ui/navigation/links
     links: linkItems,
   };
 }

@@ -61,7 +61,7 @@ Please refer to the main [CONTRIBUTING.md](https://github.com/lomiafrica/lomi./b
 
 ## Support
 
-Contact [hello@lomi.africa](mailto:hello@lomi.africa) or visit our [support center](https://developers.lomi.africa/docs/support/contact).
+Contact [hello@lomi.africa](mailto:hello@lomi.africa) or visit our [support center](https://docs.lomi.africa/docs/support/contact).
 
 ## License
 

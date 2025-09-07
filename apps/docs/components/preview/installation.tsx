@@ -38,7 +38,7 @@ export function Installation({ name }: { name: string }) {
 
       <TabsContent value="shadcn">
         <CodeBlock
-          code={`npx shadcn@latest add https://developers.lomi.africa/r/${name}.json`}
+          code={`npx shadcn@latest add https://docs.lomi.africa/r/${name}.json`}
           lang="bash"
         />
       </TabsContent>

@@ -30,7 +30,7 @@ export async function getLLMText(page: Page) {
 
   return `# ${category}: ${page.data.title}
 URL: ${page.url}
-Source: https://raw.githubusercontent.com/lomiafrica/developers.lomi.africa/refs/heads/main/content/docs/${page.path}
+Source: https://raw.githubusercontent.com/lomiafrica/docs.lomi.africa/refs/heads/main/content/docs/${page.path}
 
 ${page.data.description}
         
