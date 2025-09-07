@@ -4,12 +4,6 @@
 [submodule "apps/shopify"]
 	path = apps/shopify
 	url = https://github.com/lomiafrica/shopify.lomi.africa
-[submodule "apps/api"]
-	path = apps/api
-	url = https://github.com/lomiafrica/api.lomi.africa
-[submodule "apps/cli"]
-	path = apps/cli
-	url = https://github.com/lomiafrica/cli.lomi.africa
 [submodule "apps/admin"]
 	path = apps/admin
 	url = https://github.com/lomiafrica/admin.lomi.africa
