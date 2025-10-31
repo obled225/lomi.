@@ -13,8 +13,8 @@ const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || "";
 const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
 // Define currently supported providers and currencies
-const SUPPORTED_PROVIDERS = ["ORANGE", "WAVE", "NOWPAYMENTS"];
-const SUPPORTED_CURRENCIES = ["XOF"];
+const SUPPORTED_PROVIDERS = ["ORANGE", "WAVE", "NOWPAYMENTS", "MTN", "STRIPE", "SPI"];
+const SUPPORTED_CURRENCIES = ["XOF", "USD", "EUR"];
 
 // Error codes for better client-side error handling
 enum ErrorCode {
