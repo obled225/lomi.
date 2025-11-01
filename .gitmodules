@@ -7,3 +7,6 @@
 [submodule "apps/shopify"]
 	path = apps/shopify
 	url = https://github.com/lomiafrica/shopify.lomi.africa
+[submodule "apps/pi-spi-sdk"]
+	path = apps/pi-spi-sdk
+	url = https://github.com/lomiafrica/pi-spi-sdk.git
