@@ -1,13 +1,12 @@
 # Build files
 dist/
 node_modules/
-data/
 test/
 
 # Environment variables
 .env
 
-# Logs
-logs
+# Logs & config
+logs/
 *.log
-npm-debug.log*
+.cursor
