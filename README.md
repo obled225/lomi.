@@ -3,11 +3,6 @@
 	<h1 align="center"><b>lomi.</b></h1>
 <p align="center">
     Helping West African ventures sell online
-    <br />
-    <br />
-    <a href="https://discord.gg/lomi">Discord</a>
-    ·
-    <a href="https://github.com/lomiafrica/website/issues">Issues</a>
   </p>
 </p>
 
@@ -16,8 +11,6 @@
 <a href="https://lomi.africa">Website</a>
 <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
 <a href="https://docs.lomi.africa">Docs</a>
-<span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
-<a href="https://docs.lomi.africa/reference/core/overview">API</a>
 <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
 <a href="https://lomi.africa/blog">Blog</a>
 
@@ -53,24 +46,22 @@
 
 ## About lomi.
 
-lomi. is an open-source payment processing platform that integrates multiple payment service providers and provides a seamless experience for merchants and their customers across francophone West Africa and beyond. Our platform simplifies product, services, usage, and subscription billing while ensuring the highest levels of security, reliability, and compliance.
+lomi. is an open-source payment processing platform that integrates multiple payment service providers and provides a seamless experience for merchants and their customers across West Africa and beyond. Our platform simplifies product, services, usage, and subscription billing while ensuring the highest levels of security, reliability, and compliance.
 
-Our platform is built on top of the BCEAO's PI-SPI infrastructure (La Plateforme d'Interopérabilité du Service de Paiement Instantané), enabling seamless interoperability between banks and mobile money providers across the UEMOA region (8 countries). This eliminates the need for multiple provider integrations and provides a seamless unified payment experience.
-
-## Open-source Roadmap
+## Open-source roadmap
 
 We are progressively open-sourcing the entire lomi. project:
 
 - **Currently Open-source**:
-  - Merchant dashboard : **[apps/website](https://github.com/lomiafrica/website)**
-  - Documentation website: **[apps/developers](https://github.com/lomiafrica/lomi.)**
+  - Documentation: **[apps/docs](./apps/docs)**
+  - CLI tool: **[apps/cli](./apps/cli)**
+  - APIs: **[apps/api](./apps/api)**
+  - SDK: **[apps/sdk](./apps/sdk)**
+  - Boilerplate Next.js + Sanity: **[apps/events](https://github.com/lomiafrica/events/)**
 
-- **Opening Soon**:
-  - API service:  **[apps/api](https://github.com/lomiafrica/api.lomi.africa)**
-  - Boilerplate Next.js + Medusa: **[apps/store](https://github.com/lomiafrica/store.lomi.africa)**
-  - Boilerplate Vite + Medusa: **[apps/commerce](https://github.com/lomiafrica/commerce.lomi.africa)**
-  - Shopify extension: **[apps/shopify](https://github.com/lomiafrica/shopify.lomi.africa)**
-  - CLI tool: **[apps/cli](https://github.com/lomiafrica/cli.lomi.africa)**
+- **Opening soon**:
+  - Merchant dashboard: **[apps/website](./apps/website)**
+  - Shopify extension: **[apps/shopify](./apps/shopify)**
 
 Everything will be made available in the coming weeks and all separate repositories will be merged in the monorepo.
 
@@ -93,7 +84,7 @@ Everything will be made available in the coming weeks and all separate repositor
   </p>
 
   <p>
-    <strong>🎨 Recurrent payment processing</strong><br/> 
+    <strong>🔄 Recurrent payment processing</strong><br/> 
     Automate subscription payments and recurring invoices with seamless support for mobile money (WhatsApp) and card payments via email.
   </p>
   
@@ -128,12 +119,12 @@ Everything will be made available in the coming weeks and all separate repositor
   </p>
 
   <p>
-  <strong>🏦 Instant payouts for merchants</strong><br/>
-  Enable businesses to access their funds instantly via mobile money or bank withdrawals.
- </p>
+    <strong>🏦 Instant payouts for merchants</strong><br/>
+    Enable businesses to access their funds instantly via mobile money or bank withdrawals.
+  </p>
 </div>
 
-## Core Infrastructure
+## Core infrastructure
 
 - TypeScript
 - Node.js/Bun
@@ -154,7 +145,7 @@ Everything will be made available in the coming weeks and all separate repositor
 - Mixpanel
 - Sanity
 
-## Payment Infrastructure
+## Payment infrastructure
 
 ### PI-SPI
 
@@ -168,7 +159,7 @@ For fellow fintechs, we built an SDK around this infrastructure: `@lomi/pi-spi-s
 
 For regions outside UEMOA or specific use cases, lomi. is built on top of Stripe for enabling international card payments and cryptocurrency payments.
 
-## Quick Start
+## Quick start
 
 ### Prerequisites
 
@@ -179,7 +170,7 @@ For regions outside UEMOA or specific use cases, lomi. is built on top of Stripe
 - **PI-SPI API credentials** (for UEMOA payment processing)
 - **Stripe Connect** for international credit card payment processing
 
-### Database Setup
+### Database setup
 
 lomi. uses **separate database configurations** for local development and production:
 
@@ -194,18 +185,12 @@ This separation ensures safe testing without affecting production data, independ
 git clone https://github.com/lomiafrica/lomi./
 cd lomi.
 
-# Install dependencies
-pnpm install
-# or
-bun install
-
 # Set up environment variables
 cp apps/dashboard/.env.example apps/dashboard/.env
+cd apps/dashboard
 
 # Start the development server
 pnpm run dev
-# or
-cd apps/website && bun run dev
 ```
 
 ## Documentation
@@ -261,7 +246,7 @@ You should be familiar with GitHub issues and pull requests, have read our [docu
 
 For detailed contribution guidelines, please see our [CONTRIBUTING.md](https://github.com/lomiafrica/lomi./blob/master/CONTRIBUTING.md).
 
-## Community & Support
+## Community & support
 
 Join our [community Discord](https://discord.gg/yb4FnBmh) for discussions and help, follow [@lomiafrica](https://twitter.com/lomiafrica) on Twitter for updates, or connect with us on [Slack](https://join.slack.com/t/lomi-a/shared_invite/zt-3hezykfvo-eW1jX6IkXAqht875Y1wUOw). Submit [issues](https://github.com/lomiafrica/lomi./issues) on GitHub for bug reports and feature requests, or contact us directly at [hello@lomi.africa](mailto:hello@lomi.africa).
 

@@ -1,31 +1,18 @@
-# lomi. SDK
+# lomi. API
 
-The official Node.js SDK for integrating lomi.'s payment infrastructure.
+RESTful API service for the lomi. payment platform, providing endpoints for payment processing, subscriptions, customers, and more.
 
-## Installation
+## Overview
 
-```bash
-npm install lomi.cli
-# or
-yarn add lomi.cli
-# or
-pnpm add lomi.cli
-```
+This is the core API service that powers the lomi. platform. It handles payment processing, transaction management, webhook delivery, and provides a unified interface for integrating with PI-SPI and other payment providers.
 
-## Quick Start
+## Quick start
+
+For API documentation and integration guides, visit [docs.lomi.africa](https://docs.lomi.africa).
 
 ## Deployment
 
-### Vercel Deployment
-
-When deploying to Vercel, the application is automatically configured to run in a serverless environment. Key considerations:
-
-- File system operations are limited in serverless environments
-- Winston logger is configured to use only Console transports in production
-- File logging is disabled in production to prevent ENOENT errors
-- Set `NODE_ENV=production` in your Vercel environment variables
-
-### Local Development
+### Local development
 
 For local development:
 
@@ -33,8 +20,12 @@ For local development:
 - Logs are stored in the `logs/` directory
 - Make sure the `logs` directory exists in your development environment
 
+## Documentation
+
+- [API reference](https://docs.lomi.africa/api)
+- [Getting started guide](https://docs.lomi.africa/docs/getting-started)
+- [API authentication](https://docs.lomi.africa/docs/reference/core/authentication)
+
 ## Support
 
-- [Documentation](https://docs.lomi.africa)
-- [API Reference](https://docs.lomi.africa/api)
-- [Support Email](mailto:hello@lomi.africa)
+Contact [hello@lomi.africa](mailto:hello@lomi.africa) or visit our [support center](https://docs.lomi.africa/docs/support/contact).

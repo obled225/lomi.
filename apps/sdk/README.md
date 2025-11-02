@@ -7,14 +7,11 @@ This SDK is automatically generated from the lomi. OpenAPI specification.
 ## Installation
 
 ```bash
-# Using pnpm (recommended for this monorepo)
+# Using pnpm
 pnpm add @lomi./sdk
 
 # Using npm
-npm install @lomi./sdk
-
-# Using yarn
-yarn add @lomi./sdk
+npx install @lomi./sdk
 ```
 
 ## Usage
