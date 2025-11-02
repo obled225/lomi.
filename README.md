@@ -1,5 +1,5 @@
 <p align="center">
-	<img src="apps/docs/public/transparent_l.webp" width="200" height="200" alt="lomi. icon">
+	<img src="apps/docs/public/transparent_l.webp" width="150" height="150" alt="lomi. icon">
 	<h1 align="center"><b>lomi.</b></h1>
 <p align="center">
     Helping West African ventures sell online
@@ -20,16 +20,16 @@
     <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat" alt="PRs welcome!" />
   </a>
   <a href="https://discord.gg/yb4FnBmh">
-    <img src="https://img.shields.io/badge/chat-on%20discord-7289DA.svg" alt="Discord Chat" />
+    <img src="https://img.shields.io/badge/chat-on%20discord-7289DA.svg" alt="Discord" />
   </a>
   <a href="https://twitter.com/intent/follow?screen_name=lomiafrica">
     <img src="https://img.shields.io/twitter/follow/lomiafrica.svg?label=Follow%20@lomiafrica" alt="Follow @lomiafrica" />
   </a>
   <a href="https://www.linkedin.com/company/lomiafri">
-    <img src="https://img.shields.io/badge/LinkedIn-lomiafrica-blue?style=flat&logo=linkedin" alt="lomi. LinkedIn" />
+    <img src="https://img.shields.io/badge/LinkedIn-lomiafrica-blue?style=flat&logo=linkedin" alt="LinkedIn" />
   </a>
   <a href="https://join.slack.com/t/lomi-a/shared_invite/zt-3hezykfvo-eW1jX6IkXAqht875Y1wUOw">
-    <img src="https://img.shields.io/badge/Slack-lomi--a-4A154B?style=flat&logo=slack" alt="Join lomi. on Slack" />
+    <img src="https://img.shields.io/badge/Slack-lomi--a-4A154B?style=flat&logo=slack" alt="Join us on Slack" />
   </a>
 </p>
 
@@ -50,20 +50,35 @@ lomi. is an open-source payment processing platform that integrates multiple pay
 
 ## Open-source roadmap
 
-We are progressively open-sourcing the entire lomi. project:
+We are progressively open-sourcing the entire project:
 
-- **Currently Open-source**:
+- **Currently open-source**:
   - Documentation: **[apps/docs](./apps/docs)**
-  - CLI tool: **[apps/cli](./apps/cli)**
+  - CLI: **[apps/cli](./apps/cli)**
   - APIs: **[apps/api](./apps/api)**
   - SDK: **[apps/sdk](./apps/sdk)**
-  - Boilerplate Next.js + Sanity: **[apps/events](https://github.com/lomiafrica/events/)**
+  - Boilerplate (Next.js x Sanity): **[apps/events](https://github.com/lomiafrica/events/)**
 
 - **Opening soon**:
   - Merchant dashboard: **[apps/website](./apps/website)**
+  - Admin dashboard: **[apps/admin](./apps/website)**
   - Shopify extension: **[apps/shopify](./apps/shopify)**
 
-Everything will be made available in the coming weeks and all separate repositories will be merged in the monorepo.
+Everything will be made available in the coming months and all separate repositories will be merged in the monorepo.
+
+## Payment infrastructure
+
+### PI-SPI
+
+lomi. integrates with the **SPI**, the official Central Bank-backed payment interoperability platform. With lomi., you can accept payments across 8 UEMOA countries (Benin, Burkina Faso, Côte d'Ivoire, Guinea-Bissau, Mali, Niger, Senegal, Togo). Our platform enables Bank-to-Bank, Bank-to-Wallet, Wallet-to-Bank, and Wallet-to-Wallet transactions through our suite of APIs.
+
+The platform provides instant payment confirmation and settlement, allowing you to send payments using SHID, MCOD, or MBNO aliases without ever sharing account numbers. We offer native support for the West African CFA Franc (XOF).
+
+For fellow fintechs, we built an SDK around this infrastructure: `@lomi/pi-spi-sdk` - a community TypeScript SDK for the PI-SPI Business API ([apps/pi-spi-sdk](./apps/pi-spi-sdk)).
+
+### Additional payment providers
+
+For merchants operating outside UEMOA, lomi. is built on Stripe to enable international payments, including cards and cryptocurrencies.
 
 ## Features
 
@@ -124,7 +139,18 @@ Everything will be made available in the coming weeks and all separate repositor
   </p>
 </div>
 
-## Core infrastructure
+## Quick start
+
+### Prerequisites
+
+- **Node.js** >= 18.0.0
+- **pnpm** or **bun** package manager
+- **PostgreSQL** >= 15 (for local development)
+- **Supabase CLI** (optional, for local Supabase instance)
+- **PI-SPI API credentials** (for UEMOA payment processing)
+- **Stripe Connect** for international credit card payment processing
+
+### Stack
 
 - TypeScript
 - Node.js/Bun
@@ -144,31 +170,6 @@ Everything will be made available in the coming weeks and all separate repositor
 - Tailwind CSS
 - Mixpanel
 - Sanity
-
-## Payment infrastructure
-
-### PI-SPI
-
-lomi. integrates with the **SPI**, the official Central Bank-backed payment interoperability platform. With lomi., you can accept payments across 8 UEMOA countries (Benin, Burkina Faso, Côte d'Ivoire, Guinea-Bissau, Mali, Niger, Senegal, Togo). Our platform enables Bank-to-Bank, Bank-to-Wallet, Wallet-to-Bank, and Wallet-to-Wallet transactions through our suite of APIs.
-
-The platform provides instant payment confirmation and settlement, allowing you to send payments using SHID, MCOD, or MBNO aliases without ever sharing account numbers. We offer native support for the West African CFA Franc (XOF).
-
-For fellow fintechs, we built an SDK around this infrastructure: `@lomi/pi-spi-sdk` - a community TypeScript SDK for the PI-SPI Business API ([apps/pi-spi-sdk](./apps/pi-spi-sdk)).
-
-### Additional payment providers
-
-For merchants operating outside UEMOA, lomi. is built on Stripe to enable international payments, including cards and cryptocurrencies.
-
-## Quick start
-
-### Prerequisites
-
-- **Node.js** >= 18.0.0
-- **pnpm** or **bun** package manager
-- **PostgreSQL** >= 15 (for local development)
-- **Supabase CLI** (optional, for local Supabase instance)
-- **PI-SPI API credentials** (for UEMOA payment processing)
-- **Stripe Connect** for international credit card payment processing
 
 ### Database setup
 
@@ -196,28 +197,6 @@ pnpm run dev
 ## Documentation
 
 For comprehensive documentation, visit [docs.lomi.africa](https://docs.lomi.africa)
-
-## Use cases
-
-- **E-commerce**: Sell physical or digital products online through your website or platforms like Shopify or WooCommerce. Transactions are typically one-time purchases.
-
-- **SaaS (Software as a Service)**: Offer software on a subscription basis, with automated recurring billing for continuous access.
-
-- **Usage billing for AI companies**: Create a meter and charge your customers as they use your services
-
-- **Subscription services**: Manage recurring payments for memberships, content access, and digital products.
-
-- **Crowdfunding & Donations**: Process payments for fundraising platforms, nonprofits, and charities.
-
-- **On-demand services**: Enable instant payments for ride-sharing, food delivery, and freelance platforms.
-
-- **B2B payments**: Support invoicing, large transactions, and business-to-business billing. 
-
-- **Financial services & Fintech**: Power embedded finance, payouts, and banking-as-a-service solutions.
-
-- **Education**: Collect payments for courses, e-learning platforms, and certifications.
-
-- **Events & Ticketing**: Sell tickets for concerts, conferences, and online events.
 
 ## License
 
