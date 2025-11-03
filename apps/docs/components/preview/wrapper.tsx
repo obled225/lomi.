@@ -1,5 +1,5 @@
 import type { HTMLAttributes } from 'react';
-import { cn } from '@/lib/cn';
+import { cn } from '@/lib/utils/cn';
 
 export function Wrapper(props: HTMLAttributes<HTMLDivElement>) {
   return (

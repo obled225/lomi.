@@ -1,0 +1,32 @@
+{
+  "blog": {
+    "title": "Blog",
+    "description": "Latest insights, updates, and stories from our team.",
+    "heading": "Blog",
+    "subheading": "Stay updated with the latest insights, product updates, and industry trends from our team.",
+    "loading": "Loading blog post...",
+    "loadingDesc": "Please wait while we load the content",
+    "notFound": "Post not found",
+    "notFoundDesc": "The blog post you're looking for doesn't exist or has been moved.",
+    "backToBlog": "Back to articles",
+    "backHome": "Back home",
+    "switchLanguage": "Switch language",
+    "shareTitle": "Share this post",
+    "shareDescription": "Share this blog post on your favorite platforms.",
+    "copiedDesc": "The link has been copied to your clipboard.",
+    "copyErrorTitle": "Copy failed",
+    "copyErrorDesc": "Could not copy link to clipboard.",
+    "copied": "Copied",
+    "copyLink": "Copy link",
+    "byAuthor": "By {author}",
+    "noPosts": "No blog posts found",
+    "noPostsDesc": "There are no blog posts available at the moment. Please check back later.",
+    "categories": {
+      "news": "News",
+      "opinion": "Opinion",
+      "edge": "At the edge",
+      "spreadsheets": "Spreadsheets",
+      "case-study": "Case study"
+    }
+  }
+}

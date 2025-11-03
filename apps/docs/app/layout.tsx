@@ -1,6 +1,6 @@
 import './global.css';
 import type { Viewport } from 'next';
-import { baseUrl, createMetadata } from '@/lib/metadata';
+import { baseUrl, createMetadata } from '@/lib/utils/metadata';
 import { Body } from '@/app/layout.client';
 import { Provider } from './provider';
 import type { ReactNode } from 'react';

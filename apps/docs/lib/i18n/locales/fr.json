@@ -1,0 +1,32 @@
+{
+  "blog": {
+    "title": "Blog",
+    "description": "Les derniers insights et mises à jour de notre équipe.",
+    "heading": "Blog",
+    "subheading": "Restez à jour avec les derniers insights, mises à jour produit et tendances de notre industrie.",
+    "loading": "Chargement de l'article...",
+    "loadingDesc": "Veuillez patienter pendant que nous chargeons le contenu",
+    "notFound": "Article non trouvé",
+    "notFoundDesc": "L'article de blog que vous recherchez n'existe pas ou a été déplacé.",
+    "backToBlog": "Retour au blog",
+    "backHome": "Retour à l'accueil",
+    "switchLanguage": "Changer de langue",
+    "shareTitle": "Partager cet article",
+    "shareDescription": "Partagez cet article de blog sur vos plateformes préférées.",
+    "copiedDesc": "Le lien a été copié dans votre presse-papiers.",
+    "copyErrorTitle": "Échec de la copie",
+    "copyErrorDesc": "Impossible de copier le lien dans le presse-papiers.",
+    "copied": "Copié",
+    "copyLink": "Copier le lien",
+    "byAuthor": "Par {author}",
+    "noPosts": "Aucun article de blog trouvé",
+    "noPostsDesc": "Il n'y a pas d'articles de blog disponibles pour le moment. Veuillez revenir plus tard.",
+    "categories": {
+      "news": "Actualités",
+      "opinion": "Opinion",
+      "edge": "At the edge",
+      "spreadsheets": "Spreadsheets",
+      "case-study": "Étude de cas"
+    }
+  }
+}

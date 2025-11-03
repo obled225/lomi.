@@ -1,7 +1,7 @@
 import { buildRegistry } from '@/scripts/build-registry';
 import * as OpenAPI from 'fumadocs-openapi';
 import { rimraf } from 'rimraf';
-import { openapi } from '@/lib/openapi';
+import { openapi } from '@/lib/utils/openapi';
 
 export async function generateDocs() {
   await rimraf('./content/docs/openapi/(generated)');

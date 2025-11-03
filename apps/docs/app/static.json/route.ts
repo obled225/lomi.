@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { source } from '@/lib/source';
+import { source } from '@/lib/utils/source';
 import type { OramaDocument } from 'fumadocs-core/search/orama-cloud';
 
 export const revalidate = false;
@@ -9,14 +9,12 @@ export async function GET(): Promise<Response> {
   const results = pages
     .filter((page) => page.slugs[0] !== 'openapi')
     .map((page) => {
-      const { structuredData } = page.data;
-
       return {
         id: page.url,
-        structured: structuredData,
+        structured: { headings: [], contents: [] },
         tag: page.slugs[0],
         url: page.url,
-        title: page.data.title,
+        title: page.data.title ?? 'Untitled',
         description: page.data.description,
       } satisfies OramaDocument;
     });

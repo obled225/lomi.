@@ -2,7 +2,7 @@
 
 import { useParams } from 'next/navigation';
 import { type ReactNode, useId, type SVGProps, type JSX } from 'react';
-import { cn } from '@/lib/cn';
+import { cn } from '@/lib/utils/cn';
 
 export function Body({
   children,
