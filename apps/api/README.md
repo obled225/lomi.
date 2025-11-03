@@ -4,7 +4,7 @@ RESTful API service for the lomi. payment platform, providing endpoints for paym
 
 ## Overview
 
-This is the core API service that powers the lomi. platform. It handles payment processing, transaction management, webhook delivery, and provides a unified interface for integrating with PI-SPI and other payment providers.
+This is the core API service that powers the lomi. platform. It handles payment processing, transaction management, webhook delivery, and provides a unified interface for integrating with π-SPI and other payment providers.
 
 ## Quick start
 

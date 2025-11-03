@@ -68,131 +68,13 @@ Everything will be made available in the coming months and all separate reposito
 
 ## Payment infrastructure
 
-### PI-SPI
-
 lomi. integrates with the **SPI**, the official Central Bank-backed payment interoperability platform. With lomi., you can accept payments across 8 UEMOA countries (Benin, Burkina Faso, Côte d'Ivoire, Guinea-Bissau, Mali, Niger, Senegal, Togo). Our platform enables Bank-to-Bank, Bank-to-Wallet, Wallet-to-Bank, and Wallet-to-Wallet transactions through our suite of APIs.
 
 The platform provides instant payment confirmation and settlement, allowing you to send payments using SHID, MCOD, or MBNO aliases without ever sharing account numbers. We offer native support for the West African CFA Franc (XOF).
 
 For fellow fintechs, we built an SDK around this infrastructure: `@lomi/pi-spi-sdk` - a community TypeScript SDK for the PI-SPI Business API ([apps/pi-spi-sdk](./apps/pi-spi-sdk)).
 
-### Additional payment providers
-
 For merchants operating outside UEMOA, lomi. is built on Stripe to enable international payments, including cards and cryptocurrencies.
-
-## Features
-
-<div align="left">
-  <p>
-    <strong>🌍 PI-SPI integration</strong><br/>
-    Built on BCEAO's official payment interoperability platform, enabling seamless Bank-to-Bank, Bank-to-Wallet, Wallet-to-Bank, and Wallet-to-Wallet transactions across 8 UEMOA countries through a single unified API.
-  </p>
-  
-  <p>
-    <strong>🌐 International payments</strong><br/>
-    Accept international credit card payments and process transactions in multiple currencies.
-  </p>
-  
-  <p>
-    <strong>🎨 Customizable checkout</strong><br/>
-    Create beautiful, branded checkout experiences that work across all devices.
-  </p>
-
-  <p>
-    <strong>🔄 Recurrent payment processing</strong><br/> 
-    Automate subscription payments and recurring invoices with seamless support for mobile money (WhatsApp) and card payments via email.
-  </p>
-  
-  <p>
-    <strong>👤 End-customer portal</strong><br/>
-    Provide customers with a self-service portal to manage their payment methods, view transaction history, request refunds, update subscription and account details.
-  </p>
-  
-  <p>
-    <strong>📊 Comprehensive analytics</strong><br/>
-    Gain valuable insights into your customers payment behavior, conversion rates, and payment trends.
-  </p>
-  
-  <p>
-    <strong>🛡️ Fraud detection</strong><br/>
-    Advanced fraud prevention tools to protect your business and customers.
-  </p>
-  
-  <p>
-    <strong>🔔 Webhook management</strong><br/>
-    Real-time notifications for payment events to keep your systems in sync.
-  </p>
-  
-  <p>
-    <strong>🔒 Secure tokenization</strong><br/>
-    Safely store customers payment details for future transactions without handling sensitive data.
-  </p>
-  
-  <p>
-    <strong>👥 Role-based access control</strong><br/>
-    Manage team permissions with granular control over who can access what.
-  </p>
-
-  <p>
-    <strong>🏦 Instant payouts for merchants</strong><br/>
-    Enable businesses to access their funds instantly via mobile money or bank withdrawals.
-  </p>
-</div>
-
-## Quick start
-
-### Prerequisites
-
-- **Node.js** >= 18.0.0
-- **pnpm** or **bun** package manager
-- **PostgreSQL** >= 15 (for local development)
-- **Supabase CLI** (optional, for local Supabase instance)
-- **PI-SPI API credentials** (for UEMOA payment processing)
-- **Stripe Connect** for international credit card payment processing
-
-### Stack
-
-- TypeScript
-- Node.js/Bun
-- Vite
-- Nextjs
-- React
-- React Native
-- Shadcn UI
-- Radix UI
-- Base UI
-- PostgreSQL via Supabase
-- Resend
-- Upstash Redis
-- Anthropic
-- Huggingface
-- Infobip
-- Tailwind CSS
-- Mixpanel
-- Sanity
-
-### Database setup
-
-lomi. uses **separate database configurations** for local development and production:
-
-- **Local development**: Uses local PostgreSQL instance via Supabase CLI
-- **Production**: Uses Supabase cloud instance with enhanced security and scalability
-
-This separation ensures safe testing without affecting production data, independent schema evolution, and environment-specific optimizations.
-
-### Local development (via merchant dashboard)
-```bash
-# Clone the repository
-git clone https://github.com/lomiafrica/lomi./
-cd lomi.
-
-# Set up environment variables
-cp apps/dashboard/.env.example apps/dashboard/.env
-cd apps/dashboard
-
-# Start the development server
-pnpm run dev
-```
 
 ## Documentation
 
@@ -233,10 +115,10 @@ You should be familiar with GitHub issues and pull requests, have read our [docu
 
 For detailed contribution guidelines, please see our [CONTRIBUTING.md](https://github.com/lomiafrica/lomi./blob/master/CONTRIBUTING.md).
 
-## Community & support
+### Community & support
 
 Join our [community Discord](https://discord.gg/yb4FnBmh) for discussions and help, follow [@lomiafrica](https://twitter.com/lomiafrica) on Twitter for updates, or connect with us on [Slack](https://join.slack.com/t/lomi-a/shared_invite/zt-3hezykfvo-eW1jX6IkXAqht875Y1wUOw). Submit [issues](https://github.com/lomiafrica/lomi./issues) on GitHub for bug reports and feature requests, or contact us directly at [hello@lomi.africa](mailto:hello@lomi.africa).
 
-## Security
+### Security
 
 For security vulnerabilities, please follow our [Security Policy](https://github.com/lomiafrica/lomi.?tab=security-ov-file). Please do not report security vulnerabilities through public GitHub issues.
