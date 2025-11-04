@@ -9,7 +9,7 @@ const config = {
   // // Performance optimizations for better navigation
   experimental: {
     optimizeServerReact: true,
-    optimizeCss: true,
+    optimizeCss: process.env.NODE_ENV === "production",
   },
   // Configure server external packages for Sanity and build tools
   serverExternalPackages: ["sanity", "prettier"],
