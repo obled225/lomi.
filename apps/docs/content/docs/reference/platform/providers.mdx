@@ -1,6 +1,6 @@
 ---
-title: "Providers"
-description: "The Providers API allows merchants to retrieve information about available payment providers connected to their account. This information can be used to determine which payment methods to offer to customers."
+title: 'Providers'
+description: 'The Providers API allows merchants to retrieve information about available payment providers connected to their account. This information can be used to determine which payment methods to offer to customers.'
 ---
 
 ## Base URL
@@ -60,20 +60,20 @@ Retrieves a list of all available payment providers and indicates whether they a
 
 **Response properties:**
 
-| Property          | Type    | Description                                                     |
-| ----------------- | ------- | --------------------------------------------------------------- |
-| `` `code` ``            | `` `string` ``  | Unique identifier for the payment provider                      |
-| `` `name` ``            | `` `string` ``  | Display name of the payment provider                            |
-| `` `description` ``     | `` `string` ``  | Brief description of the payment provider                       |
-| `` `payment_methods` `` | `` `array` ``   | List of payment method types supported by this provider         |
+| Property                | Type            | Description                                                 |
+| ----------------------- | --------------- | ----------------------------------------------------------- |
+| `` `code` ``            | `` `string` ``  | Unique identifier for the payment provider                  |
+| `` `name` ``            | `` `string` ``  | Display name of the payment provider                        |
+| `` `description` ``     | `` `string` ``  | Brief description of the payment provider                   |
+| `` `payment_methods` `` | `` `array` ``   | List of payment method types supported by this provider     |
 | `` `is_connected` ``    | `` `boolean` `` | Whether this provider is connected to your merchant account |
 
 **Possible error responses:**
 
-| Status Code | Error Message                     | Description                                  |
-| ----------- | --------------------------------- | -------------------------------------------- |
-| `` `401` ``         | `` `Authentication required` ``         | Missing or invalid API key                   |
-| `` `500` ``         | `` `Failed to retrieve providers` ``    | Internal server error retrieving providers |
+| Status Code | Error Message                        | Description                                |
+| ----------- | ------------------------------------ | ------------------------------------------ |
+| `` `401` `` | `` `Authentication required` ``      | Missing or invalid API key                 |
+| `` `500` `` | `` `Failed to retrieve providers` `` | Internal server error retrieving providers |
 
 ## Error handling
 
@@ -92,17 +92,17 @@ Error responses follow a consistent format. See the [Errors](/docs/reference/ref
 
 API requests are subject to rate limits based on your API key type:
 
--   **Live API keys:** 60 requests per minute, 10,000 requests per day
--   **Test API keys:** 120 requests per minute, 20,000 requests per day
+- **Live API keys:** 60 requests per minute, 10,000 requests per day
+- **Test API keys:** 120 requests per minute, 20,000 requests per day
 
 Exceeding these limits will result in a `` `429 Too Many Requests` `` error.
 
 ## Implementation notes
 
--   Use the `` `is_connected` `` property to determine which providers to display as payment options to your customers. Only connected providers can be used to process payments.
--   The list of available providers (`` `code` ``) may change over time as new integrations are added.
--   Provider availability might depend on merchant configuration and supported regions.
--   Use the provider `` `code` `` (e.g., `` `"ORANGE"` ``, `` `"WAVE"` ``) when specifying allowed providers in other API calls like creating Checkout Sessions.
+- Use the `` `is_connected` `` property to determine which providers to display as payment options to your customers. Only connected providers can be used to process payments.
+- The list of available providers (`` `code` ``) may change over time as new integrations are added.
+- Provider availability might depend on merchant configuration and supported regions.
+- Use the provider `` `code` `` (e.g., `` `"ORANGE"` ``, `` `"WAVE"` ``) when specifying allowed providers in other API calls like creating Checkout Sessions.
 
 ## Testing
 
@@ -148,4 +148,4 @@ Expected error response:
     "details": "API key is required for authentication"
   }
 }
-``` 
+```

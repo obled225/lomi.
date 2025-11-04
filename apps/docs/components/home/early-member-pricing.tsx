@@ -1,16 +1,16 @@
 'use client';
 
-import React, { useState, useEffect, useMemo } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Button } from "@/components/ui/button";
-import { InfoBox } from "@/components/ui/info-box";
-import Link from "next/link";
-import { SingleSwirl } from "@/components/design/swirls";
-import { t } from "@/lib/i18n/translations";
+import React, { useState, useEffect, useMemo } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Button } from '@/components/ui/button';
+import { InfoBox } from '@/components/ui/info-box';
+import Link from 'next/link';
+import { SingleSwirl } from '@/components/design/swirls';
+import { t } from '@/lib/i18n/translations';
 
 export function EarlyMemberPricing() {
   const [titleNumber, setTitleNumber] = useState(0);
-  const prices = useMemo(() => ["200 F CFA", "0.30 USD", "0.30 EUR"], []);
+  const prices = useMemo(() => ['200 F CFA', '0.30 USD', '0.30 EUR'], []);
 
   // Handle price animation
   useEffect(() => {
@@ -28,7 +28,9 @@ export function EarlyMemberPricing() {
           <div className="container flex flex-col items-center justify-center">
             <div className="text-center mb-6 md:mb-8 px-4">
               <div className="mb-0 md:mb-0 flex justify-center">
-                <InfoBox variant="blue">{t("earlyMemberPricing.tag") as string}</InfoBox>
+                <InfoBox variant="blue">
+                  {t('earlyMemberPricing.tag') as string}
+                </InfoBox>
               </div>
               <div className="mb-6 md:mb-8">
                 <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-4 flex flex-col items-center">
@@ -48,11 +50,11 @@ export function EarlyMemberPricing() {
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0, y: titleNumber === 0 ? 50 : -50 }}
                           transition={{
-                            type: "spring",
+                            type: 'spring',
                             stiffness: 30,
                             duration: 2,
                           }}
-                          style={{ top: "26px" }}
+                          style={{ top: '26px' }}
                         >
                           <span className="block sm:inline relative top-[4px] sm:top-0 text-2xl md:text-4xl lg:text-6xl">
                             {prices[titleNumber]}
@@ -65,28 +67,20 @@ export function EarlyMemberPricing() {
               </div>
             </div>
             <div className="flex justify-center gap-4 -mt-2 md:-mt-4 px-4">
-              <Button
-                type="button"
-                variant="outline"
-                size="header"
-                asChild
-              >
+              <Button type="button" variant="outline" size="header" asChild>
                 <a
-                  href="https://docs.lomi.africa/docs/core/merchant-of-record/pricing"
+                  href="docs/core/merchant-of-record/pricing"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Learn more about our pricing structure and fees (opens in new tab)"
                 >
-                  {t("earlyMemberPricing.learnMore") as string}
+                  {t('earlyMemberPricing.learnMore') as string}
                 </a>
               </Button>
-              <Button
-                type="button"
-                variant="blue"
-                size="header"
-                asChild
-              >
-                <Link href="/sign-in">{t("earlyMemberPricing.getStarted") as string}</Link>
+              <Button type="button" variant="blue" size="header" asChild>
+                <Link href="/sign-in">
+                  {t('earlyMemberPricing.getStarted') as string}
+                </Link>
               </Button>
             </div>
           </div>

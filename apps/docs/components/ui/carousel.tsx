@@ -1,24 +1,24 @@
-import * as React from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import * as React from 'react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
-import { cn } from "@/lib/actions/utils";
-import { Button } from "@/components/ui/button";
+import { cn } from '@/lib/actions/utils';
+import { Button } from '@/components/ui/button';
 
 const Carousel = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn("relative", className)} {...props} />
+  <div ref={ref} className={cn('relative', className)} {...props} />
 ));
-Carousel.displayName = "Carousel";
+Carousel.displayName = 'Carousel';
 
 const CarouselContent = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn("flex", className)} {...props} />
+  <div ref={ref} className={cn('flex', className)} {...props} />
 ));
-CarouselContent.displayName = "CarouselContent";
+CarouselContent.displayName = 'CarouselContent';
 
 const CarouselItem = React.forwardRef<
   HTMLDivElement,
@@ -28,45 +28,45 @@ const CarouselItem = React.forwardRef<
     ref={ref}
     role="group"
     aria-roledescription="slide"
-    className={cn("min-w-0 shrink-0 grow-0 basis-full", className)}
+    className={cn('min-w-0 shrink-0 grow-0 basis-full', className)}
     {...props}
   />
 ));
-CarouselItem.displayName = "CarouselItem";
+CarouselItem.displayName = 'CarouselItem';
 
 const CarouselPrevious = React.forwardRef<
   HTMLButtonElement,
   React.ComponentProps<typeof Button>
->(({ className, variant = "outline", size = "icon", ...props }, ref) => (
+>(({ className, variant = 'outline', size = 'icon', ...props }, ref) => (
   <Button
     ref={ref}
     variant={variant}
     size={size}
-    className={cn("absolute h-8 w-8 rounded-sm", className)}
+    className={cn('absolute h-8 w-8 rounded-sm', className)}
     {...props}
   >
     <ChevronLeft className="h-3 w-3" />
     <span className="sr-only">Previous slide</span>
   </Button>
 ));
-CarouselPrevious.displayName = "CarouselPrevious";
+CarouselPrevious.displayName = 'CarouselPrevious';
 
 const CarouselNext = React.forwardRef<
   HTMLButtonElement,
   React.ComponentProps<typeof Button>
->(({ className, variant = "outline", size = "icon", ...props }, ref) => (
+>(({ className, variant = 'outline', size = 'icon', ...props }, ref) => (
   <Button
     ref={ref}
     variant={variant}
     size={size}
-    className={cn("absolute h-8 w-8 rounded-sm", className)}
+    className={cn('absolute h-8 w-8 rounded-sm', className)}
     {...props}
   >
     <ChevronRight className="h-3 w-3" />
     <span className="sr-only">Next slide</span>
   </Button>
 ));
-CarouselNext.displayName = "CarouselNext";
+CarouselNext.displayName = 'CarouselNext';
 
 export {
   Carousel,

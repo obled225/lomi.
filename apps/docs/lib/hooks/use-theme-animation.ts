@@ -1,6 +1,6 @@
-import { useRef, useCallback } from "react";
-import { flushSync } from "react-dom";
-import { useTheme } from "./use-theme";
+import { useRef, useCallback } from 'react';
+import { flushSync } from 'react-dom';
+import { useTheme } from './use-theme';
 
 export function useThemeAnimation() {
   const { setTheme, theme } = useTheme();
@@ -11,7 +11,7 @@ export function useThemeAnimation() {
 
     await document.startViewTransition(() => {
       flushSync(() => {
-        setTheme(theme === "dark" ? "light" : "dark");
+        setTheme(theme === 'dark' ? 'light' : 'dark');
       });
     }).ready;
 
@@ -33,8 +33,8 @@ export function useThemeAnimation() {
       },
       {
         duration: 400,
-        easing: "ease-in-out",
-        pseudoElement: "::view-transition-new(root)",
+        easing: 'ease-in-out',
+        pseudoElement: '::view-transition-new(root)',
       },
     );
   }, [theme, setTheme]);

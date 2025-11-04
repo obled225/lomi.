@@ -1,5 +1,5 @@
-import type { PortableTextBlock } from "@portabletext/types";
-import type { SanityImageAssetDocument } from "@sanity/client";
+import type { PortableTextBlock } from '@portabletext/types';
+import type { SanityImageAssetDocument } from '@sanity/client';
 
 interface SanityImage {
   asset: SanityImageAssetDocument;

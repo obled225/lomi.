@@ -1,8 +1,8 @@
-import React, { useState, useRef, useEffect, memo, useMemo } from "react";
-import Lottie, { LottieRefCurrentProps } from "lottie-react";
-import { useTheme } from "@/lib/hooks/use-theme";
-import Spinner from "@/components/ui/spinner";
-import type { LottieAnimationData } from "@/lib/lottie-animations";
+import React, { useState, useRef, useEffect, memo, useMemo } from 'react';
+import Lottie, { LottieRefCurrentProps } from 'lottie-react';
+import { useTheme } from '@/lib/hooks/use-theme';
+import Spinner from '@/components/ui/spinner';
+import type { LottieAnimationData } from '@/lib/utils/lottie-animations';
 
 // Type definitions for Lottie layer structure
 interface LottieLayer {
@@ -37,7 +37,7 @@ interface LottieIconProps {
 const LottieIconComponent = ({
   animationData,
   size = 20, // Increased from 18 for bolder appearance
-  className = "",
+  className = '',
   loop = false,
   autoplay = false,
   initialFrame,
@@ -51,7 +51,7 @@ const LottieIconComponent = ({
   const lottieRef = useRef<LottieRefCurrentProps>(null);
   const { resolvedTheme, mounted } = useTheme();
 
-  const isDark = resolvedTheme === "dark";
+  const isDark = resolvedTheme === 'dark';
   const color = useMemo(() => {
     if (customColor) return customColor;
     // Default to current text color - using pure white/black for maximum contrast
@@ -66,7 +66,7 @@ const LottieIconComponent = ({
 
   useEffect(() => {
     // Handle direct object data (our new preferred approach)
-    if (typeof animationData === "object" && animationData !== null) {
+    if (typeof animationData === 'object' && animationData !== null) {
       let processedData = animationData as LottieAnimationData;
 
       // If color is provided, override the primary color in the control layer
@@ -74,15 +74,15 @@ const LottieIconComponent = ({
         processedData = JSON.parse(JSON.stringify(processedData)); // Deep clone
         const layers = processedData.layers as LottieLayer[];
         const controlLayer = layers.find(
-          (layer) => layer.nm === "control" && layer.ef,
+          (layer) => layer.nm === 'control' && layer.ef,
         );
         if (controlLayer?.ef) {
           const primaryEffect = controlLayer.ef.find(
-            (effect) => effect.nm === "primary",
+            (effect) => effect.nm === 'primary',
           );
           if (primaryEffect?.ef) {
             const colorControl = primaryEffect.ef.find(
-              (control) => control.nm === "Color",
+              (control) => control.nm === 'Color',
             );
             if (colorControl?.v?.k) {
               colorControl.v.k = [...color, 1]; // Add alpha channel
@@ -97,7 +97,7 @@ const LottieIconComponent = ({
     }
 
     // Handle string paths (legacy - should warn developers)
-    if (typeof animationData === "string") {
+    if (typeof animationData === 'string') {
       console.warn(
         `Using path string "${animationData}" for Lottie animation is deprecated. Please use direct animation imports from @/lib/utils/lottie-animations instead.`,
       );
@@ -183,4 +183,4 @@ const LottieIconComponent = ({
 export const LottieIcon = memo(LottieIconComponent);
 
 // Set displayName for proper component identification
-LottieIcon.displayName = "LottieIcon";
+LottieIcon.displayName = 'LottieIcon';

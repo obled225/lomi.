@@ -1,10 +1,10 @@
-import { cn } from "@/lib/actions/utils";
-import Image from "next/image";
-import type React from "react";
+import { cn } from '@/lib/actions/utils';
+import Image from 'next/image';
+import type React from 'react';
 
 type SwirlProps = Omit<
   React.ImgHTMLAttributes<HTMLImageElement>,
-  "src" | "alt"
+  'src' | 'alt'
 >;
 
 export function SingleSwirl({ className, ...props }: SwirlProps) {
@@ -14,7 +14,7 @@ export function SingleSwirl({ className, ...props }: SwirlProps) {
       src="/random/swirl-2.png"
       alt="Swirl"
       className={cn(
-        "pointer-events-none w-full h-full object-cover",
+        'pointer-events-none w-full h-full object-cover',
         className,
       )}
       width={1200}
@@ -30,7 +30,7 @@ export function DoubleSwirl({ className, ...props }: SwirlProps) {
       src="/random/swirl.png"
       alt="Swirl"
       className={cn(
-        "pointer-events-none w-full h-full object-cover",
+        'pointer-events-none w-full h-full object-cover',
         className,
       )}
       width={1200}

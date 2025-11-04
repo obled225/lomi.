@@ -1,6 +1,6 @@
 import { DocsLayout } from 'fumadocs-ui/layouts/docs';
-import { baseOptions, linkItems, logo } from '@/lib/layout.shared';
-import { source } from '@/lib/source';
+import { baseOptions, linkItems, logo } from '@/lib/utils/layout.shared';
+import { source } from '@/lib/utils/source';
 import { LargeSearchToggle } from 'fumadocs-ui/components/layout/search-toggle';
 import type { ReactNode } from 'react';
 // import { Sparkles } from 'lucide-react';
@@ -41,12 +41,7 @@ export default function Layout({ children }: { children: ReactNode }) {
       }}
       nav={{
         ...base.nav,
-        title: (
-          <>
-            {logo}
-
-          </>
-        ),
+        title: <>{logo}</>,
         // children: (
         //   <AISearchTrigger
         //     className={cn(

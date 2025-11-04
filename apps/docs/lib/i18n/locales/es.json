@@ -1,16 +1,16 @@
 {
-    "hero": {
-        "title": "Construido para hacerte rentable,\nlomi. es la mejor manera de aceptar pagos en África Occidental."
-    },
-    "footer": {
+  "hero": {
+    "title": "Construido para hacerte rentable,\nlomi. es la mejor manera de aceptar pagos en África Occidental."
+  },
+  "footer": {
     "bceao_accreditation": "lomi. está actualmente en proceso de acreditación como proveedor de servicios de pago por la BCEAO.",
     "features": {
       "title": "Características",
       "overview": "Overview",
       "pricing": "Precios",
       "faq": "FAQ"
-        },
-        "resources": {
+    },
+    "resources": {
       "title": "Recursos",
       "github": "Github",
       "support": "Ayuda",
@@ -19,75 +19,75 @@
       "branding": "Marca y assets",
       "featureRequest": "Solicitar una función",
       "review": "Déjanos una reseña"
-        },
-        "company": {
-            "title": "Empresa",
-            "story": "Historia",
-            "blog": "Blog",
-            "openSource": "Código abierto"
-        },
-        "subscribe": {
-            "placeholder": "Dirección de correo electrónico**",
-            "button": "Suscribirse"
-        },
+    },
+    "company": {
+      "title": "Empresa",
+      "story": "Historia",
+      "blog": "Blog",
+      "openSource": "Código abierto"
+    },
+    "subscribe": {
+      "placeholder": "Dirección de correo electrónico**",
+      "button": "Suscribirse"
+    },
     "status": "Sistemas operativos",
     "copyright": "Copyright © 2025 — lomi. LLC"
-    },
-    "components": {
-        "tracking_cookie": {
-            "message": "Utilizamos cookies de seguimiento para entender cómo utilizas el producto y ayudarnos a mejorarlo.",
-            "accept": "Aceptar",
-            "decline": "Rechazar"
-        }
-    },
-    "blog": {
-        "title": "Blog",
-        "description": "Últimas perspectivas, actualizaciones e historias de nuestro equipo.",
-        "heading": "Blog",
-        "subheading": "Mantente actualizado con las últimas perspectivas, actualizaciones de productos y tendencias de la industria de nuestro equipo.",
-        "loading": "Cargando artículo del blog...",
-        "loadingDesc": "Por favor espera mientras cargamos el contenido",
-        "notFound": "Artículo no encontrado",
-        "notFoundDesc": "El artículo del blog que buscas no existe o ha sido movido.",
-        "backToBlog": "Volver a artículos",
-        "backHome": "Volver al inicio",
-        "switchLanguage": "Cambiar idioma",
-        "shareTitle": "Compartir este artículo",
-        "shareDescription": "Comparte este artículo del blog en tus plataformas favoritas.",
-        "copiedDesc": "El enlace ha sido copiado a tu portapapeles.",
-        "copyErrorTitle": "Error al copiar",
-        "copyErrorDesc": "No se pudo copiar el enlace al portapapeles.",
-        "copied": "Copiado",
-        "copyLink": "Copiar enlace",
-        "byAuthor": "Por {author}",
-        "noPosts": "No se encontraron artículos del blog",
-        "noPostsDesc": "No hay artículos del blog disponibles en este momento. Por favor, vuelve a revisar más tarde.",
-        "categories": {
-            "news": "Noticias",
-            "opinion": "Opinión",
-            "edge": "En el borde",
-            "spreadsheets": "Hojas de cálculo",
-            "case-study": "Estudio de caso"
-        }
-    },
-    "header": {
-        "products": "Productos",
-        "pricing": "Precios",
-        "documentation": "Documentación",
-        "blog": "Blog",
-        "talk": "Háblanos",
-        "dashboard": "Panel de control",
-        "connect": "Conectar"
-    },
+  },
+  "components": {
+    "tracking_cookie": {
+      "message": "Utilizamos cookies de seguimiento para entender cómo utilizas el producto y ayudarnos a mejorarlo.",
+      "accept": "Aceptar",
+      "decline": "Rechazar"
+    }
+  },
+  "blog": {
+    "title": "Blog",
+    "description": "Últimas perspectivas, actualizaciones e historias de nuestro equipo.",
+    "heading": "Blog",
+    "subheading": "Mantente actualizado con las últimas perspectivas, actualizaciones de productos y tendencias de la industria de nuestro equipo.",
+    "loading": "Cargando artículo del blog...",
+    "loadingDesc": "Por favor espera mientras cargamos el contenido",
+    "notFound": "Artículo no encontrado",
+    "notFoundDesc": "El artículo del blog que buscas no existe o ha sido movido.",
+    "backToBlog": "Volver a artículos",
+    "backHome": "Volver al inicio",
+    "switchLanguage": "Cambiar idioma",
+    "shareTitle": "Compartir este artículo",
+    "shareDescription": "Comparte este artículo del blog en tus plataformas favoritas.",
+    "copiedDesc": "El enlace ha sido copiado a tu portapapeles.",
+    "copyErrorTitle": "Error al copiar",
+    "copyErrorDesc": "No se pudo copiar el enlace al portapapeles.",
+    "copied": "Copiado",
+    "copyLink": "Copiar enlace",
+    "byAuthor": "Por {author}",
+    "noPosts": "No se encontraron artículos del blog",
+    "noPostsDesc": "No hay artículos del blog disponibles en este momento. Por favor, vuelve a revisar más tarde.",
+    "categories": {
+      "news": "Noticias",
+      "opinion": "Opinión",
+      "edge": "En el borde",
+      "spreadsheets": "Hojas de cálculo",
+      "case-study": "Estudio de caso"
+    }
+  },
+  "header": {
+    "products": "Productos",
+    "pricing": "Precios",
+    "documentation": "Documentación",
+    "blog": "Blog",
+    "talk": "Háblanos",
+    "dashboard": "Panel de control",
+    "connect": "Conectar"
+  },
   "sdks": {
     "title": "No te quedes atrás"
-    },
+  },
   "earlyMemberPricing": {
     "tag": "Sin sorpresas, sin tarifas ocultas, sin costos mensuales",
     "getStarted": "Comenzar",
     "learnMore": "Saber más"
   },
-"features": {
+  "features": {
     "title": "Desbloquee el potencial de su negocio",
     "card1": {
       "title": "Todos los métodos de pago preferidos por sus clientes",
@@ -128,7 +128,7 @@
     }
   },
   "careers": {
-    "title":"Una empresa de software open-source enfocada en eliminar las barreras de pago.",
+    "title": "Una empresa de software open-source enfocada en eliminar las barreras de pago.",
     "join_us": "Únete a nosotros"
   }
 }

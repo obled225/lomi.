@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { useEffect } from "react";
-import { initSoundGate } from "@/lib/sound";
+import { useEffect } from 'react';
+import { initSoundGate } from '@/lib/utils/sound';
 
 // Mount-only client component to initialize the global sound gate.
 const SoundGateInit = () => {

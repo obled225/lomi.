@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { motion } from "framer-motion";
-import { useTranslation } from "@/lib/contexts/translation-context";
-import { t, getTranslations } from "@/lib/i18n/translations";
+import { motion } from 'framer-motion';
+import { useTranslation } from '@/lib/contexts/translation-context';
+import { t, getTranslations } from '@/lib/i18n/translations';
 
 export default function ChangelogClient() {
   const { currentLanguage } = useTranslation();
@@ -28,7 +28,7 @@ export default function ChangelogClient() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              {t("changelog.title", currentLanguage) as string}
+              {t('changelog.title', currentLanguage) as string}
             </motion.h1>
             <motion.p
               className="text-gray-500 dark:text-gray-400 text-base leading-relaxed tracking-tight max-w-2xl"
@@ -36,7 +36,7 @@ export default function ChangelogClient() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              {t("changelog.subtitle", currentLanguage) as string}
+              {t('changelog.subtitle', currentLanguage) as string}
             </motion.p>
           </div>
 

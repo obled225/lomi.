@@ -1,6 +1,6 @@
-import type { Metadata } from "next";
-import BlogPostClient from "@/components/blog/blog-post-client";
-import { client } from "@/lib/sanity/client";
+import type { Metadata } from 'next';
+import BlogPostClient from '@/components/blog/blog-post-client';
+import { client } from '@/lib/sanity/client';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -36,36 +36,36 @@ export async function generateMetadata({
     if (post) {
       return {
         title: `${post.title} | lomi.`,
-        description: post.excerpt || "Read our latest blog post",
+        description: post.excerpt || 'Read our latest blog post',
         openGraph: {
           title: `${post.title} | lomi.`,
-          description: post.excerpt || "Read our latest blog post",
+          description: post.excerpt || 'Read our latest blog post',
           images: post.imageUrl
             ? [
-              {
-                url: post.imageUrl,
-                width: 1200,
-                height: 630,
-                alt: post.title,
-              },
-            ]
+                {
+                  url: post.imageUrl,
+                  width: 1200,
+                  height: 630,
+                  alt: post.title,
+                },
+              ]
             : [
-              {
-                url: "/banner.webp",
-                width: 1200,
-                height: 630,
-                alt: post.title,
-              },
-            ],
+                {
+                  url: '/banner.webp',
+                  width: 1200,
+                  height: 630,
+                  alt: post.title,
+                },
+              ],
         },
       };
     }
   } catch (error) {
-    console.error("Error fetching post metadata:", error);
+    console.error('Error fetching post metadata:', error);
   }
 
   return {
-    title: "Blog post | lomi.",
+    title: 'Blog post | lomi.',
   };
 }
 

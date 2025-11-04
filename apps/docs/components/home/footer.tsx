@@ -1,26 +1,26 @@
-"use client";
+'use client';
 
-import { useCallback, useState, useEffect } from "react";
-import Link from "next/link";
-import Image from "next/image";
-import { LanguageSwitcher } from "@/components/design/language-switcher";
-import { BackgroundText } from "@/components/design/background-text";
-import { LottieIcon } from "@/components/ui/lottie-icon";
-import { animations } from "@/lib/lottie-animations";
-import { useTheme } from "@/lib/hooks/use-theme";
-import { GitHubIcon, LinkedInIcon, XIcon, SlackIcon } from "@/components/icons";
-import { Check } from "lucide-react";
-import { ProductHuntBadge } from "@/components/design/product-hunt-badge";
+import { useCallback, useState, useEffect } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import { LanguageSwitcher } from '@/components/design/language-switcher';
+import { BackgroundText } from '@/components/design/background-text';
+import { LottieIcon } from '@/components/ui/lottie-icon';
+import { animations } from '@/lib/utils/lottie-animations';
+import { useTheme } from '@/lib/hooks/use-theme';
+import { GitHubIcon, LinkedInIcon, XIcon, SlackIcon } from '@/components/icons';
+import { Check } from 'lucide-react';
+import { ProductHuntBadge } from '@/components/design/product-hunt-badge';
 import {
   playClickSound as playSound,
   getSoundEnabled,
   setSoundEnabled,
-} from "@/lib/sound";
-import { Cookies } from "@/lib/constants";
-import { useTranslation } from "@/lib/contexts/translation-context";
-import { t as translate } from "@/lib/i18n/translations";
+} from '@/lib/utils/sound';
+import { Cookies } from '@/lib/utils/constants';
+import { useTranslation } from '@/lib/contexts/translation-context';
+import { t as translate } from '@/lib/i18n/translations';
 
-const GITHUB_REPO_URL = "https://github.com/lomiafrica/lomi./";
+const GITHUB_REPO_URL = 'https://github.com/lomiafrica/lomi./';
 
 export function Footer() {
   const { resolvedTheme, mounted, setTheme } = useTheme();
@@ -36,33 +36,33 @@ export function Footer() {
     // Listen for changes from other tabs or components
     const handleSoundChange = (e: Event) => {
       const detail = (e as CustomEvent).detail;
-      if (typeof detail?.enabled === "boolean") {
+      if (typeof detail?.enabled === 'boolean') {
         setIsSoundEnabled(detail.enabled);
       }
     };
     const handleStorageChange = (e: StorageEvent) => {
       if (e.key === Cookies.SoundEnabled) {
-        setIsSoundEnabled(e.newValue !== "false");
+        setIsSoundEnabled(e.newValue !== 'false');
       }
     };
 
-    window.addEventListener("cascade:sound-changed", handleSoundChange);
-    window.addEventListener("storage", handleStorageChange);
+    window.addEventListener('cascade:sound-changed', handleSoundChange);
+    window.addEventListener('storage', handleStorageChange);
 
     const handleScroll = () => {
       const isAtBottom =
         window.innerHeight + window.scrollY >= document.body.offsetHeight - 2;
 
       document.documentElement.style.overscrollBehaviorY = isAtBottom
-        ? "none"
-        : "auto";
+        ? 'none'
+        : 'auto';
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll);
     return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("cascade:sound-changed", handleSoundChange);
-      window.removeEventListener("storage", handleStorageChange);
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('cascade:sound-changed', handleSoundChange);
+      window.removeEventListener('storage', handleStorageChange);
     };
   }, []);
 
@@ -72,7 +72,7 @@ export function Footer() {
 
   const toggleTheme = useCallback(() => {
     playClickSound();
-    setTheme(resolvedTheme === "dark" ? "light" : "dark");
+    setTheme(resolvedTheme === 'dark' ? 'light' : 'dark');
   }, [resolvedTheme, setTheme, playClickSound]);
 
   const toggleSound = useCallback(() => {
@@ -106,13 +106,22 @@ export function Footer() {
                       className="inline-flex items-center"
                     >
                       {mounted && (
-                        <Image
-                          src="/company/transparent_l.webp"
-                          alt="lomi. logo"
-                          width={38}
-                          height={38}
-                          className="cursor-pointer hover:opacity-80 transition-opacity"
-                        />
+                        <>
+                          <Image
+                            src="/company/transparent_d.webp"
+                            alt="lomi. logo"
+                            width={38}
+                            height={38}
+                            className="block dark:hidden cursor-pointer hover:opacity-80 transition-opacity"
+                          />
+                          <Image
+                            src="/company/transparent_l.webp"
+                            alt="lomi. logo"
+                            width={38}
+                            height={38}
+                            className="hidden dark:block cursor-pointer hover:opacity-80 transition-opacity"
+                          />
+                        </>
                       )}
                     </Link>
                     <span className="text-muted-foreground text-lg leading-none font-thin">
@@ -165,19 +174,19 @@ export function Footer() {
                       className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white inline-flex items-center transition-colors cursor-pointer"
                       aria-label={
                         mounted
-                          ? `Toggle ${resolvedTheme === "light" ? "dark" : "light"} mode`
-                          : "Toggle theme"
+                          ? `Toggle ${resolvedTheme === 'light' ? 'dark' : 'light'} mode`
+                          : 'Toggle theme'
                       }
                       title={
                         mounted
-                          ? `Toggle ${resolvedTheme === "light" ? "dark" : "light"} mode`
-                          : "Toggle theme"
+                          ? `Toggle ${resolvedTheme === 'light' ? 'dark' : 'light'} mode`
+                          : 'Toggle theme'
                       }
                     >
                       {mounted && (
                         <LottieIcon
                           animationData={
-                            resolvedTheme === "dark"
+                            resolvedTheme === 'dark'
                               ? animations.sun
                               : animations.point
                           }
@@ -188,15 +197,15 @@ export function Footer() {
                           isHovered={hoveredTheme}
                           ariaLabel={
                             mounted
-                              ? `Toggle ${resolvedTheme === "light" ? "dark" : "light"} mode`
-                              : "Toggle theme"
+                              ? `Toggle ${resolvedTheme === 'light' ? 'dark' : 'light'} mode`
+                              : 'Toggle theme'
                           }
                           customColor={
                             hoveredTheme
-                              ? resolvedTheme === "dark"
+                              ? resolvedTheme === 'dark'
                                 ? [0.922, 0.922, 0.941] // Very light in dark mode (zinc-200)
                                 : [0.145, 0.145, 0.169] // Very dark in light mode (zinc-800)
-                              : resolvedTheme === "dark"
+                              : resolvedTheme === 'dark'
                                 ? [0.631, 0.631, 0.667] // zinc-400 in dark mode
                                 : [0.322, 0.322, 0.357] // zinc-600 in light mode
                           }
@@ -210,13 +219,13 @@ export function Footer() {
                       className="hidden lg:flex text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white items-center transition-colors cursor-pointer"
                       aria-label={
                         mounted
-                          ? `Toggle sound ${isSoundEnabled ? "off" : "on"}`
-                          : "Toggle sound"
+                          ? `Toggle sound ${isSoundEnabled ? 'off' : 'on'}`
+                          : 'Toggle sound'
                       }
                       title={
                         mounted
-                          ? `Toggle sound ${isSoundEnabled ? "off" : "on"}`
-                          : "Toggle sound"
+                          ? `Toggle sound ${isSoundEnabled ? 'off' : 'on'}`
+                          : 'Toggle sound'
                       }
                     >
                       {mounted && (
@@ -231,15 +240,15 @@ export function Footer() {
                           isHovered={hoveredSound}
                           ariaLabel={
                             mounted
-                              ? `Toggle sound ${isSoundEnabled ? "off" : "on"}`
-                              : "Toggle sound"
+                              ? `Toggle sound ${isSoundEnabled ? 'off' : 'on'}`
+                              : 'Toggle sound'
                           }
                           customColor={
                             hoveredSound
-                              ? resolvedTheme === "dark"
+                              ? resolvedTheme === 'dark'
                                 ? [0.922, 0.922, 0.941] // Very light in dark mode (zinc-200)
                                 : [0.145, 0.145, 0.169] // Very dark in light mode (zinc-800)
-                              : resolvedTheme === "dark"
+                              : resolvedTheme === 'dark'
                                 ? [0.631, 0.631, 0.667] // zinc-400 in dark mode
                                 : [0.322, 0.322, 0.357] // zinc-600 in light mode
                           }
@@ -256,7 +265,7 @@ export function Footer() {
                 {/* Copyright and Language - Better mobile alignment */}
                 <div className="flex flex-row items-center justify-between text-xs text-zinc-600 dark:text-zinc-400 mt-4 w-full">
                   <span className="px-2 py-1.5 h-8 bg-transparent hover:bg-[#2a2f3d]/5 rounded-sm transition-colors duration-200 dark:hover:bg-[#2a2f3d]/20 inline-flex items-center text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100">
-                    {t("footer.copyright")}
+                    {t('footer.copyright')}
                   </span>
                   <div>
                     <LanguageSwitcher />
@@ -270,20 +279,20 @@ export function Footer() {
                     href="https://status.lomi.africa"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="absolute right-0 top-1/2 -translate-y-1/2 flex items-center gap-1.5 px-2 py-1.5 text-xs h-8 bg-transparent hover:bg-[#2a2f3d]/5 rounded-sm transition-colors duration-200 justify-center dark:hover:bg-[#2a2f3d]/20 group text-blue-700 dark:text-[#4fd686] hover:text-blue-800 dark:hover:text-[#4fd686]"
+                    className="absolute right-0 top-1/2 -translate-y-1/2 flex items-center gap-1.5 px-2 py-1.5 text-xs h-8 bg-transparent hover:bg-[#2a2f3d]/5 rounded-sm transition-colors duration-200 justify-center dark:hover:bg-[#2a2f3d]/20 group text-sky-600 dark:text-green-300 hover:text-zinc-900 dark:hover:text-zinc-100"
                     onClick={playClickSound}
                   >
                     <div className="relative flex items-center justify-center w-3 h-3 shrink-0">
-                      <span className="animate-ping absolute inline-flex h-2 w-2 rounded-full bg-blue-400 dark:bg-[#4fd686]/50 opacity-50"></span>
-                      <span className="relative inline-flex rounded-full h-3 w-3 bg-blue-500 dark:bg-[#2a5a45] items-center justify-center">
+                      <span className="animate-ping absolute inline-flex h-2 w-2 rounded-full bg-sky-400 dark:bg-green-500/50 opacity-50"></span>
+                      <span className="relative inline-flex rounded-full h-3 w-3 bg-sky-500 dark:bg-green-900 items-center justify-center">
                         <Check
-                          className="h-2 w-2 text-white dark:text-[#4fd686]"
+                          className="h-2 w-2 text-white dark:text-green-300"
                           strokeWidth={3}
                         />
                       </span>
                     </div>
-                    <span className="text-blue-700 dark:text-[#4fd686] font-normal whitespace-nowrap text-center">
-                      {t("footer.status")}
+                    <span className="text-sky-600 dark:text-green-300 hover:text-zinc-900 dark:hover:text-zinc-100 font-normal whitespace-nowrap text-center">
+                      {t('footer.status')}
                     </span>
                   </a>
                   {/* Certification Icons Container - Absolutely positioned to the left of the status link */}
@@ -320,21 +329,21 @@ export function Footer() {
               {/* Features Column */}
               <div className="space-y-4 pl-4 order-1 md:order-2 lg:translate-x-[68px]">
                 <h2 className="text-zinc-900 dark:text-white font-normal text-base">
-                  {t("footer.features.title")}
+                  {t('footer.features.title')}
                 </h2>
                 <ul className="space-y-3 relative z-20">
                   {[
                     {
-                      name: t("footer.features.overview"),
-                      link: "/",
+                      name: t('footer.features.overview'),
+                      link: '/',
                     },
                     {
-                      name: t("footer.features.pricing"),
-                      link: "/pricing",
+                      name: t('footer.features.pricing'),
+                      link: '/pricing',
                     },
                     {
-                      name: t("footer.features.faq"),
-                      link: "/faq",
+                      name: t('footer.features.faq'),
+                      link: '/faq',
                     },
                   ].map((item) => (
                     <li key={item.name} className="relative z-20">
@@ -353,30 +362,30 @@ export function Footer() {
               {/* Resources Column */}
               <div className="space-y-4 pl-4 order-2 md:order-3 lg:translate-x-[75px]">
                 <h2 className="text-zinc-900 dark:text-white font-normal text-base">
-                  {t("footer.resources.title")}
+                  {t('footer.resources.title')}
                 </h2>
                 <ul className="space-y-3">
                   {[
                     {
-                      name: t("footer.resources.github"),
-                      link: "https://github.com/lomiafrica/lomi.",
+                      name: t('footer.resources.github'),
+                      link: 'https://github.com/lomiafrica/lomi.',
                     },
                     {
-                      name: t("footer.resources.support"),
-                      link: "https://docs.lomi.africa/docs/core/support/contact",
-                      target: "_blank",
-                      rel: "noopener noreferrer",
+                      name: t('footer.resources.support'),
+                      link: '/docs/core/support/contact',
+                      target: '_blank',
+                      rel: 'noopener noreferrer',
                     },
                     {
-                      name: t("footer.resources.featureRequest"),
-                      link: "https://github.com/lomiafrica/lomi./issues/new?labels=enhancement",
+                      name: t('footer.resources.featureRequest'),
+                      link: 'https://github.com/lomiafrica/lomi./issues/new?labels=enhancement',
                     },
                     {
-                      name: t("footer.resources.review"),
-                      link: "https://www.producthunt.com/products/lomi/reviews/new",
+                      name: t('footer.resources.review'),
+                      link: 'https://www.producthunt.com/products/lomi/reviews/new',
                     },
-                    { name: t("footer.resources.privacy"), link: "/privacy" },
-                    { name: t("footer.resources.terms"), link: "/terms" },
+                    { name: t('footer.resources.privacy'), link: '/privacy' },
+                    { name: t('footer.resources.terms'), link: '/terms' },
                   ].map((item) => (
                     <li key={item.name}>
                       <Link
@@ -396,7 +405,7 @@ export function Footer() {
                       download="lomi.brand.zip"
                       className="text-sm text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white transition-colors"
                     >
-                      {t("footer.resources.branding")}
+                      {t('footer.resources.branding')}
                     </a>
                   </li>
                 </ul>
@@ -405,16 +414,16 @@ export function Footer() {
               {/* Company Column */}
               <div className="space-y-4 pl-4 order-3 md:order-4 lg:translate-x-[160px]">
                 <h2 className="text-zinc-900 dark:text-white font-normal text-base">
-                  {t("footer.company.title")}
+                  {t('footer.company.title')}
                 </h2>
                 <ul className="space-y-3">
                   {[
                     {
-                      name: t("footer.company.story"),
-                      link: "https://docs.lomi.africa/docs/core/introduction/manifesto",
-                      target: "_blank",
-                      rel: "noopener noreferrer",
-                      color: "",
+                      name: t('footer.company.story'),
+                      link: '/docs/core/introduction/manifesto',
+                      target: '_blank',
+                      rel: 'noopener noreferrer',
+                      color: '',
                       icon: (
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -433,9 +442,9 @@ export function Footer() {
                       ),
                     },
                     {
-                      name: t("footer.company.blog"),
-                      link: "/blog",
-                      color: "",
+                      name: t('footer.company.blog'),
+                      link: '/blog',
+                      color: '',
                       icon: (
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -454,11 +463,12 @@ export function Footer() {
                       ),
                     },
                     {
-                      name: t("footer.company.openSource"),
-                      link: "https://docs.lomi.africa/docs/core/freedom/open-source",
-                      target: "_blank",
-                      rel: "noopener noreferrer",
-                      color: "text-sky-600 dark:text-sky-300 hover:text-sky-900 dark:hover:text-sky-200",
+                      name: t('footer.company.openSource'),
+                      link: '/docs/core/freedom/open-source',
+                      target: '_blank',
+                      rel: 'noopener noreferrer',
+                      color:
+                        'text-sky-600 dark:text-sky-300 hover:text-sky-900 dark:hover:text-sky-200',
                       icon: (
                         <svg
                           xmlns="http://www.w3.org/2000/svg"

@@ -1,8 +1,8 @@
-import type { Language } from "./config";
-import enTranslations from "./locales/en.json";
-import frTranslations from "./locales/fr.json";
-import esTranslations from "./locales/es.json";
-import zhTranslations from "./locales/zh.json";
+import type { Language } from './config';
+import enTranslations from './locales/en.json';
+import frTranslations from './locales/fr.json';
+import esTranslations from './locales/es.json';
+import zhTranslations from './locales/zh.json';
 
 // Define a more specific type for translation values
 export type TranslationValue =
@@ -26,18 +26,18 @@ export const getTranslations = (
 
 export const t = (
   key: string,
-  lang: Language = "en",
+  lang: Language = 'en',
   values?: Record<string, string | number | undefined>,
 ): TranslationValue => {
   try {
-    const keys = key.split(".");
+    const keys = key.split('.');
     let currentVal: TranslationValue | undefined = getTranslations(lang);
     let found = true;
 
     for (const k of keys) {
       if (
         currentVal &&
-        typeof currentVal === "object" &&
+        typeof currentVal === 'object' &&
         !Array.isArray(currentVal) &&
         k in currentVal
       ) {
@@ -56,7 +56,7 @@ export const t = (
       return fallbackValue !== undefined ? fallbackValue : key;
     }
 
-    if (typeof currentVal === "string") {
+    if (typeof currentVal === 'string') {
       if (values) {
         return currentVal.replace(
           /\{(\w+)\}|\[\[(\w+)\]\]/g,
@@ -92,7 +92,7 @@ function getFallbackValue(
   for (const keyPart of keys) {
     if (
       currentVal &&
-      typeof currentVal === "object" &&
+      typeof currentVal === 'object' &&
       !Array.isArray(currentVal) &&
       keyPart in currentVal
     ) {
@@ -102,7 +102,7 @@ function getFallbackValue(
     }
   }
 
-  if (typeof currentVal === "string") {
+  if (typeof currentVal === 'string') {
     if (values) {
       return currentVal.replace(/\{(\w+)\}|\[\[(\w+)\]\]/g, (match, p1, p2) => {
         const placeholderKey = p1 || p2;

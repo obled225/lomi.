@@ -1,11 +1,12 @@
 ---
-title: "Code reviews"
-description: "Our code review process ensures code quality, knowledge sharing, and maintainability."
+title: 'Code reviews'
+description: 'Our code review process ensures code quality, knowledge sharing, and maintainability.'
 ---
 
 ## Pull request guidelines
 
 ### Title format
+
 ```bash filename="PR Title Format"
 # Format
 <type>(<scope>): <description>
@@ -17,27 +18,33 @@ docs(api): update authentication guide
 ```
 
 ### Description template
+
 ```markdown filename="PR Description Template"
 ## Changes
+
 - Added Wave payment provider integration
 - Implemented webhook signature verification
 - Updated API documentation
 
 ## Testing
+
 - Unit tests added for payment processing
 - Integration tests for webhook handling
 - Manual testing with test credentials
 
 ## Screenshots
+
 [If applicable]
 
 ## Related issues
+
 Closes #123
 ```
 
 ## Review process
 
 ### Self review
+
 ```bash filename="Terminal - Self Review Checks"
 # Run tests
 npm test
@@ -50,11 +57,13 @@ npm run docs:build
 ```
 
 ### Code review
+
 - Request reviews from relevant team members
 - Address feedback promptly
 - Re-request review after changes
 
 ### CI checks
+
 - All tests must pass
 - Code coverage requirements met
 - No security vulnerabilities
@@ -63,24 +72,28 @@ npm run docs:build
 ## Review checklist
 
 ### Code quality
+
 - Follows coding standards
 - No duplicate code
 - Proper error handling
 - Efficient implementation
 
 ### Testing
+
 - Unit tests added/updated
 - Integration tests if needed
 - Edge cases covered
 - Test coverage maintained
 
 ### Security
+
 - Input validation
 - Authentication/Authorization
 - Sensitive data handling
 - Security best practices
 
 ### Documentation
+
 - Code comments
 - API documentation
 - README updates
@@ -89,6 +102,7 @@ npm run docs:build
 ## Best practices
 
 ### As a submitter
+
 ```typescript filename="Submitter Example (Good vs Bad)"
 // DO: Small, focused changes
 function validatePayment(amount: number): boolean {
@@ -104,6 +118,7 @@ function validateAndProcessPayment() {
 ```
 
 ### As a reviewer
+
 ```typescript filename="Reviewer Example (Good vs Bad Feedback)"
 // Good feedback
 // Consider using a type guard for better type safety
@@ -116,6 +131,7 @@ function isValidAmount(amount: unknown): amount is number {
 ```
 
 ### Code examples
+
 ```typescript filename="Code Example (Before/After)"
 // Before
 /*
@@ -138,6 +154,7 @@ function process(data: InputData): OutputData {
 ## Review comments
 
 ### Constructive feedback
+
 ```typescript filename="Constructive Feedback Example"
 // Instead of:
 // // This is messy
@@ -145,15 +162,13 @@ function process(data: InputData): OutputData {
 // Better:
 // Consider extracting this logic into a separate function
 // for better reusability and testing:
-function validateWebhookSignature(
-  payload: string,
-  signature: string
-): boolean {
+function validateWebhookSignature(payload: string, signature: string): boolean {
   // Implementation
 }
 ```
 
 ### Suggestions
+
 ```typescript filename="Suggestion Example"
 // Instead of:
 // // Use better names
@@ -167,6 +182,7 @@ function validateWebhookSignature(
 ## After review
 
 ### Addressing feedback
+
 ```bash filename="Terminal - Addressing Feedback"
 # Update branch
 git fetch origin
@@ -181,6 +197,7 @@ git push --force-with-lease
 ```
 
 ### Merging
+
 ```bash filename="Terminal - Merging Strategies"
 # Squash and merge
 git checkout develop
@@ -195,4 +212,4 @@ git rebase feature/payment-method
 
 - [Best practices](/docs/core/contributing/best-practices)
 - [Branching strategy](/docs/core/contributing/branching-strategy)
-- [Best practices](/docs/core/contributing/best-practices) 
+- [Best practices](/docs/core/contributing/best-practices)

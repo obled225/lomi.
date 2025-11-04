@@ -1,6 +1,6 @@
 ---
-title: "CI/CD"
-description: "This guide covers best practices for integrating lomi. with your CI/CD pipeline, ensuring reliable deployments and automated testing."
+title: 'CI/CD'
+description: 'This guide covers best practices for integrating lomi. with your CI/CD pipeline, ensuring reliable deployments and automated testing.'
 ---
 
 ## Environment setup
@@ -22,10 +22,7 @@ Ensure your CI/CD environment securely loads required secrets. Never commit secr
 ```typescript filename="Loading secrets in Node.js"
 // config/secrets.ts
 export function loadSecrets(): void {
-  const requiredSecrets = [
-    'LOMI_API_KEY',
-    'LOMI_WEBHOOK_SECRET'
-  ];
+  const requiredSecrets = ['LOMI_API_KEY', 'LOMI_WEBHOOK_SECRET'];
 
   for (const secret of requiredSecrets) {
     if (!process.env[secret]) {
@@ -50,9 +47,9 @@ name: Test
 
 on:
   push:
-    branches: [ main, develop ] # Trigger on main and develop branches
+    branches: [main, develop] # Trigger on main and develop branches
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   test:
@@ -88,7 +85,7 @@ name: Deploy
 
 on:
   push:
-    branches: [ main ] # Only trigger on pushes to main
+    branches: [main] # Only trigger on pushes to main
 
 jobs:
   deploy:
@@ -145,7 +142,7 @@ async function runPreDeploymentChecks(): Promise<void> {
 
   const lomi = new LomiSDK({
     apiKey: apiKey,
-    baseUrl: apiUrl
+    baseUrl: apiUrl,
   });
 
   try {
@@ -153,7 +150,7 @@ async function runPreDeploymentChecks(): Promise<void> {
     console.log('Checking API connectivity...');
     const providers = await lomi.providers.list();
     if (!providers || providers.data.length === 0) {
-        throw new Error('Failed to fetch providers or no providers available.');
+      throw new Error('Failed to fetch providers or no providers available.');
     }
     console.log(`Successfully fetched ${providers.data.length} providers.`);
 
@@ -190,11 +187,11 @@ describe('Payment Integration', () => {
   beforeAll(() => {
     // Ensure required env vars are set for tests
     if (!process.env.LOMI_TEST_API_KEY || !process.env.TEST_MERCHANT_ID) {
-        throw new Error('Missing test environment variables');
+      throw new Error('Missing test environment variables');
     }
     lomi = new LomiSDK({
       apiKey: process.env.LOMI_TEST_API_KEY,
-      baseUrl: 'https://sandbox.api.lomi.africa/v1'
+      baseUrl: 'https://sandbox.api.lomi.africa/v1',
     });
     // await setupTestEnvironment(); // Your test setup
   });
@@ -208,7 +205,7 @@ describe('Payment Integration', () => {
       allowed_providers: ['WAVE'], // Use a testable provider
       success_url: 'https://example.com/success',
       cancel_url: 'https://example.com/cancel',
-      metadata: { test_order_id: `e2e_${Date.now()}` }
+      metadata: { test_order_id: `e2e_${Date.now()}` },
     });
     const sessionId = sessionResponse.data.checkout_session_id;
     expect(sessionId).toBeDefined();
@@ -247,7 +244,9 @@ async function blueGreenDeploy(newVersion: string): Promise<void> {
   console.log(`Running health checks on ${inactiveEnv}...`);
   const health = await checkHealth(inactiveEnv);
   if (!health.ok) {
-    console.error(`Health check failed for ${inactiveEnv}. Rolling back deployment.`);
+    console.error(
+      `Health check failed for ${inactiveEnv}. Rolling back deployment.`,
+    );
     // await rollbackDeployment(inactiveEnv); // Optional rollback
     throw new Error('Health check failed on inactive environment');
   }
@@ -277,7 +276,10 @@ async function canaryDeploy(newVersion: string): Promise<void> {
 
   // 2. Monitor metrics (error rates, latency) for a defined period
   console.log('Monitoring canary metrics...');
-  const metricsOk = await monitorCanaryMetrics({ duration: '1h', errorThreshold: 0.05 });
+  const metricsOk = await monitorCanaryMetrics({
+    duration: '1h',
+    errorThreshold: 0.05,
+  });
 
   if (!metricsOk) {
     console.error('Canary metrics failed. Rolling back canary...');
@@ -310,9 +312,15 @@ Set up automated checks for API connectivity and critical functions.
 import { LomiSDK } from '@lomi/sdk';
 // import db from './database'; // Your database connection
 
-export async function checkServiceHealth(): Promise<{ status: string, errors: string[] }> {
+export async function checkServiceHealth(): Promise<{
+  status: string;
+  errors: string[];
+}> {
   const errors: string[] = [];
-  const lomi = new LomiSDK({ apiKey: process.env.LOMI_API_KEY!, baseUrl: process.env.LOMI_API_URL! });
+  const lomi = new LomiSDK({
+    apiKey: process.env.LOMI_API_KEY!,
+    baseUrl: process.env.LOMI_API_URL!,
+  });
 
   try {
     // Check lomi. API status (e.g., list providers)
@@ -332,7 +340,7 @@ export async function checkServiceHealth(): Promise<{ status: string, errors: st
 
   return {
     status: errors.length === 0 ? 'healthy' : 'unhealthy',
-    errors: errors
+    errors: errors,
   };
 }
 ```
@@ -373,8 +381,13 @@ Integrate rollback steps into your deployment workflow.
 
 ```typescript filename="Conceptual automated rollback script"
 // scripts/rollback.ts
-async function automaticRollback(failedDeploymentId: string, previousVersion: string): Promise<void> {
-  console.log(`Rolling back deployment ${failedDeploymentId} to version ${previousVersion}...`);
+async function automaticRollback(
+  failedDeploymentId: string,
+  previousVersion: string,
+): Promise<void> {
+  console.log(
+    `Rolling back deployment ${failedDeploymentId} to version ${previousVersion}...`,
+  );
   try {
     // 1. Stop traffic to the failed version (if applicable)
     // await stopTraffic(failedDeploymentId);
@@ -391,7 +404,6 @@ async function automaticRollback(failedDeploymentId: string, previousVersion: st
 
     // 4. Notify team
     // await notifyTeam(`Rollback completed for deployment ${failedDeploymentId}. Restored version ${previousVersion}.`);
-
   } catch (error: any) {
     console.error(`Automatic rollback failed: ${error.message}`);
     // await notifyTeam(`CRITICAL: Automatic rollback failed for deployment ${failedDeploymentId}. Manual intervention required.`);
@@ -402,6 +414,6 @@ async function automaticRollback(failedDeploymentId: string, previousVersion: st
 
 ## Next steps
 
--   [Testing guide](/docs/core/advanced-guides/testing)
--   [Security best practices](/docs/core/advanced-guides/security-best-practices)
--   [API Reference](/docs/reference) 
+- [Testing guide](/docs/core/advanced-guides/testing)
+- [Security best practices](/docs/core/advanced-guides/security-best-practices)
+- [API Reference](/docs/reference)

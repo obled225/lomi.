@@ -1,7 +1,7 @@
-import type React from "react";
-import { useEffect } from "react";
-import { useTheme } from "@/lib/hooks/use-theme";
-import { cn } from "@/lib/actions/utils";
+import type React from 'react';
+import { useEffect } from 'react';
+import { useTheme } from '@/lib/hooks/use-theme';
+import { cn } from '@/lib/actions/utils';
 
 interface SkeletonProps {
   className?: string;
@@ -10,29 +10,29 @@ interface SkeletonProps {
 }
 
 export function Skeleton({
-  className = "",
+  className = '',
   gridSize = 16, // Default grid size based on the image
   style,
 }: SkeletonProps) {
   const { theme } = useTheme();
 
   // Determine colors based on resolved theme (making grid less visible)
-  const isDark = theme === "dark";
-  const bgColor = isDark ? "hsl(210 4% 15%)" : "#f8f9fa";
+  const isDark = theme === 'dark';
+  const bgColor = isDark ? 'hsl(210 4% 15%)' : '#f8f9fa';
   const gridColor = isDark
-    ? "rgba(80, 80, 80, 0.2)"
-    : "rgba(230, 230, 230, 0.4)"; // Less visible grid
+    ? 'rgba(80, 80, 80, 0.2)'
+    : 'rgba(230, 230, 230, 0.4)'; // Less visible grid
   const overlayColor = isDark
-    ? "rgba(60, 60, 60, 0.5)"
-    : "rgba(255, 255, 255, 0.7)"; // Subtle overlay
+    ? 'rgba(60, 60, 60, 0.5)'
+    : 'rgba(255, 255, 255, 0.7)'; // Subtle overlay
 
   useEffect(() => {
     // Inject necessary styles dynamically
-    const styleId = "skeleton-dynamic-styles";
+    const styleId = 'skeleton-dynamic-styles';
     let styleElement = document.getElementById(styleId);
 
     if (!styleElement) {
-      styleElement = document.createElement("style");
+      styleElement = document.createElement('style');
       styleElement.id = styleId;
       document.head.appendChild(styleElement);
     }
@@ -71,14 +71,14 @@ export function Skeleton({
 
   return (
     <div
-      className={cn("skeleton", className)}
+      className={cn('skeleton', className)}
       style={{
-        position: "relative",
-        minHeight: "1rem",
+        position: 'relative',
+        minHeight: '1rem',
         backgroundColor: bgColor,
-        borderRadius: "0.325rem",
-        overflow: "hidden",
-        animation: "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+        borderRadius: '0.325rem',
+        overflow: 'hidden',
+        animation: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
         ...style,
       }}
     >
@@ -86,14 +86,14 @@ export function Skeleton({
         className="skeleton-grid"
         style={
           {
-            position: "absolute",
+            position: 'absolute',
             top: 0,
             left: 0,
-            width: "100%",
-            height: "100%",
-            "--grid-size": `${gridSize}px`,
-            "--grid-color": gridColor,
-            "--overlay-color": overlayColor,
+            width: '100%',
+            height: '100%',
+            '--grid-size': `${gridSize}px`,
+            '--grid-color': gridColor,
+            '--overlay-color': overlayColor,
           } as React.CSSProperties
         }
       />

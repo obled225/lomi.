@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import { motion, type Variants } from "motion/react";
+import { motion, type Variants } from 'motion/react';
 
 import {
   getVariants,
   useAnimateIconContext,
   IconWrapper,
   type IconProps,
-} from "@/components/animate/primitives/icon";
+} from '@/components/animate/primitives/icon';
 
 type FanProps = IconProps<keyof typeof animations>;
 
@@ -19,9 +19,9 @@ const animations = {
         rotate: 360,
         transition: {
           duration: 1.2,
-          ease: "linear",
+          ease: 'linear',
           repeat: Infinity,
-          repeatType: "loop",
+          repeatType: 'loop',
         },
       },
     },

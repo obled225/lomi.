@@ -1,5 +1,5 @@
-import { motion } from "framer-motion";
-import { ReactNode } from "react";
+import { motion } from 'framer-motion';
+import { ReactNode } from 'react';
 
 interface DockDropdownProps {
   isOpen: boolean;
@@ -18,11 +18,11 @@ export function DockDropdown({
     <motion.div
       initial={{ opacity: 0, height: 0 }}
       animate={
-        isOpen ? { opacity: 1, height: "auto" } : { opacity: 0, height: 0 }
+        isOpen ? { opacity: 1, height: 'auto' } : { opacity: 0, height: 0 }
       }
       exit={{ opacity: 0, height: 0 }}
       transition={{ duration: 0.2 }}
-      className={`border-t border-border mt-1 ${isOpen ? "" : "pointer-events-none"}`}
+      className={`border-t border-border mt-1 ${isOpen ? '' : 'pointer-events-none'}`}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >

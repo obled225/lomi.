@@ -1,7 +1,7 @@
-import { Suspense } from "react";
-import SimpleImage from "@/components/home/hero-image";
-import { useTranslation } from "@/lib/contexts/translation-context";
-import { t as translate } from "@/lib/i18n/translations";
+import { Suspense } from 'react';
+import SimpleImage from '@/components/home/hero-image';
+import { useTranslation } from '@/lib/contexts/translation-context';
+import { t as translate } from '@/lib/i18n/translations';
 
 interface HeroProps {
   dashboardImage?: string;
@@ -20,7 +20,7 @@ function Hero({ dashboardImage }: HeroProps) {
           {/* Hero content */}
           <div className="space-y-4">
             <h1 className="text-4xl font-normal tracking-tighter text-left text-zinc-800 dark:text-white md:text-5xl max-w-7xl whitespace-pre-line">
-              {t("hero.title") as string}
+              {t('hero.title') as string}
             </h1>
           </div>
         </div>

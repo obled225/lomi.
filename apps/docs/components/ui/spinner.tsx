@@ -2,7 +2,7 @@ interface SpinnerProps {
   className?: string;
 }
 
-export default function Spinner({ className = "" }: SpinnerProps) {
+export default function Spinner({ className = '' }: SpinnerProps) {
   return (
     <div className="flex items-center justify-center w-full h-full">
       <svg
@@ -15,9 +15,9 @@ export default function Spinner({ className = "" }: SpinnerProps) {
         xmlns="http://www.w3.org/2000/svg"
         className={`size-5 animate-spin stroke-zinc-400 ${className}`}
         style={{
-          shapeRendering: "geometricPrecision",
-          imageRendering: "crisp-edges",
-          vectorEffect: "non-scaling-stroke",
+          shapeRendering: 'geometricPrecision',
+          imageRendering: 'crisp-edges',
+          vectorEffect: 'non-scaling-stroke',
         }}
       >
         <line x1="12" y1="3" x2="12" y2="6" />

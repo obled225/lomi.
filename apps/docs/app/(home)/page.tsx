@@ -1,6 +1,6 @@
 /* @proprietary license */
 
-import { HomePageClient } from "@/components/home/home-page-client";
+import { HomePageClient } from '@/components/home/home-page-client';
 
 export default function Page() {
   return <HomePageClient />;

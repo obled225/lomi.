@@ -4,7 +4,7 @@ import {
   TabsList,
   TabsTrigger,
 } from 'fumadocs-ui/components/tabs.unstyled';
-import { CodeBlock } from '@/components/code-block';
+import { CodeBlock } from '@/components/ui/code-block';
 
 export function Installation({ name }: { name: string }) {
   const tabs = [
@@ -37,10 +37,7 @@ export function Installation({ name }: { name: string }) {
       </TabsContent>
 
       <TabsContent value="shadcn">
-        <CodeBlock
-          code={`npx shadcn@latest add https://docs.lomi.africa/r/${name}.json`}
-          lang="bash"
-        />
+        <CodeBlock code={`npx shadcn@latest add /r/${name}.json`} lang="bash" />
       </TabsContent>
     </Tabs>
   );

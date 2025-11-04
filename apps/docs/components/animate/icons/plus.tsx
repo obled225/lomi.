@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import * as React from "react";
-import { motion, type Variants } from "motion/react";
+import * as React from 'react';
+import { motion, type Variants } from 'motion/react';
 
 import {
   getVariants,
   useAnimateIconContext,
   IconWrapper,
   type IconProps,
-} from "@/components/animate/primitives/icon";
+} from '@/components/animate/primitives/icon';
 
 type PlusProps = IconProps<keyof typeof animations>;
 
@@ -17,21 +17,21 @@ const animations = {
     line1: {
       initial: {
         rotate: 0,
-        transition: { ease: "easeInOut", duration: 0.4, delay: 0.1 },
+        transition: { ease: 'easeInOut', duration: 0.4, delay: 0.1 },
       },
       animate: {
         rotate: 90,
-        transition: { ease: "easeInOut", duration: 0.4, delay: 0.1 },
+        transition: { ease: 'easeInOut', duration: 0.4, delay: 0.1 },
       },
     },
     line2: {
       initial: {
         rotate: 0,
-        transition: { ease: "easeInOut", duration: 0.4 },
+        transition: { ease: 'easeInOut', duration: 0.4 },
       },
       animate: {
         rotate: 90,
-        transition: { ease: "easeInOut", duration: 0.4 },
+        transition: { ease: 'easeInOut', duration: 0.4 },
       },
     },
   } satisfies Record<string, Variants>,
@@ -43,7 +43,7 @@ const animations = {
         y1: 19,
         x2: 12,
         y2: 5,
-        transition: { ease: "easeInOut", duration: 0.3, delay: 0.1 },
+        transition: { ease: 'easeInOut', duration: 0.3, delay: 0.1 },
       },
       animate: {
         rotate: 45,
@@ -51,7 +51,7 @@ const animations = {
         y1: 20.5,
         x2: 12,
         y2: 3.5,
-        transition: { ease: "easeInOut", duration: 0.3, delay: 0.1 },
+        transition: { ease: 'easeInOut', duration: 0.3, delay: 0.1 },
       },
     },
     line2: {
@@ -61,7 +61,7 @@ const animations = {
         y1: 12,
         x2: 19,
         y2: 12,
-        transition: { ease: "easeInOut", duration: 0.3 },
+        transition: { ease: 'easeInOut', duration: 0.3 },
       },
       animate: {
         rotate: 45,
@@ -69,7 +69,7 @@ const animations = {
         y1: 12,
         x2: 20.5,
         y2: 12,
-        transition: { ease: "easeInOut", duration: 0.3 },
+        transition: { ease: 'easeInOut', duration: 0.3 },
       },
     },
   } satisfies Record<string, Variants>,

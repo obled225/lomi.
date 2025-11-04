@@ -1,6 +1,6 @@
-import { promises as fs } from "fs";
-import * as path from "path";
-import { client } from "@/lib/sanity/client";
+import { promises as fs } from 'fs';
+import * as path from 'path';
+import { client } from '@/lib/sanity/client';
 
 interface RouteConfig {
   priority: string;
@@ -19,97 +19,97 @@ class SitemapGenerator {
   private excludeRoutes: string[];
 
   constructor() {
-    this.baseUrl = "https://viacascade.com";
-    this.srcDir = "src/app"; // Directory containing Next.js pages
-    this.outputDir = "public";
+    this.baseUrl = 'https://viacascade.com';
+    this.srcDir = 'src/app'; // Directory containing Next.js pages
+    this.outputDir = 'public';
 
     // Priority and change frequency mappings
     this.routeConfig = {
-      "": {
+      '': {
         // Homepage
-        priority: "1.0",
-        changefreq: "daily",
+        priority: '1.0',
+        changefreq: 'daily',
       },
       blog: {
-        priority: "0.8",
-        changefreq: "weekly",
+        priority: '0.8',
+        changefreq: 'weekly',
       },
       about: {
-        priority: "0.7",
-        changefreq: "monthly",
+        priority: '0.7',
+        changefreq: 'monthly',
       },
       login: {
-        priority: "0.6",
-        changefreq: "monthly",
+        priority: '0.6',
+        changefreq: 'monthly',
       },
       signup: {
-        priority: "0.6",
-        changefreq: "monthly",
+        priority: '0.6',
+        changefreq: 'monthly',
       },
-      "forgot-password": {
-        priority: "0.5",
-        changefreq: "monthly",
+      'forgot-password': {
+        priority: '0.5',
+        changefreq: 'monthly',
       },
       terms: {
-        priority: "0.5",
-        changefreq: "monthly",
+        priority: '0.5',
+        changefreq: 'monthly',
       },
       privacy: {
-        priority: "0.5",
-        changefreq: "monthly",
+        priority: '0.5',
+        changefreq: 'monthly',
       },
       default: {
-        priority: "0.5",
-        changefreq: "weekly",
+        priority: '0.5',
+        changefreq: 'weekly',
       },
     };
 
     // Routes to exclude from sitemap
     this.excludeRoutes = [
-      "api/",
-      "callback",
-      "dashboard",
-      "verify",
-      "accept-invite",
-      "welcome",
-      "workspace",
+      'api/',
+      'callback',
+      'dashboard',
+      'verify',
+      'accept-invite',
+      'welcome',
+      'workspace',
     ];
   }
 
   private cleanRoute(route: string): string {
     // Handle (group) directory structure
-    if (route.includes("(")) {
-      const parts = route.split("/");
+    if (route.includes('(')) {
+      const parts = route.split('/');
       const cleanedParts: string[] = [];
       for (const part of parts) {
-        if (part.includes("(") || part.includes(")")) {
+        if (part.includes('(') || part.includes(')')) {
           continue;
         }
         cleanedParts.push(part);
       }
-      route = cleanedParts.join("/");
+      route = cleanedParts.join('/');
     }
 
     // Clean up the route
-    if (route.endsWith("/page")) {
+    if (route.endsWith('/page')) {
       route = route.slice(0, -5); // Remove '/page'
-    } else if (route.endsWith("page")) {
+    } else if (route.endsWith('page')) {
       route = route.slice(0, -4); // Remove 'page'
     }
 
     // Handle index files
-    if (route.endsWith("/index")) {
+    if (route.endsWith('/index')) {
       route = route.slice(0, -6); // Remove '/index'
-    } else if (route === "index") {
-      route = ""; // Homepage
+    } else if (route === 'index') {
+      route = ''; // Homepage
     }
 
-    while (route.includes("//")) {
-      route = route.replace("//", "/");
+    while (route.includes('//')) {
+      route = route.replace('//', '/');
     }
 
     // Remove leading/trailing slashes
-    return route.replace(/^\/+|\/+$/g, "");
+    return route.replace(/^\/+|\/+$/g, '');
   }
 
   private async getBlogSlugs(): Promise<string[]> {
@@ -118,7 +118,7 @@ class SitemapGenerator {
       const slugs = await client.fetch<{ slug: string }[]>(query);
       return slugs.map((item) => `blog/${item.slug}`);
     } catch (error) {
-      console.error("Error fetching blog slugs from Sanity:", error);
+      console.error('Error fetching blog slugs from Sanity:', error);
       return [];
     }
   }
@@ -135,16 +135,16 @@ class SitemapGenerator {
 
         if (entry.isDirectory()) {
           await scanDirectory(fullPath);
-        } else if (entry.isFile() && entry.name === "page.tsx") {
+        } else if (entry.isFile() && entry.name === 'page.tsx') {
           // Remove src directory and file extension
           const relativePath = path.relative(srcDirPath, fullPath);
-          let route = relativePath.replace(/\.tsx$/, "");
+          let route = relativePath.replace(/\.tsx$/, '');
 
           // Convert path separators to URL format
-          route = route.replace(/\\/g, "/");
+          route = route.replace(/\\/g, '/');
 
           // Skip dynamic routes
-          if (route.includes("[") || route.includes("]")) {
+          if (route.includes('[') || route.includes(']')) {
             continue;
           }
 
@@ -175,8 +175,8 @@ class SitemapGenerator {
     routes.push(...blogRoutes);
 
     // Make sure homepage is included
-    if (!routes.includes("")) {
-      routes.push("");
+    if (!routes.includes('')) {
+      routes.push('');
     }
 
     return routes.sort();
@@ -184,8 +184,8 @@ class SitemapGenerator {
 
   private getRouteConfig(route: string): RouteConfig {
     // Empty route is homepage
-    if (route === "") {
-      return this.routeConfig[""];
+    if (route === '') {
+      return this.routeConfig[''];
     }
 
     // Try exact match first
@@ -200,30 +200,30 @@ class SitemapGenerator {
       }
     }
 
-    return this.routeConfig["default"];
+    return this.routeConfig['default'];
   }
 
   private formatXml(xml: string): string {
     // Simple XML formatting - add indentation
-    let formatted = "";
+    let formatted = '';
     let indent = 0;
-    const lines = xml.split("\n");
+    const lines = xml.split('\n');
 
     for (const line of lines) {
       const trimmed = line.trim();
       if (!trimmed) continue;
 
-      if (trimmed.startsWith("</")) {
+      if (trimmed.startsWith('</')) {
         indent -= 2;
       }
 
-      formatted += " ".repeat(Math.max(0, indent)) + trimmed + "\n";
+      formatted += ' '.repeat(Math.max(0, indent)) + trimmed + '\n';
 
       if (
-        trimmed.startsWith("<") &&
-        !trimmed.startsWith("</") &&
-        !trimmed.endsWith("/>") &&
-        !trimmed.includes("<url>")
+        trimmed.startsWith('<') &&
+        !trimmed.startsWith('</') &&
+        !trimmed.endsWith('/>') &&
+        !trimmed.includes('<url>')
       ) {
         indent += 2;
       }
@@ -255,8 +255,8 @@ Sitemap: ${this.baseUrl}/sitemap.xml`;
 
     try {
       await fs.mkdir(this.outputDir, { recursive: true });
-      const outputPath = path.join(this.outputDir, "robots.txt");
-      await fs.writeFile(outputPath, content, "utf-8");
+      const outputPath = path.join(this.outputDir, 'robots.txt');
+      await fs.writeFile(outputPath, content, 'utf-8');
     } catch (error) {
       console.error(`Error generating robots.txt: ${error}`);
       throw error;
@@ -275,26 +275,26 @@ Sitemap: ${this.baseUrl}/sitemap.xml`;
 
       // Add each route to sitemap
       for (const route of routes) {
-        const fullUrl = new URL(route || "", this.baseUrl).toString();
+        const fullUrl = new URL(route || '', this.baseUrl).toString();
         const config = this.getRouteConfig(route);
-        const lastmod = new Date().toISOString().split("T")[0]; // YYYY-MM-DD format
+        const lastmod = new Date().toISOString().split('T')[0]; // YYYY-MM-DD format
 
-        xmlContent += "  <url>\n";
+        xmlContent += '  <url>\n';
         xmlContent += `    <loc>${fullUrl}</loc>\n`;
         xmlContent += `    <lastmod>${lastmod}</lastmod>\n`;
         xmlContent += `    <changefreq>${config.changefreq}</changefreq>\n`;
         xmlContent += `    <priority>${config.priority}</priority>\n`;
-        xmlContent += "  </url>\n";
+        xmlContent += '  </url>\n';
       }
 
-      xmlContent += "</urlset>";
+      xmlContent += '</urlset>';
 
       // Create output directory if it doesn't exist
       await fs.mkdir(this.outputDir, { recursive: true });
 
       // Write the sitemap file
-      const outputPath = path.join(this.outputDir, "sitemap.xml");
-      await fs.writeFile(outputPath, xmlContent, "utf-8");
+      const outputPath = path.join(this.outputDir, 'sitemap.xml');
+      await fs.writeFile(outputPath, xmlContent, 'utf-8');
     } catch (error) {
       console.error(`Error generating sitemap: ${error}`);
       throw error;
@@ -302,13 +302,13 @@ Sitemap: ${this.baseUrl}/sitemap.xml`;
   }
 
   public async generate(): Promise<void> {
-    console.log("Generating sitemap...");
+    console.log('Generating sitemap...');
     await this.generateSitemap();
-    console.log("Sitemap generated successfully.");
+    console.log('Sitemap generated successfully.');
 
-    console.log("Generating robots.txt...");
+    console.log('Generating robots.txt...');
     await this.generateRobotsTxt();
-    console.log("robots.txt generated successfully.");
+    console.log('robots.txt generated successfully.');
   }
 }
 

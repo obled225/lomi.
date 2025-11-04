@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import React, { createContext, useContext, useState, useEffect } from "react";
-import type { Language } from "@/lib/i18n/config";
-import { languages } from "@/lib/i18n/config";
+import React, { createContext, useContext, useState, useEffect } from 'react';
+import type { Language } from '@/lib/i18n/config';
+import { languages } from '@/lib/i18n/config';
 import {
   getLocalStorageItem,
   setLocalStorageItem,
-} from "@/lib/localStorage";
-import { LocalStorageKeys } from "@/lib/constants";
+} from '@/lib/utils/localStorage';
+import { LocalStorageKeys } from '@/lib/utils/constants';
 
 interface TranslationContextType {
   currentLanguage: Language;
@@ -15,8 +15,8 @@ interface TranslationContextType {
 }
 
 const TranslationContext = createContext<TranslationContextType>({
-  currentLanguage: "en",
-  setLanguage: () => { },
+  currentLanguage: 'en',
+  setLanguage: () => {},
 });
 
 // Main provider component
@@ -27,23 +27,23 @@ export function TranslationProvider({
 }) {
   // Always start with default language to prevent hydration mismatch
   // We'll update to the correct language after mount
-  const [currentLanguage, setCurrentLanguage] = useState<Language>("en");
+  const [currentLanguage, setCurrentLanguage] = useState<Language>('en');
   const [isInitialized, setIsInitialized] = useState(false);
 
   useEffect(() => {
     // Only run on client side to avoid SSR issues
-    if (typeof window === "undefined") return;
+    if (typeof window === 'undefined') return;
 
     // After mount, read the actual language preference
     // Try cookie first (set by setLanguage), then localStorage
-    let preferredLang: Language = "en";
+    let preferredLang: Language = 'en';
 
     // Check cookie
     const cookieMatch = document.cookie
-      .split("; ")
+      .split('; ')
       .find((row) => row.startsWith(`${LocalStorageKeys.Language}=`));
     if (cookieMatch) {
-      const cookieLang = cookieMatch.split("=")[1];
+      const cookieLang = cookieMatch.split('=')[1];
       if (languages.some((lang) => lang.code === cookieLang)) {
         preferredLang = cookieLang as Language;
       }
@@ -73,7 +73,7 @@ export function TranslationProvider({
   useEffect(() => {
     // Sync cookie whenever language changes (after initialization)
     // Only run on client side
-    if (typeof window === "undefined") return;
+    if (typeof window === 'undefined') return;
 
     if (isInitialized && currentLanguage) {
       document.cookie = `${LocalStorageKeys.Language}=${currentLanguage}; path=/; max-age=31536000; SameSite=Lax`;
@@ -85,7 +85,7 @@ export function TranslationProvider({
     setLocalStorageItem(LocalStorageKeys.Language, lang);
 
     // Set cookie for server-side access (only on client side)
-    if (typeof window !== "undefined") {
+    if (typeof window !== 'undefined') {
       document.cookie = `${LocalStorageKeys.Language}=${lang}; path=/; max-age=31536000; SameSite=Lax`;
     }
   };
@@ -102,7 +102,7 @@ export function useTranslation() {
   const context = useContext(TranslationContext);
 
   if (context === undefined) {
-    throw new Error("useTranslation must be used within a TranslationProvider");
+    throw new Error('useTranslation must be used within a TranslationProvider');
   }
 
   return context;

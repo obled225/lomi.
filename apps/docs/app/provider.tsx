@@ -7,7 +7,7 @@ import { TooltipProvider } from '@radix-ui/react-tooltip';
 import { TranslationProvider } from '@/lib/contexts/translation-context';
 import { GithubStarsProvider } from '@/lib/hooks/use-github-stars';
 
-const SearchDialog = dynamic(() => import('@/components/search'), {
+const SearchDialog = dynamic(() => import('@/components/ui/search'), {
   ssr: false,
 });
 

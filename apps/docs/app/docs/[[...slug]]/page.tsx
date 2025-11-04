@@ -1,12 +1,12 @@
 import type { Metadata } from 'next';
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 import { type ComponentProps, type FC, type ReactNode, type JSX } from 'react';
 import * as Twoslash from 'fumadocs-twoslash/ui';
 import { Callout } from 'fumadocs-ui/components/callout';
 import { TypeTable } from 'fumadocs-ui/components/type-table';
 import * as Preview from '@/components/preview';
-import { createMetadata } from '@/lib/metadata';
-import { source } from '@/lib/source';
+import { createMetadata } from '@/lib/utils/metadata';
+import { source } from '@/lib/utils/source';
 import { Wrapper } from '@/components/preview/wrapper';
 import { Mermaid } from '@/components/mdx/mermaid';
 import { getMDXComponents } from '@/mdx-components';
@@ -41,8 +41,18 @@ const generator = createGenerator();
 
 export const revalidate = false;
 
-export default async function Page({ params }: { params: Promise<{ slug?: string[] }> }) {
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ slug?: string[] }>;
+}) {
   const resolvedParams = await params;
+
+  // Redirect to default page if slug is empty
+  if (!resolvedParams.slug || resolvedParams.slug.length === 0) {
+    redirect('/docs/core/introduction/what-is-lomi');
+  }
+
   const page = source.getPage(resolvedParams.slug);
 
   if (!page) notFound();

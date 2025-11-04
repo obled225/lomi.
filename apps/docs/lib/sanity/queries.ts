@@ -1,5 +1,5 @@
-import { client } from "./client";
-import type { Post } from "./types";
+import { client } from './client';
+import type { Post } from './types';
 
 // Get all posts
 export async function getAllPosts(): Promise<Post[]> {
@@ -45,10 +45,10 @@ export async function getAllPosts(): Promise<Post[]> {
     const result = await client.fetch(query);
     return result || [];
   } catch (error) {
-    console.error("Error in getAllPosts:", error);
+    console.error('Error in getAllPosts:', error);
     if (error instanceof Error) {
-      console.error("Error message:", error.message);
-      console.error("Error stack:", error.stack);
+      console.error('Error message:', error.message);
+      console.error('Error stack:', error.stack);
     }
     return [];
   }

@@ -1,5 +1,5 @@
 import type { BaseLayoutProps } from 'fumadocs-ui/layouts/shared';
-import Image from 'next/image';
+import { Logo } from './logo';
 
 /**
  * Shared layout configurations
@@ -8,24 +8,7 @@ import Image from 'next/image';
  * Home Layout: app/(home)/layout.tsx
  * Docs Layout: app/docs/layout.tsx
  */
-export const logo = (
-  <>
-    <Image
-      src="/lomi_d.webp"
-      alt="lomi."
-      width="60"
-      height="18"
-      className="block dark:hidden"
-    />
-    <Image
-      src="/lomi_l.webp"
-      alt="lomi."
-      width="60"
-      height="18"
-      className="hidden dark:block"
-    />
-  </>
-);
+export const logo = <Logo />;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const linkItems: any[] = [];
@@ -35,7 +18,7 @@ export function baseOptions(): BaseLayoutProps {
     nav: {
       title: logo,
     },
-    // see https://docs.lomi.africa/docs/ui/navigation/links
+    // see /docs/ui/navigation/links
     links: linkItems,
   };
 }

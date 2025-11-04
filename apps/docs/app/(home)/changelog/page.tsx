@@ -1,13 +1,13 @@
-import { detectLanguage } from "@/lib/i18n/server-utils";
-import { t } from "@/lib/i18n/translations";
-import type { Metadata } from "next";
-import ChangelogClient from "@/components/home/changelog-client";
+import { detectLanguage } from '@/lib/i18n/server-utils';
+import { t } from '@/lib/i18n/translations';
+import type { Metadata } from 'next';
+import ChangelogClient from '@/components/home/changelog-client';
 
 export async function generateMetadata(): Promise<Metadata> {
   const language = await detectLanguage();
   return {
     title: `Changelog | lomi.`,
-    description: t("changelog.description", language) as string,
+    description: t('changelog.description', language) as string,
   };
 }
 

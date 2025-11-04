@@ -138,7 +138,7 @@
   padding: 1.5rem;
   border-radius: 0.5rem;
   overflow-x: auto;
-  font-family: "Fira Code", monospace;
+  font-family: 'Fira Code', monospace;
   font-size: 0.875rem;
   line-height: 1.5;
   margin: 1.5rem 0;
@@ -174,7 +174,7 @@
 }
 
 .custom-list li::before {
-  content: "→";
+  content: '→';
   position: absolute;
   left: 0;
   color: hsl(var(--primary));

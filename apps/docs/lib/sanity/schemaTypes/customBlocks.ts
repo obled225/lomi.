@@ -1,43 +1,43 @@
-import { defineType } from "sanity";
+import { defineType } from 'sanity';
 
 // Code Block
 export const codeBlockType = defineType({
-  name: "codeBlock",
-  title: "Code Block",
-  type: "object",
+  name: 'codeBlock',
+  title: 'Code Block',
+  type: 'object',
   fields: [
     {
-      name: "language",
-      title: "Language",
-      type: "string",
+      name: 'language',
+      title: 'Language',
+      type: 'string',
       options: {
         list: [
-          { title: "JavaScript", value: "javascript" },
-          { title: "TypeScript", value: "typescript" },
-          { title: "HTML", value: "html" },
-          { title: "CSS", value: "css" },
-          { title: "JSON", value: "json" },
-          { title: "Bash", value: "bash" },
-          { title: "Python", value: "python" },
+          { title: 'JavaScript', value: 'javascript' },
+          { title: 'TypeScript', value: 'typescript' },
+          { title: 'HTML', value: 'html' },
+          { title: 'CSS', value: 'css' },
+          { title: 'JSON', value: 'json' },
+          { title: 'Bash', value: 'bash' },
+          { title: 'Python', value: 'python' },
         ],
       },
     },
     {
-      name: "code",
-      title: "Code",
-      type: "text",
+      name: 'code',
+      title: 'Code',
+      type: 'text',
       rows: 10,
     },
   ],
   preview: {
     select: {
-      language: "language",
-      code: "code",
+      language: 'language',
+      code: 'code',
     },
     prepare({ language, code }) {
       return {
-        title: `Code: ${language || "No language specified"}`,
-        subtitle: code ? `${code.substring(0, 50)}...` : "No code",
+        title: `Code: ${language || 'No language specified'}`,
+        subtitle: code ? `${code.substring(0, 50)}...` : 'No code',
       };
     },
   },
@@ -45,25 +45,25 @@ export const codeBlockType = defineType({
 
 // Info Block
 export const infoBlockType = defineType({
-  name: "infoBlock",
-  title: "Info Block",
-  type: "object",
+  name: 'infoBlock',
+  title: 'Info Block',
+  type: 'object',
   fields: [
     {
-      name: "text",
-      title: "Text",
-      type: "text",
+      name: 'text',
+      title: 'Text',
+      type: 'text',
       rows: 3,
     },
   ],
   preview: {
     select: {
-      text: "text",
+      text: 'text',
     },
     prepare({ text }) {
       return {
-        title: "Info Block",
-        subtitle: text ? `${text.substring(0, 50)}...` : "No text",
+        title: 'Info Block',
+        subtitle: text ? `${text.substring(0, 50)}...` : 'No text',
       };
     },
   },
@@ -71,25 +71,25 @@ export const infoBlockType = defineType({
 
 // Warning Block
 export const warningBlockType = defineType({
-  name: "warningBlock",
-  title: "Warning Block",
-  type: "object",
+  name: 'warningBlock',
+  title: 'Warning Block',
+  type: 'object',
   fields: [
     {
-      name: "text",
-      title: "Text",
-      type: "text",
+      name: 'text',
+      title: 'Text',
+      type: 'text',
       rows: 3,
     },
   ],
   preview: {
     select: {
-      text: "text",
+      text: 'text',
     },
     prepare({ text }) {
       return {
-        title: "Warning Block",
-        subtitle: text ? `${text.substring(0, 50)}...` : "No text",
+        title: 'Warning Block',
+        subtitle: text ? `${text.substring(0, 50)}...` : 'No text',
       };
     },
   },
@@ -97,35 +97,35 @@ export const warningBlockType = defineType({
 
 // Table Block
 export const tableType = defineType({
-  name: "table",
-  title: "Table",
-  type: "object",
+  name: 'table',
+  title: 'Table',
+  type: 'object',
   fields: [
     {
-      name: "rows",
-      title: "Rows",
-      type: "array",
+      name: 'rows',
+      title: 'Rows',
+      type: 'array',
       of: [
         {
-          name: "row",
-          title: "Row",
-          type: "object",
+          name: 'row',
+          title: 'Row',
+          type: 'object',
           fields: [
             {
-              name: "cells",
-              title: "Cells",
-              type: "array",
-              of: [{ type: "string" }],
+              name: 'cells',
+              title: 'Cells',
+              type: 'array',
+              of: [{ type: 'string' }],
             },
           ],
           preview: {
             select: {
-              cells: "cells",
+              cells: 'cells',
             },
             prepare({ cells }) {
               return {
-                title: "Row",
-                subtitle: cells ? cells.join(" | ") : "Empty row",
+                title: 'Row',
+                subtitle: cells ? cells.join(' | ') : 'Empty row',
               };
             },
           },
@@ -135,11 +135,11 @@ export const tableType = defineType({
   ],
   preview: {
     select: {
-      rows: "rows",
+      rows: 'rows',
     },
     prepare({ rows }) {
       return {
-        title: "Table",
+        title: 'Table',
         subtitle: `${rows?.length || 0} rows`,
       };
     },

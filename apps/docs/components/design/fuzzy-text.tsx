@@ -1,7 +1,7 @@
 'use client';
 
-import * as React from "react";
-import { useEffect, useRef, useCallback } from "react";
+import * as React from 'react';
+import { useEffect, useRef, useCallback } from 'react';
 
 interface FuzzyTextProps {
   children: React.ReactNode;
@@ -23,9 +23,9 @@ const FuzzyText = React.forwardRef<HTMLCanvasElement, FuzzyTextProps>(
   (
     {
       children,
-      fontSize = "clamp(2rem, 8vw, 8rem)",
+      fontSize = 'clamp(2rem, 8vw, 8rem)',
       fontWeight = 900,
-      fontFamily = "inherit",
+      fontFamily = 'inherit',
       color,
       enableHover = true,
       baseIntensity = 0.18,
@@ -36,15 +36,15 @@ const FuzzyText = React.forwardRef<HTMLCanvasElement, FuzzyTextProps>(
   ) => {
     const innerRef = useRef<ExtendedCanvas>(null);
     const canvasRef = (ref as React.RefObject<ExtendedCanvas>) || innerRef;
-    const textColorRef = useRef<string>("");
+    const textColorRef = useRef<string>('');
 
     // Get the computed color from CSS variables
     const getComputedColor = useCallback(() => {
       if (color) return color;
 
       // Create temporary element to compute the actual color value
-      const tempEl = document.createElement("div");
-      tempEl.style.color = "var(--foreground)";
+      const tempEl = document.createElement('div');
+      tempEl.style.color = 'var(--foreground)';
       document.body.appendChild(tempEl);
       const computedColor = window.getComputedStyle(tempEl).color;
       document.body.removeChild(tempEl);
@@ -68,21 +68,21 @@ const FuzzyText = React.forwardRef<HTMLCanvasElement, FuzzyTextProps>(
         }
         if (isCancelled) return;
 
-        const ctx = canvas.getContext("2d");
+        const ctx = canvas.getContext('2d');
         if (!ctx) return;
 
         const computedFontFamily =
-          fontFamily === "inherit"
-            ? window.getComputedStyle(canvas).fontFamily || "sans-serif"
+          fontFamily === 'inherit'
+            ? window.getComputedStyle(canvas).fontFamily || 'sans-serif'
             : fontFamily;
 
         const fontSizeStr =
-          typeof fontSize === "number" ? `${fontSize}px` : fontSize;
+          typeof fontSize === 'number' ? `${fontSize}px` : fontSize;
         let numericFontSize: number;
-        if (typeof fontSize === "number") {
+        if (typeof fontSize === 'number') {
           numericFontSize = fontSize;
         } else {
-          const temp = document.createElement("span");
+          const temp = document.createElement('span');
           temp.style.fontSize = fontSize;
           document.body.appendChild(temp);
           const computedSize = window.getComputedStyle(temp).fontSize;
@@ -90,14 +90,14 @@ const FuzzyText = React.forwardRef<HTMLCanvasElement, FuzzyTextProps>(
           document.body.removeChild(temp);
         }
 
-        const text = React.Children.toArray(children).join("");
+        const text = React.Children.toArray(children).join('');
 
-        const offscreen = document.createElement("canvas");
-        const offCtx = offscreen.getContext("2d");
+        const offscreen = document.createElement('canvas');
+        const offCtx = offscreen.getContext('2d');
         if (!offCtx) return;
 
         offCtx.font = `${fontWeight} ${fontSizeStr} ${computedFontFamily}`;
-        offCtx.textBaseline = "alphabetic";
+        offCtx.textBaseline = 'alphabetic';
         const metrics = offCtx.measureText(text);
 
         const actualAscent = metrics.actualBoundingBoxAscent ?? numericFontSize;
@@ -116,7 +116,7 @@ const FuzzyText = React.forwardRef<HTMLCanvasElement, FuzzyTextProps>(
 
         const xOffset = extraWidthBuffer / 2;
         offCtx.font = `${fontWeight} ${fontSizeStr} ${computedFontFamily}`;
-        offCtx.textBaseline = "alphabetic";
+        offCtx.textBaseline = 'alphabetic';
 
         // Get the actual computed color
         textColorRef.current = getComputedColor();
@@ -202,21 +202,21 @@ const FuzzyText = React.forwardRef<HTMLCanvasElement, FuzzyTextProps>(
         };
 
         if (enableHover) {
-          canvas.addEventListener("mousemove", handleMouseMove);
-          canvas.addEventListener("mouseleave", handleMouseLeave);
-          canvas.addEventListener("touchmove", handleTouchMove, {
+          canvas.addEventListener('mousemove', handleMouseMove);
+          canvas.addEventListener('mouseleave', handleMouseLeave);
+          canvas.addEventListener('touchmove', handleTouchMove, {
             passive: false,
           });
-          canvas.addEventListener("touchend", handleTouchEnd);
+          canvas.addEventListener('touchend', handleTouchEnd);
         }
 
         const cleanup = () => {
           window.cancelAnimationFrame(animationFrameId);
           if (enableHover) {
-            canvas.removeEventListener("mousemove", handleMouseMove);
-            canvas.removeEventListener("mouseleave", handleMouseLeave);
-            canvas.removeEventListener("touchmove", handleTouchMove);
-            canvas.removeEventListener("touchend", handleTouchEnd);
+            canvas.removeEventListener('mousemove', handleMouseMove);
+            canvas.removeEventListener('mouseleave', handleMouseLeave);
+            canvas.removeEventListener('touchmove', handleTouchMove);
+            canvas.removeEventListener('touchend', handleTouchEnd);
           }
         };
 
@@ -250,7 +250,7 @@ const FuzzyText = React.forwardRef<HTMLCanvasElement, FuzzyTextProps>(
   },
 );
 
-FuzzyText.displayName = "FuzzyText";
+FuzzyText.displayName = 'FuzzyText';
 
 export { FuzzyText };
 export type { FuzzyTextProps };

@@ -1,6 +1,6 @@
 ---
-title: "Best practices"
-description: "Following these best practices helps maintain code quality, consistency, and security across the lomi. project."
+title: 'Best practices'
+description: 'Following these best practices helps maintain code quality, consistency, and security across the lomi. project.'
 ---
 
 ## Code style
@@ -74,8 +74,14 @@ Avoid logging sensitive information like API keys, passwords, or personal user d
 const sanitizeData = (data: any) => {
   const masked = { ...data };
   // Define sensitive keys specific to your context
-  const sensitiveKeys = ['apiKey', 'secretKey', 'password', 'authorization', 'phoneNumber'];
-  sensitiveKeys.forEach(key => {
+  const sensitiveKeys = [
+    'apiKey',
+    'secretKey',
+    'password',
+    'authorization',
+    'phoneNumber',
+  ];
+  sensitiveKeys.forEach((key) => {
     if (masked[key]) masked[key] = '[REDACTED]';
   });
   return masked;
@@ -205,9 +211,9 @@ Good documentation is essential for maintainability and collaboration.
 
 ### Code comments
 
-Use comments to explain *why* something is done, not *what* it does (the code should explain the what). Use TSDoc for functions and complex logic.
+Use comments to explain _why_ something is done, not _what_ it does (the code should explain the what). Use TSDoc for functions and complex logic.
 
-```typescript filename="TSDoc Example"
+````typescript filename="TSDoc Example"
 /**
  * Processes a payment request using the specified provider.
  * Handles potential errors and ensures idempotency.
@@ -221,12 +227,10 @@ Use comments to explain *why* something is done, not *what* it does (the code sh
  * console.log(result.transactionId);
  * ```
  */
-async function processPayment(
-  request: PaymentRequest
-): Promise<PaymentResult> {
+async function processPayment(request: PaymentRequest): Promise<PaymentResult> {
   // Implementation details...
 }
-```
+````
 
 ### README files
 
@@ -236,18 +240,23 @@ Ensure packages and significant components have `README` files explaining their 
 # Package/Component Name
 
 ## Overview
+
 A brief description of what this package/component does.
 
 ## Installation
+
 `pnpm add @lomi/package-name`
 
 ## Usage
+
 Provide clear code examples and instructions.
 
 ## Configuration
+
 Detail any available configuration options.
 
 ## Testing
+
 Explain how to run tests for this specific package/component.
 `pnpm --filter @lomi/package-name test`
 ```
@@ -301,4 +310,4 @@ Package versions are managed within their respective `package.json` files and up
 
 - [Code reviews](/docs/core/contributing/code-reviews)
 - [Best practices](/docs/core/contributing/best-practices)
-- [Getting support](/docs/core/support/contact) 
+- [Getting support](/docs/core/support/contact)

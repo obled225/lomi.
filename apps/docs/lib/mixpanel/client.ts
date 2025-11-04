@@ -1,8 +1,8 @@
-import mixpanel from "mixpanel-browser";
+import mixpanel from 'mixpanel-browser';
 
 // Replace YOUR_TOKEN with your actual Mixpanel token
 // We'll use an environment variable for this
-const MIXPANEL_TOKEN = process.env.NEXT_PUBLIC_MIXPANEL_TOKEN || "";
+const MIXPANEL_TOKEN = process.env.NEXT_PUBLIC_MIXPANEL_TOKEN || '';
 
 // Define types for properties
 type MixpanelEventProperties = Record<
@@ -30,20 +30,20 @@ class MixpanelService {
    */
   init() {
     if (!MIXPANEL_TOKEN) {
-      console.warn("Mixpanel token is missing! Check your .env file.");
+      console.warn('Mixpanel token is missing! Check your .env file.');
       return;
     }
 
     try {
       mixpanel.init(MIXPANEL_TOKEN, {
-        debug: process.env.NEXT_PUBLIC_ENV === "development",
+        debug: process.env.NEXT_PUBLIC_ENV === 'development',
         track_pageview: true,
-        persistence: "localStorage",
-        api_host: "https://api.mixpanel.com",
+        persistence: 'localStorage',
+        api_host: 'https://api.mixpanel.com',
       });
       this.initialized = true;
     } catch (error) {
-      console.error("Failed to initialize Mixpanel:", error);
+      console.error('Failed to initialize Mixpanel:', error);
     }
   }
 
@@ -56,26 +56,26 @@ class MixpanelService {
     const platform = navigator.platform;
 
     // Check for macOS
-    if (platform.indexOf("Mac") !== -1) return "MacOS";
+    if (platform.indexOf('Mac') !== -1) return 'MacOS';
 
     // Check for Windows
-    if (platform.indexOf("Win") !== -1) return "Windows";
+    if (platform.indexOf('Win') !== -1) return 'Windows';
 
     // Check for Linux
-    if (platform.indexOf("Linux") !== -1 && userAgent.indexOf("Android") === -1)
-      return "Linux";
+    if (platform.indexOf('Linux') !== -1 && userAgent.indexOf('Android') === -1)
+      return 'Linux';
 
     // Check for iOS devices
     if (
       /iPad|iPhone|iPod/.test(userAgent) &&
       !(window as ExtendedWindow).MSStream
     )
-      return "iOS";
+      return 'iOS';
 
     // Check for Android
-    if (userAgent.indexOf("Android") !== -1) return "Android";
+    if (userAgent.indexOf('Android') !== -1) return 'Android';
 
-    return "Unknown";
+    return 'Unknown';
   }
 
   /**
@@ -133,7 +133,7 @@ class MixpanelService {
    * @param properties - Additional properties to include with the event
    */
   trackPageView(pageName: string, properties?: MixpanelEventProperties) {
-    this.track("Page View", {
+    this.track('Page View', {
       page_name: pageName,
       url: window.location.href,
       ...properties,
@@ -151,7 +151,7 @@ class MixpanelService {
     try {
       mixpanel.reset();
     } catch (error) {
-      console.error("Failed to reset Mixpanel user:", error);
+      console.error('Failed to reset Mixpanel user:', error);
     }
   }
 }

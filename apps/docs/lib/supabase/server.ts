@@ -1,5 +1,5 @@
-import { createServerClient } from "@supabase/ssr";
-import { cookies } from "next/headers";
+import { createServerClient } from '@supabase/ssr';
+import { cookies } from 'next/headers';
 
 export async function createClient() {
   const cookieStore = await cookies();
@@ -7,11 +7,11 @@ export async function createClient() {
   const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
 
   if (!supabaseUrl || !supabaseAnonKey) {
-    throw new Error("Missing Supabase environment variables");
+    throw new Error('Missing Supabase environment variables');
   }
 
   // Check if we're in production
-  const isProduction = process.env.NODE_ENV === "production";
+  const isProduction = process.env.NODE_ENV === 'production';
 
   const client = createServerClient(supabaseUrl, supabaseAnonKey, {
     cookies: {
@@ -24,9 +24,9 @@ export async function createClient() {
             // Use same domain strategy as website app to share cookies
             const cookieOptions = {
               ...options,
-              domain: isProduction ? ".lomi.africa" : options.domain,
-              path: options.path || "/",
-              sameSite: options.sameSite || ("lax" as const),
+              domain: isProduction ? '.lomi.africa' : options.domain,
+              path: options.path || '/',
+              sameSite: options.sameSite || ('lax' as const),
               secure: isProduction ? true : options.secure,
             };
             cookieStore.set(name, value, cookieOptions);

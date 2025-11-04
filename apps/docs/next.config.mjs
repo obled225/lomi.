@@ -9,21 +9,21 @@ const config = {
   // // Performance optimizations for better navigation
   experimental: {
     optimizeServerReact: true,
-    optimizeCss: process.env.NODE_ENV === "production",
+    optimizeCss: process.env.NODE_ENV === 'production',
   },
   // Configure server external packages for Sanity and build tools
-  serverExternalPackages: ["sanity", "prettier"],
+  serverExternalPackages: ['sanity', 'prettier'],
   // Optimize prefetching for better navigation
   async headers() {
     // In development, don't set aggressive cache headers
-    if (process.env.NODE_ENV === "development") {
+    if (process.env.NODE_ENV === 'development') {
       return [
         {
-          source: "/(.*)",
+          source: '/(.*)',
           headers: [
             {
-              key: "X-DNS-Prefetch-Control",
-              value: "on",
+              key: 'X-DNS-Prefetch-Control',
+              value: 'on',
             },
           ],
         },
@@ -33,24 +33,24 @@ const config = {
     // Production cache headers
     return [
       {
-        source: "/(.*)",
+        source: '/(.*)',
         headers: [
           {
-            key: "X-DNS-Prefetch-Control",
-            value: "on",
+            key: 'X-DNS-Prefetch-Control',
+            value: 'on',
           },
           {
-            key: "Cache-Control",
-            value: "public, max-age=604800, immutable",
+            key: 'Cache-Control',
+            value: 'public, max-age=604800, immutable',
           },
         ],
       },
       {
-        source: "/_next/static/:path*",
+        source: '/_next/static/:path*',
         headers: [
           {
-            key: "Cache-Control",
-            value: "public, max-age=604800, immutable",
+            key: 'Cache-Control',
+            value: 'public, max-age=604800, immutable',
           },
         ],
       },
@@ -59,42 +59,42 @@ const config = {
   images: {
     remotePatterns: [
       {
-        protocol: "https",
-        hostname: "cdn.sanity.io",
-        port: "",
-        pathname: "/**",
+        protocol: 'https',
+        hostname: 'cdn.sanity.io',
+        port: '',
+        pathname: '/**',
       },
       {
-        protocol: "https",
-        hostname: "mdswvokxrnfggrujsfjd.supabase.co",
-        port: "",
-        pathname: "/storage/v1/object/public/**",
+        protocol: 'https',
+        hostname: 'mdswvokxrnfggrujsfjd.supabase.co',
+        port: '',
+        pathname: '/storage/v1/object/public/**',
       },
       {
-        protocol: "https",
-        hostname: "mdswvokxrnfggrujsfjd.supabase.co",
-        port: "",
-        pathname: "/storage/v1/object/sign/**",
+        protocol: 'https',
+        hostname: 'mdswvokxrnfggrujsfjd.supabase.co',
+        port: '',
+        pathname: '/storage/v1/object/sign/**',
       },
       {
-        protocol: "https",
-        hostname: "avatar.vercel.sh",
-        port: "",
-        pathname: "/**",
+        protocol: 'https',
+        hostname: 'avatar.vercel.sh',
+        port: '',
+        pathname: '/**',
       },
     ],
-    formats: ["image/webp", "image/avif"],
+    formats: ['image/webp', 'image/avif'],
     minimumCacheTTL: 60,
   },
   compiler: {
-    removeConsole: process.env.NODE_ENV === "production",
+    removeConsole: process.env.NODE_ENV === 'production',
   },
   compress: true,
   poweredByHeader: false,
   generateEtags: false,
   // Output configuration for Vercel
   outputFileTracingIncludes: {
-    "/studio/[[...tool]]": ["./node_modules/sanity/**/*"],
+    '/studio/[[...tool]]': ['./node_modules/sanity/**/*'],
   },
 };
 

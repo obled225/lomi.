@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import * as React from "react";
-import { motion, type Variants } from "motion/react";
+import * as React from 'react';
+import { motion, type Variants } from 'motion/react';
 
 import {
   getVariants,
   useAnimateIconContext,
   IconWrapper,
   type IconProps,
-} from "@/components/animate/primitives/icon";
+} from '@/components/animate/primitives/icon';
 
 type ThreeDotsEditProps = IconProps<keyof typeof animations>;
 
@@ -17,11 +17,11 @@ const animations = {
     group: {
       initial: {
         rotate: 0,
-        transition: { type: "spring", stiffness: 60, damping: 10 },
+        transition: { type: 'spring', stiffness: 60, damping: 10 },
       },
       animate: {
         rotate: 180,
-        transition: { type: "spring", stiffness: 60, damping: 10 },
+        transition: { type: 'spring', stiffness: 60, damping: 10 },
       },
     },
     circle1: {},
@@ -32,11 +32,11 @@ const animations = {
     group: {
       initial: {
         rotate: 0,
-        transition: { type: "spring", stiffness: 100, damping: 12 },
+        transition: { type: 'spring', stiffness: 100, damping: 12 },
       },
       animate: {
         rotate: 90,
-        transition: { type: "spring", stiffness: 100, damping: 12 },
+        transition: { type: 'spring', stiffness: 100, damping: 12 },
       },
     },
     circle1: {},
@@ -54,7 +54,7 @@ const animations = {
         transition: {
           duration: 1,
           delay: 0.4,
-          ease: "easeInOut",
+          ease: 'easeInOut',
         },
       },
     },
@@ -67,7 +67,7 @@ const animations = {
         transition: {
           duration: 1,
           delay: 0.2,
-          ease: "easeInOut",
+          ease: 'easeInOut',
         },
       },
     },
@@ -79,7 +79,7 @@ const animations = {
         scale: [1, 1.5, 1],
         transition: {
           duration: 1,
-          ease: "easeInOut",
+          ease: 'easeInOut',
         },
       },
     },

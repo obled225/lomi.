@@ -1,20 +1,20 @@
 'use client';
 
-import { useEffect, useState } from "react";
-import { playClickSound } from "@/lib/sound";
-import Image from "next/image";
+import { useEffect, useState } from 'react';
+import { playClickSound } from '@/lib/utils/sound';
+import Image from 'next/image';
 
 export function ProductHuntBadge() {
   // Initialize with default theme to prevent hydration mismatch, useEffect will update it
-  const [currentTheme, setCurrentTheme] = useState<"light" | "dark">("light");
+  const [currentTheme, setCurrentTheme] = useState<'light' | 'dark'>('light');
   // Initialize timestamp as null, will be set client-side only after hydration
   const [timestamp, setTimestamp] = useState<number | null>(null);
 
   // Use MutationObserver for instant reaction to class changes on <html>
   useEffect(() => {
     // Set initial theme based on current document state
-    const isDark = document.documentElement.classList.contains("dark");
-    setCurrentTheme(isDark ? "dark" : "light");
+    const isDark = document.documentElement.classList.contains('dark');
+    setCurrentTheme(isDark ? 'dark' : 'light');
 
     // Set timestamp only on client-side after hydration
     setTimestamp(Date.now());
@@ -22,12 +22,12 @@ export function ProductHuntBadge() {
     const observer = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
         if (
-          mutation.type === "attributes" &&
-          mutation.attributeName === "class"
+          mutation.type === 'attributes' &&
+          mutation.attributeName === 'class'
         ) {
           // Update state based on the new class state
-          const isDark = document.documentElement.classList.contains("dark");
-          setCurrentTheme(isDark ? "dark" : "light");
+          const isDark = document.documentElement.classList.contains('dark');
+          setCurrentTheme(isDark ? 'dark' : 'light');
         }
       });
     });
@@ -60,8 +60,8 @@ export function ProductHuntBadge() {
         width={250}
         height={54}
         style={{
-          width: "410px",
-          height: "80px",
+          width: '410px',
+          height: '80px',
         }}
       />
     </a>

@@ -21,7 +21,10 @@ async function main() {
   try {
     await buildRegistry();
   } catch (error) {
-    console.warn('Registry build failed, but continuing with docs generation:', error instanceof Error ? error.message : String(error));
+    console.warn(
+      'Registry build failed, but continuing with docs generation:',
+      error instanceof Error ? error.message : String(error),
+    );
   }
 
   // Generate docs

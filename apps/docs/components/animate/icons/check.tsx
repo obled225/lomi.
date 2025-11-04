@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import { motion, type Variants } from "motion/react";
+import { motion, type Variants } from 'motion/react';
 
 import {
   getVariants,
   useAnimateIconContext,
   IconWrapper,
   type IconProps,
-} from "@/components/animate/primitives/icon";
+} from '@/components/animate/primitives/icon';
 
 type CheckProps = IconProps<keyof typeof animations>;
 
@@ -25,7 +25,7 @@ const animations = {
         scale: [1, 1.1, 1],
         transition: {
           duration: 0.6,
-          ease: "easeInOut",
+          ease: 'easeInOut',
         },
       },
     },

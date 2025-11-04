@@ -1,6 +1,6 @@
 ---
-title: "Webhooks"
-description: "Configure webhook endpoints for real-time event notifications."
+title: 'Webhooks'
+description: 'Configure webhook endpoints for real-time event notifications.'
 ---
 
 Webhooks allow your application to receive real-time notifications about events that occur in your lomi. account, such as successful payments, subscription renewals, or failed transactions. Instead of polling the API, you can configure a webhook endpoint where lomi will send event data via HTTP `` `POST` `` requests.
@@ -33,20 +33,20 @@ Refer to the [Webhook Signature Verification](/docs/core/advanced-guides/handlin
 
 When creating or updating a webhook, you subscribe it to specific event types. lomi. will only send notifications for the events you've subscribed to.
 
-| Event Enum                    | Description                                  | Data Payload Type |
-| ----------------------------- | -------------------------------------------- | ----------------- |
-| `` `PAYMENT_SUCCEEDED` ``           | A one-time payment is successful.            | `` `Transaction` ``       |
-| `` `PAYMENT_FAILED` ``              | A one-time payment attempt failed.           | `` `Transaction` ``       |
-| `` `CHECKOUT_COMPLETED` ``          | A checkout session was completed.            | `` `CheckoutSession` ``   |
-| `` `SUBSCRIPTION_CREATED` ``        | A new subscription is created.               | `` `Subscription` ``      |
-| `` `SUBSCRIPTION_RENEWED` ``        | A subscription successfully renews.          | `` `Subscription` ``      |
-| `` `SUBSCRIPTION_PAYMENT_FAILED` `` | A scheduled subscription payment failed.     | `` `Subscription` ``      |
-| `` `SUBSCRIPTION_CANCELED` ``       | A subscription is canceled.                  | `` `Subscription` ``      |
-| `` `REFUND_COMPLETED` ``            | A refund is successfully processed.          | `` `Refund` ``            |
-| `` `PROVIDER_STATUS_CHANGED` ``     | The status of a connected provider changes.  | `` `ProviderSetting` ``   |
-| `` `test.webhook` ``                | A test event generated via the API.          | `` `TestPayload` ``       |
+| Event Enum                          | Description                                 | Data Payload Type       |
+| ----------------------------------- | ------------------------------------------- | ----------------------- |
+| `` `PAYMENT_SUCCEEDED` ``           | A one-time payment is successful.           | `` `Transaction` ``     |
+| `` `PAYMENT_FAILED` ``              | A one-time payment attempt failed.          | `` `Transaction` ``     |
+| `` `CHECKOUT_COMPLETED` ``          | A checkout session was completed.           | `` `CheckoutSession` `` |
+| `` `SUBSCRIPTION_CREATED` ``        | A new subscription is created.              | `` `Subscription` ``    |
+| `` `SUBSCRIPTION_RENEWED` ``        | A subscription successfully renews.         | `` `Subscription` ``    |
+| `` `SUBSCRIPTION_PAYMENT_FAILED` `` | A scheduled subscription payment failed.    | `` `Subscription` ``    |
+| `` `SUBSCRIPTION_CANCELED` ``       | A subscription is canceled.                 | `` `Subscription` ``    |
+| `` `REFUND_COMPLETED` ``            | A refund is successfully processed.         | `` `Refund` ``          |
+| `` `PROVIDER_STATUS_CHANGED` ``     | The status of a connected provider changes. | `` `ProviderSetting` `` |
+| `` `test.webhook` ``                | A test event generated via the API.         | `` `TestPayload` ``     |
 
-*(Note: The specific structure of the data payload for each event type will be documented under the respective API resource, e.g., Transactions, Subscriptions.)*
+_(Note: The specific structure of the data payload for each event type will be documented under the respective API resource, e.g., Transactions, Subscriptions.)_
 
 ## API endpoints
 
@@ -92,23 +92,23 @@ Creates a new webhook endpoint.
 }
 ```
 
-*   `` `url` `` (`` `string` ``, required): The HTTPS URL for your webhook endpoint.
-*   `` `authorized_events` `` (`` `array of strings` ``, required): List of event types to subscribe to (see [Webhook Events](#webhook-events)).
-*   `` `description` `` (`` `string` ``, optional): A descriptive label.
+- `` `url` `` (`` `string` ``, required): The HTTPS URL for your webhook endpoint.
+- `` `authorized_events` `` (`` `array of strings` ``, required): List of event types to subscribe to (see [Webhook Events](#webhook-events)).
+- `` `description` `` (`` `string` ``, optional): A descriptive label.
 
 **Example response (201 Created):**
 
 ```json filename="POST /webhooks response"
 {
   "data": {
-      "id": "wh_new1b2c3d4e5f6",
-      "organization_id": "org_f6e5d4c3b2a1",
-      "url": "https://example.com/new-webhook-receiver",
-      "events": ["PAYMENT_SUCCEEDED", "PAYMENT_FAILED"],
-      "active": true,
-      "created_at": "2025-04-06T14:00:00.000Z",
-      "updated_at": "2025-04-06T14:00:00.000Z",
-      "description": "Webhook for payment events"
+    "id": "wh_new1b2c3d4e5f6",
+    "organization_id": "org_f6e5d4c3b2a1",
+    "url": "https://example.com/new-webhook-receiver",
+    "events": ["PAYMENT_SUCCEEDED", "PAYMENT_FAILED"],
+    "active": true,
+    "created_at": "2025-04-06T14:00:00.000Z",
+    "updated_at": "2025-04-06T14:00:00.000Z",
+    "description": "Webhook for payment events"
   },
   "secret": "whsec_abc123def456..." // Store this secret securely!
 }
@@ -122,18 +122,18 @@ Retrieves details for a specific webhook.
 
 **Path parameters:**
 
-| Parameter | Type   | Required | Description                   |
-| --------- | ------ | -------- | ----------------------------- |
-| `` `id` ``      | `` `string` `` | Yes      | ID of the webhook (`` `wh_...` ``) |
+| Parameter  | Type           | Required | Description                        |
+| ---------- | -------------- | -------- | ---------------------------------- |
+| `` `id` `` | `` `string` `` | Yes      | ID of the webhook (`` `wh_...` ``) |
 
 **Example response (200 OK):**
 
 ```json filename="GET /webhooks/{id} response"
 {
   "data": {
-      "id": "wh_a1b2c3d4e5f6",
-      // ... other fields (secret is NOT included)
-      "description": "Updated description"
+    "id": "wh_a1b2c3d4e5f6",
+    // ... other fields (secret is NOT included)
+    "description": "Updated description"
   }
 }
 ```
@@ -146,9 +146,9 @@ Updates an existing webhook endpoint.
 
 **Path parameters:**
 
-| Parameter | Type   | Required | Description                   |
-| --------- | ------ | -------- | ----------------------------- |
-| `` `id` ``      | `` `string` `` | Yes      | ID of the webhook (`` `wh_...` ``) |
+| Parameter  | Type           | Required | Description                        |
+| ---------- | -------------- | -------- | ---------------------------------- |
+| `` `id` `` | `` `string` `` | Yes      | ID of the webhook (`` `wh_...` ``) |
 
 **Request body (include only fields to update):**
 
@@ -161,21 +161,21 @@ Updates an existing webhook endpoint.
 }
 ```
 
-*   `` `url` `` (`` `string` ``, optional): The new HTTPS URL.
-*   `` `authorized_events` `` (`` `array of strings` ``, optional): The new list of event types.
-*   `` `is_active` `` (`` `boolean` ``, optional): Set `` `false` `` to disable, `` `true` `` to enable.
-*   `` `description` `` (`` `string` ``, optional): A new description.
+- `` `url` `` (`` `string` ``, optional): The new HTTPS URL.
+- `` `authorized_events` `` (`` `array of strings` ``, optional): The new list of event types.
+- `` `is_active` `` (`` `boolean` ``, optional): Set `` `false` `` to disable, `` `true` `` to enable.
+- `` `description` `` (`` `string` ``, optional): A new description.
 
 **Example response (200 OK):**
 
 ```json filename="PATCH /webhooks/{id} response"
 {
   "data": {
-      "id": "wh_a1b2c3d4e5f6",
-      "url": "https://example.com/updated-webhook-receiver",
-      "events": ["PAYMENT_SUCCEEDED"],
-      "active": false,
-      // ... other fields
+    "id": "wh_a1b2c3d4e5f6",
+    "url": "https://example.com/updated-webhook-receiver",
+    "events": ["PAYMENT_SUCCEEDED"],
+    "active": false
+    // ... other fields
   }
 }
 ```
@@ -188,9 +188,9 @@ Deletes a webhook endpoint.
 
 **Path parameters:**
 
-| Parameter | Type   | Required | Description                   |
-| --------- | ------ | -------- | ----------------------------- |
-| `` `id` ``      | `` `string` `` | Yes      | ID of the webhook (`` `wh_...` ``) |
+| Parameter  | Type           | Required | Description                        |
+| ---------- | -------------- | -------- | ---------------------------------- |
+| `` `id` `` | `` `string` `` | Yes      | ID of the webhook (`` `wh_...` ``) |
 
 **Example response (204 No Content):** No response body.
 
@@ -240,18 +240,18 @@ Retrieves delivery logs for a specific webhook, showing success/failure status, 
 
 **Path parameters:**
 
-| Parameter | Type   | Required | Description                   |
-| --------- | ------ | -------- | ----------------------------- |
-| `` `id` ``      | `` `string` `` | Yes      | ID of the webhook (`` `wh_...` ``) |
+| Parameter  | Type           | Required | Description                        |
+| ---------- | -------------- | -------- | ---------------------------------- |
+| `` `id` `` | `` `string` `` | Yes      | ID of the webhook (`` `wh_...` ``) |
 
 **Query parameters (optional):**
 
-| Parameter | Type    | Description                        |
-| --------- | ------- | ---------------------------------- |
-| `` `limit` ``   | `` `integer` `` | Number of logs to return (max 100) |
-| `` `offset` ``  | `` `integer` `` | Number of logs to skip (pagination)|
-| `` `success` `` | `` `boolean` `` | Filter by successful deliveries    |
-| `` `failed` ``  | `` `boolean` `` | Filter by failed deliveries        |
+| Parameter       | Type            | Description                         |
+| --------------- | --------------- | ----------------------------------- |
+| `` `limit` ``   | `` `integer` `` | Number of logs to return (max 100)  |
+| `` `offset` ``  | `` `integer` `` | Number of logs to skip (pagination) |
+| `` `success` `` | `` `boolean` `` | Filter by successful deliveries     |
+| `` `failed` ``  | `` `boolean` `` | Filter by failed deliveries         |
 
 **Example request:**
 
@@ -269,9 +269,9 @@ Manually triggers a retry for a specific failed delivery log entry.
 
 **Path parameters:**
 
-| Parameter    | Type   | Required | Description                         |
-| ------------ | ------ | -------- | ----------------------------------- |
-| `` `webhook_id` `` | `` `string` `` | Yes      | ID of the webhook (`` `wh_...` ``)       |
+| Parameter          | Type           | Required | Description                         |
+| ------------------ | -------------- | -------- | ----------------------------------- |
+| `` `webhook_id` `` | `` `string` `` | Yes      | ID of the webhook (`` `wh_...` ``)  |
 | `` `log_id` ``     | `` `string` `` | Yes      | ID of the failed delivery log entry |
 
 **Example request:**
@@ -286,8 +286,8 @@ curl -X POST "https://api.lomi.africa/v1/webhooks/YOUR_WEBHOOK_ID/logs/YOUR_LOG_
 
 ## Best practices
 
--   **Verify signatures:** Always verify the `` `X-Lomi-Signature` `` to ensure the request is from lomi.
--   **Respond quickly:** Your endpoint should return a `` `2xx` `` status code within a few seconds. Offload longer processing to background jobs.
--   **Handle retries:** Be prepared for lomi. to retry sending events if your endpoint fails or times out.
--   **Idempotency:** Design your event processing logic to handle duplicate events gracefully.
--   **Secure your secret:** Store your webhook secret securely using environment variables or a secrets manager. 
+- **Verify signatures:** Always verify the `` `X-Lomi-Signature` `` to ensure the request is from lomi.
+- **Respond quickly:** Your endpoint should return a `` `2xx` `` status code within a few seconds. Offload longer processing to background jobs.
+- **Handle retries:** Be prepared for lomi. to retry sending events if your endpoint fails or times out.
+- **Idempotency:** Design your event processing logic to handle duplicate events gracefully.
+- **Secure your secret:** Store your webhook secret securely using environment variables or a secrets manager.

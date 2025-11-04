@@ -1,87 +1,87 @@
 {
-    "hero": {
+  "hero": {
     "title": "专为让您盈利而设计，\nlomi. 是西非接受付款的最佳方式。"
-    },
-    "footer": {
+  },
+  "footer": {
     "bceao_accreditation": "lomi. 目前正在由 BCEAO 进行支付服务提供商认证程序。",
-        "features": {
-            "title": "功能",
-            "overview": "概览", 
-            "pricing": "定价",
-            "faq": "常见问题"
-        },
-        "resources": {
-            "title": "资源",
-            "github": "Github",
-            "support": "支持",
-            "privacy": "隐私政策",
-            "terms": "条款",
-            "branding": "品牌资产",
-            "featureRequest": "请求功能",
-            "review": "给我们留言"
-        },
-        "company": {
-            "title": "公司",
-            "story": "故事",
-            "blog": "博客",
-            "openSource": "开源"
-        },
-        "subscribe": {
-            "placeholder": "电子邮件地址**",
-            "button": "订阅"
-        },
-        "status": "所有服务正常运行",
-        "copyright": "版权 © 2025 — lomi. LLC"
+    "features": {
+      "title": "功能",
+      "overview": "概览",
+      "pricing": "定价",
+      "faq": "常见问题"
     },
-    "components": {
-        "tracking_cookie": {
-            "message": "我们使用跟踪 cookie 来了解您如何使用产品，并帮助我们改进它。",
-            "accept": "接受",
-            "decline": "拒绝"
-        }
+    "resources": {
+      "title": "资源",
+      "github": "Github",
+      "support": "支持",
+      "privacy": "隐私政策",
+      "terms": "条款",
+      "branding": "品牌资产",
+      "featureRequest": "请求功能",
+      "review": "给我们留言"
     },
-    "blog": {
-        "title": "博客",
-        "description": "来自我们团队的最新见解、更新和故事。",
-        "heading": "博客",
-        "subheading": "与我们团队的最新见解、产品更新和行业趋势保持同步。",
-        "loading": "正在加载博客文章...",
-        "loadingDesc": "请稍候，我们正在加载内容",
-        "notFound": "未找到文章",
-        "notFoundDesc": "您寻找的博客文章不存在或已被移动。",
-        "backToBlog": "返回文章",
-        "backHome": "返回首页",
-        "switchLanguage": "切换语言",
-        "shareTitle": "分享此文章",
-        "shareDescription": "在您喜欢的平台上分享此博客文章。",
-        "copiedDesc": "链接已复制到您的剪贴板。",
-        "copyErrorTitle": "复制失败",
-        "copyErrorDesc": "无法将链接复制到剪贴板。",
-        "copied": "已复制",
-        "copyLink": "复制链接",
-        "byAuthor": "作者：{author}",
-        "noPosts": "未找到博客文章",
-        "noPostsDesc": "目前没有可用的博客文章。请稍后再查看。",
-        "categories": {
-            "news": "新闻",
-            "opinion": "观点",
-            "edge": "前沿",
-            "spreadsheets": "电子表格",
-            "case-study": "案例研究"
-        }
+    "company": {
+      "title": "公司",
+      "story": "故事",
+      "blog": "博客",
+      "openSource": "开源"
     },
-    "header": {
-        "products": "产品",
-        "pricing": "定价",
-        "documentation": "文档",
-        "blog": "博客",
-        "talk": "联系我们",
-        "dashboard": "仪表板",
-        "connect": "连接"
+    "subscribe": {
+      "placeholder": "电子邮件地址**",
+      "button": "订阅"
     },
+    "status": "所有服务正常运行",
+    "copyright": "版权 © 2025 — lomi. LLC"
+  },
+  "components": {
+    "tracking_cookie": {
+      "message": "我们使用跟踪 cookie 来了解您如何使用产品，并帮助我们改进它。",
+      "accept": "接受",
+      "decline": "拒绝"
+    }
+  },
+  "blog": {
+    "title": "博客",
+    "description": "来自我们团队的最新见解、更新和故事。",
+    "heading": "博客",
+    "subheading": "与我们团队的最新见解、产品更新和行业趋势保持同步。",
+    "loading": "正在加载博客文章...",
+    "loadingDesc": "请稍候，我们正在加载内容",
+    "notFound": "未找到文章",
+    "notFoundDesc": "您寻找的博客文章不存在或已被移动。",
+    "backToBlog": "返回文章",
+    "backHome": "返回首页",
+    "switchLanguage": "切换语言",
+    "shareTitle": "分享此文章",
+    "shareDescription": "在您喜欢的平台上分享此博客文章。",
+    "copiedDesc": "链接已复制到您的剪贴板。",
+    "copyErrorTitle": "复制失败",
+    "copyErrorDesc": "无法将链接复制到剪贴板。",
+    "copied": "已复制",
+    "copyLink": "复制链接",
+    "byAuthor": "作者：{author}",
+    "noPosts": "未找到博客文章",
+    "noPostsDesc": "目前没有可用的博客文章。请稍后再查看。",
+    "categories": {
+      "news": "新闻",
+      "opinion": "观点",
+      "edge": "前沿",
+      "spreadsheets": "电子表格",
+      "case-study": "案例研究"
+    }
+  },
+  "header": {
+    "products": "产品",
+    "pricing": "定价",
+    "documentation": "文档",
+    "blog": "博客",
+    "talk": "联系我们",
+    "dashboard": "仪表板",
+    "connect": "连接"
+  },
   "sdks": {
     "title": "始终领先"
-    },
+  },
   "earlyMemberPricing": {
     "tag": "没有意外，没有隐藏费用，没有月费",
     "getStarted": "开始使用",

@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import * as React from "react";
-import { cn } from "@/lib/actions/utils";
+import * as React from 'react';
+import { cn } from '@/lib/actions/utils';
 
 type AnyProps = Record<string, unknown>;
 
 type DOMMotionProps<T extends HTMLElement = HTMLElement> = Omit<
   React.HTMLAttributes<T>,
-  "ref"
+  'ref'
 > & { ref?: React.Ref<T> };
 
 type WithAsChild<Base extends object> =
@@ -24,7 +24,7 @@ function mergeRefs<T>(
   return (node) => {
     refs.forEach((ref) => {
       if (!ref) return;
-      if (typeof ref === "function") {
+      if (typeof ref === 'function') {
         ref(node);
       } else {
         (ref as React.RefObject<T | null>).current = node;

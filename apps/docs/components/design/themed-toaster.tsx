@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { Toaster } from "sonner";
-import { useTheme } from "@/lib/hooks/use-theme";
+import { Toaster } from 'sonner';
+import { useTheme } from '@/lib/hooks/use-theme';
 
 // Toaster component that uses theme after ThemeProvider is mounted
 export const ThemedToaster = () => {
@@ -11,6 +11,6 @@ export const ThemedToaster = () => {
     return null;
   }
 
-  return <Toaster theme={resolvedTheme === "dark" ? "dark" : "light"} />;
+  return <Toaster theme={resolvedTheme === 'dark' ? 'dark' : 'light'} />;
   // return <Toaster theme={resolvedTheme === "dark" ? "dark" : "light"} position="top-center" />;
 };

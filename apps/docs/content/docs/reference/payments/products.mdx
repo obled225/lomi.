@@ -1,6 +1,6 @@
 ---
-title: "Products"
-description: "The Products API allows you to create, list, retrieve, update (active status only), and delete products associated with your merchant account."
+title: 'Products'
+description: 'The Products API allows you to create, list, retrieve, update (active status only), and delete products associated with your merchant account.'
 ---
 
 ## Authentication
@@ -21,16 +21,16 @@ Creates a new product for the authenticated merchant.
 
 **Request body parameters:**
 
-| Parameter               | Type           | Required | Description                                                  |
-| ----------------------- | -------------- | -------- | ------------------------------------------------------------ |
-| `` `name` ``                  | `` `string` ``         | Yes      | Name of the product.                                         |
-| `` `description` ``           | `` `string` ``         | No       | Optional description.                                        |
-| `` `price` ``                 | `` `number` ``         | Yes      | Price of the product (must be positive).                     |
-| `` `currency_code` ``         | `` `string` ``         | Yes      | Currency code (e.g., `` `"XOF"` ``, `` `"USD"` ``).                    |
-| `` `is_active` ``             | `` `boolean` ``        | No       | Whether the product is active (defaults to `` `true` ``).          |
-| `` `image_url` ``             | `` `string` ``         | No       | URL for the product image (must be a valid URL).             |
-| `` `display_on_storefront` `` | `` `boolean` ``        | No       | Whether to display on the storefront (defaults to `` `true` ``).   |
-| `` `fee_type_ids` ``        | `` `array (string)` `` | No       | Array of UUIDs for associated organization-level fee types. |
+| Parameter                     | Type                   | Required | Description                                                      |
+| ----------------------------- | ---------------------- | -------- | ---------------------------------------------------------------- |
+| `` `name` ``                  | `` `string` ``         | Yes      | Name of the product.                                             |
+| `` `description` ``           | `` `string` ``         | No       | Optional description.                                            |
+| `` `price` ``                 | `` `number` ``         | Yes      | Price of the product (must be positive).                         |
+| `` `currency_code` ``         | `` `string` ``         | Yes      | Currency code (e.g., `` `"XOF"` ``, `` `"USD"` ``).              |
+| `` `is_active` ``             | `` `boolean` ``        | No       | Whether the product is active (defaults to `` `true` ``).        |
+| `` `image_url` ``             | `` `string` ``         | No       | URL for the product image (must be a valid URL).                 |
+| `` `display_on_storefront` `` | `` `boolean` ``        | No       | Whether to display on the storefront (defaults to `` `true` ``). |
+| `` `fee_type_ids` ``          | `` `array (string)` `` | No       | Array of UUIDs for associated organization-level fee types.      |
 
 **Example request:**
 
@@ -74,10 +74,10 @@ Retrieves a list of products for the authenticated merchant, with pagination and
 
 **Query parameters:**
 
-| Parameter   | Type    | Required | Default | Description                                           |
-| ----------- | ------- | -------- | ------- | ----------------------------------------------------- |
-| `` `limit` ``     | `` `integer` `` | No       | 20      | Maximum number of products to return.                 |
-| `` `offset` ``    | `` `integer` `` | No       | 0       | Number of products to skip for pagination.            |
+| Parameter         | Type            | Required | Default | Description                                                       |
+| ----------------- | --------------- | -------- | ------- | ----------------------------------------------------------------- |
+| `` `limit` ``     | `` `integer` `` | No       | 20      | Maximum number of products to return.                             |
+| `` `offset` ``    | `` `integer` `` | No       | 0       | Number of products to skip for pagination.                        |
 | `` `is_active` `` | `` `boolean` `` | No       | (all)   | Filter products by active status (`` `true` `` or `` `false` ``). |
 
 **Example response (200 OK):**
@@ -88,13 +88,13 @@ Retrieves a list of products for the authenticated merchant, with pagination and
     {
       "product_id": "uuid-product-1",
       // ... other product fields
-      "is_active": true,
+      "is_active": true
       // ...
     },
     {
       "product_id": "uuid-product-2",
       // ... other product fields
-      "is_active": false,
+      "is_active": false
       // ...
     }
     // ... more products
@@ -115,13 +115,13 @@ Retrieves details for a specific product belonging to the authenticated merchant
 
 **Path parameters:**
 
-| Parameter | Type   | Required | Description                                      |
-| --------- | ------ | -------- | ------------------------------------------------ |
-| `` `id` ``      | `` `string` `` | Yes      | The unique identifier (UUID) of the product (`` `product_id` ``). |
+| Parameter  | Type           | Required | Description                                                       |
+| ---------- | -------------- | -------- | ----------------------------------------------------------------- |
+| `` `id` `` | `` `string` `` | Yes      | The unique identifier (UUID) of the product (`` `product_id` ``). |
 
 **Example response (200 OK):**
 
-*(Response structure is the same as the `Create product` response)*
+_(Response structure is the same as the `Create product` response)_
 
 ### Update product
 
@@ -131,14 +131,14 @@ Updates the `` `is_active` `` status of a specific product. Other product detail
 
 **Path parameters:**
 
-| Parameter | Type   | Required | Description                                      |
-| --------- | ------ | -------- | ------------------------------------------------ |
-| `` `id` ``      | `` `string` `` | Yes      | The unique identifier (UUID) of the product (`` `product_id` ``). |
+| Parameter  | Type           | Required | Description                                                       |
+| ---------- | -------------- | -------- | ----------------------------------------------------------------- |
+| `` `id` `` | `` `string` `` | Yes      | The unique identifier (UUID) of the product (`` `product_id` ``). |
 
 **Request body parameters:**
 
-| Parameter   | Type    | Required | Description                           |
-| ----------- | ------- | -------- | ------------------------------------- |
+| Parameter         | Type            | Required | Description                                                |
+| ----------------- | --------------- | -------- | ---------------------------------------------------------- |
 | `` `is_active` `` | `` `boolean` `` | Yes      | Set `` `true` `` to activate, `` `false` `` to deactivate. |
 
 **Example request:**
@@ -151,4 +151,4 @@ Updates the `` `is_active` `` status of a specific product. Other product detail
 
 **Example response (200 OK):**
 
-*(Response structure is the same as the `Create product` response, showing the updated `` `is_active` `` value and `` `updated_at`
+\*(Response structure is the same as the `Create product` response, showing the updated `` `is_active` `` value and `` `updated_at`

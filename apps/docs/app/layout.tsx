@@ -1,11 +1,10 @@
 import './global.css';
 import type { Viewport } from 'next';
-import { baseUrl, createMetadata } from '@/lib/metadata';
+import { baseUrl, createMetadata } from '@/lib/utils/metadata';
 import { Body } from '@/app/layout.client';
 import { Provider } from './provider';
 import type { ReactNode } from 'react';
-import { Geist, Geist_Mono } from 'next/font/google';
-import { Analytics } from "@vercel/analytics/next";
+import { Analytics } from '@vercel/analytics/next';
 
 export const metadata = createMetadata({
   title: {
@@ -16,15 +15,15 @@ export const metadata = createMetadata({
   metadataBase: baseUrl,
 });
 
-const geist = Geist({
-  variable: '--font-sans',
-  subsets: ['latin'],
-});
-
-const mono = Geist_Mono({
-  variable: '--font-mono',
-  subsets: ['latin'],
-});
+// Use single system font stack for everything
+const font = {
+  style: {
+    fontFamily:
+      'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+  },
+  variable: '--font-main',
+  className: 'font-main',
+};
 
 export const viewport: Viewport = {
   themeColor: [
@@ -35,11 +34,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html
-      lang="en"
-      className={`${geist.variable} ${mono.variable}`}
-      suppressHydrationWarning
-    >
+    <html lang="en" className={`${font.variable}`} suppressHydrationWarning>
       <Body>
         <Provider>{children}</Provider>
         <Analytics />

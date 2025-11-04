@@ -1,6 +1,6 @@
 ---
-title: "Testing guide"
-description: "This guide covers best practices for testing your lomi. integration, ensuring your payment flows work correctly in both sandbox and production environments."
+title: 'Testing guide'
+description: 'This guide covers best practices for testing your lomi. integration, ensuring your payment flows work correctly in both sandbox and production environments.'
 ---
 
 ## Test environment setup
@@ -14,13 +14,13 @@ import { LomiSDK } from '@lomi/sdk'; // Your SDK package
 
 const lomi = new LomiSDK({
   apiKey: process.env.LOMI_TEST_API_KEY, // Use the TEST key from environment
-  baseUrl: 'https://sandbox.api.lomi.africa/v1' // Point to the sandbox URL
+  baseUrl: 'https://sandbox.api.lomi.africa/v1', // Point to the sandbox URL
 });
 ```
 
 ### 2. Test webhook secret
 
-When testing webhooks locally or in a staging environment, create a separate webhook endpoint configuration in the lomi. Dashboard pointing to your test URL (e.g., an `ngrok` URL). Use the unique **Signing Secret** (`whsec_...`) generated for *that specific test endpoint* in your test environment configuration (`LOMI_TEST_WEBHOOK_SECRET`).
+When testing webhooks locally or in a staging environment, create a separate webhook endpoint configuration in the lomi. Dashboard pointing to your test URL (e.g., an `ngrok` URL). Use the unique **Signing Secret** (`whsec_...`) generated for _that specific test endpoint_ in your test environment configuration (`LOMI_TEST_WEBHOOK_SECRET`).
 
 ### 3. Test configuration file
 
@@ -34,7 +34,7 @@ export const testConfig = {
   testWebhookUrl: process.env.TEST_WEBHOOK_URL, // Your ngrok or test server URL
   webhookSecret: process.env.LOMI_TEST_WEBHOOK_SECRET,
   defaultAmount: 100, // Smallest valid amount for testing
-  defaultCurrency: 'XOF'
+  defaultCurrency: 'XOF',
 };
 ```
 
@@ -54,7 +54,10 @@ describe('Checkout Session Flow', () => {
   let lomi: LomiSDK;
 
   beforeAll(() => {
-    lomi = new LomiSDK({ apiKey: process.env.LOMI_TEST_API_KEY!, baseUrl: 'https://sandbox.api.lomi.africa/v1' });
+    lomi = new LomiSDK({
+      apiKey: process.env.LOMI_TEST_API_KEY!,
+      baseUrl: 'https://sandbox.api.lomi.africa/v1',
+    });
   });
 
   it('should create a checkout session successfully', async () => {
@@ -65,7 +68,7 @@ describe('Checkout Session Flow', () => {
       allowed_providers: testConfig.allowedProviders,
       success_url: 'https://example.com/success',
       cancel_url: 'https://example.com/cancel',
-      metadata: { test_order_id: `int_${Date.now()}` }
+      metadata: { test_order_id: `int_${Date.now()}` },
     });
 
     expect(sessionResponse.data.checkout_session_id).toMatch(/^cs_test_/);
@@ -95,7 +98,11 @@ import { verifySignature } from '../../src/utils/security';
 
 describe('Webhook Signature Verification', () => {
   const testSecret = 'whsec_test_secret_string';
-  const testPayload = JSON.stringify({ id: 'evt_test', event: 'PAYMENT_SUCCEEDED', data: {} });
+  const testPayload = JSON.stringify({
+    id: 'evt_test',
+    event: 'PAYMENT_SUCCEEDED',
+    data: {},
+  });
   const payloadBuffer = Buffer.from(testPayload, 'utf8');
 
   it('should return true for a valid signature', () => {
@@ -104,23 +111,35 @@ describe('Webhook Signature Verification', () => {
       .update(payloadBuffer)
       .digest('hex');
 
-    const isValid = verifySignature(payloadBuffer, expectedSignature, testSecret);
+    const isValid = verifySignature(
+      payloadBuffer,
+      expectedSignature,
+      testSecret,
+    );
     expect(isValid).toBe(true);
   });
 
   it('should return false for an invalid signature', () => {
     const invalidSignature = 'invalid_signature_string';
-    const isValid = verifySignature(payloadBuffer, invalidSignature, testSecret);
+    const isValid = verifySignature(
+      payloadBuffer,
+      invalidSignature,
+      testSecret,
+    );
     expect(isValid).toBe(false);
   });
 
   it('should return false if the secret is wrong', () => {
-     const expectedSignature = crypto
+    const expectedSignature = crypto
       .createHmac('sha256', testSecret)
       .update(payloadBuffer)
       .digest('hex');
     const wrongSecret = 'whsec_wrong_secret';
-    const isValid = verifySignature(payloadBuffer, expectedSignature, wrongSecret);
+    const isValid = verifySignature(
+      payloadBuffer,
+      expectedSignature,
+      wrongSecret,
+    );
     expect(isValid).toBe(false);
   });
 });
@@ -133,7 +152,9 @@ Test how your application handles specific API errors from lomi..
 ```typescript filename="Testing API error handling (Jest example)"
 describe('API Error Handling', () => {
   let lomi: LomiSDK;
-  beforeAll(() => { /* setup lomi instance */ });
+  beforeAll(() => {
+    /* setup lomi instance */
+  });
 
   it('should handle invalid request errors (400)', async () => {
     try {
@@ -143,7 +164,7 @@ describe('API Error Handling', () => {
         currency_code: 'XXX', // Invalid currency
         allowed_providers: [], // Invalid providers
         success_url: 'invalid-url', // Invalid URL
-        cancel_url: 'invalid-url'
+        cancel_url: 'invalid-url',
       });
       fail('Request should have failed');
     } catch (error: any) {
@@ -154,7 +175,10 @@ describe('API Error Handling', () => {
   });
 
   it('should handle authentication errors (401)', async () => {
-    const invalidLomi = new LomiSDK({ apiKey: 'lomi_sk_test_invalidkey', baseUrl: '...' });
+    const invalidLomi = new LomiSDK({
+      apiKey: 'lomi_sk_test_invalidkey',
+      baseUrl: '...',
+    });
     try {
       await invalidLomi.providers.list();
       fail('Request should have failed');
@@ -173,18 +197,20 @@ Simulate a full user journey involving payment.
 ### 1. Setup test environment
 
 Use tools like Playwright or Cypress along with a testing framework. Your setup script should:
--   Start your application.
--   Start a webhook listener (e.g., using `ngrok` and a simple server, or a dedicated test helper).
--   Ensure necessary test data exists in the lomi. sandbox (e.g., test merchant, products).
+
+- Start your application.
+- Start a webhook listener (e.g., using `ngrok` and a simple server, or a dedicated test helper).
+- Ensure necessary test data exists in the lomi. sandbox (e.g., test merchant, products).
 
 ### 2. Simulate payment flow
 
 Your E2E test script would typically:
+
 1.  Navigate through your application to initiate a payment.
 2.  Trigger the creation of a lomi. Checkout Session via your backend.
 3.  **(Challenge)** Interact with the lomi. Sandbox Checkout page. This is often difficult/flaky in automated E2E tests. Consider:
-    *   Using specific test phone numbers/methods provided by lomi. sandbox that automatically succeed or fail.
-    *   Having a dedicated API endpoint in your *test environment* that simulates the webhook callback lomi. would send upon completion (bypassing the actual sandbox UI interaction). This is often more reliable for automation.
+    - Using specific test phone numbers/methods provided by lomi. sandbox that automatically succeed or fail.
+    - Having a dedicated API endpoint in your _test environment_ that simulates the webhook callback lomi. would send upon completion (bypassing the actual sandbox UI interaction). This is often more reliable for automation.
 4.  Wait for and verify that your application receives the expected webhook (`PAYMENT_SUCCEEDED` or `CHECKOUT_COMPLETED`).
 5.  Verify that your application state updated correctly (e.g., order marked as paid, service provisioned).
 
@@ -238,11 +264,16 @@ export class TestWebhookListener {
         // Basic validation - PRODUCTION needs full signature verification!
         const payload = JSON.parse(req.body.toString());
         console.log(`Test listener received event: ${payload.event}`);
-        this.receivedEvents.push({ id: payload.id, type: payload.event, receivedAt: Date.now(), payload });
+        this.receivedEvents.push({
+          id: payload.id,
+          type: payload.event,
+          receivedAt: Date.now(),
+          payload,
+        });
         res.status(200).json({ received: true });
       } catch (e) {
-        console.error("Test listener error parsing body", e);
-        res.status(400).json({ error: "Invalid payload" });
+        console.error('Test listener error parsing body', e);
+        res.status(400).json({ error: 'Invalid payload' });
       }
     });
   }
@@ -258,12 +289,15 @@ export class TestWebhookListener {
     console.log('Test webhook listener stopped.');
   }
 
-  async waitForEvent(eventType: string, timeoutMs = 10000): Promise<RecordedEvent> {
+  async waitForEvent(
+    eventType: string,
+    timeoutMs = 10000,
+  ): Promise<RecordedEvent> {
     const start = Date.now();
     while (Date.now() - start < timeoutMs) {
-      const found = this.receivedEvents.find(e => e.type === eventType);
+      const found = this.receivedEvents.find((e) => e.type === eventType);
       if (found) return found;
-      await new Promise(r => setTimeout(r, 200)); // Poll interval
+      await new Promise((r) => setTimeout(r, 200)); // Poll interval
     }
     throw new Error(`Timeout waiting for webhook event type: ${eventType}`);
   }
@@ -324,6 +358,6 @@ jobs:
 
 ## Next steps
 
--   [CI/CD integration](/docs/core/advanced-guides/ci-cd)
--   [Error handling](/docs/core/advanced-guides/error-handling)
--   [API Reference](/docs/reference) 
+- [CI/CD integration](/docs/core/advanced-guides/ci-cd)
+- [Error handling](/docs/core/advanced-guides/error-handling)
+- [API Reference](/docs/reference)

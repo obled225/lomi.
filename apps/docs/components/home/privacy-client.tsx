@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { motion } from "framer-motion";
-import { useTranslation } from "@/lib/contexts/translation-context";
-import { t } from "@/lib/i18n/translations";
+import { motion } from 'framer-motion';
+import { useTranslation } from '@/lib/contexts/translation-context';
+import { t } from '@/lib/i18n/translations';
 
 export default function PrivacyClient() {
   const { currentLanguage } = useTranslation();
@@ -18,7 +18,7 @@ export default function PrivacyClient() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              {t("privacy.title", currentLanguage) as string}
+              {t('privacy.title', currentLanguage) as string}
             </motion.h1>
             <motion.p
               className="text-foreground/90 text-base leading-relaxed tracking-tight"
@@ -26,7 +26,7 @@ export default function PrivacyClient() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               dangerouslySetInnerHTML={{
-                __html: t("privacy.introduction", currentLanguage) as string,
+                __html: t('privacy.introduction', currentLanguage) as string,
               }}
             />
           </div>
@@ -45,10 +45,10 @@ export default function PrivacyClient() {
             transition={{ duration: 0.6, delay: 0.6 }}
           >
             <h2 className="text-xl font-semibold mb-4 text-zinc-900 dark:text-white">
-              {t("privacy.sections.notice.title", currentLanguage) as string}
+              {t('privacy.sections.notice.title', currentLanguage) as string}
             </h2>
             <p className="text-foreground/90 text-base leading-relaxed tracking-tight">
-              {t("privacy.sections.notice.content", currentLanguage) as string}
+              {t('privacy.sections.notice.content', currentLanguage) as string}
             </p>
           </motion.section>
 
@@ -58,10 +58,10 @@ export default function PrivacyClient() {
             transition={{ duration: 0.6, delay: 0.8 }}
           >
             <h2 className="text-xl font-semibold mb-4 text-zinc-900 dark:text-white">
-              {t("privacy.sections.consent.title", currentLanguage) as string}
+              {t('privacy.sections.consent.title', currentLanguage) as string}
             </h2>
             <p className="text-foreground/90 text-base leading-relaxed tracking-tight">
-              {t("privacy.sections.consent.content", currentLanguage) as string}
+              {t('privacy.sections.consent.content', currentLanguage) as string}
             </p>
           </motion.section>
 
@@ -73,7 +73,7 @@ export default function PrivacyClient() {
             <h2 className="text-xl font-semibold mb-4 text-zinc-900 dark:text-white">
               {
                 t(
-                  "privacy.sections.data_collection.title",
+                  'privacy.sections.data_collection.title',
                   currentLanguage,
                 ) as string
               }
@@ -81,7 +81,7 @@ export default function PrivacyClient() {
             <h3 className="text-lg font-medium mb-3 text-zinc-900 dark:text-white">
               {
                 t(
-                  "privacy.sections.data_collection.subsections.data_we_collect.title",
+                  'privacy.sections.data_collection.subsections.data_we_collect.title',
                   currentLanguage,
                 ) as string
               }
@@ -89,7 +89,7 @@ export default function PrivacyClient() {
             <p className="text-foreground/90 text-base leading-relaxed tracking-tight">
               {
                 t(
-                  "privacy.sections.data_collection.subsections.data_we_collect.content",
+                  'privacy.sections.data_collection.subsections.data_we_collect.content',
                   currentLanguage,
                 ) as string
               }
@@ -98,7 +98,7 @@ export default function PrivacyClient() {
             <h3 className="text-lg font-medium mb-3 mt-6 text-zinc-900 dark:text-white">
               {
                 t(
-                  "privacy.sections.data_collection.subsections.google_api.title",
+                  'privacy.sections.data_collection.subsections.google_api.title',
                   currentLanguage,
                 ) as string
               }
@@ -106,7 +106,7 @@ export default function PrivacyClient() {
             <p className="text-foreground/90 text-base leading-relaxed tracking-tight">
               {
                 t(
-                  "privacy.sections.data_collection.subsections.google_api.content",
+                  'privacy.sections.data_collection.subsections.google_api.content',
                   currentLanguage,
                 ) as string
               }
@@ -115,7 +115,7 @@ export default function PrivacyClient() {
             <h3 className="text-lg font-medium mb-3 mt-6 text-zinc-900 dark:text-white">
               {
                 t(
-                  "privacy.sections.data_collection.subsections.third_party_ai.title",
+                  'privacy.sections.data_collection.subsections.third_party_ai.title',
                   currentLanguage,
                 ) as string
               }
@@ -123,7 +123,7 @@ export default function PrivacyClient() {
             <p className="text-foreground/90 text-base leading-relaxed tracking-tight">
               {
                 t(
-                  "privacy.sections.data_collection.subsections.third_party_ai.content",
+                  'privacy.sections.data_collection.subsections.third_party_ai.content',
                   currentLanguage,
                 ) as string
               }
@@ -132,7 +132,7 @@ export default function PrivacyClient() {
             <h3 className="text-lg font-medium mb-3 mt-6 text-zinc-900 dark:text-white">
               {
                 t(
-                  "privacy.sections.data_collection.subsections.data_storage.title",
+                  'privacy.sections.data_collection.subsections.data_storage.title',
                   currentLanguage,
                 ) as string
               }
@@ -140,7 +140,7 @@ export default function PrivacyClient() {
             <p className="text-foreground/90 text-base leading-relaxed tracking-tight">
               {
                 t(
-                  "privacy.sections.data_collection.subsections.data_storage.content",
+                  'privacy.sections.data_collection.subsections.data_storage.content',
                   currentLanguage,
                 ) as string
               }
@@ -149,7 +149,7 @@ export default function PrivacyClient() {
             <h3 className="text-lg font-medium mb-3 mt-6 text-zinc-900 dark:text-white">
               {
                 t(
-                  "privacy.sections.data_collection.subsections.google_sharing.title",
+                  'privacy.sections.data_collection.subsections.google_sharing.title',
                   currentLanguage,
                 ) as string
               }
@@ -157,7 +157,7 @@ export default function PrivacyClient() {
             <p className="text-foreground/90 text-base leading-relaxed tracking-tight">
               {
                 t(
-                  "privacy.sections.data_collection.subsections.google_sharing.content",
+                  'privacy.sections.data_collection.subsections.google_sharing.content',
                   currentLanguage,
                 ) as string
               }
@@ -166,7 +166,7 @@ export default function PrivacyClient() {
             <h3 className="text-lg font-medium mb-3 mt-6 text-zinc-900 dark:text-white">
               {
                 t(
-                  "privacy.sections.data_collection.subsections.how_we_use.title",
+                  'privacy.sections.data_collection.subsections.how_we_use.title',
                   currentLanguage,
                 ) as string
               }
@@ -174,7 +174,7 @@ export default function PrivacyClient() {
             <p className="text-foreground/90 text-base leading-relaxed tracking-tight">
               {
                 t(
-                  "privacy.sections.data_collection.subsections.how_we_use.introduction",
+                  'privacy.sections.data_collection.subsections.how_we_use.introduction',
                   currentLanguage,
                 ) as string
               }
@@ -182,7 +182,7 @@ export default function PrivacyClient() {
             <ul className="list-disc pl-6 mt-2 space-y-1 text-foreground/90 text-base leading-relaxed tracking-tight">
               {(() => {
                 const content = t(
-                  "privacy.sections.data_collection.subsections.how_we_use.purposes",
+                  'privacy.sections.data_collection.subsections.how_we_use.purposes',
                   currentLanguage,
                 );
                 if (Array.isArray(content)) {
@@ -199,7 +199,7 @@ export default function PrivacyClient() {
             <p className="text-foreground/90 text-base leading-relaxed tracking-tight mt-4">
               {
                 t(
-                  "privacy.sections.data_collection.subsections.how_we_use.additional_info",
+                  'privacy.sections.data_collection.subsections.how_we_use.additional_info',
                   currentLanguage,
                 ) as string
               }
@@ -214,7 +214,7 @@ export default function PrivacyClient() {
             <h2 className="text-xl font-semibold mb-4 text-zinc-900 dark:text-white">
               {
                 t(
-                  "privacy.sections.data_retention.title",
+                  'privacy.sections.data_retention.title',
                   currentLanguage,
                 ) as string
               }
@@ -222,7 +222,7 @@ export default function PrivacyClient() {
             <p className="text-foreground/90 text-base leading-relaxed tracking-tight">
               {
                 t(
-                  "privacy.sections.data_retention.content",
+                  'privacy.sections.data_retention.content',
                   currentLanguage,
                 ) as string
               }
@@ -237,7 +237,7 @@ export default function PrivacyClient() {
             <h2 className="text-xl font-semibold mb-4 text-zinc-900 dark:text-white">
               {
                 t(
-                  "privacy.sections.your_rights.title",
+                  'privacy.sections.your_rights.title',
                   currentLanguage,
                 ) as string
               }
@@ -245,7 +245,7 @@ export default function PrivacyClient() {
             <h3 className="text-lg font-medium mb-3 text-zinc-900 dark:text-white">
               {
                 t(
-                  "privacy.sections.your_rights.subsections.data_rights.title",
+                  'privacy.sections.your_rights.subsections.data_rights.title',
                   currentLanguage,
                 ) as string
               }
@@ -253,7 +253,7 @@ export default function PrivacyClient() {
             <p className="text-foreground/90 text-base leading-relaxed tracking-tight">
               {
                 t(
-                  "privacy.sections.your_rights.subsections.data_rights.introduction",
+                  'privacy.sections.your_rights.subsections.data_rights.introduction',
                   currentLanguage,
                 ) as string
               }
@@ -261,7 +261,7 @@ export default function PrivacyClient() {
             <ul className="list-disc pl-6 mt-2 space-y-1 text-foreground/90 text-base leading-relaxed tracking-tight">
               {(() => {
                 const content = t(
-                  "privacy.sections.your_rights.subsections.data_rights.rights",
+                  'privacy.sections.your_rights.subsections.data_rights.rights',
                   currentLanguage,
                 );
                 if (Array.isArray(content)) {
@@ -278,7 +278,7 @@ export default function PrivacyClient() {
             <p className="text-foreground/90 text-base leading-relaxed tracking-tight mt-4">
               {
                 t(
-                  "privacy.sections.your_rights.subsections.data_rights.contact_info",
+                  'privacy.sections.your_rights.subsections.data_rights.contact_info',
                   currentLanguage,
                 ) as string
               }
@@ -287,7 +287,7 @@ export default function PrivacyClient() {
             <h3 className="text-lg font-medium mb-3 mt-6 text-zinc-900 dark:text-white">
               {
                 t(
-                  "privacy.sections.your_rights.subsections.right_to_object.title",
+                  'privacy.sections.your_rights.subsections.right_to_object.title',
                   currentLanguage,
                 ) as string
               }
@@ -295,7 +295,7 @@ export default function PrivacyClient() {
             <p className="text-foreground/90 text-base leading-relaxed tracking-tight">
               {
                 t(
-                  "privacy.sections.your_rights.subsections.right_to_object.content",
+                  'privacy.sections.your_rights.subsections.right_to_object.content',
                   currentLanguage,
                 ) as string
               }
@@ -310,7 +310,7 @@ export default function PrivacyClient() {
             <h2 className="text-xl font-semibold mb-4 text-zinc-900 dark:text-white">
               {
                 t(
-                  "privacy.sections.opting_out.title",
+                  'privacy.sections.opting_out.title',
                   currentLanguage,
                 ) as string
               }
@@ -318,7 +318,7 @@ export default function PrivacyClient() {
             <p className="text-foreground/90 text-base leading-relaxed tracking-tight">
               {
                 t(
-                  "privacy.sections.opting_out.content",
+                  'privacy.sections.opting_out.content',
                   currentLanguage,
                 ) as string
               }
@@ -333,7 +333,7 @@ export default function PrivacyClient() {
             <h2 className="text-xl font-semibold mb-4 text-zinc-900 dark:text-white">
               {
                 t(
-                  "privacy.sections.data_security.title",
+                  'privacy.sections.data_security.title',
                   currentLanguage,
                 ) as string
               }
@@ -341,7 +341,7 @@ export default function PrivacyClient() {
             <p className="text-foreground/90 text-base leading-relaxed tracking-tight">
               {
                 t(
-                  "privacy.sections.data_security.content",
+                  'privacy.sections.data_security.content',
                   currentLanguage,
                 ) as string
               }
@@ -356,7 +356,7 @@ export default function PrivacyClient() {
             <h2 className="text-xl font-semibold mb-4 text-zinc-900 dark:text-white">
               {
                 t(
-                  "privacy.sections.policy_changes.title",
+                  'privacy.sections.policy_changes.title',
                   currentLanguage,
                 ) as string
               }
@@ -364,7 +364,7 @@ export default function PrivacyClient() {
             <p className="text-foreground/90 text-base leading-relaxed tracking-tight">
               {
                 t(
-                  "privacy.sections.policy_changes.content",
+                  'privacy.sections.policy_changes.content',
                   currentLanguage,
                 ) as string
               }
@@ -377,10 +377,10 @@ export default function PrivacyClient() {
             transition={{ duration: 0.6, delay: 2.2 }}
           >
             <h2 className="text-xl font-semibold mb-4 text-zinc-900 dark:text-white">
-              {t("privacy.sections.contact.title", currentLanguage) as string}
+              {t('privacy.sections.contact.title', currentLanguage) as string}
             </h2>
             <p className="text-foreground/90 text-base leading-relaxed tracking-tight">
-              {t("privacy.sections.contact.content", currentLanguage) as string}
+              {t('privacy.sections.contact.content', currentLanguage) as string}
             </p>
           </motion.section>
         </motion.div>
@@ -388,7 +388,7 @@ export default function PrivacyClient() {
         {/* Footer info */}
         <div className="mt-20 pt-8 border-t border-border flex justify-end">
           <p className="text-foreground/80 text-sm">
-            {t("privacy.footer_date", currentLanguage) as string}
+            {t('privacy.footer_date', currentLanguage) as string}
           </p>
         </div>
       </div>

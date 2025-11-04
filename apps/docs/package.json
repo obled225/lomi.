@@ -136,7 +136,7 @@
     "tailwindcss-animate": "^1.0.7",
     "tinyexec": "^1.0.1",
     "tinyglobby": "^0.2.14",
-    "ts-morph": "^26.0.0",
+    "ts-morph": "^27.0.2",
     "tsconfig": "^7.0.0",
     "typescript": "^5.9.2"
   },
@@ -146,7 +146,8 @@
   "pnpm": {
     "overrides": {
       "fumadocs-ui": "~15.7.10",
-      "fumadocs-core": "~15.7.10"
+      "fumadocs-core": "~15.7.10",
+      "ts-morph": "^27.0.2"
     }
   }
 }

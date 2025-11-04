@@ -9,7 +9,7 @@ import {
   useState,
 } from 'react';
 import { Loader2, RefreshCw, Send, X } from 'lucide-react';
-import { cn } from '@/lib/cn';
+import { cn } from '@/lib/utils/cn';
 import { buttonVariants } from 'fumadocs-ui/components/ui/button';
 import Link from 'fumadocs-core/link';
 import {
@@ -95,7 +95,9 @@ function SearchAIInput(props: ComponentProps<'form'>) {
     >
       <Input
         value={input}
-        placeholder={isLoading ? 'lomi. is answering...' : 'Ask lomi. something'}
+        placeholder={
+          isLoading ? 'lomi. is answering...' : 'Ask lomi. something'
+        }
         className="max-h-60 min-h-10 p-3"
         disabled={status === 'streaming' || status === 'submitted'}
         onChange={(e) => {

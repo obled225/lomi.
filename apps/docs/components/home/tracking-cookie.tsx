@@ -1,19 +1,19 @@
 'use client';
 
-import { useState, useEffect, useRef, useCallback } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { useTranslation } from "@/lib/contexts/translation-context";
-import { t } from "@/lib/i18n/translations";
-import { playClickSound } from "@/lib/sound";
+import { useState, useEffect, useRef, useCallback } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslation } from '@/lib/contexts/translation-context';
+import { t } from '@/lib/i18n/translations';
+import { playClickSound } from '@/lib/utils/sound';
 
 // Use a more specific key that's unlikely to be cleared
-const COOKIE_CONSENT_KEY = "lomi-cookie-consent-status";
+const COOKIE_CONSENT_KEY = 'lomi-cookie-consent-status';
 
 // Try multiple storage options
 function getCookieConsentStatus() {
   try {
     // Try localStorage first
-    if (typeof window !== "undefined") {
+    if (typeof window !== 'undefined') {
       const localValue = localStorage.getItem(COOKIE_CONSENT_KEY);
       if (localValue) return localValue;
 
@@ -26,13 +26,13 @@ function getCookieConsentStatus() {
       }
     }
   } catch (error) {
-    console.error("Error accessing storage:", error);
+    console.error('Error accessing storage:', error);
     // In case of error, use a fallback approach with cookies
     try {
       const cookieValue = document.cookie
-        .split("; ")
+        .split('; ')
         .find((row) => row.startsWith(`${COOKIE_CONSENT_KEY}=`))
-        ?.split("=")[1];
+        ?.split('=')[1];
       return cookieValue || null;
     } catch {
       // Silently fail in private browsing modes
@@ -45,7 +45,7 @@ function getCookieConsentStatus() {
 function setCookieConsentStatus(status: string) {
   try {
     // Try to use multiple storage mechanisms for redundancy
-    if (typeof window !== "undefined") {
+    if (typeof window !== 'undefined') {
       // Store in localStorage
       localStorage.setItem(COOKIE_CONSENT_KEY, status);
 
@@ -58,7 +58,7 @@ function setCookieConsentStatus(status: string) {
       document.cookie = `${COOKIE_CONSENT_KEY}=${status}; expires=${date.toUTCString()}; path=/; SameSite=Lax`;
     }
   } catch (error) {
-    console.error("Error setting storage:", error);
+    console.error('Error setting storage:', error);
     // If localStorage fails, try cookies as fallback
     try {
       const date = new Date();
@@ -75,7 +75,7 @@ export default function CookieConsent() {
   const [isVisible, setIsVisible] = useState(false);
   const [showAnimation, setShowAnimation] = useState(false);
   const [animationType, setAnimationType] = useState<
-    "accept" | "decline" | null
+    'accept' | 'decline' | null
   >(null);
   const footerRef = useRef<HTMLElement | null>(null);
   const hasCheckedConsent = useRef(false);
@@ -85,7 +85,7 @@ export default function CookieConsent() {
   const handleScroll = useCallback(() => {
     // Find the footer element within the callback to ensure it's fresh
     const footer =
-      document.querySelector("footer") ||
+      document.querySelector('footer') ||
       document.querySelector("[class*='Footer']");
 
     // Don't run if banner is already visible or footer isn't found
@@ -100,7 +100,7 @@ export default function CookieConsent() {
       setIsVisible(true);
       // Once shown by scroll, we don't need the listener anymore for visibility triggering
       if (listenerAdded.current) {
-        window.removeEventListener("scroll", handleScroll);
+        window.removeEventListener('scroll', handleScroll);
         listenerAdded.current = false;
         // console.log("Scroll listener removed by handleScroll");
       }
@@ -110,7 +110,7 @@ export default function CookieConsent() {
   // Function to remove scroll listener, separated for cleanup
   const removeScrollListener = useCallback(() => {
     if (listenerAdded.current) {
-      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener('scroll', handleScroll);
       listenerAdded.current = false;
       // console.log("Scroll listener explicitly removed"); // Optional: for debugging
     }
@@ -119,7 +119,7 @@ export default function CookieConsent() {
   useEffect(() => {
     // This effect now primarily handles initial consent check and timer/listener setup
     footerRef.current =
-      document.querySelector("footer") ||
+      document.querySelector('footer') ||
       document.querySelector("[class*='Footer']");
 
     let consentStatus: string | null = null;
@@ -127,7 +127,7 @@ export default function CookieConsent() {
       consentStatus = getCookieConsentStatus();
       // console.log("Initial consent status:", consentStatus);
     } catch (error) {
-      console.error("Error checking initial consent:", error);
+      console.error('Error checking initial consent:', error);
       consentStatus = null;
     }
 
@@ -157,7 +157,7 @@ export default function CookieConsent() {
     // Option 2: Show on scroll (if footer exists)
     if (footerRef.current && !listenerAdded.current) {
       // console.log("Adding scroll listener");
-      window.addEventListener("scroll", handleScroll, { passive: true });
+      window.addEventListener('scroll', handleScroll, { passive: true });
       listenerAdded.current = true;
     }
 
@@ -174,13 +174,13 @@ export default function CookieConsent() {
 
   const handleAccept = () => {
     playClickSound();
-    setAnimationType("accept");
+    setAnimationType('accept');
     setShowAnimation(true);
     removeScrollListener(); // Remove listener immediately on action
 
     // Delay hiding the component to allow animation to complete
     setTimeout(() => {
-      setCookieConsentStatus("accepted");
+      setCookieConsentStatus('accepted');
       setIsVisible(false);
       setShowAnimation(false);
       // Here you would typically initialize your tracking code
@@ -189,13 +189,13 @@ export default function CookieConsent() {
 
   const handleDecline = () => {
     playClickSound();
-    setAnimationType("decline");
+    setAnimationType('decline');
     setShowAnimation(true);
     removeScrollListener(); // Remove listener immediately on action
 
     // Delay hiding the component to allow animation to complete - much faster for decline
     setTimeout(() => {
-      setCookieConsentStatus("declined");
+      setCookieConsentStatus('declined');
       setIsVisible(false);
       setShowAnimation(false);
     }, 300); // Very fast disappearance
@@ -218,35 +218,41 @@ export default function CookieConsent() {
           <motion.div
             className="w-[calc(100vw-60px)] max-w-[370px] overflow-hidden flex justify-end"
             animate={{
-              opacity: showAnimation && animationType === "decline" ? 0 : 1,
-              y: showAnimation && animationType === "accept" ? 100 : 0,
+              opacity: showAnimation && animationType === 'decline' ? 0 : 1,
+              y: showAnimation && animationType === 'accept' ? 100 : 0,
             }}
             transition={{
-              duration: animationType === "accept" ? 0.5 : 0.2,
-              ease: "easeInOut",
+              duration: animationType === 'accept' ? 0.5 : 0.2,
+              ease: 'easeInOut',
             }}
             style={{
-              backgroundColor: "rgba(0, 0, 0, 0.9)",
-              borderRadius: "6px",
+              backgroundColor: 'rgba(0, 0, 0, 0.9)',
+              borderRadius: '6px',
             }}
           >
             <motion.div className="px-4 py-3 sm:px-5 sm:py-4 relative overflow-hidden w-full">
               <motion.div>
                 <p className="mb-2 sm:mb-3 text-gray-200 text-xs sm:text-sm text-left select-none">
-                  {String(t("components.tracking_cookie.message", currentLanguage))}
+                  {String(
+                    t('components.tracking_cookie.message', currentLanguage),
+                  )}
                 </p>
                 <div className="flex flex-wrap gap-3 sm:gap-4">
                   <button
                     onMouseDown={handleAccept}
                     className="text-white text-xs sm:text-sm hover:text-gray-200 transition-colors font-normal"
                   >
-                    {String(t("components.tracking_cookie.accept", currentLanguage))}
+                    {String(
+                      t('components.tracking_cookie.accept', currentLanguage),
+                    )}
                   </button>
                   <button
                     onMouseDown={handleDecline}
                     className="text-gray-300 text-xs sm:text-sm hover:text-gray-200 transition-colors"
                   >
-                    {String(t("components.tracking_cookie.decline", currentLanguage))}
+                    {String(
+                      t('components.tracking_cookie.decline', currentLanguage),
+                    )}
                   </button>
                 </div>
               </motion.div>

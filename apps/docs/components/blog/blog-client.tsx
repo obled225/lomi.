@@ -1,19 +1,19 @@
-"use client";
+'use client';
 
-import { useEffect, useState, useRef } from "react";
-import { useRouter } from "next/navigation";
-import type { Post } from "@/lib/sanity/types";
-import { urlFor } from "@/lib/sanity/client";
-import { motion } from "framer-motion";
-import { useTranslation } from "@/lib/contexts/translation-context";
-import { t } from "@/lib/i18n/translations";
-import Image from "next/image";
-import Spinner from "@/components/ui/spinner";
-import { ArrowRight } from "lucide-react";
-import { playClickSound } from "@/lib/sound";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import "../../app/styles/blog.css";
+import { useEffect, useState, useRef } from 'react';
+import { useRouter } from 'next/navigation';
+import type { Post } from '@/lib/sanity/types';
+import { urlFor } from '@/lib/sanity/client';
+import { motion } from 'framer-motion';
+import { useTranslation } from '@/lib/contexts/translation-context';
+import { t } from '@/lib/i18n/translations';
+import Image from 'next/image';
+import Spinner from '@/components/ui/spinner';
+import { ArrowRight } from 'lucide-react';
+import { playClickSound } from '@/lib/utils/sound';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
+import '../../app/styles/blog.css';
 
 // Helper function to get category from post
 const getPostCategory = (post: Post): string => {
@@ -27,28 +27,28 @@ const getPostCategory = (post: Post): string => {
   }
 
   // Fallback to legacy category field
-  return post.category || "news";
+  return post.category || 'news';
 };
 
 // Function to get category color
 const getCategoryColor = (category: string) => {
   if (!category)
-    return "bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-200";
+    return 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-200';
 
   const categoryColorMap: Record<string, string> = {
-    news: "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300",
+    news: 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300',
     opinion:
-      "bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300",
-    edge: "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300",
+      'bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300',
+    edge: 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300',
     spreadsheets:
-      "bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300",
-    "case-study":
-      "bg-indigo-100 text-indigo-800 dark:bg-indigo-900/30 dark:text-indigo-300",
+      'bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300',
+    'case-study':
+      'bg-indigo-100 text-indigo-800 dark:bg-indigo-900/30 dark:text-indigo-300',
   };
 
   return (
     categoryColorMap[category] ||
-    "bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-200"
+    'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-200'
   );
 };
 
@@ -63,7 +63,7 @@ export default function BlogClient() {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await fetch("/api/blog/posts");
+        const response = await fetch('/api/blog/posts');
 
         if (!response.ok) {
           throw new Error(`API responded with status: ${response.status}`);
@@ -74,14 +74,14 @@ export default function BlogClient() {
         if (data.success) {
           setPosts(data.posts || []);
         } else {
-          throw new Error(data.error || "Failed to fetch posts");
+          throw new Error(data.error || 'Failed to fetch posts');
         }
       } catch (error) {
-        console.error("Error fetching posts:", error);
+        console.error('Error fetching posts:', error);
         // Show detailed error information
         if (error instanceof Error) {
-          console.error("Error message:", error.message);
-          console.error("Error stack:", error.stack);
+          console.error('Error message:', error.message);
+          console.error('Error stack:', error.stack);
         }
         // Set an empty array to avoid undefined errors
         setPosts([]);
@@ -117,7 +117,7 @@ export default function BlogClient() {
 
   // Function to get the localized field based on current language
   const getLocalizedField = (post: Post, field: string, fallback: string) => {
-    if (currentLanguage === "fr" && post[`${field}_fr` as keyof Post]) {
+    if (currentLanguage === 'fr' && post[`${field}_fr` as keyof Post]) {
       return post[`${field}_fr` as keyof Post] as string;
     }
     return (post[field as keyof Post] as string) || fallback;
@@ -126,12 +126,12 @@ export default function BlogClient() {
   // Check if a post has content in the current language
   const hasLanguageContent = (post: Post) => {
     // For English, always show the post since it's the base language
-    if (currentLanguage === "en") return true;
+    if (currentLanguage === 'en') return true;
 
     // For other languages, check if the languages field includes the current language
     // If the languages field doesn't exist, check if there's content in the current language
     if (!post.languages) {
-      if (currentLanguage === "fr") {
+      if (currentLanguage === 'fr') {
         return !!post.title_fr || !!post.excerpt_fr || !!post.body_fr;
       }
       return false;
@@ -154,7 +154,7 @@ export default function BlogClient() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              {t("blog.heading", currentLanguage) as string}
+              {t('blog.heading', currentLanguage) as string}
             </motion.h1>
             <motion.p
               className="text-gray-500 dark:text-gray-400 text-base leading-relaxed tracking-tight max-w-4xl"
@@ -162,7 +162,7 @@ export default function BlogClient() {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              {t("blog.subheading", currentLanguage) as string}
+              {t('blog.subheading', currentLanguage) as string}
             </motion.p>
           </div>
 
@@ -178,19 +178,19 @@ export default function BlogClient() {
               transition={{ duration: 0.5 }}
             >
               <h2 className="text-2xl font-semibold mb-4 dark:text-white">
-                {t("blog.noPosts", currentLanguage) as string}
+                {t('blog.noPosts', currentLanguage) as string}
               </h2>
               <p className="text-zinc-600 dark:text-zinc-400 mb-6">
-                {t("blog.noPostsDesc", currentLanguage) as string}
+                {t('blog.noPostsDesc', currentLanguage) as string}
               </p>
               <Button
                 variant="pink"
                 onClick={() => {
                   playClickSound();
-                  router.push("/");
+                  router.push('/');
                 }}
               >
-                {t("blog.backHome", currentLanguage) as string}
+                {t('blog.backHome', currentLanguage) as string}
               </Button>
             </motion.div>
           ) : (
@@ -225,7 +225,7 @@ export default function BlogClient() {
                                 .url()}
                               alt={
                                 post.image.alt ||
-                                getLocalizedField(post, "title", post.title)
+                                getLocalizedField(post, 'title', post.title)
                               }
                               width={320}
                               height={213}
@@ -242,13 +242,13 @@ export default function BlogClient() {
                                   {new Date(
                                     post.publishedAt,
                                   ).toLocaleDateString(
-                                    currentLanguage === "zh"
-                                      ? "zh-CN"
+                                    currentLanguage === 'zh'
+                                      ? 'zh-CN'
                                       : currentLanguage,
                                     {
-                                      year: "numeric",
-                                      month: "short",
-                                      day: "numeric",
+                                      year: 'numeric',
+                                      month: 'short',
+                                      day: 'numeric',
                                     },
                                   )}
                                 </p>
@@ -258,27 +258,27 @@ export default function BlogClient() {
                             {!post.author && post.publishedAt && (
                               <p className="text-xs text-zinc-500 dark:text-zinc-400 mb-1">
                                 {new Date(post.publishedAt).toLocaleDateString(
-                                  currentLanguage === "fr"
-                                    ? "fr-FR"
-                                    : currentLanguage === "es"
-                                      ? "es-ES"
-                                      : currentLanguage === "zh"
-                                        ? "zh-CN"
-                                        : "en-US",
+                                  currentLanguage === 'fr'
+                                    ? 'fr-FR'
+                                    : currentLanguage === 'es'
+                                      ? 'es-ES'
+                                      : currentLanguage === 'zh'
+                                        ? 'zh-CN'
+                                        : 'en-US',
                                   {
-                                    year: "numeric",
-                                    month: "short",
-                                    day: "numeric",
+                                    year: 'numeric',
+                                    month: 'short',
+                                    day: 'numeric',
                                   },
                                 )}
                               </p>
                             )}
 
                             <h2 className="font-normal text-lg mb-3 leading-tight text-zinc-900 dark:text-white min-h-fit">
-                              {getLocalizedField(post, "title", post.title)}
+                              {getLocalizedField(post, 'title', post.title)}
                             </h2>
                             <p className="text-zinc-600 dark:text-zinc-400 text-sm mb-4 overflow-hidden line-clamp-2">
-                              {getLocalizedField(post, "excerpt", "")}
+                              {getLocalizedField(post, 'excerpt', '')}
                             </p>
                           </div>
                           <div className="mt-auto flex flex-row justify-between items-center">
@@ -299,12 +299,12 @@ export default function BlogClient() {
                                 style={{
                                   transform:
                                     hoveredCard === post._id
-                                      ? "translateX(-2px)"
-                                      : "translateX(0)",
+                                      ? 'translateX(-2px)'
+                                      : 'translateX(0)',
                                 }}
                               ></span>
                               <ArrowRight
-                                className={`ml-1 h-4 w-4 transition-all duration-300 ${hoveredCard === post._id ? "opacity-100 translate-x-1" : "opacity-0 -translate-x-3"}`}
+                                className={`ml-1 h-4 w-4 transition-all duration-300 ${hoveredCard === post._id ? 'opacity-100 translate-x-1' : 'opacity-0 -translate-x-3'}`}
                               />
                             </div>
                           </div>

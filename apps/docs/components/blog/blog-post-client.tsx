@@ -1,26 +1,26 @@
-"use client";
+'use client';
 
-import { useEffect, useState, useCallback } from "react";
-import { useRouter } from "next/navigation";
-import Image from "next/image";
-import { PortableText } from "@portabletext/react";
-import type { Post } from "@/lib/sanity/types";
-import { urlFor } from "@/lib/sanity/client";
-import { motion } from "framer-motion";
-import type { PortableTextBlock } from "@portabletext/types";
-import { useTranslation } from "@/lib/contexts/translation-context";
-import { t } from "@/lib/i18n/translations";
-import Spinner from "@/components/ui/spinner";
-import { Button } from "@/components/ui/button";
-import { Share2 } from "lucide-react";
-import { ShareModal } from "@/components/design/share-modal";
-import { playClickSound } from "@/lib/sound";
-import "../../app/styles/blog.css";
+import { useEffect, useState, useCallback } from 'react';
+import { useRouter } from 'next/navigation';
+import Image from 'next/image';
+import { PortableText } from '@portabletext/react';
+import type { Post } from '@/lib/sanity/types';
+import { urlFor } from '@/lib/sanity/client';
+import { motion } from 'framer-motion';
+import type { PortableTextBlock } from '@portabletext/types';
+import { useTranslation } from '@/lib/contexts/translation-context';
+import { t } from '@/lib/i18n/translations';
+import Spinner from '@/components/ui/spinner';
+import { Button } from '@/components/ui/button';
+import { Share2 } from 'lucide-react';
+import { ShareModal } from '@/components/design/share-modal';
+import { playClickSound } from '@/lib/utils/sound';
+import '../../app/styles/blog.css';
 
 // Define the specific languages for the blog post switcher
 const blogLanguages = [
-  { code: "fr", name: "FR" },
-  { code: "en", name: "EN" },
+  { code: 'fr', name: 'FR' },
+  { code: 'en', name: 'EN' },
 ];
 
 // Helper function to get category from post
@@ -35,28 +35,28 @@ const getPostCategory = (post: Post): string => {
   }
 
   // Fallback to legacy category field
-  return post.category || "news";
+  return post.category || 'news';
 };
 
 // Function to get category color
 const getCategoryColor = (category: string) => {
   if (!category)
-    return "bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-200";
+    return 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-200';
 
   const categoryColorMap: Record<string, string> = {
-    news: "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300",
+    news: 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300',
     opinion:
-      "bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300",
-    edge: "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300",
+      'bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300',
+    edge: 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300',
     spreadsheets:
-      "bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300",
-    "case-study":
-      "bg-indigo-100 text-indigo-800 dark:bg-indigo-900/30 dark:text-indigo-300",
+      'bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300',
+    'case-study':
+      'bg-indigo-100 text-indigo-800 dark:bg-indigo-900/30 dark:text-indigo-300',
   };
 
   return (
     categoryColorMap[category] ||
-    "bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-200"
+    'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-200'
   );
 };
 
@@ -75,11 +75,9 @@ export default function BlogPostClient({ slug }: BlogPostClientProps) {
   useEffect(() => {
     if (!post && !loading) {
       // Only add styles if the post is not found (and not loading)
-      const style = document.createElement("style");
-      style.id = "glitch-style"; // Add an ID for easier removal
+      const style = document.createElement('style');
+      style.id = 'glitch-style'; // Add an ID for easier removal
       style.textContent = `
-        @import url('https://fonts.googleapis.com/css?family=Fira+Mono:400');
-
         .glitch-wrapper {
           width: 100%;
           height: 100%;
@@ -90,9 +88,9 @@ export default function BlogPostClient({ slug }: BlogPostClientProps) {
           /* Removed fixed background color to allow theme background */
         }
 
-        .glitch-text {
-          font-size: 72px; /* Slightly smaller for blog context */
-          font-family: 'Fira Mono', monospace;
+          .glitch-text {
+            font-size: 72px; /* Slightly smaller for blog context */
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
           font-weight: 400;
           letter-spacing: -5px; /* Adjusted spacing */
           animation: glitch 1s linear infinite;
@@ -154,7 +152,7 @@ export default function BlogPostClient({ slug }: BlogPostClientProps) {
       document.head.appendChild(style);
 
       return () => {
-        const styleElement = document.getElementById("glitch-style");
+        const styleElement = document.getElementById('glitch-style');
         if (styleElement) {
           document.head.removeChild(styleElement);
         }
@@ -171,24 +169,24 @@ export default function BlogPostClient({ slug }: BlogPostClientProps) {
     // Determine a valid starting index if the current language isn't in our specific list
     const validCurrentIndex =
       currentIndex === -1
-        ? blogLanguages.findIndex((l) => l.code === "en") // Default to English index if not found
+        ? blogLanguages.findIndex((l) => l.code === 'en') // Default to English index if not found
         : currentIndex;
     const nextIndex = (validCurrentIndex + 1) % blogLanguages.length;
-    const nextLang = blogLanguages[nextIndex]?.code || "en"; // Fallback to 'en'
+    const nextLang = blogLanguages[nextIndex]?.code || 'en'; // Fallback to 'en'
 
-    setLanguage(nextLang as "en" | "fr"); // The context expects Language type
+    setLanguage(nextLang as 'en' | 'fr'); // The context expects Language type
   }, [currentLanguage, setLanguage]); // Dependencies
 
   // Get the display name for the current language button
   const currentLangName =
     blogLanguages.find((l) => l.code === currentLanguage)?.name ||
-    blogLanguages.find((l) => l.code === "en")?.name ||
-    "EN"; // Fallback display name
+    blogLanguages.find((l) => l.code === 'en')?.name ||
+    'EN'; // Fallback display name
 
   useEffect(() => {
     const fetchPost = async () => {
       if (!slug) {
-        router.push("/blog");
+        router.push('/blog');
         return;
       }
 
@@ -197,7 +195,7 @@ export default function BlogPostClient({ slug }: BlogPostClientProps) {
 
         if (!response.ok) {
           if (response.status === 404) {
-            router.push("/blog");
+            router.push('/blog');
             return;
           }
           throw new Error(`API responded with status: ${response.status}`);
@@ -209,7 +207,7 @@ export default function BlogPostClient({ slug }: BlogPostClientProps) {
           const fetchedPost = data.post;
 
           const bodyKey =
-            currentLanguage !== "en" ? `body_${currentLanguage}` : "body";
+            currentLanguage !== 'en' ? `body_${currentLanguage}` : 'body';
           const bodyContent = fetchedPost[bodyKey as keyof typeof fetchedPost];
           if (Array.isArray(bodyContent)) {
             console.log(
@@ -224,11 +222,11 @@ export default function BlogPostClient({ slug }: BlogPostClientProps) {
 
           setPost(fetchedPost);
         } else {
-          throw new Error(data.error || "Failed to fetch post");
+          throw new Error(data.error || 'Failed to fetch post');
         }
       } catch (error) {
-        console.error("Error fetching post:", error);
-        router.push("/blog");
+        console.error('Error fetching post:', error);
+        router.push('/blog');
       } finally {
         setLoading(false);
       }
@@ -243,7 +241,7 @@ export default function BlogPostClient({ slug }: BlogPostClientProps) {
 
     // Check for localized field based on current language
     const localizedFieldKey = `${field}_${currentLanguage}` as keyof Post;
-    if (currentLanguage !== "en" && post[localizedFieldKey]) {
+    if (currentLanguage !== 'en' && post[localizedFieldKey]) {
       return (post[localizedFieldKey] as string) || fallback;
     }
     return (post[field as keyof Post] as string) || fallback;
@@ -252,8 +250,8 @@ export default function BlogPostClient({ slug }: BlogPostClientProps) {
   // Check if post has content in the current language
   const hasLanguageContent = () => {
     if (!post) return false;
-    if (currentLanguage === "en") return true; // English is always available as the base language
-    if (["fr"].includes(currentLanguage)) {
+    if (currentLanguage === 'en') return true; // English is always available as the base language
+    if (['fr'].includes(currentLanguage)) {
       return post.languages?.includes(currentLanguage) || false;
     }
     return false;
@@ -278,19 +276,19 @@ export default function BlogPostClient({ slug }: BlogPostClientProps) {
           transition={{ duration: 0.5 }}
         >
           <h2 className="text-2xl font-semibold mb-4 dark:text-white">
-            {t("blog.notFound", currentLanguage) as string}
+            {t('blog.notFound', currentLanguage) as string}
           </h2>
           <p className="text-zinc-600 dark:text-zinc-400 mb-6">
-            {t("blog.notFoundDesc", currentLanguage) as string}
+            {t('blog.notFoundDesc', currentLanguage) as string}
           </p>
           <Button
             variant="pink"
             onClick={() => {
               playClickSound();
-              router.push("/blog");
+              router.push('/blog');
             }}
           >
-            {t("blog.backToBlog", currentLanguage) as string}
+            {t('blog.backToBlog', currentLanguage) as string}
           </Button>
         </motion.div>
       </div>
@@ -298,11 +296,11 @@ export default function BlogPostClient({ slug }: BlogPostClientProps) {
   }
 
   // Get the appropriate content based on the current language
-  const title = getLocalizedField("title", post.title);
+  const title = getLocalizedField('title', post.title);
 
   // Get localized body content with better fallback and debugging
   let body = post.body; // Default to English body
-  if (currentLanguage !== "en") {
+  if (currentLanguage !== 'en') {
     const localizedBodyKey = `body_${currentLanguage}` as keyof Post;
     const localizedBody = post[localizedBodyKey] as
       | PortableTextBlock[]
@@ -339,7 +337,7 @@ export default function BlogPostClient({ slug }: BlogPostClientProps) {
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.6, delay: 0.2 }}
                 >
-                  {getLocalizedField("excerpt", post.excerpt)}
+                  {getLocalizedField('excerpt', post.excerpt)}
                 </motion.p>
               )}
             </div>
@@ -372,7 +370,7 @@ export default function BlogPostClient({ slug }: BlogPostClientProps) {
                     )}
                     <span>
                       {
-                        t("blog.byAuthor", currentLanguage, {
+                        t('blog.byAuthor', currentLanguage, {
                           author: post.author.name,
                         }) as string
                       }
@@ -388,8 +386,8 @@ export default function BlogPostClient({ slug }: BlogPostClientProps) {
                   {post.publishedAt && (
                     <span>
                       {new Date(post.publishedAt).toLocaleDateString(
-                        currentLanguage === "zh" ? "zh-CN" : currentLanguage,
-                        { year: "numeric", month: "long", day: "numeric" },
+                        currentLanguage === 'zh' ? 'zh-CN' : currentLanguage,
+                        { year: 'numeric', month: 'long', day: 'numeric' },
                       )}
                     </span>
                   )}
@@ -415,8 +413,8 @@ export default function BlogPostClient({ slug }: BlogPostClientProps) {
                       }}
                       className="text-zinc-600 dark:text-zinc-400 inline-flex items-center justify-center h-6 w-6 p-1 rounded-sm border border-transparent transition-colors duration-150 hover:bg-zinc-500/10 dark:hover:bg-zinc-400/10 hover:text-zinc-600 dark:hover:text-zinc-400 hover:border-zinc-500/20 dark:hover:border-zinc-400/20"
                       aria-label={
-                        (t("blog.switchLanguage", currentLanguage) as string) ||
-                        "Switch Language"
+                        (t('blog.switchLanguage', currentLanguage) as string) ||
+                        'Switch Language'
                       }
                     >
                       <span className="font-normal text-xs">
@@ -431,7 +429,7 @@ export default function BlogPostClient({ slug }: BlogPostClientProps) {
                       }}
                       className="text-zinc-600 dark:text-zinc-400 inline-flex items-center justify-center h-6 w-6 p-1 rounded-sm border border-transparent transition-colors duration-150 hover:bg-blue-400/10 dark:hover:bg-blue-400/20 hover:text-blue-500 dark:hover:text-blue-400 hover:border-blue-500/20 dark:hover:border-blue-400/30"
                       aria-label={
-                        t("blog.shareTitle", currentLanguage) as string
+                        t('blog.shareTitle', currentLanguage) as string
                       }
                     >
                       <Share2 className="h-3 w-3" />
@@ -583,7 +581,7 @@ export default function BlogPostClient({ slug }: BlogPostClientProps) {
                         </svg>
                         <div className="ml-3 flex-1">
                           <h4 className="font-semibold mb-2 text-blue-600 dark:text-blue-400">
-                            {value.title || "Information"}
+                            {value.title || 'Information'}
                           </h4>
                           <div className="text-[14px] leading-relaxed text-blue-700 dark:text-blue-300">
                             {value.text}
@@ -611,7 +609,7 @@ export default function BlogPostClient({ slug }: BlogPostClientProps) {
                         </svg>
                         <div className="ml-3 flex-1">
                           <h4 className="font-semibold mb-2 text-yellow-600 dark:text-yellow-400">
-                            {value.title || "Warning"}
+                            {value.title || 'Warning'}
                           </h4>
                           <div className="text-[14px] leading-relaxed text-yellow-700 dark:text-yellow-300">
                             {value.text}
@@ -644,8 +642,8 @@ export default function BlogPostClient({ slug }: BlogPostClientProps) {
                                   key={i}
                                   className={
                                     i % 2 === 0
-                                      ? "bg-white dark:bg-zinc-900"
-                                      : "bg-zinc-50 dark:bg-zinc-800/50"
+                                      ? 'bg-white dark:bg-zinc-900'
+                                      : 'bg-zinc-50 dark:bg-zinc-800/50'
                                   }
                                 >
                                   {row.cells.map((cell: string, j: number) => (
@@ -666,7 +664,7 @@ export default function BlogPostClient({ slug }: BlogPostClientProps) {
                     callout: ({ value }) => (
                       <div className="my-6 p-4 border-l-4 border-zinc-400 dark:border-zinc-600 bg-zinc-50 dark:bg-zinc-800/50 rounded-r-sm">
                         <div className="font-normal mb-2">
-                          {value.title || "Note"}
+                          {value.title || 'Note'}
                         </div>
                         <div className="text-zinc-700 dark:text-zinc-300">
                           {value.text}
@@ -676,16 +674,16 @@ export default function BlogPostClient({ slug }: BlogPostClientProps) {
                   },
                   marks: {
                     link: ({ value, children }) => {
-                      const target = (value?.href || "").startsWith("http")
-                        ? "_blank"
+                      const target = (value?.href || '').startsWith('http')
+                        ? '_blank'
                         : undefined;
                       return (
                         <a
                           href={value?.href}
                           target={target}
                           rel={
-                            target === "_blank"
-                              ? "noopener noreferrer"
+                            target === '_blank'
+                              ? 'noopener noreferrer'
                               : undefined
                           }
                           className="text-primary hover:underline transition-colors"

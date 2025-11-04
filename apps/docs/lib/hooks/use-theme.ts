@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { useTheme as useNextTheme } from "next-themes";
-import { useEffect, useState } from "react";
+import { useTheme as useNextTheme } from 'next-themes';
+import { useEffect, useState } from 'react';
 
-type Theme = "light" | "dark" | "system";
+type Theme = 'light' | 'dark' | 'system';
 
 export const useTheme = () => {
   const { theme, setTheme, resolvedTheme } = useNextTheme();
@@ -14,7 +14,7 @@ export const useTheme = () => {
   }, []);
 
   const currentTheme = theme as Theme;
-  const currentResolvedTheme = (resolvedTheme ?? "light") as "light" | "dark";
+  const currentResolvedTheme = (resolvedTheme ?? 'light') as 'light' | 'dark';
 
   return {
     theme: currentTheme,

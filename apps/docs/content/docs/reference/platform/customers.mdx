@@ -1,6 +1,6 @@
 ---
-title: "Customers"
-description: "The Customers API allows you to create, retrieve, update, list, and delete customer profiles associated with your merchant account."
+title: 'Customers'
+description: 'The Customers API allows you to create, retrieve, update, list, and delete customer profiles associated with your merchant account.'
 ---
 
 ## Authentication
@@ -21,18 +21,18 @@ Creates a new customer profile.
 
 **Request body parameters:**
 
-| Parameter         | Type    | Required | Description                                           |
-| ----------------- | ------- | -------- | ----------------------------------------------------- |
-| `` `name` ``            | `` `string` ``  | Yes      | Customer's full name.                                 |
-| `` `email` ``           | `` `string` ``  | No       | Customer's email address.                             |
-| `` `phone_number` ``    | `` `string` ``  | No       | Customer's phone number (preferably E.164 format).    |
-| `` `whatsapp_number` `` | `` `string` ``  | No       | Customer's WhatsApp number (preferably E.164 format). |
-| `` `country` ``         | `` `string` ``  | No       | Customer's country name or code.                     |
-| `` `city` ``            | `` `string` ``  | No       | Customer's city.                                     |
-| `` `address` ``         | `` `string` ``  | No       | Customer's street address.                            |
-| `` `postal_code` ``     | `` `string` ``  | No       | Customer's postal code.                               |
+| Parameter               | Type            | Required | Description                                                              |
+| ----------------------- | --------------- | -------- | ------------------------------------------------------------------------ |
+| `` `name` ``            | `` `string` ``  | Yes      | Customer's full name.                                                    |
+| `` `email` ``           | `` `string` ``  | No       | Customer's email address.                                                |
+| `` `phone_number` ``    | `` `string` ``  | No       | Customer's phone number (preferably E.164 format).                       |
+| `` `whatsapp_number` `` | `` `string` ``  | No       | Customer's WhatsApp number (preferably E.164 format).                    |
+| `` `country` ``         | `` `string` ``  | No       | Customer's country name or code.                                         |
+| `` `city` ``            | `` `string` ``  | No       | Customer's city.                                                         |
+| `` `address` ``         | `` `string` ``  | No       | Customer's street address.                                               |
+| `` `postal_code` ``     | `` `string` ``  | No       | Customer's postal code.                                                  |
 | `` `is_business` ``     | `` `boolean` `` | No       | Set `` `true` `` if the customer is a business (default: `` `false` ``). |
-| `` `metadata` ``        | `` `object` ``  | No       | Key-value pairs for storing additional information.   |
+| `` `metadata` ``        | `` `object` ``  | No       | Key-value pairs for storing additional information.                      |
 
 **Example request:**
 
@@ -79,13 +79,13 @@ Retrieves the details of a specific customer by their ID.
 
 **Path parameters:**
 
-| Parameter | Type   | Required | Description                     |
-| --------- | ------ | -------- | ------------------------------- |
-| `` `id` ``      | `` `string` `` | Yes      | The unique identifier of the customer (`` `customer_id` ``). |
+| Parameter  | Type           | Required | Description                                                  |
+| ---------- | -------------- | -------- | ------------------------------------------------------------ |
+| `` `id` `` | `` `string` `` | Yes      | The unique identifier of the customer (`` `customer_id` ``). |
 
 **Example response (200 OK):**
 
-*(Response structure is the same as the `Create a customer` response)*
+_(Response structure is the same as the `Create a customer` response)_
 
 ### Update a customer
 
@@ -95,13 +95,13 @@ Updates the details of a specific customer.
 
 **Path parameters:**
 
-| Parameter | Type   | Required | Description                     |
-| --------- | ------ | -------- | ------------------------------- |
-| `` `id` ``      | `` `string` `` | Yes      | The unique identifier of the customer (`` `customer_id` ``). |
+| Parameter  | Type           | Required | Description                                                  |
+| ---------- | -------------- | -------- | ------------------------------------------------------------ |
+| `` `id` `` | `` `string` `` | Yes      | The unique identifier of the customer (`` `customer_id` ``). |
 
 **Request body parameters:**
 
-*(Include only the fields you want to update. Parameters are the same as for `` `Create a customer` ``, none are required.)*
+_(Include only the fields you want to update. Parameters are the same as for `` `Create a customer` ``, none are required.)_
 
 **Example request:**
 
@@ -120,12 +120,12 @@ Returns a list of customers associated with your merchant account. Supports pagi
 
 **Query parameters:**
 
-| Parameter     | Type   | Required | Description                                          |
-| ------------- | ------ | -------- | ---------------------------------------------------- |
-| `` `limit` ``       | `` `number` `` | No       | Maximum number of customers to return (default: 20). |
-| `` `page` ``        | `` `number` `` | No       | Page number for pagination (default: 1).             |
-| `` `email` ``       | `` `string` `` | No       | Filter customers by exact email address.             |
-| `` `phone_number` ``| `` `string` `` | No       | Filter customers by exact phone number.              |
+| Parameter            | Type           | Required | Description                                          |
+| -------------------- | -------------- | -------- | ---------------------------------------------------- |
+| `` `limit` ``        | `` `number` `` | No       | Maximum number of customers to return (default: 20). |
+| `` `page` ``         | `` `number` `` | No       | Page number for pagination (default: 1).             |
+| `` `email` ``        | `` `string` `` | No       | Filter customers by exact email address.             |
+| `` `phone_number` `` | `` `string` `` | No       | Filter customers by exact phone number.              |
 
 **Note:** By default, this endpoint only returns customers who have completed or refunded transactions. To see all customers, including newly created ones without transactions, you might need specific permissions or a different filter (check API updates for this behavior).
 
@@ -135,7 +135,7 @@ Returns a list of customers associated with your merchant account. Supports pagi
 {
   "data": [
     {
-      "customer_id": "b78de3c9-7f76-4f43-9c5d-19d9f5c7c985",
+      "customer_id": "b78de3c9-7f76-4f43-9c5d-19d9f5c7c985"
       // ... other customer fields
     }
     // ... more customer objects
@@ -156,9 +156,9 @@ Deletes a specific customer profile.
 
 **Path parameters:**
 
-| Parameter | Type   | Required | Description                     |
-| --------- | ------ | -------- | ------------------------------- |
-| `` `id` ``      | `` `string` `` | Yes      | The unique identifier of the customer (`` `customer_id` ``). |
+| Parameter  | Type           | Required | Description                                                  |
+| ---------- | -------------- | -------- | ------------------------------------------------------------ |
+| `` `id` `` | `` `string` `` | Yes      | The unique identifier of the customer (`` `customer_id` ``). |
 
 **Example response (200 OK):**
 
@@ -173,4 +173,4 @@ Deletes a specific customer profile.
 
 ## Error handling
 
-Common errors include `` `400 Bad Request` `` for invalid input, `` `401 Unauthorized` ``, `` `404 Not Found` `` if the customer ID doesn't exist, and `` `500 Internal Server Error` ``. Refer to the [Errors](/docs/reference/reference/errors) guide for general structure and handling. 
+Common errors include `` `400 Bad Request` `` for invalid input, `` `401 Unauthorized` ``, `` `404 Not Found` `` if the customer ID doesn't exist, and `` `500 Internal Server Error` ``. Refer to the [Errors](/docs/reference/reference/errors) guide for general structure and handling.

@@ -1,6 +1,6 @@
 ---
-title: "Versioning"
-description: "We follow Semantic Versioning (SemVer) for all our packages and APIs."
+title: 'Versioning'
+description: 'We follow Semantic Versioning (SemVer) for all our packages and APIs.'
 ---
 
 ## Version format
@@ -45,13 +45,14 @@ git push origin --tags
 ## Release process
 
 1. **Update version**
+
    ```bash filename="Terminal - Update Version"
    # Update package.json
    npm version minor
 
    # Update changelog
    git cliff -o CHANGELOG.md
-   
+
    # Commit changes
    git add CHANGELOG.md
    git commit -m "chore: update changelog"
@@ -156,4 +157,4 @@ yarn.lock
 
 - [Best practices](/docs/core/contributing/best-practices)
 - [API reference](/docs/reference)
-- [Changelog](https://github.com/lomi/api/blob/main/CHANGELOG.md) 
+- [Changelog](https://github.com/lomi/api/blob/main/CHANGELOG.md)

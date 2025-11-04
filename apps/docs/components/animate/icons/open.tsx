@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import * as React from "react";
-import { motion, type Variants } from "motion/react";
+import * as React from 'react';
+import { motion, type Variants } from 'motion/react';
 
 import {
   getVariants,
   useAnimateIconContext,
   IconWrapper,
   type IconProps,
-} from "@/components/animate/primitives/icon";
+} from '@/components/animate/primitives/icon';
 
 type OpenProps = IconProps<keyof typeof animations>;
 
@@ -18,19 +18,19 @@ const animations = {
       initial: {
         x: 0,
         y: 0,
-        transition: { duration: 0.4, ease: "easeInOut" },
+        transition: { duration: 0.4, ease: 'easeInOut' },
       },
       animate: {
         x: 2,
         y: -2,
-        transition: { duration: 0.4, ease: "easeInOut" },
+        transition: { duration: 0.4, ease: 'easeInOut' },
       },
     },
     path1: {},
     path2: {},
     path3: {},
   } satisfies Record<string, Variants>,
-  "default-loop": {
+  'default-loop': {
     group: {
       initial: {
         x: 0,
@@ -39,7 +39,7 @@ const animations = {
       animate: {
         x: [0, 2, 0],
         y: [0, -2, 0],
-        transition: { duration: 0.8, ease: "easeInOut" },
+        transition: { duration: 0.8, ease: 'easeInOut' },
       },
     },
     path1: {},

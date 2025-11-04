@@ -1,35 +1,25 @@
-"use client";
+'use client';
 
-import { useTheme } from "@/lib/hooks/use-theme";
+import { Logo } from '@/lib/utils/logo';
 // import { useTranslation } from "@/lib/contexts/translation-context";
 // import { t } from "@/lib/i18n/translations";
-import Image from "next/image";
-import { ReactNode } from "react";
+import { ReactNode } from 'react';
 
 interface BackgroundTextProps {
   children?: ReactNode;
 }
 
 export function BackgroundText({ children }: BackgroundTextProps) {
-  const { resolvedTheme, mounted } = useTheme();
-  // const { currentLanguage } = useTranslation();
-
-  const imageSrc = resolvedTheme === "dark" ? "/company/lomi_l.webp" : "/company/lomi_d.webp";
-
-  if (!mounted) {
-    return null;
-  }
-
   return (
     <div className="w-full overflow-hidden mt-[-80px] h-[240px] translate-y-4 md:mt-[-100px] md:h-[388px] relative z-0 pointer-events-none">
-      <Image
-        src={imageSrc}
-        alt="background"
-        className="absolute right-0 w-[500px] h-[333px] object-cover md:w-[1000px] md:h-[330px] origin-bottom translate-y-[-43px] md:translate-y-[82px] opacity-[0.06] select-none pointer-events-none"
-        width={1000}
-        height={445}
-        priority={false}
-      />
+      <div className="absolute right-0 w-[500px] h-[333px] object-cover md:w-[1000px] md:h-[330px] origin-bottom translate-y-[-43px] md:translate-y-[82px] opacity-[0.06] select-none pointer-events-none">
+        <Logo
+          width={1000}
+          height={445}
+          className="w-full h-full object-cover"
+          priority={false}
+        />
+      </div>
 
       {/* Horizontal line */}
       {/* <div className="hidden md:block absolute top-3/4 md:top-[82%] w-full h-px bg-zinc-200 dark:bg-zinc-800" /> */}

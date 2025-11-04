@@ -1,5 +1,5 @@
-import { cn } from "@/lib/actions/utils";
-import React from "react";
+import { cn } from '@/lib/actions/utils';
+import React from 'react';
 
 export function Section({
   children,
@@ -8,7 +8,7 @@ export function Section({
   children: React.ReactNode;
   className?: string;
 }) {
-  return <section className={cn("my-32 col", className)}>{children}</section>;
+  return <section className={cn('my-32 col', className)}>{children}</section>;
 }
 
 export function SectionHeader({
@@ -23,7 +23,7 @@ export function SectionHeader({
   className?: string;
 }) {
   return (
-    <div className={cn("col gap-4 mb-14", className)}>
+    <div className={cn('col gap-4 mb-14', className)}>
       {tag}
       <h2 className="max-w-3xl text-4xl font-normal tracking-tighter text-left text-zinc-800 dark:text-white md:text-5xl">
         {title}

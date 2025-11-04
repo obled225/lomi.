@@ -1,6 +1,6 @@
 ---
-title: "Merchants"
-description: "The Merchants API allows you to retrieve information about merchant accounts, including details, recurring revenue metrics, and balances."
+title: 'Merchants'
+description: 'The Merchants API allows you to retrieve information about merchant accounts, including details, recurring revenue metrics, and balances.'
 ---
 
 ## Authentication
@@ -17,9 +17,9 @@ Retrieves detailed information about a specific merchant account.
 
 **Path parameters:**
 
-| Parameter | Type   | Required | Description                         |
-| --------- | ------ | -------- | ----------------------------------- |
-| `` `id` ``      | `` `string` `` | Yes      | The unique identifier of the merchant. |
+| Parameter  | Type           | Required | Description                            |
+| ---------- | -------------- | -------- | -------------------------------------- |
+| `` `id` `` | `` `string` `` | Yes      | The unique identifier of the merchant. |
 
 **Example response (200 OK):**
 
@@ -45,16 +45,16 @@ Retrieves detailed information about a specific merchant account.
 }
 ```
 
-*(See [Data Models](/docs/reference/reference/data-models#merchant-object) for property descriptions)*
+_(See [Data Models](/docs/reference/reference/data-models#merchant-object) for property descriptions)_
 
 **Possible error responses:**
 
-| Status Code | Error Code         | Description                                    |
-| ----------- | ------------------ | ---------------------------------------------- |
-| `` `401` ``         | `` `UNAUTHORIZED` ``     | Authentication failed or API key is invalid.  |
-| `` `404` ``         | `` `MERCHANT_NOT_FOUND` `` | No merchant found with the provided ID.        |
-| `` `500` ``         | `` `DATABASE_ERROR` ``   | Error retrieving merchant details.             |
-| `` `500` ``         | `` `INTERNAL_ERROR` ``   | Internal server error.                         |
+| Status Code | Error Code                 | Description                                  |
+| ----------- | -------------------------- | -------------------------------------------- |
+| `` `401` `` | `` `UNAUTHORIZED` ``       | Authentication failed or API key is invalid. |
+| `` `404` `` | `` `MERCHANT_NOT_FOUND` `` | No merchant found with the provided ID.      |
+| `` `500` `` | `` `DATABASE_ERROR` ``     | Error retrieving merchant details.           |
+| `` `500` `` | `` `INTERNAL_ERROR` ``     | Internal server error.                       |
 
 ### Get merchant monthly recurring revenue (MRR)
 
@@ -64,9 +64,9 @@ Retrieves the current MRR for a merchant.
 
 **Path parameters:**
 
-| Parameter | Type   | Required | Description                         |
-| --------- | ------ | -------- | ----------------------------------- |
-| `` `id` ``      | `` `string` `` | Yes      | The unique identifier of the merchant. |
+| Parameter  | Type           | Required | Description                            |
+| ---------- | -------------- | -------- | -------------------------------------- |
+| `` `id` `` | `` `string` `` | Yes      | The unique identifier of the merchant. |
 
 **Example response (200 OK):**
 
@@ -83,13 +83,13 @@ Retrieves the current MRR for a merchant.
 
 **Possible error responses:**
 
-| Status Code | Error Code         | Description                                    |
-| ----------- | ------------------ | ---------------------------------------------- |
-| `` `401` ``         | `` `UNAUTHORIZED` ``     | Authentication failed or API key is invalid.  |
-| `` `404` ``         | `` `MERCHANT_NOT_FOUND` `` | No merchant found with the provided ID.        |
-| `` `404` ``         | `` `NOT_FOUND` ``        | No MRR data found for the merchant.           |
-| `` `500` ``         | `` `DATABASE_ERROR` ``   | Error retrieving merchant MRR.                 |
-| `` `500` ``         | `` `INTERNAL_ERROR` ``   | Internal server error.                         |
+| Status Code | Error Code                 | Description                                  |
+| ----------- | -------------------------- | -------------------------------------------- |
+| `` `401` `` | `` `UNAUTHORIZED` ``       | Authentication failed or API key is invalid. |
+| `` `404` `` | `` `MERCHANT_NOT_FOUND` `` | No merchant found with the provided ID.      |
+| `` `404` `` | `` `NOT_FOUND` ``          | No MRR data found for the merchant.          |
+| `` `500` `` | `` `DATABASE_ERROR` ``     | Error retrieving merchant MRR.               |
+| `` `500` `` | `` `INTERNAL_ERROR` ``     | Internal server error.                       |
 
 ### Get merchant annual recurring revenue (ARR)
 
@@ -99,9 +99,9 @@ Retrieves the current ARR for a merchant.
 
 **Path parameters:**
 
-| Parameter | Type   | Required | Description                         |
-| --------- | ------ | -------- | ----------------------------------- |
-| `` `id` ``      | `` `string` `` | Yes      | The unique identifier of the merchant. |
+| Parameter  | Type           | Required | Description                            |
+| ---------- | -------------- | -------- | -------------------------------------- |
+| `` `id` `` | `` `string` `` | Yes      | The unique identifier of the merchant. |
 
 **Example response (200 OK):**
 
@@ -118,13 +118,13 @@ Retrieves the current ARR for a merchant.
 
 **Possible error responses:**
 
-| Status Code | Error Code         | Description                                    |
-| ----------- | ------------------ | ---------------------------------------------- |
-| `` `401` ``         | `` `UNAUTHORIZED` ``     | Authentication failed or API key is invalid.  |
-| `` `404` ``         | `` `MERCHANT_NOT_FOUND` `` | No merchant found with the provided ID.        |
-| `` `404` ``         | `` `NOT_FOUND` ``        | No ARR data found for the merchant.           |
-| `` `500` ``         | `` `DATABASE_ERROR` ``   | Error retrieving merchant ARR.                 |
-| `` `500` ``         | `` `INTERNAL_ERROR` ``   | Internal server error.                         |
+| Status Code | Error Code                 | Description                                  |
+| ----------- | -------------------------- | -------------------------------------------- |
+| `` `401` `` | `` `UNAUTHORIZED` ``       | Authentication failed or API key is invalid. |
+| `` `404` `` | `` `MERCHANT_NOT_FOUND` `` | No merchant found with the provided ID.      |
+| `` `404` `` | `` `NOT_FOUND` ``          | No ARR data found for the merchant.          |
+| `` `500` `` | `` `DATABASE_ERROR` ``     | Error retrieving merchant ARR.               |
+| `` `500` `` | `` `INTERNAL_ERROR` ``     | Internal server error.                       |
 
 ### Get merchant account balance
 
@@ -134,14 +134,14 @@ Retrieves the current account balance for a merchant in a specific currency.
 
 **Path parameters:**
 
-| Parameter | Type   | Required | Description                         |
-| --------- | ------ | -------- | ----------------------------------- |
-| `` `id` ``      | `` `string` `` | Yes      | The unique identifier of the merchant. |
+| Parameter  | Type           | Required | Description                            |
+| ---------- | -------------- | -------- | -------------------------------------- |
+| `` `id` `` | `` `string` `` | Yes      | The unique identifier of the merchant. |
 
 **Query parameters:**
 
-| Parameter     | Type   | Required | Description                                         |
-| ------------- | ------ | -------- | --------------------------------------------------- |
+| Parameter             | Type           | Required | Description                                                     |
+| --------------------- | -------------- | -------- | --------------------------------------------------------------- |
 | `` `currency_code` `` | `` `string` `` | Yes      | Currency code for the balance (e.g., `` `XOF` ``, `` `USD` ``). |
 
 **Example response (200 OK):**
@@ -159,15 +159,15 @@ Retrieves the current account balance for a merchant in a specific currency.
 
 **Possible error responses:**
 
-| Status Code | Error Code        | Description                                    |
-| ----------- | ----------------- | ---------------------------------------------- |
-| `` `400` ``         | `` `MISSING_PARAMETER` `` | The `` `currency_code` `` query parameter is missing. |
-| `` `401` ``         | `` `UNAUTHORIZED` ``    | Authentication failed or API key is invalid.  |
-| `` `500` ``         | `` `DATABASE_ERROR` ``  | Error retrieving merchant balance.             |
-| `` `500` ``         | `` `INTERNAL_ERROR` ``  | Internal server error.                         |
+| Status Code | Error Code                | Description                                           |
+| ----------- | ------------------------- | ----------------------------------------------------- |
+| `` `400` `` | `` `MISSING_PARAMETER` `` | The `` `currency_code` `` query parameter is missing. |
+| `` `401` `` | `` `UNAUTHORIZED` ``      | Authentication failed or API key is invalid.          |
+| `` `500` `` | `` `DATABASE_ERROR` ``    | Error retrieving merchant balance.                    |
+| `` `500` `` | `` `INTERNAL_ERROR` ``    | Internal server error.                                |
 
 ## Implementation notes
 
--   All monetary values (`` `mrr` ``, `` `arr` ``, `` `merchant_lifetime_value` ``, `` `balance` ``) are returned in the smallest currency unit (e.g., cents for USD, XOF represents the base unit directly).
--   Dates and times are returned in ISO 8601 format (`` `YYYY-MM-DDTHH:mm:ssZ` ``).
--   See the [Errors](/docs/reference/reference/errors) guide for general error handling information. 
+- All monetary values (`` `mrr` ``, `` `arr` ``, `` `merchant_lifetime_value` ``, `` `balance` ``) are returned in the smallest currency unit (e.g., cents for USD, XOF represents the base unit directly).
+- Dates and times are returned in ISO 8601 format (`` `YYYY-MM-DDTHH:mm:ssZ` ``).
+- See the [Errors](/docs/reference/reference/errors) guide for general error handling information.

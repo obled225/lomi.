@@ -1,5 +1,5 @@
 import type { MetadataRoute } from 'next';
-import { source } from '@/lib/source';
+import { source } from '@/lib/utils/source';
 
 export const revalidate = false;
 
@@ -14,7 +14,8 @@ const getSitemapBaseUrl = (): string => {
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const sitemapBaseUrl = getSitemapBaseUrl();
-  const url = (path: string): string => new URL(path, sitemapBaseUrl).toString();
+  const url = (path: string): string =>
+    new URL(path, sitemapBaseUrl).toString();
 
   return [
     {

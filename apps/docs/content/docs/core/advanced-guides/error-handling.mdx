@@ -1,5 +1,5 @@
 ---
-title: "Error handling"
+title: 'Error handling'
 description: "When integrating with lomi., it's essential to handle errors gracefully to provide a smooth payment experience for your customers."
 ---
 
@@ -34,9 +34,9 @@ const lomi = new LomiSDK({ apiKey: process.env.LOMI_API_KEY! });
 
 try {
   const session = await lomi.checkoutSessions.create({
-    amount: -100,  // Invalid: must be positive
-    currency_code: 'INVALID',  // Invalid enum value
-    allowed_providers: []  // Invalid: must not be empty
+    amount: -100, // Invalid: must be positive
+    currency_code: 'INVALID', // Invalid enum value
+    allowed_providers: [], // Invalid: must not be empty
     // Missing required fields like success_url, cancel_url
   });
 } catch (error) {
@@ -68,9 +68,13 @@ try {
     console.error('Authentication failed:', error.message);
     // Check common issues:
     if (!process.env.LOMI_API_KEY) {
-      console.error('Suggestion: LOMI_API_KEY environment variable might be missing.');
+      console.error(
+        'Suggestion: LOMI_API_KEY environment variable might be missing.',
+      );
     } else {
-      console.error('Suggestion: Verify the LOMI_API_KEY is correct and active.');
+      console.error(
+        'Suggestion: Verify the LOMI_API_KEY is correct and active.',
+      );
     }
   } else {
     console.error('An unexpected error occurred:', error);
@@ -95,8 +99,12 @@ async function makeRequestWithRateLimitHandling() {
     if (error instanceof LomiApiError && error.statusCode === 429) {
       console.warn('Rate limit exceeded. Retrying after delay...');
       // Extract Retry-After header if available (implementation depends on SDK/fetch)
-      const retryAfterSeconds = error.headers?.['retry-after'] ? parseInt(error.headers['retry-after'], 10) : 60;
-      await new Promise(resolve => setTimeout(resolve, retryAfterSeconds * 1000));
+      const retryAfterSeconds = error.headers?.['retry-after']
+        ? parseInt(error.headers['retry-after'], 10)
+        : 60;
+      await new Promise((resolve) =>
+        setTimeout(resolve, retryAfterSeconds * 1000),
+      );
       // Retry the request (implement proper retry logic, see below)
       // await makeRequestWithRateLimitHandling();
     } else {
@@ -113,23 +121,29 @@ These indicate a problem on lomi.'s side. These should be rare. It's generally s
 ## Best practices
 
 1.  **Graceful Degradation:**
-    *   Anticipate potential API failures.
-    *   Provide user-friendly feedback instead of raw error messages.
-    *   Have fallback mechanisms if a critical operation fails (e.g., allow manual order processing).
-    *   Log detailed error information (including request IDs if available) on your server for debugging, but don't expose sensitive details to the client.
+    - Anticipate potential API failures.
+    - Provide user-friendly feedback instead of raw error messages.
+    - Have fallback mechanisms if a critical operation fails (e.g., allow manual order processing).
+    - Log detailed error information (including request IDs if available) on your server for debugging, but don't expose sensitive details to the client.
 
 2.  **Retry Strategy (with Exponential Backoff & Jitter):**
     Implement a retry mechanism for network errors, rate limiting (`429`), and server errors (`5xx`). Avoid retrying client errors (`4xx` other than `429`) as they usually require correcting the request.
 
     ```typescript filename="Implementing retries with exponential backoff"
-    async function withRetry<T>(asyncFn: () => Promise<T>, maxRetries = 3, initialDelayMs = 1000): Promise<T> {
+    async function withRetry<T>(
+      asyncFn: () => Promise<T>,
+      maxRetries = 3,
+      initialDelayMs = 1000,
+    ): Promise<T> {
       let attempts = 0;
       while (true) {
         try {
           return await asyncFn();
         } catch (error: any) {
           attempts++;
-          const isRetryable = error instanceof LomiApiError && (error.statusCode === 429 || error.statusCode >= 500);
+          const isRetryable =
+            error instanceof LomiApiError &&
+            (error.statusCode === 429 || error.statusCode >= 500);
 
           if (!isRetryable || attempts >= maxRetries) {
             // Don't retry client errors (except 429) or if max retries exceeded
@@ -141,8 +155,11 @@ These indicate a problem on lomi.'s side. These should be rare. It's generally s
           const jitter = delay * 0.2 * Math.random(); // Add +/- 10% jitter
           const waitTime = Math.max(100, delay + jitter); // Ensure minimum wait
 
-          console.warn(`Attempt ${attempts} failed. Retrying in ${waitTime.toFixed(0)}ms...`, error.message);
-          await new Promise(resolve => setTimeout(resolve, waitTime));
+          console.warn(
+            `Attempt ${attempts} failed. Retrying in ${waitTime.toFixed(0)}ms...`,
+            error.message,
+          );
+          await new Promise((resolve) => setTimeout(resolve, waitTime));
         }
       }
     }
@@ -152,12 +169,12 @@ These indicate a problem on lomi.'s side. These should be rare. It's generally s
     ```
 
 3.  **Error Monitoring:**
-    *   Use an application monitoring service (e.g., Sentry, Datadog) to track errors in production.
-    *   Monitor error rates and patterns to identify systemic issues.
-    *   Set up alerts for critical errors or unusual spikes in error rates.
+    - Use an application monitoring service (e.g., Sentry, Datadog) to track errors in production.
+    - Monitor error rates and patterns to identify systemic issues.
+    - Set up alerts for critical errors or unusual spikes in error rates.
 
 ## Next steps
 
--   [Idempotency keys](/docs/core/advanced-guides/idempotency-keys)
--   [Security best practices](/docs/core/advanced-guides/security-best-practices)
--   [Error Reference](/docs/reference/reference/errors) 
+- [Idempotency keys](/docs/core/advanced-guides/idempotency-keys)
+- [Security best practices](/docs/core/advanced-guides/security-best-practices)
+- [Error Reference](/docs/reference/reference/errors)

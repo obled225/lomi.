@@ -1,7 +1,7 @@
 {
-    "hero": {
+  "hero": {
     "title": "Built to make you profitable,\nlomi. is the best way to accept payments in West Africa."
-    },
+  },
   "footer": {
     "bceao_accreditation": "lomi. is currently in the process of being an accredited payment service provider by the BCEAO.",
     "features": {
@@ -87,7 +87,7 @@
     "getStarted": "Get started",
     "learnMore": "Learn more"
   },
-"features": {
+  "features": {
     "title": "Unlock your business potential",
     "card1": {
       "title": "All your customers preferred payment methods",
@@ -127,7 +127,7 @@
       "documentation_button": "Documentation"
     }
   },
-    "careers": {
+  "careers": {
     "title": "An open-source software company focused on removing payment barriers.",
     "join_us": "Join us"
   }

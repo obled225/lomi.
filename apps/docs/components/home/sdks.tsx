@@ -1,9 +1,10 @@
-import { Section, SectionHeader } from "@/components/ui/section";
-import { Card, CardContent } from "@/components/ui/card";
-import { motion } from "framer-motion";
-import { useTranslation } from "@/lib/contexts/translation-context";
-import { t } from "@/lib/i18n/translations";
-import Image from "next/image";
+import { Section, SectionHeader } from '@/components/ui/section';
+import { Card, CardContent } from '@/components/ui/card';
+import { motion } from 'framer-motion';
+import { useTranslation } from '@/lib/contexts/translation-context';
+import { t } from '@/lib/i18n/translations';
+import Image from 'next/image';
+import { useTheme } from '@/lib/hooks/use-theme';
 
 // Simple framework data structure for SDKs
 interface Framework {
@@ -15,61 +16,62 @@ interface Framework {
 
 const frameworks: Framework[] = [
   {
-    name: "TypeScript",
-    logoSrc: "/sdks/ts.webp",
-    descriptionKey: "sdks.frameworks.typescript",
-    slug: "typescript",
+    name: 'TypeScript',
+    logoSrc: '/sdks/ts.webp',
+    descriptionKey: 'sdks.frameworks.typescript',
+    slug: 'typescript',
   },
   {
-    name: "JavaScript",
-    logoSrc: "/sdks/js.webp",
-    descriptionKey: "sdks.frameworks.javascript",
-    slug: "javascript",
+    name: 'JavaScript',
+    logoSrc: '/sdks/js.webp',
+    descriptionKey: 'sdks.frameworks.javascript',
+    slug: 'javascript',
   },
   {
-    name: "Python",
-    logoSrc: "/sdks/python.webp",
-    descriptionKey: "sdks.frameworks.python",
-    slug: "python",
+    name: 'Python',
+    logoSrc: '/sdks/python.webp',
+    descriptionKey: 'sdks.frameworks.python',
+    slug: 'python',
   },
   {
-    name: "Laravel",
-    logoSrc: "/sdks/laravel.webp",
-    descriptionKey: "sdks.frameworks.laravel",
-    slug: "laravel",
+    name: 'Laravel',
+    logoSrc: '/sdks/laravel.webp',
+    descriptionKey: 'sdks.frameworks.laravel',
+    slug: 'laravel',
   },
   {
-    name: "PHP",
-    logoSrc: "/sdks/php.webp",
-    descriptionKey: "sdks.frameworks.php",
-    slug: "php",
+    name: 'PHP',
+    logoSrc: '/sdks/php.webp',
+    descriptionKey: 'sdks.frameworks.php',
+    slug: 'php',
   },
   {
-    name: "Go",
-    logoSrc: "/sdks/go.webp",
-    descriptionKey: "sdks.frameworks.go",
-    slug: "go",
+    name: 'Go',
+    logoSrc: '/sdks/go.webp',
+    descriptionKey: 'sdks.frameworks.go',
+    slug: 'go',
   },
   {
-    name: "Node.js",
-    logoSrc: "/sdks/node.webp",
-    descriptionKey: "sdks.frameworks.nodejs",
-    slug: "nodejs",
+    name: 'Node.js',
+    logoSrc: '/sdks/node.webp',
+    descriptionKey: 'sdks.frameworks.nodejs',
+    slug: 'nodejs',
   },
   {
-    name: "cURL",
-    logoSrc: "/sdks/curl.webp",
-    descriptionKey: "sdks.frameworks.curl",
-    slug: "curl",
+    name: 'cURL',
+    logoSrc: '/sdks/curl.webp',
+    descriptionKey: 'sdks.frameworks.curl',
+    slug: 'curl',
   },
 ];
 
 export function Sdks() {
   const { currentLanguage } = useTranslation();
+  const { mounted } = useTheme();
   return (
     <Section className="pt-4 pb-16">
       <div className="container mx-auto px-6 md:px-8 lg:px-12">
-        <SectionHeader title={String(t("sdks.title", currentLanguage))} />
+        <SectionHeader title={String(t('sdks.title', currentLanguage))} />
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {frameworks.map((sdk, index) => (
             <motion.div
@@ -80,7 +82,7 @@ export function Sdks() {
               transition={{ duration: 0.6, delay: index * 0.1 }}
               className="size-full"
             >
-              <SdkCard sdk={sdk} />
+              <SdkCard sdk={sdk} mounted={mounted} />
             </motion.div>
           ))}
         </div>
@@ -89,10 +91,10 @@ export function Sdks() {
   );
 }
 
-function SdkCard({ sdk }: { sdk: Framework }) {
+function SdkCard({ sdk, mounted }: { sdk: Framework; mounted: boolean }) {
   return (
     <a
-      href={`https://docs.lomi.africa/docs/reference/${sdk.slug}`}
+      href={`/docs/reference/${sdk.slug}`}
       target="_blank"
       rel="noopener noreferrer"
       className="block"
@@ -101,22 +103,59 @@ function SdkCard({ sdk }: { sdk: Framework }) {
         <CardContent className="p-6 text-center flex flex-col items-center justify-center gap-4 grow">
           {/* Logo/Icon Container */}
           <div className="w-16 h-16 bg-card rounded-lg flex items-center justify-center group-hover:bg-muted/50 transition-colors">
-            <Image
-              src={sdk.logoSrc}
-              alt={`${sdk.name} logo`}
-              width={48}
-              height={48}
-              className="w-12 h-12 object-contain"
-              onError={(e) => {
-                // Fallback to a colored div if image fails to load
-                const target = e.target as HTMLImageElement;
-                target.style.display = "none";
-                const parent = target.parentElement;
-                if (parent) {
-                  parent.innerHTML = `<div class="w-12 h-12 rounded bg-linear-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold text-lg">${sdk.name.charAt(0)}</div>`;
-                }
-              }}
-            />
+            {sdk.slug === 'curl' && mounted ? (
+              <>
+                <Image
+                  src="/sdks/curl_d.webp"
+                  alt={`${sdk.name} logo`}
+                  width={48}
+                  height={48}
+                  className="w-12 h-12 object-contain block dark:hidden"
+                  onError={(e) => {
+                    // Fallback to a colored div if image fails to load
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = 'none';
+                    const parent = target.parentElement;
+                    if (parent) {
+                      parent.innerHTML = `<div class="w-12 h-12 rounded bg-linear-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold text-lg">${sdk.name.charAt(0)}</div>`;
+                    }
+                  }}
+                />
+                <Image
+                  src="/sdks/curl_l.webp"
+                  alt={`${sdk.name} logo`}
+                  width={48}
+                  height={48}
+                  className="w-12 h-12 object-contain hidden dark:block"
+                  onError={(e) => {
+                    // Fallback to a colored div if image fails to load
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = 'none';
+                    const parent = target.parentElement;
+                    if (parent) {
+                      parent.innerHTML = `<div class="w-12 h-12 rounded bg-linear-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold text-lg">${sdk.name.charAt(0)}</div>`;
+                    }
+                  }}
+                />
+              </>
+            ) : (
+              <Image
+                src={sdk.logoSrc}
+                alt={`${sdk.name} logo`}
+                width={48}
+                height={48}
+                className="w-12 h-12 object-contain"
+                onError={(e) => {
+                  // Fallback to a colored div if image fails to load
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = 'none';
+                  const parent = target.parentElement;
+                  if (parent) {
+                    parent.innerHTML = `<div class="w-12 h-12 rounded bg-linear-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold text-lg">${sdk.name.charAt(0)}</div>`;
+                  }
+                }}
+              />
+            )}
           </div>
 
           {/* Content */}

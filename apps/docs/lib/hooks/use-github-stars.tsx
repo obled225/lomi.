@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext, useState, useEffect } from 'react';
 
 interface GithubStarsContextType {
   stars: number | null;
@@ -24,7 +24,7 @@ const fetchStarsOnce = async (): Promise<number | null> => {
 
   try {
     const response = await fetch(
-      "https://api.github.com/repos/lomiafrica/lomi.",
+      'https://api.github.com/repos/lomiafrica/lomi.',
     );
     if (response.ok) {
       const data = await response.json();
@@ -32,7 +32,7 @@ const fetchStarsOnce = async (): Promise<number | null> => {
       return cachedStars;
     }
   } catch (error) {
-    console.error("Failed to fetch GitHub star count:", error);
+    console.error('Failed to fetch GitHub star count:', error);
   } finally {
     isLoading = false;
   }

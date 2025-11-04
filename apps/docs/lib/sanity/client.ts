@@ -1,7 +1,7 @@
-import { createClient } from "next-sanity";
-import imageUrlBuilder from "@sanity/image-url";
-import { SanityImageSource } from "@sanity/image-url/lib/types/types";
-import { apiVersion, dataset, projectId } from "./env";
+import { createClient } from 'next-sanity';
+import imageUrlBuilder from '@sanity/image-url';
+import { SanityImageSource } from '@sanity/image-url/lib/types/types';
+import { apiVersion, dataset, projectId } from './env';
 
 // Client configured for static generation
 export const client = createClient({
@@ -10,7 +10,7 @@ export const client = createClient({
   apiVersion,
   useCdn: true, // Use CDN for better performance and caching
   token: process.env.SANITY_API_TOKEN, // Include token for authenticated requests
-  perspective: "published", // Only fetch published content
+  perspective: 'published', // Only fetch published content
   stega: false,
 });
 
@@ -34,7 +34,7 @@ export const urlFor = (
   }
 
   // Always ensure proper format and auto-optimization
-  imageBuilder = imageBuilder.format("webp").auto("format");
+  imageBuilder = imageBuilder.format('webp').auto('format');
 
   return imageBuilder;
 };

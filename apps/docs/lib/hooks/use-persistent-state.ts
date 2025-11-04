@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import { useState, useEffect, type Dispatch, type SetStateAction } from "react";
+import { useState, useEffect, type Dispatch, type SetStateAction } from 'react';
 
 export function usePersistentState<T>(
   key: string,
   defaultValue: T,
 ): [T, Dispatch<SetStateAction<T>>] {
   const [state, setState] = useState<T>(() => {
-    if (typeof window === "undefined") {
+    if (typeof window === 'undefined') {
       return defaultValue;
     }
     try {

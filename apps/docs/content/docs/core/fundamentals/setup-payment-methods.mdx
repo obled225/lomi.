@@ -1,6 +1,6 @@
 ---
-title: "Setup payment methods"
-description: "lomi. allows you to accept payments through various providers like mobile money operators and cryptocurrency processors. This guide explains how to check which providers are available and active for your account via the API."
+title: 'Setup payment methods'
+description: 'lomi. allows you to accept payments through various providers like mobile money operators and cryptocurrency processors. This guide explains how to check which providers are available and active for your account via the API.'
 ---
 
 ### Connecting providers
@@ -15,8 +15,8 @@ Once providers are configured in the Dashboard, you can use the API to fetch a l
 import { LomiSDK } from 'lomi.cli';
 
 const lomi = new LomiSDK({
-  apiKey: process.env.LOMI_API_KEY, 
-  baseUrl: process.env.LOMI_API_URL // Ensure this points to the correct environment
+  apiKey: process.env.LOMI_API_KEY,
+  baseUrl: process.env.LOMI_API_URL, // Ensure this points to the correct environment
 });
 
 async function checkAvailableProviders() {
@@ -25,11 +25,12 @@ async function checkAvailableProviders() {
     console.log('Available Providers:', JSON.stringify(response.data, null, 2));
 
     // Filter for providers actually connected and ready to use
-    const connectedProviders = response.data.filter(provider => provider.is_connected);
+    const connectedProviders = response.data.filter(
+      (provider) => provider.is_connected,
+    );
     console.log('\nConnected Providers:', connectedProviders);
-    
-    // You can use connectedProviders to populate your checkout UI
 
+    // You can use connectedProviders to populate your checkout UI
   } catch (error) {
     console.error('Failed to list providers:', error);
   }
@@ -71,11 +72,11 @@ Based on `GET /providers` from the API reference:
 
 **Key fields:**
 
-*   `code`: The unique identifier (e.g., `ORANGE`, `WAVE`) used in API calls.
-*   `name`: The display name for the provider.
-*   `description`: A brief description.
-*   `payment_methods`: The type of payment (e.g., `mobile_money`, `crypto`).
-*   `is_connected`: **Crucial.** Indicates if the provider is properly configured and active for your merchant account (`true`) or not (`false`).
+- `code`: The unique identifier (e.g., `ORANGE`, `WAVE`) used in API calls.
+- `name`: The display name for the provider.
+- `description`: A brief description.
+- `payment_methods`: The type of payment (e.g., `mobile_money`, `crypto`).
+- `is_connected`: **Crucial.** Indicates if the provider is properly configured and active for your merchant account (`true`) or not (`false`).
 
 **Important:** Only providers where `is_connected` is `true` can be successfully used to process payments. You should typically only display these connected providers as options to your customers.
 
@@ -87,7 +88,7 @@ When creating a Checkout Session or a Payment Link, you specify which payment pr
 // Example for creating a Checkout Session
 const session = await lomi.checkoutSessions.create({
   // Only include codes for providers where is_connected was true
-  allowed_providers: ['ORANGE', 'WAVE'], 
+  allowed_providers: ['ORANGE', 'WAVE'],
   amount: 10000, // 100.00 XOF
   currency_code: 'XOF',
   success_url: 'https://your-site.com/success',

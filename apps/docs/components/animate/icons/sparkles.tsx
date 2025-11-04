@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import { motion, type Variants } from "motion/react";
+import { motion, type Variants } from 'motion/react';
 
 import {
   getVariants,
   useAnimateIconContext,
   IconWrapper,
   type IconProps,
-} from "@/components/animate/primitives/icon";
+} from '@/components/animate/primitives/icon';
 
 type SparklesProps = IconProps<keyof typeof animations>;
 
@@ -19,7 +19,7 @@ const animations = {
       },
       animate: {
         scale: [1, 0.9, 1.1, 1],
-        transition: { duration: 0.6, ease: "easeInOut" },
+        transition: { duration: 0.6, ease: 'easeInOut' },
       },
     },
     path: {},
@@ -31,17 +31,17 @@ const animations = {
         transition: {
           opacity: {
             duration: 0.2,
-            ease: "easeInOut",
+            ease: 'easeInOut',
             repeat: 1,
-            repeatType: "reverse",
+            repeatType: 'reverse',
             repeatDelay: 0.2,
             delay: 0.15,
           },
           scale: {
             duration: 0.2,
-            ease: "easeInOut",
+            ease: 'easeInOut',
             repeat: 1,
-            repeatType: "reverse",
+            repeatType: 'reverse',
             repeatDelay: 0.2,
             delay: 0.15,
           },
@@ -56,16 +56,16 @@ const animations = {
         transition: {
           opacity: {
             duration: 0.2,
-            ease: "easeInOut",
+            ease: 'easeInOut',
             repeat: 1,
-            repeatType: "reverse",
+            repeatType: 'reverse',
             repeatDelay: 0.2,
           },
           scale: {
             duration: 0.2,
-            ease: "easeInOut",
+            ease: 'easeInOut',
             repeat: 1,
-            repeatType: "reverse",
+            repeatType: 'reverse',
             repeatDelay: 0.2,
           },
         },
@@ -79,12 +79,12 @@ const animations = {
       },
       animate: {
         scale: [1, 0.9, 1.1, 1],
-        transition: { duration: 0.6, ease: "easeInOut" },
+        transition: { duration: 0.6, ease: 'easeInOut' },
       },
     },
     path: {
       initial: {
-        fill: "currentColor",
+        fill: 'currentColor',
         fillOpacity: 0,
       },
       animate: {
@@ -100,17 +100,17 @@ const animations = {
         transition: {
           opacity: {
             duration: 0.2,
-            ease: "easeInOut",
+            ease: 'easeInOut',
             repeat: 1,
-            repeatType: "reverse",
+            repeatType: 'reverse',
             repeatDelay: 0.2,
             delay: 0.15,
           },
           scale: {
             duration: 0.2,
-            ease: "easeInOut",
+            ease: 'easeInOut',
             repeat: 1,
-            repeatType: "reverse",
+            repeatType: 'reverse',
             repeatDelay: 0.2,
             delay: 0.15,
           },
@@ -119,7 +119,7 @@ const animations = {
     },
     circle: {
       initial: {
-        fill: "currentColor",
+        fill: 'currentColor',
         fillOpacity: 0,
         opacity: 1,
         scale: 1,
@@ -132,16 +132,16 @@ const animations = {
           fillOpacity: { delay: 0.2 },
           opacity: {
             duration: 0.2,
-            ease: "easeInOut",
+            ease: 'easeInOut',
             repeat: 1,
-            repeatType: "reverse",
+            repeatType: 'reverse',
             repeatDelay: 0.2,
           },
           scale: {
             duration: 0.2,
-            ease: "easeInOut",
+            ease: 'easeInOut',
             repeat: 1,
-            repeatType: "reverse",
+            repeatType: 'reverse',
             repeatDelay: 0.2,
           },
         },

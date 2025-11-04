@@ -1,6 +1,6 @@
 ---
-title: "Initialize a project"
-description: "Bootstrap a lomi. integration within your existing project directory."
+title: 'Initialize a project'
+description: 'Bootstrap a lomi. integration within your existing project directory.'
 ---
 
 The `lomi. init` command bootstraps an integration within your existing project directory. It focuses on setting up essential configuration and example code from the lomi. Node.js SDK, enabling your application to communicate with the API.
@@ -22,11 +22,12 @@ This command performs the following actions:
 ### Prompts for configuration
 
 Interactively asks for necessary details to configure the **SDK** usage within your project:
--   **API Key (`LOMI_API_KEY`)**: Your **secret API key** obtained from the **lomi. Merchant Portal**. This is stored in the `.env` file specifically for your SDK to authenticate its requests. **This is different from the CLI Token used by `lomi. login`.**
--   **Environment**: Choose between `production` (live) and `sandbox` (testing) **lomi. API** endpoints for the SDK.
--   **Webhook Secret (`LOMI_WEBHOOK_SECRET`)**: Your webhook signing secret from the **lomi. Merchant Portal**. Stored in `.env` for your *application* to verify incoming webhook signatures.
--   **Language**: Choose between `TypeScript` and `JavaScript` for the generated example SDK usage code.
--   **Package Manager**: Select your preferred package manager (`npm`, `yarn`, `pnpm`) for installing SDK dependencies.
+
+- **API Key (`LOMI_API_KEY`)**: Your **secret API key** obtained from the **lomi. Merchant Portal**. This is stored in the `.env` file specifically for your SDK to authenticate its requests. **This is different from the CLI Token used by `lomi. login`.**
+- **Environment**: Choose between `production` (live) and `sandbox` (testing) **lomi. API** endpoints for the SDK.
+- **Webhook Secret (`LOMI_WEBHOOK_SECRET`)**: Your webhook signing secret from the **lomi. Merchant Portal**. Stored in `.env` for your _application_ to verify incoming webhook signatures.
+- **Language**: Choose between `TypeScript` and `JavaScript` for the generated example SDK usage code.
+- **Package Manager**: Select your preferred package manager (`npm`, `yarn`, `pnpm`) for installing SDK dependencies.
 
 ### Creates `.env` file
 
@@ -45,15 +46,17 @@ LOMI_API_URL=https://api.lomi.africa/v1
 ```
 
 <Callout type="warning" emoji="⚠️" title="Security: Ignore .env">
-  Always add your `.env` file to your `.gitignore` file to prevent accidentally committing your secret credentials to version control.
+  Always add your `.env` file to your `.gitignore` file to prevent accidentally
+  committing your secret credentials to version control.
 </Callout>
 
 ### Creates example files
 
 Generates example code illustrating how to use the **lomi. Node.js SDK** based on your language choice:
--   **`lib/lomi./client.{ts|js}`**: Sets up and exports initialized **lomi. SDK** clients, loading credentials from the `.env` file.
--   **`examples/checkout.{ts|js}`**: Demonstrates creating a checkout session using the configured SDK client.
--   **`examples/webhook.{ts|js}`**: Provides a basic HTTP server example for receiving and verifying webhook events using the SDK and the `LOMI_WEBHOOK_SECRET` from `.env`.
+
+- **`lib/lomi./client.{ts|js}`**: Sets up and exports initialized **lomi. SDK** clients, loading credentials from the `.env` file.
+- **`examples/checkout.{ts|js}`**: Demonstrates creating a checkout session using the configured SDK client.
+- **`examples/webhook.{ts|js}`**: Provides a basic HTTP server example for receiving and verifying webhook events using the SDK and the `LOMI_WEBHOOK_SECRET` from `.env`.
 
 ### Installs dependencies
 
@@ -88,5 +91,5 @@ Next Steps:
 
 ## Prerequisites
 
--   You should ideally run `lomi. login` first to authenticate the CLI itself, although `init` primarily focuses on SDK setup.
--   Have your **lomi. API key** and **webhook secret** ready from the **lomi. Merchant Portal** (Settings > API Keys & Webhooks sections).
+- You should ideally run `lomi. login` first to authenticate the CLI itself, although `init` primarily focuses on SDK setup.
+- Have your **lomi. API key** and **webhook secret** ready from the **lomi. Merchant Portal** (Settings > API Keys & Webhooks sections).

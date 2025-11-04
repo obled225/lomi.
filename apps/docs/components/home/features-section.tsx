@@ -1,7 +1,7 @@
-import React from "react";
-import { useTranslation } from "@/lib/contexts/translation-context";
-import { t } from "@/lib/i18n/translations";
-import { CardHeader, Card, CardContent } from "@/components/ui/card";
+import React from 'react';
+import { useTranslation } from '@/lib/contexts/translation-context';
+import { t } from '@/lib/i18n/translations';
+import { CardHeader, Card, CardContent } from '@/components/ui/card';
 import {
   Smartphone,
   ArrowRight,
@@ -9,16 +9,18 @@ import {
   CornerDownRight,
   Star,
   Terminal,
-} from "lucide-react";
-import { motion, useInView } from "framer-motion";
-import { Switch } from "@/components/ui/switch";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
-import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import { GitHubIcon } from "@/components/icons/GitHubIcon";
-import { useGithubStars } from "@/lib/hooks/use-github-stars-hooks";
-import { useIsMobile } from "@/lib/hooks/use-mobile";
+} from 'lucide-react';
+import { motion, useInView } from 'framer-motion';
+import { Switch } from '@/components/ui/switch';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { blueVsTheme } from '@/lib/utils/code-highlighting-theme';
+import Image from 'next/image';
+import { Button } from '@/components/ui/button';
+import { GitHubIcon } from '@/components/icons/GitHubIcon';
+import { useGithubStars } from '@/lib/hooks/use-github-stars-hooks';
+import { useIsMobile } from '@/lib/hooks/use-mobile';
+import { useTheme } from '@/lib/hooks/use-theme';
 
 // Demo Revenue Chart Component with Interactive Features
 const DemoRevenueChart = () => {
@@ -42,13 +44,13 @@ const DemoRevenueChart = () => {
 
     // Use fixed growth factors instead of random ones to ensure deterministic rendering
     const growthFactors = [
-      0.8, 0.9, 1.2, 0.7, 1.1, 0.6, 1.4, 0.8, 1.3, 0.9, 1.0, 1.2
+      0.8, 0.9, 1.2, 0.7, 1.1, 0.6, 1.4, 0.8, 1.3, 0.9, 1.0, 1.2,
     ];
 
     // Add spikes for sudden growth periods (using fixed indices)
     const spikeIndices = [2, 6, 8]; // Fixed spike positions
     const spikedFactors = [...growthFactors];
-    spikeIndices.forEach(index => {
+    spikeIndices.forEach((index) => {
       spikedFactors[index] = spikedFactors[index] * 2.5; // 2.5x spike for sudden rises
     });
 
@@ -72,14 +74,14 @@ const DemoRevenueChart = () => {
       }
 
       monthlyData.push({
-        date: date.toLocaleDateString("en-US", {
-          month: "short",
-          year: "2-digit",
+        date: date.toLocaleDateString('en-US', {
+          month: 'short',
+          year: '2-digit',
         }),
         value: Math.round(cumulative),
-        fullDate: date.toLocaleDateString("en-US", {
-          month: "long",
-          year: "numeric",
+        fullDate: date.toLocaleDateString('en-US', {
+          month: 'long',
+          year: 'numeric',
         }),
       });
     }
@@ -134,10 +136,10 @@ const DemoRevenueChart = () => {
 
   // Generate smooth curve path
   const generatePath = () => {
-    if (chartData.length === 0) return "";
+    if (chartData.length === 0) return '';
 
     const firstPoint = chartData[0];
-    if (!firstPoint) return "";
+    if (!firstPoint) return '';
 
     let path = `M ${xScale(0)} ${yScale(firstPoint.value)}`;
 
@@ -202,19 +204,20 @@ const DemoRevenueChart = () => {
       <div className="flex flex-col gap-1">
         <div className="text-2xl font-semibold">
           <span className="text-2xl font-semibold text-foreground">
-            {totalRevenue.toLocaleString("fr-FR")}
+            {totalRevenue.toLocaleString('fr-FR')}
           </span>
           <span className="text-sm font-normal text-muted-foreground ml-1">
             F CFA
           </span>
         </div>
         <span
-          className={`inline-flex items-center gap-1 px-2 py-1 rounded-sm text-xs font-medium w-fit ${growthRate >= 0
-            ? "bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-300"
-            : "bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300"
-            }`}
+          className={`inline-flex items-center gap-1 px-2 py-1 rounded-sm text-xs font-medium w-fit ${
+            growthRate >= 0
+              ? 'bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-300'
+              : 'bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300'
+          }`}
         >
-          {growthRate >= 0 ? "+" : ""}
+          {growthRate >= 0 ? '+' : ''}
           {growthRate.toFixed(1)}%
         </span>
       </div>
@@ -224,9 +227,10 @@ const DemoRevenueChart = () => {
           width="102%"
           height={height}
           viewBox={`0 0 ${width} ${height}`}
-          className="overflow-visible cursor-crosshair"
+          className="overflow-visible cursor-crosshair focus:outline-none focus:ring-0 focus:border-none"
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
+          tabIndex={-1}
         >
           <defs>
             <linearGradient id="demoGradient" x1="0" y1="0" x2="0" y2="1">
@@ -275,14 +279,14 @@ const DemoRevenueChart = () => {
             style={{
               left: `${hoveredPoint.x}px`,
               top: `${hoveredPoint.y}px`,
-              transform: "translate(-50%, -120%)",
+              transform: 'translate(-50%, -120%)',
             }}
           >
             <div className="text-muted-foreground mb-1">
               {hoveredPoint.fullDate}
             </div>
             <div className="font-semibold">
-              {hoveredPoint.value.toLocaleString("fr-FR")} F CFA
+              {hoveredPoint.value.toLocaleString('fr-FR')} F CFA
             </div>
           </div>
         )}
@@ -293,6 +297,7 @@ const DemoRevenueChart = () => {
 
 export function FeaturesSection() {
   const { currentLanguage } = useTranslation();
+  const { mounted, resolvedTheme } = useTheme();
   const featuresRef = React.useRef<HTMLElement>(null);
   const isFeaturesInView = useInView(featuresRef, { once: true, amount: 0.2 });
   const starCount = useGithubStars();
@@ -334,12 +339,12 @@ export function FeaturesSection() {
   ];
 
   const providerNames = [
-    "SPI",
-    "Wave",
-    "Visa",
-    "PayPal",
-    "Google Pay",
-    "Bitcoin",
+    'SPI',
+    'Wave',
+    'Visa',
+    'PayPal',
+    'Google Pay',
+    'Bitcoin',
   ] as const;
 
   // Payment method toggle states
@@ -350,32 +355,32 @@ export function FeaturesSection() {
     Wave: true,
     Visa: true,
     PayPal: false,
-    "Google Pay": true,
+    'Google Pay': true,
   });
 
   // Phone numbers hover state - separate for each field
   const [phoneNumberIndex1, setPhoneNumberIndex1] = React.useState(0);
   const [phoneNumberIndex2, setPhoneNumberIndex2] = React.useState(1);
   const phoneNumbers = [
-    { country: "SN", number: "+221 77 123 45 67" },
-    { country: "CI", number: "+225 07 12 34 56 78" },
-    { country: "SN", number: "+221 76 987 65 43" },
-    { country: "CI", number: "+225 05 87 65 43 21" },
-    { country: "SN", number: "+221 78 456 78 90" },
-    { country: "CI", number: "+225 01 23 45 67 89" },
+    { country: 'SN', number: '+221 77 123 45 67' },
+    { country: 'CI', number: '+225 07 12 34 56 78' },
+    { country: 'SN', number: '+221 76 987 65 43' },
+    { country: 'CI', number: '+225 05 87 65 43 21' },
+    { country: 'SN', number: '+221 78 456 78 90' },
+    { country: 'CI', number: '+225 01 23 45 67 89' },
   ];
 
   // Bank account hover state
   const [bankAccountIndex, setBankAccountIndex] = React.useState(0);
-  const [activeTab, setActiveTab] = React.useState("product");
+  const [activeTab, setActiveTab] = React.useState('product');
   const bankAccounts = [
-    { code: "NL", number: "NL91 ABNA 0417 1643 00" },
-    { code: "CI", number: "CI05 SGBS 1234 5678 9012 34" },
-    { code: "SN", number: "SN12 3456 7890 1234 5678 9012" },
+    { code: 'NL', number: 'NL91 ABNA 0417 1643 00' },
+    { code: 'CI', number: 'CI05 SGBS 1234 5678 9012 34' },
+    { code: 'SN', number: 'SN12 3456 7890 1234 5678 9012' },
   ];
 
   const formatStars = (count: number | null): string => {
-    if (count === null) return "...";
+    if (count === null) return '...';
     if (count >= 1000) {
       return `${(count / 1000).toFixed(1)}k`;
     }
@@ -579,7 +584,7 @@ export function FeaturesSection() {
         id="features"
         ref={featuresRef}
         aria-labelledby="features-heading"
-        className={`py-24 ${isFeaturesInView ? "in-view" : ""}`}
+        className={`py-24 ${isFeaturesInView ? 'in-view' : ''}`}
       >
         <div className="container mx-auto px-6 md:px-8 lg:px-12">
           <div className="mb-14">
@@ -587,7 +592,7 @@ export function FeaturesSection() {
               id="features-heading"
               className="max-w-3xl text-4xl font-normal tracking-tighter text-left text-zinc-800 dark:text-white md:text-5xl mt-24 md:mt-0"
             >
-              {String(t("features.title", currentLanguage))}
+              {String(t('features.title', currentLanguage))}
             </h2>
           </div>
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
@@ -601,10 +606,12 @@ export function FeaturesSection() {
             >
               <Card className="flex flex-col h-[450px] md:h-[400px] rounded-sm">
                 <CardHeader className="p-6 pb-4 text-base font-medium">
-                  {String(t("features.card1.title", currentLanguage))}
+                  {String(t('features.card1.title', currentLanguage))}
                 </CardHeader>
                 <CardContent className="px-6 pb-6 pt-0 text-sm text-muted-foreground grow">
-                  <p className="mb-4">{String(t("features.card1.description", currentLanguage))}</p>
+                  <p className="mb-4">
+                    {String(t('features.card1.description', currentLanguage))}
+                  </p>
                   <div className="w-full max-h-[230px] overflow-y-auto space-y-2 pr-2 hide-scrollbar">
                     {providerNames.map((name, i) => (
                       <motion.div
@@ -613,15 +620,15 @@ export function FeaturesSection() {
                         animate={
                           cardInViews[0]
                             ? {
-                              opacity: 1,
-                              x: 0,
-                              transition: {
-                                delay: 0.5 + i * 0.1,
-                                type: "spring",
-                                stiffness: 120,
-                                damping: 20,
-                              },
-                            }
+                                opacity: 1,
+                                x: 0,
+                                transition: {
+                                  delay: 0.5 + i * 0.1,
+                                  type: 'spring',
+                                  stiffness: 120,
+                                  damping: 20,
+                                },
+                              }
                             : {}
                         }
                         className="flex items-center justify-between p-1.5 bg-background border border-border rounded-sm hover:bg-muted/40 transition-colors duration-200"
@@ -629,35 +636,59 @@ export function FeaturesSection() {
                         <div className="flex items-center gap-3">
                           <div className="w-8 h-8 bg-background border border-border rounded-sm flex items-center justify-center shadow-sm overflow-hidden">
                             <Image
-                              src={`/payment_channels/${name === "Bitcoin" ? "btc" : name.toLowerCase().replace(" ", "_")}.webp`}
+                              src={`/payment_channels/${name === 'Bitcoin' ? 'btc' : name.toLowerCase().replace(' ', '_')}.webp`}
                               alt={`${name} logo`}
-                              width={name === "SPI" ? 24 : 32}
-                              height={name === "SPI" ? 24 : 32}
-                              className={name === "SPI" ? "w-6 h-6 object-cover rounded-sm" : "w-full h-full object-cover rounded-sm"}
+                              width={name === 'SPI' ? 24 : 32}
+                              height={name === 'SPI' ? 24 : 32}
+                              className={
+                                name === 'SPI'
+                                  ? 'w-6 h-6 object-cover rounded-sm'
+                                  : 'w-full h-full object-cover rounded-sm'
+                              }
                             />
                           </div>
                           <div>
                             <span className="text-sm font-medium text-foreground">
-                              {name === "SPI" ? "π-SPI" : name}
+                              {name === 'SPI' ? 'π-SPI' : name}
                             </span>
                             <p className="text-xs text-muted-foreground">
-                              {name === "SPI" &&
-                                String(t("features.card1.spi_description", currentLanguage))}
-                              {name === "Wave" &&
-                                String(t("features.card1.momo_description", currentLanguage))}
-                              {(name === "Visa" ||
-                                name === "PayPal" ||
-                                name === "Google Pay") &&
-                                String(t("features.card1.card_description", currentLanguage))}
-                              {name === "Bitcoin" &&
-                                String(t("features.card1.crypto_description", currentLanguage))}
+                              {name === 'SPI' &&
+                                String(
+                                  t(
+                                    'features.card1.spi_description',
+                                    currentLanguage,
+                                  ),
+                                )}
+                              {name === 'Wave' &&
+                                String(
+                                  t(
+                                    'features.card1.momo_description',
+                                    currentLanguage,
+                                  ),
+                                )}
+                              {(name === 'Visa' ||
+                                name === 'PayPal' ||
+                                name === 'Google Pay') &&
+                                String(
+                                  t(
+                                    'features.card1.card_description',
+                                    currentLanguage,
+                                  ),
+                                )}
+                              {name === 'Bitcoin' &&
+                                String(
+                                  t(
+                                    'features.card1.crypto_description',
+                                    currentLanguage,
+                                  ),
+                                )}
                             </p>
                           </div>
                         </div>
                         <Switch
                           checked={paymentToggles[name] || false}
                           onCheckedChange={() => handlePaymentToggle(name)}
-                          aria-label={`${paymentToggles[name] ? "Disable" : "Enable"} ${name} payments`}
+                          aria-label={`${paymentToggles[name] ? 'Disable' : 'Enable'} ${name} payments`}
                           className="data-[state=checked]:bg-[#56A5F9] data-[state=checked]:border-[#56A5F9] dark:data-[state=checked]:bg-sky-600 dark:data-[state=checked]:border-sky-600"
                         />
                       </motion.div>
@@ -677,18 +708,31 @@ export function FeaturesSection() {
             >
               <Card className="flex flex-col h-[400px] rounded-sm overflow-hidden">
                 <CardHeader className="p-6 pb-4 text-base font-medium">
-                  {String(t("features.card2.title", currentLanguage))}
+                  {String(t('features.card2.title', currentLanguage))}
                 </CardHeader>
                 <CardContent className="px-6 pb-6 pt-0 text-sm text-muted-foreground grow relative flex flex-col">
-                  <p className="mb-4">{String(t("features.card2.description", currentLanguage))}</p>
+                  <p className="mb-4">
+                    {String(t('features.card2.description', currentLanguage))}
+                  </p>
                   <div className="relative grow rounded-sm overflow-hidden">
-                    <Image
-                      src="/random/arch.webp"
-                      alt="Seamless checkout architecture"
-                      width={400}
-                      height={300}
-                      className="absolute inset-0 w-full h-full object-contain -ml-2 md:ml-0"
-                    />
+                    {mounted && (
+                      <>
+                        <Image
+                          src="/random/arch_d.webp"
+                          alt="Seamless checkout architecture"
+                          width={400}
+                          height={300}
+                          className="absolute inset-0 w-full h-full object-contain -ml-2 md:ml-0 block dark:hidden"
+                        />
+                        <Image
+                          src="/random/arch_l.webp"
+                          alt="Seamless checkout architecture"
+                          width={400}
+                          height={300}
+                          className="absolute inset-0 w-full h-full object-contain -ml-2 md:ml-0 hidden dark:block"
+                        />
+                      </>
+                    )}
                   </div>
                 </CardContent>
               </Card>
@@ -704,10 +748,12 @@ export function FeaturesSection() {
             >
               <Card className="flex flex-col h-[400px] rounded-sm">
                 <CardHeader className="px-6 pt-6 pb-2 text-base font-medium">
-                  {String(t("features.card5.title", currentLanguage))}
+                  {String(t('features.card5.title', currentLanguage))}
                 </CardHeader>
                 <CardContent className="px-6 pb-6 pt-0 text-sm text-muted-foreground grow">
-                  <p className="mb-4">{String(t("features.card5.description", currentLanguage))}</p>
+                  <p className="mb-4">
+                    {String(t('features.card5.description', currentLanguage))}
+                  </p>
                   <div className="w-full">
                     <DemoRevenueChart />
                   </div>
@@ -725,10 +771,12 @@ export function FeaturesSection() {
             >
               <Card className="flex flex-col h-[400px] rounded-sm">
                 <CardHeader className="p-6 pb-4 text-base font-medium">
-                  {String(t("features.card4.title", currentLanguage))}
+                  {String(t('features.card4.title', currentLanguage))}
                 </CardHeader>
                 <CardContent className="px-6 pb-6 pt-0 text-sm text-muted-foreground grow">
-                  <p className="mb-5">{String(t("features.card4.description", currentLanguage))}</p>
+                  <p className="mb-5">
+                    {String(t('features.card4.description', currentLanguage))}
+                  </p>
                   <div
                     data-animate
                     className="flex flex-col items-start justify-center gap-3 lomi-demo-card-content w-full"
@@ -736,11 +784,11 @@ export function FeaturesSection() {
                     <div className="payout-dashboard w-full">
                       <div className="flex justify-between items-center">
                         <span className="text-xs text-muted-foreground">
-                          {String(t("features.card4.balance", currentLanguage))}
+                          {String(t('features.card4.balance', currentLanguage))}
                         </span>
                         <div className="text-xl font-semibold">
                           <span className="text-xl font-semibold text-foreground">
-                            {(12847392).toLocaleString("fr-FR")}
+                            {(12847392).toLocaleString('fr-FR')}
                           </span>
                           <span className="text-sm font-normal text-muted-foreground ml-1">
                             F CFA
@@ -753,13 +801,15 @@ export function FeaturesSection() {
                       <CornerDownRight className="size-5 text-muted-foreground/80 mt-20 mr-4" />
                       <div className="flex-1 flex flex-col gap-3">
                         <div className="flex flex-col gap-2">
-                          <p className="text-xs text-muted-foreground mb-0">
-                            {String(t("features.card4.payout_phone", currentLanguage))}
+                          <p className="text-[11px] text-muted-foreground mb-1">
+                            {String(
+                              t('features.card4.payout_phone', currentLanguage),
+                            )}
                           </p>
                           <div className="flex items-center gap-4">
                             <div className="flex flex-col gap-2 translate-x-12 mr-12">
                               <div
-                                className="flex items-center gap-2 rounded-sm p-1.5 bg-muted/40 border w-36 justify-center cursor-pointer transition-colors hover:bg-muted/60"
+                                className="flex items-center gap-2 rounded-sm p-1.5 bg-muted/40 border w-36 justify-center cursor-pointer transition-colors hover:bg-muted/60 focus:outline-none focus:ring-0 focus:border-none"
                                 onMouseEnter={handlePhoneNumberHover1}
                               >
                                 <span className="font-mono text-[11px]">
@@ -767,7 +817,7 @@ export function FeaturesSection() {
                                 </span>
                               </div>
                               <div
-                                className="flex items-center gap-2 rounded-sm p-1.5 bg-muted/40 border w-36 justify-center cursor-pointer transition-colors hover:bg-muted/60"
+                                className="flex items-center gap-2 rounded-sm p-1.5 bg-muted/40 border w-36 justify-center cursor-pointer transition-colors hover:bg-muted/60 focus:outline-none focus:ring-0 focus:border-none"
                                 onMouseEnter={handlePhoneNumberHover2}
                               >
                                 <span className="font-mono text-[11px]">
@@ -782,13 +832,15 @@ export function FeaturesSection() {
                           </div>
                         </div>
                         <div className="flex flex-col gap-2">
-                          <p className="text-xs text-muted-foreground translate-x-0 mb-0">
-                            {String(t("features.card4.payout_bank", currentLanguage))}
+                          <p className="text-[11px] text-muted-foreground translate-x-0 mb-0">
+                            {String(
+                              t('features.card4.payout_bank', currentLanguage),
+                            )}
                           </p>
                           <div className="flex items-center gap-4">
                             <div className="flex flex-col translate-x-0 mr-0">
                               <div
-                                className="flex items-center gap-2 rounded-sm px-0 py-1.5 bg-muted/40 border w-48 justify-center cursor-pointer transition-colors hover:bg-muted/60"
+                                className="flex items-center gap-2 rounded-sm px-0 py-1.5 bg-muted/40 border w-48 justify-center cursor-pointer transition-colors hover:bg-muted/60 focus:outline-none focus:ring-0 focus:border-none"
                                 onMouseEnter={handleBankAccountHover}
                               >
                                 <span className="font-mono text-[11px]">
@@ -819,115 +871,147 @@ export function FeaturesSection() {
             >
               <Card className="flex flex-col h-[400px] rounded-sm">
                 <CardHeader className="p-6 pb-4 text-base font-medium">
-                  {String(t("features.card3.title", currentLanguage))}
+                  {String(t('features.card3.title', currentLanguage))}
                 </CardHeader>
                 <CardContent className="px-6 pb-6 pt-0 text-sm text-muted-foreground grow flex flex-col">
-                  <p className="mb-4">{String(t("features.card3.description", currentLanguage))}</p>
+                  <p className="mb-4">
+                    {String(t('features.card3.description', currentLanguage))}
+                  </p>
                   <div className="w-full">
                     <div className="flex gap-1 rounded-sm bg-muted/30 border border-border p-1 w-full h-[42px]">
                       <button
                         type="button"
-                        onClick={() => setActiveTab("product")}
-                        className={`flex-1 px-3 py-2 text-sm font-normal rounded-sm transition-all duration-200 h-[34px] -mt-px ${activeTab === "product"
-                          ? "bg-[#E9EAEF] dark:bg-[#2A2B30] text-foreground shadow-sm border border-border/50"
-                          : "text-muted-foreground hover:text-foreground"
-                          }`}
+                        onClick={() => setActiveTab('product')}
+                        className={`flex-1 px-3 py-2 text-sm font-normal rounded-sm transition-all duration-200 h-[34px] -mt-px focus:outline-none focus:ring-0 focus:border-none ${
+                          activeTab === 'product'
+                            ? 'bg-[#E9EAEF] dark:bg-[#2A2B30] text-foreground shadow-sm border border-border/50'
+                            : 'text-muted-foreground hover:text-foreground'
+                        }`}
                       >
-                        {String(t("features.card3.tab_products", currentLanguage))}
+                        {String(
+                          t('features.card3.tab_products', currentLanguage),
+                        )}
                       </button>
                       <button
                         type="button"
-                        onClick={() => setActiveTab("subscription")}
-                        className={`flex-1 px-3 py-2 text-sm font-normal rounded-sm transition-all duration-200 h-[34px] -mt-px ${activeTab === "subscription"
-                          ? "bg-[#E9EAEF] dark:bg-[#2A2B30] text-foreground shadow-sm border border-border/50"
-                          : "text-muted-foreground hover:text-foreground"
-                          }`}
+                        onClick={() => setActiveTab('subscription')}
+                        className={`flex-1 px-3 py-2 text-sm font-normal rounded-sm transition-all duration-200 h-[34px] -mt-px focus:outline-none focus:ring-0 focus:border-none ${
+                          activeTab === 'subscription'
+                            ? 'bg-[#E9EAEF] dark:bg-[#2A2B30] text-foreground shadow-sm border border-border/50'
+                            : 'text-muted-foreground hover:text-foreground'
+                        }`}
                       >
-                        {String(t("features.card3.tab_subscriptions", currentLanguage))}
+                        {String(
+                          t(
+                            'features.card3.tab_subscriptions',
+                            currentLanguage,
+                          ),
+                        )}
                       </button>
                       <button
                         type="button"
-                        onClick={() => setActiveTab("checkout")}
-                        className={`flex-1 px-3 py-2 text-sm font-normal rounded-sm transition-all duration-200 h-[34px] -mt-px ${activeTab === "checkout"
-                          ? "bg-[#E9EAEF] dark:bg-[#2A2B30] text-foreground shadow-sm border border-border/50"
-                          : "text-muted-foreground hover:text-foreground"
-                          }`}
+                        onClick={() => setActiveTab('checkout')}
+                        className={`flex-1 px-3 py-2 text-sm font-normal rounded-sm transition-all duration-200 h-[34px] -mt-px focus:outline-none focus:ring-0 focus:border-none ${
+                          activeTab === 'checkout'
+                            ? 'bg-[#E9EAEF] dark:bg-[#2A2B30] text-foreground shadow-sm border border-border/50'
+                            : 'text-muted-foreground hover:text-foreground'
+                        }`}
                       >
-                        {String(t("features.card3.tab_checkout", currentLanguage))}
+                        {String(
+                          t('features.card3.tab_checkout', currentLanguage),
+                        )}
                       </button>
                     </div>
                     <div className="mt-2">
                       <div className="relative">
-                        {activeTab === "product" && (
-                          <div className="bg-slate-900 dark:bg-slate-950 rounded-sm border border-slate-700 overflow-hidden shadow-lg h-54 md:h-50 overflow-y-auto hide-scrollbar">
-                            <SyntaxHighlighter
-                              language="json"
-                              style={vscDarkPlus}
-                              customStyle={{
-                                margin: 0,
-                                padding: "1rem",
-                                background: "transparent",
-                                fontSize: "0.75rem",
-                                lineHeight: "1.5",
-                              }}
-                              wrapLines={true}
-                              codeTagProps={{
-                                style: {
-                                  whiteSpace: "pre-wrap",
-                                  wordBreak: "break-word",
-                                },
-                              }}
-                            >
-                              {productCode}
-                            </SyntaxHighlighter>
+                        {activeTab === 'product' && (
+                          <div className="bg-muted/50 dark:bg-slate-900 rounded-sm border border-border overflow-hidden shadow-lg h-54 md:h-50 overflow-y-auto hide-scrollbar">
+                            {mounted && (
+                              <SyntaxHighlighter
+                                language="json"
+                                style={
+                                  resolvedTheme === 'dark'
+                                    ? vscDarkPlus
+                                    : blueVsTheme
+                                }
+                                customStyle={{
+                                  margin: 0,
+                                  padding: '1rem',
+                                  backgroundColor: 'transparent',
+                                  fontSize: '0.75rem',
+                                  lineHeight: '1.5',
+                                }}
+                                wrapLines={true}
+                                codeTagProps={{
+                                  style: {
+                                    whiteSpace: 'pre-wrap',
+                                    wordBreak: 'break-word',
+                                  },
+                                }}
+                              >
+                                {productCode}
+                              </SyntaxHighlighter>
+                            )}
                           </div>
                         )}
-                        {activeTab === "subscription" && (
-                          <div className="bg-slate-900 dark:bg-slate-950 rounded-sm border border-slate-700 overflow-hidden shadow-lg h-54 md:h-50 overflow-y-auto hide-scrollbar">
-                            <SyntaxHighlighter
-                              language="json"
-                              style={vscDarkPlus}
-                              customStyle={{
-                                margin: 0,
-                                padding: "1rem",
-                                background: "transparent",
-                                fontSize: "0.75rem",
-                                lineHeight: "1.5",
-                              }}
-                              wrapLines={true}
-                              codeTagProps={{
-                                style: {
-                                  whiteSpace: "pre-wrap",
-                                  wordBreak: "break-word",
-                                },
-                              }}
-                            >
-                              {subscriptionCode}
-                            </SyntaxHighlighter>
+                        {activeTab === 'subscription' && (
+                          <div className="bg-muted/50 dark:bg-slate-900 rounded-sm border border-border overflow-hidden shadow-lg h-54 md:h-50 overflow-y-auto hide-scrollbar">
+                            {mounted && (
+                              <SyntaxHighlighter
+                                language="json"
+                                style={
+                                  resolvedTheme === 'dark'
+                                    ? vscDarkPlus
+                                    : blueVsTheme
+                                }
+                                customStyle={{
+                                  margin: 0,
+                                  padding: '1rem',
+                                  backgroundColor: 'transparent',
+                                  fontSize: '0.75rem',
+                                  lineHeight: '1.5',
+                                }}
+                                wrapLines={true}
+                                codeTagProps={{
+                                  style: {
+                                    whiteSpace: 'pre-wrap',
+                                    wordBreak: 'break-word',
+                                  },
+                                }}
+                              >
+                                {subscriptionCode}
+                              </SyntaxHighlighter>
+                            )}
                           </div>
                         )}
-                        {activeTab === "checkout" && (
-                          <div className="bg-slate-900 dark:bg-slate-950 rounded-sm border border-slate-700 overflow-hidden shadow-lg h-54 md:h-50 overflow-y-auto hide-scrollbar">
-                            <SyntaxHighlighter
-                              language="json"
-                              style={vscDarkPlus}
-                              customStyle={{
-                                margin: 0,
-                                padding: "1rem",
-                                background: "transparent",
-                                fontSize: "0.75rem",
-                                lineHeight: "1.5",
-                              }}
-                              wrapLines={true}
-                              codeTagProps={{
-                                style: {
-                                  whiteSpace: "pre-wrap",
-                                  wordBreak: "break-word",
-                                },
-                              }}
-                            >
-                              {checkoutCode}
-                            </SyntaxHighlighter>
+                        {activeTab === 'checkout' && (
+                          <div className="bg-muted/50 dark:bg-slate-900 rounded-sm border border-border overflow-hidden shadow-lg h-54 md:h-50 overflow-y-auto hide-scrollbar">
+                            {mounted && (
+                              <SyntaxHighlighter
+                                language="json"
+                                style={
+                                  resolvedTheme === 'dark'
+                                    ? vscDarkPlus
+                                    : blueVsTheme
+                                }
+                                customStyle={{
+                                  margin: 0,
+                                  padding: '1rem',
+                                  backgroundColor: 'transparent',
+                                  fontSize: '0.75rem',
+                                  lineHeight: '1.5',
+                                }}
+                                wrapLines={true}
+                                codeTagProps={{
+                                  style: {
+                                    whiteSpace: 'pre-wrap',
+                                    wordBreak: 'break-word',
+                                  },
+                                }}
+                              >
+                                {checkoutCode}
+                              </SyntaxHighlighter>
+                            )}
                           </div>
                         )}
                       </div>
@@ -947,10 +1031,12 @@ export function FeaturesSection() {
             >
               <Card className="flex flex-col h-[400px] rounded-sm">
                 <CardHeader className="p-6 pb-2 text-base font-medium">
-                  {String(t("features.card6.title", currentLanguage))}
+                  {String(t('features.card6.title', currentLanguage))}
                 </CardHeader>
                 <CardContent className="px-6 pb-6 pt-0 text-sm text-muted-foreground grow flex flex-col">
-                  <p className="mb-4">{String(t("features.card6.description", currentLanguage))}</p>
+                  <p className="mb-4">
+                    {String(t('features.card6.description', currentLanguage))}
+                  </p>
 
                   <div className="relative my-4">
                     <div className="grid grid-cols-[1fr_2fr_1fr] h-[120px] *:border-foreground/10 *:border-dashed mask-radial-circle-long">
@@ -968,7 +1054,7 @@ export function FeaturesSection() {
                     </div>
                     <code className="absolute inset-0 flex items-center justify-center">
                       <code
-                        className={`cli-command-animated ${cliAnimationTriggered && !isMobile ? "animate" : ""}`}
+                        className={`cli-command-animated ${cliAnimationTriggered && !isMobile ? 'animate' : ''}`}
                       >
                         <code className="text-sm text-transparent bg-clip-text bg-linear-to-r from-blue-300 to-foreground font-medium" />
                       </code>
@@ -978,7 +1064,11 @@ export function FeaturesSection() {
                   <div className="space-y-3 grow">
                     <div className="flex items-center gap-3">
                       <Terminal className="size-4 text-blue-500 shrink-0" />
-                      <span>{String(t("features.card6.open_source_note", currentLanguage))}</span>
+                      <span>
+                        {String(
+                          t('features.card6.open_source_note', currentLanguage),
+                        )}
+                      </span>
                     </div>
                   </div>
 
@@ -1005,10 +1095,15 @@ export function FeaturesSection() {
                       className="w-full h-10 relative bg-slate-50 text-sm font-normal hover:bg-slate-100 dark:bg-zinc-800 dark:hover:bg-zinc-700 rounded-sm"
                     >
                       <a
-                        href="/docs"
+                        href="/docs/core/introduction/what-is-lomi"
                         className="flex items-center justify-center"
                       >
-                        {String(t("features.card6.documentation_button", currentLanguage))}
+                        {String(
+                          t(
+                            'features.card6.documentation_button',
+                            currentLanguage,
+                          ),
+                        )}
                       </a>
                     </Button>
                   </div>

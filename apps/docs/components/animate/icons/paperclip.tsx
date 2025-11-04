@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import * as React from "react";
-import { motion, type Variants } from "motion/react";
+import * as React from 'react';
+import { motion, type Variants } from 'motion/react';
 
 import {
   getVariants,
   useAnimateIconContext,
   IconWrapper,
   type IconProps,
-} from "@/components/animate/primitives/icon";
+} from '@/components/animate/primitives/icon';
 
 type PaperclipProps = IconProps<keyof typeof animations>;
 
@@ -20,19 +20,19 @@ const animations = {
         pathLength: [0.02, 1],
         transition: {
           duration: 1.2,
-          ease: "easeInOut",
+          ease: 'easeInOut',
         },
       },
     },
   } satisfies Record<string, Variants>,
-  "default-loop": {
+  'default-loop': {
     path: {
       initial: { pathLength: 1 },
       animate: {
         pathLength: [1, 0.02, 1],
         transition: {
           duration: 2.4,
-          ease: "easeInOut",
+          ease: 'easeInOut',
         },
       },
     },
