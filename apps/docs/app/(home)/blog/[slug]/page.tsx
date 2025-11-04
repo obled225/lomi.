@@ -3,7 +3,7 @@ import BlogPostClient from "@/components/blog/blog-post-client";
 import { client } from "@/lib/sanity/client";
 
 interface PageProps {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 // Generate static paths for all blog posts
@@ -12,7 +12,8 @@ export async function generateStaticParams() {
     `*[_type == "post" && defined(slug.current)][].slug.current`,
   );
 
-  return slugs.map((slug) => ({
+  const slugsArray = Array.isArray(slugs) ? slugs : [];
+  return slugsArray.map((slug) => ({
     slug,
   }));
 }
@@ -20,7 +21,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
-  const { slug } = await Promise.resolve(params);
+  const { slug } = await params;
 
   try {
     const post = await client.fetch(
@@ -70,7 +71,7 @@ export async function generateMetadata({
 
 // Server component that renders the client component
 export default async function BlogPost({ params }: PageProps) {
-  const { slug } = await Promise.resolve(params);
+  const { slug } = await params;
   return (
     <main className="flex-1 pt-0">
       <div className="relative">

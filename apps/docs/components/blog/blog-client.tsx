@@ -10,7 +10,7 @@ import { t } from "@/lib/i18n/translations";
 import Image from "next/image";
 import Spinner from "@/components/ui/spinner";
 import { ArrowRight } from "lucide-react";
-import { playClickSound } from "@/lib/utils/sound";
+import { playClickSound } from "@/lib/sound";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import "../../app/styles/blog.css";

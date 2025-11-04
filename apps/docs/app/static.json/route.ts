@@ -1,12 +1,13 @@
 import { NextResponse } from 'next/server';
-import { source } from '@/lib/utils/source';
+import { source } from '@/lib/source';
 import type { OramaDocument } from 'fumadocs-core/search/orama-cloud';
 
 export const revalidate = false;
 
 export async function GET(): Promise<Response> {
   const pages = source.getPages();
-  const results = pages
+  const pagesArray = Array.isArray(pages) ? pages : [];
+  const results = pagesArray
     .filter((page) => page.slugs[0] !== 'openapi')
     .map((page) => {
       return {

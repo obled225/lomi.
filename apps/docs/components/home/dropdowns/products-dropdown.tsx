@@ -1,9 +1,9 @@
 import { ChevronDown } from "lucide-react";
 import { useState } from "react";
 import { LottieIcon } from "@/components/ui/lottie-icon";
-import { animations, LottieAnimationData } from "@/lib/utils/lottie-animations";
+import { animations, LottieAnimationData } from "@/lib/lottie-animations";
 import { useTheme } from "@/lib/hooks/use-theme";
-import { playClickSound } from "@/lib/utils/sound";
+import { playClickSound } from "@/lib/sound";
 
 type UseCase = {
   name: string;

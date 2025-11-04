@@ -5,8 +5,8 @@
 import {
   getLocalStorageItem,
   setLocalStorageItem,
-} from "@/lib/utils/localStorage";
-import { Cookies } from "@/lib/utils/constants";
+} from "@/lib/localStorage";
+import { Cookies } from "@/lib/constants";
 
 declare global {
   interface Window {

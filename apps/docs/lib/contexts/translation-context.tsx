@@ -6,8 +6,8 @@ import { languages } from "@/lib/i18n/config";
 import {
   getLocalStorageItem,
   setLocalStorageItem,
-} from "@/lib/utils/localStorage";
-import { LocalStorageKeys } from "@/lib/utils/constants";
+} from "@/lib/localStorage";
+import { LocalStorageKeys } from "@/lib/constants";
 
 interface TranslationContextType {
   currentLanguage: Language;

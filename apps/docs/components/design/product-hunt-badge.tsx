@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from "react";
-import { playClickSound } from "@/lib/utils/sound";
+import { playClickSound } from "@/lib/sound";
 import Image from "next/image";
 
 export function ProductHuntBadge() {

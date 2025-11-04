@@ -4,7 +4,7 @@ import React, { memo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { languages } from "@/lib/i18n/config";
 import { useTranslation } from "@/lib/contexts/translation-context";
-import { playClickSound } from "@/lib/utils/sound";
+import { playClickSound } from "@/lib/sound";
 
 interface LanguageSwitcherProps {
   onLanguageChange?: (language: string) => void;

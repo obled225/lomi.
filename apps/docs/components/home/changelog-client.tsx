@@ -7,16 +7,15 @@ import { t, getTranslations } from "@/lib/i18n/translations";
 export default function ChangelogClient() {
   const { currentLanguage } = useTranslation();
   const translations = getTranslations(currentLanguage);
-  const changelogEntries = (
-    translations.changelog as unknown as {
-      entries: {
-        date: string;
-        version: string;
-        title: string;
-        changes: string[];
-      }[];
-    }
-  ).entries;
+  const changelogData = translations.changelog as unknown as {
+    entries?: {
+      date: string;
+      version: string;
+      title: string;
+      changes: string[];
+    }[];
+  };
+  const changelogEntries = changelogData?.entries || [];
 
   return (
     <section className="w-full py-8 md:py-20 lg:py-24 xl:py-32">

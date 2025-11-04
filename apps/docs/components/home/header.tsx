@@ -11,7 +11,7 @@ import { Dock } from "@/components/ui/dock";
 import { DockDropdown } from "@/components/design/dock-dropdown";
 import { Button } from "@/components/ui/button";
 import { IntegrationsDropdown } from "@/components/home/dropdowns/products-dropdown";
-import { playClickSound } from "@/lib/utils/sound";
+import { playClickSound } from "@/lib/sound";
 import { useGithubStars } from "@/lib/hooks/use-github-stars-hooks";
 import { useAuth } from "@/lib/hooks/use-auth";
 import { useTranslation } from "@/lib/contexts/translation-context";

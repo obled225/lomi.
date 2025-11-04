@@ -6,7 +6,7 @@ import {
   Copy,
   ExternalLinkIcon,
 } from 'lucide-react';
-import { cn } from '@/lib/utils/cn';
+import { cn } from '@/lib/cn';
 import { useCopyButton } from 'fumadocs-ui/utils/use-copy-button';
 import { buttonVariants } from 'fumadocs-ui/components/ui/button';
 import {

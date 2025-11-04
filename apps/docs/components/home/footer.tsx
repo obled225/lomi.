@@ -6,7 +6,7 @@ import Image from "next/image";
 import { LanguageSwitcher } from "@/components/design/language-switcher";
 import { BackgroundText } from "@/components/design/background-text";
 import { LottieIcon } from "@/components/ui/lottie-icon";
-import { animations } from "@/lib/utils/lottie-animations";
+import { animations } from "@/lib/lottie-animations";
 import { useTheme } from "@/lib/hooks/use-theme";
 import { GitHubIcon, LinkedInIcon, XIcon, SlackIcon } from "@/components/icons";
 import { Check } from "lucide-react";
@@ -15,8 +15,8 @@ import {
   playClickSound as playSound,
   getSoundEnabled,
   setSoundEnabled,
-} from "@/lib/utils/sound";
-import { Cookies } from "@/lib/utils/constants";
+} from "@/lib/sound";
+import { Cookies } from "@/lib/constants";
 import { useTranslation } from "@/lib/contexts/translation-context";
 import { t as translate } from "@/lib/i18n/translations";
 

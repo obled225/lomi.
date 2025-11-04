@@ -1,4 +1,4 @@
-import { source } from '@/lib/utils/source';
+import { source } from '@/lib/source';
 
 export const revalidate = false;
 

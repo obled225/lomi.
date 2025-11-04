@@ -18,7 +18,7 @@ import { Send as Telegram, Mail, Copy, Check } from "lucide-react";
 import { useTranslation } from "@/lib/contexts/translation-context";
 import { t } from "@/lib/i18n/translations";
 import { toast } from "@/components/design/toast";
-import { playCompletionSound } from "@/lib/utils/sound";
+import { playCompletionSound } from "@/lib/sound";
 
 interface ShareModalProps {
   isOpen: boolean;

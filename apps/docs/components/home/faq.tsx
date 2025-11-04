@@ -7,7 +7,7 @@ import { cn } from "@/lib/actions/utils";
 import { Button } from "@/components/ui/button";
 import { useTranslation } from "@/lib/contexts/translation-context";
 import { t, getTranslations } from "@/lib/i18n/translations";
-import { playClickSound } from "@/lib/utils/sound";
+import { playClickSound } from "@/lib/sound";
 
 interface FaqSectionProps extends React.HTMLAttributes<HTMLElement> {
   contactInfo?: {

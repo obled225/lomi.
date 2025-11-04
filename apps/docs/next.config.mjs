@@ -6,10 +6,10 @@ const withMDX = createMDX();
 const config = {
   reactStrictMode: true,
   devIndicators: false,
-  // Performance optimizations for better navigation
+  // // Performance optimizations for better navigation
   experimental: {
     optimizeServerReact: true,
-    optimizeCss: process.env.NODE_ENV === "production",
+    optimizeCss: true,
   },
   // Configure server external packages for Sanity and build tools
   serverExternalPackages: ["sanity", "prettier"],

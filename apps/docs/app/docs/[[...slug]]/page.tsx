@@ -5,8 +5,8 @@ import * as Twoslash from 'fumadocs-twoslash/ui';
 import { Callout } from 'fumadocs-ui/components/callout';
 import { TypeTable } from 'fumadocs-ui/components/type-table';
 import * as Preview from '@/components/preview';
-import { createMetadata } from '@/lib/utils/metadata';
-import { source } from '@/lib/utils/source';
+import { createMetadata } from '@/lib/metadata';
+import { source } from '@/lib/source';
 import { Wrapper } from '@/components/preview/wrapper';
 import { Mermaid } from '@/components/mdx/mermaid';
 import { getMDXComponents } from '@/mdx-components';
@@ -47,8 +47,13 @@ export default async function Page({ params }: { params: Promise<{ slug?: string
 
   if (!page) notFound();
 
-  const preview = page.data.preview;
-  const { body: Mdx, toc, lastModified } = page.data;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const pageData = page.data as any;
+
+  const preview = pageData.preview as string | undefined;
+  const Mdx = pageData.body;
+  const toc = pageData.toc;
+  const lastModified = pageData.lastModified;
 
   return (
     <DocsPage
@@ -121,16 +126,19 @@ export default async function Page({ params }: { params: Promise<{ slug?: string
             Customisation,
           })}
         />
-        {page.data.index ? <DocsCategory url={page.url} /> : null}
+        {pageData.index ? <DocsCategory url={page.url} /> : null}
       </div>
     </DocsPage>
   );
 }
 
 function DocsCategory({ url }: { url: string }) {
+  const peers = getPageTreePeers(source.pageTree, url);
+  const peersArray = Array.isArray(peers) ? peers : [];
+
   return (
     <Cards>
-      {getPageTreePeers(source.pageTree, url).map((peer) => (
+      {peersArray.map((peer) => (
         <Card key={peer.url} title={peer.name} href={peer.url}>
           {peer.description}
         </Card>

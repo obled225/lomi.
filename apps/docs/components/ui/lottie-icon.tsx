@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect, memo, useMemo } from "react";
 import Lottie, { LottieRefCurrentProps } from "lottie-react";
 import { useTheme } from "@/lib/hooks/use-theme";
 import Spinner from "@/components/ui/spinner";
-import type { LottieAnimationData } from "@/lib/utils/lottie-animations";
+import type { LottieAnimationData } from "@/lib/lottie-animations";
 
 // Type definitions for Lottie layer structure
 interface LottieLayer {

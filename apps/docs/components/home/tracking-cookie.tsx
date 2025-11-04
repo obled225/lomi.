@@ -4,7 +4,7 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation } from "@/lib/contexts/translation-context";
 import { t } from "@/lib/i18n/translations";
-import { playClickSound } from "@/lib/utils/sound";
+import { playClickSound } from "@/lib/sound";
 
 // Use a more specific key that's unlikely to be cleared
 const COOKIE_CONSENT_KEY = "lomi-cookie-consent-status";

@@ -1,4 +1,4 @@
-import { source } from '@/lib/utils/source';
+import { source } from '@/lib/source';
 import { notFound } from 'next/navigation';
 import { generateOGImage } from '@/lib/og/mono';
 
@@ -21,7 +21,9 @@ export async function GET(
 export function generateStaticParams(): {
   slug: string[];
 }[] {
-  return source.generateParams().map((page) => ({
+  const params = source.generateParams();
+  const paramsArray = Array.isArray(params) ? params : [];
+  return paramsArray.map((page) => ({
     ...page,
     slug: [...page.slug, 'image.png'],
   }));

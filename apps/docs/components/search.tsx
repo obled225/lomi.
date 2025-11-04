@@ -22,7 +22,7 @@ import {
 } from 'fumadocs-ui/components/ui/popover';
 import { ChevronDown } from 'lucide-react';
 import { buttonVariants } from 'fumadocs-ui/components/ui/button';
-import { cn } from '@/lib/utils/cn';
+import { cn } from '@/lib/cn';
 
 const client = new OramaClient({
   endpoint: process.env.NEXT_PUBLIC_ORAMA_ENDPOINT || 'https://cloud.orama.run/v1/indexes/developers-lomi-africa-fvwfcn',

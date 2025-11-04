@@ -1,6 +1,5 @@
 # deps
 /node_modules
-/data
 
 # generated content
 .contentlayer
@@ -10,7 +9,6 @@
 # test & build
 /coverage
 /.next/
-/out/
 /build
 *.tsbuildinfo
 
@@ -19,10 +17,8 @@
 *.pem
 /.pnp
 .pnp.js
-npm-debug.log*
 
 # others
 .env
 .env.production
-.vercel
 next-env.d.ts

@@ -9,7 +9,7 @@ import {
   useState,
 } from 'react';
 import { Loader2, RefreshCw, Send, X } from 'lucide-react';
-import { cn } from '@/lib/utils/cn';
+import { cn } from '@/lib/cn';
 import { buttonVariants } from 'fumadocs-ui/components/ui/button';
 import Link from 'fumadocs-core/link';
 import {

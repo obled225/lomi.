@@ -14,7 +14,7 @@ import Spinner from "@/components/ui/spinner";
 import { Button } from "@/components/ui/button";
 import { Share2 } from "lucide-react";
 import { ShareModal } from "@/components/design/share-modal";
-import { playClickSound } from "@/lib/utils/sound";
+import { playClickSound } from "@/lib/sound";
 import "../../app/styles/blog.css";
 
 // Define the specific languages for the blog post switcher
