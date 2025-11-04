@@ -1,0 +1,134 @@
+{
+    "hero": {
+    "title": "专为让您盈利而设计，\nlomi. 是西非接受付款的最佳方式。"
+    },
+    "footer": {
+    "bceao_accreditation": "lomi. 目前正在由 BCEAO 进行支付服务提供商认证程序。",
+        "features": {
+            "title": "功能",
+            "overview": "概览", 
+            "pricing": "定价",
+            "faq": "常见问题"
+        },
+        "resources": {
+            "title": "资源",
+            "github": "Github",
+            "support": "支持",
+            "privacy": "隐私政策",
+            "terms": "条款",
+            "branding": "品牌资产",
+            "featureRequest": "请求功能",
+            "review": "给我们留言"
+        },
+        "company": {
+            "title": "公司",
+            "story": "故事",
+            "blog": "博客",
+            "openSource": "开源"
+        },
+        "subscribe": {
+            "placeholder": "电子邮件地址**",
+            "button": "订阅"
+        },
+        "status": "所有服务正常运行",
+        "copyright": "版权 © 2025 — lomi. LLC"
+    },
+    "components": {
+        "tracking_cookie": {
+            "message": "我们使用跟踪 cookie 来了解您如何使用产品，并帮助我们改进它。",
+            "accept": "接受",
+            "decline": "拒绝"
+        }
+    },
+    "blog": {
+        "title": "博客",
+        "description": "来自我们团队的最新见解、更新和故事。",
+        "heading": "博客",
+        "subheading": "与我们团队的最新见解、产品更新和行业趋势保持同步。",
+        "loading": "正在加载博客文章...",
+        "loadingDesc": "请稍候，我们正在加载内容",
+        "notFound": "未找到文章",
+        "notFoundDesc": "您寻找的博客文章不存在或已被移动。",
+        "backToBlog": "返回文章",
+        "backHome": "返回首页",
+        "switchLanguage": "切换语言",
+        "shareTitle": "分享此文章",
+        "shareDescription": "在您喜欢的平台上分享此博客文章。",
+        "copiedDesc": "链接已复制到您的剪贴板。",
+        "copyErrorTitle": "复制失败",
+        "copyErrorDesc": "无法将链接复制到剪贴板。",
+        "copied": "已复制",
+        "copyLink": "复制链接",
+        "byAuthor": "作者：{author}",
+        "noPosts": "未找到博客文章",
+        "noPostsDesc": "目前没有可用的博客文章。请稍后再查看。",
+        "categories": {
+            "news": "新闻",
+            "opinion": "观点",
+            "edge": "前沿",
+            "spreadsheets": "电子表格",
+            "case-study": "案例研究"
+        }
+    },
+    "header": {
+        "products": "产品",
+        "pricing": "定价",
+        "documentation": "文档",
+        "blog": "博客",
+        "talk": "联系我们",
+        "dashboard": "仪表板",
+        "connect": "连接"
+    },
+  "sdks": {
+    "title": "始终领先"
+    },
+  "earlyMemberPricing": {
+    "tag": "没有意外，没有隐藏费用，没有月费",
+    "getStarted": "开始使用",
+    "learnMore": "了解更多"
+  },
+  "features": {
+    "title": "释放您的商业潜力",
+    "card1": {
+      "title": "满足您所有客户偏好的支付方式",
+      "description": "接受本地和国际支付方式，无需努力。",
+      "momo_description": "移动货币支付",
+      "wallet_description": "数字钱包支付",
+      "crypto_description": "加密货币支付",
+      "spi_description": "统一支付系统",
+      "card_description": "卡支付解决方案"
+    },
+    "card2": {
+      "title": "高转化率的结账体验",
+      "description": "创建快速、强大且安全的支付流程。"
+    },
+    "card3": {
+      "title": "您的想象力是唯一的限制",
+      "description": "从产品到订阅再到按使用量计费，我们都能满足您的需求。",
+      "tab_products": "产品",
+      "tab_subscriptions": "订阅",
+      "tab_checkout": "结账"
+    },
+    "card4": {
+      "title": "即时轻松的支付",
+      "description": "在几秒内将您的收入直接提取到您的移动货币或银行账户。",
+      "balance": "余额",
+      "payout_phone": "按需支付到您的电话号码",
+      "payout_bank": "或直接支付到您本地或国际银行账户"
+    },
+    "card5": {
+      "title": "通过强大的分析了解有效的方法",
+      "description": "使用我们强大的仪表板监控收入，跟踪交易并规划您的下一步行动。"
+    },
+    "card6": {
+      "title": "由您成就",
+      "description": "开源，100%由热情和开源社区驱动。",
+      "open_source_note": "完全开源并由社区贡献积极维护。",
+      "documentation_button": "文档"
+    }
+  },
+  "careers": {
+    "title": "lomi. 是一个专注于消除支付障碍的软件公司。",
+    "join_us": "加入我们"
+  }
+}

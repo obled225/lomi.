@@ -14,7 +14,8 @@ export const source = loader({
   },
   source: docs.toFumadocsSource(),
   pageTree: {
-    transformers: [transformerOpenAPI()],
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    transformers: [transformerOpenAPI() as any],
   },
 });
 

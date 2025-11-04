@@ -24,11 +24,11 @@ export const registry: Registry = {
     // source object is external
     if (filePath === 'lib/source.ts') return undefined;
 
-    // ignore all node_modules files
+    // ignore all node_modules files (including type definitions)
     if (absolutePath.includes('node_modules')) return undefined;
 
     // ignore TypeScript declaration files anywhere
-    if (absolutePath.includes('.d.ts')) return undefined;
+    if (absolutePath.endsWith('.d.ts')) return undefined;
 
     // allow specific lib files that are used by components
     if (filePath === 'lib/cn.ts') {

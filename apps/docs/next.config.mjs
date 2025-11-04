@@ -11,8 +11,8 @@ const config = {
     optimizeServerReact: true,
     optimizeCss: process.env.NODE_ENV === "production",
   },
-  // Configure server external packages for Sanity
-  serverExternalPackages: ["sanity"],
+  // Configure server external packages for Sanity and build tools
+  serverExternalPackages: ["sanity", "prettier"],
   // Optimize prefetching for better navigation
   async headers() {
     // In development, don't set aggressive cache headers

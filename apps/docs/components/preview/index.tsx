@@ -80,7 +80,7 @@ export function tabs(): ReactNode {
 export function typeTable(): ReactNode {
   return (
     <Wrapper>
-      <div className="rounded-xl bg-fd-background">
+      <div className="rounded-sm bg-fd-background">
         <TypeTable
           type={{
             percentage: {
@@ -102,7 +102,7 @@ export function zoomImage(): ReactNode {
       <ImageZoom
         alt="banner"
         src={BannerImage}
-        className="!my-0 rounded-xl bg-fd-background"
+        className="my-0! rounded-sm bg-fd-background"
         priority
       />
     </Wrapper>
@@ -178,7 +178,7 @@ export function inlineTOC(): ReactNode {
 export function steps(): ReactNode {
   return (
     <Wrapper>
-      <div className="rounded-xl bg-fd-background p-3">
+      <div className="rounded-sm bg-fd-background p-3">
         <Steps>
           <Step>
             <h4>Buy Coffee</h4>

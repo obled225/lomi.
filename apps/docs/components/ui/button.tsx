@@ -27,6 +27,7 @@ const buttonVariants = cva(
           "bg-transparent border-0 shadow-none hover:bg-transparent sidebar-hover",
         link: "text-primary underline-offset-4 hover:underline",
         blue: "bg-[#56A5F9] text-white hover:bg-[#52A1F8] shadow-[inset_0_1px_0_rgba(255,255,255,0.15),inset_0_-1px_0_rgba(0,0,0,0.1)] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] active:brightness-99 dark:bg-sky-100 dark:text-sky-600 dark:hover:bg-sky-100 dark:hover:text-sky-900 dark:bg-sky-900 dark:text-sky-300 dark:hover:bg-sky-900 dark:hover:text-sky-200",
+        green: "bg-[#22C55E] text-white hover:bg-[#16A34A] shadow-[inset_0_1px_0_rgba(255,255,255,0.15),inset_0_-1px_0_rgba(0,0,0,0.1)] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] active:brightness-99 dark:bg-green-100 dark:text-green-600 dark:hover:bg-green-100 dark:hover:text-green-900 dark:bg-green-900 dark:text-green-300 dark:hover:bg-green-900 dark:hover:text-green-200",
         pink: "bg-[#E91E63] text-white hover:bg-[#C2185B] shadow-[inset_0_1px_0_rgba(255,255,255,0.15),inset_0_-1px_0_rgba(0,0,0,0.1)] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] hover:brightness-101 active:brightness-99 dark:bg-pink-100 dark:text-pink-600 dark:hover:bg-pink-100 dark:hover:text-pink-900 dark:bg-pink-900 dark:text-pink-300 dark:hover:bg-pink-900 dark:hover:text-pink-200",
         cancel:
           "bg-[#6B7280] text-white hover:bg-[#5A6370] shadow-[inset_0_1px_0_rgba(255,255,255,0.15),inset_0_-1px_0_rgba(0,0,0,0.1)] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] hover:brightness-101 active:brightness-99 dark:bg-gray-100 dark:text-gray-600 dark:hover:bg-gray-100 dark:hover:text-gray-900 dark:bg-gray-900 dark:text-gray-300 dark:hover:bg-gray-900 dark:hover:text-gray-200",
@@ -40,8 +41,7 @@ const buttonVariants = cva(
         sm: "h-9 rounded-sm px-3",
         lg: "h-11 rounded-sm px-8",
         icon: "h-10 w-10",
-        header: "h-7 px-4 py-2",
-        header2: "h-7 px-4 py-2",
+        header: "h-8 px-4 py-2",
         small: "h-7 w-7 p-0",
         sidebar: "h-7 py-2 w-56",
       },

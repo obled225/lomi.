@@ -1,5 +1,7 @@
-import { redirect } from 'next/navigation';
+/* @proprietary license */
 
-export default function HomePage() {
-  redirect('/docs/core/introduction/what-is-lomi');
+import { HomePageClient } from "@/components/home/home-page-client";
+
+export default function Page() {
+  return <HomePageClient />;
 }

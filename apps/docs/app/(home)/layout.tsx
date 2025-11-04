@@ -1,5 +1,3 @@
-import { HomeLayout } from 'fumadocs-ui/layouts/home';
-import { baseOptions } from '@/lib/utils/layout.shared';
 import type { ReactNode } from 'react';
 
 interface LayoutProps<T extends string> {
@@ -8,5 +6,7 @@ interface LayoutProps<T extends string> {
 }
 
 export default function Layout({ children }: LayoutProps<'/'>) {
-  return <HomeLayout {...baseOptions()}>{children}</HomeLayout>;
+  // The home pages already have their own complete layout in HomePageClient
+  // No need for HomeLayout wrapper which adds an extra header
+  return <>{children}</>;
 }

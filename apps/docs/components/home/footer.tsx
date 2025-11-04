@@ -8,10 +8,8 @@ import { BackgroundText } from "@/components/design/background-text";
 import { LottieIcon } from "@/components/ui/lottie-icon";
 import { animations } from "@/lib/utils/lottie-animations";
 import { useTheme } from "@/lib/hooks/use-theme";
-import { useTranslation } from "@/lib/contexts/translation-context";
-import { usePlatform } from "@/lib/hooks/use-is-mac";
-import { t } from "@/lib/i18n/translations";
 import { GitHubIcon, LinkedInIcon, XIcon, SlackIcon } from "@/components/icons";
+import { Check } from "lucide-react";
 import { ProductHuntBadge } from "@/components/design/product-hunt-badge";
 import {
   playClickSound as playSound,
@@ -19,13 +17,17 @@ import {
   setSoundEnabled,
 } from "@/lib/utils/sound";
 import { Cookies } from "@/lib/utils/constants";
+import { useTranslation } from "@/lib/contexts/translation-context";
+import { t as translate } from "@/lib/i18n/translations";
 
-const GITHUB_REPO_URL = "https://github.com/princemuichkine/viacascade";
+const GITHUB_REPO_URL = "https://github.com/lomiafrica/lomi./";
 
 export function Footer() {
   const { resolvedTheme, mounted, setTheme } = useTheme();
   const { currentLanguage } = useTranslation();
-  const platform = usePlatform();
+
+  // Create t function that uses currentLanguage (same pattern as tracking-cookie.tsx)
+  const t = (key: string) => String(translate(key, currentLanguage));
   const [hoveredTheme, setHoveredTheme] = useState(false);
   const [hoveredSound, setHoveredSound] = useState(false);
   const [isSoundEnabled, setIsSoundEnabled] = useState(() => getSoundEnabled());
@@ -83,7 +85,6 @@ export function Footer() {
   }, [isSoundEnabled, playClickSound]);
 
   // Wait for theme to be mounted to prevent hydration mismatches
-  const logoSrc = "/icon.webp";
 
   return (
     <div>
@@ -92,13 +93,13 @@ export function Footer() {
         <div className="container max-w-6xl mx-auto px-4 pt-8 py-8 border-b border-zinc-200 dark:border-zinc-800"></div>
 
         {/* Footer content */}
-        <div className="w-full text-zinc-600 dark:text-zinc-400 pt-8 pb-20 select-none relative z-10">
+        <div className="w-full text-zinc-600 dark:text-zinc-400 pt-12 pb-16 select-none relative z-10">
           <div className="container max-w-5xl mx-auto pl-4 pr-6 md:px-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1.3fr_1fr_1fr] gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {/* Subscribe and Social */}
-              <div className="space-y-4 lg:-translate-x-2 order-3 md:order-1">
-                <div className="flex flex-row items-center text-left justify-start gap-2 w-full max-w-[600px]">
-                  <div className="flex items-center gap-6 flex-wrap ml-4 sm:ml-4 justify-left w-full sm:w-auto">
+              <div className="space-y-4 lg:-ml-20 order-4 md:order-1">
+                <div className="flex flex-row items-center text-left justify-start gap-1 w-full max-w-[600px]">
+                  <div className="flex items-center gap-4 flex-wrap ml-4 sm:ml-4 justify-left w-full sm:w-auto">
                     <Link
                       href="/"
                       onClick={playClickSound}
@@ -106,7 +107,7 @@ export function Footer() {
                     >
                       {mounted && (
                         <Image
-                          src={logoSrc}
+                          src="/company/transparent_l.webp"
                           alt="lomi. logo"
                           width={38}
                           height={38}
@@ -128,32 +129,32 @@ export function Footer() {
                       <GitHubIcon className="h-[20px] w-[20px]" />
                     </Link>
                     <Link
-                      href="https://x.com/viacascadecom"
+                      href="https://twitter.com/lomiafrica"
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={playClickSound}
                       className="text-zinc-600 dark:text-zinc-400 hover:text-[#000000] dark:hover:text-[#FFFFFF] inline-flex items-center transition-colors"
-                      aria-label="Follow us on X"
+                      aria-label="Follow us on Twitter"
                     >
-                      <XIcon className="h-[22px] w-[22px] translate-y-[-0.5px] translate-x-[-4px]" />
+                      <XIcon className="h-[22px] w-[22px] translate-y-[-0.5px] -translate-x-px" />
                     </Link>
                     <Link
-                      href="https://www.linkedin.com/company/viacascade"
+                      href="https://www.linkedin.com/company/lomiafri"
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={playClickSound}
-                      className="text-zinc-600 dark:text-zinc-400 hover:text-[#0072b1] dark:hover:text-[#0072b1] inline-flex items-center transition-colors"
+                      className="text-zinc-600 dark:text-zinc-400 hover:text-[#0A66C2] dark:hover:text-[#0A66C2] inline-flex items-center transition-colors"
                       aria-label="Follow us on LinkedIn"
                     >
-                      <LinkedInIcon className="h-[19px] w-[19px] translate-x-[-2px]" />
+                      <LinkedInIcon className="h-[20px] w-[20px]" />
                     </Link>
                     <Link
-                      href="https://slack.com"
+                      href="https://slack.lomi.africa"
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={playClickSound}
-                      className="text-zinc-600 dark:text-zinc-400 hover:text-[#36C5F0] dark:hover:text-[#36C5F0] inline-flex items-center transition-colors"
-                      aria-label="Join us on Slack"
+                      className="text-zinc-600 dark:text-zinc-400 hover:text-[#4A154B] dark:hover:text-[#4A154B] inline-flex items-center transition-colors"
+                      aria-label="Join our Slack community"
                     >
                       <SlackIcon className="h-[20px] w-[20px]" />
                     </Link>
@@ -180,7 +181,7 @@ export function Footer() {
                               ? animations.sun
                               : animations.point
                           }
-                          size={23}
+                          size={20}
                           loop={false}
                           autoplay={false}
                           initialFrame={0}
@@ -223,7 +224,7 @@ export function Footer() {
                           animationData={
                             isSoundEnabled ? animations.pause : animations.play
                           }
-                          size={23}
+                          size={20}
                           loop={false}
                           autoplay={false}
                           initialFrame={0}
@@ -252,31 +253,29 @@ export function Footer() {
                   <ProductHuntBadge />
                 </div>
 
-                {/* Description */}
-                <div className="mt-2">
-                  <p className="text-xs text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto leading-relaxed text-left">
-                    {t("footer.description", currentLanguage) as string}
-                  </p>
-                </div>
-
+                {/* Copyright and Language - Better mobile alignment */}
                 <div className="flex flex-row items-center justify-between text-xs text-zinc-600 dark:text-zinc-400 mt-4 w-full">
-                  <span className="px-2 py-1.5 h-8 bg-transparent hover:bg-[#2a2f3d]/3 rounded-sm transition-colors duration-200 dark:hover:bg-[#2a2f3d]/10 inline-flex items-center text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100">
-                    {t("footer.copyright", currentLanguage) as string}
+                  <span className="px-2 py-1.5 h-8 bg-transparent hover:bg-[#2a2f3d]/5 rounded-sm transition-colors duration-200 dark:hover:bg-[#2a2f3d]/20 inline-flex items-center text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100">
+                    {t("footer.copyright")}
                   </span>
-                  <LanguageSwitcher className="px-2 py-1.5 h-8 bg-transparent hover:bg-[#2a2f3d]/3 rounded-sm transition-colors duration-200 dark:hover:bg-[#2a2f3d]/10 inline-flex items-center text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100" />
+                  <div>
+                    <LanguageSwitcher />
+                  </div>
                 </div>
 
-                {/* System Status
+                {/* System Status and Certifications Container - Using Absolute Positioning for both */}
                 <div className="hidden sm:flex mt-[20px] ml-auto relative h-[70px]">
+                  {/* Status Link - Absolutely positioned to the far right */}
                   <a
-                    href="#"
+                    href="https://status.lomi.africa"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="absolute right-0 top-1/2 -translate-y-1/2 flex items-center gap-2.5 px-2 py-1.5 text-xs h-8 bg-transparent hover:bg-[#2a2f3d]/[0.03] rounded-sm transition-colors duration-200 justify-center dark:hover:bg-[#2a2f3d]/10 group text-blue-700 dark:text-[#4fd686] hover:text-blue-800 dark:hover:text-[#4fd686]"
+                    className="absolute right-0 top-1/2 -translate-y-1/2 flex items-center gap-1.5 px-2 py-1.5 text-xs h-8 bg-transparent hover:bg-[#2a2f3d]/5 rounded-sm transition-colors duration-200 justify-center dark:hover:bg-[#2a2f3d]/20 group text-blue-700 dark:text-[#4fd686] hover:text-blue-800 dark:hover:text-[#4fd686]"
+                    onClick={playClickSound}
                   >
                     <div className="relative flex items-center justify-center w-3 h-3 shrink-0">
-                      <span className="animate-ping absolute inline-flex h-2 w-2 rounded-sm bg-blue-400 dark:bg-[#4fd686]/50 opacity-50"></span>
-                      <span className="relative inline-flex rounded-sm h-3 w-3 bg-blue-500 dark:bg-[#2a5a45] items-center justify-center">
+                      <span className="animate-ping absolute inline-flex h-2 w-2 rounded-full bg-blue-400 dark:bg-[#4fd686]/50 opacity-50"></span>
+                      <span className="relative inline-flex rounded-full h-3 w-3 bg-blue-500 dark:bg-[#2a5a45] items-center justify-center">
                         <Check
                           className="h-2 w-2 text-white dark:text-[#4fd686]"
                           strokeWidth={3}
@@ -284,140 +283,213 @@ export function Footer() {
                       </span>
                     </div>
                     <span className="text-blue-700 dark:text-[#4fd686] font-normal whitespace-nowrap text-center">
-                      {t("footer.status", currentLanguage) as string}
+                      {t("footer.status")}
                     </span>
                   </a>
-                </div> */}
+                  {/* Certification Icons Container - Absolutely positioned to the left of the status link */}
+                  {/* Estimate status link width + gap ~ 160px? Use right-40 (160px) */}
+                  <div className="absolute right-40 top-1/2 -translate-y-1/2 flex items-center">
+                    {/* Positioned absolutely, left of status */}
+                    {/* PCI Icon Wrapper - Remove cursor-pointer */}
+                    <div
+                      className="group mr-2"
+                      title="lomi. is PCI DSS level 4 certified"
+                    >
+                      <Image
+                        src="/regulatory/PCI_DSS.webp"
+                        alt="PCI DSS Certified"
+                        width={120}
+                        height={70}
+                        className="w-[120px] h-[70px] shrink-0 object-contain filter grayscale opacity-30 group-hover:grayscale-0 group-hover:opacity-100 dark:filter dark:grayscale dark:brightness-100 dark:opacity-25 dark:group-hover:opacity-100 transition-all"
+                      />
+                    </div>
+                    {/* SSL Icon - Remove cursor-pointer */}
+                    <div className="group mr-6" title="lomi. is SSL secure">
+                      <Image
+                        src="/regulatory/SSL.webp"
+                        alt="SSL Secured"
+                        width={69}
+                        height={27}
+                        className="w-[69px] h-[27px] shrink-0 object-contain filter grayscale opacity-30 group-hover:grayscale-0 group-hover:opacity-100 dark:invert dark:opacity-25 dark:group-hover:opacity-100 transition-all"
+                      />
+                    </div>
+                  </div>
+                </div>
               </div>
 
               {/* Features Column */}
-              <div className="space-y-4 md:translate-x-30 order-1 md:order-2">
-                <h2 className="text-zinc-900 dark:text-white font-normal text-md">
-                  {t("footer.features.title", currentLanguage) as string}
+              <div className="space-y-4 pl-4 order-1 md:order-2 lg:translate-x-[68px]">
+                <h2 className="text-zinc-900 dark:text-white font-normal text-base">
+                  {t("footer.features.title")}
                 </h2>
-                <ul className="space-y-3 relative z-20 pointer-events-auto">
+                <ul className="space-y-3 relative z-20">
                   {[
                     {
-                      name: t("footer.features.learn", currentLanguage),
-                      key: "learn",
-                      link: "#",
+                      name: t("footer.features.overview"),
+                      link: "/",
                     },
                     {
-                      name: t("footer.features.enrich", currentLanguage),
-                      key: "enrich",
-                      link: "#",
+                      name: t("footer.features.pricing"),
+                      link: "/pricing",
                     },
                     {
-                      name: t("footer.features.linkedin", currentLanguage),
-                      key: "linkedin",
-                      link: "#",
-                    },
-                    {
-                      name: t("footer.features.autopilot", currentLanguage),
-                      key: "autopilot",
-                      link: "#",
-                    },
-                    {
-                      name: t("footer.features.xray", currentLanguage),
-                      key: "xray",
-                      link: "#",
-                    },
-                    {
-                      name: t("footer.features.scrapers", currentLanguage),
-                      key: "scrapers",
-                      link: "#",
+                      name: t("footer.features.faq"),
+                      link: "/faq",
                     },
                   ].map((item) => (
-                    <li key={item.key} className="relative z-20">
-                      <span className="text-sm text-zinc-400 dark:text-zinc-500 inline-flex items-center gap-2 cursor-not-allowed">
-                        {item.name as string}
-                      </span>
+                    <li key={item.name} className="relative z-20">
+                      <Link
+                        href={item.link}
+                        className="text-sm text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white transition-colors inline-flex items-center gap-2"
+                        onClick={playClickSound}
+                      >
+                        {item.name}
+                      </Link>
                     </li>
                   ))}
                 </ul>
               </div>
 
               {/* Resources Column */}
-              <div className="space-y-4 lg:translate-x-24 order-2 md:order-3">
-                <h2 className="text-zinc-900 dark:text-white font-normal text-md">
-                  {t("footer.resources.title", currentLanguage) as string}
+              <div className="space-y-4 pl-4 order-2 md:order-3 lg:translate-x-[75px]">
+                <h2 className="text-zinc-900 dark:text-white font-normal text-base">
+                  {t("footer.resources.title")}
                 </h2>
                 <ul className="space-y-3">
-                  {platform !== "mobile" && (
-                    <li>
-                      <a
-                        href="#"
+                  {[
+                    {
+                      name: t("footer.resources.github"),
+                      link: "https://github.com/lomiafrica/lomi.",
+                    },
+                    {
+                      name: t("footer.resources.support"),
+                      link: "https://docs.lomi.africa/docs/core/support/contact",
+                      target: "_blank",
+                      rel: "noopener noreferrer",
+                    },
+                    {
+                      name: t("footer.resources.featureRequest"),
+                      link: "https://github.com/lomiafrica/lomi./issues/new?labels=enhancement",
+                    },
+                    {
+                      name: t("footer.resources.review"),
+                      link: "https://www.producthunt.com/products/lomi/reviews/new",
+                    },
+                    { name: t("footer.resources.privacy"), link: "/privacy" },
+                    { name: t("footer.resources.terms"), link: "/terms" },
+                  ].map((item) => (
+                    <li key={item.name}>
+                      <Link
+                        href={item.link}
+                        target={item.target}
+                        rel={item.rel}
+                        className="text-sm text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white transition-colors whitespace-nowrap"
                         onClick={playClickSound}
-                        className="text-sm text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white transition-colors"
                       >
-                        {platform === "mac"
-                          ? (t(
-                            "footer.resources.download_macos",
-                            currentLanguage,
-                          ) as string)
-                          : (t(
-                            "footer.resources.download_windows",
-                            currentLanguage,
-                          ) as string)}
-                      </a>
+                        {item.name}
+                      </Link>
                     </li>
-                  )}
-                  <li>
-                    <Link
-                      href="/blog"
-                      onClick={playClickSound}
-                      className="text-sm text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white transition-colors"
-                    >
-                      Blog
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="/changelog"
-                      onClick={playClickSound}
-                      className="text-sm text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white transition-colors"
-                    >
-                      {
-                        t(
-                          "footer.resources.changelog",
-                          currentLanguage,
-                        ) as string
-                      }
-                    </Link>
-                  </li>
+                  ))}
                   <li>
                     <a
-                      href="/assets/brand-assets.zip"
-                      download
-                      onClick={playClickSound}
+                      href="/assets/lomi.brand.zip"
+                      download="lomi.brand.zip"
                       className="text-sm text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white transition-colors"
                     >
-                      {
-                        t(
-                          "footer.resources.branding",
-                          currentLanguage,
-                        ) as string
-                      }
+                      {t("footer.resources.branding")}
                     </a>
                   </li>
-                  <li>
-                    <Link
-                      href="/privacy"
-                      onClick={playClickSound}
-                      className="text-sm text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white transition-colors"
-                    >
-                      {t("footer.resources.privacy", currentLanguage) as string}
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="/terms"
-                      onClick={playClickSound}
-                      className="text-sm text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white transition-colors"
-                    >
-                      {t("footer.resources.terms", currentLanguage) as string}
-                    </Link>
-                  </li>
+                </ul>
+              </div>
+
+              {/* Company Column */}
+              <div className="space-y-4 pl-4 order-3 md:order-4 lg:translate-x-[160px]">
+                <h2 className="text-zinc-900 dark:text-white font-normal text-base">
+                  {t("footer.company.title")}
+                </h2>
+                <ul className="space-y-3">
+                  {[
+                    {
+                      name: t("footer.company.story"),
+                      link: "https://docs.lomi.africa/docs/core/introduction/manifesto",
+                      target: "_blank",
+                      rel: "noopener noreferrer",
+                      color: "",
+                      icon: (
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-4 w-4 ml-1 transition-transform duration-300 transform group-hover:translate-x-1 opacity-0 group-hover:opacity-100"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M13 10V3L4 14h7v7l9-11h-7z"
+                          />
+                        </svg>
+                      ),
+                    },
+                    {
+                      name: t("footer.company.blog"),
+                      link: "/blog",
+                      color: "",
+                      icon: (
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-4 w-4 ml-1 transition-transform duration-300 transform group-hover:translate-x-1 opacity-0 group-hover:opacity-100"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+                          />
+                        </svg>
+                      ),
+                    },
+                    {
+                      name: t("footer.company.openSource"),
+                      link: "https://docs.lomi.africa/docs/core/freedom/open-source",
+                      target: "_blank",
+                      rel: "noopener noreferrer",
+                      color: "text-sky-600 dark:text-sky-300 hover:text-sky-900 dark:hover:text-sky-200",
+                      icon: (
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-4 w-4 ml-1 transition-transform duration-300 transform group-hover:translate-x-1 opacity-0 group-hover:opacity-100"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                          />
+                        </svg>
+                      ),
+                    },
+                  ].map((item) => (
+                    <li key={item.name}>
+                      <Link
+                        href={item.link}
+                        target={item.target}
+                        rel={item.rel}
+                        className={`text-sm ${item.color} transition-colors group flex items-center`}
+                        onClick={playClickSound}
+                      >
+                        <span>{item.name}</span>
+                        {item.icon}
+                      </Link>
+                    </li>
+                  ))}
                 </ul>
               </div>
             </div>

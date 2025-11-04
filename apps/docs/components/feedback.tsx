@@ -127,7 +127,7 @@ export function Feedback({
       </div>
       <CollapsibleContent className="mt-3">
         {previous ? (
-          <div className="px-3 py-6 flex flex-col items-center gap-3 bg-fd-card text-fd-muted-foreground text-sm text-center rounded-xl">
+          <div className="px-3 py-6 flex flex-col items-center gap-3 bg-fd-card text-fd-muted-foreground text-sm text-center rounded-sm">
             <p>Thank you for your feedback!</p>
             <div className="flex flex-row items-center gap-2">
               <a

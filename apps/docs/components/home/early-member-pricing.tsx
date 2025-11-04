@@ -1,0 +1,97 @@
+'use client';
+
+import React, { useState, useEffect, useMemo } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { InfoBox } from "@/components/ui/info-box";
+import Link from "next/link";
+import { SingleSwirl } from "@/components/design/swirls";
+import { t } from "@/lib/i18n/translations";
+
+export function EarlyMemberPricing() {
+  const [titleNumber, setTitleNumber] = useState(0);
+  const prices = useMemo(() => ["200 F CFA", "0.30 USD", "0.30 EUR"], []);
+
+  // Handle price animation
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setTitleNumber((prev) => (prev + 1) % prices.length);
+    }, 15000);
+    return () => clearTimeout(timeoutId);
+  }, [prices.length]);
+  return (
+    <div className="mt-20 md:mt-40 hidden md:block">
+      <div className="container mx-auto px-6 md:px-8 lg:px-12">
+        <section className="overflow-hidden relative bg-foreground dark:bg-background text-background dark:text-foreground rounded-sm border p-0 pb-16 pt-16 md:pb-32 md:pt-32">
+          <SingleSwirl className="pointer-events-none absolute top-0 bottom-0 left-0" />
+          <SingleSwirl className="pointer-events-none rotate-180 absolute top-0 bottom-0 right-0 opacity-50" />
+          <div className="container flex flex-col items-center justify-center">
+            <div className="text-center mb-6 md:mb-8 px-4">
+              <div className="mb-0 md:mb-0 flex justify-center">
+                <InfoBox variant="blue">{t("earlyMemberPricing.tag") as string}</InfoBox>
+              </div>
+              <div className="mb-6 md:mb-8">
+                <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-4 flex flex-col items-center">
+                  <div className="flex flex-wrap items-baseline justify-center translate-x-[4px]">
+                    <span className="inline-flex whitespace-nowrap mr-2 text-3xl md:text-4xl lg:text-6xl">
+                      3.2% +
+                    </span>
+                    <div className="relative inline-flex items-center h-16 sm:h-20 md:h-24 min-w-[200px] sm:min-w-[250px] w-auto">
+                      <AnimatePresence mode="wait">
+                        <motion.span
+                          key={titleNumber}
+                          className="absolute text-background dark:text-foreground whitespace-nowrap mt-2"
+                          initial={{
+                            opacity: 0,
+                            y: titleNumber === 0 ? -50 : 50,
+                          }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: titleNumber === 0 ? 50 : -50 }}
+                          transition={{
+                            type: "spring",
+                            stiffness: 30,
+                            duration: 2,
+                          }}
+                          style={{ top: "26px" }}
+                        >
+                          <span className="block sm:inline relative top-[4px] sm:top-0 text-2xl md:text-4xl lg:text-6xl">
+                            {prices[titleNumber]}
+                          </span>
+                        </motion.span>
+                      </AnimatePresence>
+                    </div>
+                  </div>
+                </h1>
+              </div>
+            </div>
+            <div className="flex justify-center gap-4 -mt-2 md:-mt-4 px-4">
+              <Button
+                type="button"
+                variant="outline"
+                size="header"
+                asChild
+              >
+                <a
+                  href="https://docs.lomi.africa/docs/core/merchant-of-record/pricing"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Learn more about our pricing structure and fees (opens in new tab)"
+                >
+                  {t("earlyMemberPricing.learnMore") as string}
+                </a>
+              </Button>
+              <Button
+                type="button"
+                variant="blue"
+                size="header"
+                asChild
+              >
+                <Link href="/sign-in">{t("earlyMemberPricing.getStarted") as string}</Link>
+              </Button>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  );
+}

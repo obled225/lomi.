@@ -15,7 +15,7 @@ type WithAsChild<Base extends object> =
   | (Base & { asChild?: false | undefined });
 
 type SlotProps<T extends HTMLElement = HTMLElement> = {
-  children?: any;
+  children?: React.ReactNode;
 } & DOMMotionProps<T>;
 
 function mergeRefs<T>(

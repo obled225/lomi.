@@ -1,4 +1,45 @@
 {
+    "hero": {
+    "title": "Built to make you profitable,\nlomi. is the best way to accept payments in West Africa."
+    },
+  "footer": {
+    "bceao_accreditation": "lomi. is currently in the process of being an accredited payment service provider by the BCEAO.",
+    "features": {
+      "title": "Features",
+      "overview": "Overview",
+      "pricing": "Pricing",
+      "faq": "FAQ"
+    },
+    "resources": {
+      "title": "Resources",
+      "github": "Github",
+      "support": "Support",
+      "privacy": "Privacy Policy",
+      "terms": "Terms",
+      "branding": "Brand assets",
+      "featureRequest": "Request a feature",
+      "review": "Leave us a review"
+    },
+    "company": {
+      "title": "Company",
+      "story": "Story",
+      "blog": "Blog",
+      "openSource": "Open-source"
+    },
+    "subscribe": {
+      "placeholder": "Email address**",
+      "button": "Subscribe"
+    },
+    "status": "All services are online",
+    "copyright": "Copyright © 2025 — lomi. LLC"
+  },
+  "components": {
+    "tracking_cookie": {
+      "message": "We use tracking cookies to understand how you use the product and help us improve it.",
+      "accept": "Accept",
+      "decline": "Decline"
+    }
+  },
   "blog": {
     "title": "Blog",
     "description": "Latest insights, updates, and stories from our team.",
@@ -28,5 +69,66 @@
       "spreadsheets": "Spreadsheets",
       "case-study": "Case study"
     }
+  },
+  "header": {
+    "products": "Products",
+    "pricing": "Pricing",
+    "documentation": "Documentation",
+    "blog": "Blog",
+    "talk": "Talk to us",
+    "dashboard": "Dashboard",
+    "connect": "Connect"
+  },
+  "sdks": {
+    "title": "Lead the charge"
+  },
+  "earlyMemberPricing": {
+    "tag": "No surprises, no hidden fees, no monthly costs",
+    "getStarted": "Get started",
+    "learnMore": "Learn more"
+  },
+"features": {
+    "title": "Unlock your business potential",
+    "card1": {
+      "title": "All your customers preferred payment methods",
+      "description": "Accept local and international payment methods, seamlessly.",
+      "momo_description": "Mobile money payments",
+      "wallet_description": "Digital wallet payments",
+      "crypto_description": "Cryptocurrency payments",
+      "spi_description": "Interoperable payment system",
+      "card_description": "Card payment solution"
+    },
+    "card2": {
+      "title": "A checkout experience that converts",
+      "description": "Create a fast, powerful, and secure payment flow."
+    },
+    "card3": {
+      "title": "Your imagination is the limit",
+      "description": "From products to subscriptions to usage billing, we got you covered.",
+      "tab_products": "Products",
+      "tab_subscriptions": "Subscriptions",
+      "tab_checkout": "Checkout"
+    },
+    "card4": {
+      "title": "Instant and effortless payouts",
+      "description": "Withdraw your earnings directly to your mobile money or bank account in seconds.",
+      "balance": "Balance",
+      "payout_phone": "Payout as much as you need to your phone number",
+      "payout_bank": "or directly to your local or international bank account"
+    },
+    "card5": {
+      "title": "See what sticks with powerful analytics",
+      "description": "Monitor revenue, track transactions, and plan your next move with our powerful dashboard."
+    },
+    "card6": {
+      "title": "Made possible by YOU",
+      "description": "Open-source, 100% powered by passion and the open-source community.",
+      "open_source_note": "Fully open-source and actively maintained by contributions.",
+      "documentation_button": "Documentation"
+    }
+  },
+    "careers": {
+    "title": "An open-source software company focused on removing payment barriers.",
+    "join_us": "Join us"
   }
 }

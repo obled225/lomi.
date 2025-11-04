@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -175,23 +174,14 @@
 }
 
 @layer utilities {
-  /* Hide scrollbars globally */
+  /* Hide scrollbars for specific elements only */
   .hide-scrollbar {
     -ms-overflow-style: none; /* Internet Explorer 10+ */
     scrollbar-width: none; /* Firefox */
+    overflow-x: hidden; /* Hide horizontal scrollbar */
   }
   .hide-scrollbar::-webkit-scrollbar {
     display: none; /* Safari and Chrome */
-  }
-
-  /* Hide scrollbars for all elements by default */
-  * {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-
-  *::-webkit-scrollbar {
-    display: none;
   }
 }
 

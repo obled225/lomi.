@@ -1,8 +1,14 @@
 import { createBrowserClient } from "@supabase/ssr";
 
 export function createClient() {
-  return createBrowserClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-  );
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+
+  if (!supabaseUrl || !supabaseAnonKey) {
+    throw new Error("Missing Supabase environment variables");
+  }
+
+  // createBrowserClient automatically reads cookies from the browser
+  // Cookies set by website app with domain ".lomi.africa" will be accessible here
+  return createBrowserClient(supabaseUrl, supabaseAnonKey);
 }

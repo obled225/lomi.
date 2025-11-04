@@ -1,3 +1,5 @@
+'use client';
+
 import * as React from "react";
 import { useEffect, useRef, useCallback } from "react";
 
@@ -98,17 +100,16 @@ const FuzzyText = React.forwardRef<HTMLCanvasElement, FuzzyTextProps>(
         offCtx.textBaseline = "alphabetic";
         const metrics = offCtx.measureText(text);
 
-        const actualLeft = metrics.actualBoundingBoxLeft ?? 0;
-        const actualRight = metrics.actualBoundingBoxRight ?? metrics.width;
         const actualAscent = metrics.actualBoundingBoxAscent ?? numericFontSize;
         const actualDescent =
           metrics.actualBoundingBoxDescent ?? numericFontSize * 0.2;
 
-        const textBoundingWidth = Math.ceil(actualLeft + actualRight);
+        // Use metrics.width with generous padding for reliable text rendering
+        const textWidth = Math.ceil(metrics.width * 1.1); // Add 10% padding
         const tightHeight = Math.ceil(actualAscent + actualDescent);
 
-        const extraWidthBuffer = 10;
-        const offscreenWidth = textBoundingWidth + extraWidthBuffer;
+        const extraWidthBuffer = 30;
+        const offscreenWidth = textWidth + extraWidthBuffer;
 
         offscreen.width = offscreenWidth;
         offscreen.height = tightHeight;
@@ -120,7 +121,7 @@ const FuzzyText = React.forwardRef<HTMLCanvasElement, FuzzyTextProps>(
         // Get the actual computed color
         textColorRef.current = getComputedColor();
         offCtx.fillStyle = textColorRef.current;
-        offCtx.fillText(text, xOffset - actualLeft, actualAscent);
+        offCtx.fillText(text, xOffset, actualAscent);
 
         const horizontalMargin = 50;
         const verticalMargin = 0;
@@ -130,7 +131,7 @@ const FuzzyText = React.forwardRef<HTMLCanvasElement, FuzzyTextProps>(
 
         const interactiveLeft = horizontalMargin + xOffset;
         const interactiveTop = verticalMargin;
-        const interactiveRight = interactiveLeft + textBoundingWidth;
+        const interactiveRight = interactiveLeft + textWidth;
         const interactiveBottom = interactiveTop + tightHeight;
 
         let isHovering = false;

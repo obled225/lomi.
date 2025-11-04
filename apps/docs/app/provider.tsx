@@ -4,6 +4,8 @@ import { RootProvider } from 'fumadocs-ui/provider';
 import dynamic from 'next/dynamic';
 import type { ReactNode } from 'react';
 import { TooltipProvider } from '@radix-ui/react-tooltip';
+import { TranslationProvider } from '@/lib/contexts/translation-context';
+import { GithubStarsProvider } from '@/lib/hooks/use-github-stars';
 
 const SearchDialog = dynamic(() => import('@/components/search'), {
   ssr: false,
@@ -31,13 +33,17 @@ export function Provider({ children }: { children: ReactNode }) {
         SearchDialog,
       }}
     >
-      <TooltipProvider>
-        <script
-          suppressHydrationWarning
-          dangerouslySetInnerHTML={{ __html: inject }}
-        />
-        {children}
-      </TooltipProvider>
+      <TranslationProvider>
+        <GithubStarsProvider>
+          <TooltipProvider>
+            <script
+              suppressHydrationWarning
+              dangerouslySetInnerHTML={{ __html: inject }}
+            />
+            {children}
+          </TooltipProvider>
+        </GithubStarsProvider>
+      </TranslationProvider>
     </RootProvider>
   );
 }

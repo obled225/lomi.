@@ -13,7 +13,7 @@ import { ArrowRight } from "lucide-react";
 import { playClickSound } from "@/lib/utils/sound";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import "../../styles/blog.css";
+import "../../app/styles/blog.css";
 
 // Helper function to get category from post
 const getPostCategory = (post: Post): string => {

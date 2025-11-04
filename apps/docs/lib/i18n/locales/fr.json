@@ -1,4 +1,45 @@
 {
+  "hero": {
+    "title": "Conçu pour accélérer votre croissance,\nlomi. est la solution de paiement pensée pour l'Afrique de l'Ouest."
+  },
+  "footer": {
+    "bceao_accreditation": "lomi. est actuellement en cours d'accréditation en tant que prestataire de services de paiement par la BCEAO.",
+    "features": {
+      "title": "Fonctionnalités",
+      "overview": "Aperçu",
+      "pricing": "Tarification",
+      "faq": "FAQ"
+    },
+    "resources": {
+      "title": "Ressources",
+      "github": "Github",
+      "support": "Support",
+      "privacy": "Politique de confidentialité",
+      "terms": "Conditions générales",
+      "branding": "Branding",
+      "featureRequest": "Demander une fonctionnalité",
+      "review": "Laissez-nous un feedback"
+    },
+    "company": {
+      "title": "Entreprise",
+      "story": "À propos de nous",
+      "blog": "Blog",
+      "openSource": "Open-source"
+    },
+    "subscribe": {
+      "placeholder": "Adresse email**",
+      "button": "S'abonner"
+    },
+    "status": "Systèmes opérationnels",
+    "copyright": "Copyright © 2025 — lomi. LLC"
+  },
+  "components": {
+    "tracking_cookie": {
+      "message": "Nous utilisons des cookies pour comprendre comment vous utilisez le produit.",
+      "accept": "Accepter",
+      "decline": "Refuser"
+    }
+  },
   "blog": {
     "title": "Blog",
     "description": "Les derniers insights et mises à jour de notre équipe.",
@@ -28,5 +69,66 @@
       "spreadsheets": "Spreadsheets",
       "case-study": "Étude de cas"
     }
+  },
+  "header": {
+    "products": "Produits",
+    "pricing": "Tarification",
+    "documentation": "Documentation",
+    "blog": "Blog",
+    "talk": "Contactez-nous",
+    "dashboard": "Tableau de bord",
+    "connect": "Connexion"
+  },
+  "sdks": {
+    "title": "Gardez une longueur d'avance"
+  },
+  "earlyMemberPricing": {
+    "tag": "Pas de surprises, pas de frais cachés, pas de coûts mensuels",
+    "getStarted": "Commencer",
+    "learnMore": "En savoir plus"
+  },
+"features": {
+    "title": "Libérez le potentiel de votre entreprise",
+    "card1": {
+      "title": "Tous les moyens de paiement préférés de vos clients",
+      "description": "Acceptez les paiements locaux et internationaux, sans efforts.",
+      "momo_description": "Paiements par mobile money",
+      "wallet_description": "Paiements par E-Wallet",
+      "crypto_description": "Paiements en cryptomonnaie",
+      "spi_description": "Système interopérable de paiement",
+      "card_description": "Solution de paiement par carte"
+    },
+    "card2": {
+      "title": "Une expérience de paiement qui convertit",
+      "description": "Créez des flux de paiement rapide, puissant et sécurisé."
+    },
+    "card3": {
+      "title": "Votre imagination est votre seule limite",
+      "description": "Des produits aux abonnements en passant par la facturation à l'usage.",
+      "tab_products": "Produits",
+      "tab_subscriptions": "Abonnements",
+      "tab_checkout": "Paiement"
+    },
+    "card4": {
+      "title": "Des versements instantanés et sans effort",
+      "description": "Retirez vos revenus en quelques secondes.",
+      "balance": "Solde",
+      "payout_phone": "Envoyez votre argent sur votre téléphone",
+      "payout_bank": "ou directement sur votre compte bancaire."
+    },
+    "card5": {
+      "title": "Analysez ce qui marche",
+      "description": "Surveillez vos performances et planifiez vos ventes avec un tableau de bord puissant."
+    },
+    "card6": {
+      "title": "Rendu possible par VOUS",
+      "description": "Open-source, 100% alimenté par notre passion et notre communauté.",
+      "open_source_note": "Entièrement open-source et activement maintenu.",
+      "documentation_button": "Documentation"
+    }
+  },
+  "careers": {
+    "title": "Un logiciel open-source axée sur l'élimination des barrières de paiement.",
+    "join_us": "Rejoignez-nous"
   }
 }

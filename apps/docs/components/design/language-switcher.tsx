@@ -1,6 +1,6 @@
 "use client";
 
-import { memo, useCallback } from "react";
+import React, { memo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { languages } from "@/lib/i18n/config";
 import { useTranslation } from "@/lib/contexts/translation-context";
@@ -46,7 +46,7 @@ export const LanguageSwitcher = memo(
       <button
         onClick={toggleLanguage}
         type="button" // Explicitly set type to prevent form submission
-        className={`relative overflow-visible text-xs text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors rounded-sm px-2 py-1.5 hover:bg-[#2a2f3d]/[0.03] dark:hover:bg-[#2a2f3d]/10 ${className}`}
+        className={`relative overflow-visible text-xs text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors rounded-sm px-2 py-1.5 hover:bg-[#2a2f3d]/3 dark:hover:bg-[#2a2f3d]/10 ${className}`}
         aria-label="Switch language"
       >
         <div className="relative w-[70px] h-[16px] overflow-visible">

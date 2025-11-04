@@ -3,12 +3,12 @@ import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "@/lib/actions/utils";
 
-const infoBoxVariants = cva("p-4 rounded-sm select-none", {
+const infoBoxVariants = cva("py-2 px-3 rounded-sm select-none w-fit", {
   variants: {
     variant: {
       default:
         "bg-sky-100 dark:bg-sky-900 border border-sky-200 dark:border-sky-800/50",
-      blue: "bg-sky-100 dark:bg-sky-900 border border-sky-200 dark:border-sky-800/50",
+      blue: "bg-[#56A5F9] text-white border border-[#52A1F8] shadow-[inset_0_1px_0_rgba(255,255,255,0.15),inset_0_-1px_0_rgba(0,0,0,0.1)] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] dark:bg-sky-900 dark:text-sky-300 dark:border-sky-800/50",
       red: "bg-red-100 dark:bg-red-900 border border-red-200 dark:border-red-800/50",
       green:
         "bg-green-100 dark:bg-green-900 border border-green-200 dark:border-green-800/50",
@@ -48,7 +48,7 @@ const infoBoxTextVariants = cva("leading-relaxed", {
   variants: {
     variant: {
       default: "text-sky-600 dark:text-sky-300",
-      blue: "text-sky-600 dark:text-sky-300",
+      blue: "text-white dark:text-sky-300",
       green: "text-green-600 dark:text-green-300",
       red: "text-red-600 dark:text-red-300",
       orange: "text-orange-600 dark:text-orange-300",
@@ -69,7 +69,7 @@ const infoBoxTextVariants = cva("leading-relaxed", {
 
 export interface InfoBoxProps
   extends React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof infoBoxVariants> {
+  VariantProps<typeof infoBoxVariants> {
   children: React.ReactNode;
 }
 

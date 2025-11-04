@@ -3,7 +3,6 @@ import {
   Dialog,
   DialogContent,
   DialogHeader,
-  DialogTitle,
   DialogDescription,
   DialogFooter,
 } from "@/components/ui/dialog";
@@ -15,7 +14,7 @@ import {
   WhatsappIcon,
   LinkedInIcon,
 } from "@/components/icons";
-import { Send as Telegram, Mail, Copy, Share2, Check } from "lucide-react";
+import { Send as Telegram, Mail, Copy, Check } from "lucide-react";
 import { useTranslation } from "@/lib/contexts/translation-context";
 import { t } from "@/lib/i18n/translations";
 import { toast } from "@/components/design/toast";
