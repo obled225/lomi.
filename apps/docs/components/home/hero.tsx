@@ -4,10 +4,12 @@ import { useTranslation } from '@/lib/contexts/translation-context';
 import { t as translate } from '@/lib/i18n/translations';
 
 interface HeroProps {
-  dashboardImage?: string | {
-    light: string;
-    dark: string;
-  };
+  dashboardImage?:
+    | string
+    | {
+        light: string;
+        dark: string;
+      };
   mobileDashboardImage?: {
     light: string;
     dark: string;

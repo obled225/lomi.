@@ -9,7 +9,8 @@ const kbdVariants = cva(
       variant: {
         default: 'rounded-sm px-2 py-0.5 h-5 text-xs',
         tiny: 'rounded-sm px-1 h-3.5 min-w-[8px] text-[1px] !font-normal',
-        search: 'rounded-[3px] px-1.5 py-0.5 h-5 text-xs font-normal bg-slate-100 hover:bg-slate-200 dark:bg-zinc-700 dark:hover:bg-zinc-600 border border-gray-300 dark:border-gray-600',
+        search:
+          'rounded-[3px] px-1.5 py-0.5 h-5 text-xs font-normal bg-slate-100 hover:bg-slate-200 dark:bg-zinc-700 dark:hover:bg-zinc-600 border border-gray-300 dark:border-gray-600',
       },
     },
     defaultVariants: {

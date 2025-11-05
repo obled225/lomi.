@@ -205,7 +205,6 @@ export default function PrivacyClient() {
               }
             </p>
           </motion.section>
-
         </motion.div>
 
         {/* Footer info */}

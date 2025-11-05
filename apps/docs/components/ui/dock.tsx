@@ -1,4 +1,4 @@
-import React, { forwardRef } from "react";
+import React, { forwardRef } from 'react';
 
 interface DockProps {
   children: React.ReactNode;
@@ -14,4 +14,4 @@ export const Dock = forwardRef<HTMLDivElement, DockProps>(
   },
 );
 
-Dock.displayName = "Dock";
+Dock.displayName = 'Dock';

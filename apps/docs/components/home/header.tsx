@@ -57,7 +57,11 @@ const AuthButtons = ({
         size="header"
         onClick={() => {
           playClickSound();
-          navigate(user ? 'https://dashboard.lomi.africa/' : 'https://dashboard.lomi.africa/sign-in');
+          navigate(
+            user
+              ? 'https://dashboard.lomi.africa/'
+              : 'https://dashboard.lomi.africa/sign-in',
+          );
         }}
       >
         {user ? t('header.dashboard') : t('header.connect')}
@@ -77,27 +81,6 @@ export function Header() {
 
   // Create t function that uses currentLanguage (same pattern as tracking-cookie.tsx)
   const t = (key: string) => String(translate(key, currentLanguage));
-
-  const handleSmoothScroll = (sectionId: string) => (e: React.MouseEvent) => {
-    e.preventDefault();
-
-    // Smooth scroll to section with 4px offset
-    const element = document.getElementById(sectionId);
-    if (element) {
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset + 3.5;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth',
-      });
-    } else {
-      // If section doesn't exist on current page, navigate to home page with hash
-      if (window.location.pathname !== '/') {
-        window.location.href = `/#${sectionId}`;
-      }
-    }
-  };
 
   const handleIntegrationsMouseEnter = () => {
     if (leaveTimeout.current) {

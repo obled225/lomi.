@@ -30,16 +30,16 @@ export function useHomePageInit() {
   // Function to get mobile dashboard images (theme-based only, no language logic)
   const getMobileDashboardImage = () => {
     return {
-      light: "/mobile-light.webp",
-      dark: "/mobile-dark.webp"
+      light: '/mobile-light.webp',
+      dark: '/mobile-dark.webp',
     };
   };
 
   // Function to get mobile join us images (theme-based only, no language logic)
   const getMobileJoinUsImage = () => {
     return {
-      light: "/company/join-us-mobile-light.webp",
-      dark: "/company/join-us-mobile-dark.webp"
+      light: '/company/join-us-mobile-light.webp',
+      dark: '/company/join-us-mobile-dark.webp',
     };
   };
 

@@ -86,7 +86,9 @@ export default function CustomSearchDialog(props: SharedProps) {
                 className: '-m-1.5 me-auto',
               })}
             >
-              <span className="text-fd-muted-foreground/80 me-2">{t('search.filter')}</span>
+              <span className="text-fd-muted-foreground/80 me-2">
+                {t('search.filter')}
+              </span>
               {items.find((item) => item.value === tag)?.name}
               <ChevronDown className="size-3.5 text-fd-muted-foreground" />
             </PopoverTrigger>

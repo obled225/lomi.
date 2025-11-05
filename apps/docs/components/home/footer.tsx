@@ -9,7 +9,13 @@ import { LottieIcon } from '@/components/ui/lottie-icon';
 import { animations } from '@/lib/utils/lottie-animations';
 import { useTheme } from '@/lib/hooks/use-theme';
 import { useThemeAnimation } from '@/lib/hooks/use-theme-animation';
-import { FacebookIcon, GitHubIcon, LinkedInIcon, XIcon, SlackIcon } from '@/components/icons';
+import {
+  FacebookIcon,
+  GitHubIcon,
+  LinkedInIcon,
+  XIcon,
+  SlackIcon,
+} from '@/components/icons';
 import { Check } from 'lucide-react';
 import { ProductHuntBadge } from '@/components/design/product-hunt-badge';
 import { playClickSound as playSound } from '@/lib/utils/sound';
@@ -51,7 +57,6 @@ export function Footer() {
     playClickSound();
     await toggleTheme();
   }, [toggleTheme, playClickSound]);
-
 
   // Wait for theme to be mounted to prevent hydration mismatches
 

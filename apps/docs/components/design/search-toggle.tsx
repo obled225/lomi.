@@ -10,9 +10,7 @@ import { cn } from '@/lib/utils/cn';
 import { type ButtonProps, buttonVariants } from '@/components/ui/button';
 import { Kbd } from '@/components/ui/kbd';
 
-interface SearchToggleProps
-  extends ComponentProps<'button'>,
-  ButtonProps {
+interface SearchToggleProps extends ComponentProps<'button'>, ButtonProps {
   hideIfDisabled?: boolean;
 }
 

@@ -194,11 +194,11 @@ export function IntegrationsDropdown({
     const rows = [
       ['checkout-sessions-api', 'lomi-cli'], // Row 1
       ['refund-api', 'payout-transfer-api'], // Row 2
-      ['fraud-api'] // Row 3
+      ['fraud-api'], // Row 3
     ];
 
     // Find which row the clicked card belongs to
-    const currentRowIndex = rows.findIndex(row => row.includes(id));
+    const currentRowIndex = rows.findIndex((row) => row.includes(id));
 
     if (currentRowIndex === -1) return;
 
@@ -207,24 +207,34 @@ export function IntegrationsDropdown({
     // If clicking the same section that's already open, close the entire row
     if (expandedSections.includes(id)) {
       // Close all cards in the current row
-      setExpandedSections(prev => prev.filter(cardId => !currentRow.includes(cardId)));
+      setExpandedSections((prev) =>
+        prev.filter((cardId) => !currentRow.includes(cardId)),
+      );
       return;
     }
 
     // Check if any card from the current row is already open
-    const isCurrentRowOpen = currentRow.some(cardId => expandedSections.includes(cardId));
+    const isCurrentRowOpen = currentRow.some((cardId) =>
+      expandedSections.includes(cardId),
+    );
 
     if (isCurrentRowOpen) {
       // If current row is already open, just ensure all cards in row are open
-      setExpandedSections(prev => {
-        const newExpanded = prev.filter(cardId => !currentRow.includes(cardId)); // Remove current row
+      setExpandedSections((prev) => {
+        const newExpanded = prev.filter(
+          (cardId) => !currentRow.includes(cardId),
+        ); // Remove current row
         return [...newExpanded, ...currentRow]; // Add all cards in current row
       });
     } else {
       // Close any open cards from other rows and open all cards in current row
-      const otherRows = rows.filter((_, index) => index !== currentRowIndex).flat();
-      setExpandedSections(prev => {
-        const withoutOtherRows = prev.filter(cardId => !otherRows.includes(cardId));
+      const otherRows = rows
+        .filter((_, index) => index !== currentRowIndex)
+        .flat();
+      setExpandedSections((prev) => {
+        const withoutOtherRows = prev.filter(
+          (cardId) => !otherRows.includes(cardId),
+        );
         return [...withoutOtherRows, ...currentRow];
       });
     }
@@ -255,7 +265,8 @@ export function IntegrationsDropdown({
                     <div className="shrink-0 w-3 h-3 mt-1">
                       <LottieIcon
                         animationData={
-                          nativeFeatureIcons[index]?.animation || animations.globe
+                          nativeFeatureIcons[index]?.animation ||
+                          animations.globe
                         }
                         size={15}
                         loop={false}
@@ -322,8 +333,11 @@ export function IntegrationsDropdown({
                       </p>
                     </div>
                     <ChevronDown
-                      className={`h-3 w-3 text-muted-foreground transition-transform shrink-0 ${expandedSections.includes(product.id) ? 'rotate-180' : ''
-                        }`}
+                      className={`h-3 w-3 text-muted-foreground transition-transform shrink-0 ${
+                        expandedSections.includes(product.id)
+                          ? 'rotate-180'
+                          : ''
+                      }`}
                     />
                   </div>
                 </CardHeader>

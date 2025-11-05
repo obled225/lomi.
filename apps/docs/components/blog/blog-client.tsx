@@ -155,7 +155,9 @@ export default function BlogClient() {
   const regularPosts = filteredPosts.filter((post) => !post.featured);
 
   // Create display posts array with featured first, then regular posts
-  const displayPosts = featuredPost ? [featuredPost, ...regularPosts] : regularPosts;
+  const displayPosts = featuredPost
+    ? [featuredPost, ...regularPosts]
+    : regularPosts;
 
   // Calculate pagination
   const totalPosts = displayPosts.length;
@@ -245,7 +247,9 @@ export default function BlogClient() {
                         className="group flex flex-col h-full"
                         onMouseDown={playClickSound}
                       >
-                        <article className={`flex flex-col bg-white dark:bg-zinc-900 rounded-sm overflow-hidden shadow-sm hover:shadow-sm transition-all duration-300 border border-zinc-200 dark:border-zinc-800 h-full ${isFeatured && isFirstOnPage ? 'ring-2 ring-primary/20 shadow-lg' : ''}`}>
+                        <article
+                          className={`flex flex-col bg-white dark:bg-zinc-900 rounded-sm overflow-hidden shadow-sm hover:shadow-sm transition-all duration-300 border border-zinc-200 dark:border-zinc-800 h-full ${isFeatured && isFirstOnPage ? 'ring-2 ring-primary/20 shadow-lg' : ''}`}
+                        >
                           {post.image && (
                             <div className="aspect-3/2 overflow-hidden border-b border-zinc-200 dark:border-zinc-800">
                               <Image
@@ -287,7 +291,9 @@ export default function BlogClient() {
 
                               {!post.author && post.publishedAt && (
                                 <p className="text-xs text-zinc-500 dark:text-zinc-400 mb-1">
-                                  {new Date(post.publishedAt).toLocaleDateString(
+                                  {new Date(
+                                    post.publishedAt,
+                                  ).toLocaleDateString(
                                     currentLanguage === 'fr'
                                       ? 'fr-FR'
                                       : currentLanguage === 'es'
@@ -360,7 +366,7 @@ export default function BlogClient() {
                     size="sm"
                     onClick={() => {
                       playClickSound();
-                      setCurrentPage(prev => Math.max(1, prev - 1));
+                      setCurrentPage((prev) => Math.max(1, prev - 1));
                     }}
                     disabled={currentPage === 1}
                     className="flex items-center gap-1"
@@ -370,20 +376,22 @@ export default function BlogClient() {
                   </Button>
 
                   <div className="flex items-center space-x-1">
-                    {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-                      <Button
-                        key={page}
-                        variant={currentPage === page ? "default" : "outline"}
-                        size="sm"
-                        onClick={() => {
-                          playClickSound();
-                          setCurrentPage(page);
-                        }}
-                        className="w-8 h-8 p-0"
-                      >
-                        {page}
-                      </Button>
-                    ))}
+                    {Array.from({ length: totalPages }, (_, i) => i + 1).map(
+                      (page) => (
+                        <Button
+                          key={page}
+                          variant={currentPage === page ? 'default' : 'outline'}
+                          size="sm"
+                          onClick={() => {
+                            playClickSound();
+                            setCurrentPage(page);
+                          }}
+                          className="w-8 h-8 p-0"
+                        >
+                          {page}
+                        </Button>
+                      ),
+                    )}
                   </div>
 
                   <Button
@@ -391,7 +399,7 @@ export default function BlogClient() {
                     size="sm"
                     onClick={() => {
                       playClickSound();
-                      setCurrentPage(prev => Math.min(totalPages, prev + 1));
+                      setCurrentPage((prev) => Math.min(totalPages, prev + 1));
                     }}
                     disabled={currentPage === totalPages}
                     className="flex items-center gap-1"

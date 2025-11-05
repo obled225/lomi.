@@ -65,7 +65,7 @@
     "noPostsDesc": "There are no blog posts available at the moment. Please check back later.",
     "previous": "Previous",
     "next": "Next",
-"categories": {
+    "categories": {
       "news": "News",
       "opinion": "Opinion",
       "payments": "Payments",
@@ -74,7 +74,7 @@
       "online-business": "Online Business"
     }
   },
-    "changelog": {
+  "changelog": {
     "title": "Changelog",
     "subtitle": "All the latest updates, improvements, and fixes to our products and services.",
     "description": "Stay updated with all the latest updates, improvements, and fixes to lomi.",
