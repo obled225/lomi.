@@ -187,9 +187,9 @@ export function Header() {
                   setIsIntegrationsOpen(false);
                 }, 200);
               }}
-              onClick={(e) => {
+              onClick={() => {
                 playClickSound();
-                handleSmoothScroll('pricing')(e);
+                navigate('/pricing');
               }}
             >
               {t('header.pricing')}
@@ -250,9 +250,9 @@ export function Header() {
             <nav className="flex flex-col space-y-4 py-4 px-4">
               <button
                 className="text-left text-sm text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors bg-transparent rounded-sm px-2 py-1.5 border-none cursor-pointer w-full hover:bg-[#2a2f3d]/3 dark:hover:bg-[#2a2f3d]/10"
-                onClick={(e) => {
+                onClick={() => {
                   playClickSound();
-                  handleSmoothScroll('pricing')(e);
+                  navigate('/pricing');
                 }}
               >
                 {t('header.pricing')}

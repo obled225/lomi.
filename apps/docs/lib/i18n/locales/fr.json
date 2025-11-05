@@ -13,6 +13,7 @@
     "resources": {
       "title": "Ressources",
       "github": "Github",
+      "changelog": "Changelog",
       "support": "Support",
       "privacy": "Politique de confidentialité",
       "terms": "Conditions générales",
@@ -88,6 +89,24 @@
         ]
       }
     ]
+  },
+  "terms": {
+    "title": "Conditions générales d'utilisation",
+    "description": "Conditions générales d'utilisation des produits et services de lomi."
+  },
+  "privacy": {
+    "title": "Politique de confidentialité",
+    "description": "Politique de confidentialité des produits et services de lomi."
+  },
+  "pricing": {
+    "title": "Tarification",
+    "description": ".",
+    "introduction": ""
+  },
+  "faq": {
+    "title": "Questions fréquemment posées",
+    "description": "Réponses aux questions courantes.",
+    "introduction": "Trouvez des réponses aux questions les plus courantes sur l'utilisation de lomi. pour vos besoins de paiements."
   },
   "header": {
     "products": "Produits",

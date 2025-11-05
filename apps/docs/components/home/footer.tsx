@@ -308,6 +308,10 @@ export function Footer() {
                       link: 'https://github.com/lomiafrica/lomi.',
                     },
                     {
+                      name: t('footer.resources.changelog'),
+                      link: '/changelog',
+                    },
+                    {
                       name: t('footer.resources.support'),
                       link: '/docs/core/support/contact',
                       target: '_blank',

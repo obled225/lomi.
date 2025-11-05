@@ -13,9 +13,10 @@
     "resources": {
       "title": "Resources",
       "github": "Github",
+      "changelog": "Changelog",
       "support": "Support",
       "privacy": "Privacy Policy",
-      "terms": "Terms",
+      "terms": "Terms and conditions",
       "branding": "Brand assets",
       "featureRequest": "Request a feature",
       "review": "Leave us a review"
@@ -88,6 +89,24 @@
         ]
       }
     ]
+  },
+  "terms": {
+    "title": "Terms and conditions",
+    "description": "Terms and conditions of lomi.'s products and services."
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "description": "Privacy policy of lomi. LLC and lomi. Softwares, Inc."
+  },
+  "pricing": {
+    "title": "Pricing",
+    "description": ".",
+    "introduction": ""
+  },
+  "faq": {
+    "title": "Frequently asked questions",
+    "description": "Answers to common questions about lomi.'s payment processing services.",
+    "introduction": "Find answers to the most common questions about using lomi. for your payment needs."
   },
   "header": {
     "products": "Products",
