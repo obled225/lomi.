@@ -150,7 +150,7 @@ export function Header() {
           </div>
 
           {/* GitHub Stars - positioned above navigation */}
-          <div className="absolute left-[88px] top-[8px]">
+          <div className="absolute left-[88px] top-[8px] hidden lg:block">
             <GithubStars />
           </div>
 

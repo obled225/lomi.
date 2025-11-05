@@ -1,9 +1,16 @@
 import { useTranslation } from '@/lib/contexts/translation-context';
 import { Button } from '@/components/ui/button';
-import Image from 'next/image';
+import SimpleImage from '@/components/home/hero-image';
 import { t } from '@/lib/i18n/translations';
 
-export function CareersSection() {
+interface CareersSectionProps {
+  mobileJoinUsImage?: {
+    light: string;
+    dark: string;
+  };
+}
+
+export function CareersSection({ mobileJoinUsImage }: CareersSectionProps) {
   const { currentLanguage } = useTranslation();
 
   return (
@@ -24,14 +31,13 @@ export function CareersSection() {
 
         {/* Careers Image Section */}
         <div className="w-full mt-8 relative">
-          <Image
+          <SimpleImage
             src="/company/join-us.webp"
+            mobileSrc={mobileJoinUsImage}
             alt="Join our team"
             width={800}
             height={400}
             className="w-full h-auto object-cover"
-            loading="lazy"
-            decoding="async"
           />
         </div>
       </div>
