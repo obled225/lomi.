@@ -6,7 +6,7 @@ import ChangelogClient from '@/components/home/changelog-client';
 export async function generateMetadata(): Promise<Metadata> {
   const language = await detectLanguage();
   return {
-    title: `Changelog | lomi.`,
+    title: `Changelog`,
     description: t('changelog.description', language) as string,
   };
 }

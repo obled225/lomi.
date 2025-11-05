@@ -427,6 +427,15 @@ export const postType = defineType({
       },
       initialValue: ['en'],
     }),
+
+    // Featured post field
+    defineField({
+      name: 'featured',
+      title: 'Featured Post',
+      type: 'boolean',
+      description: 'Mark this post as featured to display it prominently',
+      initialValue: false,
+    }),
   ],
   preview: {
     select: {

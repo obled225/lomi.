@@ -7,10 +7,10 @@ export async function generateMetadata(): Promise<Metadata> {
   const language = await detectLanguage();
 
   return {
-    title: `Blog | lomi.`,
+    title: `Blog`,
     description: t('blog.description', language) as string,
     openGraph: {
-      title: `Blog | lomi.`,
+      title: `Blog`,
       description: t('blog.description', language) as string,
       images: [
         {

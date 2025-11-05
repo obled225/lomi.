@@ -62,13 +62,32 @@
     "byAuthor": "作者：{author}",
     "noPosts": "未找到博客文章",
     "noPostsDesc": "目前没有可用的博客文章。请稍后再查看。",
+    "previous": "上一页",
+    "next": "下一页",
     "categories": {
       "news": "新闻",
       "opinion": "观点",
-      "edge": "前沿",
-      "spreadsheets": "电子表格",
-      "case-study": "案例研究"
+      "payments": "支付",
+      "startupOpenSource": "创业与开源",
+      "case-study": "案例研究",
+      "online-business": "在线业务"
     }
+  },
+  "changelog": {
+    "title": "更新日志",
+    "subtitle": "我们产品的最新更新、改进和修复。",
+    "description": "保持更新，了解我们产品的最新更新、改进和修复。",
+    "entries": [
+      {
+        "date": "26 March 2025",
+        "version": "1.0.0",
+        "title": "发布",
+        "changes": [
+          "lomi. 的初始发布 - 西非商业的开放源码支付处理平台。",
+          "支持一种支付方式：Wave Mobile Money。"
+        ]
+      }
+    ]
   },
   "header": {
     "products": "产品",

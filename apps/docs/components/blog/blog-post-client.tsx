@@ -316,13 +316,13 @@ export default function BlogPostClient({ slug }: BlogPostClientProps) {
 
   return (
     <>
-      <div className="max-w-5xl mx-auto pl-4 pr-6 md:pl-2 sm:pr-4">
-        <div className="mb-8 mt-22 md:mt-32">
+      <div className="max-w-7xl mx-auto pl-2 pr-4 py-2">
+        <div className="mb-0 mt-27">
           <div className="relative mb-6 flex flex-col md:block">
             <div className="md:absolute md:left-0 md:top-2 md:w-[175px] md:-translate-x-full md:pr-8 shrink-0 mb-6 md:mb-0 flex flex-col items-start md:items-end gap-2"></div>
             <div className="space-y-4">
               <motion.h1
-                className="text-4xl sm:text-5xl md:text-7xl tracking-tighter font-regular text-zinc-800 dark:text-white"
+                className="text-4xl font-normal tracking-tighter text-left text-zinc-800 dark:text-white md:text-5xl max-w-7xl whitespace-pre-line"
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
@@ -332,7 +332,7 @@ export default function BlogPostClient({ slug }: BlogPostClientProps) {
               {/* Display localized excerpt if available */}
               {post.excerpt && (
                 <motion.p
-                  className="text-gray-500 dark:text-gray-400 text-base leading-relaxed tracking-tight max-w-4xl"
+                  className="text-gray-500 dark:text-gray-400 text-base leading-relaxed tracking-tight max-w-7xl"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.6, delay: 0.2 }}
@@ -349,7 +349,7 @@ export default function BlogPostClient({ slug }: BlogPostClientProps) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <article className="max-w-5xl mx-auto pb-10 sm: -pb-100">
+          <article className="max-w-none mx-auto pb-16 sm: -pb-100">
             <header className="mb-6">
               <div className="flex flex-wrap items-center text-sm text-zinc-600 dark:text-zinc-400 mb-6">
                 {post.author && (

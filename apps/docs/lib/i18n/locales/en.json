@@ -62,13 +62,32 @@
     "byAuthor": "By {author}",
     "noPosts": "No blog posts found",
     "noPostsDesc": "There are no blog posts available at the moment. Please check back later.",
-    "categories": {
+    "previous": "Previous",
+    "next": "Next",
+"categories": {
       "news": "News",
       "opinion": "Opinion",
-      "edge": "At the edge",
-      "spreadsheets": "Spreadsheets",
-      "case-study": "Case study"
+      "payments": "Payments",
+      "startupOpenSource": "Startup & Open-source",
+      "case-study": "Case Study",
+      "online-business": "Online Business"
     }
+  },
+    "changelog": {
+    "title": "Changelog",
+    "subtitle": "All the latest updates, improvements, and fixes to our products and services.",
+    "description": "Stay updated with all the latest updates, improvements, and fixes to lomi.",
+    "entries": [
+      {
+        "date": "26 March 2025",
+        "version": "1.0.0",
+        "title": "Launch",
+        "changes": [
+          "Initial release of lomi. - The open-source payment processing platform powering West African businesses.",
+          "Support for one payment method: Wave Mobile Money."
+        ]
+      }
+    ]
   },
   "header": {
     "products": "Products",

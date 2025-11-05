@@ -62,13 +62,32 @@
     "byAuthor": "Por {author}",
     "noPosts": "No se encontraron artículos del blog",
     "noPostsDesc": "No hay artículos del blog disponibles en este momento. Por favor, vuelve a revisar más tarde.",
+    "previous": "Anterior",
+    "next": "Siguiente",
     "categories": {
       "news": "Noticias",
       "opinion": "Opinión",
-      "edge": "En el borde",
-      "spreadsheets": "Hojas de cálculo",
-      "case-study": "Estudio de caso"
+      "payments": "Pagos",
+      "startupOpenSource": "Startup y Código Abierto",
+      "case-study": "Caso de Estudio",
+      "online-business": "Negocio en Línea"
     }
+  },
+  "changelog": {  
+    "title": "Changelog",
+    "subtitle": "Todas las últimas actualizaciones, mejoras y correcciones a nuestros productos y servicios.",
+    "description": "Mantente actualizado con todas las últimas actualizaciones, mejoras y correcciones a lomi.",
+    "entries": [
+      {
+        "date": "26 March 2025",
+        "version": "1.0.0",
+        "title": "Lanzamiento",
+        "changes": [
+          "Lanzamiento de lomi. - La plataforma de procesamiento de pagos de código abierto que impulsa los negocios de África Occidental.",
+          "Soporte para un solo método de pago: Wave Mobile Money."
+        ]
+      }
+    ]
   },
   "header": {
     "products": "Productos",

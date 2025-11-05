@@ -90,7 +90,7 @@ export function Footer() {
     <div>
       <div className="relative w-full bg-background pt-28 sm:pt-6">
         {/* Header with Logo and Tagline */}
-        <div className="max-w-7xl mx-auto pl-2 pr-4 py-2 border-b border-zinc-200 dark:border-zinc-800"></div>
+        <div className="max-w-[1265px] mx-auto pl-2 pr-4 py-2 border-b border-zinc-200 dark:border-zinc-800"></div>
 
         {/* Footer content */}
         <div className="w-full text-zinc-600 dark:text-zinc-400 pt-12 pb-16 select-none relative z-10">
@@ -327,7 +327,7 @@ export function Footer() {
               </div>
 
               {/* Features Column */}
-              <div className="space-y-4 pl-4 order-1 md:order-2 lg:translate-x-[16px]">
+              <div className="space-y-4 pl-4 order-1 md:order-2 lg:translate-x-[105px]">
                 <h2 className="text-zinc-900 dark:text-white font-normal text-base">
                   {t('footer.features.title')}
                 </h2>
@@ -360,7 +360,7 @@ export function Footer() {
               </div>
 
               {/* Resources Column */}
-              <div className="space-y-4 pl-4 order-2 md:order-3 lg:translate-x-[24px]">
+              <div className="space-y-4 pl-4 order-2 md:order-3 lg:translate-x-[65px]">
                 <h2 className="text-zinc-900 dark:text-white font-normal text-base">
                   {t('footer.resources.title')}
                 </h2>
@@ -412,7 +412,7 @@ export function Footer() {
               </div>
 
               {/* Company Column */}
-              <div className="space-y-4 pl-4 order-3 md:order-4 lg:translate-x-[48px]">
+              <div className="space-y-4 pl-4 order-3 md:order-4 lg:translate-x-[55px]">
                 <h2 className="text-zinc-900 dark:text-white font-normal text-base">
                   {t('footer.company.title')}
                 </h2>

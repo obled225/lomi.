@@ -42,21 +42,21 @@ export async function generateMetadata({
           description: post.excerpt || 'Read our latest blog post',
           images: post.imageUrl
             ? [
-                {
-                  url: post.imageUrl,
-                  width: 1200,
-                  height: 630,
-                  alt: post.title,
-                },
-              ]
+              {
+                url: post.imageUrl,
+                width: 1200,
+                height: 630,
+                alt: post.title,
+              },
+            ]
             : [
-                {
-                  url: '/banner.webp',
-                  width: 1200,
-                  height: 630,
-                  alt: post.title,
-                },
-              ],
+              {
+                url: '/banner.webp',
+                width: 1200,
+                height: 630,
+                alt: post.title,
+              },
+            ],
         },
       };
     }
@@ -65,7 +65,7 @@ export async function generateMetadata({
   }
 
   return {
-    title: 'Blog post | lomi.',
+    title: 'lomi. | Blog post',
   };
 }
 

@@ -8,7 +8,7 @@ import { Analytics } from '@vercel/analytics/next';
 
 export const metadata = createMetadata({
   title: {
-    template: '%s | lomi.',
+    template: 'lomi. | %s',
     default: 'lomi.',
   },
   description: 'The documentation website for lomi.',

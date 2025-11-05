@@ -43,4 +43,5 @@ export interface Post {
     };
   }>;
   author?: Author;
+  featured?: boolean;
 }

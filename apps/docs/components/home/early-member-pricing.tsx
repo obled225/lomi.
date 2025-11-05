@@ -3,7 +3,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { InfoBox } from '@/components/ui/info-box';
 import Link from 'next/link';
 import { SingleSwirl } from '@/components/design/swirls';
 import { t } from '@/lib/i18n/translations';
@@ -20,18 +19,20 @@ export function EarlyMemberPricing() {
     return () => clearTimeout(timeoutId);
   }, [prices.length]);
   return (
-    <div className="mt-20 md:mt-40 hidden md:block">
+    <div className="mt-20 md:mt-20 hidden md:block">
       <div className="max-w-7xl mx-auto pl-2 pr-4 py-2">
+        {/* Tag as title above the card */}
+        <div className="mb-6 md:mb-8">
+          <h2 className="text-4xl font-normal tracking-tighter text-left text-zinc-800 dark:text-white md:text-5xl max-w-7xl whitespace-pre-line">
+            {t('earlyMemberPricing.tag') as string}
+          </h2>
+        </div>
+
         <section className="overflow-hidden relative bg-transparent dark:bg-background text-foreground dark:text-foreground rounded-sm border p-0 pb-16 pt-16 md:pb-32 md:pt-32 before:absolute before:inset-0 before:bg-gradient-to-r before:from-foreground/5 before:via-transparent before:to-foreground/5 before:pointer-events-none dark:before:from-background/20 dark:before:to-background/20 select-none">
           <SingleSwirl className="pointer-events-none absolute top-0 bottom-0 left-0" />
           <SingleSwirl className="pointer-events-none rotate-180 absolute top-0 bottom-0 right-0 opacity-50" />
           <div className="container flex flex-col items-center justify-center">
             <div className="text-center mb-6 md:mb-8 px-4">
-              <div className="mb-0 md:mb-0 flex justify-center">
-                <InfoBox variant="blue">
-                  {t('earlyMemberPricing.tag') as string}
-                </InfoBox>
-              </div>
               <div className="mb-6 md:mb-8">
                 <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-4 flex flex-col items-center">
                   <div className="flex flex-wrap items-baseline justify-center translate-x-[4px]">

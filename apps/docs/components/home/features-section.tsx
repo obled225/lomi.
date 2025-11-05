@@ -586,10 +586,10 @@ export function FeaturesSection() {
         className={`py-24 ${isFeaturesInView ? 'in-view' : ''}`}
       >
         <div className="max-w-7xl mx-auto pl-2 pr-4 py-2">
-          <div className="mb-14">
+          <div className="mb-6 md:mb-8">
             <h2
               id="features-heading"
-              className="max-w-3xl text-4xl font-normal tracking-tighter text-left text-zinc-800 dark:text-white md:text-5xl mt-24 md:mt-0"
+              className="max-w-3xl text-4xl font-normal tracking-tighter text-left text-zinc-800 dark:text-white md:text-5xl"
             >
               {String(t('features.title', currentLanguage))}
             </h2>
@@ -931,7 +931,6 @@ export function FeaturesSection() {
                                 customStyle={{
                                   margin: 0,
                                   padding: '1rem',
-                                  backgroundColor: 'transparent',
                                   fontSize: '0.75rem',
                                   lineHeight: '1.5',
                                 }}
@@ -961,7 +960,6 @@ export function FeaturesSection() {
                                 customStyle={{
                                   margin: 0,
                                   padding: '1rem',
-                                  backgroundColor: 'transparent',
                                   fontSize: '0.75rem',
                                   lineHeight: '1.5',
                                 }}
@@ -991,7 +989,6 @@ export function FeaturesSection() {
                                 customStyle={{
                                   margin: 0,
                                   padding: '1rem',
-                                  backgroundColor: 'transparent',
                                   fontSize: '0.75rem',
                                   lineHeight: '1.5',
                                 }}

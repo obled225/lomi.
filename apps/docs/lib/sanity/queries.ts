@@ -40,6 +40,7 @@ export async function getAllPosts(): Promise<Post[]> {
         bio,
         role
       },
+      featured,
       body
     }`;
     const result = await client.fetch(query);
@@ -93,6 +94,7 @@ export async function getPostBySlug(slug: string): Promise<Post> {
         bio,
         role
       },
+      featured,
       body,
       body_fr
     }`,

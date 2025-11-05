@@ -19,11 +19,11 @@ export default function ChangelogClient() {
 
   return (
     <section className="w-full py-8 md:py-20 lg:py-24 xl:py-32">
-      <div className="max-w-5xl mx-auto pl-4 pr-6 md:pl-2 sm:pr-4">
-        <div className="flex flex-col space-y-6 text-left mt-20 md:mt-0">
+      <div className="max-w-7xl mx-auto pl-2 pr-4 py-2">
+        <div className="flex flex-col space-y-6 text-left -mt-4">
           <div className="space-y-4">
             <motion.h1
-              className="text-4xl sm:text-5xl md:text-7xl tracking-tighter font-regular text-zinc-800 dark:text-white"
+              className="text-4xl font-normal tracking-tighter text-left text-zinc-800 dark:text-white md:text-5xl max-w-7xl whitespace-pre-line"
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
