@@ -72,8 +72,8 @@ export function Footer() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {/* Subscribe and Social */}
               <div className="space-y-4 order-4 md:order-1">
-                <div className="flex flex-row items-center text-left justify-start gap-1 w-full max-w-[600px]">
-                  <div className="flex items-center gap-4 flex-wrap justify-center md:justify-start w-full sm:w-auto">
+                <div className="flex flex-row items-center text-left justify-center md:justify-center xl:justify-start gap-1 w-full max-w-[600px]">
+                  <div className="flex items-center gap-4 flex-wrap justify-center md:justify-center xl:justify-start w-full sm:w-auto">
                     <Link
                       href="/"
                       onClick={playClickSound}
@@ -206,7 +206,7 @@ export function Footer() {
 
                 {/* Copyright and Language - Better mobile alignment */}
                 <div className="flex flex-row items-center justify-between text-xs text-zinc-600 dark:text-zinc-400 mt-4 -translate-y-3 w-full">
-                  <span className="px-2 py-1.5 h-8 ml-2 md:ml-0 bg-transparent hover:bg-[#2a2f3d]/5 rounded-sm transition-colors duration-200 dark:hover:bg-[#2a2f3d]/20 inline-flex items-center text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100">
+                  <span className="px-2 py-1.5 h-8 ml-2 md:ml-4 lg:ml-0 bg-transparent hover:bg-[#2a2f3d]/5 rounded-sm transition-colors duration-200 dark:hover:bg-[#2a2f3d]/20 inline-flex items-center text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100">
                     {t('footer.copyright')}
                   </span>
                   <div className="">
@@ -221,7 +221,7 @@ export function Footer() {
                     href="https://status.lomi.africa"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="absolute right-0 top-1/2 -translate-y-11.5 flex items-center gap-1.5 px-2 py-1.5 text-xs h-8 bg-transparent hover:bg-[#2a2f3d]/5 rounded-sm transition-colors duration-200 justify-center dark:hover:bg-[#2a2f3d]/20 group text-sky-600 dark:text-green-300 hover:text-zinc-900 dark:hover:text-zinc-100"
+                    className="absolute right-3 lg:right-0 top-1/2 -translate-y-11.5 flex items-center gap-1.5 px-2 py-1.5 text-xs h-8 bg-transparent hover:bg-[#2a2f3d]/5 rounded-sm transition-colors duration-200 justify-center dark:hover:bg-[#2a2f3d]/20 group text-sky-600 dark:text-green-300 hover:text-zinc-900 dark:hover:text-zinc-100"
                     onClick={playClickSound}
                   >
                     <div className="relative flex items-center justify-center w-3 h-3 shrink-0">

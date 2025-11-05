@@ -51,7 +51,7 @@ export function ProductHuntBadge() {
       href="https://www.producthunt.com/posts/lomi?embed=true&utm_source=badge-featured&utm_medium=badge&utm_souce=badge-lomi"
       target="_blank"
       rel="noopener noreferrer"
-      className="inline-block"
+      className="block mx-auto"
       onMouseDown={() => playClickSound()}
     >
       <Image
@@ -63,7 +63,7 @@ export function ProductHuntBadge() {
           width: '370px',
           height: '74px',
         }}
-        className="md:w-[410px] md:h-[80px]"
+        className="mx-auto md:w-[410px] md:h-[80px]"
       />
     </a>
   );
