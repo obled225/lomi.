@@ -47,24 +47,16 @@ export function ProductHuntBadge() {
     : `https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=720260&theme=${currentTheme}`;
 
   return (
-    <a
-      href="https://www.producthunt.com/posts/lomi?embed=true&utm_source=badge-featured&utm_medium=badge&utm_souce=badge-lomi"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="block mx-auto"
-      onMouseDown={() => playClickSound()}
-    >
-      <Image
-        src={imageSrc}
-        alt="lomi. - Simplifying payments across francophone West Africa | Product Hunt"
-        width={250}
-        height={54}
-        style={{
-          width: '370px',
-          height: '74px',
-        }}
-        className="mx-auto md:w-[410px] md:h-[80px]"
-      />
-    </a>
+    <Image
+      src={imageSrc}
+      alt="lomi. - Helping West African ventures sell online"
+      width={250}
+      height={54}
+      style={{
+        width: '500px',
+        height: '100px',
+      }}
+      className="mx-auto md:w-[550px] md:h-[110px]"
+    />
   );
 }

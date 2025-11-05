@@ -64,16 +64,16 @@ export function Footer() {
     <div>
       <div className="relative w-full bg-background pt-28 sm:pt-6">
         {/* Header with Logo and Tagline */}
-        <div className="max-w-[1265px] mx-auto pl-2 pr-4 py-2 border-b border-zinc-200 dark:border-zinc-800"></div>
+        <div className="max-w-[1255px] mx-auto -translate-x-1 border-b border-zinc-200 dark:border-zinc-800"></div>
 
         {/* Footer content */}
-        <div className="w-full text-zinc-600 dark:text-zinc-400 pt-12 pb-16 select-none relative z-10">
+        <div className="w-full text-zinc-600 dark:text-zinc-400 pt-4 pb-4 select-none relative z-10">
           <div className="max-w-7xl mx-auto pl-2 pr-4 py-2">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {/* Subscribe and Social */}
-              <div className="space-y-4 order-4 md:order-1">
-                <div className="flex flex-row items-center text-left justify-center md:justify-center xl:justify-start gap-1 w-full max-w-[600px]">
-                  <div className="flex items-center gap-4 flex-wrap justify-center md:justify-center xl:justify-start w-full sm:w-auto">
+              <div className="space-y-4 lg:space-y-1 order-4 md:order-1 lg:w-[calc(25%+230px)]">
+                <div className="flex flex-row items-center text-left justify-center md:justify-center xl:justify-start gap-1 w-full">
+                  <div className="flex items-center gap-4.25 flex-wrap justify-center md:justify-center xl:justify-start w-full sm:w-auto">
                     <Link
                       href="/"
                       onClick={playClickSound}
@@ -200,28 +200,59 @@ export function Footer() {
                   </div>
                 </div>
 
-                <div className="">
+                <a
+                  href="https://www.producthunt.com/posts/lomi?embed=true&utm_source=badge-featured&utm_medium=badge&utm_souce=badge-lomi"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block"
+                  onClick={playClickSound}
+                >
                   <ProductHuntBadge />
-                </div>
+                </a>
 
                 {/* Copyright and Language - Better mobile alignment */}
-                <div className="flex flex-row items-center justify-between text-xs text-zinc-600 dark:text-zinc-400 mt-4 -translate-y-3 w-full">
+                <div className="flex flex-row items-center justify-center gap-4 text-xs text-zinc-600 dark:text-zinc-400 mt-4 -translate-y-3 w-full">
                   <span className="px-2 py-1.5 h-8 ml-2 md:ml-4 lg:ml-0 bg-transparent hover:bg-[#2a2f3d]/5 rounded-sm transition-colors duration-200 dark:hover:bg-[#2a2f3d]/20 inline-flex items-center text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100">
                     {t('footer.copyright')}
                   </span>
-                  <div className="">
-                    <LanguageSwitcher />
-                  </div>
+                  <LanguageSwitcher />
                 </div>
 
-                {/* System Status and Certifications Container - Using Absolute Positioning for both */}
-                <div className="flex mt-[20px] ml-auto relative h-[70px]">
-                  {/* Status Link - Absolutely positioned to the far right */}
+                {/* System Status and Certifications Container */}
+                <div className="flex -mt-4 justify-center items-center gap-4 w-full">
+                  {/* Certification Icons Container */}
+                  <div className="flex items-center gap-2">
+                    {/* PCI Icon Wrapper */}
+                    <div
+                      className="group"
+                      title="lomi. is PCI DSS level 4 certified"
+                    >
+                      <Image
+                        src="/regulatory/PCI_DSS.webp"
+                        alt="PCI DSS Certified"
+                        width={120}
+                        height={70}
+                        className="w-[120px] h-[70px] shrink-0 object-contain filter grayscale opacity-30 group-hover:grayscale-0 group-hover:opacity-100 dark:filter dark:grayscale dark:brightness-100 dark:opacity-25 dark:group-hover:opacity-100 transition-all"
+                      />
+                    </div>
+                    {/* SSL Icon */}
+                    <div className="group" title="lomi. is SSL secure">
+                      <Image
+                        src="/regulatory/SSL.webp"
+                        alt="SSL Secured"
+                        width={69}
+                        height={27}
+                        className="w-[69px] h-[27px] shrink-0 object-contain filter grayscale opacity-30 group-hover:grayscale-0 group-hover:opacity-100 dark:invert dark:opacity-25 dark:group-hover:opacity-100 transition-all"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Status Link */}
                   <a
                     href="https://status.lomi.africa"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="absolute right-3 lg:right-0 top-1/2 -translate-y-11.5 flex items-center gap-1.5 px-2 py-1.5 text-xs h-8 bg-transparent hover:bg-[#2a2f3d]/5 rounded-sm transition-colors duration-200 justify-center dark:hover:bg-[#2a2f3d]/20 group text-sky-600 dark:text-green-300 hover:text-zinc-900 dark:hover:text-zinc-100"
+                    className="flex items-center gap-1.5 px-2 py-1.5 text-xs h-8 bg-transparent hover:bg-[#2a2f3d]/5 rounded-sm transition-colors duration-200 justify-center dark:hover:bg-[#2a2f3d]/20 group text-sky-600 dark:text-green-300 hover:text-zinc-900 dark:hover:text-zinc-100"
                     onClick={playClickSound}
                   >
                     <div className="relative flex items-center justify-center w-3 h-3 shrink-0">
@@ -237,34 +268,6 @@ export function Footer() {
                       {t('footer.status')}
                     </span>
                   </a>
-                  {/* Certification Icons Container - Absolutely positioned to the left of the status link */}
-                  {/* Estimate status link width + gap ~ 160px? Use right-40 (160px) */}
-                  <div className="absolute right-40 top-[calc(50%-30px)] -translate-y-1/2 flex items-center">
-                    {/* Positioned absolutely, left of status */}
-                    {/* PCI Icon Wrapper - Remove cursor-pointer */}
-                    <div
-                      className="group mr-2"
-                      title="lomi. is PCI DSS level 4 certified"
-                    >
-                      <Image
-                        src="/regulatory/PCI_DSS.webp"
-                        alt="PCI DSS Certified"
-                        width={120}
-                        height={70}
-                        className="w-[120px] h-[70px] shrink-0 object-contain filter grayscale opacity-30 group-hover:grayscale-0 group-hover:opacity-100 dark:filter dark:grayscale dark:brightness-100 dark:opacity-25 dark:group-hover:opacity-100 transition-all"
-                      />
-                    </div>
-                    {/* SSL Icon - Remove cursor-pointer */}
-                    <div className="group mr-6" title="lomi. is SSL secure">
-                      <Image
-                        src="/regulatory/SSL.webp"
-                        alt="SSL Secured"
-                        width={69}
-                        height={27}
-                        className="w-[69px] h-[27px] shrink-0 object-contain filter grayscale opacity-30 group-hover:grayscale-0 group-hover:opacity-100 dark:invert dark:opacity-25 dark:group-hover:opacity-100 transition-all"
-                      />
-                    </div>
-                  </div>
                 </div>
               </div>
 

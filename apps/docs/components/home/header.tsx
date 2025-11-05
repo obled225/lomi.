@@ -133,7 +133,7 @@ export function Header() {
           </div>
 
           {/* GitHub Stars - positioned above navigation */}
-          <div className="absolute left-[88px] top-[8px] hidden lg:block">
+          <div className="absolute left-[87px] top-[7.5px] hidden lg:block">
             <GithubStars />
           </div>
 
