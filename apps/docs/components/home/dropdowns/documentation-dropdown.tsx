@@ -34,7 +34,7 @@ export function DocumentationDropdown({
   const { theme } = useTheme();
 
   const featuredCard: FeaturedCard = {
-    title: 'Focus on building, not billing',
+    title: 'Focus on building, not billing.',
     description: 'Turn your application into a business in minutes.',
     image: '/company/800x800.webp',
     imageAlt: 'Documentation interface screenshot',

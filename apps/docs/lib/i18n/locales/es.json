@@ -90,6 +90,12 @@
       }
     ]
   },
+  "pricing": {
+    "title": "Precios",
+    "description": ".",
+    "introduction": "",
+    "transparency": "Sin sorpresas, sin tarifas ocultas, sin costos mensuales."
+  },
   "header": {
     "products": "Productos",
     "pricing": "Precios",
@@ -112,7 +118,6 @@
     "title": "No te quedes atrás."
   },
   "earlyMemberPricing": {
-    "tag": "Sin sorpresas, sin tarifas ocultas, sin costos mensuales.",
     "getStarted": "Comenzar",
     "learnMore": "Saber más"
   },

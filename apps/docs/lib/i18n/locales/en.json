@@ -101,7 +101,8 @@
   "pricing": {
     "title": "Pricing",
     "description": ".",
-    "introduction": ""
+    "introduction": "",
+    "transparency": "No surprises, no hidden fees, no monthly costs."
   },
   "faq": {
     "title": "Frequently asked questions",
@@ -130,7 +131,6 @@
     "title": "Lead the charge."
   },
   "earlyMemberPricing": {
-    "tag": "No surprises, no hidden fees, no monthly costs.",
     "getStarted": "Get started",
     "learnMore": "Learn more"
   },

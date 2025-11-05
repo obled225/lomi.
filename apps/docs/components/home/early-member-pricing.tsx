@@ -5,9 +5,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { SingleSwirl } from '@/components/design/swirls';
+import { useTranslation } from '@/lib/contexts/translation-context';
 import { t } from '@/lib/i18n/translations';
 
 export function EarlyMemberPricing() {
+  const { currentLanguage } = useTranslation();
   const [titleNumber, setTitleNumber] = useState(0);
   const prices = useMemo(() => ['200 F CFA', '0.30 USD', '0.30 EUR'], []);
 
@@ -24,7 +26,7 @@ export function EarlyMemberPricing() {
         {/* Tag as title above the card */}
         <div className="mb-6 md:mb-8">
           <h2 className="text-4xl font-normal tracking-tighter text-left text-zinc-800 dark:text-white md:text-5xl max-w-7xl whitespace-pre-line">
-            {t('earlyMemberPricing.tag') as string}
+            {String(t('pricing.transparency', currentLanguage))}
           </h2>
         </div>
 

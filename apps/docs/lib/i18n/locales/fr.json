@@ -101,7 +101,8 @@
   "pricing": {
     "title": "Tarification",
     "description": ".",
-    "introduction": ""
+    "introduction": "",
+    "transparency": "Pas de surprises, pas de frais cachés, pas de coûts mensuels."
   },
   "faq": {
     "title": "Questions fréquemment posées",
@@ -130,7 +131,6 @@
     "title": "Gardez une longueur d'avance."
   },
   "earlyMemberPricing": {
-    "tag": "Pas de surprises, pas de frais cachés, pas de coûts mensuels.",
     "getStarted": "Commencer",
     "learnMore": "En savoir plus"
   },
