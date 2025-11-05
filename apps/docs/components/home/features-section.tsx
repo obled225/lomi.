@@ -213,11 +213,10 @@ const DemoRevenueChart = () => {
           </span>
         </div>
         <span
-          className={`inline-flex items-center gap-1 px-2 py-1 rounded-sm text-xs font-medium w-fit ${
-            growthRate >= 0
-              ? 'bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-300'
-              : 'bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300'
-          }`}
+          className={`inline-flex items-center gap-1 px-2 py-1 rounded-sm text-xs font-medium w-fit ${growthRate >= 0
+            ? 'bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-300'
+            : 'bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300'
+            }`}
         >
           {growthRate >= 0 ? '+' : ''}
           {growthRate.toFixed(1)}%
@@ -300,6 +299,66 @@ const DemoRevenueChart = () => {
   );
 };
 
+// Card configuration with IDs
+const CARD_CONFIGS = {
+  payment_providers: {
+    id: 'payment_providers',
+    refIndex: 0,
+    title: 'features.card1.title',
+    component: 'payment_providers'
+  },
+  seamless_checkout: {
+    id: 'seamless_checkout',
+    refIndex: 1,
+    title: 'features.card2.title',
+    component: 'seamless_checkout'
+  },
+  data_insights: {
+    id: 'data_insights',
+    refIndex: 4,
+    title: 'features.card5.title',
+    component: 'data_insights'
+  },
+  mobile_payouts: {
+    id: 'mobile_payouts',
+    refIndex: 3,
+    title: 'features.card4.title',
+    component: 'mobile_payouts'
+  },
+  selling_models: {
+    id: 'selling_models',
+    refIndex: 2,
+    title: 'features.card3.title',
+    component: 'selling_models'
+  },
+  coupons_discounts: {
+    id: 'coupons_discounts',
+    refIndex: 5,
+    title: 'features.card6.title',
+    component: 'coupons_discounts'
+  }
+} as const;
+
+// Card ordering configurations for different themes
+const CARD_ORDERS = {
+  light: [
+    'payment_providers',
+    'selling_models',
+    'data_insights',
+    'mobile_payouts',
+    'seamless_checkout',
+    'coupons_discounts'
+  ] as const,
+  dark: [
+    'payment_providers',
+    'seamless_checkout',
+    'data_insights',
+    'mobile_payouts',
+    'selling_models',
+    'coupons_discounts'
+  ] as const
+};
+
 export function FeaturesSection() {
   const { currentLanguage } = useTranslation();
   const { mounted, resolvedTheme } = useTheme();
@@ -307,6 +366,12 @@ export function FeaturesSection() {
   const isFeaturesInView = useInView(featuresRef, { once: true, amount: 0.2 });
   const starCount = useGithubStars();
   const isMobile = useIsMobile();
+
+  // Determine card order based on theme
+  const currentCardOrder = React.useMemo(() => {
+    if (!mounted) return CARD_ORDERS.light; // Default to light during hydration
+    return resolvedTheme === 'dark' ? CARD_ORDERS.dark : CARD_ORDERS.light;
+  }, [mounted, resolvedTheme]);
 
   const card1Ref = React.useRef<HTMLDivElement>(null);
   const card2Ref = React.useRef<HTMLDivElement>(null);
@@ -342,6 +407,573 @@ export function FeaturesSection() {
     card5InView,
     card6InView,
   ];
+
+  // Function to render a card based on its configuration
+  const renderCard = (cardId: keyof typeof CARD_CONFIGS, index: number) => {
+    const config = CARD_CONFIGS[cardId];
+    const ref = cardRefs[config.refIndex];
+    const inView = cardInViews[config.refIndex];
+    const delay = 0.1 + (index * 0.05); // Stagger animation delays
+
+    switch (config.component) {
+      case 'payment_providers':
+        return (
+          <motion.div
+            key={cardId}
+            ref={ref}
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay }}
+            className="size-full"
+          >
+            <Card className="flex flex-col h-[450px] md:h-[400px] rounded-sm">
+              <CardHeader className="p-6 pb-4 text-base font-medium">
+                {String(t('features.card1.title', currentLanguage))}
+              </CardHeader>
+              <CardContent className="px-6 pb-6 pt-0 text-sm text-muted-foreground grow">
+                <p className="mb-4">
+                  {String(t('features.card1.description', currentLanguage))}
+                </p>
+                <div className="w-full max-h-[230px] overflow-y-auto space-y-2 pr-2 hide-scrollbar">
+                  {providerNames.map((name, i) => (
+                    <motion.div
+                      key={name}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={
+                        inView
+                          ? {
+                            opacity: 1,
+                            x: 0,
+                            transition: {
+                              delay: 0.5 + i * 0.1,
+                              type: 'spring',
+                              stiffness: 120,
+                              damping: 20,
+                            },
+                          }
+                          : {}
+                      }
+                      className="flex items-center justify-between p-1.5 bg-background border border-zinc-200 dark:border-zinc-800 rounded-sm hover:bg-muted/40 transition-colors duration-200"
+                    >
+                      <div className="flex items-center gap-3">
+                        <div className="w-8 h-8 bg-background border border-zinc-200 dark:border-zinc-800 rounded-sm flex items-center justify-center shadow-sm overflow-hidden">
+                          <Image
+                            src={`/payment_channels/${name === 'Bitcoin' ? 'btc' : name === 'Visa' ? `${visaImages[visaImageIndex]}` : name.toLowerCase().replace(' ', '_')}.webp`}
+                            alt={`${name} logo`}
+                            width={name === 'SPI' ? 24 : 32}
+                            height={name === 'SPI' ? 24 : 32}
+                            className={
+                              name === 'SPI'
+                                ? 'w-6 h-6 object-cover rounded-sm'
+                                : 'w-full h-full object-cover rounded-sm'
+                            }
+                          />
+                        </div>
+                        <div>
+                          <span className="text-sm font-medium text-foreground">
+                            {name === 'SPI'
+                              ? 'π-SPI'
+                              : name === 'Visa'
+                                ? 'Cards'
+                                : name}
+                          </span>
+                          <p className="text-xs text-muted-foreground">
+                            {name === 'SPI' &&
+                              String(
+                                t(
+                                  'features.card1.spi_description',
+                                  currentLanguage,
+                                ),
+                              )}
+                            {name === 'Wave' &&
+                              String(
+                                t(
+                                  'features.card1.momo_description',
+                                  currentLanguage,
+                                ),
+                              )}
+                            {name === 'Visa' &&
+                              String(
+                                t(
+                                  'features.card1.visa_description',
+                                  currentLanguage,
+                                ),
+                              )}
+                            {name === 'PayPal' &&
+                              String(
+                                t(
+                                  'features.card1.paypal_description',
+                                  currentLanguage,
+                                ),
+                              )}
+                            {name === 'Google Pay' &&
+                              String(
+                                t(
+                                  'features.card1.google_pay_description',
+                                  currentLanguage,
+                                ),
+                              )}
+                            {name === 'Bitcoin' &&
+                              String(
+                                t(
+                                  'features.card1.crypto_description',
+                                  currentLanguage,
+                                ),
+                              )}
+                          </p>
+                        </div>
+                      </div>
+                      <Switch
+                        checked={paymentToggles[name] || false}
+                        onCheckedChange={() => handlePaymentToggle(name)}
+                        aria-label={`${paymentToggles[name] ? 'Disable' : 'Enable'} ${name} payments`}
+                        className="data-[state=checked]:bg-[#56A5F9] data-[state=checked]:border-[#56A5F9] dark:data-[state=checked]:bg-sky-600 dark:data-[state=checked]:border-sky-600"
+                      />
+                    </motion.div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+        );
+
+      case 'seamless_checkout':
+        return (
+          <motion.div
+            key={cardId}
+            ref={ref}
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay }}
+            className="size-full"
+          >
+            <Card className="flex flex-col h-[400px] rounded-sm overflow-hidden">
+              <CardHeader className="p-6 pb-4 text-base font-medium">
+                {String(
+                  t(
+                    mounted && resolvedTheme === 'light'
+                      ? 'features.card2.title_light'
+                      : 'features.card2.title',
+                    currentLanguage,
+                  ),
+                )}
+              </CardHeader>
+              <CardContent className="px-6 pb-6 pt-0 text-sm text-muted-foreground grow relative flex flex-col">
+                <p className="mb-4">
+                  {String(
+                    t(
+                      mounted && resolvedTheme === 'light'
+                        ? 'features.card2.description_light'
+                        : 'features.card2.description',
+                      currentLanguage,
+                    ),
+                  )}
+                </p>
+                <div className="relative grow rounded-sm overflow-hidden">
+                  {mounted && (
+                    <>
+                      <Image
+                        src="/okra/okra_api_receipts.svg"
+                        alt="Seamless checkout architecture"
+                        width={400}
+                        height={300}
+                        className="absolute inset-0 w-full h-full object-contain -ml-2 md:ml-0 block dark:hidden"
+                      />
+                      <Image
+                        src="/random/arch_l.webp"
+                        alt="Seamless checkout architecture"
+                        width={400}
+                        height={300}
+                        className="absolute inset-0 w-full h-full object-contain -ml-2 md:ml-0 hidden dark:block"
+                        priority
+                      />
+                    </>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+        );
+
+      case 'data_insights':
+        return (
+          <motion.div
+            key={cardId}
+            ref={ref}
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay }}
+            className="size-full"
+          >
+            <Card className="flex flex-col h-[400px] rounded-sm">
+              <CardHeader className="px-6 pt-6 pb-4 text-base font-medium">
+                {String(t('features.card5.title', currentLanguage))}
+              </CardHeader>
+              <CardContent className="px-6 pb-6 pt-0 text-sm text-muted-foreground grow">
+                <p className="mb-4">
+                  {String(t('features.card5.description', currentLanguage))}
+                </p>
+                <div className="w-full">
+                  <DemoRevenueChart />
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+        );
+
+      case 'mobile_payouts':
+        return (
+          <motion.div
+            key={cardId}
+            ref={ref}
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay }}
+            className="size-full"
+          >
+            <Card className="flex flex-col h-[400px] rounded-sm">
+              <CardHeader className="p-6 pb-4 text-base font-medium">
+                {String(t('features.card4.title', currentLanguage))}
+              </CardHeader>
+              <CardContent className="px-6 pb-6 pt-0 text-sm text-muted-foreground grow">
+                <p className="mb-2">
+                  {String(t('features.card4.description', currentLanguage))}
+                </p>
+                <div
+                  data-animate
+                  className="flex flex-col items-start justify-center gap-3 lomi-demo-card-content w-full"
+                >
+                  <div className="payout-dashboard w-full">
+                    <div className="flex justify-between items-center">
+                      <span className="text-xs text-muted-foreground">
+                        {String(t('features.card4.balance', currentLanguage))}
+                      </span>
+                      <div className="flex items-center gap-2 rounded-sm p-1.5 bg-green-50 dark:bg-green-900/30 border w-48 h-8 justify-center">
+                        <span className="font-mono text-[11px] font-bold text-green-700 dark:text-green-300">
+                          {(49847392)
+                            .toLocaleString('fr-FR')
+                            .replace(/\u202F/g, ' ')}{' '}
+                          F CFA
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex w-full items-start pt-0">
+                    <CornerDownRight className="size-5 text-muted-foreground/80 mt-20 mr-4" />
+                    <div className="flex-1 flex flex-col gap-3">
+                      <div className="flex flex-col gap-2">
+                        <p className="text-[11px] text-muted-foreground mb-2">
+                          {String(
+                            t('features.card4.payout_phone', currentLanguage),
+                          )}
+                        </p>
+                        <div className="flex items-center gap-4">
+                          <div className="flex flex-col gap-2 translate-x-12 mr-12">
+                            <div
+                              className="flex items-center gap-2 rounded-sm p-1.5 bg-muted/40 border w-36 h-8 justify-center cursor-pointer transition-colors hover:bg-muted/60 focus:outline-none focus:ring-0 focus:border-none"
+                              onMouseEnter={handlePhoneNumberHover1}
+                            >
+                              <span className="font-mono text-[11px]">
+                                {phoneNumbers[phoneNumberIndex1]?.number}
+                              </span>
+                            </div>
+                            <div
+                              className="flex items-center gap-2 rounded-sm p-1.5 bg-muted/40 border w-36 h-8 justify-center cursor-pointer transition-colors hover:bg-muted/60 focus:outline-none focus:ring-0 focus:border-none"
+                              onMouseEnter={handlePhoneNumberHover2}
+                            >
+                              <span className="font-mono text-[11px]">
+                                {phoneNumbers[phoneNumberIndex2]?.number}
+                              </span>
+                            </div>
+                          </div>
+                          <ArrowRight className="size-4 text-muted-foreground/80" />
+                          <div className="h-8 w-8 rounded-sm bg-muted/40 border flex items-center justify-center">
+                            <Smartphone className="size-4 text-foreground" />
+                          </div>
+                        </div>
+                      </div>
+                      <div className="flex flex-col gap-2">
+                        <p className="text-[11px] text-muted-foreground translate-x-0 mt-2 mb-2">
+                          {String(
+                            t('features.card4.payout_bank', currentLanguage),
+                          )}
+                        </p>
+                        <div className="flex items-center gap-4">
+                          <div className="flex flex-col translate-x-0 mr-0">
+                            <div
+                              className="flex items-center gap-2 rounded-sm px-0 py-1.5 bg-muted/40 border w-48 h-8 justify-center cursor-pointer transition-colors hover:bg-muted/60 focus:outline-none focus:ring-0 focus:border-none"
+                              onMouseEnter={handleBankAccountHover}
+                            >
+                              <span className="font-mono text-[11px]">
+                                {bankAccounts[bankAccountIndex]?.number}
+                              </span>
+                            </div>
+                          </div>
+                          <ArrowRight className="size-4 text-muted-foreground/80" />
+                          <div className="h-8 w-8 rounded-sm bg-muted/40 border flex items-center justify-center">
+                            <Landmark className="size-4 text-foreground" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+        );
+
+      case 'selling_models':
+        return (
+          <motion.div
+            key={cardId}
+            ref={ref}
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay }}
+            className="size-full"
+          >
+            <Card className="flex flex-col h-[400px] rounded-sm">
+              <CardHeader className="p-6 pb-4 text-base font-medium">
+                {String(t('features.card3.title', currentLanguage))}
+              </CardHeader>
+              <CardContent className="px-6 pb-6 pt-0 text-sm text-muted-foreground grow flex flex-col">
+                <p className="mb-4">
+                  {String(t('features.card3.description', currentLanguage))}
+                </p>
+                <div className="w-full">
+                  <div className="flex gap-1 rounded-sm bg-muted/30 border border-border p-1 w-full h-10">
+                    <button
+                      type="button"
+                      onClick={() => setActiveTab('product')}
+                      className={`flex-1 px-3 pt-1.5 pb-2.5 text-sm font-normal rounded-sm transition-all duration-200 h-7.5 focus:outline-none focus:ring-0 focus:border-none ${activeTab === 'product'
+                        ? 'bg-[#E9EAEF] dark:bg-[#2A2B30] text-foreground shadow-sm border border-border/50'
+                        : 'text-muted-foreground hover:text-foreground'
+                        }`}
+                    >
+                      {String(
+                        t('features.card3.tab_products', currentLanguage),
+                      )}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setActiveTab('subscription')}
+                      className={`flex-1 px-3 pt-1.5 pb-2.5 text-sm font-normal rounded-sm transition-all duration-200 h-7.5 focus:outline-none focus:ring-0 focus:border-none ${activeTab === 'subscription'
+                        ? 'bg-[#E9EAEF] dark:bg-[#2A2B30] text-foreground shadow-sm border border-border/50'
+                        : 'text-muted-foreground hover:text-foreground'
+                        }`}
+                    >
+                      {String(
+                        t(
+                          'features.card3.tab_subscriptions',
+                          currentLanguage,
+                        ),
+                      )}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setActiveTab('checkout')}
+                      className={`flex-1 px-3 pt-1.5 pb-2.5 text-sm font-normal rounded-sm transition-all duration-200 h-7.5 focus:outline-none focus:ring-0 focus:border-none ${activeTab === 'checkout'
+                        ? 'bg-[#E9EAEF] dark:bg-[#2A2B30] text-foreground shadow-sm border border-border/50'
+                        : 'text-muted-foreground hover:text-foreground'
+                        }`}
+                    >
+                      {String(
+                        t('features.card3.tab_checkout', currentLanguage),
+                      )}
+                    </button>
+                  </div>
+                  <div className="mt-2">
+                    <div className="relative">
+                      {activeTab === 'product' && (
+                        <div className="bg-muted/50 dark:bg-blue-950/30 rounded-sm overflow-hidden shadow-sm h-54 md:h-50 overflow-y-auto hide-scrollbar">
+                          {mounted && (
+                            <SyntaxHighlighter
+                              language="json"
+                              style={
+                                resolvedTheme === 'dark'
+                                  ? blueVsDarkTheme
+                                  : blueVsTheme
+                              }
+                              customStyle={{
+                                margin: 0,
+                                padding: '1rem',
+                                fontSize: '0.75rem',
+                                lineHeight: '1.5',
+                              }}
+                              wrapLines={true}
+                              codeTagProps={{
+                                style: {
+                                  whiteSpace: 'pre-wrap',
+                                  wordBreak: 'break-word',
+                                },
+                              }}
+                            >
+                              {productCode}
+                            </SyntaxHighlighter>
+                          )}
+                        </div>
+                      )}
+                      {activeTab === 'subscription' && (
+                        <div className="bg-muted/50 dark:bg-blue-950/30 rounded-sm overflow-hidden shadow-sm h-54 md:h-50 overflow-y-auto hide-scrollbar">
+                          {mounted && (
+                            <SyntaxHighlighter
+                              language="json"
+                              style={
+                                resolvedTheme === 'dark'
+                                  ? blueVsDarkTheme
+                                  : blueVsTheme
+                              }
+                              customStyle={{
+                                margin: 0,
+                                padding: '1rem',
+                                fontSize: '0.75rem',
+                                lineHeight: '1.5',
+                              }}
+                              wrapLines={true}
+                              codeTagProps={{
+                                style: {
+                                  whiteSpace: 'pre-wrap',
+                                  wordBreak: 'break-word',
+                                },
+                              }}
+                            >
+                              {subscriptionCode}
+                            </SyntaxHighlighter>
+                          )}
+                        </div>
+                      )}
+                      {activeTab === 'checkout' && (
+                        <div className="bg-muted/50 dark:bg-blue-950/30 rounded-sm overflow-hidden shadow-sm h-54 md:h-50 overflow-y-auto hide-scrollbar">
+                          {mounted && (
+                            <SyntaxHighlighter
+                              language="json"
+                              style={
+                                resolvedTheme === 'dark'
+                                  ? blueVsDarkTheme
+                                  : blueVsTheme
+                              }
+                              customStyle={{
+                                margin: 0,
+                                padding: '1rem',
+                                fontSize: '0.75rem',
+                                lineHeight: '1.5',
+                              }}
+                              wrapLines={true}
+                              codeTagProps={{
+                                style: {
+                                  whiteSpace: 'pre-wrap',
+                                  wordBreak: 'break-word',
+                                },
+                              }}
+                            >
+                              {checkoutCode}
+                            </SyntaxHighlighter>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+        );
+
+      case 'coupons_discounts':
+        return (
+          <motion.div
+            key={cardId}
+            ref={ref}
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay }}
+            className="size-full"
+          >
+            <Card className="flex flex-col h-[400px] rounded-sm">
+              <CardHeader className="p-6 pb-4 text-base font-medium">
+                {String(t('features.card6.title', currentLanguage))}
+              </CardHeader>
+              <CardContent className="px-6 pb-6 pt-0 text-sm text-muted-foreground grow flex flex-col">
+                <p className="mb-4">
+                  {String(t('features.card6.description', currentLanguage))}
+                </p>
+
+                <div className="relative my-4">
+                  <div className="grid grid-cols-[1fr_2fr_1fr] h-[120px] *:border-foreground/10 *:border-dashed mask-radial-circle-long">
+                    <div className="border-r border-b" />
+                    <div className="border-b" />
+                    <div className="border-l border-b" />
+
+                    <div className="border-r" />
+                    <div />
+                    <div className="border-l" />
+
+                    <div className="border-r border-t" />
+                    <div className="border-t" />
+                    <div className="border-l border-t" />
+                  </div>
+                  <code className="absolute inset-0 flex items-center justify-center">
+                    <code
+                      className={`cli-command-animated ${cliAnimationTriggered && !isMobile ? 'animate' : ''}`}
+                    >
+                      <code className="text-sm text-transparent bg-clip-text bg-linear-to-r from-blue-300 to-foreground font-medium" />
+                    </code>
+                  </code>
+                </div>
+
+                <div className="space-y-3">
+                  <div className="flex items-center gap-3">
+                    <Terminal className="size-4 text-blue-500 shrink-0" />
+                    <span>
+                      {String(
+                        t('features.card6.open_source_note', currentLanguage),
+                      )}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="flex flex-row gap-3 mt-6">
+                  <a
+                    href="https://github.com/lomiafrica/lomi./"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full rounded-sm font-normal border border-zinc-200 dark:border-zinc-800 flex items-center h-8 text-sm overflow-hidden"
+                  >
+                    <div className="inline-flex items-center justify-center gap-2 bg-transparent px-3 py-2 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white border-zinc-200 dark:border-zinc-800 h-full">
+                      <GitHubIcon className="h-5 w-5" />
+                    </div>
+                    <div className="bg-transparent px-2 py-2 text-amber-500 hover:text-amber-600 border-l border-zinc-200 dark:border-zinc-800 h-full flex items-center justify-center flex-1">
+                      <span className="mr-1 font-semibold text-amber-600 dark:text-amber-300 hover:text-amber-700 dark:hover:text-amber-200">
+                        {formatStars(starCount)}
+                      </span>
+                      <Star className="h-3.5 w-3.5 text-amber-600 dark:text-amber-300 hover:text-amber-700 dark:hover:text-amber-200 fill-current shrink-0" />
+                    </div>
+                  </a>
+                  <Button asChild variant="outline" className="w-full h-8">
+                    <a
+                      href="/docs/core/introduction/what-is-lomi"
+                      className="flex items-center justify-center text-foreground"
+                    >
+                      {String(
+                        t(
+                          'features.card6.documentation_button',
+                          currentLanguage,
+                        ),
+                      )}
+                    </a>
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+        );
+
+      default:
+        return null;
+    }
+  };
 
   const providerNames = [
     'SPI',
@@ -614,545 +1246,7 @@ export function FeaturesSection() {
             </h2>
           </div>
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {/* Card 1: Multiple Payment Providers */}
-            <motion.div
-              ref={cardRefs[0]}
-              initial={{ opacity: 0, y: 20 }}
-              animate={cardInViews[0] ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="size-full"
-            >
-              <Card className="flex flex-col h-[450px] md:h-[400px] rounded-sm">
-                <CardHeader className="p-6 pb-4 text-base font-medium">
-                  {String(t('features.card1.title', currentLanguage))}
-                </CardHeader>
-                <CardContent className="px-6 pb-6 pt-0 text-sm text-muted-foreground grow">
-                  <p className="mb-4">
-                    {String(t('features.card1.description', currentLanguage))}
-                  </p>
-                  <div className="w-full max-h-[230px] overflow-y-auto space-y-2 pr-2 hide-scrollbar">
-                    {providerNames.map((name, i) => (
-                      <motion.div
-                        key={name}
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={
-                          cardInViews[0]
-                            ? {
-                                opacity: 1,
-                                x: 0,
-                                transition: {
-                                  delay: 0.5 + i * 0.1,
-                                  type: 'spring',
-                                  stiffness: 120,
-                                  damping: 20,
-                                },
-                              }
-                            : {}
-                        }
-                        className="flex items-center justify-between p-1.5 bg-background border border-zinc-200 dark:border-zinc-800 rounded-sm hover:bg-muted/40 transition-colors duration-200"
-                      >
-                        <div className="flex items-center gap-3">
-                          <div className="w-8 h-8 bg-background border border-zinc-200 dark:border-zinc-800 rounded-sm flex items-center justify-center shadow-sm overflow-hidden">
-                            <Image
-                              src={`/payment_channels/${name === 'Bitcoin' ? 'btc' : name === 'Visa' ? `${visaImages[visaImageIndex]}` : name.toLowerCase().replace(' ', '_')}.webp`}
-                              alt={`${name} logo`}
-                              width={name === 'SPI' ? 24 : 32}
-                              height={name === 'SPI' ? 24 : 32}
-                              className={
-                                name === 'SPI'
-                                  ? 'w-6 h-6 object-cover rounded-sm'
-                                  : 'w-full h-full object-cover rounded-sm'
-                              }
-                            />
-                          </div>
-                          <div>
-                            <span className="text-sm font-medium text-foreground">
-                              {name === 'SPI'
-                                ? 'π-SPI'
-                                : name === 'Visa'
-                                  ? 'Cards'
-                                  : name}
-                            </span>
-                            <p className="text-xs text-muted-foreground">
-                              {name === 'SPI' &&
-                                String(
-                                  t(
-                                    'features.card1.spi_description',
-                                    currentLanguage,
-                                  ),
-                                )}
-                              {name === 'Wave' &&
-                                String(
-                                  t(
-                                    'features.card1.momo_description',
-                                    currentLanguage,
-                                  ),
-                                )}
-                              {name === 'Visa' &&
-                                String(
-                                  t(
-                                    'features.card1.visa_description',
-                                    currentLanguage,
-                                  ),
-                                )}
-                              {name === 'PayPal' &&
-                                String(
-                                  t(
-                                    'features.card1.paypal_description',
-                                    currentLanguage,
-                                  ),
-                                )}
-                              {name === 'Google Pay' &&
-                                String(
-                                  t(
-                                    'features.card1.google_pay_description',
-                                    currentLanguage,
-                                  ),
-                                )}
-                              {name === 'Bitcoin' &&
-                                String(
-                                  t(
-                                    'features.card1.crypto_description',
-                                    currentLanguage,
-                                  ),
-                                )}
-                            </p>
-                          </div>
-                        </div>
-                        <Switch
-                          checked={paymentToggles[name] || false}
-                          onCheckedChange={() => handlePaymentToggle(name)}
-                          aria-label={`${paymentToggles[name] ? 'Disable' : 'Enable'} ${name} payments`}
-                          className="data-[state=checked]:bg-[#56A5F9] data-[state=checked]:border-[#56A5F9] dark:data-[state=checked]:bg-sky-600 dark:data-[state=checked]:border-sky-600"
-                        />
-                      </motion.div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-
-            {/* Card 2: Seamless Checkout */}
-            <motion.div
-              ref={cardRefs[1]}
-              initial={{ opacity: 0, y: 20 }}
-              animate={cardInViews[1] ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="size-full"
-            >
-              <Card className="flex flex-col h-[400px] rounded-sm overflow-hidden">
-                <CardHeader className="p-6 pb-4 text-base font-medium">
-                  {String(
-                    t(
-                      mounted && resolvedTheme === 'light'
-                        ? 'features.card2.title_light'
-                        : 'features.card2.title',
-                      currentLanguage,
-                    ),
-                  )}
-                </CardHeader>
-                <CardContent className="px-6 pb-6 pt-0 text-sm text-muted-foreground grow relative flex flex-col">
-                  <p className="mb-4">
-                    {String(
-                      t(
-                        mounted && resolvedTheme === 'light'
-                          ? 'features.card2.description_light'
-                          : 'features.card2.description',
-                        currentLanguage,
-                      ),
-                    )}
-                  </p>
-                  <div className="relative grow rounded-sm overflow-hidden">
-                    {mounted && (
-                      <>
-                        <Image
-                          // src="/random/arch_d.webp"
-                          src="/okra/okra_api_receipts.svg"
-                          alt="Seamless checkout architecture"
-                          width={400}
-                          height={300}
-                          className="absolute inset-0 w-full h-full object-contain -ml-2 md:ml-0 block dark:hidden"
-                        />
-                        <Image
-                          src="/random/arch_l.webp"
-                          alt="Seamless checkout architecture"
-                          width={400}
-                          height={300}
-                          className="absolute inset-0 w-full h-full object-contain -ml-2 md:ml-0 hidden dark:block"
-                          priority
-                        />
-                      </>
-                    )}
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-
-            {/* Card 5: Data-Driven Insights */}
-            <motion.div
-              ref={cardRefs[4]}
-              initial={{ opacity: 0, y: 20 }}
-              animate={cardInViews[4] ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.25 }}
-              className="size-full"
-            >
-              <Card className="flex flex-col h-[400px] rounded-sm">
-                <CardHeader className="px-6 pt-6 pb-4 text-base font-medium">
-                  {String(t('features.card5.title', currentLanguage))}
-                </CardHeader>
-                <CardContent className="px-6 pb-6 pt-0 text-sm text-muted-foreground grow">
-                  <p className="mb-4">
-                    {String(t('features.card5.description', currentLanguage))}
-                  </p>
-                  <div className="w-full">
-                    <DemoRevenueChart />
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-
-            {/* Card 4: Mobile Money Payouts */}
-            <motion.div
-              ref={cardRefs[3]}
-              initial={{ opacity: 0, y: 20 }}
-              animate={cardInViews[3] ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.15 }}
-              className="size-full"
-            >
-              <Card className="flex flex-col h-[400px] rounded-sm">
-                <CardHeader className="p-6 pb-4 text-base font-medium">
-                  {String(t('features.card4.title', currentLanguage))}
-                </CardHeader>
-                <CardContent className="px-6 pb-6 pt-0 text-sm text-muted-foreground grow">
-                  <p className="mb-2">
-                    {String(t('features.card4.description', currentLanguage))}
-                  </p>
-                  <div
-                    data-animate
-                    className="flex flex-col items-start justify-center gap-3 lomi-demo-card-content w-full"
-                  >
-                    <div className="payout-dashboard w-full">
-                      <div className="flex justify-between items-center">
-                        <span className="text-xs text-muted-foreground">
-                          {String(t('features.card4.balance', currentLanguage))}
-                        </span>
-                        <div className="flex items-center gap-2 rounded-sm p-1.5 bg-green-50 dark:bg-green-900/30 border w-48 h-8 justify-center">
-                          <span className="font-mono text-[11px] font-bold text-green-700 dark:text-green-300">
-                            {(49847392)
-                              .toLocaleString('fr-FR')
-                              .replace(/\u202F/g, ' ')}{' '}
-                            F CFA
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="flex w-full items-start pt-0">
-                      <CornerDownRight className="size-5 text-muted-foreground/80 mt-20 mr-4" />
-                      <div className="flex-1 flex flex-col gap-3">
-                        <div className="flex flex-col gap-2">
-                          <p className="text-[11px] text-muted-foreground mb-2">
-                            {String(
-                              t('features.card4.payout_phone', currentLanguage),
-                            )}
-                          </p>
-                          <div className="flex items-center gap-4">
-                            <div className="flex flex-col gap-2 translate-x-12 mr-12">
-                              <div
-                                className="flex items-center gap-2 rounded-sm p-1.5 bg-muted/40 border w-36 h-8 justify-center cursor-pointer transition-colors hover:bg-muted/60 focus:outline-none focus:ring-0 focus:border-none"
-                                onMouseEnter={handlePhoneNumberHover1}
-                              >
-                                <span className="font-mono text-[11px]">
-                                  {phoneNumbers[phoneNumberIndex1]?.number}
-                                </span>
-                              </div>
-                              <div
-                                className="flex items-center gap-2 rounded-sm p-1.5 bg-muted/40 border w-36 h-8 justify-center cursor-pointer transition-colors hover:bg-muted/60 focus:outline-none focus:ring-0 focus:border-none"
-                                onMouseEnter={handlePhoneNumberHover2}
-                              >
-                                <span className="font-mono text-[11px]">
-                                  {phoneNumbers[phoneNumberIndex2]?.number}
-                                </span>
-                              </div>
-                            </div>
-                            <ArrowRight className="size-4 text-muted-foreground/80" />
-                            <div className="h-8 w-8 rounded-sm bg-muted/40 border flex items-center justify-center">
-                              <Smartphone className="size-4 text-foreground" />
-                            </div>
-                          </div>
-                        </div>
-                        <div className="flex flex-col gap-2">
-                          <p className="text-[11px] text-muted-foreground translate-x-0 mt-2 mb-2">
-                            {String(
-                              t('features.card4.payout_bank', currentLanguage),
-                            )}
-                          </p>
-                          <div className="flex items-center gap-4">
-                            <div className="flex flex-col translate-x-0 mr-0">
-                              <div
-                                className="flex items-center gap-2 rounded-sm px-0 py-1.5 bg-muted/40 border w-48 h-8 justify-center cursor-pointer transition-colors hover:bg-muted/60 focus:outline-none focus:ring-0 focus:border-none"
-                                onMouseEnter={handleBankAccountHover}
-                              >
-                                <span className="font-mono text-[11px]">
-                                  {bankAccounts[bankAccountIndex]?.number}
-                                </span>
-                              </div>
-                            </div>
-                            <ArrowRight className="size-4 text-muted-foreground/80" />
-                            <div className="h-8 w-8 rounded-sm bg-muted/40 border flex items-center justify-center">
-                              <Landmark className="size-4 text-foreground" />
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-
-            {/* Card 3: Flexible Selling Models */}
-            <motion.div
-              ref={cardRefs[2]}
-              initial={{ opacity: 0, y: 20 }}
-              animate={cardInViews[2] ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="size-full"
-            >
-              <Card className="flex flex-col h-[400px] rounded-sm">
-                <CardHeader className="p-6 pb-4 text-base font-medium">
-                  {String(t('features.card3.title', currentLanguage))}
-                </CardHeader>
-                <CardContent className="px-6 pb-6 pt-0 text-sm text-muted-foreground grow flex flex-col">
-                  <p className="mb-4">
-                    {String(t('features.card3.description', currentLanguage))}
-                  </p>
-                  <div className="w-full">
-                    <div className="flex gap-1 rounded-sm bg-muted/30 border border-border p-1 w-full h-10">
-                      <button
-                        type="button"
-                        onClick={() => setActiveTab('product')}
-                        className={`flex-1 px-3 pt-1.5 pb-2.5 text-sm font-normal rounded-sm transition-all duration-200 h-7.5 focus:outline-none focus:ring-0 focus:border-none ${
-                          activeTab === 'product'
-                            ? 'bg-[#E9EAEF] dark:bg-[#2A2B30] text-foreground shadow-sm border border-border/50'
-                            : 'text-muted-foreground hover:text-foreground'
-                        }`}
-                      >
-                        {String(
-                          t('features.card3.tab_products', currentLanguage),
-                        )}
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => setActiveTab('subscription')}
-                        className={`flex-1 px-3 pt-1.5 pb-2.5 text-sm font-normal rounded-sm transition-all duration-200 h-7.5 focus:outline-none focus:ring-0 focus:border-none ${
-                          activeTab === 'subscription'
-                            ? 'bg-[#E9EAEF] dark:bg-[#2A2B30] text-foreground shadow-sm border border-border/50'
-                            : 'text-muted-foreground hover:text-foreground'
-                        }`}
-                      >
-                        {String(
-                          t(
-                            'features.card3.tab_subscriptions',
-                            currentLanguage,
-                          ),
-                        )}
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => setActiveTab('checkout')}
-                        className={`flex-1 px-3 pt-1.5 pb-2.5 text-sm font-normal rounded-sm transition-all duration-200 h-7.5 focus:outline-none focus:ring-0 focus:border-none ${
-                          activeTab === 'checkout'
-                            ? 'bg-[#E9EAEF] dark:bg-[#2A2B30] text-foreground shadow-sm border border-border/50'
-                            : 'text-muted-foreground hover:text-foreground'
-                        }`}
-                      >
-                        {String(
-                          t('features.card3.tab_checkout', currentLanguage),
-                        )}
-                      </button>
-                    </div>
-                    <div className="mt-2">
-                      <div className="relative">
-                        {activeTab === 'product' && (
-                          <div className="bg-muted/50 dark:bg-blue-950/30 rounded-sm overflow-hidden shadow-sm h-54 md:h-50 overflow-y-auto hide-scrollbar">
-                            {mounted && (
-                              <SyntaxHighlighter
-                                language="json"
-                                style={
-                                  resolvedTheme === 'dark'
-                                    ? blueVsDarkTheme
-                                    : blueVsTheme
-                                }
-                                customStyle={{
-                                  margin: 0,
-                                  padding: '1rem',
-                                  fontSize: '0.75rem',
-                                  lineHeight: '1.5',
-                                }}
-                                wrapLines={true}
-                                codeTagProps={{
-                                  style: {
-                                    whiteSpace: 'pre-wrap',
-                                    wordBreak: 'break-word',
-                                  },
-                                }}
-                              >
-                                {productCode}
-                              </SyntaxHighlighter>
-                            )}
-                          </div>
-                        )}
-                        {activeTab === 'subscription' && (
-                          <div className="bg-muted/50 dark:bg-blue-950/30 rounded-sm overflow-hidden shadow-sm h-54 md:h-50 overflow-y-auto hide-scrollbar">
-                            {mounted && (
-                              <SyntaxHighlighter
-                                language="json"
-                                style={
-                                  resolvedTheme === 'dark'
-                                    ? blueVsDarkTheme
-                                    : blueVsTheme
-                                }
-                                customStyle={{
-                                  margin: 0,
-                                  padding: '1rem',
-                                  fontSize: '0.75rem',
-                                  lineHeight: '1.5',
-                                }}
-                                wrapLines={true}
-                                codeTagProps={{
-                                  style: {
-                                    whiteSpace: 'pre-wrap',
-                                    wordBreak: 'break-word',
-                                  },
-                                }}
-                              >
-                                {subscriptionCode}
-                              </SyntaxHighlighter>
-                            )}
-                          </div>
-                        )}
-                        {activeTab === 'checkout' && (
-                          <div className="bg-muted/50 dark:bg-blue-950/30 rounded-sm overflow-hidden shadow-sm h-54 md:h-50 overflow-y-auto hide-scrollbar">
-                            {mounted && (
-                              <SyntaxHighlighter
-                                language="json"
-                                style={
-                                  resolvedTheme === 'dark'
-                                    ? blueVsDarkTheme
-                                    : blueVsTheme
-                                }
-                                customStyle={{
-                                  margin: 0,
-                                  padding: '1rem',
-                                  fontSize: '0.75rem',
-                                  lineHeight: '1.5',
-                                }}
-                                wrapLines={true}
-                                codeTagProps={{
-                                  style: {
-                                    whiteSpace: 'pre-wrap',
-                                    wordBreak: 'break-word',
-                                  },
-                                }}
-                              >
-                                {checkoutCode}
-                              </SyntaxHighlighter>
-                            )}
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-
-            {/* Card 6: Coupons & Discounts */}
-            <motion.div
-              ref={cardRefs[5]}
-              initial={{ opacity: 0, y: 20 }}
-              animate={cardInViews[5] ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.35 }}
-              className="size-full"
-            >
-              <Card className="flex flex-col h-[400px] rounded-sm">
-                <CardHeader className="p-6 pb-4 text-base font-medium">
-                  {String(t('features.card6.title', currentLanguage))}
-                </CardHeader>
-                <CardContent className="px-6 pb-6 pt-0 text-sm text-muted-foreground grow flex flex-col">
-                  <p className="mb-4">
-                    {String(t('features.card6.description', currentLanguage))}
-                  </p>
-
-                  <div className="relative my-4">
-                    <div className="grid grid-cols-[1fr_2fr_1fr] h-[120px] *:border-foreground/10 *:border-dashed mask-radial-circle-long">
-                      <div className="border-r border-b" />
-                      <div className="border-b" />
-                      <div className="border-l border-b" />
-
-                      <div className="border-r" />
-                      <div />
-                      <div className="border-l" />
-
-                      <div className="border-r border-t" />
-                      <div className="border-t" />
-                      <div className="border-l border-t" />
-                    </div>
-                    <code className="absolute inset-0 flex items-center justify-center">
-                      <code
-                        className={`cli-command-animated ${cliAnimationTriggered && !isMobile ? 'animate' : ''}`}
-                      >
-                        <code className="text-sm text-transparent bg-clip-text bg-linear-to-r from-blue-300 to-foreground font-medium" />
-                      </code>
-                    </code>
-                  </div>
-
-                  <div className="space-y-3">
-                    <div className="flex items-center gap-3">
-                      <Terminal className="size-4 text-blue-500 shrink-0" />
-                      <span>
-                        {String(
-                          t('features.card6.open_source_note', currentLanguage),
-                        )}
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-row gap-3 mt-6">
-                    <a
-                      href="https://github.com/lomiafrica/lomi./"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-full rounded-sm font-normal border border-zinc-200 dark:border-zinc-800 flex items-center h-8 text-sm overflow-hidden"
-                    >
-                      <div className="inline-flex items-center justify-center gap-2 bg-transparent px-3 py-2 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white border-zinc-200 dark:border-zinc-800 h-full">
-                        <GitHubIcon className="h-5 w-5" />
-                      </div>
-                      <div className="bg-transparent px-2 py-2 text-amber-500 hover:text-amber-600 border-l border-zinc-200 dark:border-zinc-800 h-full flex items-center justify-center flex-1">
-                        <span className="mr-1 font-semibold text-amber-600 dark:text-amber-300 hover:text-amber-700 dark:hover:text-amber-200">
-                          {formatStars(starCount)}
-                        </span>
-                        <Star className="h-3.5 w-3.5 text-amber-600 dark:text-amber-300 hover:text-amber-700 dark:hover:text-amber-200 fill-current shrink-0" />
-                      </div>
-                    </a>
-                    <Button asChild variant="outline" className="w-full h-8">
-                      <a
-                        href="/docs/core/introduction/what-is-lomi"
-                        className="flex items-center justify-center text-foreground"
-                      >
-                        {String(
-                          t(
-                            'features.card6.documentation_button',
-                            currentLanguage,
-                          ),
-                        )}
-                      </a>
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
+            {currentCardOrder.map((cardId, index) => renderCard(cardId, index))}
           </div>
         </div>
       </section>
