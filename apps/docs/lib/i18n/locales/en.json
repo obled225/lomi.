@@ -120,10 +120,13 @@
     "card1": {
       "title": "All your preferred payment methods",
       "description": "Accept local and international payment methods, seamlessly.",
-      "momo_description": "Mobile money payments",
+      "momo_description": "Mobile money payment service",
       "wallet_description": "Digital wallet payments",
-      "crypto_description": "Cryptocurrency payments",
-      "spi_description": "Interoperable payment system",
+      "crypto_description": "Decentralized payment network",
+      "spi_description": "Interoperable payment infrastructure",
+      "visa_description": "Global electronic payment network",
+      "paypal_description": "Digital payment platform",
+      "google_pay_description": "Contactless payment system",
       "card_description": "Card payment solution"
     },
     "card2": {

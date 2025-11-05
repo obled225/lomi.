@@ -5,6 +5,7 @@ import { LottieIcon } from '@/components/ui/lottie-icon';
 import { animations, LottieAnimationData } from '@/lib/utils/lottie-animations';
 import { useTheme } from '@/lib/hooks/use-theme';
 import { playClickSound } from '@/lib/utils/sound';
+import { Card, CardHeader, CardContent } from '@/components/ui/card';
 
 type DocCard = {
     id: string;
@@ -32,49 +33,55 @@ export function DocumentationDropdown({
     const { theme } = useTheme();
 
     const featuredCard: FeaturedCard = {
-        title: 'Build Your Docs.',
-        description: 'Learn to use Fumadocs on your docs site.',
-        image: '/images/docs/featured-docs.png', // You'll need to add this image
+        title: "Focus on building, not billing",
+        description: 'Turn your application into a business in minutes.',
+        image: '/company/800x800.webp',
         imageAlt: 'Documentation interface screenshot',
         href: '/docs/getting-started',
-        badge: 'Getting Started',
+        badge: 'Getting started',
     };
 
     const docCards: DocCard[] = [
         {
-            id: 'components',
-            title: 'Components',
-            description: 'Add interactive experience to your docs.',
+            id: 'cli',
+            title: 'CLI',
+            description: 'Master the command line interface for project setup and management.',
             icon: animations.code,
-            href: '/docs/components',
+            href: '/docs/core/lomi-cli',
         },
         {
-            id: 'markdown',
-            title: 'Markdown',
-            description: 'Learn the writing format/syntax of Fumadocs.',
+            id: 'products',
+            title: 'Products & Subscriptions',
+            description: 'Create and manage products, subscription plans, and usage tracking.',
             icon: animations.mail,
-            href: '/docs/markdown',
+            href: '/docs/reference/payments/products',
         },
         {
-            id: 'openapi',
-            title: 'OpenAPI',
-            description:
-                'Generate interactive playgrounds and docs for your OpenAPI schema.',
+            id: 'checkouts',
+            title: 'Checkouts',
+            description: 'Implement secure payment flows with checkout sessions and payment links.',
             icon: animations.settings,
-            href: '/docs/openapi',
+            href: '/docs/reference/payments/checkout-sessions',
         },
         {
-            id: 'manual-installation',
-            title: 'Manual Installation',
-            description: 'Setup Fumadocs for your existing Next.js app.',
+            id: 'merchant-of-record',
+            title: 'Finance & Payouts',
+            description: 'Understand merchant services, pricing, and payout management.',
             icon: animations.search,
-            href: '/docs/installation',
+            href: '/docs/core/merchant-of-record',
         },
+        // {
+        //     id: 'open-source',
+        //     title: 'Open Source',
+        //     description: 'Explore our open-source solution and self-hosting options.',
+        //     icon: animations.code,
+        //     href: '/docs/core/freedom/open-source',
+        // },
     ];
 
     return (
         <div
-            className="w-full max-w-7xl max-h-[420px] overflow-y-auto py-1"
+            className="w-full max-w-7xl max-h-[420px] overflow-y-auto px-2 -translate-y-2"
             onMouseLeave={onMouseLeave}
         >
             <div className="flex flex-col md:flex-row gap-4">
@@ -126,38 +133,43 @@ export function DocumentationDropdown({
                         <Link
                             key={card.id}
                             href={card.href}
-                            className="group flex flex-col px-4 py-4 bg-background border border-border hover:border-zinc-300 dark:hover:border-zinc-700 rounded-sm transition-all cursor-pointer hover:shadow-sm"
                             onMouseEnter={() => setHoveredIcon(card.id)}
                             onMouseLeave={() => setHoveredIcon(null)}
                             onClick={playClickSound}
                         >
-                            <div className="flex items-start gap-3 mb-3">
-                                <div className="shrink-0">
-                                    <LottieIcon
-                                        animationData={card.icon}
-                                        size={24}
-                                        loop={false}
-                                        autoplay={false}
-                                        initialFrame={0}
-                                        isHovered={hoveredIcon === card.id}
-                                        customColor={
-                                            hoveredIcon === card.id
-                                                ? theme === 'dark'
-                                                    ? [0.922, 0.922, 0.941] // Very light in dark mode (zinc-200)
-                                                    : [0.145, 0.145, 0.169] // Very dark in light mode (zinc-800)
-                                                : theme === 'dark'
-                                                    ? [0.631, 0.631, 0.667] // zinc-400 in dark mode
-                                                    : [0.322, 0.322, 0.357] // zinc-600 in light mode
-                                        }
-                                    />
-                                </div>
-                                <h4 className="text-base font-semibold text-zinc-700 dark:text-zinc-300 group-hover:text-zinc-900 dark:group-hover:text-zinc-100 transition-colors leading-tight">
-                                    {card.title}
-                                </h4>
-                            </div>
-                            <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
-                                {card.description}
-                            </p>
+                            <Card className="group flex flex-col h-[160px] rounded-sm transition-all cursor-pointer hover:shadow-sm">
+                                <CardHeader className="p-6 pb-4">
+                                    <div className="flex items-start gap-3">
+                                        <div className="shrink-0">
+                                            <LottieIcon
+                                                animationData={card.icon}
+                                                size={24}
+                                                loop={false}
+                                                autoplay={false}
+                                                initialFrame={0}
+                                                isHovered={hoveredIcon === card.id}
+                                                customColor={
+                                                    hoveredIcon === card.id
+                                                        ? theme === 'dark'
+                                                            ? [0.922, 0.922, 0.941] // Very light in dark mode (zinc-200)
+                                                            : [0.145, 0.145, 0.169] // Very dark in light mode (zinc-800)
+                                                        : theme === 'dark'
+                                                            ? [0.631, 0.631, 0.667] // zinc-400 in dark mode
+                                                            : [0.322, 0.322, 0.357] // zinc-600 in light mode
+                                                }
+                                            />
+                                        </div>
+                                        <h4 className="text-base font-medium text-zinc-700 dark:text-zinc-300 group-hover:text-zinc-900 dark:group-hover:text-zinc-100 transition-colors leading-tight">
+                                            {card.title}
+                                        </h4>
+                                    </div>
+                                </CardHeader>
+                                <CardContent className="px-6 pb-6 pt-0 text-sm text-muted-foreground grow">
+                                    <p className="leading-relaxed">
+                                        {card.description}
+                                    </p>
+                                </CardContent>
+                            </Card>
                         </Link>
                     ))}
                 </div>

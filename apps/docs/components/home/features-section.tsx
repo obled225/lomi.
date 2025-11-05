@@ -13,8 +13,7 @@ import {
 import { motion, useInView } from 'framer-motion';
 import { Switch } from '@/components/ui/switch';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import { blueVsTheme } from '@/lib/utils/code-highlighting-theme';
+import { blueVsTheme, blueVsDarkTheme } from '@/lib/utils/code-highlighting-theme';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { GitHubIcon } from '@/components/icons/GitHubIcon';
@@ -360,6 +359,10 @@ export function FeaturesSection() {
   // Phone numbers hover state - separate for each field
   const [phoneNumberIndex1, setPhoneNumberIndex1] = React.useState(0);
   const [phoneNumberIndex2, setPhoneNumberIndex2] = React.useState(1);
+
+  // Visa image rotation state
+  const [visaImageIndex, setVisaImageIndex] = React.useState(0);
+  const visaImages = ['visa', 'mastercard', 'amex', 'gim'];
   const phoneNumbers = [
     { country: 'SN', number: '+221 77 123 45 67' },
     { country: 'CI', number: '+225 07 12 34 56 78' },
@@ -404,6 +407,15 @@ export function FeaturesSection() {
       [providerName]: !prev[providerName],
     }));
   };
+
+  // Visa image rotation effect
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      setVisaImageIndex((prev) => (prev + 1) % visaImages.length);
+    }, 4000); // Change every 4 seconds
+
+    return () => clearInterval(interval);
+  }, [visaImages.length]);
 
   const productCode = `{
   "name": "Just a mug",
@@ -635,7 +647,7 @@ export function FeaturesSection() {
                         <div className="flex items-center gap-3">
                           <div className="w-8 h-8 bg-background border border-zinc-200 dark:border-zinc-800 rounded-sm flex items-center justify-center shadow-sm overflow-hidden">
                             <Image
-                              src={`/payment_channels/${name === 'Bitcoin' ? 'btc' : name.toLowerCase().replace(' ', '_')}.webp`}
+                              src={`/payment_channels/${name === 'Bitcoin' ? 'btc' : name === 'Visa' ? `${visaImages[visaImageIndex]}` : name.toLowerCase().replace(' ', '_')}.webp`}
                               alt={`${name} logo`}
                               width={name === 'SPI' ? 24 : 32}
                               height={name === 'SPI' ? 24 : 32}
@@ -648,7 +660,7 @@ export function FeaturesSection() {
                           </div>
                           <div>
                             <span className="text-sm font-medium text-foreground">
-                              {name === 'SPI' ? 'π-SPI' : name}
+                              {name === 'SPI' ? 'π-SPI' : name === 'Visa' ? 'Cards' : name}
                             </span>
                             <p className="text-xs text-muted-foreground">
                               {name === 'SPI' &&
@@ -665,12 +677,24 @@ export function FeaturesSection() {
                                     currentLanguage,
                                   ),
                                 )}
-                              {(name === 'Visa' ||
-                                name === 'PayPal' ||
-                                name === 'Google Pay') &&
+                              {name === 'Visa' &&
                                 String(
                                   t(
-                                    'features.card1.card_description',
+                                    'features.card1.visa_description',
+                                    currentLanguage,
+                                  ),
+                                )}
+                              {name === 'PayPal' &&
+                                String(
+                                  t(
+                                    'features.card1.paypal_description',
+                                    currentLanguage,
+                                  ),
+                                )}
+                              {name === 'Google Pay' &&
+                                String(
+                                  t(
+                                    'features.card1.google_pay_description',
                                     currentLanguage,
                                   ),
                                 )}
@@ -919,13 +943,13 @@ export function FeaturesSection() {
                     <div className="mt-2">
                       <div className="relative">
                         {activeTab === 'product' && (
-                          <div className="bg-muted/50 dark:bg-slate-900 rounded-sm border border-border overflow-hidden shadow-sm h-54 md:h-50 overflow-y-auto hide-scrollbar">
+                          <div className="bg-muted/50 dark:bg-blue-950/30 rounded-sm overflow-hidden shadow-sm h-54 md:h-50 overflow-y-auto hide-scrollbar">
                             {mounted && (
                               <SyntaxHighlighter
                                 language="json"
                                 style={
                                   resolvedTheme === 'dark'
-                                    ? vscDarkPlus
+                                    ? blueVsDarkTheme
                                     : blueVsTheme
                                 }
                                 customStyle={{
@@ -948,13 +972,13 @@ export function FeaturesSection() {
                           </div>
                         )}
                         {activeTab === 'subscription' && (
-                          <div className="bg-muted/50 dark:bg-slate-900 rounded-sm border border-border overflow-hidden shadow-sm h-54 md:h-50 overflow-y-auto hide-scrollbar">
+                          <div className="bg-muted/50 dark:bg-blue-950/30 rounded-sm overflow-hidden shadow-sm h-54 md:h-50 overflow-y-auto hide-scrollbar">
                             {mounted && (
                               <SyntaxHighlighter
                                 language="json"
                                 style={
                                   resolvedTheme === 'dark'
-                                    ? vscDarkPlus
+                                    ? blueVsDarkTheme
                                     : blueVsTheme
                                 }
                                 customStyle={{
@@ -977,13 +1001,13 @@ export function FeaturesSection() {
                           </div>
                         )}
                         {activeTab === 'checkout' && (
-                          <div className="bg-muted/50 dark:bg-slate-900 rounded-sm border border-border overflow-hidden shadow-sm h-54 md:h-50 overflow-y-auto hide-scrollbar">
+                          <div className="bg-muted/50 dark:bg-blue-950/30 rounded-sm overflow-hidden shadow-sm h-54 md:h-50 overflow-y-auto hide-scrollbar">
                             {mounted && (
                               <SyntaxHighlighter
                                 language="json"
                                 style={
                                   resolvedTheme === 'dark'
-                                    ? vscDarkPlus
+                                    ? blueVsDarkTheme
                                     : blueVsTheme
                                 }
                                 customStyle={{

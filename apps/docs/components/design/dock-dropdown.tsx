@@ -22,7 +22,7 @@ export function DockDropdown({
       }
       exit={{ opacity: 0, height: 0 }}
       transition={{ duration: 0.2 }}
-      className={`border-t border-border mt-1 ${isOpen ? '' : 'pointer-events-none'}`}
+      className={`mt-1 ${isOpen ? '' : 'pointer-events-none'}`}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
