@@ -4,10 +4,17 @@ import { useTranslation } from '@/lib/contexts/translation-context';
 import { t as translate } from '@/lib/i18n/translations';
 
 interface HeroProps {
-  dashboardImage?: string;
+  dashboardImage?: string | {
+    light: string;
+    dark: string;
+  };
+  mobileDashboardImage?: {
+    light: string;
+    dark: string;
+  };
 }
 
-function Hero({ dashboardImage }: HeroProps) {
+function Hero({ dashboardImage, mobileDashboardImage }: HeroProps) {
   const { currentLanguage } = useTranslation();
 
   // Create t function that uses currentLanguage (same pattern as header.tsx)
@@ -35,7 +42,8 @@ function Hero({ dashboardImage }: HeroProps) {
             >
               <SimpleImage
                 src={dashboardImage}
-                alt="Dashboard Preview"
+                mobileSrc={mobileDashboardImage}
+                alt="Preview"
                 width={1200}
                 height={800}
                 className=""

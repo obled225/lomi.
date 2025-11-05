@@ -60,9 +60,10 @@ export function ProductHuntBadge() {
         width={250}
         height={54}
         style={{
-          width: '410px',
-          height: '80px',
+          width: '370px',
+          height: '74px',
         }}
+        className="md:w-[410px] md:h-[80px]"
       />
     </a>
   );

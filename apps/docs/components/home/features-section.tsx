@@ -24,7 +24,7 @@ import { useTheme } from '@/lib/hooks/use-theme';
 // Demo Revenue Chart Component with Interactive Features
 const DemoRevenueChart = () => {
   // Fixed total revenue that doesn't change
-  const totalRevenue = 12847392;
+  const totalRevenue = 49847392;
 
   // Generate realistic yearly growth data from 0 to totalRevenue
   const generateYearlyData = (): Array<{
@@ -273,11 +273,11 @@ const DemoRevenueChart = () => {
         {/* Tooltip */}
         {hoveredPoint && (
           <div
-            className="absolute z-10 bg-background border border-border rounded-sm px-3 py-2 shadow-sm text-xs pointer-events-none"
+            className="absolute z-10 bg-background border border-border rounded-sm px-3 py-2 shadow-sm text-xs pointer-events-none min-w-[140px] whitespace-nowrap"
             style={{
               left: `${hoveredPoint.x}px`,
               top: `${hoveredPoint.y}px`,
-              transform: 'translate(-50%, -120%)',
+              transform: hoveredPoint.x < chartWidth / 2 ? 'translate(0%, -120%)' : 'translate(-100%, -120%)',
             }}
           >
             <div className="text-muted-foreground mb-1">
@@ -799,7 +799,7 @@ export function FeaturesSection() {
                   {String(t('features.card4.title', currentLanguage))}
                 </CardHeader>
                 <CardContent className="px-6 pb-6 pt-0 text-sm text-muted-foreground grow">
-                  <p className="mb-5">
+                  <p className="mb-2">
                     {String(t('features.card4.description', currentLanguage))}
                   </p>
                   <div
@@ -813,7 +813,7 @@ export function FeaturesSection() {
                         </span>
                         <div className="flex items-center gap-2 rounded-sm p-1.5 bg-green-50 dark:bg-green-900/30 border w-48 h-8 justify-center">
                           <span className="font-mono text-[11px] font-bold text-green-700 dark:text-green-300">
-                            {(12847392).toLocaleString('fr-FR').replace(/\u202F/g, ' ')} F CFA
+                            {(49847392).toLocaleString('fr-FR').replace(/\u202F/g, ' ')} F CFA
                           </span>
                         </div>
                       </div>
@@ -823,7 +823,7 @@ export function FeaturesSection() {
                       <CornerDownRight className="size-5 text-muted-foreground/80 mt-20 mr-4" />
                       <div className="flex-1 flex flex-col gap-3">
                         <div className="flex flex-col gap-2">
-                          <p className="text-[11px] text-muted-foreground mb-1">
+                          <p className="text-[11px] text-muted-foreground mb-2">
                             {String(
                               t('features.card4.payout_phone', currentLanguage),
                             )}
@@ -854,7 +854,7 @@ export function FeaturesSection() {
                           </div>
                         </div>
                         <div className="flex flex-col gap-2">
-                          <p className="text-[11px] text-muted-foreground translate-x-0 mb-0">
+                          <p className="text-[11px] text-muted-foreground translate-x-0 mt-2 mb-2">
                             {String(
                               t('features.card4.payout_bank', currentLanguage),
                             )}

@@ -141,7 +141,7 @@ export function Header() {
     <Dock>
       <header className="bg-background/80 backdrop-blur-md border border-zinc-200 dark:border-zinc-800 rounded-sm shadow-sm select-none">
         <div className="flex items-center justify-between h-12">
-          <div className="flex items-center pl-4 pt-2">
+          <div className="flex items-center pl-3 md:pl-4 pt-2">
             <Link href="/" onClick={playClickSound}>
               <div className="cursor-pointer hover:opacity-80 transition-opacity">
                 <Logo width={80} height={24} />
@@ -219,7 +219,7 @@ export function Header() {
 
             {/* Search Toggle */}
             <div className="h-8 pl-2 pr-0.5 flex items-center">
-              <LargeSearchToggle className="h-8 w-40 rounded-sm bg-slate-50 text-sm font-normal hover:bg-slate-100 dark:bg-zinc-800 dark:hover:bg-zinc-700 border border-gray-200 dark:border-[0.15px] dark:border-gray-700/20" />
+              <LargeSearchToggle className="h-8 w-41 rounded-sm bg-slate-50 text-sm font-normal hover:bg-slate-100 dark:bg-zinc-800 dark:hover:bg-zinc-700 border border-gray-200 dark:border-[0.15px] dark:border-gray-700/20" />
             </div>
 
             <AuthButtons
@@ -233,7 +233,7 @@ export function Header() {
 
           {/* Mobile Menu Button - Hidden on desktop */}
           <button
-            className="md:hidden pr-4 text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white transition-colors"
+            className="md:hidden pr-4 pt-2 text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white transition-colors"
             onClick={() => {
               playClickSound();
               toggleMobileMenu();
@@ -246,7 +246,7 @@ export function Header() {
 
         {/* Mobile Menu - Hidden on desktop */}
         {isMobileMenuOpen && (
-          <div className="md:hidden border-t border-zinc-200 dark:border-zinc-800 bg-background/95 backdrop-blur-md">
+          <div className="md:hidden">
             <nav className="flex flex-col space-y-4 py-4 px-4">
               <button
                 className="text-left text-sm text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors bg-transparent rounded-sm px-2 py-1.5 border-none cursor-pointer w-full hover:bg-[#2a2f3d]/3 dark:hover:bg-[#2a2f3d]/10"
@@ -261,7 +261,7 @@ export function Header() {
                 className="text-left text-sm text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors bg-transparent rounded-sm px-2 py-1.5 border-none cursor-pointer w-full hover:bg-[#2a2f3d]/3 dark:hover:bg-[#2a2f3d]/10"
                 onClick={() => {
                   playClickSound();
-                  window.open('https://docs.lomi.africa', '_blank');
+                  navigate('/docs/introduction/what-is-lomi');
                 }}
               >
                 {t('header.documentation')}
@@ -278,7 +278,7 @@ export function Header() {
 
               {/* Mobile Search Toggle */}
               <div className="px-2 py-1.5 flex items-center">
-                <LargeSearchToggle className="h-8 w-40 rounded-sm bg-slate-50 text-sm font-normal hover:bg-slate-100 dark:bg-zinc-800 dark:hover:bg-zinc-700 border border-gray-200 dark:border-[0.15px] dark:border-gray-700/20" />
+                <LargeSearchToggle className="h-8 w-full rounded-sm bg-slate-50 text-sm font-normal hover:bg-slate-100 dark:bg-zinc-800 dark:hover:bg-zinc-700 border border-gray-200 dark:border-[0.15px] dark:border-gray-700/20" />
               </div>
 
               <AuthButtons

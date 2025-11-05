@@ -68,7 +68,7 @@ export function Footer() {
               {/* Subscribe and Social */}
               <div className="space-y-4 order-4 md:order-1">
                 <div className="flex flex-row items-center text-left justify-start gap-1 w-full max-w-[600px]">
-                  <div className="flex items-center gap-4 flex-wrap justify-left  w-full sm:w-auto">
+                  <div className="flex items-center gap-4 flex-wrap justify-center md:justify-start w-full sm:w-auto">
                     <Link
                       href="/"
                       onClick={playClickSound}
@@ -201,7 +201,7 @@ export function Footer() {
 
                 {/* Copyright and Language - Better mobile alignment */}
                 <div className="flex flex-row items-center justify-between text-xs text-zinc-600 dark:text-zinc-400 mt-4 -translate-y-3 w-full">
-                  <span className="px-2 py-1.5 h-8 bg-transparent hover:bg-[#2a2f3d]/5 rounded-sm transition-colors duration-200 dark:hover:bg-[#2a2f3d]/20 inline-flex items-center text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100">
+                  <span className="px-2 py-1.5 h-8 ml-2 md:ml-0 bg-transparent hover:bg-[#2a2f3d]/5 rounded-sm transition-colors duration-200 dark:hover:bg-[#2a2f3d]/20 inline-flex items-center text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100">
                     {t('footer.copyright')}
                   </span>
                   <div className="">
@@ -210,7 +210,7 @@ export function Footer() {
                 </div>
 
                 {/* System Status and Certifications Container - Using Absolute Positioning for both */}
-                <div className="hidden sm:flex mt-[20px] ml-auto relative h-[70px]">
+                <div className="flex mt-[20px] ml-auto relative h-[70px]">
                   {/* Status Link - Absolutely positioned to the far right */}
                   <a
                     href="https://status.lomi.africa"

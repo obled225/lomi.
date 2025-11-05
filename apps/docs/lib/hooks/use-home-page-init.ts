@@ -27,6 +27,14 @@ export function useHomePageInit() {
     return '/company/portal-main-en.webp';
   };
 
+  // Function to get mobile dashboard images (theme-based only, no language logic)
+  const getMobileDashboardImage = () => {
+    return {
+      light: "/mobile-light.webp",
+      dark: "/mobile-dark.webp"
+    };
+  };
+
   // Initialize language settings
   useEffect(() => {
     const initializeLanguage = () => {
@@ -128,5 +136,6 @@ export function useHomePageInit() {
 
   return {
     getDashboardImage,
+    getMobileDashboardImage,
   };
 }

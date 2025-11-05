@@ -5,11 +5,15 @@ import Image from 'next/image';
 
 interface SimpleImageProps {
   src:
-    | string
-    | {
-        light: string;
-        dark: string;
-      };
+  | string
+  | {
+    light: string;
+    dark: string;
+  };
+  mobileSrc?: {
+    light: string;
+    dark: string;
+  };
   alt: string;
   width: number;
   height: number;
@@ -18,6 +22,7 @@ interface SimpleImageProps {
 
 export default function SimpleImage({
   src,
+  mobileSrc,
   alt,
   width,
   height,
@@ -26,10 +31,24 @@ export default function SimpleImage({
   // Initialize state directly from documentElement class for immediate accuracy
   const [currentTheme, setCurrentTheme] = useState<'light' | 'dark'>(() =>
     typeof document !== 'undefined' &&
-    document.documentElement.classList.contains('dark')
+      document.documentElement.classList.contains('dark')
       ? 'dark'
       : 'light',
   );
+
+  // Check if we're on mobile
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkIfMobile = () => {
+      setIsMobile(window.innerWidth < 768); // md breakpoint
+    };
+
+    checkIfMobile();
+    window.addEventListener('resize', checkIfMobile);
+
+    return () => window.removeEventListener('resize', checkIfMobile);
+  }, []);
 
   // Use MutationObserver for instant reaction to class changes on <html>
   useEffect(() => {
@@ -56,13 +75,14 @@ export default function SimpleImage({
     };
   }, []); // Empty dependency array: run only once on mount
 
-  // Handle both string and object formats for src
+  // Handle both string and object formats for src, with mobile support
+  const currentSrc = isMobile && mobileSrc ? mobileSrc : src;
   const imageSrc =
-    typeof src === 'string'
-      ? src
+    typeof currentSrc === 'string'
+      ? currentSrc
       : currentTheme === 'dark'
-        ? src.dark
-        : src.light;
+        ? currentSrc.dark
+        : currentSrc.light;
 
   return (
     <div className="w-full">
@@ -72,7 +92,7 @@ export default function SimpleImage({
           alt={alt}
           width={width}
           height={height}
-          className={`w-full h-auto object-cover rounded-sm ${className || ''}`}
+          className={`w-full min-h-[500px] md:min-h-[600px] h-auto object-cover rounded-sm ${className || ''}`}
           loading="eager"
           decoding="async"
           crossOrigin="anonymous"
