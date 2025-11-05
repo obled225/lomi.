@@ -731,11 +731,11 @@ export function FeaturesSection() {
             >
               <Card className="flex flex-col h-[400px] rounded-sm overflow-hidden">
                 <CardHeader className="p-6 pb-4 text-base font-medium">
-                  {String(t(resolvedTheme === 'light' ? 'features.card2.title_light' : 'features.card2.title', currentLanguage))}
+                  {String(t(mounted && resolvedTheme === 'light' ? 'features.card2.title_light' : 'features.card2.title', currentLanguage))}
                 </CardHeader>
                 <CardContent className="px-6 pb-6 pt-0 text-sm text-muted-foreground grow relative flex flex-col">
                   <p className="mb-4">
-                    {String(t(resolvedTheme === 'light' ? 'features.card2.description_light' : 'features.card2.description', currentLanguage))}
+                    {String(t(mounted && resolvedTheme === 'light' ? 'features.card2.description_light' : 'features.card2.description', currentLanguage))}
                   </p>
                   <div className="relative grow rounded-sm overflow-hidden">
                     {mounted && (
