@@ -322,7 +322,7 @@ export default function BlogPostClient({ slug }: BlogPostClientProps) {
             <div className="md:absolute md:left-0 md:top-2 md:w-[175px] md:-translate-x-full md:pr-8 shrink-0 mb-6 md:mb-0 flex flex-col items-start md:items-end gap-2"></div>
             <div className="space-y-4">
               <motion.h1
-                className="text-4xl font-normal tracking-tighter text-left text-zinc-800 dark:text-white md:text-5xl max-w-7xl whitespace-pre-line"
+                className="text-4xl font-normal tracking-tighter text-left text-zinc-800 dark:text-white md:text-5xl max-w-7xl whitespace-pre-line -mt-11 md:mt-0"
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}

@@ -13,7 +13,7 @@ export default function TermsClient() {
                 <div className="flex flex-col space-y-6 text-left mt-24">
                     <div className="space-y-4">
                         <motion.h1
-                            className="text-4xl font-normal tracking-tighter text-left text-zinc-800 dark:text-white md:text-5xl max-w-7xl whitespace-pre-line"
+                            className="text-4xl font-normal tracking-tighter text-left text-zinc-800 dark:text-white md:text-5xl max-w-7xl whitespace-pre-line -mt-2 md:mt-0"
                             initial={{ opacity: 0, y: -20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.6 }}

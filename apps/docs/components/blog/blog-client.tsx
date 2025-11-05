@@ -175,7 +175,7 @@ export default function BlogClient() {
         <div className="flex flex-col space-y-6 text-left -mt-4">
           <div className="space-y-4">
             <motion.h1
-              className="text-4xl font-normal tracking-tighter text-left text-zinc-800 dark:text-white md:text-5xl max-w-7xl whitespace-pre-line"
+              className="text-4xl font-normal tracking-tighter text-left text-zinc-800 dark:text-white md:text-5xl max-w-7xl whitespace-pre-line mt-18 md:mt-0"
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
@@ -324,7 +324,7 @@ export default function BlogClient() {
                               </span>
 
                               {isFeatured && isFirstOnPage && (
-                                <span className="px-2 py-1 text-xs font-semibold rounded bg-gradient-to-r from-primary to-primary/80 text-white">
+                                <span className="px-2 py-1 text-xs font-semibold rounded bg-linear-to-r from-primary to-primary/80 text-white">
                                   Featured
                                 </span>
                               )}

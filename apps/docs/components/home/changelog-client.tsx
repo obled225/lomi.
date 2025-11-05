@@ -23,7 +23,7 @@ export default function ChangelogClient() {
         <div className="flex flex-col space-y-6 text-left -mt-4">
           <div className="space-y-4">
             <motion.h1
-              className="text-4xl font-normal tracking-tighter text-left text-zinc-800 dark:text-white md:text-5xl max-w-7xl whitespace-pre-line"
+              className="text-4xl font-normal tracking-tighter text-left text-zinc-800 dark:text-white md:text-5xl max-w-7xl whitespace-pre-line mt-18 md:mt-0"
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
@@ -50,20 +50,20 @@ export default function ChangelogClient() {
             {/* Timeline */}
             <div className="relative">
               {/* Vertical line - centered between date/version and content */}
-              <div className="absolute left-[120px] top-0 bottom-0 w-px bg-border" />
+              <div className="absolute left-[80px] md:left-[120px] top-0 bottom-0 w-px bg-border" />
 
               {/* Changelog entries */}
               <div className="space-y-12">
                 {changelogEntries.map((entry, index) => (
                   <motion.div
                     key={index}
-                    className="relative flex gap-6"
+                    className="relative flex gap-4 md:gap-6"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.6 + index * 0.2 }}
                   >
                     {/* Left side - Date info */}
-                    <div className="w-[108px] text-right shrink-0 pt-1">
+                    <div className="w-[80px] md:w-[108px] text-right shrink-0 pt-1">
                       <div className="text-muted-foreground/70 text-xs">
                         {entry.date}
                       </div>
