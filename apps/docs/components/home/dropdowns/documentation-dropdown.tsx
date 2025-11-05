@@ -6,6 +6,7 @@ import { animations, LottieAnimationData } from '@/lib/utils/lottie-animations';
 import { useTheme } from '@/lib/hooks/use-theme';
 import { playClickSound } from '@/lib/utils/sound';
 import { Card, CardHeader, CardContent } from '@/components/ui/card';
+import { InfoBox } from '@/components/ui/info-box';
 
 type DocCard = {
   id: string;
@@ -97,7 +98,7 @@ export function DocumentationDropdown({
         >
           <div className="relative h-full min-h-[280px] md:min-h-[320px] flex flex-col">
             {/* Image Background */}
-            <div className="absolute inset-0 opacity-10 dark:opacity-20 group-hover:opacity-15 dark:group-hover:opacity-25 transition-opacity">
+            <div className="absolute inset-0 opacity-90 dark:opacity-20 group-hover:opacity-100 dark:group-hover:opacity-25 transition-opacity">
               <Image
                 src={featuredCard.image}
                 alt={featuredCard.imageAlt}
@@ -111,7 +112,7 @@ export function DocumentationDropdown({
             <div className="relative z-10 flex flex-col justify-between h-full p-6 md:p-8">
               {/* Title Section */}
               <div>
-                <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-zinc-900 dark:text-zinc-100 mb-2 group-hover:text-zinc-950 dark:group-hover:text-white transition-colors">
+                <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-black dark:text-zinc-100 mb-2 transition-colors">
                   {featuredCard.title}
                 </h3>
               </div>
@@ -119,11 +120,11 @@ export function DocumentationDropdown({
               {/* Bottom Section */}
               <div className="mt-auto">
                 {featuredCard.badge && (
-                  <div className="inline-block mb-2 px-2.5 py-1 text-xs font-semibold text-zinc-700 dark:text-zinc-300 bg-zinc-100 dark:bg-zinc-800 rounded-sm">
+                  <InfoBox variant="outline" size="sm" className="mb-2 pointer-events-none">
                     {featuredCard.badge}
-                  </div>
+                  </InfoBox>
                 )}
-                <p className="text-sm md:text-base text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                <p className="text-sm md:text-base text-white dark:text-zinc-400 leading-relaxed">
                   {featuredCard.description}
                 </p>
               </div>

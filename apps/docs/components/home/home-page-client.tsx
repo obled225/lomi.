@@ -20,8 +20,8 @@ export function HomePageClient() {
       />
       <FeaturesSection />
       <Sdks />
-      <EarlyMemberPricing />
       <CareersSection mobileJoinUsImage={getMobileJoinUsImage()} />
+      <EarlyMemberPricing />
     </>
   );
 }
