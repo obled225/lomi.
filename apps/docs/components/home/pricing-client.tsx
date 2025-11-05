@@ -3,6 +3,8 @@
 import { motion } from 'framer-motion';
 import { useTranslation } from '@/lib/contexts/translation-context';
 import { t } from '@/lib/i18n/translations';
+import BusinessOutreach from '@/components/design/business-outreach';
+import PricingTool from './pricing-tool';
 
 export default function PricingClient() {
   const { currentLanguage } = useTranslation();
@@ -10,7 +12,7 @@ export default function PricingClient() {
   return (
     <>
       <div className="max-w-7xl mx-auto pl-2 pr-4 py-2">
-        <div className="flex flex-col space-y-6 text-left mt-24">
+        <div className="flex flex-col space-y-3 text-left mt-28">
           <div className="space-y-4">
             <motion.h1
               className="text-4xl font-normal tracking-tighter text-left text-zinc-800 dark:text-white md:text-5xl max-w-7xl whitespace-pre-line -mt-2 md:mt-0"
@@ -32,6 +34,10 @@ export default function PricingClient() {
           </div>
         </div>
       </div>
+
+      <PricingTool />
+
+      <BusinessOutreach />
     </>
   );
 }

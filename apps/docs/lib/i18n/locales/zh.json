@@ -39,6 +39,11 @@
       "message": "我们使用跟踪 cookie 来了解您如何使用产品，并帮助我们改进它。",
       "accept": "接受",
       "decline": "拒绝"
+    },
+        "business_outreach": {
+      "message": "大型或快速增长的企业？获取专属定价和支持。",
+      "reach_out": "联系我们",
+      "dismiss": "关闭"
     }
   },
   "blog": {

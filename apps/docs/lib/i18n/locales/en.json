@@ -39,6 +39,11 @@
       "message": "We use tracking cookies to understand how you use the product and help us improve it.",
       "accept": "Accept",
       "decline": "Decline"
+    },
+      "business_outreach": {
+      "message": "Large or fast-growing business? Get dedicated pricing and support.",
+      "reach_out": "Reach out to us",
+      "dismiss": "Dismiss"
     }
   },
   "blog": {

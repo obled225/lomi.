@@ -4,6 +4,7 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from '@/lib/contexts/translation-context';
 import { t } from '@/lib/i18n/translations';
+import { useTheme } from '@/lib/hooks/use-theme';
 import { playClickSound } from '@/lib/utils/sound';
 
 // Use a more specific key that's unlikely to be cleared
@@ -72,6 +73,7 @@ function setCookieConsentStatus(status: string) {
 
 export default function CookieConsent() {
   const { currentLanguage } = useTranslation();
+  const { resolvedTheme } = useTheme();
   const [isVisible, setIsVisible] = useState(false);
   const [showAnimation, setShowAnimation] = useState(false);
   const [animationType, setAnimationType] = useState<
@@ -80,6 +82,12 @@ export default function CookieConsent() {
   const footerRef = useRef<HTMLElement | null>(null);
   const hasCheckedConsent = useRef(false);
   const listenerAdded = useRef(false); // Keep track if listener is active
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    // This runs only on the client, after initial render
+    setMounted(true);
+  }, []);
 
   // Memoized handler for scroll events
   const handleScroll = useCallback(() => {
@@ -201,6 +209,10 @@ export default function CookieConsent() {
     }, 300); // Very fast disappearance
   };
 
+  if (!mounted) {
+    return null;
+  }
+
   // No change needed below this line for the logic fix
   if (!isVisible && !showAnimation) return null; // Ensure component unmounts fully after animation
 
@@ -226,13 +238,23 @@ export default function CookieConsent() {
               ease: 'easeInOut',
             }}
             style={{
-              backgroundColor: 'rgba(0, 0, 0, 0.9)',
-              borderRadius: '6px',
+              backgroundColor:
+                resolvedTheme === "dark"
+                  ? "rgba(0, 0, 0, 0.9)"
+                  : "rgba(255, 255, 255, 0.95)",
+              border:
+                resolvedTheme === "dark"
+                  ? "1px solid rgba(255, 255, 255, 0.1)"
+                  : "1px solid rgba(0, 0, 0, 0.1)",
+              borderRadius: "6px",
             }}
           >
             <motion.div className="px-4 py-3 sm:px-5 sm:py-4 relative overflow-hidden w-full">
               <motion.div>
-                <p className="mb-2 sm:mb-3 text-gray-200 text-xs sm:text-sm text-left select-none">
+                <p
+                  className={`mb-2 sm:mb-3 text-xs sm:text-sm text-left select-none ${resolvedTheme === "dark" ? "text-gray-300" : "text-gray-700"
+                    }`}
+                >
                   {String(
                     t('components.tracking_cookie.message', currentLanguage),
                   )}
@@ -240,7 +262,8 @@ export default function CookieConsent() {
                 <div className="flex flex-wrap gap-3 sm:gap-4">
                   <button
                     onMouseDown={handleAccept}
-                    className="text-white text-xs sm:text-sm hover:text-gray-200 transition-colors font-normal"
+                    className={`text-xs sm:text-sm hover:opacity-75 transition-colors font-medium ${resolvedTheme === "dark" ? "text-white" : "text-gray-900"
+                      }`}
                   >
                     {String(
                       t('components.tracking_cookie.accept', currentLanguage),
@@ -248,7 +271,8 @@ export default function CookieConsent() {
                   </button>
                   <button
                     onMouseDown={handleDecline}
-                    className="text-gray-300 text-xs sm:text-sm hover:text-gray-200 transition-colors"
+                    className={`text-xs sm:text-sm hover:opacity-75 transition-colors ${resolvedTheme === "dark" ? "text-gray-500" : "text-gray-500"
+                      }`}
                   >
                     {String(
                       t('components.tracking_cookie.decline', currentLanguage),

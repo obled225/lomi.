@@ -39,6 +39,11 @@
       "message": "Nous utilisons des cookies pour comprendre comment vous utilisez le produit.",
       "accept": "Accepter",
       "decline": "Refuser"
+    },
+      "business_outreach": {
+      "message": "Entreprise en croissance rapide ? Bénéficiez de tarifs et d'une assistance dédiés.",
+      "reach_out": "Contactez-nous",
+      "dismiss": "Ignorer"
     }
   },
   "blog": {
