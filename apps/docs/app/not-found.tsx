@@ -2,7 +2,7 @@ import { FuzzyText } from '@/components/design/fuzzy-text';
 
 export default function NotFound() {
   return (
-    <div className="h-svh overflow-hidden flex items-center justify-center">
+    <div className="h-svh overflow-hidden flex items-center justify-center translate-x-13">
       <FuzzyText
         fontSize="clamp(4rem, 20vw, 12rem)"
         fontWeight={900}
@@ -11,7 +11,7 @@ export default function NotFound() {
         hoverIntensity={0.4}
         enableHover={true}
       >
-        404
+        NOT FOUND
       </FuzzyText>
     </div>
   );

@@ -55,7 +55,7 @@ export const registry: Registry = {
       files: [
         {
           type: 'components',
-          path: 'components/graph-view.tsx',
+          path: 'components/ui/graph-view.tsx',
         },
       ],
     },

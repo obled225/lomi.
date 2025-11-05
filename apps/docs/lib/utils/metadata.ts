@@ -6,14 +6,14 @@ export function createMetadata(override: Metadata): Metadata {
     openGraph: {
       title: override.title ?? undefined,
       description: override.description ?? undefined,
-      url: 'https://docs.lomi.africa',
+      url: 'https://lomi.africa',
       images: '/banner.webp',
       siteName: 'lomi. / docs',
       ...override.openGraph,
     },
     twitter: {
       card: 'summary_large_image',
-      creator: '@money_is_shark',
+      creator: '@lomiafrica',
       title: override.title ?? undefined,
       description: override.description ?? undefined,
       images: '/banner.webp',

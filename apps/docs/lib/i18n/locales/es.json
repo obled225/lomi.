@@ -79,11 +79,20 @@
     "dashboard": "Panel de control",
     "connect": "Conectar"
   },
+  "search": {
+    "search": "Buscar",
+    "all": "Todos",
+    "core": "Principal",
+    "apiReference": "Referencia API",
+    "filter": "Filtrar",
+    "fundamentalsDescription": "Fundamentos y conceptos principales",
+    "apiReferenceDescription": "Documentación completa"
+  },
   "sdks": {
     "title": "No te quedes atrás"
   },
   "earlyMemberPricing": {
-    "tag": "Sin sorpresas, sin tarifas ocultas, sin costos mensuales",
+    "tag": "Sin sorpresas, sin tarifas ocultas, sin costos mensuales.",
     "getStarted": "Comenzar",
     "learnMore": "Saber más"
   },

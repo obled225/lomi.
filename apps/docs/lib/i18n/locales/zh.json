@@ -79,11 +79,20 @@
     "dashboard": "仪表板",
     "connect": "连接"
   },
+  "search": {
+    "search": "搜索",
+    "all": "全部",
+    "core": "核心",
+    "apiReference": "API 参考",
+    "filter": "筛选",
+    "fundamentalsDescription": "基础知识和核心概念",
+    "apiReferenceDescription": "完整的 API 文档"
+  },
   "sdks": {
     "title": "始终领先"
   },
   "earlyMemberPricing": {
-    "tag": "没有意外，没有隐藏费用，没有月费",
+    "tag": "没有意外，没有隐藏费用，没有月费。",
     "getStarted": "开始使用",
     "learnMore": "了解更多"
   },

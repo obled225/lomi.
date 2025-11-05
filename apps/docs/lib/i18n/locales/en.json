@@ -79,18 +79,27 @@
     "dashboard": "Dashboard",
     "connect": "Connect"
   },
+  "search": {
+    "search": "Search",
+    "all": "All",
+    "core": "Core",
+    "apiReference": "API Reference",
+    "filter": "Filter",
+    "fundamentalsDescription": "Fundamentals and core concepts",
+    "apiReferenceDescription": "Complete API documentation"
+  },
   "sdks": {
     "title": "Lead the charge"
   },
   "earlyMemberPricing": {
-    "tag": "No surprises, no hidden fees, no monthly costs",
+    "tag": "No surprises, no hidden fees, no monthly costs.",
     "getStarted": "Get started",
     "learnMore": "Learn more"
   },
   "features": {
     "title": "Unlock your business potential",
     "card1": {
-      "title": "All your customers preferred payment methods",
+      "title": "All your preferred payment methods",
       "description": "Accept local and international payment methods, seamlessly.",
       "momo_description": "Mobile money payments",
       "wallet_description": "Digital wallet payments",

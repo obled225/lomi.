@@ -9,7 +9,7 @@ const getSitemapBaseUrl = (): string => {
     return 'http://localhost:3000';
   }
   // Always use the custom domain for production sitemap
-  return 'https://docs.lomi.africa';
+  return 'https://lomi.africa';
 };
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {

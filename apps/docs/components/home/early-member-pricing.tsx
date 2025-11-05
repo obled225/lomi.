@@ -22,7 +22,7 @@ export function EarlyMemberPricing() {
   return (
     <div className="mt-20 md:mt-40 hidden md:block">
       <div className="container mx-auto px-6 md:px-8 lg:px-12">
-        <section className="overflow-hidden relative bg-foreground dark:bg-background text-background dark:text-foreground rounded-sm border p-0 pb-16 pt-16 md:pb-32 md:pt-32">
+        <section className="overflow-hidden relative bg-transparent dark:bg-background text-foreground dark:text-foreground rounded-sm border p-0 pb-16 pt-16 md:pb-32 md:pt-32 before:absolute before:inset-0 before:bg-gradient-to-r before:from-foreground/5 before:via-transparent before:to-foreground/5 before:pointer-events-none dark:before:from-background/20 dark:before:to-background/20">
           <SingleSwirl className="pointer-events-none absolute top-0 bottom-0 left-0" />
           <SingleSwirl className="pointer-events-none rotate-180 absolute top-0 bottom-0 right-0 opacity-50" />
           <div className="container flex flex-col items-center justify-center">
@@ -42,7 +42,7 @@ export function EarlyMemberPricing() {
                       <AnimatePresence mode="wait">
                         <motion.span
                           key={titleNumber}
-                          className="absolute text-background dark:text-foreground whitespace-nowrap mt-2"
+                          className="absolute text-foreground dark:text-foreground whitespace-nowrap mt-2"
                           initial={{
                             opacity: 0,
                             y: titleNumber === 0 ? -50 : 50,
@@ -78,7 +78,7 @@ export function EarlyMemberPricing() {
                 </a>
               </Button>
               <Button type="button" variant="blue" size="header" asChild>
-                <Link href="/sign-in">
+                <Link href="https://dashboard.lomi.africa/sign-in">
                   {t('earlyMemberPricing.getStarted') as string}
                 </Link>
               </Button>

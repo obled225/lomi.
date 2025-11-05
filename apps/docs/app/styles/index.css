@@ -198,8 +198,8 @@
 *:focus,
 *:focus-visible {
   outline: none;
-
   box-shadow: none;
+  border-color: transparent !important;
 }
 
 /* More aggressive focus ring removal for inputs and form elements */
@@ -213,11 +213,8 @@ select:focus-visible,
 button:focus,
 button:focus-visible {
   outline: none !important;
-
   box-shadow: none !important;
-
-  border-color: hsl(var(--border)) !important;
-
+  border-color: transparent !important;
   -webkit-tap-highlight-color: transparent !important;
 }
 
@@ -232,10 +229,8 @@ select:active:focus,
 button:hover:focus,
 button:active:focus {
   outline: none !important;
-
   box-shadow: none !important;
-
-  border-color: hsl(var(--border)) !important;
+  border-color: transparent !important;
 }
 
 @layer utilities {

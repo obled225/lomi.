@@ -79,11 +79,20 @@
     "dashboard": "Tableau de bord",
     "connect": "Connexion"
   },
+  "search": {
+    "search": "Rechercher",
+    "all": "Tous",
+    "core": "Principal",
+    "apiReference": "Référence API",
+    "filter": "Filtrer",
+    "fundamentalsDescription": "Fondamentaux et concepts principaux",
+    "apiReferenceDescription": "Documentation complète"
+  },
   "sdks": {
     "title": "Gardez une longueur d'avance"
   },
   "earlyMemberPricing": {
-    "tag": "Pas de surprises, pas de frais cachés, pas de coûts mensuels",
+    "tag": "Pas de surprises, pas de frais cachés, pas de coûts mensuels.",
     "getStarted": "Commencer",
     "learnMore": "En savoir plus"
   },

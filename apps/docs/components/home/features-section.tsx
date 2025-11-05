@@ -204,18 +204,17 @@ const DemoRevenueChart = () => {
       <div className="flex flex-col gap-1">
         <div className="text-2xl font-semibold">
           <span className="text-2xl font-semibold text-foreground">
-            {totalRevenue.toLocaleString('fr-FR')}
+            {totalRevenue.toLocaleString('fr-FR').replace(/\u202F/g, ' ')}
           </span>
           <span className="text-sm font-normal text-muted-foreground ml-1">
             F CFA
           </span>
         </div>
         <span
-          className={`inline-flex items-center gap-1 px-2 py-1 rounded-sm text-xs font-medium w-fit ${
-            growthRate >= 0
-              ? 'bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-300'
-              : 'bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300'
-          }`}
+          className={`inline-flex items-center gap-1 px-2 py-1 rounded-sm text-xs font-medium w-fit ${growthRate >= 0
+            ? 'bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-300'
+            : 'bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300'
+            }`}
         >
           {growthRate >= 0 ? '+' : ''}
           {growthRate.toFixed(1)}%
@@ -412,7 +411,7 @@ export function FeaturesSection() {
   "price": 5000,
   "currency_code": "XOF",
   "display_on_storefront": true,
-  "image_url": "https://cdn.img.co/3i32"
+  "image_url": "https://cdn.img.co/+++"
 }`;
 
   const subscriptionCode = `{
@@ -620,21 +619,21 @@ export function FeaturesSection() {
                         animate={
                           cardInViews[0]
                             ? {
-                                opacity: 1,
-                                x: 0,
-                                transition: {
-                                  delay: 0.5 + i * 0.1,
-                                  type: 'spring',
-                                  stiffness: 120,
-                                  damping: 20,
-                                },
-                              }
+                              opacity: 1,
+                              x: 0,
+                              transition: {
+                                delay: 0.5 + i * 0.1,
+                                type: 'spring',
+                                stiffness: 120,
+                                damping: 20,
+                              },
+                            }
                             : {}
                         }
-                        className="flex items-center justify-between p-1.5 bg-background border border-border rounded-sm hover:bg-muted/40 transition-colors duration-200"
+                        className="flex items-center justify-between p-1.5 bg-background border border-zinc-200 dark:border-zinc-800 rounded-sm hover:bg-muted/40 transition-colors duration-200"
                       >
                         <div className="flex items-center gap-3">
-                          <div className="w-8 h-8 bg-background border border-border rounded-sm flex items-center justify-center shadow-sm overflow-hidden">
+                          <div className="w-8 h-8 bg-background border border-zinc-200 dark:border-zinc-800 rounded-sm flex items-center justify-center shadow-sm overflow-hidden">
                             <Image
                               src={`/payment_channels/${name === 'Bitcoin' ? 'btc' : name.toLowerCase().replace(' ', '_')}.webp`}
                               alt={`${name} logo`}
@@ -730,6 +729,7 @@ export function FeaturesSection() {
                           width={400}
                           height={300}
                           className="absolute inset-0 w-full h-full object-contain -ml-2 md:ml-0 hidden dark:block"
+                          priority
                         />
                       </>
                     )}
@@ -747,7 +747,7 @@ export function FeaturesSection() {
               className="size-full"
             >
               <Card className="flex flex-col h-[400px] rounded-sm">
-                <CardHeader className="px-6 pt-6 pb-2 text-base font-medium">
+                <CardHeader className="px-6 pt-6 pb-4 text-base font-medium">
                   {String(t('features.card5.title', currentLanguage))}
                 </CardHeader>
                 <CardContent className="px-6 pb-6 pt-0 text-sm text-muted-foreground grow">
@@ -786,12 +786,9 @@ export function FeaturesSection() {
                         <span className="text-xs text-muted-foreground">
                           {String(t('features.card4.balance', currentLanguage))}
                         </span>
-                        <div className="text-xl font-semibold">
-                          <span className="text-xl font-semibold text-foreground">
-                            {(12847392).toLocaleString('fr-FR')}
-                          </span>
-                          <span className="text-sm font-normal text-muted-foreground ml-1">
-                            F CFA
+                        <div className="flex items-center gap-2 rounded-sm p-1.5 bg-green-50 dark:bg-green-900/30 border w-48 h-8 justify-center">
+                          <span className="font-mono text-[11px] font-bold text-green-700 dark:text-green-300">
+                            {(12847392).toLocaleString('fr-FR').replace(/\u202F/g, ' ')} F CFA
                           </span>
                         </div>
                       </div>
@@ -809,7 +806,7 @@ export function FeaturesSection() {
                           <div className="flex items-center gap-4">
                             <div className="flex flex-col gap-2 translate-x-12 mr-12">
                               <div
-                                className="flex items-center gap-2 rounded-sm p-1.5 bg-muted/40 border w-36 justify-center cursor-pointer transition-colors hover:bg-muted/60 focus:outline-none focus:ring-0 focus:border-none"
+                                className="flex items-center gap-2 rounded-sm p-1.5 bg-muted/40 border w-36 h-8 justify-center cursor-pointer transition-colors hover:bg-muted/60 focus:outline-none focus:ring-0 focus:border-none"
                                 onMouseEnter={handlePhoneNumberHover1}
                               >
                                 <span className="font-mono text-[11px]">
@@ -817,7 +814,7 @@ export function FeaturesSection() {
                                 </span>
                               </div>
                               <div
-                                className="flex items-center gap-2 rounded-sm p-1.5 bg-muted/40 border w-36 justify-center cursor-pointer transition-colors hover:bg-muted/60 focus:outline-none focus:ring-0 focus:border-none"
+                                className="flex items-center gap-2 rounded-sm p-1.5 bg-muted/40 border w-36 h-8 justify-center cursor-pointer transition-colors hover:bg-muted/60 focus:outline-none focus:ring-0 focus:border-none"
                                 onMouseEnter={handlePhoneNumberHover2}
                               >
                                 <span className="font-mono text-[11px]">
@@ -826,8 +823,8 @@ export function FeaturesSection() {
                               </div>
                             </div>
                             <ArrowRight className="size-4 text-muted-foreground/80" />
-                            <div className="p-2 rounded-sm bg-muted/40 border">
-                              <Smartphone className="size-5 text-foreground" />
+                            <div className="h-8 w-8 rounded-sm bg-muted/40 border flex items-center justify-center">
+                              <Smartphone className="size-4 text-foreground" />
                             </div>
                           </div>
                         </div>
@@ -840,7 +837,7 @@ export function FeaturesSection() {
                           <div className="flex items-center gap-4">
                             <div className="flex flex-col translate-x-0 mr-0">
                               <div
-                                className="flex items-center gap-2 rounded-sm px-0 py-1.5 bg-muted/40 border w-48 justify-center cursor-pointer transition-colors hover:bg-muted/60 focus:outline-none focus:ring-0 focus:border-none"
+                                className="flex items-center gap-2 rounded-sm px-0 py-1.5 bg-muted/40 border w-48 h-8 justify-center cursor-pointer transition-colors hover:bg-muted/60 focus:outline-none focus:ring-0 focus:border-none"
                                 onMouseEnter={handleBankAccountHover}
                               >
                                 <span className="font-mono text-[11px]">
@@ -849,8 +846,8 @@ export function FeaturesSection() {
                               </div>
                             </div>
                             <ArrowRight className="size-4 text-muted-foreground/80" />
-                            <div className="p-2 rounded-sm bg-muted/40 border">
-                              <Landmark className="size-5 text-foreground" />
+                            <div className="h-8 w-8 rounded-sm bg-muted/40 border flex items-center justify-center">
+                              <Landmark className="size-4 text-foreground" />
                             </div>
                           </div>
                         </div>
@@ -878,15 +875,14 @@ export function FeaturesSection() {
                     {String(t('features.card3.description', currentLanguage))}
                   </p>
                   <div className="w-full">
-                    <div className="flex gap-1 rounded-sm bg-muted/30 border border-border p-1 w-full h-[42px]">
+                    <div className="flex gap-1 rounded-sm bg-muted/30 border border-border p-1 w-full h-10">
                       <button
                         type="button"
                         onClick={() => setActiveTab('product')}
-                        className={`flex-1 px-3 py-2 text-sm font-normal rounded-sm transition-all duration-200 h-[34px] -mt-px focus:outline-none focus:ring-0 focus:border-none ${
-                          activeTab === 'product'
-                            ? 'bg-[#E9EAEF] dark:bg-[#2A2B30] text-foreground shadow-sm border border-border/50'
-                            : 'text-muted-foreground hover:text-foreground'
-                        }`}
+                        className={`flex-1 px-3 pt-1.5 pb-2.5 text-sm font-normal rounded-sm transition-all duration-200 h-7.5 focus:outline-none focus:ring-0 focus:border-none ${activeTab === 'product'
+                          ? 'bg-[#E9EAEF] dark:bg-[#2A2B30] text-foreground shadow-sm border border-border/50'
+                          : 'text-muted-foreground hover:text-foreground'
+                          }`}
                       >
                         {String(
                           t('features.card3.tab_products', currentLanguage),
@@ -895,11 +891,10 @@ export function FeaturesSection() {
                       <button
                         type="button"
                         onClick={() => setActiveTab('subscription')}
-                        className={`flex-1 px-3 py-2 text-sm font-normal rounded-sm transition-all duration-200 h-[34px] -mt-px focus:outline-none focus:ring-0 focus:border-none ${
-                          activeTab === 'subscription'
-                            ? 'bg-[#E9EAEF] dark:bg-[#2A2B30] text-foreground shadow-sm border border-border/50'
-                            : 'text-muted-foreground hover:text-foreground'
-                        }`}
+                        className={`flex-1 px-3 pt-1.5 pb-2.5 text-sm font-normal rounded-sm transition-all duration-200 h-7.5 focus:outline-none focus:ring-0 focus:border-none ${activeTab === 'subscription'
+                          ? 'bg-[#E9EAEF] dark:bg-[#2A2B30] text-foreground shadow-sm border border-border/50'
+                          : 'text-muted-foreground hover:text-foreground'
+                          }`}
                       >
                         {String(
                           t(
@@ -911,11 +906,10 @@ export function FeaturesSection() {
                       <button
                         type="button"
                         onClick={() => setActiveTab('checkout')}
-                        className={`flex-1 px-3 py-2 text-sm font-normal rounded-sm transition-all duration-200 h-[34px] -mt-px focus:outline-none focus:ring-0 focus:border-none ${
-                          activeTab === 'checkout'
-                            ? 'bg-[#E9EAEF] dark:bg-[#2A2B30] text-foreground shadow-sm border border-border/50'
-                            : 'text-muted-foreground hover:text-foreground'
-                        }`}
+                        className={`flex-1 px-3 pt-1.5 pb-2.5 text-sm font-normal rounded-sm transition-all duration-200 h-7.5 focus:outline-none focus:ring-0 focus:border-none ${activeTab === 'checkout'
+                          ? 'bg-[#E9EAEF] dark:bg-[#2A2B30] text-foreground shadow-sm border border-border/50'
+                          : 'text-muted-foreground hover:text-foreground'
+                          }`}
                       >
                         {String(
                           t('features.card3.tab_checkout', currentLanguage),
@@ -1030,7 +1024,7 @@ export function FeaturesSection() {
               className="size-full"
             >
               <Card className="flex flex-col h-[400px] rounded-sm">
-                <CardHeader className="p-6 pb-2 text-base font-medium">
+                <CardHeader className="p-6 pb-4 text-base font-medium">
                   {String(t('features.card6.title', currentLanguage))}
                 </CardHeader>
                 <CardContent className="px-6 pb-6 pt-0 text-sm text-muted-foreground grow flex flex-col">
@@ -1061,7 +1055,7 @@ export function FeaturesSection() {
                     </code>
                   </div>
 
-                  <div className="space-y-3 grow">
+                  <div className="space-y-3">
                     <div className="flex items-center gap-3">
                       <Terminal className="size-4 text-blue-500 shrink-0" />
                       <span>
@@ -1072,12 +1066,12 @@ export function FeaturesSection() {
                     </div>
                   </div>
 
-                  <div className="flex flex-row gap-3 mt-auto pt-4">
+                  <div className="flex flex-row gap-3 mt-6">
                     <a
                       href="https://github.com/lomiafrica/lomi./"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-full rounded-sm font-normal border border-zinc-200 dark:border-zinc-800 flex items-center h-10 text-sm overflow-hidden"
+                      className="w-full rounded-sm font-normal border border-zinc-200 dark:border-zinc-800 flex items-center h-8 text-sm overflow-hidden"
                     >
                       <div className="inline-flex items-center justify-center gap-2 bg-transparent px-3 py-2 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white border-zinc-200 dark:border-zinc-800 h-full">
                         <GitHubIcon className="h-5 w-5" />
@@ -1092,11 +1086,11 @@ export function FeaturesSection() {
                     <Button
                       asChild
                       variant="outline"
-                      className="w-full h-10 relative bg-slate-50 text-sm font-normal hover:bg-slate-100 dark:bg-zinc-800 dark:hover:bg-zinc-700 rounded-sm"
+                      className="w-full h-8"
                     >
                       <a
                         href="/docs/core/introduction/what-is-lomi"
-                        className="flex items-center justify-center"
+                        className="flex items-center justify-center text-foreground"
                       >
                         {String(
                           t(

@@ -22,6 +22,7 @@ export function Logo({
         height={height}
         className={`block dark:hidden ${className}`.trim()}
         priority={priority}
+        style={{ height: "auto" }}
       />
       <Image
         src="/company/lomi_l.webp"
@@ -30,6 +31,7 @@ export function Logo({
         height={height}
         className={`hidden dark:block ${className}`.trim()}
         priority={priority}
+        style={{ height: "auto" }}
       />
     </>
   );

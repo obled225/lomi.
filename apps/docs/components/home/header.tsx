@@ -5,19 +5,19 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState, useRef } from 'react';
 import { Menu, X } from 'lucide-react';
-import { Star } from 'lucide-react';
 import type { User } from '@supabase/supabase-js';
 import { Dock } from '@/components/ui/dock';
 import { DockDropdown } from '@/components/design/dock-dropdown';
 import { Button } from '@/components/ui/button';
 import { IntegrationsDropdown } from '@/components/home/dropdowns/products-dropdown';
+import { DocumentationDropdown } from '@/components/home/dropdowns/documentation-dropdown';
 import { playClickSound } from '@/lib/utils/sound';
-import { useGithubStars } from '@/lib/hooks/use-github-stars-hooks';
 import { useAuth } from '@/lib/hooks/use-auth';
 import { useTranslation } from '@/lib/contexts/translation-context';
 import { t as translate } from '@/lib/i18n/translations';
 import { Logo } from '@/lib/utils/logo';
-import { LargeSearchToggle } from 'fumadocs-ui/components/layout/search-toggle';
+import { LargeSearchToggle } from '@/components/design/search-toggle';
+import { GithubStars } from '@/components/home/github-stars';
 
 const AuthButtons = ({
   isMobile = false,
@@ -57,7 +57,7 @@ const AuthButtons = ({
         size="header"
         onClick={() => {
           playClickSound();
-          navigate(user ? '/portal' : '/sign-in');
+          navigate(user ? 'https://dashboard.lomi.africa/' : 'https://dashboard.lomi.africa/sign-in');
         }}
       >
         {user ? t('header.dashboard') : t('header.connect')}
@@ -70,8 +70,8 @@ export function Header() {
   const router = useRouter();
   const { currentLanguage } = useTranslation();
   const { user } = useAuth();
-  const starCount = useGithubStars();
   const [isIntegrationsOpen, setIsIntegrationsOpen] = useState(false);
+  const [isDocumentationOpen, setIsDocumentationOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const leaveTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -104,10 +104,27 @@ export function Header() {
       clearTimeout(leaveTimeout.current);
     }
     setIsIntegrationsOpen(true);
+    setIsDocumentationOpen(false);
   };
 
   const handleIntegrationsMouseLeave = () => {
     leaveTimeout.current = setTimeout(() => {
+      setIsIntegrationsOpen(false);
+      setIsDocumentationOpen(false);
+    }, 200);
+  };
+
+  const handleDocumentationMouseEnter = () => {
+    if (leaveTimeout.current) {
+      clearTimeout(leaveTimeout.current);
+    }
+    setIsDocumentationOpen(true);
+    setIsIntegrationsOpen(false);
+  };
+
+  const handleDocumentationMouseLeave = () => {
+    leaveTimeout.current = setTimeout(() => {
+      setIsDocumentationOpen(false);
       setIsIntegrationsOpen(false);
     }, 200);
   };
@@ -132,8 +149,21 @@ export function Header() {
             </Link>
           </div>
 
+          {/* GitHub Stars - positioned above navigation */}
+          <div className="absolute left-[88px] top-[10px]">
+            <GithubStars />
+          </div>
+
           {/* Desktop Navigation - Hidden on mobile */}
           <nav className="hidden md:flex items-center gap-3 pr-4 pt-1">
+            <button
+              className="text-sm text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors bg-transparent rounded-sm px-2 py-1.5 border-none cursor-pointer hover:bg-[#2a2f3d]/3 dark:hover:bg-[#2a2f3d]/10"
+              onMouseEnter={handleDocumentationMouseEnter}
+              onMouseLeave={handleDocumentationMouseLeave}
+              onClick={playClickSound}
+            >
+              {t('header.documentation')}
+            </button>
             <button
               className="text-sm text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors bg-transparent rounded-sm px-2 py-1.5 border-none cursor-pointer hover:bg-[#2a2f3d]/3 dark:hover:bg-[#2a2f3d]/10"
               onMouseEnter={handleIntegrationsMouseEnter}
@@ -144,6 +174,19 @@ export function Header() {
             </button>
             <button
               className="text-sm text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors bg-transparent rounded-sm px-2 py-1.5 border-none cursor-pointer hover:bg-[#2a2f3d]/3 dark:hover:bg-[#2a2f3d]/10"
+              onMouseEnter={() => {
+                if (leaveTimeout.current) {
+                  clearTimeout(leaveTimeout.current);
+                }
+                setIsDocumentationOpen(false);
+                setIsIntegrationsOpen(false);
+              }}
+              onMouseLeave={() => {
+                leaveTimeout.current = setTimeout(() => {
+                  setIsDocumentationOpen(false);
+                  setIsIntegrationsOpen(false);
+                }, 200);
+              }}
               onClick={(e) => {
                 playClickSound();
                 handleSmoothScroll('pricing')(e);
@@ -153,15 +196,19 @@ export function Header() {
             </button>
             <button
               className="text-sm text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors bg-transparent rounded-sm px-2 py-1.5 border-none cursor-pointer hover:bg-[#2a2f3d]/3 dark:hover:bg-[#2a2f3d]/10"
-              onClick={() => {
-                playClickSound();
-                window.open('https://docs.lomi.africa', '_blank');
+              onMouseEnter={() => {
+                if (leaveTimeout.current) {
+                  clearTimeout(leaveTimeout.current);
+                }
+                setIsDocumentationOpen(false);
+                setIsIntegrationsOpen(false);
               }}
-            >
-              {t('header.documentation')}
-            </button>
-            <button
-              className="text-sm text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors bg-transparent rounded-sm px-2 py-1.5 border-none cursor-pointer hover:bg-[#2a2f3d]/3 dark:hover:bg-[#2a2f3d]/10"
+              onMouseLeave={() => {
+                leaveTimeout.current = setTimeout(() => {
+                  setIsDocumentationOpen(false);
+                  setIsIntegrationsOpen(false);
+                }, 200);
+              }}
               onClick={() => {
                 playClickSound();
                 navigate('/blog');
@@ -169,24 +216,6 @@ export function Header() {
             >
               {t('header.blog')}
             </button>
-            <span className="text-muted-foreground text-lg leading-none font-thin">
-              |
-            </span>
-            {/* GitHub Stars */}
-            <Link
-              href="https://github.com/lomiafrica/lomi."
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center"
-              onMouseDown={() => playClickSound()}
-            >
-              <div className="flex items-center gap-1 text-amber-500 hover:text-amber-600 transition-colors">
-                <span className="font-semibold text-amber-600 dark:text-amber-300 hover:text-amber-700 dark:hover:text-amber-200">
-                  {starCount !== null ? starCount.toLocaleString() : '10'}
-                </span>
-                <Star className="h-4 w-4 text-amber-600 dark:text-amber-300 hover:text-amber-700 dark:hover:text-amber-200 fill-current" />
-              </div>
-            </Link>
 
             {/* Search Toggle */}
             <div className="h-8 pl-2 pr-0.5 flex items-center">
@@ -270,6 +299,15 @@ export function Header() {
           onMouseLeave={handleIntegrationsMouseLeave}
         >
           <IntegrationsDropdown />
+        </DockDropdown>
+
+        {/* Desktop Documentation Dropdown */}
+        <DockDropdown
+          isOpen={isDocumentationOpen}
+          onMouseEnter={handleDocumentationMouseEnter}
+          onMouseLeave={handleDocumentationMouseLeave}
+        >
+          <DocumentationDropdown />
         </DockDropdown>
       </header>
     </Dock>

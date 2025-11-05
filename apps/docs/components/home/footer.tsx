@@ -263,7 +263,7 @@ export function Footer() {
                 </div>
 
                 {/* Copyright and Language - Better mobile alignment */}
-                <div className="flex flex-row items-center justify-between text-xs text-zinc-600 dark:text-zinc-400 mt-4 w-full">
+                <div className="flex flex-row items-center justify-between text-xs text-zinc-600 dark:text-zinc-400 mt-4 -translate-y-3 w-full">
                   <span className="px-2 py-1.5 h-8 bg-transparent hover:bg-[#2a2f3d]/5 rounded-sm transition-colors duration-200 dark:hover:bg-[#2a2f3d]/20 inline-flex items-center text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100">
                     {t('footer.copyright')}
                   </span>
@@ -279,7 +279,7 @@ export function Footer() {
                     href="https://status.lomi.africa"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="absolute right-0 top-1/2 -translate-y-1/2 flex items-center gap-1.5 px-2 py-1.5 text-xs h-8 bg-transparent hover:bg-[#2a2f3d]/5 rounded-sm transition-colors duration-200 justify-center dark:hover:bg-[#2a2f3d]/20 group text-sky-600 dark:text-green-300 hover:text-zinc-900 dark:hover:text-zinc-100"
+                    className="absolute right-0 top-1/2 -translate-y-11.5 flex items-center gap-1.5 px-2 py-1.5 text-xs h-8 bg-transparent hover:bg-[#2a2f3d]/5 rounded-sm transition-colors duration-200 justify-center dark:hover:bg-[#2a2f3d]/20 group text-sky-600 dark:text-green-300 hover:text-zinc-900 dark:hover:text-zinc-100"
                     onClick={playClickSound}
                   >
                     <div className="relative flex items-center justify-center w-3 h-3 shrink-0">
@@ -297,7 +297,7 @@ export function Footer() {
                   </a>
                   {/* Certification Icons Container - Absolutely positioned to the left of the status link */}
                   {/* Estimate status link width + gap ~ 160px? Use right-40 (160px) */}
-                  <div className="absolute right-40 top-1/2 -translate-y-1/2 flex items-center">
+                  <div className="absolute right-40 top-[calc(50%-30px)] -translate-y-1/2 flex items-center">
                     {/* Positioned absolutely, left of status */}
                     {/* PCI Icon Wrapper - Remove cursor-pointer */}
                     <div

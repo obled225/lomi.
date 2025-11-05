@@ -1,21 +1,25 @@
 'use client';
+
 import type { ComponentProps } from 'react';
+import type React from 'react';
 import { Search } from 'lucide-react';
-import { useSearchContext } from '@/components/ui/search';
-import { useI18n } from '@/lib/contexts/translation-context';
+import { useSearchContext } from 'fumadocs-ui/provider';
+import { useTranslation } from '@/lib/contexts/translation-context';
+import { t as translate } from '@/lib/i18n/translations';
 import { cn } from '@/lib/utils/cn';
 import { type ButtonProps, buttonVariants } from '@/components/ui/button';
+import { Kbd } from '@/components/ui/kbd';
 
 interface SearchToggleProps
-  extends Omit<ComponentProps<'button'>, 'color'>,
-    ButtonProps {
+  extends ComponentProps<'button'>,
+  ButtonProps {
   hideIfDisabled?: boolean;
 }
 
 export function SearchToggle({
   hideIfDisabled,
-  size = 'icon-sm',
-  color = 'ghost',
+  size = 'small',
+  variant = 'ghost',
   ...props
 }: SearchToggleProps) {
   const { setOpenSearch, enabled } = useSearchContext();
@@ -27,7 +31,7 @@ export function SearchToggle({
       className={cn(
         buttonVariants({
           size,
-          color,
+          variant,
         }),
         props.className,
       )}
@@ -49,7 +53,8 @@ export function LargeSearchToggle({
   hideIfDisabled?: boolean;
 }) {
   const { enabled, hotKey, setOpenSearch } = useSearchContext();
-  const { text } = useI18n();
+  const { currentLanguage } = useTranslation();
+  const t = (key: string) => String(translate(key, currentLanguage));
   if (hideIfDisabled && !enabled) return null;
 
   return (
@@ -66,14 +71,14 @@ export function LargeSearchToggle({
       }}
     >
       <Search className="size-4" />
-      {text.search}
-      <div className="ms-auto inline-flex gap-0.5">
-        {hotKey.map((k, i) => (
-          <kbd key={i} className="rounded-md border bg-fd-background px-1.5">
-            {k.display}
-          </kbd>
-        ))}
-      </div>
+      {t('search.search')}
+      <Kbd variant="search" className="ms-auto">
+        <span className="flex items-center gap-0.5">
+          {hotKey.map((k: { display: React.ReactNode }, index: number) => (
+            <span key={index}>{k.display}</span>
+          ))}
+        </span>
+      </Kbd>
     </button>
   );
 }
