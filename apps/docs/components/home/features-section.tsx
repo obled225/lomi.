@@ -120,9 +120,9 @@ const DemoRevenueChart = () => {
   } | null>(null);
 
   // Chart dimensions
-  const width = 320;
+  const width = 365;
   const height = 180;
-  const padding = { top: 10, right: 0, bottom: 5, left: 10 };
+  const padding = { top: 10, right: 0, bottom: 5, left: 20 };
 
   const chartWidth = width - padding.left - padding.right;
   const chartHeight = height - padding.top - padding.bottom;
@@ -731,17 +731,18 @@ export function FeaturesSection() {
             >
               <Card className="flex flex-col h-[400px] rounded-sm overflow-hidden">
                 <CardHeader className="p-6 pb-4 text-base font-medium">
-                  {String(t('features.card2.title', currentLanguage))}
+                  {String(t(resolvedTheme === 'light' ? 'features.card2.title_light' : 'features.card2.title', currentLanguage))}
                 </CardHeader>
                 <CardContent className="px-6 pb-6 pt-0 text-sm text-muted-foreground grow relative flex flex-col">
                   <p className="mb-4">
-                    {String(t('features.card2.description', currentLanguage))}
+                    {String(t(resolvedTheme === 'light' ? 'features.card2.description_light' : 'features.card2.description', currentLanguage))}
                   </p>
                   <div className="relative grow rounded-sm overflow-hidden">
                     {mounted && (
                       <>
                         <Image
-                          src="/random/arch_d.webp"
+                          // src="/random/arch_d.webp"
+                          src="/okra/okra_api_receipts.svg"
                           alt="Seamless checkout architecture"
                           width={400}
                           height={300}

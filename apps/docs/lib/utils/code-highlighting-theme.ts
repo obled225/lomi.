@@ -51,14 +51,14 @@ export const blueVsDarkTheme = {
   ...vs,
   'code[class*="language-"]': {
     ...vs['code[class*="language-"]'],
-    color: '#e2e8f0', // slate-200 for better contrast in dark
-    background: 'transparent',
+    color: '#e2e8f0', // slate-200 - inverted from operator
+    background: 'hsl(0 0% 10.1961%)',
     border: 'none',
   },
   'pre[class*="language-"]': {
     ...vs['pre[class*="language-"]'],
-    background: 'transparent',
-    color: '#e2e8f0',
+    background: 'hsl(0 0% 10.1961%)',
+    color: '#e2e8f0', // slate-200 - inverted from operator
     border: 'none',
   },
   comment: {
@@ -66,28 +66,31 @@ export const blueVsDarkTheme = {
     fontStyle: 'italic',
   },
   keyword: {
-    color: '#60a5fa', // blue-400
+    color: '#3b82f6', // blue-500 - exact same blue as chart in Card 5
     fontWeight: '600',
   },
+  boolean: {
+    color: '#06b6d4', // cyan-500 - for true/false values
+  },
   string: {
-    color: '#3b82f6', // blue-500 - using blue
+    color: '#38bdf8', // sky-400 - sky blue for strings like the text in the JSON example
   },
   number: {
-    color: '#a78bfa', // violet-400
+    color: '#06b6d4', // sky-400 - blue instead of purple
   },
   function: {
-    color: '#60a5fa', // blue-400
+    color: '#3b82f6', // blue-500 - exact same blue as chart in Card 5
   },
   variable: {
-    color: '#e2e8f0', // slate-200
+    color: '#cbd5e1', // slate-300 - lighter for variables
   },
   operator: {
-    color: '#cbd5e1', // slate-300
+    color: '#7dd3fc', // sky-300 - inverted from text
   },
   punctuation: {
     color: '#94a3b8', // slate-400
   },
   property: {
-    color: '#60a5fa', // blue-400
+    color: '#3b82f6', // blue-500 - exact same blue as chart in Card 5
   },
 };

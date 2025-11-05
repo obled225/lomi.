@@ -15,9 +15,9 @@ export function HomePageClient() {
       {/* Hero Section */}
       <Hero dashboardImage={getDashboardImage()} />
       <FeaturesSection />
-      <CareersSection />
       <Sdks />
       <EarlyMemberPricing />
+      <CareersSection />
     </>
   );
 }

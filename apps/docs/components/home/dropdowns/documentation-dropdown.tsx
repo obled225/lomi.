@@ -137,7 +137,7 @@ export function DocumentationDropdown({
                             onMouseLeave={() => setHoveredIcon(null)}
                             onClick={playClickSound}
                         >
-                            <Card className="group flex flex-col h-[160px] rounded-sm transition-all cursor-pointer hover:shadow-sm">
+                            <Card className="group flex flex-col h-[165px] rounded-sm transition-all cursor-pointer hover:shadow-sm">
                                 <CardHeader className="p-6 pb-4">
                                     <div className="flex items-start gap-3">
                                         <div className="shrink-0">

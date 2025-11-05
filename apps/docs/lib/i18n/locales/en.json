@@ -108,7 +108,7 @@
     "apiReferenceDescription": "Complete API documentation"
   },
   "sdks": {
-    "title": "Lead the charge"
+    "title": "Lead the charge."
   },
   "earlyMemberPricing": {
     "tag": "No surprises, no hidden fees, no monthly costs.",
@@ -116,7 +116,7 @@
     "learnMore": "Learn more"
   },
   "features": {
-    "title": "Unlock your business potential",
+    "title": "Unlock your business potential.",
     "card1": {
       "title": "All your preferred payment methods",
       "description": "Accept local and international payment methods, seamlessly.",
@@ -131,7 +131,9 @@
     },
     "card2": {
       "title": "A checkout experience that converts",
-      "description": "Create a fast, powerful, and secure payment flow."
+      "description": "Create a fast, powerful, and secure payment flow.",
+      "title_light": "Engineered for performance",
+      "description_light": "Increase your revenue and keep customers coming back."
     },
     "card3": {
       "title": "Your imagination is the limit",

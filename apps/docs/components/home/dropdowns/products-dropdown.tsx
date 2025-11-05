@@ -237,7 +237,7 @@ export function IntegrationsDropdown({
     >
       <div className="flex flex-col">
         {/* Core Features Section */}
-        <div className="px-1">
+        <div className="px-2">
           <h3 className="text-sm font-semibold text-zinc-600 dark:text-zinc-400 mb-1.5 px-0">
             Features
           </h3>
@@ -280,7 +280,7 @@ export function IntegrationsDropdown({
         </div>
 
         {/* Products Section */}
-        <div className="px-1 py-1.5">
+        <div className="px-2 py-1.5">
           <h3 className="text-sm font-semibold text-zinc-600 dark:text-zinc-400 mb-1.5 px-0">
             Integrate
           </h3>

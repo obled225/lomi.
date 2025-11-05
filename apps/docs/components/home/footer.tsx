@@ -8,47 +8,26 @@ import { BackgroundText } from '@/components/design/background-text';
 import { LottieIcon } from '@/components/ui/lottie-icon';
 import { animations } from '@/lib/utils/lottie-animations';
 import { useTheme } from '@/lib/hooks/use-theme';
-import { GitHubIcon, LinkedInIcon, XIcon, SlackIcon } from '@/components/icons';
+import { useThemeAnimation } from '@/lib/hooks/use-theme-animation';
+import { FacebookIcon, GitHubIcon, LinkedInIcon, XIcon, SlackIcon } from '@/components/icons';
 import { Check } from 'lucide-react';
 import { ProductHuntBadge } from '@/components/design/product-hunt-badge';
-import {
-  playClickSound as playSound,
-  getSoundEnabled,
-  setSoundEnabled,
-} from '@/lib/utils/sound';
-import { Cookies } from '@/lib/utils/constants';
+import { playClickSound as playSound } from '@/lib/utils/sound';
 import { useTranslation } from '@/lib/contexts/translation-context';
 import { t as translate } from '@/lib/i18n/translations';
 
 const GITHUB_REPO_URL = 'https://github.com/lomiafrica/lomi./';
 
 export function Footer() {
-  const { resolvedTheme, mounted, setTheme } = useTheme();
+  const { resolvedTheme, mounted } = useTheme();
+  const { toggleTheme, themeButtonRef } = useThemeAnimation();
   const { currentLanguage } = useTranslation();
 
   // Create t function that uses currentLanguage (same pattern as tracking-cookie.tsx)
   const t = (key: string) => String(translate(key, currentLanguage));
   const [hoveredTheme, setHoveredTheme] = useState(false);
-  const [hoveredSound, setHoveredSound] = useState(false);
-  const [isSoundEnabled, setIsSoundEnabled] = useState(() => getSoundEnabled());
 
   useEffect(() => {
-    // Listen for changes from other tabs or components
-    const handleSoundChange = (e: Event) => {
-      const detail = (e as CustomEvent).detail;
-      if (typeof detail?.enabled === 'boolean') {
-        setIsSoundEnabled(detail.enabled);
-      }
-    };
-    const handleStorageChange = (e: StorageEvent) => {
-      if (e.key === Cookies.SoundEnabled) {
-        setIsSoundEnabled(e.newValue !== 'false');
-      }
-    };
-
-    window.addEventListener('cascade:sound-changed', handleSoundChange);
-    window.addEventListener('storage', handleStorageChange);
-
     const handleScroll = () => {
       const isAtBottom =
         window.innerHeight + window.scrollY >= document.body.offsetHeight - 2;
@@ -61,8 +40,6 @@ export function Footer() {
     window.addEventListener('scroll', handleScroll);
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('cascade:sound-changed', handleSoundChange);
-      window.removeEventListener('storage', handleStorageChange);
     };
   }, []);
 
@@ -70,19 +47,11 @@ export function Footer() {
     playSound();
   }, []);
 
-  const toggleTheme = useCallback(() => {
+  const handleToggleTheme = useCallback(async () => {
     playClickSound();
-    setTheme(resolvedTheme === 'dark' ? 'light' : 'dark');
-  }, [resolvedTheme, setTheme, playClickSound]);
+    await toggleTheme();
+  }, [toggleTheme, playClickSound]);
 
-  const toggleSound = useCallback(() => {
-    playClickSound();
-
-    // Update state for instant UI change and persist the setting.
-    const newSoundEnabled = !isSoundEnabled;
-    setIsSoundEnabled(newSoundEnabled);
-    setSoundEnabled(newSoundEnabled);
-  }, [isSoundEnabled, playClickSound]);
 
   // Wait for theme to be mounted to prevent hydration mismatches
 
@@ -132,7 +101,7 @@ export function Footer() {
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={playClickSound}
-                      className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-[#6f42c1] inline-flex items-center transition-colors"
+                      className="text-zinc-600 dark:text-zinc-400 hover:text-[#5FED83] dark:hover:text-[#5FED83] inline-flex items-center transition-colors"
                       aria-label="View our GitHub"
                     >
                       <GitHubIcon className="h-[20px] w-[20px]" />
@@ -148,11 +117,21 @@ export function Footer() {
                       <XIcon className="h-[22px] w-[22px] translate-y-[-0.5px] -translate-x-px" />
                     </Link>
                     <Link
+                      href="https://www.facebook.com/lomiafrica"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={playClickSound}
+                      className="text-zinc-600 dark:text-zinc-400 hover:text-[#1877F2] dark:hover:text-[#1877F2] inline-flex items-center transition-colors"
+                      aria-label="Follow us on Facebook"
+                    >
+                      <FacebookIcon className="h-[20px] w-[20px]" />
+                    </Link>
+                    <Link
                       href="https://www.linkedin.com/company/lomiafri"
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={playClickSound}
-                      className="text-zinc-600 dark:text-zinc-400 hover:text-[#0A66C2] dark:hover:text-[#0A66C2] inline-flex items-center transition-colors"
+                      className="text-zinc-600 dark:text-zinc-400 hover:text-[#0077B5] dark:hover:text-[#0077B5] inline-flex items-center transition-colors"
                       aria-label="Follow us on LinkedIn"
                     >
                       <LinkedInIcon className="h-[20px] w-[20px]" />
@@ -162,13 +141,14 @@ export function Footer() {
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={playClickSound}
-                      className="text-zinc-600 dark:text-zinc-400 hover:text-[#4A154B] dark:hover:text-[#4A154B] inline-flex items-center transition-colors"
+                      className="text-zinc-600 dark:text-zinc-400 hover:text-[#E01E5A] dark:hover:text-[#E01E5A] inline-flex items-center transition-colors"
                       aria-label="Join our Slack community"
                     >
                       <SlackIcon className="h-[20px] w-[20px]" />
                     </Link>
                     <div
-                      onClick={toggleTheme}
+                      ref={themeButtonRef}
+                      onClick={handleToggleTheme}
                       onMouseEnter={() => setHoveredTheme(true)}
                       onMouseLeave={() => setHoveredTheme(false)}
                       className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white inline-flex items-center transition-colors cursor-pointer"
@@ -202,49 +182,6 @@ export function Footer() {
                           }
                           customColor={
                             hoveredTheme
-                              ? resolvedTheme === 'dark'
-                                ? [0.922, 0.922, 0.941] // Very light in dark mode (zinc-200)
-                                : [0.145, 0.145, 0.169] // Very dark in light mode (zinc-800)
-                              : resolvedTheme === 'dark'
-                                ? [0.631, 0.631, 0.667] // zinc-400 in dark mode
-                                : [0.322, 0.322, 0.357] // zinc-600 in light mode
-                          }
-                        />
-                      )}
-                    </div>
-                    <div
-                      onClick={toggleSound}
-                      onMouseEnter={() => setHoveredSound(true)}
-                      onMouseLeave={() => setHoveredSound(false)}
-                      className="hidden lg:flex text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white items-center transition-colors cursor-pointer"
-                      aria-label={
-                        mounted
-                          ? `Toggle sound ${isSoundEnabled ? 'off' : 'on'}`
-                          : 'Toggle sound'
-                      }
-                      title={
-                        mounted
-                          ? `Toggle sound ${isSoundEnabled ? 'off' : 'on'}`
-                          : 'Toggle sound'
-                      }
-                    >
-                      {mounted && (
-                        <LottieIcon
-                          animationData={
-                            isSoundEnabled ? animations.pause : animations.play
-                          }
-                          size={20}
-                          loop={false}
-                          autoplay={false}
-                          initialFrame={0}
-                          isHovered={hoveredSound}
-                          ariaLabel={
-                            mounted
-                              ? `Toggle sound ${isSoundEnabled ? 'off' : 'on'}`
-                              : 'Toggle sound'
-                          }
-                          customColor={
-                            hoveredSound
                               ? resolvedTheme === 'dark'
                                 ? [0.922, 0.922, 0.941] // Very light in dark mode (zinc-200)
                                 : [0.145, 0.145, 0.169] // Very dark in light mode (zinc-800)

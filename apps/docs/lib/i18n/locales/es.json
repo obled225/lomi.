@@ -128,7 +128,9 @@
     },
     "card2": {
       "title": "Una experiencia de pago que convierte",
-      "description": "Cree un flujo de pago rápido, potente y seguro."
+      "description": "Cree un flujo de pago rápido, potente y seguro.",
+      "title_light": "Concebido para rendimiento",
+      "description_light": "Aumente sus ingresos y fidelice a sus clientes."
     },
     "card3": {
       "title": "Su imaginación es el límite",

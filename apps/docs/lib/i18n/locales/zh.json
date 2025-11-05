@@ -128,7 +128,9 @@
     },
     "card2": {
       "title": "高转化率的结账体验",
-      "description": "创建快速、强大且安全的支付流程。"
+      "description": "创建快速、强大且安全的支付流程。",
+      "title_light": "为性能而设计",
+      "description_light": "增加收入并留住客户。"
     },
     "card3": {
       "title": "您的想象力是唯一的限制",
