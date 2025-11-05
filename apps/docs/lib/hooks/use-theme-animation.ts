@@ -3,7 +3,7 @@ import { flushSync } from 'react-dom';
 import { useTheme } from './use-theme';
 
 export function useThemeAnimation() {
-  const { setTheme, theme } = useTheme();
+  const { setTheme, resolvedTheme } = useTheme();
   const themeButtonRef = useRef<HTMLDivElement>(null);
 
   const toggleTheme = useCallback(async () => {
@@ -11,7 +11,8 @@ export function useThemeAnimation() {
 
     await document.startViewTransition(() => {
       flushSync(() => {
-        setTheme(theme === 'dark' ? 'light' : 'dark');
+        // Use resolvedTheme to get the actual theme (handles 'system' theme correctly)
+        setTheme(resolvedTheme === 'dark' ? 'light' : 'dark');
       });
     }).ready;
 
@@ -37,7 +38,7 @@ export function useThemeAnimation() {
         pseudoElement: '::view-transition-new(root)',
       },
     );
-  }, [theme, setTheme]);
+  }, [resolvedTheme, setTheme]);
 
   return {
     toggleTheme,

@@ -72,23 +72,6 @@ export function useHomePageInit() {
     initializeLanguage();
   }, [currentLanguage, setLanguage]);
 
-  // Force dark mode for home page
-  useEffect(() => {
-    // Remove any existing theme classes first
-    document.documentElement.classList.remove('light', 'dark');
-
-    // Always apply dark mode for home page
-    document.documentElement.classList.add('dark');
-    document.documentElement.style.colorScheme = 'dark';
-
-    // Dispatch theme change event to notify any listeners
-    window.dispatchEvent(
-      new CustomEvent('theme-change', {
-        detail: { theme: 'dark' },
-      }),
-    );
-  }, []);
-
   // Track page view
   useEffect(() => {
     // Defer tracking slightly to avoid blocking initial render
