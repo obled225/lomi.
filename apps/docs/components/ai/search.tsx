@@ -281,7 +281,7 @@ export default function AISearch(props: DialogProps) {
             e.preventDefault();
           }}
           aria-describedby={undefined}
-          className="fixed flex flex-col w-[calc(100%-1rem)] bg-fd-popover/80 backdrop-blur-xl p-1 rounded-sm shadow-2xl border max-md:top-12 md:bottom-12 left-1/2 z-50 max-w-screen-sm -translate-x-1/2 focus-visible:outline-none data-[state=open]:animate-fd-dialog-in data-[state=closed]:animate-fd-dialog-out"
+          className="fixed flex flex-col w-[calc(100%-1rem)] bg-fd-popover/80 backdrop-blur-xl p-1 rounded-sm shadow-sm border max-md:top-12 md:bottom-12 left-1/2 z-50 max-w-screen-sm -translate-x-1/2 focus-visible:outline-none data-[state=open]:animate-fd-dialog-in data-[state=closed]:animate-fd-dialog-out"
         >
           <ChatContext value={chat}>
             <div className="px-3 py-2">

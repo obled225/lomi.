@@ -12,7 +12,7 @@ interface BackgroundTextProps {
 export function BackgroundText({ children }: BackgroundTextProps) {
   return (
     <div className="w-full overflow-hidden mt-[-80px] h-[240px] translate-y-4 md:mt-[-100px] md:h-[388px] relative z-0 pointer-events-none">
-      <div className="absolute right-0 w-[500px] h-[333px] object-cover md:w-[1000px] md:h-[330px] origin-bottom translate-y-[-43px] md:translate-y-[82px] opacity-[0.06] select-none pointer-events-none">
+      <div className="absolute right-0 w-[500px] h-[333px] object-cover md:w-[1000px] md:h-[330px] origin-bottom translate-x-[80px] translate-y-[25px] md:translate-y-[0px] opacity-[0.06] select-none pointer-events-none">
         <Logo
           width={1000}
           height={445}

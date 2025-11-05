@@ -17,9 +17,9 @@ export function GithubStars() {
             className="flex items-center"
             onMouseDown={() => playClickSound()}
         >
-            <div className="flex items-center gap-0.5 text-amber-500 hover:text-amber-600 transition-colors">
-                <Star className="h-2.5 w-2.5 text-amber-600 dark:text-amber-300 hover:text-amber-700 dark:hover:text-amber-200 fill-current" />
-                <span className="text-[10px] font-medium text-amber-600 dark:text-amber-300 hover:text-amber-700 dark:hover:text-amber-200">
+            <div className="flex items-center gap-0.5 text-amber-400 hover:text-amber-300 transition-colors">
+                <Star className="h-2.5 w-2.5 text-amber-400 hover:text-amber-300 fill-current" />
+                <span className="text-[10px] font-medium text-amber-400 hover:text-amber-300">
                     {starCount !== null ? starCount.toLocaleString() : '10'}
                 </span>
             </div>

@@ -141,7 +141,7 @@ export function Header() {
     <Dock>
       <header className="bg-background/80 backdrop-blur-md border border-zinc-200 dark:border-zinc-800 rounded-sm shadow-sm select-none">
         <div className="flex items-center justify-between h-12">
-          <div className="flex items-center pl-4 pt-1">
+          <div className="flex items-center pl-4 pt-2">
             <Link href="/" onClick={playClickSound}>
               <div className="cursor-pointer hover:opacity-80 transition-opacity">
                 <Logo width={80} height={24} />
@@ -150,12 +150,12 @@ export function Header() {
           </div>
 
           {/* GitHub Stars - positioned above navigation */}
-          <div className="absolute left-[88px] top-[10px]">
+          <div className="absolute left-[88px] top-[8px]">
             <GithubStars />
           </div>
 
           {/* Desktop Navigation - Hidden on mobile */}
-          <nav className="hidden md:flex items-center gap-3 pr-4 pt-1">
+          <nav className="hidden md:flex items-center gap-3 pr-4 pt-2">
             <button
               className="text-sm text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors bg-transparent rounded-sm px-2 py-1.5 border-none cursor-pointer hover:bg-[#2a2f3d]/3 dark:hover:bg-[#2a2f3d]/10"
               onMouseEnter={handleDocumentationMouseEnter}

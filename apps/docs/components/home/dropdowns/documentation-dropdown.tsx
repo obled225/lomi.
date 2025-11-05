@@ -81,7 +81,7 @@ export function DocumentationDropdown({
                 {/* Featured Large Card */}
                 <Link
                     href={featuredCard.href}
-                    className="group flex-1 min-w-0 rounded-sm overflow-hidden bg-background border border-border hover:border-zinc-300 dark:hover:border-zinc-700 transition-all cursor-pointer hover:shadow-lg"
+                    className="group flex-1 min-w-0 rounded-sm overflow-hidden bg-background border border-border hover:border-zinc-300 dark:hover:border-zinc-700 transition-all cursor-pointer hover:shadow-sm"
                     onClick={playClickSound}
                 >
                     <div className="relative h-full min-h-[280px] md:min-h-[320px] flex flex-col">
@@ -126,7 +126,7 @@ export function DocumentationDropdown({
                         <Link
                             key={card.id}
                             href={card.href}
-                            className="group flex flex-col px-4 py-4 bg-background border border-border hover:border-zinc-300 dark:hover:border-zinc-700 rounded-sm transition-all cursor-pointer hover:shadow-md"
+                            className="group flex flex-col px-4 py-4 bg-background border border-border hover:border-zinc-300 dark:hover:border-zinc-700 rounded-sm transition-all cursor-pointer hover:shadow-sm"
                             onMouseEnter={() => setHoveredIcon(card.id)}
                             onMouseLeave={() => setHoveredIcon(null)}
                             onClick={playClickSound}

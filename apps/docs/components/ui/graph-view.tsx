@@ -179,7 +179,7 @@ function ClientOnly({
       />
       {tooltip && (
         <div
-          className="absolute bg-fd-popover text-fd-popover-foreground size-fit p-2 border rounded-sm shadow-lg text-sm max-w-xs"
+          className="absolute bg-fd-popover text-fd-popover-foreground size-fit p-2 border rounded-sm shadow-sm text-sm max-w-xs"
           style={{ top: tooltip.y, left: tooltip.x }}
         >
           {tooltip.content}

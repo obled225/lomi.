@@ -274,7 +274,7 @@ const DemoRevenueChart = () => {
         {/* Tooltip */}
         {hoveredPoint && (
           <div
-            className="absolute z-10 bg-background border border-border rounded-sm px-3 py-2 shadow-lg text-xs pointer-events-none"
+            className="absolute z-10 bg-background border border-border rounded-sm px-3 py-2 shadow-sm text-xs pointer-events-none"
             style={{
               left: `${hoveredPoint.x}px`,
               top: `${hoveredPoint.y}px`,
@@ -919,7 +919,7 @@ export function FeaturesSection() {
                     <div className="mt-2">
                       <div className="relative">
                         {activeTab === 'product' && (
-                          <div className="bg-muted/50 dark:bg-slate-900 rounded-sm border border-border overflow-hidden shadow-lg h-54 md:h-50 overflow-y-auto hide-scrollbar">
+                          <div className="bg-muted/50 dark:bg-slate-900 rounded-sm border border-border overflow-hidden shadow-sm h-54 md:h-50 overflow-y-auto hide-scrollbar">
                             {mounted && (
                               <SyntaxHighlighter
                                 language="json"
@@ -949,7 +949,7 @@ export function FeaturesSection() {
                           </div>
                         )}
                         {activeTab === 'subscription' && (
-                          <div className="bg-muted/50 dark:bg-slate-900 rounded-sm border border-border overflow-hidden shadow-lg h-54 md:h-50 overflow-y-auto hide-scrollbar">
+                          <div className="bg-muted/50 dark:bg-slate-900 rounded-sm border border-border overflow-hidden shadow-sm h-54 md:h-50 overflow-y-auto hide-scrollbar">
                             {mounted && (
                               <SyntaxHighlighter
                                 language="json"
@@ -979,7 +979,7 @@ export function FeaturesSection() {
                           </div>
                         )}
                         {activeTab === 'checkout' && (
-                          <div className="bg-muted/50 dark:bg-slate-900 rounded-sm border border-border overflow-hidden shadow-lg h-54 md:h-50 overflow-y-auto hide-scrollbar">
+                          <div className="bg-muted/50 dark:bg-slate-900 rounded-sm border border-border overflow-hidden shadow-sm h-54 md:h-50 overflow-y-auto hide-scrollbar">
                             {mounted && (
                               <SyntaxHighlighter
                                 language="json"
