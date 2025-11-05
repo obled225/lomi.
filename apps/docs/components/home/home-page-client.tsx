@@ -19,7 +19,7 @@ export function HomePageClient() {
       <main className="relative z-10">
         <Header />
         <div className="min-h-[80vh] sm:min-h-screen ">
-          <div className="container mx-auto px-4 sm:px-6 flex flex-col min-h-[calc(80vh-40px)] sm:min-h-[calc(100vh-40px)] pt-8 sm:pt-16">
+          <div className="max-w-7xl mx-auto pl-2 pr-4 py-2 flex flex-col min-h-[calc(80vh-40px)] sm:min-h-[calc(100vh-40px)] pt-8 sm:pt-16">
             {/* Hero Section */}
             <Hero dashboardImage={getDashboardImage()} />
           </div>

@@ -15,7 +15,7 @@ function Hero({ dashboardImage }: HeroProps) {
 
   return (
     <section className="relative w-full py-12 md:py-12 lg:py-12 xl:py-12 overflow-hidden">
-      <div className="relative z-10 w-full pl-6 pr-6 md:pl-6 sm:pr-6">
+      <div className="relative z-10 max-w-7xl mx-auto pl-0 pr-0 py-2">
         <div className="flex flex-col space-y-6 text-left mt-20 md:mt-0">
           {/* Hero content */}
           <div className="space-y-4">

@@ -90,16 +90,16 @@ export function Footer() {
     <div>
       <div className="relative w-full bg-background pt-28 sm:pt-6">
         {/* Header with Logo and Tagline */}
-        <div className="container max-w-6xl mx-auto px-4 pt-8 py-8 border-b border-zinc-200 dark:border-zinc-800"></div>
+        <div className="max-w-7xl mx-auto pl-2 pr-4 py-2 border-b border-zinc-200 dark:border-zinc-800"></div>
 
         {/* Footer content */}
         <div className="w-full text-zinc-600 dark:text-zinc-400 pt-12 pb-16 select-none relative z-10">
-          <div className="container max-w-5xl mx-auto pl-4 pr-6 md:px-4">
+          <div className="max-w-7xl mx-auto pl-2 pr-4 py-2">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {/* Subscribe and Social */}
-              <div className="space-y-4 lg:-ml-20 order-4 md:order-1">
+              <div className="space-y-4 order-4 md:order-1">
                 <div className="flex flex-row items-center text-left justify-start gap-1 w-full max-w-[600px]">
-                  <div className="flex items-center gap-4 flex-wrap ml-4 sm:ml-4 justify-left w-full sm:w-auto">
+                  <div className="flex items-center gap-4 flex-wrap justify-left  w-full sm:w-auto">
                     <Link
                       href="/"
                       onClick={playClickSound}
@@ -267,7 +267,7 @@ export function Footer() {
                   <span className="px-2 py-1.5 h-8 bg-transparent hover:bg-[#2a2f3d]/5 rounded-sm transition-colors duration-200 dark:hover:bg-[#2a2f3d]/20 inline-flex items-center text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100">
                     {t('footer.copyright')}
                   </span>
-                  <div>
+                  <div className="">
                     <LanguageSwitcher />
                   </div>
                 </div>
@@ -327,7 +327,7 @@ export function Footer() {
               </div>
 
               {/* Features Column */}
-              <div className="space-y-4 pl-4 order-1 md:order-2 lg:translate-x-[68px]">
+              <div className="space-y-4 pl-4 order-1 md:order-2 lg:translate-x-[16px]">
                 <h2 className="text-zinc-900 dark:text-white font-normal text-base">
                   {t('footer.features.title')}
                 </h2>
@@ -360,7 +360,7 @@ export function Footer() {
               </div>
 
               {/* Resources Column */}
-              <div className="space-y-4 pl-4 order-2 md:order-3 lg:translate-x-[75px]">
+              <div className="space-y-4 pl-4 order-2 md:order-3 lg:translate-x-[24px]">
                 <h2 className="text-zinc-900 dark:text-white font-normal text-base">
                   {t('footer.resources.title')}
                 </h2>
@@ -412,7 +412,7 @@ export function Footer() {
               </div>
 
               {/* Company Column */}
-              <div className="space-y-4 pl-4 order-3 md:order-4 lg:translate-x-[160px]">
+              <div className="space-y-4 pl-4 order-3 md:order-4 lg:translate-x-[48px]">
                 <h2 className="text-zinc-900 dark:text-white font-normal text-base">
                   {t('footer.company.title')}
                 </h2>

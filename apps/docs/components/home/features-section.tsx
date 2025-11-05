@@ -585,7 +585,7 @@ export function FeaturesSection() {
         aria-labelledby="features-heading"
         className={`py-24 ${isFeaturesInView ? 'in-view' : ''}`}
       >
-        <div className="container mx-auto px-6 md:px-8 lg:px-12">
+        <div className="max-w-7xl mx-auto pl-2 pr-4 py-2">
           <div className="mb-14">
             <h2
               id="features-heading"

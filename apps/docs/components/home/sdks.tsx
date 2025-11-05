@@ -70,7 +70,7 @@ export function Sdks() {
   const { mounted } = useTheme();
   return (
     <Section className="pt-4 pb-16">
-      <div className="container mx-auto px-6 md:px-8 lg:px-12">
+      <div className="max-w-7xl mx-auto pl-2 pr-4 py-2">
         <SectionHeader title={String(t('sdks.title', currentLanguage))} />
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {frameworks.map((sdk, index) => (

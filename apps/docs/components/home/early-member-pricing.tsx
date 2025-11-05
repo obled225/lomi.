@@ -21,7 +21,7 @@ export function EarlyMemberPricing() {
   }, [prices.length]);
   return (
     <div className="mt-20 md:mt-40 hidden md:block">
-      <div className="container mx-auto px-6 md:px-8 lg:px-12">
+      <div className="max-w-7xl mx-auto pl-2 pr-4 py-2">
         <section className="overflow-hidden relative bg-transparent dark:bg-background text-foreground dark:text-foreground rounded-sm border p-0 pb-16 pt-16 md:pb-32 md:pt-32 before:absolute before:inset-0 before:bg-gradient-to-r before:from-foreground/5 before:via-transparent before:to-foreground/5 before:pointer-events-none dark:before:from-background/20 dark:before:to-background/20 select-none">
           <SingleSwirl className="pointer-events-none absolute top-0 bottom-0 left-0" />
           <SingleSwirl className="pointer-events-none rotate-180 absolute top-0 bottom-0 right-0 opacity-50" />
