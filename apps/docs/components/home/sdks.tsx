@@ -69,7 +69,7 @@ export function Sdks() {
   const { currentLanguage } = useTranslation();
   const { mounted } = useTheme();
   return (
-    <Section className="pt-4 pb-16">
+    <Section className="mb-8 lg:mb-28">
       <div className="max-w-7xl mx-auto pl-2 pr-4 py-2">
         <SectionHeader
           title={String(t('sdks.title', currentLanguage))}

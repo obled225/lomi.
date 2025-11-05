@@ -1234,7 +1234,7 @@ export function FeaturesSection() {
         id="features"
         ref={featuresRef}
         aria-labelledby="features-heading"
-        className={`py-24 ${isFeaturesInView ? 'in-view' : ''}`}
+        className={`py-12 pb-10 pt-36 lg:pt-10 lg:pb-8 ${isFeaturesInView ? 'in-view' : ''}`}
       >
         <div className="max-w-7xl mx-auto pl-2 pr-4 py-2">
           <div className="mb-6 md:mb-8">

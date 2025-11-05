@@ -127,7 +127,7 @@
     "apiReferenceDescription": "Documentation complète"
   },
   "sdks": {
-    "title": "Gardez une longueur d'avance"
+    "title": "Gardez une longueur d'avance."
   },
   "earlyMemberPricing": {
     "tag": "Pas de surprises, pas de frais cachés, pas de coûts mensuels.",
@@ -135,7 +135,7 @@
     "learnMore": "En savoir plus"
   },
   "features": {
-    "title": "Libérez le potentiel de votre entreprise",
+    "title": "Libérez le potentiel de votre entreprise.",
     "card1": {
       "title": "Tous les moyens de paiement préférés de vos clients",
       "description": "Acceptez les paiements locaux et internationaux, sans efforts.",

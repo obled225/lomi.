@@ -15,7 +15,7 @@ export function CareersSection({ mobileJoinUsImage }: CareersSectionProps) {
 
   return (
     <section className="relative w-full py-12 md:py-12 lg:py-12 xl:py-12 overflow-hidden">
-      <div className="max-w-7xl mx-auto pl-2 pr-4 py-2">
+      <div className="max-w-7xl mx-auto pl-2 pr-4 py-2 pb-28 lg:pb-10">
         <div className="flex flex-col space-y-6 text-left mt-20 md:mt-0">
           {/* Careers content */}
           <div className="space-y-4">

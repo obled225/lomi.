@@ -19,7 +19,7 @@ export function EarlyMemberPricing() {
     return () => clearTimeout(timeoutId);
   }, [prices.length]);
   return (
-    <div className="mt-20 md:mt-20 hidden md:block">
+    <div className="lg:mb-38 md:mt-20 hidden md:block">
       <div className="max-w-7xl mx-auto pl-2 pr-4 py-2">
         {/* Tag as title above the card */}
         <div className="mb-6 md:mb-8">
