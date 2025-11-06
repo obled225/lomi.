@@ -210,8 +210,12 @@ export function Footer() {
                   <ProductHuntBadge />
                 </a>
 
+                <p className="text-[10px] text-zinc-500 dark:text-zinc-400 max-w-xs leading-relaxed text-justify mt-2">
+                  lomi. is a suite of APIs powering online payment processing and e-commerce products in West Africa. Accept payments, send payouts, and automate financial workflows with ease.
+                </p>
+
                 {/* Copyright and Language - Better mobile alignment */}
-                <div className="flex flex-row items-center justify-center gap-4 text-xs text-zinc-600 dark:text-zinc-400 mt-4 -translate-y-3 w-full">
+                <div className="flex flex-row items-center justify-between md:justify-center lg:justify-between gap-4 text-xs text-zinc-600 dark:text-zinc-400 mt-6 -translate-y-3 w-full">
                   <span className="px-2 py-1.5 h-8 ml-2 md:ml-4 lg:ml-0 bg-transparent hover:bg-[#2a2f3d]/5 rounded-sm transition-colors duration-200 dark:hover:bg-[#2a2f3d]/20 inline-flex items-center text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100">
                     {t('footer.copyright')}
                   </span>

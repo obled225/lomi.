@@ -105,7 +105,7 @@ function SdkCard({ sdk, mounted }: { sdk: Framework; mounted: boolean }) {
       <Card className="flex flex-col h-[280px] rounded-sm hover:shadow-sm transition-all duration-300 group cursor-pointer">
         <CardContent className="p-6 text-center flex flex-col items-center justify-center gap-4 grow">
           {/* Logo/Icon Container */}
-          <div className="w-16 h-16 bg-card rounded-lg flex items-center justify-center group-hover:bg-muted/50 transition-colors">
+          <div className="w-16 h-16 bg-card rounded-sm flex items-center justify-center group-hover:bg-[#2a2f3d]/5 dark:group-hover:bg-[#2a2f3d]/20 transition-colors">
             {sdk.slug === 'curl' && mounted ? (
               <>
                 <Image

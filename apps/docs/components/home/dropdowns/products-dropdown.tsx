@@ -291,7 +291,7 @@ export function IntegrationsDropdown({
         </div>
 
         {/* Products Section */}
-        <div className="px-2 py-1.5">
+        <div className="px-2">
           <h3 className="text-sm font-semibold text-zinc-600 dark:text-zinc-400 mb-1.5 px-0">
             Integrate
           </h3>
@@ -333,11 +333,10 @@ export function IntegrationsDropdown({
                       </p>
                     </div>
                     <ChevronDown
-                      className={`h-3 w-3 text-muted-foreground transition-transform shrink-0 ${
-                        expandedSections.includes(product.id)
-                          ? 'rotate-180'
-                          : ''
-                      }`}
+                      className={`h-3 w-3 text-muted-foreground transition-transform shrink-0 ${expandedSections.includes(product.id)
+                        ? 'rotate-180'
+                        : ''
+                        }`}
                     />
                   </div>
                 </CardHeader>
