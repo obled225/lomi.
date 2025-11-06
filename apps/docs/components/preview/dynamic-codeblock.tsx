@@ -8,8 +8,8 @@ export default function Example() {
   const [code, setCode] = useState('console.log("This is pre-rendered")');
 
   return (
-    <div className="prose flex flex-col gap-4 rounded-lg bg-fd-background p-4">
-      <div className="not-prose flex flex-col rounded-lg bg-fd-secondary text-fd-secondary-foreground">
+    <div className="prose flex flex-col gap-4 rounded-sm bg-fd-background p-4">
+      <div className="not-prose flex flex-col rounded-sm bg-fd-secondary text-fd-secondary-foreground">
         <select
           value={lang}
           onChange={(e) => setLang(e.target.value)}

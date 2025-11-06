@@ -23,7 +23,7 @@ import BannerImage from '@/public/banner.webp';
 export function heading(): ReactNode {
   return (
     <Wrapper>
-      <div className="rounded-lg bg-fd-background p-4 prose-no-margin">
+      <div className="rounded-sm bg-fd-background p-4 prose-no-margin">
         <Heading id="preview" as="h3">
           Hello World
         </Heading>
@@ -38,7 +38,7 @@ export function heading(): ReactNode {
 export function card(): ReactNode {
   return (
     <Wrapper>
-      <div className="rounded-lg bg-fd-background">
+      <div className="rounded-sm bg-fd-background">
         <Card
           href="#"
           icon={<Home />}
@@ -201,7 +201,7 @@ export function steps(): ReactNode {
 export function rootToggle(): ReactNode {
   return (
     <Wrapper>
-      <div className="not-prose mx-auto grid max-w-[240px] rounded-lg bg-fd-background">
+      <div className="not-prose mx-auto grid max-w-[240px] rounded-sm bg-fd-background">
         <RootToggle
           className="p-3"
           options={[

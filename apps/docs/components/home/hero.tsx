@@ -5,11 +5,11 @@ import { t as translate } from '@/lib/i18n/translations';
 
 interface HeroProps {
   dashboardImage?:
-    | string
-    | {
-        light: string;
-        dark: string;
-      };
+  | string
+  | {
+    light: string;
+    dark: string;
+  };
   mobileDashboardImage?: {
     light: string;
     dark: string;
@@ -39,7 +39,7 @@ function Hero({ dashboardImage, mobileDashboardImage }: HeroProps) {
           <div className="w-full mt-8">
             <Suspense
               fallback={
-                <div className="w-full h-[400px] md:h-[600px] bg-gray-100 dark:bg-gray-800 animate-pulse rounded-lg" />
+                <div className="w-full h-[400px] md:h-[600px] bg-gray-100 dark:bg-gray-800 animate-pulse rounded-sm" />
               }
             >
               <SimpleImage

@@ -135,8 +135,8 @@ export default function CustomSearchDialog(props: SharedProps) {
             // Add breadcrumb context to the page title
             const breadcrumbText =
               doc.breadcrumbs &&
-              Array.isArray(doc.breadcrumbs) &&
-              doc.breadcrumbs.length > 0
+                Array.isArray(doc.breadcrumbs) &&
+                doc.breadcrumbs.length > 0
                 ? doc.breadcrumbs.join(' › ') + ' › '
                 : '';
 
@@ -278,7 +278,7 @@ export default function CustomSearchDialog(props: SharedProps) {
                       setOpen(false);
                     }}
                     className={cn(
-                      'rounded-lg text-start px-2 py-1.5',
+                      'rounded-sm text-start px-2 py-1.5',
                       isSelected
                         ? 'text-fd-primary bg-fd-primary/10'
                         : 'hover:text-fd-accent-foreground hover:bg-fd-accent',

@@ -52,7 +52,7 @@ export function DocumentationDropdown({
       title: t('documentationDropdown.billingTitle'),
       description: t('documentationDropdown.billingDescription'),
       icon: animations.code,
-      href: '/docs/core/billing',
+      href: '/docs/core/merchant-of-record/pricing',
     },
     {
       id: 'merchant-of-record',
