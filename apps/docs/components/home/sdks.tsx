@@ -59,7 +59,7 @@ const frameworks: Framework[] = [
   },
   {
     name: 'cURL',
-    logoSrc: '/sdks/curl.webp',
+    logoSrc: '/sdks/curl_l.webp',
     descriptionKey: 'sdks.frameworks.curl',
     slug: 'curl',
   },

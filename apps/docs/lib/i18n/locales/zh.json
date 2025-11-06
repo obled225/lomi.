@@ -326,6 +326,9 @@
       "wallet_description": "数字钱包支付",
       "crypto_description": "加密货币支付",
       "spi_description": "统一支付系统",
+      "visa_description": "全球电子支付网络",
+      "paypal_description": "数字支付平台",
+      "google_pay_description": "非接触式支付系统",
       "card_description": "卡支付解决方案"
     },
     "card2": {

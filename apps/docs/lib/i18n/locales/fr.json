@@ -331,6 +331,9 @@
       "wallet_description": "Paiements par E-Wallet",
       "crypto_description": "Paiements en cryptomonnaie",
       "spi_description": "Système interopérable de paiement",
+      "visa_description": "Réseau de paiement électronique mondial",
+      "paypal_description": "Plateforme de paiement numérique",
+      "google_pay_description": "Système de paiement sans contact",
       "card_description": "Solution de paiement par carte"
     },
     "card2": {

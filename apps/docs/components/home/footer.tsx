@@ -237,7 +237,6 @@ export function Footer() {
                         width={120}
                         height={70}
                         className="w-[120px] h-[70px] shrink-0 object-contain filter grayscale opacity-30 group-hover:grayscale-0 group-hover:opacity-100 dark:filter dark:grayscale dark:brightness-100 dark:opacity-25 dark:group-hover:opacity-100 transition-all"
-                        style={{ width: 'auto' }}
                       />
                     </div>
                     {/* SSL Icon */}
@@ -248,7 +247,6 @@ export function Footer() {
                         width={69}
                         height={27}
                         className="w-[69px] h-[27px] shrink-0 object-contain filter grayscale opacity-30 group-hover:grayscale-0 group-hover:opacity-100 dark:invert dark:opacity-25 dark:group-hover:opacity-100 transition-all"
-                        style={{ width: 'auto' }}
                       />
                     </div>
                   </div>

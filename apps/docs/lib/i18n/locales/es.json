@@ -262,6 +262,9 @@
       "wallet_description": "Pagos con billetera digital",
       "crypto_description": "Pagos con criptomonedas",
       "spi_description": "Sistema interoperable de pago",
+      "visa_description": "Red electrónica de pago global",
+      "paypal_description": "Plataforma de pago digital",
+      "google_pay_description": "Sistema de pago sin contacto",
       "card_description": "Solución de pago con tarjeta"
     },
     "card2": {
