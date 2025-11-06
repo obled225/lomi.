@@ -22,7 +22,7 @@ For detailed contribution guidelines, see the main [CONTRIBUTING.md](https://git
 
 ## Support
 
-Contact [hello@lomi.africa](mailto:hello@lomi.africa) or visit our [support center](https://lomi.africa/support).
+Contact [hello@lomi.africa](mailto:hello@lomi.africa) or visit our [support center](https://docs.lomi.africa/support).
 
 ## License
 
