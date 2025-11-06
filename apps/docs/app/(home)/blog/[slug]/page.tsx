@@ -21,7 +21,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
-  const { slug } = await params;
+  const { slug } = await Promise.resolve(params);
 
   try {
     const post = await client.fetch(
@@ -42,21 +42,21 @@ export async function generateMetadata({
           description: post.excerpt || 'Read our latest blog post',
           images: post.imageUrl
             ? [
-                {
-                  url: post.imageUrl,
-                  width: 1200,
-                  height: 630,
-                  alt: post.title,
-                },
-              ]
+              {
+                url: post.imageUrl,
+                width: 1200,
+                height: 630,
+                alt: post.title,
+              },
+            ]
             : [
-                {
-                  url: '/banner.webp',
-                  width: 1200,
-                  height: 630,
-                  alt: post.title,
-                },
-              ],
+              {
+                url: '/banner.webp',
+                width: 1200,
+                height: 630,
+                alt: post.title,
+              },
+            ],
         },
       };
     }
@@ -71,7 +71,7 @@ export async function generateMetadata({
 
 // Server component that renders the client component
 export default async function BlogPost({ params }: PageProps) {
-  const { slug } = await params;
+  const { slug } = await Promise.resolve(params);
   return (
     <main className="flex-1 pt-0">
       <div className="relative">
