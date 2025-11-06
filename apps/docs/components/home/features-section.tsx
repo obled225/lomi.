@@ -426,7 +426,7 @@ export function FeaturesSection() {
             transition={{ duration: 0.6, delay }}
             className="size-full"
           >
-            <Card className="flex flex-col h-[450px] md:h-[400px] rounded-sm bg-blue-50 dark:bg-blue-950/30 border-blue-200 dark:border-blue-800">
+            <Card className="flex flex-col h-[450px] md:h-[400px] rounded-sm">
               <CardHeader className="p-6 pb-4 text-base font-medium">
                 {String(t('features.card1.title', currentLanguage))}
               </CardHeader>

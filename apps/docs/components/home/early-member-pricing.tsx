@@ -39,7 +39,7 @@ export function EarlyMemberPricing() {
                 <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-4 flex flex-col items-center">
                   <div className="flex flex-wrap items-baseline justify-center translate-x-[4px]">
                     <span className="inline-flex whitespace-nowrap mr-2 text-3xl md:text-4xl lg:text-6xl">
-                      3.2% +
+                      2.9% +
                     </span>
                     <div className="relative inline-flex items-center h-16 sm:h-20 md:h-24 min-w-[200px] sm:min-w-[250px] w-auto">
                       <AnimatePresence mode="wait">

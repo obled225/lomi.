@@ -97,9 +97,19 @@
   },
   "pricing": {
     "title": "Precios",
-    "description": ".",
-    "introduction": "",
-    "transparency": "Sin sorpresas, sin tarifas ocultas, sin costos mensuales."
+    "description": "Tarifas transparentes con un descuento del 20% frente a la competencia.",
+    "introduction": "Solo ganamos cuando tú lo haces — sin sorpresas, sin tarifas ocultas, sin costos mensuales.",
+    "transparency": "Sin sorpresas, sin tarifas ocultas, sin costos mensuales",
+    "calculator": {
+      "currency": "Moneda",
+      "transaction_amount": "Monto promedio de transacción",
+      "transaction_count": "Número de transacciones",
+      "our_fee": "Nuestra tarifa",
+      "you_receive": "Tú recibes",
+      "disclaimer": "Estimados se calculan basados en tu monto promedio de transacción y volumen.",
+      "see_fees": "Ver cómo se aplican nuestras tarifas.",
+      "fee_tooltip": "Incluye procesamiento, comercio de registro, prevención de fraude y tasas y tarifas de cumplimiento global."
+    }
   },
   "header": {
     "products": "Productos",

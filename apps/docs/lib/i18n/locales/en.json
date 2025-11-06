@@ -105,14 +105,53 @@
   },
   "pricing": {
     "title": "Pricing",
-    "description": ".",
-    "introduction": "",
-    "transparency": "No surprises, no hidden fees, no monthly costs."
+    "description": "Transparent fees at a 20% discount vs. competition.",
+    "introduction": "We only earn when you do — no surprises, no hidden fees, no monthly costs.",
+    "transparency": "No surprises, no hidden fees, no monthly costs",
+    "calculator": {
+      "currency": "Currency",
+      "transaction_amount": "Average transaction amount",
+      "our_fee": "Our fee",
+      "transaction_count": "Number of transactions",
+      "you_receive": "You receive",
+      "disclaimer": "Estimates are calculated based on your average transaction amount and volume.",
+      "see_fees": "See how our fees apply.",
+      "fee_tooltip": "Includes processing, merchant of record, fraud prevention and global compliance taxes and fees."
+    }
   },
   "faq": {
     "title": "Frequently asked questions",
     "description": "Answers to common questions about lomi.'s payment processing services.",
-    "introduction": "Find answers to the most common questions about using lomi. for your payment needs."
+    "introduction": "Find answers to the most common questions about using lomi. for your payment needs.",
+    "subtitle": "Find answers to common questions about our services.",
+    "still_have_questions": "Still have questions?",
+    "visit_docs": "Visit our developer documentation",
+    "items": {
+      "pricing": {
+        "question": "How does lomi. pricing work?",
+        "answer": "lomi. offers transparent pricing with no hidden fees. We charge a simple 2.9% fee per transaction plus a small fixed fee depending on the currency. There are no setup fees, monthly fees, or hidden charges."
+      },
+      "funds": {
+        "question": "When can I receive my funds?",
+        "answer": "Funds are typically available for withdrawal within 2 business days after a payout is completed."
+      },
+      "payment_methods": {
+        "question": "What payment methods do you support?",
+        "answer": "We support major credit and debit cards, and mobile money across multiple African countries."
+      },
+      "minimum_amount": {
+        "question": "Is there a minimum transaction amount?",
+        "answer": "No, there is no minimum transaction amount. You can process payments of any size through our platform."
+      },
+      "security": {
+        "question": "How secure is lomi.?",
+        "answer": "lomi. uses industry-standard security protocols and is fully compliant with PCI DSS requirements for card payments processing. We employ encryption, tokenization, and other security measures to protect your data and your customers' information."
+      },
+      "international": {
+        "question": "Can I use lomi. for international transactions?",
+        "answer": "Yes, lomi. supports international transactions. We can process payments in multiple currencies, including USD and XOF."
+      }
+    }
   },
   "header": {
     "products": "Products",

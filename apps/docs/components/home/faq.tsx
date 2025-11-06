@@ -108,7 +108,7 @@ const FaqItem = React.forwardRef<
     playClickSound: () => void;
   }
 >((props, ref) => {
-  const [isOpen, setIsOpen] = React.useState(false);
+  const [isOpen, setIsOpen] = React.useState(props.index === 0);
   const { question, answer, index, playClickSound } = props;
 
   return (
@@ -118,8 +118,8 @@ const FaqItem = React.forwardRef<
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.2, delay: index * 0.1 }}
       className={cn(
-        'group rounded-sm',
-        'transition-all duration-200 ease-in-out',
+        'group',
+        'transition-all duration-200 ease-in-out rounded-sm',
         isOpen
           ? 'border-t border-l border-r border-border/50 border-b-0 bg-linear-to-br from-background via-muted/50 to-background'
           : 'border border-border/50 hover:bg-muted/50',
@@ -191,4 +191,38 @@ const FaqItem = React.forwardRef<
 });
 FaqItem.displayName = 'FaqItem';
 
-export { FaqSection };
+// FAQ Footer component
+const FaqFooter = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => {
+  const { currentLanguage } = useTranslation();
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.2 }}
+      className={cn(
+        'group transition-all duration-200 ease-in-out rounded-sm border border-border/50 hover:bg-muted/50',
+        className
+      )}
+    >
+      <div className="w-full px-6 py-3 h-auto justify-between hover:bg-transparent items-center flex-wrap sm:flex-nowrap flex">
+        <h3 className="text-sm sm:text-base font-medium transition-colors duration-200 text-left leading-relaxed text-gray-600 dark:text-white wrap-break-word whitespace-normal word-break hyphens-auto flex-1 pr-3">
+          {t('faq.still_have_questions', currentLanguage) as string}
+        </h3>
+        <a
+          href="/docs"
+          className="text-sm hover:opacity-75 transition-colors font-medium text-zinc-800 dark:text-white shrink-0"
+        >
+          {t('faq.visit_docs', currentLanguage) as string}
+        </a>
+      </div>
+    </motion.div>
+  );
+});
+FaqFooter.displayName = 'FaqFooter';
+
+export { FaqSection, FaqFooter };

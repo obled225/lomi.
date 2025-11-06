@@ -50,7 +50,7 @@ export default function PricingTool() {
     };
 
     const calculateMonthlyCosts = () => {
-        const percentageRate = 0.032;
+        const percentageRate = 0.029;
         let fixedFee = 200; // Default XOF
 
         if (currency === "USD") {
@@ -256,7 +256,7 @@ export default function PricingTool() {
     ) => {
         const value = e.target.value;
 
-        const minValue = 1;
+        const minValue = 0;
         const maxValue = 2500; // Updated Max Value
 
         if (value === "") {
@@ -274,18 +274,11 @@ export default function PricingTool() {
                 // Clamp the value between minValue and maxValue
                 const clampedNum = Math.max(minValue, Math.min(num, maxValue));
 
-                // If the user explicitly typed '0', allow it temporarily in state, but clamp for slider/calculation
-                if (value === "0") {
-                    setTransactionCount(0);
-                } else {
-                    setTransactionCount(clampedNum);
-                }
+                setTransactionCount(clampedNum);
             } else {
                 // Handle potential edge case where parseInt fails despite regex
                 setTransactionCount(""); // Or fallback to a default/previous value
             }
-        } else if (value === "0") {
-            setTransactionCount(0); // Specifically allow typing '0'
         } else {
             // Ignore invalid non-digit characters, potentially reset or keep old state
             setTransactionCount("");
@@ -299,7 +292,7 @@ export default function PricingTool() {
     return (
         <>
             <div className="max-w-7xl mx-auto pl-2 pr-4 py-2">
-                <div className="flex flex-col space-y-6 text-left mt-12">
+                <div className="flex flex-col space-y-6 text-left mt-16">
 
                     <motion.div
                         initial={{ opacity: 0 }}
@@ -314,11 +307,11 @@ export default function PricingTool() {
                                 viewport={{ once: true, margin: "-100px" }}
                                 className="mb-2"
                             >
-                                <Card className="w-full max-w-7xl mx-auto bg-background border border-border rounded-sm shadow-sm overflow-hidden -mt-8">
+                                <Card className="w-full max-w-7xl mx-auto bg-background border border-border/50 rounded-sm shadow-sm overflow-hidden -mt-8">
                                     <TooltipProvider delayDuration={100}>
-                                        <CardContent className="p-2 sm:p-3 md:p-4">
-                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-                                                <div className="space-y-3 sm:space-y-4 flex flex-col">
+                                        <CardContent className="p-3 sm:p-4 md:p-5">
+                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-7">
+                                                <div className="space-y-4 sm:space-y-5 flex flex-col">
                                                     <div className="flex justify-center sm:justify-start">
                                                         <CurrencyToggle />
                                                     </div>
@@ -326,12 +319,12 @@ export default function PricingTool() {
                                                     <div>
                                                         <Label
                                                             htmlFor="averageAmountInput"
-                                                            className="text-base font-semibold mb-1 sm:mb-2 block text-zinc-700 dark:text-zinc-300"
+                                                            className="text-base font-semibold mb-2 sm:mb-3 block text-zinc-700 dark:text-zinc-300"
                                                         >
                                                             {t("pricing.calculator.transaction_amount", currentLanguage) as string}
                                                         </Label>
 
-                                                        <div className="flex items-center gap-2 mb-2 sm:mb-3">
+                                                        <div className="flex items-center gap-3 mb-3 sm:mb-4">
                                                             <Input
                                                                 id="averageAmountInput"
                                                                 type="text"
@@ -388,7 +381,7 @@ export default function PricingTool() {
                                                                 onValueChange={(value) =>
                                                                     setAverageAmount(value[0] ?? 0)
                                                                 }
-                                                                className="w-full p-2 **:[[role=slider]]:rounded-sm **:[[role=slider]]:bg-zinc-600 **:[[role=slider]]:border-0" // Added p-2 and custom thumb styling
+                                                                className="w-full p-2 **:[[role=slider]]:rounded-sm **:[[role=slider]]:bg-zinc-600 **:[[role=slider]]:border-0" // Added p-3 and custom thumb styling
                                                             />
                                                         </div>
                                                     </div>
@@ -396,12 +389,12 @@ export default function PricingTool() {
                                                     <div>
                                                         <Label
                                                             htmlFor="transactionCountInput"
-                                                            className="text-base font-semibold mb-1 sm:mb-2 block text-zinc-700 dark:text-zinc-300"
+                                                            className="text-base font-semibold mb-2 sm:mb-3 block text-zinc-700 dark:text-zinc-300"
                                                         >
                                                             {t("pricing.calculator.transaction_count", currentLanguage) as string}
                                                         </Label>
 
-                                                        <div className="flex items-center mb-2 sm:mb-3">
+                                                        <div className="flex items-center mb-3 sm:mb-4">
                                                             <Input
                                                                 id="transactionCountInput"
                                                                 type="text"
@@ -430,25 +423,25 @@ export default function PricingTool() {
                                                                 })()}
                                                                 onChange={handleTransactionCountChange}
                                                                 className="hide-number-spinners bg-transparent hover:bg-transparent border-0 focus:bg-transparent focus:ring-0 focus:outline-none focus:border-transparent p-0 caret-current w-24 text-xl sm:text-2xl font-normal text-zinc-900 dark:text-white tracking-wide"
-                                                                min={1}
+                                                                min={0}
                                                             />
                                                         </div>
 
                                                         <div className="bg-zinc-100 dark:bg-zinc-800 rounded-sm overflow-hidden">
                                                             <Slider
                                                                 id="transactionCountSlider"
-                                                                min={1}
+                                                                min={0}
                                                                 max={2500} // Updated Max Value
                                                                 step={1}
                                                                 value={[
                                                                     typeof transactionCount === "number" &&
-                                                                        transactionCount >= 1
+                                                                        transactionCount >= 0
                                                                         ? transactionCount
-                                                                        : 1,
+                                                                        : 0,
                                                                 ]}
                                                                 onValueChange={(value) =>
                                                                     setTransactionCount(
-                                                                        Math.max(1, value[0] ?? 1),
+                                                                        Math.max(0, value[0] ?? 0),
                                                                     )
                                                                 }
                                                                 className="w-full p-2 **:[[role=slider]]:rounded-sm **:[[role=slider]]:bg-zinc-600 **:[[role=slider]]:border-0"
@@ -457,24 +450,24 @@ export default function PricingTool() {
                                                     </div>
                                                 </div>
 
-                                                <div className="space-y-4 sm:space-y-6 flex flex-col justify-center md:border-l border-zinc-200 dark:border-zinc-800 md:pl-4 lg:pl-6 h-full pt-2 md:pt-0 border-t md:border-t-0 mt-4 md:mt-0 text-right sm:text-left">
+                                                <div className="space-y-5 sm:space-y-7 flex flex-col justify-center md:border-l border-zinc-200 dark:border-zinc-800 md:pl-5 lg:pl-7 h-full pt-3 md:pt-0 border-t md:border-t-0 mt-5 md:mt-0 text-right sm:text-left">
                                                     <div>
-                                                        <p className="text-base sm:text-lg font-normal text-zinc-600 dark:text-zinc-400 mb-1 flex items-center gap-1">
+                                                        <div className="text-base font-semibold text-zinc-700 dark:text-zinc-300 mb-2 flex items-center gap-2 -mt-1.5">
                                                             {t("pricing.calculator.our_fee", currentLanguage) as string}
                                                             <span className="text-red-500">*</span>
                                                             <Tooltip>
                                                                 <TooltipTrigger asChild>
-                                                                    <Info className="h-3 w-3 sm:h-4 sm:w-4 text-zinc-400 dark:text-zinc-500 cursor-help ml-1" />
+                                                                    <Info className="h-3 w-3 sm:h-4 sm:w-4 text-zinc-400 dark:text-zinc-500 cursor-help ml-2" />
                                                                 </TooltipTrigger>
                                                                 <TooltipContent
                                                                     side="right"
                                                                     align="start"
-                                                                    className="max-w-[200px] text-left text-[11px] leading-tight bg-white text-zinc-700 dark:bg-black/90 dark:text-gray-300 rounded-sm p-3 sm:p-2 shadow-md border border-zinc-200 dark:border-zinc-700"
+                                                                    className="max-w-[200px] text-left text-[11px] leading-tight bg-white text-zinc-700 dark:bg-black/90 dark:text-gray-300 rounded-sm p-4 sm:p-3 shadow-md border border-zinc-200 dark:border-zinc-700"
                                                                 >
                                                                     {t("pricing.calculator.fee_tooltip", currentLanguage) as string}
                                                                 </TooltipContent>
                                                             </Tooltip>
-                                                        </p>
+                                                        </div>
 
                                                         <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-normal tracking-normal text-zinc-900 dark:text-white wrap-break-word leading-tight">
                                                             <span className="font-semibold">
@@ -484,7 +477,7 @@ export default function PricingTool() {
                                                                         currency === "XOF" ? 0 : 2,
                                                                 }).match(/[\d.,\s]+/)?.[0] || ""}
                                                             </span>
-                                                            <span className="font-normal ml-1">
+                                                            <span className="font-normal ml-2">
                                                                 {formatCurrency(monthlyFees, currency, {
                                                                     minimumFractionDigits: 0,
                                                                     maximumFractionDigits:
@@ -494,12 +487,12 @@ export default function PricingTool() {
                                                         </p>
                                                     </div>
 
-                                                    <div className="pb-6 sm:pb-0">
-                                                        <p className="text-base sm:text-lg font-normal text-zinc-600 dark:text-zinc-400 mb-1 flex items-center gap-1">
+                                                    <div className="pb-7 sm:pb-0">
+                                                        <p className="text-base sm:text-lg font-normal text-zinc-600 dark:text-zinc-400 mb-2 flex items-center gap-2 -translate-y-1">
                                                             {t("pricing.calculator.you_receive", currentLanguage) as string}
                                                         </p>
 
-                                                        <p className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal tracking-normal text-green-600 dark:text-green-400 wrap-break-word leading-tight">
+                                                        <p className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal tracking-normal text-green-600 dark:text-green-400 wrap-break-word leading-tight translate-y-0">
                                                             <span className="font-semibold">
                                                                 {formatCurrency(
                                                                     monthlyAmountReceived,
@@ -511,7 +504,7 @@ export default function PricingTool() {
                                                                     },
                                                                 ).match(/[\d.,\s]+/)?.[0] || ""}
                                                             </span>
-                                                            <span className="font-normal ml-1">
+                                                            <span className="font-normal ml-2">
                                                                 {formatCurrency(
                                                                     monthlyAmountReceived,
                                                                     currency,
@@ -527,9 +520,9 @@ export default function PricingTool() {
                                                 </div>
                                             </div>
 
-                                            <div className="mt-2 sm:mt-3 pt-2 sm:pt-3 border-t border-zinc-200 dark:border-zinc-800 space-y-2">
-                                                <div className="flex items-start gap-2">
-                                                    <span className="text-red-500 text-xs -mr-1">*</span>
+                                            <div className="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-zinc-200 dark:border-zinc-800 space-y-3">
+                                                <div className="flex items-start gap-3">
+                                                    <span className="text-red-500 text-xs -mr-2">*</span>
                                                     <div className="space-y-0">
                                                         <p className="text-xs text-zinc-500 dark:text-zinc-400">
                                                             {t("pricing.calculator.disclaimer", currentLanguage) as string}

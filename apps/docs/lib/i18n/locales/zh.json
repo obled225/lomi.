@@ -97,9 +97,19 @@
   },
   "pricing": {
     "title": "定价",
-    "description": ".",
-    "introduction": "",
-    "transparency": "没有意外，没有隐藏费用，没有月费。"
+    "description": "透明费用，与竞争对手相比有20%的折扣。",
+    "introduction": "我们只在您盈利时盈利 — 没有意外，没有隐藏费用，没有月费。",
+    "transparency": "没有意外，没有隐藏费用，没有月费",
+    "calculator": {
+      "currency": "货币",
+      "transaction_amount": "平均交易金额",
+      "transaction_count": "交易次数",
+      "our_fee": "我们的费用",
+      "you_receive": "您收到",
+      "disclaimer": "估计基于您的平均交易金额和交易量。",
+      "see_fees": "了解我们的费用如何适用。",
+      "fee_tooltip": "部分退款收取2%费用，用于覆盖处理成本。全额退款免费。"
+    }
   },
   "header": {
     "products": "产品",

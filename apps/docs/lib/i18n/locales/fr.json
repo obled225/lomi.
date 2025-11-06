@@ -23,7 +23,7 @@
     },
     "company": {
       "title": "Entreprise",
-      "story": "À propos de nous",
+      "story": "À propos",
       "blog": "Blog",
       "openSource": "Open-source"
     },
@@ -105,9 +105,19 @@
   },
   "pricing": {
     "title": "Tarification",
-    "description": ".",
-    "introduction": "",
-    "transparency": "Pas de surprises, pas de frais cachés, pas de coûts mensuels."
+    "description": "Tarifs transparents avec une remise de 20% par rapport à la concurrence.",
+    "introduction": "Nous ne gagnons que lorsque vous gagnez — pas de surprises, pas de frais cachés, pas de coûts mensuels.",
+    "transparency": "Pas de surprises, pas de frais cachés, pas de coûts mensuels",
+    "calculator": {
+      "currency": "Devise",
+      "transaction_amount": "Montant moyen d'une transaction",
+      "transaction_count": "Nombre de transactions",
+      "our_fee": "Nos frais",
+      "you_receive": "Vous recevez",
+      "disclaimer": "Ces estimations sont calculées sur la base du nombre et du montant moyen de vos transactions.",
+      "see_fees": "Voir comment nos frais s'appliquent.",
+      "fee_tooltip": "Inclut le traitement, la prévention des fraudes et les taxes et frais de conformité."
+    }
   },
   "faq": {
     "title": "Questions fréquemment posées",
