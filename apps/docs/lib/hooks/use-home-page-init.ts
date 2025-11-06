@@ -7,24 +7,36 @@ import mixpanelService from '@/lib/mixpanel/client';
 export function useHomePageInit() {
   const { currentLanguage, setLanguage } = useTranslation();
 
-  // Function to get the appropriate image based on language
+  // Function to get the appropriate image based on language (theme-aware)
   const getDashboardImage = () => {
     // For English and French, use main variant (removed randomization to fix hydration mismatch)
     if (currentLanguage === 'en' || currentLanguage === 'fr') {
-      return `/company/portal-main-${currentLanguage}.webp`;
+      return {
+        light: `/company/dashboard/main-${currentLanguage}-l.webp`,
+        dark: `/company/dashboard/main-${currentLanguage}-d.webp`,
+      };
     }
 
     // For other languages, use the main version
     if (currentLanguage === 'es') {
-      return '/company/portal-main-es.webp';
+      return {
+        light: '/company/dashboard/main-es-l.webp',
+        dark: '/company/dashboard/main-es-d.webp',
+      };
     }
 
     if (currentLanguage === 'zh') {
-      return '/company/portal-main-zh.webp';
+      return {
+        light: '/company/dashboard/main-zh-l.webp',
+        dark: '/company/dashboard/main-zh-d.webp',
+      };
     }
 
     // Default fallback to English main
-    return '/company/portal-main-en.webp';
+    return {
+      light: '/company/dashboard/main-en-l.webp',
+      dark: '/company/dashboard/main-en-d.webp',
+    };
   };
 
   // Function to get mobile dashboard images (theme-based only, no language logic)
