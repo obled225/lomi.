@@ -3,54 +3,14 @@
 import { useEffect, useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import type { Post } from '@/lib/sanity/types';
-import { urlFor } from '@/lib/sanity/client';
 import { motion } from 'framer-motion';
 import { useTranslation } from '@/lib/contexts/translation-context';
 import { t } from '@/lib/i18n/translations';
-import Image from 'next/image';
 import Spinner from '@/components/ui/spinner';
-import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
-import { playClickSound } from '@/lib/utils/sound';
-import Link from 'next/link';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { BlogArticleCard } from './blog-article-card';
 import '../../app/styles/blog.css';
-
-// Helper function to get category from post
-const getPostCategory = (post: Post): string => {
-  // First try to get from categories array
-  if (
-    post.categories &&
-    post.categories.length > 0 &&
-    post.categories[0]?.slug?.current
-  ) {
-    return post.categories[0].slug.current;
-  }
-
-  // Fallback to legacy category field
-  return post.category || 'news';
-};
-
-// Function to get category color
-const getCategoryColor = (category: string) => {
-  if (!category)
-    return 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-200';
-
-  const categoryColorMap: Record<string, string> = {
-    news: 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300',
-    opinion:
-      'bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300',
-    edge: 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300',
-    spreadsheets:
-      'bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300',
-    'case-study':
-      'bg-indigo-100 text-indigo-800 dark:bg-indigo-900/30 dark:text-indigo-300',
-  };
-
-  return (
-    categoryColorMap[category] ||
-    'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-200'
-  );
-};
 
 export default function BlogClient() {
   const [posts, setPosts] = useState<Post[]>([]);
@@ -107,25 +67,6 @@ export default function BlogClient() {
         staggerChildren: 0.1,
       },
     },
-  };
-
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.5,
-      },
-    },
-  };
-
-  // Function to get the localized field based on current language
-  const getLocalizedField = (post: Post, field: string, fallback: string) => {
-    if (currentLanguage === 'fr' && post[`${field}_fr` as keyof Post]) {
-      return post[`${field}_fr` as keyof Post] as string;
-    }
-    return (post[field as keyof Post] as string) || fallback;
   };
 
   // Check if a post has content in the current language
@@ -235,125 +176,15 @@ export default function BlogClient() {
                   const isFirstOnPage = index === 0 && currentPage === 1;
 
                   return (
-                    <motion.div
+                    <BlogArticleCard
                       key={post._id}
-                      variants={itemVariants}
-                      className={`w-full ${isFeatured && isFirstOnPage ? 'sm:col-span-2 lg:col-span-2' : ''}`}
-                      onMouseEnter={() => setHoveredCard(post._id)}
-                      onMouseLeave={() => setHoveredCard(null)}
-                    >
-                      <Link
-                        href={`/blog/${post.slug.current}`}
-                        className="group flex flex-col h-full"
-                        onMouseDown={playClickSound}
-                      >
-                        <article
-                          className={`flex flex-col bg-white dark:bg-zinc-900 rounded-sm overflow-hidden shadow-sm hover:shadow-sm transition-all duration-300 border border-zinc-200 dark:border-zinc-800 h-full ${isFeatured && isFirstOnPage ? 'ring-2 ring-primary/20 shadow-lg' : ''}`}
-                        >
-                          {post.image && (
-                            <div className="aspect-3/2 overflow-hidden border-b border-zinc-200 dark:border-zinc-800">
-                              <Image
-                                src={urlFor(post.image)
-                                  .width(320)
-                                  .height(213)
-                                  .url()}
-                                alt={
-                                  post.image.alt ||
-                                  getLocalizedField(post, 'title', post.title)
-                                }
-                                width={320}
-                                height={213}
-                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                                loading="lazy"
-                              />
-                            </div>
-                          )}
-                          <div className="p-5 flex flex-col grow">
-                            <div className="grow flex flex-col">
-                              {post.author && post.publishedAt && (
-                                <div className="flex items-center mb-1">
-                                  <p className="text-xs text-zinc-500 dark:text-zinc-400">
-                                    {new Date(
-                                      post.publishedAt,
-                                    ).toLocaleDateString(
-                                      currentLanguage === 'zh'
-                                        ? 'zh-CN'
-                                        : currentLanguage,
-                                      {
-                                        year: 'numeric',
-                                        month: 'short',
-                                        day: 'numeric',
-                                      },
-                                    )}
-                                  </p>
-                                </div>
-                              )}
-
-                              {!post.author && post.publishedAt && (
-                                <p className="text-xs text-zinc-500 dark:text-zinc-400 mb-1">
-                                  {new Date(
-                                    post.publishedAt,
-                                  ).toLocaleDateString(
-                                    currentLanguage === 'fr'
-                                      ? 'fr-FR'
-                                      : currentLanguage === 'es'
-                                        ? 'es-ES'
-                                        : currentLanguage === 'zh'
-                                          ? 'zh-CN'
-                                          : 'en-US',
-                                    {
-                                      year: 'numeric',
-                                      month: 'short',
-                                      day: 'numeric',
-                                    },
-                                  )}
-                                </p>
-                              )}
-
-                              <h2 className="font-normal text-lg mb-3 leading-tight text-zinc-900 dark:text-white min-h-fit">
-                                {getLocalizedField(post, 'title', post.title)}
-                              </h2>
-                              <p className="text-zinc-600 dark:text-zinc-400 text-sm mb-4 overflow-hidden line-clamp-2">
-                                {getLocalizedField(post, 'excerpt', '')}
-                              </p>
-                            </div>
-                            <div className="mt-auto flex flex-row justify-between items-center">
-                              <span
-                                className={`px-2 py-1 text-xs font-normal rounded ${getCategoryColor(getPostCategory(post))}`}
-                              >
-                                {
-                                  t(
-                                    `blog.categories.${getPostCategory(post)}`,
-                                    currentLanguage,
-                                  ) as string
-                                }
-                              </span>
-
-                              {isFeatured && isFirstOnPage && (
-                                <span className="px-2 py-1 text-xs font-semibold rounded bg-linear-to-r from-primary to-primary/80 text-white">
-                                  Featured
-                                </span>
-                              )}
-
-                              <div className="flex items-center text-primary text-sm font-normal">
-                                <span
-                                  className="transition-transform duration-300"
-                                  style={{
-                                    transform:
-                                      hoveredCard === post._id
-                                        ? 'translateX(-2px)'
-                                        : 'translateX(0)',
-                                  }}
-                                ></span>
-                                <ArrowRight
-                                  className={`ml-1 h-4 w-4 transition-all duration-300 ${hoveredCard === post._id ? 'opacity-100 translate-x-1' : 'opacity-0 -translate-x-3'}`}
-                                />
-                              </div>
-                            </div>
-                          </div>
-                        </article>
-                      </Link>
-                    </motion.div>
+                      post={post}
+                      index={index}
+                      isFeatured={isFeatured}
+                      isFirstOnPage={isFirstOnPage}
+                      hoveredCard={hoveredCard}
+                      onHover={setHoveredCard}
+                    />
                   );
                 })}
               </motion.div>

@@ -77,7 +77,7 @@ export function Footer() {
                     <Link
                       href="/"
                       onClick={playClickSound}
-                      className="inline-flex items-center"
+                      className="inline-flex items-center ml-2 lg:ml-2"
                     >
                       {mounted && (
                         <>
@@ -210,8 +210,8 @@ export function Footer() {
                   <ProductHuntBadge />
                 </a>
 
-                <p className="text-[10px] text-zinc-500 dark:text-zinc-400 max-w-xs leading-relaxed text-justify mt-2">
-                  lomi. is a suite of APIs powering online payment processing and e-commerce products in West Africa. Accept payments, send payouts, and automate financial workflows with ease.
+                <p className="hidden lg:block text-[10px] text-zinc-500 dark:text-zinc-400 max-w-xs leading-relaxed text-justify mt-2">
+                  {t('footer.description')}
                 </p>
 
                 {/* Copyright and Language - Better mobile alignment */}
@@ -276,7 +276,7 @@ export function Footer() {
               </div>
 
               {/* Features Column */}
-              <div className="space-y-4 pl-4 order-1 md:order-2 lg:translate-x-[105px]">
+              <div className="space-y-4 pl-4 order-1 md:order-2 lg:translate-x-[105px] mt-2">
                 <h2 className="text-zinc-900 dark:text-white font-normal text-base">
                   {t('footer.features.title')}
                 </h2>
@@ -309,7 +309,7 @@ export function Footer() {
               </div>
 
               {/* Resources Column */}
-              <div className="space-y-4 pl-4 order-2 md:order-3 lg:translate-x-[65px]">
+              <div className="space-y-4 pl-4 order-2 md:order-3 lg:translate-x-[65px] mt-2">
                 <h2 className="text-zinc-900 dark:text-white font-normal text-base">
                   {t('footer.resources.title')}
                 </h2>
@@ -365,7 +365,7 @@ export function Footer() {
               </div>
 
               {/* Company Column */}
-              <div className="space-y-4 pl-4 order-3 md:order-4 lg:translate-x-[55px]">
+              <div className="space-y-4 pl-4 order-3 md:order-4 lg:translate-x-[55px] mt-2">
                 <h2 className="text-zinc-900 dark:text-white font-normal text-base">
                   {t('footer.company.title')}
                 </h2>
