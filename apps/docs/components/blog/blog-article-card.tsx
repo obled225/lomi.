@@ -73,7 +73,7 @@ export function BlogArticleCard({
   return (
     <motion.div
       key={post._id}
-      className={`w-full ${isFeatured && isFirstOnPage ? 'sm:col-span-2 lg:col-span-2' : ''}`}
+      className={`w-full ${isFeatured && isFirstOnPage ? 'lg:col-span-2 lg:self-start' : ''}`}
       onMouseEnter={() => onHover(post._id)}
       onMouseLeave={() => onHover(null)}
     >
@@ -83,10 +83,10 @@ export function BlogArticleCard({
         onMouseDown={playClickSound}
       >
         <article
-          className={`flex flex-col bg-white dark:bg-zinc-900 rounded-sm overflow-hidden shadow-sm hover:shadow-sm transition-all duration-300 border border-zinc-200 dark:border-zinc-800 h-full ${isFeatured && isFirstOnPage ? 'ring-2 ring-primary/20 shadow-sm' : ''}`}
+          className={`flex flex-col bg-white dark:bg-zinc-900 rounded-sm overflow-hidden shadow-sm hover:shadow-sm transition-all duration-300 border border-zinc-200 dark:border-zinc-800 h-full`}
         >
           {post.image && (
-            <div className="aspect-3/2 overflow-hidden border-b border-zinc-200 dark:border-zinc-800">
+            <div className={`overflow-hidden border-b border-zinc-200 dark:border-zinc-800 ${isFeatured && isFirstOnPage ? 'lg:aspect-21/9 aspect-3/2' : 'aspect-3/2'}`}>
               <Image
                 src={urlFor(post.image).width(320).height(213).url()}
                 alt={
@@ -99,11 +99,11 @@ export function BlogArticleCard({
               />
             </div>
           )}
-          <div className="p-5 flex flex-col grow bg-card">
+          <div className={`flex flex-col grow bg-card ${isFeatured && isFirstOnPage ? 'lg:px-5 lg:py-[5.5px] lg:pt-4 p-5' : 'p-5'}`}>
             <div className="grow flex flex-col">
               {post.author && post.publishedAt && (
-                <div className="flex items-center mb-1">
-                  <p className="text-xs text-zinc-500 dark:text-zinc-400">
+                <div className={`flex items-center ${isFeatured && isFirstOnPage ? 'lg:mb-0.5 mb-1' : 'mb-1'}`}>
+                  <p className={`text-zinc-500 dark:text-zinc-400 ${isFeatured && isFirstOnPage ? 'lg:text-[11px] text-xs' : 'text-xs'}`}>
                     {new Date(post.publishedAt).toLocaleDateString(
                       currentLanguage === 'zh' ? 'zh-CN' : currentLanguage,
                       {
@@ -117,7 +117,7 @@ export function BlogArticleCard({
               )}
 
               {!post.author && post.publishedAt && (
-                <p className="text-xs text-zinc-500 dark:text-zinc-400 mb-1">
+                <p className={`text-zinc-500 dark:text-zinc-400 ${isFeatured && isFirstOnPage ? 'lg:text-[11px] lg:mb-0.5 text-xs mb-1' : 'text-xs mb-1'}`}>
                   {new Date(post.publishedAt).toLocaleDateString(
                     currentLanguage === 'fr'
                       ? 'fr-FR'
@@ -135,14 +135,14 @@ export function BlogArticleCard({
                 </p>
               )}
 
-              <h2 className="font-normal text-lg mb-3 leading-tight text-zinc-900 dark:text-white min-h-fit">
+              <h2 className={`font-normal leading-tight text-zinc-900 dark:text-white min-h-fit ${isFeatured && isFirstOnPage ? 'lg:text-base lg:mb-2 text-lg mb-3' : 'text-lg mb-3'}`}>
                 {getLocalizedField(post, 'title', post.title)}
               </h2>
-              <p className="text-zinc-600 dark:text-zinc-400 text-sm mb-4 overflow-hidden line-clamp-2">
+              <p className={`text-zinc-600 dark:text-zinc-400 overflow-hidden line-clamp-2 ${isFeatured && isFirstOnPage ? 'lg:text-xs lg:mb-2.5 text-sm mb-4' : 'text-sm mb-4'}`}>
                 {getLocalizedField(post, 'excerpt', '')}
               </p>
             </div>
-            <div className="mt-auto flex flex-row justify-between items-center">
+            <div className={`mt-auto flex flex-row justify-between items-center ${isFeatured && isFirstOnPage ? 'lg:mb-3' : ''}`}>
               <span
                 className={`px-2 py-1 text-xs font-normal rounded ${getCategoryColor(getPostCategory(post))}`}
               >
@@ -153,12 +153,6 @@ export function BlogArticleCard({
                   ) as string
                 }
               </span>
-
-              {isFeatured && isFirstOnPage && (
-                <span className="px-2 py-1 text-xs font-semibold rounded bg-linear-to-r from-primary to-primary/80 text-white">
-                  Featured
-                </span>
-              )}
 
               <div className="flex items-center text-primary text-sm font-normal">
                 <span
