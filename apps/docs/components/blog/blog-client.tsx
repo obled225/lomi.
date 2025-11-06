@@ -23,7 +23,10 @@ export default function BlogClient() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   // For Spanish and Chinese, use English for blog display and show all articles
-  const displayLanguage = currentLanguage === 'es' || currentLanguage === 'zh' ? 'en' : currentLanguage;
+  const displayLanguage =
+    currentLanguage === 'es' || currentLanguage === 'zh'
+      ? 'en'
+      : currentLanguage;
 
   // Pagination constants
   const POSTS_PER_PAGE = 32; // Show all posts on one page

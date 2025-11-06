@@ -5,11 +5,11 @@ import Image from 'next/image';
 
 interface SimpleImageProps {
   src:
-  | string
-  | {
-    light: string;
-    dark: string;
-  };
+    | string
+    | {
+        light: string;
+        dark: string;
+      };
   mobileSrc?: {
     light: string;
     dark: string;
@@ -31,7 +31,7 @@ export default function SimpleImage({
   // Initialize state directly from documentElement class for immediate accuracy
   const [currentTheme, setCurrentTheme] = useState<'light' | 'dark'>(() =>
     typeof document !== 'undefined' &&
-      document.documentElement.classList.contains('dark')
+    document.documentElement.classList.contains('dark')
       ? 'dark'
       : 'light',
   );

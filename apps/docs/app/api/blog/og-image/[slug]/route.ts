@@ -34,10 +34,18 @@ export async function GET(
 
     if (post.image) {
       // Use the post's primary image, optimized for OG
-      imageUrl = urlFor(post.image, { width: 1200, height: 630, quality: 90 }).url();
+      imageUrl = urlFor(post.image, {
+        width: 1200,
+        height: 630,
+        quality: 90,
+      }).url();
     } else if (post.mainImage) {
       // Fallback to mainImage if image doesn't exist
-      imageUrl = urlFor(post.mainImage, { width: 1200, height: 630, quality: 90 }).url();
+      imageUrl = urlFor(post.mainImage, {
+        width: 1200,
+        height: 630,
+        quality: 90,
+      }).url();
     } else {
       // No image found, use default banner
       imageUrl =
@@ -65,4 +73,3 @@ export async function GET(
     });
   }
 }
-

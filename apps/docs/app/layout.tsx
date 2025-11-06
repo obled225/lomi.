@@ -160,9 +160,21 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <head>
         {/* Preconnect to critical origins for better performance */}
         <link rel="preconnect" href="https://cdn.sanity.io" crossOrigin="" />
-        <link rel="preconnect" href="https://mdswvokxrnfggrujsfjd.supabase.co" crossOrigin="" />
-        <link rel="preconnect" href="https://res.cloudinary.com" crossOrigin="" />
-        <link rel="preconnect" href="https://api.producthunt.com" crossOrigin="" />
+        <link
+          rel="preconnect"
+          href="https://mdswvokxrnfggrujsfjd.supabase.co"
+          crossOrigin=""
+        />
+        <link
+          rel="preconnect"
+          href="https://res.cloudinary.com"
+          crossOrigin=""
+        />
+        <link
+          rel="preconnect"
+          href="https://api.producthunt.com"
+          crossOrigin=""
+        />
         <link rel="dns-prefetch" href="//cdn.sanity.io" />
         <link rel="dns-prefetch" href="//mdswvokxrnfggrujsfjd.supabase.co" />
         <link rel="dns-prefetch" href="//res.cloudinary.com" />
