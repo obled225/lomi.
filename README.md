@@ -1,5 +1,5 @@
 <p align="center">
-	<img src="apps/docs/public/lomi_l.webp" width="150" height="150" alt="lomi. icon">
+	<img src="apps/docs/public/company/lomi_l.webp" width="150" height="150" alt="lomi. icon">
 <p align="center">
     Helping West African ventures sell online
   </p>
