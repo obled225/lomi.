@@ -14,7 +14,8 @@ export const useTheme = () => {
   }, []);
 
   const currentTheme = theme as Theme;
-  const currentResolvedTheme = (resolvedTheme ?? 'light') as 'light' | 'dark';
+  // Default to 'dark' as the preferred theme
+  const currentResolvedTheme = (resolvedTheme ?? 'dark') as 'light' | 'dark';
 
   return {
     theme: currentTheme,

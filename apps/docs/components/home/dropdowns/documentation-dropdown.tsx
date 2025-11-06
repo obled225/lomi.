@@ -142,7 +142,7 @@ export function DocumentationDropdown({
                   <CardHeader className="p-6 pb-4">
                     <div className="flex items-center gap-3">
                       <div className="shrink-0">
-                        <div className="flex items-center justify-center w-8 h-8 rounded-md hover:bg-[#2a2f3d]/3 dark:hover:bg-[#2a2f3d]/10 transition-colors">
+                        <div className="flex items-center justify-center w-8 h-8 rounded-sm hover:bg-[#2a2f3d]/3 dark:hover:bg-[#2a2f3d]/10 transition-colors">
                           <LottieIcon
                             animationData={card.icon}
                             size={20}

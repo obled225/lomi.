@@ -214,7 +214,7 @@ export function IntegrationsDropdown({
                 <CardContent className="p-3 text-sm">
                   <div className="flex items-center gap-3 pt-1">
                     <div className="shrink-0">
-                      <div className="flex items-center justify-center w-6 h-6 rounded-md hover:bg-[#2a2f3d]/3 dark:hover:bg-[#2a2f3d]/10 transition-colors">
+                      <div className="flex items-center justify-center w-6 h-6 rounded-sm hover:bg-[#2a2f3d]/3 dark:hover:bg-[#2a2f3d]/10 transition-colors">
                         <LottieIcon
                           animationData={
                             nativeFeatureIcons[index]?.animation ||
@@ -267,7 +267,7 @@ export function IntegrationsDropdown({
               >
                 <div className="flex items-center gap-2">
                   <div className="shrink-0">
-                    <div className="flex items-center justify-center w-6 h-6 rounded-md hover:bg-[#2a2f3d]/3 dark:hover:bg-[#2a2f3d]/10 transition-colors">
+                    <div className="flex items-center justify-center w-6 h-6 rounded-sm hover:bg-[#2a2f3d]/3 dark:hover:bg-[#2a2f3d]/10 transition-colors">
                       <LottieIcon
                         animationData={product.icon}
                         size={18}

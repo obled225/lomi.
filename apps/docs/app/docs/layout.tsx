@@ -49,7 +49,7 @@ export default function Layout({ children }: { children: ReactNode }) {
         //         variant: 'secondary',
         //         size: 'sm',
         //         className:
-        //           'absolute left-1/2 top-1/2 -translate-1/2 text-fd-muted-foreground rounded-full gap-2 md:hidden',
+        //           'absolute left-1/2 top-1/2 -translate-1/2 text-fd-muted-foreground rounded-sm gap-2 md:hidden',
         //       }),
         //     )}
         //   >
