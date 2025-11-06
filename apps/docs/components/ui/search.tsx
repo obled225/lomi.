@@ -12,8 +12,7 @@ import {
   SearchDialogOverlay,
   type SharedProps,
 } from 'fumadocs-ui/components/dialog/search';
-import { useDocsSearch } from 'fumadocs-core/search/client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Popover,
   PopoverContent,
@@ -25,10 +24,14 @@ import { cn } from '@/lib/utils/cn';
 import { useTranslation } from '@/lib/contexts/translation-context';
 import { t as translate } from '@/lib/i18n/translations';
 import { orama } from '@/lib/orama/client';
+import type { SortedResult } from 'fumadocs-core/server';
 
 export default function CustomSearchDialog(props: SharedProps) {
   const [open, setOpen] = useState(false);
   const [tag, setTag] = useState<string | undefined>();
+  const [search, setSearch] = useState('');
+  const [results, setResults] = useState<SortedResult[] | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
   const { currentLanguage } = useTranslation();
   const t = (key: string) => String(translate(key, currentLanguage));
 
@@ -49,17 +52,137 @@ export default function CustomSearchDialog(props: SharedProps) {
     },
   ];
 
-  const { search, setSearch, query } = useDocsSearch({
-    type: 'orama-cloud',
-    client: orama,
-    tag,
-  });
+  // Custom search implementation using Orama client directly
+  useEffect(() => {
+    let cancelled = false;
+
+    async function performSearch() {
+      if (!search || search.trim().length === 0) {
+        setResults(null);
+        setIsLoading(false);
+        return;
+      }
+
+      setIsLoading(true);
+      try {
+        const searchOptions: Record<string, unknown> = {
+          term: search,
+          limit: 10,
+        };
+
+        // Add tag filter if specified
+        if (tag) {
+          searchOptions.where = {
+            tag: { eq: tag },
+          };
+        }
+
+        const response = await orama.search(searchOptions);
+
+        if (cancelled) return;
+
+        // Debug: log the raw response structure
+        console.log('Orama search response:', {
+          count: response?.count,
+          hitsCount: response?.hits?.length,
+          firstHit: response?.hits?.[0],
+        });
+
+        // Transform Orama Cloud results to fumadocs format
+        if (response && response.hits && Array.isArray(response.hits)) {
+          const transformedResults: SortedResult[] = [];
+          const searchLower = search.toLowerCase();
+
+          response.hits.forEach((hit: any) => {
+            const doc = hit.document || {};
+            const pageUrl = doc.url || doc.id || hit.id;
+            const pageTitle = doc.title || 'Untitled';
+
+            // Add breadcrumb context to the page title
+            const breadcrumbText = doc.breadcrumbs && Array.isArray(doc.breadcrumbs) && doc.breadcrumbs.length > 0
+              ? doc.breadcrumbs.join(' › ') + ' › '
+              : '';
+
+            // Main page result with breadcrumb prefix
+            transformedResults.push({
+              type: 'page' as const,
+              id: doc.id || hit.id,
+              url: pageUrl,
+              content: breadcrumbText + pageTitle,
+            });
+
+            // Add description as a text result if it exists and contains the search term
+            if (doc.description && doc.description.toLowerCase().includes(searchLower)) {
+              transformedResults.push({
+                type: 'text' as const,
+                id: `${doc.id}-desc`,
+                url: pageUrl,
+                content: doc.description,
+              });
+            }
+
+            // Add matching content sections as text results
+            if (doc.structured?.contents && Array.isArray(doc.structured.contents)) {
+              // Find all content sections that contain the search term
+              const matchingContents = doc.structured.contents
+                .filter((content: string) =>
+                  content.toLowerCase().includes(searchLower) && content.length > 20
+                )
+                .slice(0, 2); // Limit to 2 matching sections per page
+
+              matchingContents.forEach((content: string, idx: number) => {
+                const maxLength = 120;
+                const index = content.toLowerCase().indexOf(searchLower);
+
+                let excerpt = content;
+                if (content.length > maxLength) {
+                  // Center the excerpt around the match
+                  const start = Math.max(0, index - 40);
+                  const end = Math.min(content.length, start + maxLength);
+                  excerpt = (start > 0 ? '...' : '') +
+                    content.substring(start, end) +
+                    (end < content.length ? '...' : '');
+                }
+
+                transformedResults.push({
+                  type: 'text' as const,
+                  id: `${doc.id}-content-${idx}`,
+                  url: pageUrl,
+                  content: excerpt,
+                });
+              });
+            }
+          });
+
+          setResults(transformedResults);
+        } else {
+          setResults([]);
+        }
+      } catch (error) {
+        console.error('Search error:', error);
+        if (!cancelled) {
+          setResults([]);
+        }
+      } finally {
+        if (!cancelled) {
+          setIsLoading(false);
+        }
+      }
+    }
+
+    const timeoutId = setTimeout(performSearch, 300); // Debounce search
+
+    return () => {
+      cancelled = true;
+      clearTimeout(timeoutId);
+    };
+  }, [search, tag]);
 
   return (
     <SearchDialog
       search={search}
       onSearchChange={setSearch}
-      isLoading={query.isLoading}
+      isLoading={isLoading}
       {...props}
     >
       <SearchDialogOverlay />
@@ -69,7 +192,7 @@ export default function CustomSearchDialog(props: SharedProps) {
           <SearchDialogInput />
           <SearchDialogClose />
         </SearchDialogHeader>
-        <SearchDialogList items={query.data !== 'empty' ? query.data : null} />
+        <SearchDialogList items={results} />
         <SearchDialogFooter className="flex flex-row flex-wrap gap-2 items-center">
           <Popover open={open} onOpenChange={setOpen}>
             <PopoverTrigger
