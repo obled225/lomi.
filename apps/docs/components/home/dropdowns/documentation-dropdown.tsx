@@ -40,7 +40,7 @@ export function DocumentationDropdown({
   const featuredCard: FeaturedCard = {
     title: t('documentationDropdown.featuredTitle'),
     description: t('documentationDropdown.featuredDescription'),
-    image: '/company/800x800.webp',
+    image: '/company/900x900.webp',
     imageAlt: 'Developers space',
     href: '/docs/getting-started',
     badge: 'Getting started',
@@ -77,7 +77,7 @@ export function DocumentationDropdown({
         >
           <div className="relative h-full min-h-[280px] md:min-h-[320px] flex flex-col">
             {/* Image Background */}
-            <div className="absolute inset-0 opacity-90 dark:opacity-20 group-hover:opacity-100 dark:group-hover:opacity-25 transition-opacity">
+            <div className="absolute inset-0 opacity-70 dark:opacity-40 group-hover:opacity-100 dark:group-hover:opacity-60 transition-opacity">
               <Image
                 src={featuredCard.image}
                 alt={featuredCard.imageAlt}
@@ -91,7 +91,7 @@ export function DocumentationDropdown({
             <div className="relative z-10 flex flex-col justify-between h-full p-6 md:p-8">
               {/* Title Section */}
               <div>
-                <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-black dark:text-zinc-100 mb-2 transition-colors">
+                <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white dark:text-zinc-100 mb-2 transition-colors">
                   {featuredCard.title}
                 </h3>
               </div>
@@ -127,9 +127,9 @@ export function DocumentationDropdown({
             >
               <Card className="group relative flex flex-col h-[155px] rounded-sm transition-all cursor-pointer hover:shadow-sm overflow-hidden">
                 {/* Image Background */}
-                <div className="absolute inset-0 opacity-90 dark:opacity-20 group-hover:opacity-100 dark:group-hover:opacity-25 transition-opacity">
+                <div className="absolute inset-0 opacity-70 dark:opacity-40 group-hover:opacity-100 dark:group-hover:opacity-60 transition-opacity">
                   <Image
-                    src={card.id === 'billing' ? '/company/500x500.webp' : '/company/700x700.webp'}
+                    src={card.id === 'billing' ? '/company/600x600.webp' : '/company/500x500.webp'}
                     alt="Background"
                     fill
                     className="object-cover"
