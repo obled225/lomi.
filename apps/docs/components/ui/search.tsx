@@ -1,6 +1,5 @@
 'use client';
 
-import { OramaClient } from '@oramacloud/client';
 import {
   SearchDialog,
   SearchDialogClose,
@@ -25,13 +24,7 @@ import { buttonVariants } from 'fumadocs-ui/components/ui/button';
 import { cn } from '@/lib/utils/cn';
 import { useTranslation } from '@/lib/contexts/translation-context';
 import { t as translate } from '@/lib/i18n/translations';
-
-const client = new OramaClient({
-  endpoint:
-    process.env.NEXT_PUBLIC_ORAMA_ENDPOINT ||
-    'https://cloud.orama.run/v1/indexes/developers-lomi-africa-fvwfcn',
-  api_key: process.env.NEXT_PUBLIC_ORAMA_API_KEY || '',
-});
+import { orama } from '@/lib/orama/client';
 
 export default function CustomSearchDialog(props: SharedProps) {
   const [open, setOpen] = useState(false);
@@ -58,7 +51,7 @@ export default function CustomSearchDialog(props: SharedProps) {
 
   const { search, setSearch, query } = useDocsSearch({
     type: 'orama-cloud',
-    client,
+    client: orama,
     tag,
   });
 

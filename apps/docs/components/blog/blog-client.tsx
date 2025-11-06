@@ -10,6 +10,7 @@ import Spinner from '@/components/ui/spinner';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { BlogArticleCard } from './blog-article-card';
+import { playClickSound } from '@/lib/utils/sound';
 import '../../app/styles/blog.css';
 
 export default function BlogClient() {
@@ -172,14 +173,13 @@ export default function BlogClient() {
                 animate="visible"
               >
                 {currentPosts.map((post, index) => {
-                  const isFeatured = post.featured;
+                  const isFeatured = !!post.featured;
                   const isFirstOnPage = index === 0 && currentPage === 1;
 
                   return (
                     <BlogArticleCard
                       key={post._id}
                       post={post}
-                      index={index}
                       isFeatured={isFeatured}
                       isFirstOnPage={isFirstOnPage}
                       hoveredCard={hoveredCard}

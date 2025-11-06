@@ -48,7 +48,7 @@ export default function FaqClient() {
             transition={{ duration: 0.6, delay: 0.4 }}
           >
             <Accordion type="single" collapsible className="rounded-sm">
-              {faqItems.map((item, index) => (
+              {faqItems.map((item) => (
                 <AccordionItem
                   key={item.key}
                   value={item.key}

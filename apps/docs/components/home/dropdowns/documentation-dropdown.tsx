@@ -3,7 +3,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { LottieIcon } from '@/components/ui/lottie-icon';
 import { animations, LottieAnimationData } from '@/lib/utils/lottie-animations';
-import { useTheme } from '@/lib/hooks/use-theme';
 import { playClickSound } from '@/lib/utils/sound';
 import { Card, CardHeader, CardContent } from '@/components/ui/card';
 import { InfoBox } from '@/components/ui/info-box';
@@ -31,7 +30,6 @@ export function DocumentationDropdown({
   onMouseLeave?: () => void;
 }) {
   const [hoveredIcon, setHoveredIcon] = useState<string | null>(null);
-  const { theme } = useTheme();
 
   const featuredCard: FeaturedCard = {
     title: 'Focus on building, not billing.',

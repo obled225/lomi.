@@ -102,7 +102,7 @@ export function formatCurrency(
     } else {
       return formattedNumber; // Return only number if style is 'decimal'
     }
-  } catch (_error) {
+  } catch {
     // Fallback for invalid currency codes
     console.warn(
       `Invalid currency code: ${normalizedCurrency}. Using default format.`,

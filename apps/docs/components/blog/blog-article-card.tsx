@@ -47,7 +47,6 @@ const getCategoryColor = (category: string) => {
 
 interface BlogArticleCardProps {
     post: Post;
-    index: number;
     isFeatured: boolean;
     isFirstOnPage: boolean;
     hoveredCard: string | null;
@@ -56,7 +55,6 @@ interface BlogArticleCardProps {
 
 export function BlogArticleCard({
     post,
-    index,
     isFeatured,
     isFirstOnPage,
     hoveredCard,

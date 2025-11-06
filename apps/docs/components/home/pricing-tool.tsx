@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation } from '@/lib/contexts/translation-context';
 import { t } from '@/lib/i18n/translations';
@@ -26,8 +26,6 @@ export default function PricingTool() {
     const [currency, setCurrency] = useState<Currency>("XOF");
     const [averageAmount, setAverageAmount] = useState<number | string>(18000);
     const [transactionCount, setTransactionCount] = useState<number | string>(30);
-
-    const prices = useMemo(() => ["200 F CFA", "0.30 $", "0.25 €"], []);
 
     // Handle hydration mismatch
     useEffect(() => {
