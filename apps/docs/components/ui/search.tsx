@@ -80,6 +80,23 @@ export default function CustomSearchDialog(props: SharedProps) {
 
       setIsLoading(true);
       try {
+        // Check if Orama is properly configured
+        const apiKey = process.env.NEXT_PUBLIC_ORAMA_API_KEY;
+        const endpoint = process.env.NEXT_PUBLIC_ORAMA_ENDPOINT;
+
+        if (!apiKey || !endpoint) {
+          console.error(
+            'Orama search is not configured. Missing environment variables:',
+            {
+              hasApiKey: !!apiKey,
+              hasEndpoint: !!endpoint,
+            },
+          );
+          setResults([]);
+          setIsLoading(false);
+          return;
+        }
+
         const searchOptions: Record<string, unknown> = {
           term: search,
           limit: 10,
@@ -96,12 +113,14 @@ export default function CustomSearchDialog(props: SharedProps) {
 
         if (cancelled) return;
 
-        // Debug: log the raw response structure
-        console.log('Orama search response:', {
-          count: response?.count,
-          hitsCount: response?.hits?.length,
-          firstHit: response?.hits?.[0],
-        });
+        // Debug: log the raw response structure (only in development)
+        if (process.env.NODE_ENV === 'development') {
+          console.log('Orama search response:', {
+            count: response?.count,
+            hitsCount: response?.hits?.length,
+            firstHit: response?.hits?.[0],
+          });
+        }
 
         // Transform Orama Cloud results to fumadocs format
         if (response && response.hits && Array.isArray(response.hits)) {
@@ -174,7 +193,16 @@ export default function CustomSearchDialog(props: SharedProps) {
           setResults([]);
         }
       } catch (error) {
+        // Log error details for debugging
         console.error('Search error:', error);
+
+        // Check if it's a configuration error
+        if (error instanceof Error && error.message.includes('not configured')) {
+          console.error(
+            'Orama search configuration error. Please check your environment variables.',
+          );
+        }
+
         if (!cancelled) {
           setResults([]);
         }
