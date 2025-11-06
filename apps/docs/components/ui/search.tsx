@@ -26,6 +26,21 @@ import { t as translate } from '@/lib/i18n/translations';
 import { orama } from '@/lib/orama/client';
 import type { SortedResult } from 'fumadocs-core/server';
 
+// Define types for Orama search results
+interface OramaHit {
+  id: string;
+  document: {
+    id?: string;
+    url?: string;
+    title?: string;
+    breadcrumbs?: string[];
+    description?: string;
+    structured?: {
+      contents?: string[];
+    };
+  };
+}
+
 export default function CustomSearchDialog(props: SharedProps) {
   const [open, setOpen] = useState(false);
   const [tag, setTag] = useState<string | undefined>();
@@ -93,7 +108,7 @@ export default function CustomSearchDialog(props: SharedProps) {
           const transformedResults: SortedResult[] = [];
           const searchLower = search.toLowerCase();
 
-          response.hits.forEach((hit: any) => {
+          response.hits.forEach((hit: OramaHit) => {
             const doc = hit.document || {};
             const pageUrl = doc.url || doc.id || hit.id;
             const pageTitle = doc.title || 'Untitled';
