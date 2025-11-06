@@ -66,7 +66,7 @@ export async function GET(req: NextRequest) {
         if (post) {
           // --- Generate Dynamic Meta Tags ---
           const title = post.title; // TODO: Add localization if needed
-          const description = post.excerpt || 'Read this article on Cascade.'; // TODO: Localization
+          const description = post.excerpt || 'Read this article on lomi.'; // TODO: Localization
           // Use the new OG image generator API endpoint
           const ogImageUrl = `${protocol}://${host}/api/blog/og-image/${slug}`;
           const imageUrl = ogImageUrl;

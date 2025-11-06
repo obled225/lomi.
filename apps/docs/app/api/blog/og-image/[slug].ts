@@ -22,7 +22,7 @@ export async function GET(req: NextRequest) {
         status: 302,
         headers: {
           Location:
-            'https://res.cloudinary.com/dhmonwr4a/image/upload/v1760032935/banner_1_1_ojtrzi.webp',
+            'https://res.cloudinary.com/dzrdlevfn/image/upload/v1759315964/x_banner_vu16vp.webp',
         },
       });
     }
@@ -43,7 +43,7 @@ export async function GET(req: NextRequest) {
     } else {
       // No image found, use default banner
       imageUrl =
-        'https://res.cloudinary.com/dhmonwr4a/image/upload/v1760032935/banner_1_1_ojtrzi.webp';
+        'https://res.cloudinary.com/dzrdlevfn/image/upload/v1759315964/x_banner_vu16vp.webp';
     }
 
     // Set cache headers and redirect to the image
@@ -62,7 +62,7 @@ export async function GET(req: NextRequest) {
       status: 302,
       headers: {
         Location:
-          'https://res.cloudinary.com/dhmonwr4a/image/upload/v1760032935/banner_1_1_ojtrzi.webp',
+          'https://res.cloudinary.com/dzrdlevfn/image/upload/v1759315964/x_banner_vu16vp.webp',
       },
     });
   }
