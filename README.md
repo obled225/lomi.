@@ -47,23 +47,25 @@
 
 lomi. is an open-source payment processing platform that integrates multiple payment service providers and provides a seamless experience for merchants and their customers across West Africa and beyond. Our platform simplifies product, services, usage, and subscription billing while ensuring the highest levels of security, reliability, and compliance.
 
-## Open-source roadmap
+## Roadmap
 
 We are progressively open-sourcing the entire project:
 
 - **Currently open-source**:
-  - Documentation: **[apps/docs](./apps/docs)**
+  - Website and documentation: **[apps/docs](./apps/docs)**
   - CLI: **[apps/cli](./apps/cli)**
-  - APIs: **[apps/api](./apps/api)**
-  - SDK: **[apps/sdk](./apps/sdk)**
+  - APIs: **[apps/apis](./apps/api)**
+  - SDKs: **[apps/sdks](./apps/sdk)**
   - Boilerplate (Next.js x Sanity): **[apps/events](https://github.com/lomiafrica/events/)**
 
 - **Opening soon**:
-  - Merchant dashboard: **[apps/website](./apps/website)**
-  - Admin dashboard: **[apps/admin](./apps/website)**
+  - Merchant dashboard: **[apps/dashboard](./apps/website)**
   - Shopify extension: **[apps/shopify](./apps/shopify)**
 
-Everything will be made available in the coming months and all separate repositories will be merged in the monorepo.
+- **Proprietary**:
+  - Admin dashboard: **[apps/admin](./apps/admin)**
+
+All open-source repositories will be merged into the monorepo in the coming months.
 
 ## Payment infrastructure
 
