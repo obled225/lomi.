@@ -9,7 +9,8 @@ const infoBoxVariants = cva('py-2 px-3 rounded-sm select-none w-fit', {
       default:
         'bg-sky-100 dark:bg-sky-900 border border-sky-200 dark:border-sky-800/50',
       blue: 'bg-[#56A5F9] text-white border border-[#52A1F8] shadow-[inset_0_1px_0_rgba(255,255,255,0.15),inset_0_-1px_0_rgba(0,0,0,0.1)] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] dark:bg-sky-900 dark:text-sky-300 dark:border-sky-800/50',
-      green: 'bg-[#22C55E] text-white border border-[#16A34A] shadow-[inset_0_1px_0_rgba(255,255,255,0.15),inset_0_-1px_0_rgba(0,0,0,0.1)] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] dark:bg-green-900 dark:text-green-300 dark:border-green-800/50',
+      green:
+        'bg-[#22C55E] text-white border border-[#16A34A] shadow-[inset_0_1px_0_rgba(255,255,255,0.15),inset_0_-1px_0_rgba(0,0,0,0.1)] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] dark:bg-green-900 dark:text-green-300 dark:border-green-800/50',
       red: 'bg-red-100 dark:bg-red-900 border border-red-200 dark:border-red-800/50',
       orange:
         'bg-orange-100 dark:bg-orange-900 border border-orange-200 dark:border-orange-800/50',
@@ -71,7 +72,7 @@ const infoBoxTextVariants = cva('leading-relaxed', {
 
 export interface InfoBoxProps
   extends React.HTMLAttributes<HTMLDivElement>,
-  VariantProps<typeof infoBoxVariants> {
+    VariantProps<typeof infoBoxVariants> {
   children: React.ReactNode;
 }
 

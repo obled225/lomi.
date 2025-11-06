@@ -42,8 +42,7 @@ export function IntegrationsDropdown({
       useCases: [
         {
           name: 'For e-commerce and marketplaces',
-          description:
-            '.',
+          description: '.',
         },
         {
           name: 'Send invoices and collect payments',
@@ -60,8 +59,7 @@ export function IntegrationsDropdown({
       useCases: [
         {
           name: 'Handle returns and cancellations',
-          description:
-            'Process refunds and cancellations instantly.',
+          description: 'Process refunds and cancellations instantly.',
         },
         {
           name: 'Manage your customers subscriptions',
@@ -74,8 +72,7 @@ export function IntegrationsDropdown({
       id: 'payout-transfer-api',
       name: 'Payouts',
       icon: animations.mail,
-      description:
-        'Send money to third parties.',
+      description: 'Send money to third parties.',
       useCases: [
         {
           name: 'Pay your vendors and providers',
@@ -83,7 +80,8 @@ export function IntegrationsDropdown({
         },
         {
           name: 'Pay yourself, your staff and your partners',
-          description: 'Send payments to any mobile wallet in UEMOA and to any bank account globally.',
+          description:
+            'Send payments to any mobile wallet in UEMOA and to any bank account globally.',
         },
       ],
     },
@@ -257,7 +255,10 @@ export function IntegrationsDropdown({
         </h3>
         <div className="grid grid-cols-2 gap-3">
           {products.map((product) => (
-            <Card key={product.id} className="group relative flex flex-col rounded-sm transition-all cursor-pointer hover:shadow-sm overflow-hidden">
+            <Card
+              key={product.id}
+              className="group relative flex flex-col rounded-sm transition-all cursor-pointer hover:shadow-sm overflow-hidden"
+            >
               <CardHeader
                 className="p-3 pb-2 cursor-pointer transition-all"
                 onClick={() => toggleSection(product.id)}
@@ -295,10 +296,9 @@ export function IntegrationsDropdown({
                     </p>
                   </div>
                   <ChevronDown
-                    className={`h-3 w-3 text-muted-foreground transition-transform shrink-0 ${expandedSections.includes(product.id)
-                      ? 'rotate-180'
-                      : ''
-                      }`}
+                    className={`h-3 w-3 text-muted-foreground transition-transform shrink-0 ${
+                      expandedSections.includes(product.id) ? 'rotate-180' : ''
+                    }`}
                   />
                 </div>
               </CardHeader>

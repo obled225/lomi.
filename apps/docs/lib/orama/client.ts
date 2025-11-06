@@ -16,7 +16,7 @@ if (!isConfigured) {
   // Client-side: errors will be handled in the component
 }
 
-export const DataSourceId = endpoint ? endpoint.split('/').pop() ?? '' : '';
+export const DataSourceId = endpoint ? (endpoint.split('/').pop() ?? '') : '';
 export const isAdmin = !!process.env.ORAMA_PRIVATE_API_KEY;
 
 // Only create client if environment variables are configured

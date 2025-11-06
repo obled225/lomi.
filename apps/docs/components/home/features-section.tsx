@@ -213,10 +213,11 @@ const DemoRevenueChart = () => {
           </span>
         </div>
         <span
-          className={`inline-flex items-center gap-1 px-2 py-1 rounded-sm text-xs font-medium w-fit ${growthRate >= 0
-            ? 'bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-300'
-            : 'bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300'
-            }`}
+          className={`inline-flex items-center gap-1 px-2 py-1 rounded-sm text-xs font-medium w-fit ${
+            growthRate >= 0
+              ? 'bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-300'
+              : 'bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300'
+          }`}
         >
           {growthRate >= 0 ? '+' : ''}
           {growthRate.toFixed(1)}%
@@ -305,38 +306,38 @@ const CARD_CONFIGS = {
     id: 'payment_providers',
     refIndex: 0,
     title: 'features.card1.title',
-    component: 'payment_providers'
+    component: 'payment_providers',
   },
   seamless_checkout: {
     id: 'seamless_checkout',
     refIndex: 1,
     title: 'features.card2.title',
-    component: 'seamless_checkout'
+    component: 'seamless_checkout',
   },
   data_insights: {
     id: 'data_insights',
     refIndex: 4,
     title: 'features.card5.title',
-    component: 'data_insights'
+    component: 'data_insights',
   },
   mobile_payouts: {
     id: 'mobile_payouts',
     refIndex: 3,
     title: 'features.card4.title',
-    component: 'mobile_payouts'
+    component: 'mobile_payouts',
   },
   selling_models: {
     id: 'selling_models',
     refIndex: 2,
     title: 'features.card3.title',
-    component: 'selling_models'
+    component: 'selling_models',
   },
   coupons_discounts: {
     id: 'coupons_discounts',
     refIndex: 5,
     title: 'features.card6.title',
-    component: 'coupons_discounts'
-  }
+    component: 'coupons_discounts',
+  },
 } as const;
 
 // Card ordering configurations for different themes
@@ -347,7 +348,7 @@ const CARD_ORDERS = {
     'data_insights',
     'mobile_payouts',
     'seamless_checkout',
-    'coupons_discounts'
+    'coupons_discounts',
   ] as const,
   dark: [
     'payment_providers',
@@ -355,8 +356,8 @@ const CARD_ORDERS = {
     'data_insights',
     'mobile_payouts',
     'selling_models',
-    'coupons_discounts'
-  ] as const
+    'coupons_discounts',
+  ] as const,
 };
 
 export function FeaturesSection() {
@@ -413,7 +414,7 @@ export function FeaturesSection() {
     const config = CARD_CONFIGS[cardId];
     const ref = cardRefs[config.refIndex];
     const inView = cardInViews[config.refIndex];
-    const delay = 0.1 + (index * 0.05); // Stagger animation delays
+    const delay = 0.1 + index * 0.05; // Stagger animation delays
 
     switch (config.component) {
       case 'payment_providers':
@@ -442,15 +443,15 @@ export function FeaturesSection() {
                       animate={
                         inView
                           ? {
-                            opacity: 1,
-                            x: 0,
-                            transition: {
-                              delay: 0.5 + i * 0.1,
-                              type: 'spring',
-                              stiffness: 120,
-                              damping: 20,
-                            },
-                          }
+                              opacity: 1,
+                              x: 0,
+                              transition: {
+                                delay: 0.5 + i * 0.1,
+                                type: 'spring',
+                                stiffness: 120,
+                                damping: 20,
+                              },
+                            }
                           : {}
                       }
                       className="flex items-center justify-between p-1 bg-background border border-zinc-200 dark:border-zinc-800 rounded-sm hover:bg-muted/40 transition-colors duration-200"
@@ -747,10 +748,11 @@ export function FeaturesSection() {
                     <button
                       type="button"
                       onClick={() => setActiveTab('product')}
-                      className={`flex-1 px-3 pt-1.5 pb-2.5 text-sm font-normal rounded-sm transition-all duration-200 h-7.5 focus:outline-none focus:ring-0 focus:border-none ${activeTab === 'product'
-                        ? 'bg-[#E9EAEF] dark:bg-[#2A2B30] text-foreground shadow-sm border border-border/50'
-                        : 'text-muted-foreground hover:text-foreground'
-                        }`}
+                      className={`flex-1 px-3 pt-1.5 pb-2.5 text-sm font-normal rounded-sm transition-all duration-200 h-7.5 focus:outline-none focus:ring-0 focus:border-none ${
+                        activeTab === 'product'
+                          ? 'bg-[#E9EAEF] dark:bg-[#2A2B30] text-foreground shadow-sm border border-border/50'
+                          : 'text-muted-foreground hover:text-foreground'
+                      }`}
                     >
                       {String(
                         t('features.card3.tab_products', currentLanguage),
@@ -759,25 +761,24 @@ export function FeaturesSection() {
                     <button
                       type="button"
                       onClick={() => setActiveTab('subscription')}
-                      className={`flex-1 px-3 pt-1.5 pb-2.5 text-sm font-normal rounded-sm transition-all duration-200 h-7.5 focus:outline-none focus:ring-0 focus:border-none ${activeTab === 'subscription'
-                        ? 'bg-[#E9EAEF] dark:bg-[#2A2B30] text-foreground shadow-sm border border-border/50'
-                        : 'text-muted-foreground hover:text-foreground'
-                        }`}
+                      className={`flex-1 px-3 pt-1.5 pb-2.5 text-sm font-normal rounded-sm transition-all duration-200 h-7.5 focus:outline-none focus:ring-0 focus:border-none ${
+                        activeTab === 'subscription'
+                          ? 'bg-[#E9EAEF] dark:bg-[#2A2B30] text-foreground shadow-sm border border-border/50'
+                          : 'text-muted-foreground hover:text-foreground'
+                      }`}
                     >
                       {String(
-                        t(
-                          'features.card3.tab_subscriptions',
-                          currentLanguage,
-                        ),
+                        t('features.card3.tab_subscriptions', currentLanguage),
                       )}
                     </button>
                     <button
                       type="button"
                       onClick={() => setActiveTab('checkout')}
-                      className={`flex-1 px-3 pt-1.5 pb-2.5 text-sm font-normal rounded-sm transition-all duration-200 h-7.5 focus:outline-none focus:ring-0 focus:border-none ${activeTab === 'checkout'
-                        ? 'bg-[#E9EAEF] dark:bg-[#2A2B30] text-foreground shadow-sm border border-border/50'
-                        : 'text-muted-foreground hover:text-foreground'
-                        }`}
+                      className={`flex-1 px-3 pt-1.5 pb-2.5 text-sm font-normal rounded-sm transition-all duration-200 h-7.5 focus:outline-none focus:ring-0 focus:border-none ${
+                        activeTab === 'checkout'
+                          ? 'bg-[#E9EAEF] dark:bg-[#2A2B30] text-foreground shadow-sm border border-border/50'
+                          : 'text-muted-foreground hover:text-foreground'
+                      }`}
                     >
                       {String(
                         t('features.card3.tab_checkout', currentLanguage),

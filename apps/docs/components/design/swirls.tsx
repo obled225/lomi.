@@ -22,19 +22,3 @@ export function SingleSwirl({ className, ...props }: SwirlProps) {
     />
   );
 }
-
-export function DoubleSwirl({ className, ...props }: SwirlProps) {
-  return (
-    <Image
-      {...props}
-      src="/random/swirl.png"
-      alt="Swirl"
-      className={cn(
-        'pointer-events-none w-full h-full object-cover',
-        className,
-      )}
-      width={1200}
-      height={1200}
-    />
-  );
-}

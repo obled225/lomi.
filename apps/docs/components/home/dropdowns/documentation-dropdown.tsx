@@ -44,16 +44,14 @@ export function DocumentationDropdown({
     {
       id: 'billing',
       title: 'Billing',
-      description:
-        'Bill and manage customers however you want.',
+      description: 'Bill and manage customers however you want.',
       icon: animations.code,
       href: '/docs/core/billing',
     },
     {
       id: 'merchant-of-record',
       title: 'Money management',
-      description:
-        'Manage money and finance directly or within your platform.',
+      description: 'Manage money and finance directly or within your platform.',
       icon: animations.search,
       href: '/docs/core/merchant-of-record',
     },
@@ -95,7 +93,11 @@ export function DocumentationDropdown({
               {/* Bottom Section */}
               <div className="mt-auto">
                 {featuredCard.badge && (
-                  <InfoBox variant="outline" size="sm" className="mb-2 pointer-events-none">
+                  <InfoBox
+                    variant="outline"
+                    size="sm"
+                    className="mb-2 pointer-events-none"
+                  >
                     {featuredCard.badge}
                   </InfoBox>
                 )}
@@ -152,7 +154,9 @@ export function DocumentationDropdown({
                     </div>
                   </CardHeader>
                   <CardContent className="px-6 pb-8 pt-0 text-sm md:text-base text-white dark:text-zinc-400 grow flex flex-col">
-                    <p className="leading-relaxed mt-auto">{card.description}</p>
+                    <p className="leading-relaxed mt-auto">
+                      {card.description}
+                    </p>
                   </CardContent>
                 </div>
               </Card>

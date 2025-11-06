@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from '@/lib/contexts/translation-context';
 import { t } from '@/lib/i18n/translations';
 import { useTheme } from '@/lib/hooks/use-theme';
-import { playClickSound } from "@/lib/utils/sound";
+import { playClickSound } from '@/lib/utils/sound';
 
 export default function BusinessOutreach() {
   const { currentLanguage } = useTranslation();
@@ -35,7 +35,7 @@ export default function BusinessOutreach() {
 
   const handleReachOut = () => {
     playClickSound();
-    window.open("https://cal.com/babacar-diop/30min", "_blank");
+    window.open('https://cal.com/babacar-diop/30min', '_blank');
     setIsVisible(false);
   };
 
@@ -63,18 +63,19 @@ export default function BusinessOutreach() {
             className="w-[calc(100vw-60px)] max-w-[370px] rounded-[6px] px-4 py-3 sm:px-5 sm:py-4"
             style={{
               backgroundColor:
-                resolvedTheme === "dark"
-                  ? "rgba(0, 0, 0, 0.9)"
-                  : "rgba(255, 255, 255, 0.95)",
+                resolvedTheme === 'dark'
+                  ? 'rgba(0, 0, 0, 0.9)'
+                  : 'rgba(255, 255, 255, 0.95)',
               border:
-                resolvedTheme === "dark"
-                  ? "1px solid rgba(255, 255, 255, 0.1)"
-                  : "1px solid rgba(0, 0, 0, 0.1)",
+                resolvedTheme === 'dark'
+                  ? '1px solid rgba(255, 255, 255, 0.1)'
+                  : '1px solid rgba(0, 0, 0, 0.1)',
             }}
           >
             <p
-              className={`mb-2 sm:mb-3 text-xs sm:text-sm text-left select-none ${resolvedTheme === "dark" ? "text-gray-300" : "text-gray-700"
-                }`}
+              className={`mb-2 sm:mb-3 text-xs sm:text-sm text-left select-none ${
+                resolvedTheme === 'dark' ? 'text-gray-300' : 'text-gray-700'
+              }`}
             >
               {String(
                 t('components.business_outreach.message', currentLanguage),
@@ -83,8 +84,9 @@ export default function BusinessOutreach() {
             <div className="flex flex-wrap gap-3 sm:gap-4">
               <button
                 onMouseDown={handleReachOut}
-                className={`text-xs sm:text-sm hover:opacity-75 transition-colors font-medium ${resolvedTheme === "dark" ? "text-white" : "text-gray-900"
-                  }`}
+                className={`text-xs sm:text-sm hover:opacity-75 transition-colors font-medium ${
+                  resolvedTheme === 'dark' ? 'text-white' : 'text-gray-900'
+                }`}
               >
                 {String(
                   t('components.business_outreach.reach_out', currentLanguage),
@@ -92,8 +94,9 @@ export default function BusinessOutreach() {
               </button>
               <button
                 onMouseDown={handleDismiss}
-                className={`text-xs sm:text-sm hover:opacity-75 transition-colors ${resolvedTheme === "dark" ? "text-gray-500" : "text-gray-500"
-                  }`}
+                className={`text-xs sm:text-sm hover:opacity-75 transition-colors ${
+                  resolvedTheme === 'dark' ? 'text-gray-500' : 'text-gray-500'
+                }`}
               >
                 {String(
                   t('components.business_outreach.dismiss', currentLanguage),

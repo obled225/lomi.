@@ -5,7 +5,7 @@ import { Provider } from './provider';
 import type { ReactNode } from 'react';
 import { Analytics } from '@vercel/analytics/next';
 
-const title = 'lomi. | West Africa\'s Payment Processing Platform';
+const title = "lomi. | West Africa's Payment Processing Platform";
 const description =
   'lomi. is a suite of APIs powering online payment processing and e-commerce solutions in West Africa. Accept payments, send payouts, and automate financial workflows with ease.';
 
@@ -38,12 +38,12 @@ export const metadata: Metadata = {
     'wave',
     'paiement en ligne',
     'paiement mobile',
-    'transfert d\'argent',
+    "transfert d'argent",
     'portefeuille électronique',
     'commerce électronique',
     'passerelle de paiement',
     'solution de paiement',
-    'Afrique de l\'Ouest',
+    "Afrique de l'Ouest",
     'paiements africains',
     'plateforme de paiement',
     'intégration de paiement',
@@ -80,7 +80,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: 'https://lomi.africa',
     languages: {
-      'en': 'https://lomi.africa',
+      en: 'https://lomi.africa',
       'x-default': 'https://lomi.africa',
     },
   },
@@ -115,20 +115,23 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title,
     description,
-    images: ['https://res.cloudinary.com/dzrdlevfn/image/upload/v1759315964/x_banner_vu16vp.webp'],
+    images: [
+      'https://res.cloudinary.com/dzrdlevfn/image/upload/v1759315964/x_banner_vu16vp.webp',
+    ],
     site: '@lomiafrica',
     creator: '@lomiafrica',
   },
   other: {
-    'og:title[fr]': 'lomi. | La meilleure façon d\'accepter des paiements en Afrique de l\'Ouest',
-    'og:description[fr]': 'lomi. est une suite d\'APIs qui facilitent le traitement des paiements en ligne et les solutions de e-commerce en Afrique de l\'Ouest. Acceptez des paiements, effectuez des versements et automatisez vos flux financiers en toute simplicité.',
-    'twitter:title[fr]': 'lomi. | La meilleure façon d\'accepter des paiements en Afrique de l\'Ouest',
-    'twitter:description[fr]': 'lomi. est une suite d\'APIs qui facilitent le traitement des paiements en ligne et les solutions e-commerce en Afrique de l\'Ouest. Acceptez des paiements, effectuez des versements et automatisez vos flux financiers en toute simplicité.',
+    'og:title[fr]':
+      "lomi. | La meilleure façon d'accepter des paiements en Afrique de l'Ouest",
+    'og:description[fr]':
+      "lomi. est une suite d'APIs qui facilitent le traitement des paiements en ligne et les solutions de e-commerce en Afrique de l'Ouest. Acceptez des paiements, effectuez des versements et automatisez vos flux financiers en toute simplicité.",
+    'twitter:title[fr]':
+      "lomi. | La meilleure façon d'accepter des paiements en Afrique de l'Ouest",
+    'twitter:description[fr]':
+      "lomi. est une suite d'APIs qui facilitent le traitement des paiements en ligne et les solutions e-commerce en Afrique de l'Ouest. Acceptez des paiements, effectuez des versements et automatisez vos flux financiers en toute simplicité.",
     'msapplication-TileColor': '#da532c',
-    preconnect: [
-      'https://api.producthunt.com',
-      'https://res.cloudinary.com',
-    ],
+    preconnect: ['https://api.producthunt.com', 'https://res.cloudinary.com'],
   },
 };
 

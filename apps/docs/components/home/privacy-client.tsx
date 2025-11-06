@@ -47,9 +47,15 @@ export default function PrivacyClient() {
             <h2 className="text-xl font-semibold mb-4 text-zinc-900 dark:text-white">
               {t('privacy.sections.notice.title', currentLanguage) as string}
             </h2>
-            <p className="text-foreground/90 text-base leading-relaxed tracking-tight [&_strong]:font-semibold" dangerouslySetInnerHTML={{
-              __html: t('privacy.sections.notice.content', currentLanguage) as string,
-            }} />
+            <p
+              className="text-foreground/90 text-base leading-relaxed tracking-tight [&_strong]:font-semibold"
+              dangerouslySetInnerHTML={{
+                __html: t(
+                  'privacy.sections.notice.content',
+                  currentLanguage,
+                ) as string,
+              }}
+            />
           </motion.section>
 
           <motion.section
@@ -61,18 +67,41 @@ export default function PrivacyClient() {
               {t('privacy.sections.consent.title', currentLanguage) as string}
             </h2>
             <div className="text-foreground/90 text-base leading-relaxed tracking-tight [&_strong]:font-semibold">
-              <p dangerouslySetInnerHTML={{
-                __html: t('privacy.sections.consent.content', currentLanguage) as string,
-              }} />
-              <p className="mt-2" dangerouslySetInnerHTML={{
-                __html: t('privacy.sections.consent.personal_data_content', currentLanguage) as string,
-              }} />
-              <p className="mt-4" dangerouslySetInnerHTML={{
-                __html: t('privacy.sections.consent.additional_content', currentLanguage) as string,
-              }} />
-              <p className="mt-2" dangerouslySetInnerHTML={{
-                __html: t('privacy.sections.consent.other_data_content', currentLanguage) as string,
-              }} />
+              <p
+                dangerouslySetInnerHTML={{
+                  __html: t(
+                    'privacy.sections.consent.content',
+                    currentLanguage,
+                  ) as string,
+                }}
+              />
+              <p
+                className="mt-2"
+                dangerouslySetInnerHTML={{
+                  __html: t(
+                    'privacy.sections.consent.personal_data_content',
+                    currentLanguage,
+                  ) as string,
+                }}
+              />
+              <p
+                className="mt-4"
+                dangerouslySetInnerHTML={{
+                  __html: t(
+                    'privacy.sections.consent.additional_content',
+                    currentLanguage,
+                  ) as string,
+                }}
+              />
+              <p
+                className="mt-2"
+                dangerouslySetInnerHTML={{
+                  __html: t(
+                    'privacy.sections.consent.other_data_content',
+                    currentLanguage,
+                  ) as string,
+                }}
+              />
             </div>
           </motion.section>
 
@@ -98,12 +127,23 @@ export default function PrivacyClient() {
               }
             </h3>
             <div className="text-foreground/90 text-base leading-relaxed tracking-tight [&_strong]:font-semibold [&_ul]:list-disc [&_ul]:ml-6 [&_li]:mb-2">
-              <p dangerouslySetInnerHTML={{
-                __html: t('privacy.sections.data_collection.subsections.data_we_collect.content', currentLanguage) as string,
-              }} />
-              <div className="mt-2" dangerouslySetInnerHTML={{
-                __html: t('privacy.sections.data_collection.subsections.data_we_collect.purposes_content', currentLanguage) as string,
-              }} />
+              <p
+                dangerouslySetInnerHTML={{
+                  __html: t(
+                    'privacy.sections.data_collection.subsections.data_we_collect.content',
+                    currentLanguage,
+                  ) as string,
+                }}
+              />
+              <div
+                className="mt-2"
+                dangerouslySetInnerHTML={{
+                  __html: t(
+                    'privacy.sections.data_collection.subsections.data_we_collect.purposes_content',
+                    currentLanguage,
+                  ) as string,
+                }}
+              />
             </div>
 
             <h3 className="text-lg font-medium mb-3 mt-6 text-zinc-900 dark:text-white">
@@ -115,12 +155,23 @@ export default function PrivacyClient() {
               }
             </h3>
             <div className="text-foreground/90 text-base leading-relaxed tracking-tight [&_strong]:font-semibold">
-              <p dangerouslySetInnerHTML={{
-                __html: t('privacy.sections.data_collection.subsections.data_disclosure.content', currentLanguage) as string,
-              }} />
-              <p className="mt-4" dangerouslySetInnerHTML={{
-                __html: t('privacy.sections.data_collection.subsections.data_disclosure.additional_content', currentLanguage) as string,
-              }} />
+              <p
+                dangerouslySetInnerHTML={{
+                  __html: t(
+                    'privacy.sections.data_collection.subsections.data_disclosure.content',
+                    currentLanguage,
+                  ) as string,
+                }}
+              />
+              <p
+                className="mt-4"
+                dangerouslySetInnerHTML={{
+                  __html: t(
+                    'privacy.sections.data_collection.subsections.data_disclosure.additional_content',
+                    currentLanguage,
+                  ) as string,
+                }}
+              />
             </div>
 
             <h3 className="text-lg font-medium mb-3 mt-6 text-zinc-900 dark:text-white">
@@ -131,12 +182,15 @@ export default function PrivacyClient() {
                 ) as string
               }
             </h3>
-            <div className="text-foreground/90 text-base leading-relaxed tracking-tight [&_strong]:font-semibold [&_ul]:list-disc [&_ul]:ml-6 [&_li]:mb-2" dangerouslySetInnerHTML={{
-              __html: t(
-                'privacy.sections.data_collection.subsections.data_subject_rights.content',
-                currentLanguage,
-              ) as string,
-            }} />
+            <div
+              className="text-foreground/90 text-base leading-relaxed tracking-tight [&_strong]:font-semibold [&_ul]:list-disc [&_ul]:ml-6 [&_li]:mb-2"
+              dangerouslySetInnerHTML={{
+                __html: t(
+                  'privacy.sections.data_collection.subsections.data_subject_rights.content',
+                  currentLanguage,
+                ) as string,
+              }}
+            />
 
             <h3 className="text-lg font-medium mb-3 mt-6 text-zinc-900 dark:text-white">
               {
@@ -146,12 +200,15 @@ export default function PrivacyClient() {
                 ) as string
               }
             </h3>
-            <p className="text-foreground/90 text-base leading-relaxed tracking-tight [&_strong]:font-semibold" dangerouslySetInnerHTML={{
-              __html: t(
-                'privacy.sections.data_collection.subsections.data_storage.content',
-                currentLanguage,
-              ) as string,
-            }} />
+            <p
+              className="text-foreground/90 text-base leading-relaxed tracking-tight [&_strong]:font-semibold"
+              dangerouslySetInnerHTML={{
+                __html: t(
+                  'privacy.sections.data_collection.subsections.data_storage.content',
+                  currentLanguage,
+                ) as string,
+              }}
+            />
 
             <h3 className="text-lg font-medium mb-3 mt-6 text-zinc-900 dark:text-white">
               {
@@ -161,12 +218,15 @@ export default function PrivacyClient() {
                 ) as string
               }
             </h3>
-            <p className="text-foreground/90 text-base leading-relaxed tracking-tight [&_strong]:font-semibold" dangerouslySetInnerHTML={{
-              __html: t(
-                'privacy.sections.data_collection.subsections.data_transfers.content',
-                currentLanguage,
-              ) as string,
-            }} />
+            <p
+              className="text-foreground/90 text-base leading-relaxed tracking-tight [&_strong]:font-semibold"
+              dangerouslySetInnerHTML={{
+                __html: t(
+                  'privacy.sections.data_collection.subsections.data_transfers.content',
+                  currentLanguage,
+                ) as string,
+              }}
+            />
 
             <h3 className="text-lg font-medium mb-3 mt-6 text-zinc-900 dark:text-white">
               {
@@ -176,21 +236,33 @@ export default function PrivacyClient() {
                 ) as string
               }
             </h3>
-            <p className="text-foreground/90 text-base leading-relaxed tracking-tight [&_strong]:font-semibold" dangerouslySetInnerHTML={{
-              __html: t(
-                'privacy.sections.data_collection.subsections.privacy_changes.introduction',
-                currentLanguage,
-              ) as string,
-            }} />
-            <p className="text-foreground/90 text-base leading-relaxed tracking-tight mt-2 [&_strong]:font-semibold" dangerouslySetInnerHTML={{
-              __html: t('privacy.sections.data_collection.subsections.privacy_changes.purposes_content', currentLanguage) as string,
-            }} />
-            <p className="text-foreground/90 text-base leading-relaxed tracking-tight mt-4 [&_strong]:font-semibold" dangerouslySetInnerHTML={{
-              __html: t(
-                'privacy.sections.data_collection.subsections.privacy_changes.additional_info',
-                currentLanguage,
-              ) as string,
-            }} />
+            <p
+              className="text-foreground/90 text-base leading-relaxed tracking-tight [&_strong]:font-semibold"
+              dangerouslySetInnerHTML={{
+                __html: t(
+                  'privacy.sections.data_collection.subsections.privacy_changes.introduction',
+                  currentLanguage,
+                ) as string,
+              }}
+            />
+            <p
+              className="text-foreground/90 text-base leading-relaxed tracking-tight mt-2 [&_strong]:font-semibold"
+              dangerouslySetInnerHTML={{
+                __html: t(
+                  'privacy.sections.data_collection.subsections.privacy_changes.purposes_content',
+                  currentLanguage,
+                ) as string,
+              }}
+            />
+            <p
+              className="text-foreground/90 text-base leading-relaxed tracking-tight mt-4 [&_strong]:font-semibold"
+              dangerouslySetInnerHTML={{
+                __html: t(
+                  'privacy.sections.data_collection.subsections.privacy_changes.additional_info',
+                  currentLanguage,
+                ) as string,
+              }}
+            />
           </motion.section>
         </motion.div>
 

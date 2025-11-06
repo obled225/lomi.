@@ -1,4 +1,4 @@
-import { buildRegistry } from '@/scripts/build-registry';
+import { buildRegistry } from '@/lib/scripts/build-registry';
 import * as OpenAPI from 'fumadocs-openapi';
 import { rimraf } from 'rimraf';
 import { openapi } from '@/lib/openapi';

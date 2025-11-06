@@ -133,9 +133,12 @@ export default function CustomSearchDialog(props: SharedProps) {
             const pageTitle = doc.title || 'Untitled';
 
             // Add breadcrumb context to the page title
-            const breadcrumbText = doc.breadcrumbs && Array.isArray(doc.breadcrumbs) && doc.breadcrumbs.length > 0
-              ? doc.breadcrumbs.join(' › ') + ' › '
-              : '';
+            const breadcrumbText =
+              doc.breadcrumbs &&
+              Array.isArray(doc.breadcrumbs) &&
+              doc.breadcrumbs.length > 0
+                ? doc.breadcrumbs.join(' › ') + ' › '
+                : '';
 
             // Main page result with breadcrumb prefix
             transformedResults.push({
@@ -146,7 +149,10 @@ export default function CustomSearchDialog(props: SharedProps) {
             });
 
             // Add description as a text result if it exists and contains the search term
-            if (doc.description && doc.description.toLowerCase().includes(searchLower)) {
+            if (
+              doc.description &&
+              doc.description.toLowerCase().includes(searchLower)
+            ) {
               transformedResults.push({
                 type: 'text' as const,
                 id: `${doc.id}-desc`,
@@ -156,11 +162,16 @@ export default function CustomSearchDialog(props: SharedProps) {
             }
 
             // Add matching content sections as text results
-            if (doc.structured?.contents && Array.isArray(doc.structured.contents)) {
+            if (
+              doc.structured?.contents &&
+              Array.isArray(doc.structured.contents)
+            ) {
               // Find all content sections that contain the search term
               const matchingContents = doc.structured.contents
-                .filter((content: string) =>
-                  content.toLowerCase().includes(searchLower) && content.length > 20
+                .filter(
+                  (content: string) =>
+                    content.toLowerCase().includes(searchLower) &&
+                    content.length > 20,
                 )
                 .slice(0, 2); // Limit to 2 matching sections per page
 
@@ -173,7 +184,8 @@ export default function CustomSearchDialog(props: SharedProps) {
                   // Center the excerpt around the match
                   const start = Math.max(0, index - 40);
                   const end = Math.min(content.length, start + maxLength);
-                  excerpt = (start > 0 ? '...' : '') +
+                  excerpt =
+                    (start > 0 ? '...' : '') +
                     content.substring(start, end) +
                     (end < content.length ? '...' : '');
                 }
@@ -197,7 +209,10 @@ export default function CustomSearchDialog(props: SharedProps) {
         console.error('Search error:', error);
 
         // Check if it's a configuration error
-        if (error instanceof Error && error.message.includes('not configured')) {
+        if (
+          error instanceof Error &&
+          error.message.includes('not configured')
+        ) {
           console.error(
             'Orama search configuration error. Please check your environment variables.',
           );

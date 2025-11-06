@@ -7,9 +7,7 @@ export async function updateSearchIndexes(): Promise<void> {
   const apiKey = process.env.ORAMA_PRIVATE_API_KEY;
 
   if (!isAdmin) {
-    console.log(
-      'Orama private key not found, skipping index update.',
-    );
+    console.log('Orama private key not found, skipping index update.');
     return;
   }
 

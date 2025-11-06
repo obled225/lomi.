@@ -3,18 +3,47 @@
 import { motion } from 'framer-motion';
 import { useTranslation } from '@/lib/contexts/translation-context';
 import { t } from '@/lib/i18n/translations';
-import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@/components/ui/accordion';
+import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+} from '@/components/ui/accordion';
 
 export default function FaqClient() {
   const { currentLanguage } = useTranslation();
 
   const faqItems = [
-    { key: 'pricing', question: t('faq.items.pricing.question', currentLanguage), answer: t('faq.items.pricing.answer', currentLanguage) },
-    { key: 'funds', question: t('faq.items.funds.question', currentLanguage), answer: t('faq.items.funds.answer', currentLanguage) },
-    { key: 'payment_methods', question: t('faq.items.payment_methods.question', currentLanguage), answer: t('faq.items.payment_methods.answer', currentLanguage) },
-    { key: 'minimum_amount', question: t('faq.items.minimum_amount.question', currentLanguage), answer: t('faq.items.minimum_amount.answer', currentLanguage) },
-    { key: 'security', question: t('faq.items.security.question', currentLanguage), answer: t('faq.items.security.answer', currentLanguage) },
-    { key: 'international', question: t('faq.items.international.question', currentLanguage), answer: t('faq.items.international.answer', currentLanguage) },
+    {
+      key: 'pricing',
+      question: t('faq.items.pricing.question', currentLanguage),
+      answer: t('faq.items.pricing.answer', currentLanguage),
+    },
+    {
+      key: 'funds',
+      question: t('faq.items.funds.question', currentLanguage),
+      answer: t('faq.items.funds.answer', currentLanguage),
+    },
+    {
+      key: 'payment_methods',
+      question: t('faq.items.payment_methods.question', currentLanguage),
+      answer: t('faq.items.payment_methods.answer', currentLanguage),
+    },
+    {
+      key: 'minimum_amount',
+      question: t('faq.items.minimum_amount.question', currentLanguage),
+      answer: t('faq.items.minimum_amount.answer', currentLanguage),
+    },
+    {
+      key: 'security',
+      question: t('faq.items.security.question', currentLanguage),
+      answer: t('faq.items.security.answer', currentLanguage),
+    },
+    {
+      key: 'international',
+      question: t('faq.items.international.question', currentLanguage),
+      answer: t('faq.items.international.answer', currentLanguage),
+    },
   ];
 
   return (
@@ -49,17 +78,17 @@ export default function FaqClient() {
           >
             <Accordion type="single" collapsible className="rounded-sm">
               {faqItems.map((item) => (
-                <AccordionItem
-                  key={item.key}
-                  value={item.key}
-                >
+                <AccordionItem key={item.key} value={item.key}>
                   <AccordionTrigger className="text-left">
                     {item.question as string}
                   </AccordionTrigger>
                   <AccordionContent className="px-4.5">
-                    <p className="text-foreground/90 leading-relaxed" dangerouslySetInnerHTML={{
-                      __html: item.answer as string,
-                    }} />
+                    <p
+                      className="text-foreground/90 leading-relaxed"
+                      dangerouslySetInnerHTML={{
+                        __html: item.answer as string,
+                      }}
+                    />
                   </AccordionContent>
                 </AccordionItem>
               ))}
@@ -84,7 +113,6 @@ export default function FaqClient() {
                 </div>
               </AccordionItem>
             </Accordion>
-
           </motion.div>
         </div>
       </div>
