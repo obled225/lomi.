@@ -4,16 +4,16 @@
   "private": true,
   "scripts": {
     "build": "pnpm build:pre && NODE_OPTIONS='--max-old-space-size=4096' next build && pnpm build:post",
-    "build:pre": "bun ./scripts/pre-build.ts",
-    "build:post": "bun ./scripts/post-build.ts",
+    "build:pre": "bun ./lib/scripts/pre-build.ts",
+    "build:post": "bun ./lib/scripts/post-build.ts",
     "clean": "rimraf .next",
     "dev": "next dev --turbo",
-    "lint": "fumadocs-mdx && bun ./scripts/lint.ts && eslint .",
+    "lint": "fumadocs-mdx && bun ./lib/scripts/lint.ts && eslint .",
     "start": "next start",
     "mdx": "pnpm exec fumadocs-mdx",
     "knip": "knip",
     "format": "prettier --write .",
-    "map": "tsx --env-file=.env src/lib/scripts/generate_sitemap.ts",
+    "map": "tsx --env-file=.env lib/scripts/generate_sitemap.ts",
     "types": "/opt/homebrew/bin/supabase gen types typescript --project-id mdswvokxrnfggrujsfjd > src/lib/types/database.ts"
   },
   "dependencies": {
