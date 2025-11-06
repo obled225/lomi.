@@ -222,12 +222,20 @@ export function IntegrationsDropdown({
                             nativeFeatureIcons[index]?.animation ||
                             animations.globe
                           }
-                          size={12}
+                          size={18}
                           loop={false}
                           autoplay={false}
                           initialFrame={0}
                           isHovered={hoveredIcon === `feature-${index}`}
-                          customColor={theme === 'dark' ? [1, 1, 1] : [0.145, 0.145, 0.169]} // White in dark mode, dark in light mode
+                          customColor={
+                            hoveredIcon === `feature-${index}`
+                              ? theme === 'dark'
+                                ? [0.922, 0.922, 0.941] // Very light in dark mode (zinc-200)
+                                : [0.145, 0.145, 0.169] // Very dark in light mode (zinc-800)
+                              : theme === 'dark'
+                                ? [0.631, 0.631, 0.667] // zinc-400 in dark mode
+                                : [0.322, 0.322, 0.357] // zinc-600 in light mode
+                          }
                         />
                       </div>
                     </div>
@@ -247,7 +255,7 @@ export function IntegrationsDropdown({
         <h3 className="text-sm font-semibold text-zinc-600 dark:text-zinc-400 mb-2 px-0">
           Integrate
         </h3>
-        <div className="grid grid-cols-2 gap-2">
+        <div className="grid grid-cols-2 gap-3">
           {products.map((product) => (
             <Card key={product.id} className="group relative flex flex-col rounded-sm transition-all cursor-pointer hover:shadow-sm overflow-hidden">
               <CardHeader
@@ -261,7 +269,7 @@ export function IntegrationsDropdown({
                     <div className="flex items-center justify-center w-6 h-6 rounded-md hover:bg-[#2a2f3d]/3 dark:hover:bg-[#2a2f3d]/10 transition-colors">
                       <LottieIcon
                         animationData={product.icon}
-                        size={12}
+                        size={18}
                         loop={false}
                         autoplay={false}
                         initialFrame={0}

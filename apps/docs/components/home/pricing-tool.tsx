@@ -6,7 +6,6 @@ import { useTranslation } from '@/lib/contexts/translation-context';
 import { t } from '@/lib/i18n/translations';
 import { playClickSound } from "@/lib/utils/sound";
 import { formatCurrency, parseFormattedNumber, type Currency } from "@/lib/utils/formatter";
-import BusinessOutreach from "@/components/design/business-outreach";
 import { Card, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
@@ -547,8 +546,6 @@ export default function PricingTool() {
                     </motion.div>
                 </div>
             </div>
-
-            <BusinessOutreach />
         </>
     );
 }
