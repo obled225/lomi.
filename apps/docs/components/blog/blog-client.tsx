@@ -22,6 +22,9 @@ export default function BlogClient() {
   const router = useRouter();
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
+  // For Spanish and Chinese, use English for blog display and show all articles
+  const displayLanguage = currentLanguage === 'es' || currentLanguage === 'zh' ? 'en' : currentLanguage;
+
   // Pagination constants
   const POSTS_PER_PAGE = 32; // Show all posts on one page
   const MAX_POSTS = 32; // Show pagination only when we reach 32 posts
@@ -72,6 +75,9 @@ export default function BlogClient() {
 
   // Check if a post has content in the current language
   const hasLanguageContent = (post: Post) => {
+    // For Spanish and Chinese, show all articles (same as English)
+    if (currentLanguage === 'es' || currentLanguage === 'zh') return true;
+
     // For English, always show the post since it's the base language
     if (currentLanguage === 'en') return true;
 
@@ -124,7 +130,7 @@ export default function BlogClient() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              {t('blog.heading', currentLanguage) as string}
+              {t('blog.heading', displayLanguage) as string}
             </motion.h1>
             <motion.p
               className="text-gray-500 dark:text-gray-400 text-base leading-relaxed tracking-tight max-w-4xl"
@@ -132,7 +138,7 @@ export default function BlogClient() {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              {t('blog.subheading', currentLanguage) as string}
+              {t('blog.subheading', displayLanguage) as string}
             </motion.p>
           </div>
 
@@ -148,10 +154,10 @@ export default function BlogClient() {
               transition={{ duration: 0.5 }}
             >
               <h2 className="text-2xl font-semibold mb-4 dark:text-white">
-                {t('blog.noPosts', currentLanguage) as string}
+                {t('blog.noPosts', displayLanguage) as string}
               </h2>
               <p className="text-zinc-600 dark:text-zinc-400 mb-6">
-                {t('blog.noPostsDesc', currentLanguage) as string}
+                {t('blog.noPostsDesc', displayLanguage) as string}
               </p>
               <Button
                 variant="pink"
@@ -160,7 +166,7 @@ export default function BlogClient() {
                   router.push('/');
                 }}
               >
-                {t('blog.backHome', currentLanguage) as string}
+                {t('blog.backHome', displayLanguage) as string}
               </Button>
             </motion.div>
           ) : (
@@ -203,7 +209,7 @@ export default function BlogClient() {
                     className="flex items-center gap-1"
                   >
                     <ChevronLeft className="h-4 w-4" />
-                    {t('blog.previous', currentLanguage) as string}
+                    {t('blog.previous', displayLanguage) as string}
                   </Button>
 
                   <div className="flex items-center space-x-1">
@@ -235,7 +241,7 @@ export default function BlogClient() {
                     disabled={currentPage === totalPages}
                     className="flex items-center gap-1"
                   >
-                    {t('blog.next', currentLanguage) as string}
+                    {t('blog.next', displayLanguage) as string}
                     <ChevronRight className="h-4 w-4" />
                   </Button>
                 </div>

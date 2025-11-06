@@ -5,8 +5,8 @@ import { apiVersion, dataset, projectId } from './env';
 
 // Client configured for static generation
 export const client = createClient({
-  projectId,
-  dataset,
+  projectId: projectId(),
+  dataset: dataset(),
   apiVersion,
   useCdn: true, // Use CDN for better performance and caching
   token: process.env.SANITY_API_TOKEN, // Include token for authenticated requests

@@ -89,6 +89,8 @@ const config = {
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
   },
+  // Enable source maps for production builds for debugging and Lighthouse
+  productionBrowserSourceMaps: true,
   compress: true,
   poweredByHeader: false,
   generateEtags: false,
