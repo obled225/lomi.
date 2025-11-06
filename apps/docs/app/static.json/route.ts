@@ -34,11 +34,23 @@ export async function GET(): Promise<Response> {
     const structured = structuredData
       ? {
           // Extract heading IDs (or content) as flat string array
-          headings: structuredData.headings.map((h) => h.id),
+          // Ensure headings is an array and map to strings
+          headings: Array.isArray(structuredData.headings)
+            ? structuredData.headings
+                .map((h) => (typeof h === 'object' && h?.id ? h.id : String(h)))
+                .filter((h) => h.length > 0)
+            : [],
           // Extract content strings as flat array, filtering empty
-          contents: structuredData.contents
-            .map((c) => c.content.trim())
-            .filter((c) => c.length > 0),
+          // Ensure contents is an array and map to strings
+          contents: Array.isArray(structuredData.contents)
+            ? structuredData.contents
+                .map((c) =>
+                  typeof c === 'object' && c?.content
+                    ? c.content.trim()
+                    : String(c).trim(),
+                )
+                .filter((c) => c.length > 0)
+            : [],
         }
       : { headings: [], contents: [] };
 
