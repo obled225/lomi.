@@ -14,10 +14,19 @@ export async function GET(): Promise<Response> {
         (item) => item.name,
       );
 
+      // Transform structured data from fumadocs format to flat arrays for Orama
+      const structuredData = page.data.structuredData;
+      const structured = structuredData?.contents
+        ? {
+            headings: structuredData.contents.map((item) => item.heading ?? ''),
+            contents: structuredData.contents.map((item) => item.content ?? ''),
+          }
+        : { headings: [], contents: [] };
+
       return {
         id: page.url,
         page_id: page.url,
-        structured: page.data.structuredData ?? { headings: [], contents: [] },
+        structured,
         tag: page.slugs[0],
         url: page.url,
         title: page.data.title ?? 'Untitled',
