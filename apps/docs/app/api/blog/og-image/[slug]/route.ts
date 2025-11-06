@@ -2,18 +2,20 @@ import { getPostBySlug } from '@/lib/sanity/queries';
 import { urlFor } from '@/lib/sanity/client';
 import type { NextRequest } from 'next/server';
 
-export async function GET(req: NextRequest) {
-  const url = new URL(req.url);
-  const slug = url.pathname.split('/').pop();
-
-  if (!slug) {
-    return Response.json(
-      { error: 'Slug parameter is required' },
-      { status: 400 },
-    );
-  }
-
+export async function GET(
+  req: NextRequest,
+  { params }: { params: Promise<{ slug: string }> },
+) {
   try {
+    const { slug } = await params;
+
+    if (!slug) {
+      return Response.json(
+        { error: 'Slug parameter is required' },
+        { status: 400 },
+      );
+    }
+
     const post = await getPostBySlug(slug);
 
     if (!post) {
@@ -32,14 +34,10 @@ export async function GET(req: NextRequest) {
 
     if (post.image) {
       // Use the post's primary image, optimized for OG
-      imageUrl = urlFor(post.image).width(1200).height(630).quality(90).url();
+      imageUrl = urlFor(post.image, { width: 1200, height: 630, quality: 90 }).url();
     } else if (post.mainImage) {
       // Fallback to mainImage if image doesn't exist
-      imageUrl = urlFor(post.mainImage)
-        .width(1200)
-        .height(630)
-        .quality(90)
-        .url();
+      imageUrl = urlFor(post.mainImage, { width: 1200, height: 630, quality: 90 }).url();
     } else {
       // No image found, use default banner
       imageUrl =
@@ -67,3 +65,4 @@ export async function GET(req: NextRequest) {
     });
   }
 }
+

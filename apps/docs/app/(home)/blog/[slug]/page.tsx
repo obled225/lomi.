@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import BlogPostClient from '@/components/blog/blog-post-client';
 import { client } from '@/lib/sanity/client';
+import { headers } from 'next/headers';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -27,36 +28,43 @@ export async function generateMetadata({
     const post = await client.fetch(
       `*[_type == "post" && slug.current == $slug][0]{
         title,
-        excerpt,
-        "imageUrl": mainImage.asset->url
+        excerpt
       }`,
       { slug },
     );
 
     if (post) {
+      // Get the base URL for absolute OG image URLs
+      const headersList = await headers();
+      const host = headersList.get('host') || 'lomi.so';
+      const protocol = process.env.NODE_ENV === 'production' ? 'https' : 'http';
+      const baseUrl = `${protocol}://${host}`;
+
+      // Use the og-image API endpoint for optimized OG images
+      const ogImageUrl = `${baseUrl}/api/blog/og-image/${slug}`;
+
       return {
         title: `${post.title} | lomi.`,
         description: post.excerpt || 'Read our latest blog post',
         openGraph: {
           title: `${post.title} | lomi.`,
           description: post.excerpt || 'Read our latest blog post',
-          images: post.imageUrl
-            ? [
-                {
-                  url: post.imageUrl,
-                  width: 1200,
-                  height: 630,
-                  alt: post.title,
-                },
-              ]
-            : [
-                {
-                  url: '/banner.webp',
-                  width: 1200,
-                  height: 630,
-                  alt: post.title,
-                },
-              ],
+          url: `${baseUrl}/blog/${slug}`,
+          type: 'article',
+          images: [
+            {
+              url: ogImageUrl,
+              width: 1200,
+              height: 630,
+              alt: post.title,
+            },
+          ],
+        },
+        twitter: {
+          card: 'summary_large_image',
+          title: `${post.title} | lomi.`,
+          description: post.excerpt || 'Read our latest blog post',
+          images: [ogImageUrl],
         },
       };
     }
