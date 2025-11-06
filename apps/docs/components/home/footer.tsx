@@ -210,7 +210,7 @@ export function Footer() {
                   <ProductHuntBadge />
                 </a>
 
-                <p className="hidden lg:block text-[10px] text-zinc-500 dark:text-zinc-400 max-w-xs leading-relaxed text-justify mt-2">
+                <p className="hidden lg:block text-[10px] text-zinc-600 dark:text-zinc-400 max-w-xs leading-relaxed text-justify align-left mt-2">
                   {t('footer.description')}
                 </p>
 

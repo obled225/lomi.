@@ -35,53 +35,30 @@ export function DocumentationDropdown({
 
   const featuredCard: FeaturedCard = {
     title: 'Focus on building, not billing.',
-    description: 'Turn your application into a business in minutes.',
+    description: 'Explore our guides and examples to integrate lomi.',
     image: '/company/800x800.webp',
-    imageAlt: 'Documentation interface screenshot',
+    imageAlt: 'Developers space',
     href: '/docs/getting-started',
     badge: 'Getting started',
   };
 
   const docCards: DocCard[] = [
     {
-      id: 'cli',
-      title: 'CLI',
+      id: 'billing',
+      title: 'Billing',
       description:
-        'Master the command line interface for project setup and management.',
+        'Bill and manage customers however you want.',
       icon: animations.code,
-      href: '/docs/core/lomi-cli',
-    },
-    {
-      id: 'products',
-      title: 'Products & Subscriptions',
-      description:
-        'Create and manage products, subscription plans, and usage tracking.',
-      icon: animations.mail,
-      href: '/docs/reference/payments/products',
-    },
-    {
-      id: 'checkouts',
-      title: 'Checkouts',
-      description:
-        'Implement secure payment flows with checkout sessions and payment links.',
-      icon: animations.settings,
-      href: '/docs/reference/payments/checkout-sessions',
+      href: '/docs/core/billing',
     },
     {
       id: 'merchant-of-record',
-      title: 'Finance & Payouts',
+      title: 'Money management',
       description:
-        'Understand merchant services, pricing, and payout management.',
+        'Manage money and finance directly or within your platform.',
       icon: animations.search,
       href: '/docs/core/merchant-of-record',
     },
-    // {
-    //     id: 'open-source',
-    //     title: 'Open Source',
-    //     description: 'Explore our open-source solution and self-hosting options.',
-    //     icon: animations.code,
-    //     href: '/docs/core/freedom/open-source',
-    // },
   ];
 
   return (
@@ -132,8 +109,8 @@ export function DocumentationDropdown({
           </div>
         </Link>
 
-        {/* Grid of Smaller Cards */}
-        <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-3 min-w-0">
+        {/* Grid of Larger Cards */}
+        <div className="flex-1 grid grid-cols-1 gap-3 min-w-0">
           {docCards.map((card) => (
             <Link
               key={card.id}
@@ -142,36 +119,44 @@ export function DocumentationDropdown({
               onMouseLeave={() => setHoveredIcon(null)}
               onClick={playClickSound}
             >
-              <Card className="group flex flex-col h-[165px] rounded-sm transition-all cursor-pointer hover:shadow-sm">
-                <CardHeader className="p-6 pb-4">
-                  <div className="flex items-start gap-3">
-                    <div className="shrink-0">
-                      <LottieIcon
-                        animationData={card.icon}
-                        size={24}
-                        loop={false}
-                        autoplay={false}
-                        initialFrame={0}
-                        isHovered={hoveredIcon === card.id}
-                        customColor={
-                          hoveredIcon === card.id
-                            ? theme === 'dark'
-                              ? [0.922, 0.922, 0.941] // Very light in dark mode (zinc-200)
-                              : [0.145, 0.145, 0.169] // Very dark in light mode (zinc-800)
-                            : theme === 'dark'
-                              ? [0.631, 0.631, 0.667] // zinc-400 in dark mode
-                              : [0.322, 0.322, 0.357] // zinc-600 in light mode
-                        }
-                      />
+              <Card className="group relative flex flex-col h-[155px] rounded-sm transition-all cursor-pointer hover:shadow-sm overflow-hidden">
+                {/* Image Background */}
+                <div className="absolute inset-0 opacity-90 dark:opacity-20 group-hover:opacity-100 dark:group-hover:opacity-25 transition-opacity">
+                  <Image
+                    src="/company/800x800.webp"
+                    alt="Background"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
+                </div>
+
+                {/* Content Overlay */}
+                <div className="relative z-10 flex flex-col h-full">
+                  <CardHeader className="p-6 pb-4">
+                    <div className="flex items-center gap-3">
+                      <div className="shrink-0">
+                        <div className="flex items-center justify-center w-8 h-8 rounded-md hover:bg-[#2a2f3d]/3 dark:hover:bg-[#2a2f3d]/10 transition-colors">
+                          <LottieIcon
+                            animationData={card.icon}
+                            size={18}
+                            loop={false}
+                            autoplay={false}
+                            initialFrame={0}
+                            isHovered={hoveredIcon === card.id}
+                            customColor={[1, 1, 1]} // White in both light and dark mode
+                          />
+                        </div>
+                      </div>
+                      <h4 className="text-lg md:text-xl font-bold text-white dark:text-zinc-100 transition-colors leading-tight">
+                        {card.title}
+                      </h4>
                     </div>
-                    <h4 className="text-base font-medium text-zinc-700 dark:text-zinc-300 group-hover:text-zinc-900 dark:group-hover:text-zinc-100 transition-colors leading-tight">
-                      {card.title}
-                    </h4>
-                  </div>
-                </CardHeader>
-                <CardContent className="px-6 pb-6 pt-0 text-sm text-muted-foreground grow">
-                  <p className="leading-relaxed">{card.description}</p>
-                </CardContent>
+                  </CardHeader>
+                  <CardContent className="px-6 pb-8 pt-0 text-sm md:text-base text-white dark:text-zinc-400 grow flex flex-col">
+                    <p className="leading-relaxed mt-auto">{card.description}</p>
+                  </CardContent>
+                </div>
               </Card>
             </Link>
           ))}

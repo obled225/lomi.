@@ -8,7 +8,7 @@ import { Card, CardHeader, CardContent } from '@/components/ui/card';
 
 type UseCase = {
   name: string;
-  description: string;
+  description?: string;
 };
 
 type Product = {
@@ -17,6 +17,10 @@ type Product = {
   icon: LottieAnimationData;
   description: string;
   useCases: UseCase[];
+};
+
+type NativeFeature = {
+  name: string;
 };
 
 export function IntegrationsDropdown({
@@ -30,114 +34,72 @@ export function IntegrationsDropdown({
 
   const products: Product[] = [
     {
-      id: 'checkout-sessions-api',
-      name: 'Checkout Sessions API',
+      id: 'payments',
+      name: 'Payments',
       icon: animations.creditCard,
       description:
-        'Create and manage secure payment sessions to accept payments',
+        'Accept payments through hosted checkout forms and direct bank debits.',
       useCases: [
         {
-          name: 'E-commerce Integration',
+          name: 'For e-commerce and marketplaces',
           description:
-            'Accept payments directly on your website with hosted checkout pages.',
+            'Accept payments directly on your app with hosted checkout pages or directly via direct debits.',
         },
         {
-          name: 'Marketplace Payments',
+          name: 'Send invoices and collect payments',
           description:
-            'Handle payments for multiple vendors in a marketplace environment.',
-        },
-        {
-          name: 'Subscription Setup',
-          description:
-            'Create recurring payment sessions for subscription services.',
-        },
-      ],
-    },
-    {
-      id: 'lomi-cli',
-      name: 'lomi. CLI',
-      icon: animations.code,
-      description:
-        'A powerful command-line interface to help you get started in minutes',
-      useCases: [
-        {
-          name: 'Development workflow',
-          description:
-            'Test payment flows and manage everything from your terminal.',
-        },
-        {
-          name: 'CI/CD Integration',
-          description: 'Automate payment testing in your deployment pipelines.',
-        },
-        {
-          name: 'Data export',
-          description: 'Export transaction data and reports via command line.',
+            'Let us handle the invoicing and collection of payments for you.',
         },
       ],
     },
     {
       id: 'refund-api',
-      name: 'Refund API',
+      name: 'Refunds',
       icon: animations.refresh,
-      description: 'Process refunds programmatically',
+      description: 'Process refunds programmatically.',
       useCases: [
         {
-          name: 'Customer service automation',
+          name: 'Handle returns and cancellations',
           description:
-            'Automatically process refunds based on customer support requests.',
+            'Process refunds and cancellations instantly.',
         },
         {
-          name: 'Order management',
+          name: 'Manage your customers subscriptions',
           description:
-            'Handle returns and cancellations with instant refund processing.',
-        },
-        {
-          name: 'Subscription management',
-          description:
-            'Process prorated refunds when customers cancel subscriptions.',
+            'Send prorated refunds when customers cancel subscriptions.',
         },
       ],
     },
     {
       id: 'payout-transfer-api',
-      name: 'Payout API',
+      name: 'Payouts',
       icon: animations.mail,
       description:
-        'Transfer funds to your bank accounts or your mobile money wallets anywhere in UEMOA, instantly',
+        'Send money to third parties.',
       useCases: [
         {
-          name: 'Vendors and providers payments',
+          name: 'Pay your vendors and providers',
           description: 'Automatically pay your vendors and service providers.',
         },
         {
-          name: 'Affiliate commissions',
-          description:
-            'Distribute earnings to affiliate marketers and partners.',
-        },
-        {
-          name: 'Pay your staff',
-          description: 'Send payments to your employees and contractors.',
+          name: 'Pay yourself, your staff and your partners',
+          description: 'Send payments to any account globally.',
         },
       ],
     },
     {
       id: 'fraud-api',
-      name: 'Fraud API',
+      name: 'Fraud',
       icon: animations.flag,
-      description: 'Detect and prevent fraudulent transactions in real-time',
+      description: 'Detect and prevent fraudulent transactions in real-time.',
       useCases: [
         {
-          name: 'Real-time fraud detection',
-          description:
-            'Analyze transactions for suspicious patterns and block fraudulent activity.',
-        },
-        {
-          name: 'Risk assessment',
+          name: 'Eliminate risk with our fraud detection product',
           description:
             'Our algorithm score transactions based on multiple risk factors and suspect customer behavior.',
         },
         {
-          name: 'Chargeback Prevention',
+          name: 'Prevent chargebacks',
           description:
             'Reduce chargeback rates with proactive fraud monitoring.',
         },
@@ -145,26 +107,18 @@ export function IntegrationsDropdown({
     },
   ];
 
-  const nativeFeatures: UseCase[] = [
+  const nativeFeatures: NativeFeature[] = [
     {
       name: 'Sell online globally',
-      description:
-        'Accept cards, mobile money and cryptocurrencies payments anywhere in francophone West Africa and beyond.',
     },
     {
       name: 'Build complex payment workflows',
-      description:
-        'Be notified when a customers pays and develop APIs and webhooks services.',
     },
     {
-      name: 'Recurring billing',
-      description:
-        'Accept mobile money payments anywhere in francophone West Africa.',
+      name: 'Manage your business finances',
     },
     {
-      name: 'Direct Debit',
-      description:
-        'Invoice your customers with direct bank transfers to accounts across West African banking systems.',
+      name: 'Manage your customers billing and subscriptions',
     },
   ];
 
@@ -192,9 +146,8 @@ export function IntegrationsDropdown({
 
     // Define row groups
     const rows = [
-      ['checkout-sessions-api', 'lomi-cli'], // Row 1
-      ['refund-api', 'payout-transfer-api'], // Row 2
-      ['fraud-api'], // Row 3
+      ['payments', 'refund-api'], // Row 1
+      ['payout-transfer-api', 'fraud-api'], // Row 2
     ];
 
     // Find which row the clicked card belongs to
@@ -248,67 +201,67 @@ export function IntegrationsDropdown({
       <div className="flex flex-col">
         {/* Core Features Section */}
         <div className="px-2">
-          <h3 className="text-sm font-semibold text-zinc-600 dark:text-zinc-400 mb-1.5 px-0">
+          <h3 className="text-sm font-semibold text-zinc-600 dark:text-zinc-400 mb-2 px-0">
             Features
           </h3>
-          <div className="grid grid-cols-4 gap-2">
+          <div className="grid grid-cols-2 gap-3">
             {nativeFeatures.map((feature, index) => (
               <Card
                 key={index}
-                className="group rounded-sm transition-all cursor-pointer hover:shadow-sm"
+                className="group relative flex flex-col h-[57px] rounded-sm transition-all cursor-pointer hover:shadow-sm overflow-hidden"
                 onMouseEnter={() => setHoveredIcon(`feature-${index}`)}
                 onMouseLeave={() => setHoveredIcon(null)}
                 onClick={playClickSound}
               >
                 <CardContent className="p-3 text-sm">
-                  <div className="flex items-start gap-2.5">
-                    <div className="shrink-0 w-3 h-3 mt-1">
-                      <LottieIcon
-                        animationData={
-                          nativeFeatureIcons[index]?.animation ||
-                          animations.globe
-                        }
-                        size={15}
-                        loop={false}
-                        autoplay={false}
-                        initialFrame={0}
-                        isHovered={hoveredIcon === `feature-${index}`}
-                      />
+                  <div className="flex items-center gap-3 pt-1">
+                    <div className="shrink-0">
+                      <div className="flex items-center justify-center w-6 h-6 rounded-md hover:bg-[#2a2f3d]/3 dark:hover:bg-[#2a2f3d]/10 transition-colors">
+                        <LottieIcon
+                          animationData={
+                            nativeFeatureIcons[index]?.animation ||
+                            animations.globe
+                          }
+                          size={12}
+                          loop={false}
+                          autoplay={false}
+                          initialFrame={0}
+                          isHovered={hoveredIcon === `feature-${index}`}
+                          customColor={theme === 'dark' ? [1, 1, 1] : [0.145, 0.145, 0.169]} // White in dark mode, dark in light mode
+                        />
+                      </div>
                     </div>
-                    <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 leading-tight">
-                        {feature.name}
-                      </p>
-                      <p className="text-xs text-muted-foreground mt-0.5 line-clamp-2 leading-tight">
-                        {feature.description}
-                      </p>
-                    </div>
+                    <p className="text-sm font-semibold text-zinc-600 dark:text-zinc-400 leading-tight flex-1">
+                      {feature.name}
+                    </p>
                   </div>
                 </CardContent>
               </Card>
             ))}
           </div>
         </div>
+      </div>
 
-        {/* Products Section */}
-        <div className="px-2">
-          <h3 className="text-sm font-semibold text-zinc-600 dark:text-zinc-400 mb-1.5 px-0">
-            Integrate
-          </h3>
-          <div className="grid grid-cols-2 gap-2">
-            {products.map((product) => (
-              <Card key={product.id} className="rounded-sm overflow-hidden">
-                <CardHeader
-                  className="p-3 pb-2 cursor-pointer transition-all hover:bg-muted/50"
-                  onClick={() => toggleSection(product.id)}
-                  onMouseEnter={() => setHoveredIcon(product.id)}
-                  onMouseLeave={() => setHoveredIcon(null)}
-                >
-                  <div className="flex items-center gap-2">
-                    <div className="shrink-0">
+      {/* Products Section */}
+      <div className="px-2 mt-4">
+        <h3 className="text-sm font-semibold text-zinc-600 dark:text-zinc-400 mb-2 px-0">
+          Integrate
+        </h3>
+        <div className="grid grid-cols-2 gap-2">
+          {products.map((product) => (
+            <Card key={product.id} className="group relative flex flex-col rounded-sm transition-all cursor-pointer hover:shadow-sm overflow-hidden">
+              <CardHeader
+                className="p-3 pb-2 cursor-pointer transition-all"
+                onClick={() => toggleSection(product.id)}
+                onMouseEnter={() => setHoveredIcon(product.id)}
+                onMouseLeave={() => setHoveredIcon(null)}
+              >
+                <div className="flex items-center gap-2">
+                  <div className="shrink-0">
+                    <div className="flex items-center justify-center w-6 h-6 rounded-md hover:bg-[#2a2f3d]/3 dark:hover:bg-[#2a2f3d]/10 transition-colors">
                       <LottieIcon
                         animationData={product.icon}
-                        size={16}
+                        size={12}
                         loop={false}
                         autoplay={false}
                         initialFrame={0}
@@ -324,48 +277,48 @@ export function IntegrationsDropdown({
                         }
                       />
                     </div>
-                    <div className="flex-1 min-w-0">
-                      <p className="text-sm font-semibold leading-tight text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100">
-                        {product.name}
-                      </p>
-                      <p className="text-xs text-muted-foreground mt-0.5 line-clamp-1 leading-tight">
-                        {product.description}
-                      </p>
-                    </div>
-                    <ChevronDown
-                      className={`h-3 w-3 text-muted-foreground transition-transform shrink-0 ${expandedSections.includes(product.id)
-                        ? 'rotate-180'
-                        : ''
-                        }`}
-                    />
                   </div>
-                </CardHeader>
+                  <div className="flex-1 min-w-0 pl-1.5">
+                    <p className="text-sm font-semibold leading-tight text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100">
+                      {product.name}
+                    </p>
+                    <p className="text-xs text-muted-foreground mt-0.5 line-clamp-1 leading-tight">
+                      {product.description}
+                    </p>
+                  </div>
+                  <ChevronDown
+                    className={`h-3 w-3 text-muted-foreground transition-transform shrink-0 ${expandedSections.includes(product.id)
+                      ? 'rotate-180'
+                      : ''
+                      }`}
+                  />
+                </div>
+              </CardHeader>
 
-                {expandedSections.includes(product.id) && (
-                  <CardContent className="px-3 py-2 pt-0">
-                    <div className="grid grid-cols-1 gap-2">
-                      {product.useCases.map((useCase, index) => (
-                        <Card
-                          key={index}
-                          className="rounded-sm transition-all cursor-pointer hover:shadow-sm"
-                          onClick={playClickSound}
-                        >
-                          <CardContent className="p-3 text-sm">
-                            <p className="text-sm font-medium text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 leading-tight">
-                              {useCase.name}
-                            </p>
-                            <p className="text-xs text-muted-foreground mt-1 line-clamp-2 leading-tight">
-                              {useCase.description}
-                            </p>
-                          </CardContent>
-                        </Card>
-                      ))}
-                    </div>
-                  </CardContent>
-                )}
-              </Card>
-            ))}
-          </div>
+              {expandedSections.includes(product.id) && (
+                <CardContent className="px-3 py-2 pt-0">
+                  <div className="grid grid-cols-1 gap-2">
+                    {product.useCases.map((useCase, index) => (
+                      <Card
+                        key={index}
+                        className="rounded-sm transition-all cursor-pointer hover:shadow-sm"
+                        onClick={playClickSound}
+                      >
+                        <CardContent className="p-3 text-sm">
+                          <p className="text-sm font-medium text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 leading-tight">
+                            {useCase.name}
+                          </p>
+                          <p className="text-xs text-muted-foreground mt-1 line-clamp-2 leading-tight">
+                            {useCase.description}
+                          </p>
+                        </CardContent>
+                      </Card>
+                    ))}
+                  </div>
+                </CardContent>
+              )}
+            </Card>
+          ))}
         </div>
       </div>
     </div>

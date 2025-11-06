@@ -462,7 +462,7 @@ export default function PricingTool() {
                                                                 <TooltipContent
                                                                     side="right"
                                                                     align="start"
-                                                                    className="max-w-[200px] text-left text-[11px] leading-tight bg-white text-zinc-700 dark:bg-black/90 dark:text-gray-300 rounded-sm p-4 sm:p-3 shadow-md border border-zinc-200 dark:border-zinc-700"
+                                                                    className="max-w-[200px] text-left text-[11px] leading-tight bg-white text-zinc-700 dark:bg-black/90 dark:text-gray-300 rounded-sm p-4 sm:p-3 shadow-sm border border-zinc-200 dark:border-zinc-700"
                                                                 >
                                                                     {t("pricing.calculator.fee_tooltip", currentLanguage) as string}
                                                                 </TooltipContent>
