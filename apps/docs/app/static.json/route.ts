@@ -1,51 +1,65 @@
-import { NextResponse } from 'next/server';
 import { source } from '@/lib/utils/source';
+import type { OramaDocument } from 'fumadocs-core/search/orama-cloud';
 import { getBreadcrumbItems } from 'fumadocs-core/breadcrumb';
 
 export const revalidate = false;
 
+// Extended type for Orama Cloud that includes breadcrumbs and page_id
+// We override the structured field to use flat arrays instead of StructuredData objects
+type ExtendedOramaDocument = Omit<OramaDocument, 'structured'> & {
+  breadcrumbs: string[];
+  page_id: string;
+  structured: {
+    headings: string[];
+    contents: string[];
+  };
+};
+
 export async function GET(): Promise<Response> {
+  const results: ExtendedOramaDocument[] = [];
   const pages = source.getPages();
-  const pagesArray = Array.isArray(pages) ? pages : [];
-  const results = pagesArray
-    .filter((page) => page.slugs[0] !== 'openapi')
-    .map((page) => {
-      const breadcrumbs = getBreadcrumbItems(page.url, source.pageTree).map(
-        (item) => item.name,
-      );
+  for (const page of pages) {
+    if (page.data._openapi) continue;
 
-      // Transform structured data from fumadocs format to flat arrays for Orama
-      const structuredData = page.data.structuredData;
-      const structured = structuredData?.contents
-        ? (() => {
-            // Filter out entries with empty headings or content, keeping arrays aligned
-            const filtered = structuredData.contents
-              .map((item) => ({
-                heading: (item.heading ?? '').trim(),
-                content: (item.content ?? '').trim(),
-              }))
-              .filter(
-                (item) => item.heading.length > 0 && item.content.length > 0,
-              );
-
-            return {
-              headings: filtered.map((item) => item.heading),
-              contents: filtered.map((item) => item.content),
-            };
-          })()
-        : { headings: [], contents: [] };
-
-      return {
-        id: page.url,
-        page_id: page.url,
-        structured,
-        tag: page.slugs[0],
-        url: page.url,
-        title: page.data.title ?? 'Untitled',
-        description: page.data.description,
-        breadcrumbs,
-      };
+    const items = getBreadcrumbItems(page.url, source.pageTree, {
+      includePage: false,
+      includeRoot: true,
     });
 
-  return NextResponse.json(results);
+    const structuredData = page.data.structuredData;
+    const structured = structuredData
+      ? (() => {
+          // Filter and map contents, keeping headings and contents aligned
+          const filtered = structuredData.contents
+            .map((c) => ({
+              heading: (c.heading ?? '').trim(),
+              content: c.content.trim(),
+            }))
+            .filter((c) => c.content.length > 0);
+
+          return {
+            // Extract heading IDs (or empty string if no heading)
+            headings: filtered.map((c) => c.heading),
+            // Extract content strings
+            contents: filtered.map((c) => c.content),
+          };
+        })()
+      : { headings: [], contents: [] };
+
+    results.push({
+      id: page.url,
+      page_id: page.url,
+      structured,
+      tag: page.slugs[0],
+      url: page.url,
+      title: page.data.title ?? 'Untitled',
+      description: page.data.description,
+      breadcrumbs: items
+        .slice(1) // Skip root
+        .map((item) => (typeof item.name === 'string' ? item.name : ''))
+        .filter((name) => name.length > 0),
+    });
+  }
+
+  return Response.json(results);
 }
