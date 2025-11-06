@@ -46,12 +46,20 @@ export function IntegrationsDropdown({
       description: t('productsDropdown.products.payments.description'),
       useCases: [
         {
-          name: t('productsDropdown.products.payments.useCases.ecommerceMarketplaces.name'),
-          description: t('productsDropdown.products.payments.useCases.ecommerceMarketplaces.description'),
+          name: t(
+            'productsDropdown.products.payments.useCases.ecommerceMarketplaces.name',
+          ),
+          description: t(
+            'productsDropdown.products.payments.useCases.ecommerceMarketplaces.description',
+          ),
         },
         {
-          name: t('productsDropdown.products.payments.useCases.invoicesPayments.name'),
-          description: t('productsDropdown.products.payments.useCases.invoicesPayments.description'),
+          name: t(
+            'productsDropdown.products.payments.useCases.invoicesPayments.name',
+          ),
+          description: t(
+            'productsDropdown.products.payments.useCases.invoicesPayments.description',
+          ),
         },
       ],
     },
@@ -62,12 +70,20 @@ export function IntegrationsDropdown({
       description: t('productsDropdown.products.refunds.description'),
       useCases: [
         {
-          name: t('productsDropdown.products.refunds.useCases.returnsCancellations.name'),
-          description: t('productsDropdown.products.refunds.useCases.returnsCancellations.description'),
+          name: t(
+            'productsDropdown.products.refunds.useCases.returnsCancellations.name',
+          ),
+          description: t(
+            'productsDropdown.products.refunds.useCases.returnsCancellations.description',
+          ),
         },
         {
-          name: t('productsDropdown.products.refunds.useCases.customerSubscriptions.name'),
-          description: t('productsDropdown.products.refunds.useCases.customerSubscriptions.description'),
+          name: t(
+            'productsDropdown.products.refunds.useCases.customerSubscriptions.name',
+          ),
+          description: t(
+            'productsDropdown.products.refunds.useCases.customerSubscriptions.description',
+          ),
         },
       ],
     },
@@ -78,12 +94,20 @@ export function IntegrationsDropdown({
       description: t('productsDropdown.products.payouts.description'),
       useCases: [
         {
-          name: t('productsDropdown.products.payouts.useCases.payVendorsProviders.name'),
-          description: t('productsDropdown.products.payouts.useCases.payVendorsProviders.description'),
+          name: t(
+            'productsDropdown.products.payouts.useCases.payVendorsProviders.name',
+          ),
+          description: t(
+            'productsDropdown.products.payouts.useCases.payVendorsProviders.description',
+          ),
         },
         {
-          name: t('productsDropdown.products.payouts.useCases.payYourselfStaff.name'),
-          description: t('productsDropdown.products.payouts.useCases.payYourselfStaff.description'),
+          name: t(
+            'productsDropdown.products.payouts.useCases.payYourselfStaff.name',
+          ),
+          description: t(
+            'productsDropdown.products.payouts.useCases.payYourselfStaff.description',
+          ),
         },
       ],
     },
@@ -94,12 +118,20 @@ export function IntegrationsDropdown({
       description: t('productsDropdown.products.fraud.description'),
       useCases: [
         {
-          name: t('productsDropdown.products.fraud.useCases.builtInFraudDetection.name'),
-          description: t('productsDropdown.products.fraud.useCases.builtInFraudDetection.description'),
+          name: t(
+            'productsDropdown.products.fraud.useCases.builtInFraudDetection.name',
+          ),
+          description: t(
+            'productsDropdown.products.fraud.useCases.builtInFraudDetection.description',
+          ),
         },
         {
-          name: t('productsDropdown.products.fraud.useCases.preventChargebacks.name'),
-          description: t('productsDropdown.products.fraud.useCases.preventChargebacks.description'),
+          name: t(
+            'productsDropdown.products.fraud.useCases.preventChargebacks.name',
+          ),
+          description: t(
+            'productsDropdown.products.fraud.useCases.preventChargebacks.description',
+          ),
         },
       ],
     },
@@ -296,8 +328,9 @@ export function IntegrationsDropdown({
                     </p>
                   </div>
                   <ChevronDown
-                    className={`h-3 w-3 text-muted-foreground transition-transform shrink-0 ${expandedSections.includes(product.id) ? 'rotate-180' : ''
-                      }`}
+                    className={`h-3 w-3 text-muted-foreground transition-transform shrink-0 ${
+                      expandedSections.includes(product.id) ? 'rotate-180' : ''
+                    }`}
                   />
                 </div>
               </CardHeader>

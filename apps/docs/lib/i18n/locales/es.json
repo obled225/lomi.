@@ -303,8 +303,7 @@
         "useCases": {
           "builtInFraudDetection": {
             "name": "Elimina riesgos con herramientas de detección de fraude integradas",
-"description": "Evaluamos transacciones e identificamos comportamientos sospechosos."
-
+            "description": "Evaluamos transacciones e identificamos comportamientos sospechosos."
           },
           "preventChargebacks": {
             "name": "Previene contracargos",

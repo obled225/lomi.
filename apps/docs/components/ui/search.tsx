@@ -135,8 +135,8 @@ export default function CustomSearchDialog(props: SharedProps) {
             // Add breadcrumb context to the page title
             const breadcrumbText =
               doc.breadcrumbs &&
-                Array.isArray(doc.breadcrumbs) &&
-                doc.breadcrumbs.length > 0
+              Array.isArray(doc.breadcrumbs) &&
+              doc.breadcrumbs.length > 0
                 ? doc.breadcrumbs.join(' › ') + ' › '
                 : '';
 
