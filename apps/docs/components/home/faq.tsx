@@ -64,20 +64,20 @@ const FaqSection = React.forwardRef<HTMLElement, FaqSectionProps>(
                     )}
                   >
                     <AccordionTrigger
-                      className="w-full px-2 py-2 h-auto justify-between hover:bg-transparent items-start flex-wrap sm:flex-nowrap [&[data-state=open]>svg]:rotate-180"
+                      className="w-full px-0 py-2 h-auto justify-between hover:bg-transparent items-start flex-wrap sm:flex-nowrap [&[data-state=open]>svg]:rotate-180"
                     >
                       <h3
                         className={cn(
                           'text-base sm:text-lg font-medium transition-colors duration-200 text-left leading-relaxed',
                           'text-gray-600 dark:text-white',
-                          'wrap-break-word whitespace-normal word-break hyphens-auto flex-1 pr-3',
+                          'wrap-break-word whitespace-normal word-break hyphens-auto flex-1',
                           'data-[state=open]:text-gray-900! data-[state=open]:dark:text-white!',
                         )}
                       >
                         {item.question}
                       </h3>
                     </AccordionTrigger>
-                    <AccordionContent className="px-2 pb-4 pt-2">
+                    <AccordionContent className="px-4 pb-4 pt-2">
                       <motion.p
                         initial={{ y: -10, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}

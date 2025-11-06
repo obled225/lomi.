@@ -8,7 +8,8 @@ import {
   useRef,
   useState,
 } from 'react';
-import { Loader2, RefreshCw, Send, X } from 'lucide-react';
+import { RefreshCw, Send, X } from 'lucide-react';
+import Spinner from '@/components/ui/spinner';
 import { cn } from '@/lib/utils/cn';
 import { buttonVariants } from 'fumadocs-ui/components/ui/button';
 import Link from 'fumadocs-core/link';
@@ -120,7 +121,7 @@ function SearchAIInput(props: ComponentProps<'form'>) {
           )}
           onClick={stop}
         >
-          <Loader2 className="size-4 animate-spin text-fd-muted-foreground" />
+          <Spinner className="text-fd-muted-foreground" />
           Abort Answer
         </button>
       ) : (

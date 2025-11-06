@@ -52,32 +52,31 @@ export default function FaqClient() {
                 <AccordionItem
                   key={item.key}
                   value={item.key}
-                  className="rounded-sm"
                 >
                   <AccordionTrigger className="text-left">
                     {item.question as string}
                   </AccordionTrigger>
-                  <AccordionContent>
-                    <p className="text-foreground/90 leading-relaxed">
-                      {item.answer as string}
-                    </p>
+                  <AccordionContent className="px-4.5">
+                    <p className="text-foreground/90 leading-relaxed" dangerouslySetInnerHTML={{
+                      __html: item.answer as string,
+                    }} />
                   </AccordionContent>
                 </AccordionItem>
               ))}
 
               {/* Additional static question row without response */}
-              <AccordionItem value="static-footer" className="rounded-sm">
-                <div className="flex flex-1 items-start gap-2 rounded-md py-2 -mb-1.5 text-left text-sm font-medium px-2">
-                  <div className="text-muted-foreground pointer-events-none size-3 shrink-0 translate-y-1 transition-transform duration-200 ml-2 opacity-0">
+              <AccordionItem value="static-footer">
+                <div className="flex flex-1 items-start gap-2 py-2 -mb-1.5 text-left text-sm font-medium px-4">
+                  <div className="text-muted-foreground pointer-events-none size-4 shrink-0 translate-y-2 transition-transform duration-200 opacity-0">
                     {/* Invisible placeholder to match spacing */}
                   </div>
                   <div className="flex-1 flex items-center justify-between">
-                    <h3 className="text-base font-medium text-left leading-relaxed text-gray-600 dark:text-white -ml-2">
+                    <h3 className="text-sm font-medium text-left leading-relaxed text-gray-500 dark:text-gray-300">
                       Still have questions?
                     </h3>
                     <a
                       href="/docs"
-                      className="text-sm font-medium text-gray-500 dark:text-gray-300 hover:text-gray-700 dark:hover:text-white transition-colors shrink-0"
+                      className="text-sm font-medium text-gray-500 dark:text-gray-300 hover:text-gray-700 dark:hover:text-white transition-colors shrink-0 -translate-x-2 "
                     >
                       Visit our developer documentation
                     </a>

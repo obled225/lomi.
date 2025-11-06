@@ -252,7 +252,7 @@ export function Footer() {
                     href="https://status.lomi.africa"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-1.5 px-2 py-1.5 text-xs h-8 bg-transparent hover:bg-[#2a2f3d]/5 rounded-sm transition-colors duration-200 justify-center dark:hover:bg-[#2a2f3d]/20 group text-sky-600 dark:text-green-300 hover:text-zinc-900 dark:hover:text-zinc-100"
+                    className="flex items-center gap-1.5 px-2 py-1.5 text-xs h-8 bg-transparent hover:bg-[#2a2f3d]/5 rounded-sm transition-colors duration-200 justify-center dark:hover:bg-[#2a2f3d]/20 group text-[#56A5F9] hover:text-[#52A1F8] dark:text-green-300 dark:hover:text-zinc-100"
                     onClick={playClickSound}
                   >
                     <div className="relative flex items-center justify-center w-3 h-3 shrink-0">
@@ -264,7 +264,7 @@ export function Footer() {
                         />
                       </span>
                     </div>
-                    <span className="text-sky-600 dark:text-green-300 hover:text-zinc-900 dark:hover:text-zinc-100 font-normal whitespace-nowrap text-center">
+                    <span className="text-[#56A5F9] hover:text-[#52A1F8] dark:text-green-300 dark:hover:text-zinc-100 font-normal whitespace-nowrap text-center">
                       {t('footer.status')}
                     </span>
                   </a>
@@ -417,7 +417,7 @@ export function Footer() {
                       target: '_blank',
                       rel: 'noopener noreferrer',
                       color:
-                        'text-sky-600 dark:text-sky-300 hover:text-sky-900 dark:hover:text-sky-200',
+                        'text-[#56A5F9] hover:text-[#52A1F8] dark:text-sky-300 dark:hover:text-sky-200',
                       icon: (
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
