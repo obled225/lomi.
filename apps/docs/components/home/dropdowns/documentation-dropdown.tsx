@@ -129,7 +129,7 @@ export function DocumentationDropdown({
                 {/* Image Background */}
                 <div className="absolute inset-0 opacity-90 dark:opacity-20 group-hover:opacity-100 dark:group-hover:opacity-25 transition-opacity">
                   <Image
-                    src="/company/800x800.webp"
+                    src={card.id === 'billing' ? '/company/500x500.webp' : '/company/700x700.webp'}
                     alt="Background"
                     fill
                     className="object-cover"

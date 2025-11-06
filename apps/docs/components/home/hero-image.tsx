@@ -64,7 +64,7 @@ export default function SimpleImage({
           alt={alt}
           width={width}
           height={height}
-          className={`w-full min-h-[500px] md:min-h-[600px] h-auto object-cover rounded-sm ${className || ''}`}
+          className={`w-full min-h-[500px] md:min-h-[600px] h-auto object-cover rounded-xs ${className || ''}`}
           loading="eager"
           decoding="async"
           crossOrigin="anonymous"

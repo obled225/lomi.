@@ -42,16 +42,16 @@ export function useHomePageInit() {
   // Function to get mobile dashboard images (theme-based only, no language logic)
   const getMobileDashboardImage = () => {
     return {
-      light: '/mobile-light.webp',
-      dark: '/mobile-dark.webp',
+      light: '/company/dashboard/mobile-l.webp',
+      dark: '/company/dashboard/mobile-d.webp',
     };
   };
 
   // Function to get mobile join us images (theme-based only, no language logic)
   const getMobileJoinUsImage = () => {
     return {
-      light: '/company/join-us-mobile-light.webp',
-      dark: '/company/join-us-mobile-dark.webp',
+      light: '/company/mobile/join-us-l.webp',
+      dark: '/company/mobile/join-us-d.webp',
     };
   };
 
