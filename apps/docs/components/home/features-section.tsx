@@ -924,7 +924,7 @@ export function FeaturesSection() {
                 </div>
 
                 <div className="space-y-3">
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-3 mb-1">
                     <Terminal className="size-4 text-blue-500 shrink-0" />
                     <span>
                       {String(

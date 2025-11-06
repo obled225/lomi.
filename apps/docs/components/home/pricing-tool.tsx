@@ -469,7 +469,7 @@ export default function PricingTool() {
                                                         </div>
 
                                                         <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-normal tracking-normal text-zinc-900 dark:text-white wrap-break-word leading-tight">
-                                                            <span className="font-semibold">
+                                                            <span className="font-normal">
                                                                 {formatCurrency(monthlyFees, currency, {
                                                                     minimumFractionDigits: 0,
                                                                     maximumFractionDigits:
@@ -491,7 +491,7 @@ export default function PricingTool() {
                                                             {t("pricing.calculator.you_receive", currentLanguage) as string}
                                                         </p>
 
-                                                        <p className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal tracking-normal text-green-600 dark:text-green-400 wrap-break-word leading-tight translate-y-0">
+                                                        <p className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal tracking-normal text-[#56A5F9] dark:text-sky-300 wrap-break-word leading-tight translate-y-0">
                                                             <span className="font-semibold">
                                                                 {formatCurrency(
                                                                     monthlyAmountReceived,
@@ -530,7 +530,7 @@ export default function PricingTool() {
                                                                 target="_blank"
                                                                 rel="noopener noreferrer"
                                                                 aria-label="See how our fees apply (opens in new tab)"
-                                                                className="text-xs text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 inline-flex items-center ml-1"
+                                                                className="text-xs text-sky-600 hover:text-sky-700 dark:text-sky-300 dark:hover:text-sky-200 inline-flex items-center ml-1"
                                                             >
                                                                 {t("pricing.calculator.see_fees", currentLanguage) as string}
                                                             </a>

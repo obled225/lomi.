@@ -38,17 +38,17 @@ export function IntegrationsDropdown({
       name: 'Payments',
       icon: animations.creditCard,
       description:
-        'Accept payments through hosted checkout forms and direct bank debits.',
+        'Accept payments through our hosted checkout forms or via direct bank debits.',
       useCases: [
         {
           name: 'For e-commerce and marketplaces',
           description:
-            'Accept payments directly on your app with hosted checkout pages or directly via direct debits.',
+            '.',
         },
         {
           name: 'Send invoices and collect payments',
           description:
-            'Let us handle the invoicing and collection of payments for you.',
+            'Let us handle the invoicing and collection of one-time and recurring payments for you.',
         },
       ],
     },
@@ -83,7 +83,7 @@ export function IntegrationsDropdown({
         },
         {
           name: 'Pay yourself, your staff and your partners',
-          description: 'Send payments to any account globally.',
+          description: 'Send payments to any mobile wallet in UEMOA and to any bank account globally.',
         },
       ],
     },
@@ -94,9 +94,9 @@ export function IntegrationsDropdown({
       description: 'Detect and prevent fraudulent transactions in real-time.',
       useCases: [
         {
-          name: 'Eliminate risk with our fraud detection product',
+          name: 'Eliminate risk with built-in fraud detection tools',
           description:
-            'Our algorithm score transactions based on multiple risk factors and suspect customer behavior.',
+            'We score transactions based on multiple risk factors and flag suspicious customer behavior.',
         },
         {
           name: 'Prevent chargebacks',

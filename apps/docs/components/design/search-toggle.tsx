@@ -71,7 +71,7 @@ export function LargeSearchToggle({
       <Search className="size-4" />
       {t('search.search')}
       <Kbd variant="search" className="ms-auto hidden md:inline">
-        <span className="flex items-center gap-0.5">
+        <span className="flex items-center gap-0.5 -translate-y-0.25">
           {hotKey.map((k: { display: React.ReactNode }, index: number) => (
             <span key={index}>{k.display}</span>
           ))}
