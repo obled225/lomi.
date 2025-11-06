@@ -17,10 +17,22 @@ export async function GET(): Promise<Response> {
       // Transform structured data from fumadocs format to flat arrays for Orama
       const structuredData = page.data.structuredData;
       const structured = structuredData?.contents
-        ? {
-            headings: structuredData.contents.map((item) => item.heading ?? ''),
-            contents: structuredData.contents.map((item) => item.content ?? ''),
-          }
+        ? (() => {
+            // Filter out entries with empty headings or content, keeping arrays aligned
+            const filtered = structuredData.contents
+              .map((item) => ({
+                heading: (item.heading ?? '').trim(),
+                content: (item.content ?? '').trim(),
+              }))
+              .filter(
+                (item) => item.heading.length > 0 && item.content.length > 0,
+              );
+
+            return {
+              headings: filtered.map((item) => item.heading),
+              contents: filtered.map((item) => item.content),
+            };
+          })()
         : { headings: [], contents: [] };
 
       return {
