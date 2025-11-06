@@ -3,8 +3,7 @@
 import { motion } from 'framer-motion';
 import { useTranslation } from '@/lib/contexts/translation-context';
 import { t } from '@/lib/i18n/translations';
-import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
-import { FaqFooter } from './faq';
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@/components/ui/accordion';
 
 export default function FaqClient() {
   const { currentLanguage } = useTranslation();
@@ -48,28 +47,45 @@ export default function FaqClient() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            <Accordions type="single" defaultValue="pricing" className="rounded-sm">
+            <Accordion type="single" collapsible className="rounded-sm">
               {faqItems.map((item, index) => (
-                <Accordion
+                <AccordionItem
                   key={item.key}
-                  title={item.question as string}
+                  value={item.key}
                   className="rounded-sm"
                 >
-                  <p className="text-foreground/90 leading-relaxed">
-                    {item.answer as string}
-                  </p>
-                </Accordion>
+                  <AccordionTrigger className="text-left">
+                    {item.question as string}
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <p className="text-foreground/90 leading-relaxed">
+                      {item.answer as string}
+                    </p>
+                  </AccordionContent>
+                </AccordionItem>
               ))}
-            </Accordions>
 
-            <motion.div
-              className="mt-4"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.8 }}
-            >
-              <FaqFooter />
-            </motion.div>
+              {/* Additional static question row without response */}
+              <AccordionItem value="static-footer" className="rounded-sm">
+                <div className="flex flex-1 items-start gap-2 rounded-md py-2 -mb-1.5 text-left text-sm font-medium px-2">
+                  <div className="text-muted-foreground pointer-events-none size-3 shrink-0 translate-y-1 transition-transform duration-200 ml-2 opacity-0">
+                    {/* Invisible placeholder to match spacing */}
+                  </div>
+                  <div className="flex-1 flex items-center justify-between">
+                    <h3 className="text-base font-medium text-left leading-relaxed text-gray-600 dark:text-white -ml-2">
+                      Still have questions?
+                    </h3>
+                    <a
+                      href="/docs"
+                      className="text-sm font-medium text-gray-500 dark:text-gray-300 hover:text-gray-700 dark:hover:text-white transition-colors shrink-0"
+                    >
+                      Visit our developer documentation
+                    </a>
+                  </div>
+                </div>
+              </AccordionItem>
+            </Accordion>
+
           </motion.div>
         </div>
       </div>

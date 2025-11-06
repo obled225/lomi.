@@ -1,13 +1,14 @@
 'use client';
 
 import * as React from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, Mail } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Mail } from 'lucide-react';
 import { cn } from '@/lib/actions/utils';
 import { Button } from '@/components/ui/button';
 import { useTranslation } from '@/lib/contexts/translation-context';
 import { t, getTranslations } from '@/lib/i18n/translations';
 import { playClickSound } from '@/lib/utils/sound';
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@/components/ui/accordion';
 
 interface FaqSectionProps extends React.HTMLAttributes<HTMLElement> {
   contactInfo?: {
@@ -50,16 +51,44 @@ const FaqSection = React.forwardRef<HTMLElement, FaqSectionProps>(
             </div>
 
             {/* FAQ Items */}
-            <div className="max-w-2xl mx-auto space-y-2 w-full">
-              {faqData.map((item, index) => (
-                <FaqItem
-                  key={index}
-                  question={item.question}
-                  answer={item.answer}
-                  index={index}
-                  playClickSound={playClickSound}
-                />
-              ))}
+            <div className="max-w-2xl mx-auto w-full">
+              <Accordion type="single" collapsible>
+                {faqData.map((item, index) => (
+                  <AccordionItem
+                    key={index}
+                    value={index.toString()}
+                    className={cn(
+                      'group',
+                      'transition-all duration-200 ease-in-out',
+                      'hover:bg-muted/50',
+                    )}
+                  >
+                    <AccordionTrigger
+                      className="w-full px-2 py-2 h-auto justify-between hover:bg-transparent items-start flex-wrap sm:flex-nowrap [&[data-state=open]>svg]:rotate-180"
+                    >
+                      <h3
+                        className={cn(
+                          'text-base sm:text-lg font-medium transition-colors duration-200 text-left leading-relaxed',
+                          'text-gray-600 dark:text-white',
+                          'wrap-break-word whitespace-normal word-break hyphens-auto flex-1 pr-3',
+                          'data-[state=open]:text-gray-900! data-[state=open]:dark:text-white!',
+                        )}
+                      >
+                        {item.question}
+                      </h3>
+                    </AccordionTrigger>
+                    <AccordionContent className="px-2 pb-4 pt-2">
+                      <motion.p
+                        initial={{ y: -10, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        className="text-foreground/80 text-sm leading-relaxed text-left"
+                      >
+                        {item.answer}
+                      </motion.p>
+                    </AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
             </div>
 
             {/* Contact Section */}
@@ -98,131 +127,6 @@ const FaqSection = React.forwardRef<HTMLElement, FaqSectionProps>(
 );
 FaqSection.displayName = 'FaqSection';
 
-// Internal FaqItem component
-const FaqItem = React.forwardRef<
-  HTMLDivElement,
-  {
-    question: string;
-    answer: string;
-    index: number;
-    playClickSound: () => void;
-  }
->((props, ref) => {
-  const [isOpen, setIsOpen] = React.useState(props.index === 0);
-  const { question, answer, index, playClickSound } = props;
 
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.2, delay: index * 0.1 }}
-      className={cn(
-        'group',
-        'transition-all duration-200 ease-in-out rounded-sm',
-        isOpen
-          ? 'border-t border-l border-r border-border/50 border-b-0 bg-linear-to-br from-background via-muted/50 to-background'
-          : 'border border-border/50 hover:bg-muted/50',
-      )}
-    >
-      <Button
-        variant="dashed"
-        onClick={() => {
-          setIsOpen(!isOpen);
-          playClickSound();
-        }}
-        className="w-full px-6 py-6 h-auto justify-between hover:bg-transparent items-start flex-wrap sm:flex-nowrap"
-      >
-        <h3
-          className={cn(
-            'text-sm sm:text-base font-medium transition-colors duration-200 text-left leading-relaxed',
-            'text-gray-600 dark:text-white',
-            'wrap-break-word whitespace-normal word-break hyphens-auto flex-1 pr-3',
-            isOpen && 'text-gray-900 dark:text-white',
-          )}
-        >
-          {question}
-        </h3>
-        <motion.div
-          animate={{
-            rotate: isOpen ? 180 : 0,
-            scale: isOpen ? 1.1 : 1,
-          }}
-          transition={{ duration: 0.2 }}
-          className={cn(
-            'p-0.5 rounded-sm shrink-0 mt-1',
-            'transition-colors duration-200',
-            isOpen ? 'text-primary' : 'text-foreground/80',
-          )}
-        >
-          <ChevronDown className="h-3 w-3" />
-        </motion.div>
-      </Button>
-      <AnimatePresence initial={false}>
-        {isOpen && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{
-              height: 'auto',
-              opacity: 1,
-              transition: { duration: 0.2, ease: 'easeOut' },
-            }}
-            exit={{
-              height: 0,
-              opacity: 0,
-              transition: { duration: 0.2, ease: 'easeIn' },
-            }}
-          >
-            <div className="px-6 pb-4 pt-2 border-b border-border/50 rounded-sm">
-              <motion.p
-                initial={{ y: -10, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                exit={{ y: -10, opacity: 0 }}
-                className="text-foreground/80 text-sm leading-relaxed text-left"
-              >
-                {answer}
-              </motion.p>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.div>
-  );
-});
-FaqItem.displayName = 'FaqItem';
 
-// FAQ Footer component
-const FaqFooter = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => {
-  const { currentLanguage } = useTranslation();
-
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.2 }}
-      className={cn(
-        'group transition-all duration-200 ease-in-out rounded-sm border border-border/50 hover:bg-muted/50',
-        className
-      )}
-    >
-      <div className="w-full px-6 py-3 h-auto justify-between hover:bg-transparent items-center flex-wrap sm:flex-nowrap flex">
-        <h3 className="text-sm sm:text-base font-medium transition-colors duration-200 text-left leading-relaxed text-gray-600 dark:text-white wrap-break-word whitespace-normal word-break hyphens-auto flex-1 pr-3">
-          {t('faq.still_have_questions', currentLanguage) as string}
-        </h3>
-        <a
-          href="/docs"
-          className="text-sm hover:opacity-75 transition-colors font-medium text-zinc-800 dark:text-white shrink-0"
-        >
-          {t('faq.visit_docs', currentLanguage) as string}
-        </a>
-      </div>
-    </motion.div>
-  );
-});
-FaqFooter.displayName = 'FaqFooter';
-
-export { FaqSection, FaqFooter };
+export { FaqSection };
