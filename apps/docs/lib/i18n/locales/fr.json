@@ -306,6 +306,82 @@
     "dashboard": "Tableau de bord",
     "connect": "Connexion"
   },
+  "documentationDropdown": {
+    "featuredTitle": "Concentrez-vous sur le développement, pas sur la facturation.",
+    "featuredDescription": "Explorez nos guides et exemples pour intégrer lomi.",
+    "billingTitle": "Facturation",
+    "billingDescription": "Facturez et gérez vos clients comme vous voulez.",
+    "moneyManagementTitle": "Money management",
+    "moneyManagementDescription": "Gérez vos finances via notre dashboard ou directement sur votre plateforme."
+  },
+  "productsDropdown": {
+    "featuresTitle": "Fonctionnalités",
+    "integrateTitle": "Intégrer",
+    "nativeFeatures": {
+      "sellOnlineGlobally": "Vendez en ligne partout dans le monde",
+      "buildComplexWorkflows": "Construisez des workflows de paiement complexes",
+      "manageBusinessFinances": "Gérez les finances de votre entreprise",
+      "manageCustomerBilling": "Gérez la facturation et les abonnements de vos clients"
+    },
+    "products": {
+      "payments": {
+        "name": "Paiements",
+        "description": "Acceptez les paiements via nos formulaires de paiement hébergés ou via des débits bancaires directs.",
+        "useCases": {
+          "ecommerceMarketplaces": {
+            "name": "Pour l'e-commerce et les places de marché",
+            "description": "Activez des transactions sécurisées entre acheteurs et vendeurs."
+          },
+          "invoicesPayments": {
+            "name": "Envoyez des factures et collectez les paiements",
+            "description": "Laissez-nous gérer la facturation et la collecte des paiements uniques et récurrents pour vous."
+          }
+        }
+      },
+      "refunds": {
+        "name": "Remboursements",
+        "description": "Traitez les remboursements par programmation.",
+        "useCases": {
+          "returnsCancellations": {
+            "name": "Gérez les retours et annulations",
+            "description": "Traitez les remboursements et annulations instantanément."
+          },
+          "customerSubscriptions": {
+            "name": "Gérez les abonnements de vos clients",
+            "description": "Envoyez des remboursements au prorata lorsque les clients annulent leurs abonnements."
+          }
+        }
+      },
+      "payouts": {
+        "name": "Paiements",
+        "description": "Envoyez de l'argent à des tiers.",
+        "useCases": {
+          "payVendorsProviders": {
+            "name": "Payez vos vendeurs et fournisseurs",
+            "description": "Payez automatiquement vos vendeurs et fournisseurs de services."
+          },
+          "payYourselfStaff": {
+            "name": "Payez-vous, votre personnel et vos partenaires",
+            "description": "Envoyez des paiements vers n'importe quel portefeuille mobile en UEMOA et vers n'importe quel compte bancaire dans le monde."
+          }
+        }
+      },
+      "fraud": {
+        "name": "Fraude",
+        "description": "Détectez et empêchez les transactions frauduleuses en temps réel.",
+        "useCases": {
+          "builtInFraudDetection": {
+            "name": "Éliminez les risques avec des outils de détection de fraude intégrés",
+            "description": "Nous évaluons les transactions en fonction de multiples facteurs de risque et signalons les comportements suspects des clients."
+          },
+          "preventChargebacks": {
+            "name": "Préventez les rétrofacturations",
+            "description": "Réduisez les taux de rétrofacturation grâce à une surveillance proactive des fraudes."
+          }
+        }
+      }
+    }
+  },
   "search": {
     "search": "Rechercher",
     "all": "Tous",

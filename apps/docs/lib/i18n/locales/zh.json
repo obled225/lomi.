@@ -301,6 +301,82 @@
     "dashboard": "仪表板",
     "connect": "连接"
   },
+  "documentationDropdown": {
+    "featuredTitle": "专注于构建，而非计费。",
+    "featuredDescription": "探索我们的指南和示例以集成 lomi。",
+    "billingTitle": "计费",
+    "billingDescription": "以您想要的方式计费和管理客户。",
+    "moneyManagementTitle": "资金管理",
+    "moneyManagementDescription": "直接管理资金和财务，或在您的平台内管理。"
+  },
+  "productsDropdown": {
+    "featuresTitle": "功能",
+    "integrateTitle": "集成",
+    "nativeFeatures": {
+      "sellOnlineGlobally": "全球在线销售",
+      "buildComplexWorkflows": "构建复杂的支付工作流程",
+      "manageBusinessFinances": "管理您的企业财务",
+      "manageCustomerBilling": "管理客户的计费和订阅"
+    },
+    "products": {
+      "payments": {
+        "name": "支付",
+        "description": "通过我们的托管结账表单或直接银行借记接受付款。",
+        "useCases": {
+          "ecommerceMarketplaces": {
+            "name": "适用于电子商务和市场",
+            "description": "通过自动付款拆分和托管保护，实现买家和卖家之间的安全交易。"
+          },
+          "invoicesPayments": {
+            "name": "发送发票并收集付款",
+            "description": "让我们为您处理一次性付款和定期付款的开票和收取。"
+          }
+        }
+      },
+      "refunds": {
+        "name": "退款",
+        "description": "以编程方式处理退款。",
+        "useCases": {
+          "returnsCancellations": {
+            "name": "处理退货和取消",
+            "description": "即时处理退款和取消。"
+          },
+          "customerSubscriptions": {
+            "name": "管理客户订阅",
+            "description": "当客户取消订阅时发送按比例退款。"
+          }
+        }
+      },
+      "payouts": {
+        "name": "付款",
+        "description": "向第三方发送资金。",
+        "useCases": {
+          "payVendorsProviders": {
+            "name": "支付您的供应商和服务提供商",
+            "description": "自动支付您的供应商和服务提供商。"
+          },
+          "payYourselfStaff": {
+            "name": "给自己、员工和合作伙伴付款",
+            "description": "向UEMOA中的任何移动钱包和全球任何银行账户发送付款。"
+          }
+        }
+      },
+      "fraud": {
+        "name": "欺诈",
+        "description": "实时检测和防止欺诈交易。",
+        "useCases": {
+          "builtInFraudDetection": {
+            "name": "使用内置欺诈检测工具消除风险",
+            "description": "我们根据多个风险因素对交易进行评分，并标记可疑客户行为。"
+          },
+          "preventChargebacks": {
+            "name": "防止退款",
+            "description": "通过主动欺诈监控降低退款率。"
+          }
+        }
+      }
+    }
+  },
   "search": {
     "search": "搜索",
     "all": "全部",

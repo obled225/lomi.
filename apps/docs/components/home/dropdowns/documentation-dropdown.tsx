@@ -6,6 +6,8 @@ import { animations, LottieAnimationData } from '@/lib/utils/lottie-animations';
 import { playClickSound } from '@/lib/utils/sound';
 import { Card, CardHeader, CardContent } from '@/components/ui/card';
 import { InfoBox } from '@/components/ui/info-box';
+import { useTranslation } from '@/lib/contexts/translation-context';
+import { t as translate } from '@/lib/i18n/translations';
 
 type DocCard = {
   id: string;
@@ -30,10 +32,14 @@ export function DocumentationDropdown({
   onMouseLeave?: () => void;
 }) {
   const [hoveredIcon, setHoveredIcon] = useState<string | null>(null);
+  const { currentLanguage } = useTranslation();
+
+  // Create t function that uses currentLanguage
+  const t = (key: string) => String(translate(key, currentLanguage));
 
   const featuredCard: FeaturedCard = {
-    title: 'Focus on building, not billing.',
-    description: 'Explore our guides and examples to integrate lomi.',
+    title: t('documentationDropdown.featuredTitle'),
+    description: t('documentationDropdown.featuredDescription'),
     image: '/company/800x800.webp',
     imageAlt: 'Developers space',
     href: '/docs/getting-started',
@@ -43,15 +49,15 @@ export function DocumentationDropdown({
   const docCards: DocCard[] = [
     {
       id: 'billing',
-      title: 'Billing',
-      description: 'Bill and manage customers however you want.',
+      title: t('documentationDropdown.billingTitle'),
+      description: t('documentationDropdown.billingDescription'),
       icon: animations.code,
       href: '/docs/core/billing',
     },
     {
       id: 'merchant-of-record',
-      title: 'Money management',
-      description: 'Manage money and finance directly or within your platform.',
+      title: t('documentationDropdown.moneyManagementTitle'),
+      description: t('documentationDropdown.moneyManagementDescription'),
       icon: animations.search,
       href: '/docs/core/merchant-of-record',
     },

@@ -5,6 +5,8 @@ import { animations, LottieAnimationData } from '@/lib/utils/lottie-animations';
 import { useTheme } from '@/lib/hooks/use-theme';
 import { playClickSound } from '@/lib/utils/sound';
 import { Card, CardHeader, CardContent } from '@/components/ui/card';
+import { useTranslation } from '@/lib/contexts/translation-context';
+import { t as translate } from '@/lib/i18n/translations';
 
 type UseCase = {
   name: string;
@@ -31,75 +33,73 @@ export function IntegrationsDropdown({
   const [expandedSections, setExpandedSections] = useState<string[]>([]);
   const [hoveredIcon, setHoveredIcon] = useState<string | null>(null);
   const { theme } = useTheme();
+  const { currentLanguage } = useTranslation();
+
+  // Create t function that uses currentLanguage
+  const t = (key: string) => String(translate(key, currentLanguage));
 
   const products: Product[] = [
     {
       id: 'payments',
-      name: 'Payments',
+      name: t('productsDropdown.products.payments.name'),
       icon: animations.creditCard,
-      description:
-        'Accept payments through our hosted checkout forms or via direct bank debits.',
+      description: t('productsDropdown.products.payments.description'),
       useCases: [
         {
-          name: 'For e-commerce and marketplaces',
-          description: '.',
+          name: t('productsDropdown.products.payments.useCases.ecommerceMarketplaces.name'),
+          description: t('productsDropdown.products.payments.useCases.ecommerceMarketplaces.description'),
         },
         {
-          name: 'Send invoices and collect payments',
-          description:
-            'Let us handle the invoicing and collection of one-time and recurring payments for you.',
+          name: t('productsDropdown.products.payments.useCases.invoicesPayments.name'),
+          description: t('productsDropdown.products.payments.useCases.invoicesPayments.description'),
         },
       ],
     },
     {
       id: 'refund-api',
-      name: 'Refunds',
+      name: t('productsDropdown.products.refunds.name'),
       icon: animations.refresh,
-      description: 'Process refunds programmatically.',
+      description: t('productsDropdown.products.refunds.description'),
       useCases: [
         {
-          name: 'Handle returns and cancellations',
-          description: 'Process refunds and cancellations instantly.',
+          name: t('productsDropdown.products.refunds.useCases.returnsCancellations.name'),
+          description: t('productsDropdown.products.refunds.useCases.returnsCancellations.description'),
         },
         {
-          name: 'Manage your customers subscriptions',
-          description:
-            'Send prorated refunds when customers cancel subscriptions.',
+          name: t('productsDropdown.products.refunds.useCases.customerSubscriptions.name'),
+          description: t('productsDropdown.products.refunds.useCases.customerSubscriptions.description'),
         },
       ],
     },
     {
       id: 'payout-transfer-api',
-      name: 'Payouts',
+      name: t('productsDropdown.products.payouts.name'),
       icon: animations.mail,
-      description: 'Send money to third parties.',
+      description: t('productsDropdown.products.payouts.description'),
       useCases: [
         {
-          name: 'Pay your vendors and providers',
-          description: 'Automatically pay your vendors and service providers.',
+          name: t('productsDropdown.products.payouts.useCases.payVendorsProviders.name'),
+          description: t('productsDropdown.products.payouts.useCases.payVendorsProviders.description'),
         },
         {
-          name: 'Pay yourself, your staff and your partners',
-          description:
-            'Send payments to any mobile wallet in UEMOA and to any bank account globally.',
+          name: t('productsDropdown.products.payouts.useCases.payYourselfStaff.name'),
+          description: t('productsDropdown.products.payouts.useCases.payYourselfStaff.description'),
         },
       ],
     },
     {
       id: 'fraud-api',
-      name: 'Fraud',
+      name: t('productsDropdown.products.fraud.name'),
       icon: animations.flag,
-      description: 'Detect and prevent fraudulent transactions in real-time.',
+      description: t('productsDropdown.products.fraud.description'),
       useCases: [
         {
-          name: 'Eliminate risk with built-in fraud detection tools',
-          description:
-            'We score transactions based on multiple risk factors and flag suspicious customer behavior.',
+          name: t('productsDropdown.products.fraud.useCases.builtInFraudDetection.name'),
+          description: t('productsDropdown.products.fraud.useCases.builtInFraudDetection.description'),
         },
         {
-          name: 'Prevent chargebacks',
-          description:
-            'Reduce chargeback rates with proactive fraud monitoring.',
+          name: t('productsDropdown.products.fraud.useCases.preventChargebacks.name'),
+          description: t('productsDropdown.products.fraud.useCases.preventChargebacks.description'),
         },
       ],
     },
@@ -107,16 +107,16 @@ export function IntegrationsDropdown({
 
   const nativeFeatures: NativeFeature[] = [
     {
-      name: 'Sell online globally',
+      name: t('productsDropdown.nativeFeatures.sellOnlineGlobally'),
     },
     {
-      name: 'Build complex payment workflows',
+      name: t('productsDropdown.nativeFeatures.buildComplexWorkflows'),
     },
     {
-      name: 'Manage your business finances',
+      name: t('productsDropdown.nativeFeatures.manageBusinessFinances'),
     },
     {
-      name: 'Manage your customers billing and subscriptions',
+      name: t('productsDropdown.nativeFeatures.manageCustomerBilling'),
     },
   ];
 
@@ -200,7 +200,7 @@ export function IntegrationsDropdown({
         {/* Core Features Section */}
         <div className="px-2">
           <h3 className="text-sm font-semibold text-zinc-600 dark:text-zinc-400 mb-2 px-0">
-            Features
+            {t('productsDropdown.featuresTitle')}
           </h3>
           <div className="grid grid-cols-2 gap-3">
             {nativeFeatures.map((feature, index) => (
@@ -251,7 +251,7 @@ export function IntegrationsDropdown({
       {/* Products Section */}
       <div className="px-2 mt-4">
         <h3 className="text-sm font-semibold text-zinc-600 dark:text-zinc-400 mb-2 px-0">
-          Integrate
+          {t('productsDropdown.integrateTitle')}
         </h3>
         <div className="grid grid-cols-2 gap-3">
           {products.map((product) => (
@@ -296,9 +296,8 @@ export function IntegrationsDropdown({
                     </p>
                   </div>
                   <ChevronDown
-                    className={`h-3 w-3 text-muted-foreground transition-transform shrink-0 ${
-                      expandedSections.includes(product.id) ? 'rotate-180' : ''
-                    }`}
+                    className={`h-3 w-3 text-muted-foreground transition-transform shrink-0 ${expandedSections.includes(product.id) ? 'rotate-180' : ''
+                      }`}
                   />
                 </div>
               </CardHeader>

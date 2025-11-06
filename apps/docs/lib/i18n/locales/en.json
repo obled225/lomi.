@@ -335,6 +335,82 @@
     "dashboard": "Dashboard",
     "connect": "Connect"
   },
+  "documentationDropdown": {
+    "featuredTitle": "Focus on building, not billing.",
+    "featuredDescription": "Explore our guides and examples to integrate lomi.",
+    "billingTitle": "Billing",
+    "billingDescription": "Bill and manage customers however you want.",
+    "moneyManagementTitle": "Money management",
+    "moneyManagementDescription": "Manage money and finance directly or within your platform."
+  },
+  "productsDropdown": {
+    "featuresTitle": "Features",
+    "integrateTitle": "Integrate",
+    "nativeFeatures": {
+      "sellOnlineGlobally": "Sell online globally",
+      "buildComplexWorkflows": "Build complex payment workflows",
+      "manageBusinessFinances": "Manage your business finances",
+      "manageCustomerBilling": "Manage your customers billing and subscriptions"
+    },
+    "products": {
+      "payments": {
+        "name": "Payments",
+        "description": "Accept payments through our hosted checkout forms or via direct bank debits.",
+        "useCases": {
+          "ecommerceMarketplaces": {
+            "name": "For e-commerce and marketplaces",
+            "description": "Enable secure buyer-seller transactions with payment splitting and escrow protection."
+          },
+          "invoicesPayments": {
+            "name": "Send invoices and collect payments",
+            "description": "Let us handle the invoicing and collection of one-time and recurring payments for you."
+          }
+        }
+      },
+      "refunds": {
+        "name": "Refunds",
+        "description": "Process refunds programmatically.",
+        "useCases": {
+          "returnsCancellations": {
+            "name": "Handle returns and cancellations",
+            "description": "Process refunds and cancellations instantly."
+          },
+          "customerSubscriptions": {
+            "name": "Manage your customers subscriptions",
+            "description": "Send prorated refunds when customers cancel subscriptions."
+          }
+        }
+      },
+      "payouts": {
+        "name": "Payouts",
+        "description": "Send money to third parties.",
+        "useCases": {
+          "payVendorsProviders": {
+            "name": "Pay your vendors and providers",
+            "description": "Automatically pay your vendors and service providers."
+          },
+          "payYourselfStaff": {
+            "name": "Pay yourself, your staff and your partners",
+            "description": "Send payments to any mobile wallet in UEMOA and to any bank account globally."
+          }
+        }
+      },
+      "fraud": {
+        "name": "Fraud",
+        "description": "Detect and prevent fraudulent transactions in real-time.",
+        "useCases": {
+          "builtInFraudDetection": {
+            "name": "Eliminate risk with built-in fraud detection tools",
+            "description": "We score transactions based on multiple risk factors and flag suspicious customer behavior."
+          },
+          "preventChargebacks": {
+            "name": "Prevent chargebacks",
+            "description": "Reduce chargeback rates with proactive fraud monitoring."
+          }
+        }
+      }
+    }
+  },
   "search": {
     "search": "Search",
     "all": "All",

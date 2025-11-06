@@ -237,6 +237,83 @@
     "dashboard": "Panel de control",
     "connect": "Conectar"
   },
+  "documentationDropdown": {
+    "featuredTitle": "Concéntrate en construir, no en facturar.",
+    "featuredDescription": "Explora nuestras guías y ejemplos para integrar lomi.",
+    "billingTitle": "Facturación",
+    "billingDescription": "Factura y gestiona a tus clientes como quieras.",
+    "moneyManagementTitle": "Gestión de dinero",
+    "moneyManagementDescription": "Gestiona el dinero y las finanzas directamente o dentro de tu plataforma."
+  },
+  "productsDropdown": {
+    "featuresTitle": "Características",
+    "integrateTitle": "Integrar",
+    "nativeFeatures": {
+      "sellOnlineGlobally": "Vende en línea a nivel global",
+      "buildComplexWorkflows": "Construye flujos de trabajo de pago complejos",
+      "manageBusinessFinances": "Gestiona las finanzas de tu empresa",
+      "manageCustomerBilling": "Gestiona la facturación y suscripciones de tus clientes"
+    },
+    "products": {
+      "payments": {
+        "name": "Pagos",
+        "description": "Acepta pagos a través de nuestros formularios de pago alojados o mediante débitos bancarios directos.",
+        "useCases": {
+          "ecommerceMarketplaces": {
+            "name": "Para comercio electrónico y mercados",
+            "description": "Habilite transacciones seguras entre compradores y vendedores."
+          },
+          "invoicesPayments": {
+            "name": "Envía facturas y cobra pagos",
+            "description": "Déjanos manejar la facturación y cobro de pagos únicos y recurrentes por ti."
+          }
+        }
+      },
+      "refunds": {
+        "name": "Reembolsos",
+        "description": "Procesa reembolsos programáticamente.",
+        "useCases": {
+          "returnsCancellations": {
+            "name": "Maneja devoluciones y cancelaciones",
+            "description": "Procesa reembolsos y cancelaciones al instante."
+          },
+          "customerSubscriptions": {
+            "name": "Gestiona las suscripciones de tus clientes",
+            "description": "Envía reembolsos prorrateados cuando los clientes cancelan sus suscripciones."
+          }
+        }
+      },
+      "payouts": {
+        "name": "Pagos",
+        "description": "Envía dinero a terceros.",
+        "useCases": {
+          "payVendorsProviders": {
+            "name": "Paga a tus proveedores y proveedores",
+            "description": "Paga automáticamente a tus proveedores y proveedores de servicios."
+          },
+          "payYourselfStaff": {
+            "name": "Págate a ti mismo, a tu personal y a tus socios",
+            "description": "Envía pagos a cualquier billetera móvil en UEMOA y a cualquier cuenta bancaria globalmente."
+          }
+        }
+      },
+      "fraud": {
+        "name": "Fraude",
+        "description": "Detecta y previene transacciones fraudulentas en tiempo real.",
+        "useCases": {
+          "builtInFraudDetection": {
+            "name": "Elimina riesgos con herramientas de detección de fraude integradas",
+"description": "Evaluamos transacciones e identificamos comportamientos sospechosos."
+
+          },
+          "preventChargebacks": {
+            "name": "Previene contracargos",
+            "description": "Reduce las tasas de contracargos con monitoreo proactivo de fraudes."
+          }
+        }
+      }
+    }
+  },
   "search": {
     "search": "Buscar",
     "all": "Todos",
