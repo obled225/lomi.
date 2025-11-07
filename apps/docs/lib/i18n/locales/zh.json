@@ -398,7 +398,6 @@
     "card1": {
       "title": "满足您所有客户偏好的支付方式",
       "description": "接受本地和国际支付方式，无需努力。",
-      "momo_description": "移动货币支付",
       "wallet_description": "数字钱包支付",
       "crypto_description": "加密货币支付",
       "spi_description": "统一支付系统",

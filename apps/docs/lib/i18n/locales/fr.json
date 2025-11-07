@@ -403,7 +403,6 @@
     "card1": {
       "title": "Tous les moyens de paiement préférés de vos clients",
       "description": "Acceptez les paiements locaux et internationaux, sans efforts.",
-      "momo_description": "Paiements par mobile money",
       "wallet_description": "Paiements par E-Wallet",
       "crypto_description": "Paiements en cryptomonnaie",
       "spi_description": "Système interopérable de paiement",

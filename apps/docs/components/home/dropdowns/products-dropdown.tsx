@@ -261,7 +261,7 @@ export function IntegrationsDropdown({
                             hoveredIcon === `feature-${index}`
                               ? theme === 'dark'
                                 ? [0.922, 0.922, 0.941] // Very light in dark mode (zinc-200)
-                                : [0.145, 0.145, 0.169] // Very dark in light mode (zinc-800)
+                                : [0.4, 0.4, 0.427] // zinc-700 in light mode
                               : theme === 'dark'
                                 ? [0.631, 0.631, 0.667] // zinc-400 in dark mode
                                 : [0.322, 0.322, 0.357] // zinc-600 in light mode
@@ -269,7 +269,11 @@ export function IntegrationsDropdown({
                         />
                       </div>
                     </div>
-                    <p className="text-sm font-semibold text-zinc-600 dark:text-zinc-400 leading-tight flex-1">
+                    <p className={`text-sm font-semibold leading-tight flex-1 ${
+                      hoveredIcon === `feature-${index}`
+                        ? 'text-zinc-900 dark:text-zinc-100'
+                        : 'text-zinc-600 dark:text-zinc-400'
+                    }`}>
                       {feature.name}
                     </p>
                   </div>
@@ -311,7 +315,7 @@ export function IntegrationsDropdown({
                           hoveredIcon === product.id
                             ? theme === 'dark'
                               ? [0.922, 0.922, 0.941] // Very light in dark mode (zinc-200)
-                              : [0.145, 0.145, 0.169] // Very dark in light mode (zinc-800)
+                              : [0.4, 0.4, 0.427] // zinc-700 in light mode
                             : theme === 'dark'
                               ? [0.631, 0.631, 0.667] // zinc-400 in dark mode
                               : [0.322, 0.322, 0.357] // zinc-600 in light mode
@@ -320,7 +324,11 @@ export function IntegrationsDropdown({
                     </div>
                   </div>
                   <div className="flex-1 min-w-0 pl-1.5">
-                    <p className="text-sm font-semibold leading-tight text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100">
+                    <p className={`text-sm font-semibold leading-tight ${
+                      hoveredIcon === product.id
+                        ? 'text-zinc-900 dark:text-zinc-100'
+                        : 'text-zinc-600 dark:text-zinc-400'
+                    }`}>
                       {product.name}
                     </p>
                     <p className="text-xs text-muted-foreground mt-0.5 line-clamp-1 leading-tight">
@@ -340,7 +348,7 @@ export function IntegrationsDropdown({
                     {product.useCases.map((useCase, index) => (
                       <Card
                         key={index}
-                        className="rounded-sm transition-all cursor-pointer hover:shadow-sm"
+                        className={`rounded-sm transition-all cursor-pointer hover:shadow-sm ${index === 0 ? 'mt-1' : ''}`}
                         onClick={playClickSound}
                       >
                         <CardContent className="p-3 text-sm">

@@ -34,7 +34,7 @@ const buttonVariants = cva(
           'bg-[#6B7280] text-white hover:bg-[#5A6370] shadow-[inset_0_1px_0_rgba(255,255,255,0.15),inset_0_-1px_0_rgba(0,0,0,0.1)] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] hover:brightness-101 active:brightness-99 dark:bg-gray-100 dark:text-gray-600 dark:hover:bg-gray-100 dark:hover:text-gray-900 dark:bg-gray-900 dark:text-gray-300 dark:hover:bg-gray-900 dark:hover:text-gray-200',
         teal: 'bg-[#14B8A6] text-white hover:bg-[#0F9A8A] shadow-[inset_0_1px_0_rgba(255,255,255,0.15),inset_0_-1px_0_rgba(0,0,0,0.1)] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] hover:brightness-101 active:brightness-99 dark:bg-teal-100 dark:text-teal-600 dark:hover:bg-teal-100 dark:hover:text-teal-900 dark:bg-teal-900 dark:text-teal-300 dark:hover:bg-teal-900 dark:hover:text-teal-200',
         workspace:
-          'bg-white text-blue-600 border border-gray-200 hover:bg-gray-50 shadow-[inset_0_1px_0_rgba(255,255,255,0.1),inset_0_-1px_2px_rgba(0,0,0,0.05)] hover:brightness-101 active:brightness-99 dark:bg-sky-900 dark:text-sky-300 dark:hover:bg-sky-900 dark:hover:text-sky-200 dark:border-transparent dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.08),inset_0_-1px_2px_rgba(0,0,0,0.04)]',
+          'bg-white text-[#56A5F9] border border-gray-200 hover:bg-gray-50 shadow-[inset_0_1px_0_rgba(255,255,255,0.1),inset_0_-1px_2px_rgba(0,0,0,0.05)] hover:brightness-101 active:brightness-99 dark:bg-sky-900 dark:text-sky-300 dark:hover:bg-sky-900 dark:hover:text-sky-200 dark:border-transparent dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.08),inset_0_-1px_2px_rgba(0,0,0,0.04)]',
         auth: 'bg-slate-50 text-sm font-normal hover:bg-slate-100 dark:bg-zinc-800 dark:hover:bg-zinc-700',
       },
       size: {

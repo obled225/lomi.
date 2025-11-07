@@ -432,7 +432,6 @@
     "card1": {
       "title": "All your preferred payment methods",
       "description": "Accept local and international payment methods, seamlessly.",
-      "momo_description": "Mobile money payment service",
       "wallet_description": "Digital wallet payments",
       "crypto_description": "Decentralized payment network",
       "spi_description": "Interoperable payment infrastructure",

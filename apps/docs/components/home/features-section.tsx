@@ -453,17 +453,17 @@ export function FeaturesSection() {
                           }
                           : {}
                       }
-                      className="flex items-center justify-between p-1 bg-background border border-zinc-200 dark:border-zinc-800 rounded-sm hover:bg-muted/40 transition-colors duration-200"
+                      className="flex items-center justify-between p-1 h-12.5 bg-background border border-zinc-200 dark:border-zinc-800 rounded-sm hover:bg-muted/40 transition-colors duration-200"
                     >
                       <div className="flex items-center gap-3">
                         <div className="w-8 h-8 bg-background border border-zinc-200 dark:border-zinc-800 rounded-sm flex items-center justify-center shadow-sm overflow-hidden">
                           <Image
-                            src={`/payment_channels/${name === 'Bitcoin' ? 'btc' : name === 'Visa' ? `${visaImages[visaImageIndex]}` : name.toLowerCase().replace(' ', '_')}.webp`}
+                            src={`/payment_channels/${name === 'SPI' ? `${spiImages[spiImageIndex]}` : name === 'Bitcoin' ? 'btc' : name === 'Visa' ? `${visaImages[visaImageIndex]}` : name.toLowerCase().replace(' ', '_')}.webp`}
                             alt={`${name} logo`}
-                            width={name === 'SPI' ? 24 : 32}
-                            height={name === 'SPI' ? 24 : 32}
+                            width={name === 'SPI' && spiImages[spiImageIndex] === 'spi' ? 24 : 32}
+                            height={name === 'SPI' && spiImages[spiImageIndex] === 'spi' ? 24 : 32}
                             className={
-                              name === 'SPI'
+                              name === 'SPI' && spiImages[spiImageIndex] === 'spi'
                                 ? 'w-6 h-6 object-cover rounded-sm'
                                 : 'w-full h-full object-cover rounded-sm'
                             }
@@ -482,13 +482,6 @@ export function FeaturesSection() {
                               String(
                                 t(
                                   'features.card1.spi_description',
-                                  currentLanguage,
-                                ),
-                              )}
-                            {name === 'Wave' &&
-                              String(
-                                t(
-                                  'features.card1.momo_description',
                                   currentLanguage,
                                 ),
                               )}
@@ -527,7 +520,7 @@ export function FeaturesSection() {
                         checked={paymentToggles[name] || false}
                         onCheckedChange={() => handlePaymentToggle(name)}
                         aria-label={`${paymentToggles[name] ? 'Disable' : 'Enable'} ${name} payments`}
-                        className="data-[state=checked]:bg-[#56A5F9] data-[state=checked]:border-[#56A5F9] dark:data-[state=checked]:bg-sky-600 dark:data-[state=checked]:border-sky-600"
+                        className="data-[state=checked]:bg-[#56A5F9] data-[state=checked]:border-[#56A5F9] dark:data-[state=checked]:bg-sky-600 dark:data-[state=checked]:border-sky-600 mr-2"
                       />
                     </motion.div>
                   ))}
@@ -974,7 +967,6 @@ export function FeaturesSection() {
 
   const providerNames = [
     'SPI',
-    'Wave',
     'Visa',
     'PayPal',
     'Google Pay',
@@ -986,7 +978,6 @@ export function FeaturesSection() {
     Record<string, boolean>
   >({
     SPI: true,
-    Wave: true,
     Visa: true,
     PayPal: false,
     'Google Pay': true,
@@ -999,6 +990,10 @@ export function FeaturesSection() {
   // Visa image rotation state
   const [visaImageIndex, setVisaImageIndex] = React.useState(0);
   const visaImages = ['visa', 'mastercard', 'amex', 'gim'];
+
+  // SPI image rotation state
+  const [spiImageIndex, setSpiImageIndex] = React.useState(0);
+  const spiImages = ['orange', 'wave', 'mtn', 'airtel', 'moov', 'free'];
   const phoneNumbers = [
     { country: 'SN', number: '+221 77 123 45 67' },
     { country: 'CI', number: '+225 07 12 34 56 78' },
@@ -1052,6 +1047,15 @@ export function FeaturesSection() {
 
     return () => clearInterval(interval);
   }, [visaImages.length]);
+
+  // SPI image rotation effect
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      setSpiImageIndex((prev) => (prev + 1) % spiImages.length);
+    }, 8000); // Change every 8 seconds
+
+    return () => clearInterval(interval);
+  }, [spiImages.length]);
 
   const productCode = `{
   "name": "Just a mug",

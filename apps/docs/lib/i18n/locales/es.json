@@ -334,7 +334,6 @@
     "card1": {
       "title": "Todos los métodos de pago preferidos por sus clientes",
       "description": "Acepte métodos de pago locales e internacionales, sin esfuerzos.",
-      "momo_description": "Pagos con dinero móvil",
       "wallet_description": "Pagos con billetera digital",
       "crypto_description": "Pagos con criptomonedas",
       "spi_description": "Sistema interoperable de pago",
