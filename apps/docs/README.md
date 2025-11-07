@@ -1,6 +1,6 @@
 # Documentation
 
-Welcome to the documentation for [lomi.](https://lomi.africa), the open-source payment processing platform powering francophone West African businesses.
+Welcome to the documentation of [lomi.](https://lomi.africa), the open-source payment processing platform powering francophone West African businesses. This repository contains the code for the lomi. website, docs, and blog.  Everything is built on top of Next.js, Sanity, and Fumadocs.
 
 ## Getting started
 
@@ -10,7 +10,7 @@ To start using lomi. for your payment processing needs:
 2. Set up your preferred payment methods in the lomi. dashboard
 3. Integrate lomi. into your application using our API and SDKs
 4. Test your integration in our sandbox environment
-5. Go live and start processing real transactions
+5. Go live and start making money
 
 For detailed instructions and guides, visit [lomi.africa](https://lomi.africa).
 

@@ -7,7 +7,7 @@ import { useState, useRef } from 'react';
 import { Menu, X } from 'lucide-react';
 import type { User } from '@supabase/supabase-js';
 import { Dock } from '@/components/ui/dock';
-import { DockDropdown } from '@/components/design/dock-dropdown';
+import { DockDropdown } from '@/components/preview/dock-dropdown';
 import { Button } from '@/components/ui/button';
 import { IntegrationsDropdown } from '@/components/home/dropdowns/products-dropdown';
 import { DocumentationDropdown } from '@/components/home/dropdowns/documentation-dropdown';
@@ -16,7 +16,7 @@ import { useAuth } from '@/lib/hooks/use-auth';
 import { useTranslation } from '@/lib/contexts/translation-context';
 import { t as translate } from '@/lib/i18n/translations';
 import { Logo } from '@/lib/utils/logo';
-import { LargeSearchToggle } from '@/components/design/search-toggle';
+import { LargeSearchToggle } from '@/components/preview/search-toggle';
 import { GithubStars } from '@/components/home/github-stars';
 
 const AuthButtons = ({

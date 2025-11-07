@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 
-import { cn } from '@/lib/actions/utils';
+import { cn } from '@/lib/utils/cn';
 
 const infoBoxVariants = cva('py-2 px-3 rounded-sm select-none w-fit', {
   variants: {
@@ -72,7 +72,7 @@ const infoBoxTextVariants = cva('leading-relaxed', {
 
 export interface InfoBoxProps
   extends React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof infoBoxVariants> {
+  VariantProps<typeof infoBoxVariants> {
   children: React.ReactNode;
 }
 

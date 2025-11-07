@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { motion } from 'framer-motion';
 import { Mail } from 'lucide-react';
-import { cn } from '@/lib/actions/utils';
+import { cn } from '@/lib/utils/cn';
 import { Button } from '@/components/ui/button';
 import { useTranslation } from '@/lib/contexts/translation-context';
 import { t, getTranslations } from '@/lib/i18n/translations';

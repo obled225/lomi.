@@ -24,5 +24,5 @@ export const ImageZoom = dynamic(() =>
 );
 
 export const GraphView = dynamic(() =>
-  import('@/components/ui/graph-view').then((res) => res.GraphView),
+  import('@/components/preview/graph-view').then((res) => res.GraphView),
 );

@@ -3,7 +3,7 @@ import {
   writeFumadocsRegistry,
   writeShadcnRegistry,
 } from '@fumadocs/cli/build';
-import { registry } from '@/components/registry.mjs';
+import { registry } from '@/components/preview/registry.mjs';
 
 export async function buildRegistry() {
   const mainRegistry = await build(registry);

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { LottieIcon } from '@/components/ui/lottie-icon';
+import { LottieIcon } from '@/components/preview/lottie-icon';
 import { animations, LottieAnimationData } from '@/lib/utils/lottie-animations';
 import { playClickSound } from '@/lib/utils/sound';
 import { Card, CardHeader, CardContent } from '@/components/ui/card';
@@ -40,7 +40,7 @@ export function DocumentationDropdown({
   const featuredCard: FeaturedCard = {
     title: t('documentationDropdown.featuredTitle'),
     description: t('documentationDropdown.featuredDescription'),
-    image: '/company/900x900.webp',
+    image: '/company/700x700.webp',
     imageAlt: 'Developers space',
     href: '/docs/getting-started',
     badge: 'Getting started',

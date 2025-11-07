@@ -8,7 +8,7 @@ import * as Preview from '@/components/preview';
 import { createMetadata } from '@/lib/utils/metadata';
 import { source } from '@/lib/utils/source';
 import { Wrapper } from '@/components/preview/wrapper';
-import { Mermaid } from '@/components/mdx/mermaid';
+import { Mermaid } from '@/components/preview/mermaid';
 import { getMDXComponents } from '@/mdx-components';
 import {
   HoverCard,
@@ -21,7 +21,7 @@ import { createGenerator } from 'fumadocs-typescript';
 import { getPageTreePeers } from 'fumadocs-core/server';
 import { Card, Cards } from 'fumadocs-ui/components/card';
 import { APIPage } from 'fumadocs-openapi/ui';
-import { LLMCopyButton, ViewOptions } from '@/components/ai/page-actions';
+import { LLMCopyButton, ViewOptions } from '@/components/preview/page-actions';
 import * as path from 'node:path';
 import { Banner } from 'fumadocs-ui/components/banner';
 import { Installation } from '@/components/preview/installation';

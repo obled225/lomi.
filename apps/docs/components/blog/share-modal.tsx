@@ -13,7 +13,7 @@ import {
   FacebookIcon,
   WhatsappIcon,
   LinkedInIcon,
-} from '@/components/icons';
+} from '@/components/preview/icons';
 import { Send as Telegram, Mail, Copy, Check } from 'lucide-react';
 import { useTranslation } from '@/lib/contexts/translation-context';
 import { t } from '@/lib/i18n/translations';

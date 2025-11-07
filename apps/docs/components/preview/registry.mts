@@ -100,13 +100,13 @@ export const registry: Registry = {
       ],
     },
     {
-      name: 'ai/page-actions',
+      name: 'mdx/page-actions',
       title: 'AI Page Actions',
       description: 'Common page actions for AI',
       files: [
         {
           type: 'components',
-          path: 'components/ai/page-actions.tsx',
+          path: 'components/mdx/page-actions.tsx',
         },
       ],
     },

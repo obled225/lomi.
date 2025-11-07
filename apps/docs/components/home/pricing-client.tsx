@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import { useTranslation } from '@/lib/contexts/translation-context';
 import { t } from '@/lib/i18n/translations';
-import BusinessOutreach from '@/components/design/business-outreach';
+import BusinessOutreach from '@/components/preview/business-outreach';
 import PricingTool from './pricing-tool';
 
 export default function PricingClient() {

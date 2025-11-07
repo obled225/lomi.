@@ -1,4 +1,4 @@
-import { cn } from '@/lib/actions/utils';
+import { cn } from '@/lib/utils/cn';
 import React from 'react';
 
 export function Section({

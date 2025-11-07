@@ -1,6 +1,6 @@
 import { ChevronDown } from 'lucide-react';
 import { useState } from 'react';
-import { LottieIcon } from '@/components/ui/lottie-icon';
+import { LottieIcon } from '@/components/preview/lottie-icon';
 import { animations, LottieAnimationData } from '@/lib/utils/lottie-animations';
 import { useTheme } from '@/lib/hooks/use-theme';
 import { playClickSound } from '@/lib/utils/sound';
@@ -328,9 +328,8 @@ export function IntegrationsDropdown({
                     </p>
                   </div>
                   <ChevronDown
-                    className={`h-3 w-3 text-muted-foreground transition-transform shrink-0 ${
-                      expandedSections.includes(product.id) ? 'rotate-180' : ''
-                    }`}
+                    className={`h-3 w-3 text-muted-foreground transition-transform shrink-0 ${expandedSections.includes(product.id) ? 'rotate-180' : ''
+                      }`}
                   />
                 </div>
               </CardHeader>

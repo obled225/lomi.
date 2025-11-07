@@ -3,9 +3,9 @@
 import { useCallback, useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { LanguageSwitcher } from '@/components/design/language-switcher';
-import { BackgroundText } from '@/components/design/background-text';
-import { LottieIcon } from '@/components/ui/lottie-icon';
+import { LanguageSwitcher } from '@/components/preview/language-switcher';
+import { BackgroundText } from '@/components/preview/background-text';
+import { LottieIcon } from '@/components/preview/lottie-icon';
 import { animations } from '@/lib/utils/lottie-animations';
 import { useTheme } from '@/lib/hooks/use-theme';
 import { useThemeAnimation } from '@/lib/hooks/use-theme-animation';
@@ -15,9 +15,9 @@ import {
   LinkedInIcon,
   XIcon,
   SlackIcon,
-} from '@/components/icons';
+} from '@/components/preview/icons';
 import { Check } from 'lucide-react';
-import { ProductHuntBadge } from '@/components/design/product-hunt-badge';
+import { ProductHuntBadge } from '@/components/preview/product-hunt-badge';
 import { playClickSound as playSound } from '@/lib/utils/sound';
 import { useTranslation } from '@/lib/contexts/translation-context';
 import { t as translate } from '@/lib/i18n/translations';
