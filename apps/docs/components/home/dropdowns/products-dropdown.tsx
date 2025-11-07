@@ -42,7 +42,7 @@ export function IntegrationsDropdown({
     {
       id: 'payments',
       name: t('productsDropdown.products.payments.name'),
-      icon: animations.creditCard,
+      icon: animations.cash,
       description: t('productsDropdown.products.payments.description'),
       useCases: [
         {
@@ -66,7 +66,7 @@ export function IntegrationsDropdown({
     {
       id: 'refund-api',
       name: t('productsDropdown.products.refunds.name'),
-      icon: animations.refresh,
+      icon: animations.autorenew,
       description: t('productsDropdown.products.refunds.description'),
       useCases: [
         {
@@ -90,7 +90,7 @@ export function IntegrationsDropdown({
     {
       id: 'payout-transfer-api',
       name: t('productsDropdown.products.payouts.name'),
-      icon: animations.mail,
+      icon: animations.takeoff,
       description: t('productsDropdown.products.payouts.description'),
       useCases: [
         {
@@ -158,15 +158,15 @@ export function IntegrationsDropdown({
       color: [0.13, 0.45, 0.85] as [number, number, number],
     }, // Blue
     {
-      animation: animations.swap,
+      animation: animations.cube,
       color: [0.1, 0.64, 0.25] as [number, number, number],
     }, // Green
     {
-      animation: animations.search,
+      animation: animations.highpriority,
       color: [0.9, 0.45, 0.1] as [number, number, number],
     }, // Orange
     {
-      animation: animations.settings,
+      animation: animations.calculate,
       color: [0.5, 0.2, 0.8] as [number, number, number],
     }, // Purple
   ];
@@ -269,11 +269,10 @@ export function IntegrationsDropdown({
                         />
                       </div>
                     </div>
-                    <p className={`text-sm font-semibold leading-tight flex-1 ${
-                      hoveredIcon === `feature-${index}`
-                        ? 'text-zinc-900 dark:text-zinc-100'
-                        : 'text-zinc-600 dark:text-zinc-400'
-                    }`}>
+                    <p className={`text-sm font-semibold leading-tight flex-1 ${hoveredIcon === `feature-${index}`
+                      ? 'text-zinc-900 dark:text-zinc-100'
+                      : 'text-zinc-600 dark:text-zinc-400'
+                      }`}>
                       {feature.name}
                     </p>
                   </div>
@@ -324,11 +323,10 @@ export function IntegrationsDropdown({
                     </div>
                   </div>
                   <div className="flex-1 min-w-0 pl-1.5">
-                    <p className={`text-sm font-semibold leading-tight ${
-                      hoveredIcon === product.id
-                        ? 'text-zinc-900 dark:text-zinc-100'
-                        : 'text-zinc-600 dark:text-zinc-400'
-                    }`}>
+                    <p className={`text-sm font-semibold leading-tight ${hoveredIcon === product.id
+                      ? 'text-zinc-900 dark:text-zinc-100'
+                      : 'text-zinc-600 dark:text-zinc-400'
+                      }`}>
                       {product.name}
                     </p>
                     <p className="text-xs text-muted-foreground mt-0.5 line-clamp-1 leading-tight">

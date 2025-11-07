@@ -106,7 +106,7 @@ export function Footer() {
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={playClickSound}
-                      className="text-zinc-600 dark:text-zinc-400 hover:text-[#5FED83] dark:hover:text-[#5FED83] inline-flex items-center transition-colors"
+                      className="text-black dark:text-white hover:text-[#5FED83] dark:hover:text-[#5FED83] inline-flex items-center transition-colors"
                       aria-label="View our GitHub"
                     >
                       <GitHubIcon className="h-[20px] w-[20px]" />
@@ -116,7 +116,7 @@ export function Footer() {
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={playClickSound}
-                      className="text-zinc-600 dark:text-zinc-400 hover:text-[#000000] dark:hover:text-[#FFFFFF] inline-flex items-center transition-colors"
+                      className="text-black dark:text-white hover:text-[#000000] dark:hover:text-[#FFFFFF] inline-flex items-center transition-colors"
                       aria-label="Follow us on Twitter"
                     >
                       <XIcon className="h-[22px] w-[22px] translate-y-[-0.5px] -translate-x-px" />
@@ -126,7 +126,7 @@ export function Footer() {
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={playClickSound}
-                      className="text-zinc-600 dark:text-zinc-400 hover:text-[#1877F2] dark:hover:text-[#1877F2] inline-flex items-center transition-colors"
+                      className="text-black dark:text-white hover:text-[#1877F2] dark:hover:text-[#1877F2] inline-flex items-center transition-colors"
                       aria-label="Follow us on Facebook"
                     >
                       <FacebookIcon className="h-[20px] w-[20px]" />
@@ -136,7 +136,7 @@ export function Footer() {
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={playClickSound}
-                      className="text-zinc-600 dark:text-zinc-400 hover:text-[#0077B5] dark:hover:text-[#0077B5] inline-flex items-center transition-colors"
+                      className="text-black dark:text-white hover:text-[#0077B5] dark:hover:text-[#0077B5] inline-flex items-center transition-colors"
                       aria-label="Follow us on LinkedIn"
                     >
                       <LinkedInIcon className="h-[20px] w-[20px]" />
@@ -146,7 +146,7 @@ export function Footer() {
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={playClickSound}
-                      className="text-zinc-600 dark:text-zinc-400 hover:text-[#E01E5A] dark:hover:text-[#E01E5A] inline-flex items-center transition-colors"
+                      className="text-black dark:text-white hover:text-[#E01E5A] dark:hover:text-[#E01E5A] inline-flex items-center transition-colors"
                       aria-label="Join our Slack community"
                     >
                       <SlackIcon className="h-[20px] w-[20px]" />
@@ -191,8 +191,8 @@ export function Footer() {
                                 ? [0.922, 0.922, 0.941] // Very light in dark mode (zinc-200)
                                 : [0.145, 0.145, 0.169] // Very dark in light mode (zinc-800)
                               : resolvedTheme === 'dark'
-                                ? [0.631, 0.631, 0.667] // zinc-400 in dark mode
-                                : [0.322, 0.322, 0.357] // zinc-600 in light mode
+                                ? [1, 1, 1] // white in dark mode
+                                : [0, 0, 0] // black in light mode
                           }
                         />
                       )}

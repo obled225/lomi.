@@ -58,7 +58,7 @@ export function DocumentationDropdown({
       id: 'merchant-of-record',
       title: t('documentationDropdown.moneyManagementTitle'),
       description: t('documentationDropdown.moneyManagementDescription'),
-      icon: animations.search,
+      icon: animations.wallet,
       href: '/docs/core/merchant-of-record',
     },
   ];
