@@ -91,7 +91,7 @@ export const metadata: Metadata = {
     },
     {
       rel: 'apple-touch-icon',
-      url: '/icon.png',
+      url: '/apple-touch-icon.png',
     },
   ],
   openGraph: {

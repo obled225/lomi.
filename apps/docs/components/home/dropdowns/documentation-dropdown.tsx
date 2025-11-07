@@ -42,7 +42,7 @@ export function DocumentationDropdown({
     description: t('documentationDropdown.featuredDescription'),
     image: '/company/700x700.webp',
     imageAlt: 'Developers space',
-    href: '/docs/getting-started',
+    href: '/docs/core/fundamentals',
     badge: 'Getting started',
   };
 
