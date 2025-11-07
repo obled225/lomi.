@@ -1,7 +1,3 @@
-// =====================================================
-// SUPABASE DATABASE QUERIES
-// =====================================================
-
 // import { createClient } from "@/lib/supabase/client";
 // import type { Database, Json } from "@/lib/types/database";
 // import type { SupabaseClient } from "@supabase/supabase-js";

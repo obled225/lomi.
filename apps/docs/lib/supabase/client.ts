@@ -7,8 +7,6 @@ export function createClient() {
   if (!supabaseUrl || !supabaseAnonKey) {
     throw new Error('Missing Supabase environment variables');
   }
-
-  // createBrowserClient automatically reads cookies from the browser
-  // Cookies set by website app with domain ".lomi.africa" will be accessible here
+  
   return createBrowserClient(supabaseUrl, supabaseAnonKey);
 }
