@@ -139,24 +139,30 @@ export function Header() {
 
           {/* Desktop Navigation - Hidden on mobile */}
           <nav className="hidden md:flex items-center gap-3 pr-4 pt-2">
-            <button
-              className="text-sm text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors bg-transparent rounded-sm px-2 py-1.5 border-none cursor-pointer hover:bg-[#2a2f3d]/3 dark:hover:bg-[#2a2f3d]/10"
+            <Button
+              variant="ghost"
+              size="header"
+              className="text-sm text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors"
               onMouseEnter={handleDocumentationMouseEnter}
               onMouseLeave={handleDocumentationMouseLeave}
               onClick={playClickSound}
             >
               {t('header.documentation')}
-            </button>
-            <button
-              className="text-sm text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors bg-transparent rounded-sm px-2 py-1.5 border-none cursor-pointer hover:bg-[#2a2f3d]/3 dark:hover:bg-[#2a2f3d]/10"
+            </Button>
+            <Button
+              variant="ghost"
+              size="header"
+              className="text-sm text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors"
               onMouseEnter={handleIntegrationsMouseEnter}
               onMouseLeave={handleIntegrationsMouseLeave}
               onClick={playClickSound}
             >
               {t('header.products')}
-            </button>
-            <button
-              className="text-sm text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors bg-transparent rounded-sm px-2 py-1.5 border-none cursor-pointer hover:bg-[#2a2f3d]/3 dark:hover:bg-[#2a2f3d]/10"
+            </Button>
+            <Button
+              variant="ghost"
+              size="header"
+              className="text-sm text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors"
               onMouseEnter={() => {
                 if (leaveTimeout.current) {
                   clearTimeout(leaveTimeout.current);
@@ -176,9 +182,11 @@ export function Header() {
               }}
             >
               {t('header.pricing')}
-            </button>
-            <button
-              className="text-sm text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors bg-transparent rounded-sm px-2 py-1.5 border-none cursor-pointer hover:bg-[#2a2f3d]/3 dark:hover:bg-[#2a2f3d]/10"
+            </Button>
+            <Button
+              variant="ghost"
+              size="header"
+              className="text-sm text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors"
               onMouseEnter={() => {
                 if (leaveTimeout.current) {
                   clearTimeout(leaveTimeout.current);
@@ -198,7 +206,7 @@ export function Header() {
               }}
             >
               {t('header.blog')}
-            </button>
+            </Button>
 
             {/* Search Toggle */}
             <div className="h-8 pl-2 pr-0.5 flex items-center">
@@ -215,7 +223,9 @@ export function Header() {
           </nav>
 
           {/* Mobile Menu Button - Hidden on desktop */}
-          <button
+          <Button
+            variant="ghost"
+            size="icon"
             className="md:hidden pr-4 pt-2 text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white transition-colors"
             onClick={() => {
               playClickSound();
@@ -224,40 +234,46 @@ export function Header() {
             aria-label="Toggle mobile menu"
           >
             {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
-          </button>
+          </Button>
         </div>
 
         {/* Mobile Menu - Hidden on desktop */}
         {isMobileMenuOpen && (
           <div className="md:hidden">
             <nav className="flex flex-col space-y-4 py-4 px-4">
-              <button
-                className="text-left text-sm text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors bg-transparent rounded-sm px-2 py-1.5 border-none cursor-pointer w-full hover:bg-[#2a2f3d]/3 dark:hover:bg-[#2a2f3d]/10"
+              <Button
+                variant="ghost"
+                size="header"
+                className="text-left text-sm text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors w-full justify-start"
                 onClick={() => {
                   playClickSound();
                   navigate('/pricing');
                 }}
               >
                 {t('header.pricing')}
-              </button>
-              <button
-                className="text-left text-sm text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors bg-transparent rounded-sm px-2 py-1.5 border-none cursor-pointer w-full hover:bg-[#2a2f3d]/3 dark:hover:bg-[#2a2f3d]/10"
+              </Button>
+              <Button
+                variant="ghost"
+                size="header"
+                className="text-left text-sm text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors w-full justify-start"
                 onClick={() => {
                   playClickSound();
                   navigate('/docs/introduction/what-is-lomi');
                 }}
               >
                 {t('header.documentation')}
-              </button>
-              <button
-                className="text-left text-sm text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors bg-transparent rounded-sm px-2 py-1.5 border-none cursor-pointer w-full hover:bg-[#2a2f3d]/3 dark:hover:bg-[#2a2f3d]/10"
+              </Button>
+              <Button
+                variant="ghost"
+                size="header"
+                className="text-left text-sm text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors w-full justify-start"
                 onClick={() => {
                   playClickSound();
                   navigate('/blog');
                 }}
               >
                 {t('header.blog')}
-              </button>
+              </Button>
 
               {/* Mobile Search Toggle */}
               <div className="px-2 py-1.5 flex items-center">

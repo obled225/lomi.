@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { PortableText } from '@portabletext/react';
@@ -17,11 +17,6 @@ import { ShareModal } from '@/components/blog/share-modal';
 import { playClickSound } from '@/lib/utils/sound';
 import '../../app/styles/blog.css';
 
-// Define the specific languages for the blog post switcher
-const blogLanguages = [
-  { code: 'fr', name: 'FR' },
-  { code: 'en', name: 'EN' },
-];
 
 // Helper function to get category from post
 const getPostCategory = (post: Post): string => {
@@ -69,7 +64,7 @@ export default function BlogPostClient({ slug }: BlogPostClientProps) {
   const [post, setPost] = useState<Post | null>(null);
   const [loading, setLoading] = useState(true);
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
-  const { currentLanguage, setLanguage } = useTranslation();
+  const { currentLanguage } = useTranslation();
 
   // Added useEffect for glitch CSS
   useEffect(() => {
@@ -161,27 +156,6 @@ export default function BlogPostClient({ slug }: BlogPostClientProps) {
     return undefined; // Explicitly return undefined for the other code path
   }, [post, loading]); // Rerun effect if post or loading state changes
 
-  // Language switching logic for the blog post page
-  const changeBlogLanguage = useCallback(() => {
-    const currentIndex = blogLanguages.findIndex(
-      (l) => l.code === currentLanguage,
-    );
-    // Determine a valid starting index if the current language isn't in our specific list
-    const validCurrentIndex =
-      currentIndex === -1
-        ? blogLanguages.findIndex((l) => l.code === 'en') // Default to English index if not found
-        : currentIndex;
-    const nextIndex = (validCurrentIndex + 1) % blogLanguages.length;
-    const nextLang = blogLanguages[nextIndex]?.code || 'en'; // Fallback to 'en'
-
-    setLanguage(nextLang as 'en' | 'fr'); // The context expects Language type
-  }, [currentLanguage, setLanguage]); // Dependencies
-
-  // Get the display name for the current language button
-  const currentLangName =
-    blogLanguages.find((l) => l.code === currentLanguage)?.name ||
-    blogLanguages.find((l) => l.code === 'en')?.name ||
-    'EN'; // Fallback display name
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -406,23 +380,9 @@ export default function BlogPostClient({ slug }: BlogPostClientProps) {
                   </span>
 
                   <div className="hidden md:flex items-center gap-2 ml-2">
-                    <button
-                      onClick={() => {
-                        playClickSound();
-                        changeBlogLanguage();
-                      }}
-                      className="text-zinc-600 dark:text-zinc-400 inline-flex items-center justify-center h-6 w-6 p-1 rounded-sm border border-transparent transition-colors duration-150 hover:bg-zinc-500/10 dark:hover:bg-zinc-400/10 hover:text-zinc-600 dark:hover:text-zinc-400 hover:border-zinc-500/20 dark:hover:border-zinc-400/20"
-                      aria-label={
-                        (t('blog.switchLanguage', currentLanguage) as string) ||
-                        'Switch Language'
-                      }
-                    >
-                      <span className="font-normal text-xs">
-                        {currentLangName}
-                      </span>
-                    </button>
-
-                    <button
+                    <Button
+                      variant="ghost"
+                      size="sm"
                       onClick={() => {
                         playClickSound();
                         setIsShareModalOpen(true);
@@ -433,7 +393,7 @@ export default function BlogPostClient({ slug }: BlogPostClientProps) {
                       }
                     >
                       <Share2 className="h-3 w-3" />
-                    </button>
+                    </Button>
                   </div>
                 </div>
               </div>

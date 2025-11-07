@@ -280,7 +280,7 @@
     "title": "Pricing",
     "description": "Transparent fees at a 20% discount vs. competition.",
     "introduction": "We only earn when you do — no surprises, no hidden fees, no monthly costs.",
-    "transparency": "No surprises, no hidden fees, no monthly costs",
+    "transparency": "No surprises, no hidden fees, no monthly costs.",
     "calculator": {
       "currency": "Currency",
       "transaction_amount": "Average transaction amount",

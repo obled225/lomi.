@@ -216,7 +216,7 @@
     "title": "Precios",
     "description": "Tarifas transparentes con un descuento del 20% frente a la competencia.",
     "introduction": "Solo ganamos cuando tú lo haces — sin sorpresas, sin tarifas ocultas, sin costos mensuales.",
-    "transparency": "Sin sorpresas, sin tarifas ocultas, sin costos mensuales",
+    "transparency": "Sin sorpresas, sin tarifas ocultas, sin costos mensuales.",
     "calculator": {
       "currency": "Moneda",
       "transaction_amount": "Monto promedio de transacción",

@@ -280,7 +280,7 @@
     "title": "定价",
     "description": "透明费用，与竞争对手相比有20%的折扣。",
     "introduction": "我们只在您盈利时盈利 — 没有意外，没有隐藏费用，没有月费。",
-    "transparency": "没有意外，没有隐藏费用，没有月费",
+    "transparency": "没有意外，没有隐藏费用，没有月费。",
     "calculator": {
       "currency": "货币",
       "transaction_amount": "平均交易金额",

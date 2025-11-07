@@ -5,7 +5,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils/cn';
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-sm text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
+  'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-sm text-sm ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
   {
     variants: {
       variant: {
@@ -22,9 +22,9 @@ const buttonVariants = cva(
         dashed:
           'hover:bg-[#2a2f3d]/[0.03] dark:hover:bg-[#2a2f3d]/10 hover:text-accent-foreground shadow-[inset_0_1px_0_rgba(255,255,255,0.25)] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]',
         ghost:
-          'hover:bg-[#2a2f3d]/[0.03] dark:hover:bg-[#2a2f3d]/10 hover:text-accent-foreground shadow-[inset_0_1px_0_rgba(255,255,255,0.25),inset_0_-1px_0_rgba(0,0,0,0.15)] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.05),inset_0_-1px_0_rgba(0,0,0,0.08)]',
+          'hover:bg-[#2a2f3d]/3 dark:hover:bg-[#2a2f3d]/10 hover:text-accent-foreground',
         transparent:
-          'bg-transparent border-0 shadow-none hover:bg-transparent sidebar-hover',
+          'bg-transparent border-0 shadow-none',
         link: 'text-primary underline-offset-4 hover:underline',
         blue: 'bg-[#56A5F9] text-white hover:bg-[#52A1F8] shadow-[inset_0_1px_0_rgba(255,255,255,0.15),inset_0_-1px_0_rgba(0,0,0,0.1)] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] active:brightness-99 dark:bg-sky-100 dark:text-sky-600 dark:hover:bg-sky-100 dark:hover:text-sky-900 dark:bg-sky-900 dark:text-sky-300 dark:hover:bg-sky-900 dark:hover:text-sky-200',
         green:
@@ -39,7 +39,7 @@ const buttonVariants = cva(
       },
       size: {
         default: 'h-10 px-4 py-2',
-        sm: 'h-9 rounded-sm px-3',
+        sm: 'h-7 rounded-sm px-3',
         lg: 'h-11 rounded-sm px-8',
         icon: 'h-10 w-10',
         header: 'h-8 px-4 py-2',

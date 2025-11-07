@@ -40,7 +40,7 @@ export function ShareModal({ isOpen, onClose, url, title }: ShareModalProps) {
   };
 
   const baseButtonClasses =
-    'flex items-center justify-start gap-2 text-left h-8 rounded-[4px] text-white transition-colors duration-200';
+    'flex items-center justify-start gap-2 text-left h-8 rounded-[4px] text-white transition-colors duration-200 border-0';
 
   const shareOptions = [
     {

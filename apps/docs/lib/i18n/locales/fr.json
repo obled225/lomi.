@@ -280,7 +280,7 @@
     "title": "Tarification",
     "description": "Tarifs transparents avec une remise de 20% par rapport à la concurrence.",
     "introduction": "Nous ne gagnons que lorsque vous gagnez — pas de surprises, pas de frais cachés, pas de coûts mensuels.",
-    "transparency": "Pas de surprises, pas de frais cachés, pas de coûts mensuels",
+    "transparency": "Pas de surprises, pas de frais cachés, pas de coûts mensuels.",
     "calculator": {
       "currency": "Devise",
       "transaction_amount": "Montant moyen d'une transaction",
@@ -333,18 +333,18 @@
             "description": "Activez des transactions sécurisées entre acheteurs et vendeurs."
           },
           "invoicesPayments": {
-            "name": "Envoyez des factures et collectez les paiements",
+            "name": "Envoyez des factures et collectez vos paiements",
             "description": "Laissez-nous gérer la facturation et la collecte des paiements uniques et récurrents pour vous."
           }
         }
       },
       "refunds": {
         "name": "Remboursements",
-        "description": "Traitez les remboursements par programmation.",
+        "description": "Traitez vos remboursements programmatiquement.",
         "useCases": {
           "returnsCancellations": {
             "name": "Gérez les retours et annulations",
-            "description": "Traitez les remboursements et annulations instantanément."
+            "description": "Gérez les retours et annulations automatiquement."
           },
           "customerSubscriptions": {
             "name": "Gérez les abonnements de vos clients",
