@@ -7,3 +7,6 @@
 [submodule "apps/pi-spi-sdk"]
 	path = apps/pi-spi-sdk
 	url = https://github.com/lomiafrica/pi-spi-sdk.git
+[submodule "apps/dashboard"]
+	path = apps/dashboard
+	url = https://github.com/lomiafrica/dashboard.git
