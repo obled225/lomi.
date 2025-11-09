@@ -25,14 +25,14 @@
   ],
   "author": "lomi. <hello@lomi.africa> (https://lomi.africa)",
   "license": "MIT",
-  "homepage": "https://github.com/lomiafrica/lomi./tree/main/apps/sdk",
+  "homepage": "https://github.com/lomiafrica/lomi./tree/main/apps/sdks",
   "bugs": {
     "url": "https://github.com/lomiafrica/lomi./issues"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/lomiafrica/lomi..git",
-    "directory": "apps/sdk"
+    "directory": "apps/sdks"
   },
   "engines": {
     "node": ">=18.0.0"

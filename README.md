@@ -54,12 +54,12 @@ We are progressively open-sourcing the entire project:
 - **Currently open-source**:
   - Website and documentation: **[apps/docs](./apps/docs)**
   - CLI: **[apps/cli](./apps/cli)**
-  - APIs: **[apps/apis](./apps/api)**
-  - SDKs: **[apps/sdks](./apps/sdk)**
+  - APIs: **[apps/api](./apps/api)**
+  - SDKs: **[apps/sdks](./apps/sdks)**
   - Boilerplate (Next.js x Sanity): **[apps/events](https://github.com/lomiafrica/events/)**
 
 - **Opening soon**:
-  - Merchant dashboard: **[apps/dashboard](./apps/website)**
+  - Merchant dashboard: **[apps/dashboard](./apps/dashboard)**
   - Shopify extension: **[apps/shopify](./apps/shopify)**
 
 - **Proprietary**:

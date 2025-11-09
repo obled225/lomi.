@@ -3,7 +3,7 @@ import { join, resolve } from 'path';
 import * as Types from '../src/types/api';
 
 // Path to SQL schema file - Fixed path resolution
-const schemaPath = resolve(join(__dirname, '../../website/supabase/migrations/20240828000002_db.sql'));
+const schemaPath = resolve(join(__dirname, '../../dashboard/supabase/migrations/20240828000002_db.sql'));
 const schemaContent = readFileSync(schemaPath, 'utf8');
 
 console.log('🔍 Verifying type consistency between SQL schema and TypeScript...');

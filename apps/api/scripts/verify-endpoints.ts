@@ -4,7 +4,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 // Paths with fixed path resolution
-const migrationsDir = '/Users/babacar/Projects/lomi./apps/website/supabase/migrations';
+const migrationsDir = '/Users/babacar/Projects/lomi./apps/dashboard/supabase/migrations';
 const clientDir = resolve(__dirname, '../src/client');
 
 console.log(`Looking for SQL files in: ${migrationsDir}`);
@@ -12,7 +12,7 @@ console.log(`Looking for client files in: ${clientDir}`);
 
 // Get all SQL functions
 async function getSqlFunctions(): Promise<string[]> {
-  const migrationsDir = '/Users/babacar/Projects/lomi./apps/website/supabase/migrations';
+  const migrationsDir = '/Users/babacar/Projects/lomi./apps/dashboard/supabase/migrations';
   console.log(`Searching for SQL files in ${migrationsDir}`);
   
   // Get all SQL files in the migrations directory

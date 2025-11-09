@@ -2,7 +2,7 @@ import { readFileSync, readdirSync } from 'fs';
 import { join, resolve } from 'path';
 
 // Paths with fixed path resolution
-const migrationsDir = resolve(__dirname, '../../website/supabase/migrations');
+const migrationsDir = resolve(__dirname, '../../dashboard/supabase/migrations');
 const clientDir = resolve(__dirname, '../src/client');
 
 console.log(`Looking for SQL files in: ${migrationsDir}`);
