@@ -6,6 +6,7 @@ dist/
 build/
 /dist/
 /openapi/functions/
+openapi/spec.yaml
 
 # Environment variables
 .env
