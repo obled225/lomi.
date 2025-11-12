@@ -10,11 +10,11 @@ import { Cookies } from '@/lib/utils/constants';
 
 declare global {
   interface Window {
-    __cascadeSoundEnabled?: boolean;
-    __cascadeSoundGateInitialized?: boolean;
-    __cascadeOriginalMediaPlay?: HTMLMediaElement['play'];
-    __cascadeSharedClickSound?: HTMLAudioElement;
-    __cascadeSharedCompletionSound?: HTMLAudioElement;
+    __lomiSoundEnabled?: boolean;
+    __lomiSoundGateInitialized?: boolean;
+    __lomiOriginalMediaPlay?: HTMLMediaElement['play'];
+    __lomiSharedClickSound?: HTMLAudioElement;
+    __lomiSharedCompletionSound?: HTMLAudioElement;
   }
 }
 
@@ -24,12 +24,12 @@ declare global {
 export const getClickSound = (): HTMLAudioElement | null => {
   if (typeof window === 'undefined') return null;
 
-  if (!window.__cascadeSharedClickSound) {
-    window.__cascadeSharedClickSound = new Audio('/sounds/light.mp3');
-    window.__cascadeSharedClickSound.volume = 0.2;
+  if (!window.__lomiSharedClickSound) {
+    window.__lomiSharedClickSound = new Audio('/sounds/light.mp3');
+    window.__lomiSharedClickSound.volume = 0.2;
   }
 
-  return window.__cascadeSharedClickSound;
+  return window.__lomiSharedClickSound;
 };
 
 /**
@@ -38,7 +38,7 @@ export const getClickSound = (): HTMLAudioElement | null => {
 export const playClickSound = (): void => {
   const audio = getClickSound();
   if (audio && getSoundEnabled()) {
-    const originalPlay = window.__cascadeOriginalMediaPlay;
+    const originalPlay = window.__lomiOriginalMediaPlay;
     if (typeof originalPlay === 'function') {
       originalPlay.call(audio).catch(() => {});
     } else {
@@ -53,12 +53,12 @@ export const playClickSound = (): void => {
 export const getCompletionSound = (): HTMLAudioElement | null => {
   if (typeof window === 'undefined') return null;
 
-  if (!window.__cascadeSharedCompletionSound) {
-    window.__cascadeSharedCompletionSound = new Audio('/sounds/completion.mp3');
-    window.__cascadeSharedCompletionSound.volume = 0.2;
+  if (!window.__lomiSharedCompletionSound) {
+    window.__lomiSharedCompletionSound = new Audio('/sounds/completion.mp3');
+    window.__lomiSharedCompletionSound.volume = 0.2;
   }
 
-  return window.__cascadeSharedCompletionSound;
+  return window.__lomiSharedCompletionSound;
 };
 
 /**
@@ -67,7 +67,7 @@ export const getCompletionSound = (): HTMLAudioElement | null => {
 export const playCompletionSound = (): void => {
   const audio = getCompletionSound();
   if (audio && getSoundEnabled()) {
-    const originalPlay = window.__cascadeOriginalMediaPlay;
+    const originalPlay = window.__lomiOriginalMediaPlay;
     if (typeof originalPlay === 'function') {
       originalPlay.call(audio).catch(() => {});
     } else {
@@ -105,10 +105,10 @@ export const setSoundEnabled = (enabled: boolean): void => {
 
   setLocalStorageItem(Cookies.SoundEnabled, String(enabled));
 
-  window.__cascadeSoundEnabled = enabled;
+  window.__lomiSoundEnabled = enabled;
   try {
     window.dispatchEvent(
-      new CustomEvent('cascade:sound-changed', { detail: { enabled } }),
+      new CustomEvent('lomi:sound-changed', { detail: { enabled } }),
     );
   } catch {
     // ignore
@@ -121,22 +121,22 @@ export const setSoundEnabled = (enabled: boolean): void => {
 export const initSoundGate = (): void => {
   if (typeof window === 'undefined') return;
   const w = window;
-  if (w.__cascadeSoundGateInitialized) return;
-  w.__cascadeSoundGateInitialized = true;
+  if (w.__lomiSoundGateInitialized) return;
+  w.__lomiSoundGateInitialized = true;
 
   // Initialize flag from storage once
-  w.__cascadeSoundEnabled = getSoundEnabled();
+  w.__lomiSoundEnabled = getSoundEnabled();
 
   const originalPlay: HTMLMediaElement['play'] =
     HTMLMediaElement.prototype.play;
-  w.__cascadeOriginalMediaPlay = originalPlay;
+  w.__lomiOriginalMediaPlay = originalPlay;
 
   // Patch play to no-op when muted
   HTMLMediaElement.prototype.play = function patchedPlay(
     this: HTMLMediaElement,
     ...args: Parameters<HTMLMediaElement['play']>
   ): ReturnType<HTMLMediaElement['play']> {
-    const enabled = w.__cascadeSoundEnabled ?? true;
+    const enabled = w.__lomiSoundEnabled ?? true;
     if (!enabled) {
       // Return a resolved promise to satisfy callers awaiting play()
       return Promise.resolve() as ReturnType<HTMLMediaElement['play']>;
@@ -151,14 +151,14 @@ export const initSoundGate = (): void => {
   // Keep runtime flag in sync across tabs and local changes
   window.addEventListener('storage', (e: StorageEvent) => {
     if (e.key === Cookies.SoundEnabled) {
-      w.__cascadeSoundEnabled = e.newValue !== 'false';
+      w.__lomiSoundEnabled = e.newValue !== 'false';
     }
   });
 
-  window.addEventListener('cascade:sound-changed', (e: Event) => {
+  window.addEventListener('lomi:sound-changed', (e: Event) => {
     try {
       const detail = (e as CustomEvent).detail;
-      w.__cascadeSoundEnabled = !!detail?.enabled;
+      w.__lomiSoundEnabled = !!detail?.enabled;
     } catch {
       // ignore
     }

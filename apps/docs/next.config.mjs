@@ -76,12 +76,6 @@ const config = {
         port: '',
         pathname: '/storage/v1/object/sign/**',
       },
-      {
-        protocol: 'https',
-        hostname: 'avatar.vercel.sh',
-        port: '',
-        pathname: '/**',
-      },
     ],
     formats: ['image/webp', 'image/avif'],
     minimumCacheTTL: 60,

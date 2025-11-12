@@ -6,7 +6,7 @@ import type { Language } from './config';
  */
 export const detectLanguage = async (): Promise<Language> => {
   const cookieStore = await cookies();
-  const languageCookie = cookieStore.get('cascade.language');
+  const languageCookie = cookieStore.get('lomi.language');
 
   // Return the language from cookie, or default to English
   if (languageCookie?.value === 'fr' || languageCookie?.value === 'en') {
