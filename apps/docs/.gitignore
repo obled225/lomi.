@@ -9,6 +9,7 @@
 .source
 
 # test & build
+/lib/scripts
 /coverage
 /.next/
 /build
