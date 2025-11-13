@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { useTranslation } from '@/lib/contexts/translation-context';
 import { t } from '@/lib/i18n/translations';
 import BusinessOutreach from '@/components/preview/business-outreach';
+import PricingDetails from './pricing-details';
 import PricingTool from './pricing-tool';
 
 export default function PricingClient() {
@@ -33,6 +34,15 @@ export default function PricingClient() {
             />
           </div>
         </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto pl-2 pr-4 py-2">
+        <div className="bg-card border rounded-sm">
+          <PricingDetails />
+        </div>
+
+        {/* Separator between pricing details and pricing tool */}
+        <div className="h-px bg-border mt-12" />
       </div>
 
       <PricingTool />

@@ -51,7 +51,7 @@ export default function PricingTool() {
   };
 
   const calculateMonthlyCosts = () => {
-    const percentageRate = 0.029;
+    const percentageRate = 0.02;
     let fixedFee = 200; // Default XOF
 
     if (currency === 'USD') {
@@ -184,10 +184,9 @@ export default function PricingTool() {
             }
           }}
           className={
-            `px-4 sm:px-6 py-2 transition-colors ${
-              currency === curr
-                ? 'bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-white'
-                : 'bg-transparent hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-600 dark:text-zinc-400'
+            `px-4 sm:px-6 py-2 transition-colors ${currency === curr
+              ? 'bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-white'
+              : 'bg-transparent hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-600 dark:text-zinc-400'
             } ${index < arr.length - 1 ? 'border-r border-zinc-200 dark:border-zinc-800' : ''}` // Add right border except for last
           }
         >
@@ -308,7 +307,7 @@ export default function PricingTool() {
                 viewport={{ once: true, margin: '-100px' }}
                 className="mb-2"
               >
-                <Card className="w-full max-w-7xl mx-auto bg-background border border-border/50 rounded-sm shadow-sm overflow-hidden -mt-8">
+                <Card className="w-full max-w-7xl mx-auto bg-card border border-border/50 rounded-sm shadow-sm overflow-hidden -mt-8">
                   <TooltipProvider delayDuration={100}>
                     <CardContent className="p-3 sm:p-4 md:p-5">
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-7">
@@ -351,11 +350,11 @@ export default function PricingTool() {
                                   // Otherwise, format the parsed number if valid, default to raw state if parsing failed unexpectedly
                                   return parsedNum !== null
                                     ? formatCurrency(parsedNum, currency, {
-                                        style: 'decimal',
-                                        minimumFractionDigits: 0,
-                                        maximumFractionDigits:
-                                          currency === 'XOF' ? 0 : 1,
-                                      })
+                                      style: 'decimal',
+                                      minimumFractionDigits: 0,
+                                      maximumFractionDigits:
+                                        currency === 'XOF' ? 0 : 1,
+                                    })
                                     : averageAmount; // Fallback to raw state
                                 })()}
                                 onChange={handleAverageAmountChange}
@@ -420,16 +419,16 @@ export default function PricingTool() {
                                     typeof transactionCount === 'number'
                                       ? transactionCount
                                       : parseFormattedNumber(
-                                          transactionCount.toString(),
-                                        );
+                                        transactionCount.toString(),
+                                      );
                                   // Format if parsedNum is a valid number (not null)
                                   return parsedNum !== null
                                     ? formatCurrency(parsedNum, currency, {
-                                        // Use currency for locale consistency
-                                        style: 'decimal',
-                                        minimumFractionDigits: 0,
-                                        maximumFractionDigits: 0,
-                                      })
+                                      // Use currency for locale consistency
+                                      style: 'decimal',
+                                      minimumFractionDigits: 0,
+                                      maximumFractionDigits: 0,
+                                    })
                                     : transactionCount; // Fallback to raw state if parsing fails
                                 })()}
                                 onChange={handleTransactionCountChange}
@@ -446,7 +445,7 @@ export default function PricingTool() {
                                 step={1}
                                 value={[
                                   typeof transactionCount === 'number' &&
-                                  transactionCount >= 0
+                                    transactionCount >= 0
                                     ? transactionCount
                                     : 0,
                                 ]}

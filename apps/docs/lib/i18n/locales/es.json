@@ -183,6 +183,179 @@
     "title": "Precios",
     "transparency": "Sin sorpresas, sin tarifas ocultas, sin costos mensuales."
   },
+  "pricingDetails": {
+    "sections": {
+      "intro": "Introducción",
+      "transaction": "Tarifas de transacción",
+      "additional": "Tarifas adicionales",
+      "example": "Ejemplos",
+      "refunds": "Reembolsos",
+      "dispute": "Tarifas de contracargo",
+      "payout": "Tarifas de pago",
+      "volume": "Precios por volumen"
+    },
+    "content": {
+      "intro": {
+        "title": "Introducción",
+        "sections": [
+          {
+            "subtitle": "El MoR más barato del mercado",
+            "items": [
+              {
+                "text": "lomi. tiene un precio 20% más barato que otros proveedores de registro de comerciantes en África Occidental francófona. 2% y 200 F CFA por transacción para dinero móvil."
+              }
+            ]
+          },
+          {
+            "subtitle": "Sin tarifas ocultas",
+            "items": [
+              {
+                "text": "No hay tarifas ocultas ni cargos adicionales. Cubrimos todos los costos de infraestructura y no agregamos tarifas adicionales ni margen."
+              }
+            ]
+          }
+        ]
+      },
+      "transaction": {
+        "title": "Tarifas de transacción",
+        "sections": [
+          {
+            "subtitle": "2% + 200 F CFA por transacción",
+            "items": [
+              {
+                "text": "lomi. está construido actualmente sobre SPI para el procesamiento de pagos con dinero móvil, y nuestra estructura de precios está diseñada para cubrir la tarifa de infraestructura del 1% al 1.5% con la nuestra."
+              },
+              {
+                "text": "Para el procesamiento de pagos con tarjeta de crédito, actualmente usamos Stripe y cubrimos su tarifa del 3.2% + 30 ¢ cobrando 4% + 0.40 $ por transacción. Sin embargo, imponen algunas tarifas adicionales por ciertas transacciones que necesitamos pasar."
+              }
+            ]
+          }
+        ]
+      },
+      "additional": {
+        "title": "Tarifas adicionales",
+        "sections": [
+          {
+            "subtitle": "+1.5% para tarjetas internacionales"
+          },
+          {
+            "subtitle": "+0.5% para pagos de suscripción"
+          }
+        ]
+      },
+      "example": {
+        "title": "Ejemplos",
+        "sections": [
+          {
+            "subtitle": "Desglose de pago para una suscripción de 20 000 F CFA en Côte d'Ivoire",
+            "items": [
+              {
+                "text": "Veamos un desglose de ejemplo con nuestros precios aplicados. A continuación hay un pago de una suscripción de 20 000 F CFA en Côte d'Ivoire usando dinero móvil."
+              }
+            ],
+            "table": [
+              { "label": "Precio del producto", "value": "20 000 F CFA" },
+              { "label": "Valor total de la transacción", "value": "20 000 F CFA" },
+              { "label": "Tarifa de transacción (2% + 200 XOF)", "value": "600 F CFA" },
+              { "label": "Monto que recibes", "value": "19 400 F CFA" }
+            ]
+          },
+          {
+            "subtitle": "Desglose de pago para una suscripción de 30 $ al mes",
+            "items": [
+              {
+                "text": "Aquí está la misma suscripción pagada esta vez en USD usando una tarjeta de crédito."
+              }
+            ],
+            "table": [
+              { "label": "Precio del producto", "value": "30 $" },
+              { "label": "Valor total de la transacción", "value": "30 $" },
+              { "label": "Tarifa de suscripción (0.5%)", "value": "0.15 $" },
+              { "label": "Tarifa de transacción (4% + 0.40 $)", "value": "1.60 $" },
+              { "label": "Monto que recibes", "value": "28.25 $" }
+            ]
+          }
+        ]
+      },
+      "refunds": {
+        "title": "Reembolsos",
+        "sections": [
+          {
+            "subtitle": "Reembolsos completos y parciales",
+            "items": [
+              {
+                "text": "Puedes emitir reembolsos completos o parciales en lomi. a tus clientes. Sin embargo, las tarifas iniciales de transacción no se reembolsan ya que las redes de tarjetas de crédito y los PSP las cobran independientemente de un futuro reembolso.",
+                "bubble": "lomi. se reserva el derecho de emitir reembolsos a nuestra discreción hasta 60 días después de la compra como parte de nuestros esfuerzos para reducir continuamente y de manera proactiva los contracargos que te cuestan 15 $ por disputa. Solo aprovechamos este derecho para este propósito y en interés de reducir los contracargos y tarifas para ti."
+              }
+            ]
+          }
+        ]
+      },
+      "dispute": {
+        "title": "Contracargo",
+        "sections": [
+          {
+            "subtitle": "Sin contracargo en dinero móvil",
+            "items": [
+              {
+                "text": "No es posible abrir un contracargo en transacciones de dinero móvil."
+              }
+            ]
+          },
+          {
+            "subtitle": "Manejo de disputas",
+            "items": [
+              {
+                "text": "A veces, los clientes pueden abrir una disputa a través de su banco por una compra hecha con tarjeta de crédito. Las disputas cuestan 15 $ independientemente del resultado y se deducen directamente de tu saldo. Esta tarifa es cobrada por las redes de tarjetas de crédito subyacentes y PSP y, por lo tanto, no podemos reembolsarla. Sin embargo, continuamente trabajamos para reducir proactivamente la tasa de contracargos para estar en o por debajo de los estándares de la industria.",
+                "bubble": "Las redes de tarjetas de crédito imponen programas de monitoreo, penalizaciones y costos de contracargo más altos para vendedores con tasas de contracargo altas (~0.7%+). Dado que lomi. actúa como el Mercader de Registro, por lo tanto, siempre monitoreamos y prevenimos proactivamente que nuestra tasa se acerque a estos umbrales. En casos raros, podríamos necesitar intervenir e incluso suspender tu cuenta a menos que se tomen medidas rápidas y proactivas para reducir los contracargos a un nivel aceptable."
+              }
+            ]
+          }
+        ]
+      },
+      "payout": {
+        "title": "Tarifas de pago",
+        "sections": [
+          {
+            "subtitle": "Aunque los pagos pueden incurrir en tarifas cobradas por los proveedores de pago, lomi. no agrega tarifas adicionales ni margen.",
+            "items": [
+              {
+                "text": "lomi. no gana nada con los retiros de comerciantes, nos esforzamos por hacerlos completamente gratuitos. También ofrecemos retiros instantáneos tanto para dinero móvil como para transferencias bancarias internacionales, manteniéndote en total control de cuándo emitir pagos."
+              }
+            ],
+            "providers": [
+              {
+                "name": "SPI",
+                "fees": [
+                  "1% a nivel nacional de tu país, 2% al enviar a otro país UEMOA (Côte d'Ivoire, Burkina Faso, Niger, Senegal, Guinea, Mali, Benin, Togo)"
+                ]
+              },
+              {
+                "name": "Stripe",
+                "fees": [
+                  "$2 por mes de pago(s) activo(s)",
+                  "0.25% + $0.25 por pago"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "volume": {
+        "title": "Precios personalizados",
+        "sections": [
+          {
+            "subtitle": "Precios personalizados para empresas en crecimiento",
+            "items": [
+              {
+                "text": "¿Empresa grande o en rápido crecimiento? Podemos ofrecer precios personalizados para adaptarnos mejor a tus necesidades. Contáctanos para más información."
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
   "privacy": {
     "description": "Comprender nuestro compromiso con la privacidad",
     "footer_date": "Última actualización: 6 de noviembre de 2025",

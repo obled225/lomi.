@@ -183,6 +183,179 @@
     "title": "Pricing",
     "transparency": "No surprises, no hidden fees, no monthly costs."
   },
+  "pricingDetails": {
+    "sections": {
+      "intro": "Introduction",
+      "transaction": "Transaction fees",
+      "additional": "Additional fees",
+      "example": "Example",
+      "refunds": "Refunds",
+      "dispute": "Chargeback Fees",
+      "payout": "Payout fees",
+      "volume": "Volume pricing"
+    },
+    "content": {
+      "intro": {
+        "title": "Introduction",
+        "sections": [
+          {
+            "subtitle": "Cheapest MoR on the market",
+            "items": [
+              {
+                "text": "lomi. is priced 20% cheaper than other merchant of record in francophone West Africa. 2% and 200 F CFA per transaction for mobile money."
+              }
+            ]
+          },
+          {
+            "subtitle": "No hidden fees",
+            "items": [
+              {
+                "text": "There are no hidden fees or additional charges. We cover all infrastructure costs and we don't add any extra fees or markup."
+              }
+            ]
+          }
+        ]
+      },
+      "transaction": {
+        "title": "Transaction fees",
+        "sections": [
+          {
+            "subtitle": "2% + 200 F CFA per transaction",
+            "items": [
+              {
+                "text": "lomi. is currently built on top of SPI for mobile money payment processing, and our pricing structure is made to cover the infrastructure 1% to 1.5% fee with ours."
+              },
+              {
+                "text": "For credit card payment processing, we currently use Stripe and we cover their 3.2% + 30 ¢ fee by charging 4% + 0.40 $ per transaction. However, they impose a few additional fees for certain transactions that we need to pass on."
+              }
+            ]
+          }
+        ]
+      },
+      "additional": {
+        "title": "Additional fees",
+        "sections": [
+          {
+            "subtitle": "+1.5% for international cards"
+          },
+          {
+            "subtitle": "+0.5% for subscription payments"
+          }
+        ]
+      },
+      "example": {
+        "title": "Examples",
+        "sections": [
+          {
+            "subtitle": "Payment breakdown for a 20 000 F CFA subscription in Côte d'Ivoire",
+            "items": [
+              {
+                "text": "Let's look at an example breakdown with our pricing applied. Below is a payment of a 20 000 F CFA subscription in Côte d'Ivoire using mobile money."
+              }
+            ],
+            "table": [
+              { "label": "Product Price", "value": "20 000 F CFA" },
+              { "label": "Total Transaction Value", "value": "20 000 F CFA" },
+              { "label": "Transaction Fee (2% + 200 XOF)", "value": "600 F CFA" },
+              { "label": "Amount you receive", "value": "19 400 F CFA" }
+            ]
+          },
+          {
+            "subtitle": "Payment breakdown for a subscription priced 30 $ per month",
+            "items": [
+              {
+                "text": "Here's the same subscription paid this time in USD using a credit card."
+              }
+            ],
+            "table": [
+              { "label": "Product Price", "value": "30 $" },
+              { "label": "Total Transaction Value", "value": "30 $" },
+              { "label": "Subscription Fee (0.5%)", "value": "0.15 $" },
+              { "label": "Transaction Fee (4% + 0.40 $)", "value": "1.60 $" },
+              { "label": "Amount you receive", "value": "28.25 $" }
+            ]
+          }
+        ]
+      },
+      "refunds": {
+        "title": "Refunds",
+        "sections": [
+          {
+            "subtitle": "Full and partial refunds",
+            "items": [
+              {
+                "text": "You can issue both full or partial refunds on lomi. to your customers. However, the initial transaction fees are not refunded to you since credit card networks and PSPs charge them regardless of a future refund.",
+                "bubble": "lomi. reserves the right to issue refunds at our own discretion up to 60 days after the purchase as part of our efforts to continuously and proactively reduce chargebacks which costs you 15 $ per dispute. We only leverage this right for this purpose and in the interest of reducing chargebacks and fees for you."
+              }
+            ]
+          }
+        ]
+      },
+      "dispute": {
+        "title": "Chargeback",
+        "sections": [
+          {
+            "subtitle": "No chargeback on Mobile Money",
+            "items": [
+              {
+                "text": "It is not possible to open a chargeback on mobile money transactions."
+              }
+            ]
+          },
+          {
+            "subtitle": "Dispute handling",
+            "items": [
+              {
+                "text": "Sometimes, customers can open a dispute via their bank for a purchase made via credit card. Disputes cost 15 $ regardless of the outcome and is deducted from your balance directly. This fee is charged by the underlying credit card networks & PSPs and therefore something we cannot refund. However, we continuously work to proactively reduce the rate of chargebacks to be at or lower than industry standards.",
+                "bubble": "Credit card networks impose monitoring programs, penalties and higher chargeback costs for sellers with high chargeback rates (~0.7%+). Since lomi. acts as the Merchant of Record, we therefore always monitor and proactively prevent our rate coming close to these thresholds. In rare cases, we might need to intervene and even suspend your account unless swift and proactive measures are taken to reduce chargebacks to an acceptable level."
+              }
+            ]
+          }
+        ]
+      },
+      "payout": {
+        "title": "Payout fees",
+        "sections": [
+          {
+            "subtitle": "While payouts may incur fees charged by the payout providers, lomi. does not add any extra fees or markup.",
+            "items": [
+              {
+                "text": "lomi. does not profit from merchant withdrawals at all, we strive to make them entirely free. We also offer instant withdrawals for both mobile money and international bank transfers, keeping you in total control of when to issue payouts."
+              }
+            ],
+            "providers": [
+              {
+                "name": "SPI",
+                "fees": [
+                  "1% at your country's national level, 2% when sending to another UEMOA country (Côte d'Ivoire, Burkina Faso, Niger, Senegal, Guinea, Mali, Benin, Togo)"
+                ]
+              },
+              {
+                "name": "Stripe",
+                "fees": [
+                  "$2 per month of active payout(s)",
+                  "0.25% + $0.25 per payout"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "volume": {
+        "title": "Custom pricing",
+        "sections": [
+          {
+            "subtitle": "Custom pricing for growing businesses",
+            "items": [
+              {
+                "text": "Large or fast-growing business? We can offer custom pricing to better fit your needs. Reach out to us for more information."
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
   "privacy": {
     "description": "Understanding our privacy commitment",
     "footer_date": "Last updated: November 6, 2025",

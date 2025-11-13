@@ -183,6 +183,179 @@
     "title": "Tarification",
     "transparency": "Pas de surprises, pas de frais cachés, pas de coûts mensuels."
   },
+  "pricingDetails": {
+    "sections": {
+      "intro": "Introduction",
+      "transaction": "Frais de transaction",
+      "additional": "Frais supplémentaires",
+      "example": "Exemples",
+      "refunds": "Remboursements",
+      "dispute": "Frais de rétrofacturation",
+      "payout": "Frais de paiement",
+      "volume": "Tarification par volume"
+    },
+    "content": {
+      "intro": {
+        "title": "Introduction",
+        "sections": [
+          {
+            "subtitle": "Le MoR le moins cher du marché",
+            "items": [
+              {
+                "text": "lomi. est tarifé 20% moins cher que d'autres plateformes de paiement en Afrique de l'Ouest francophone. 2% et 200 F CFA par transaction pour le mobile money."
+              }
+            ]
+          },
+          {
+            "subtitle": "Aucun frais caché",
+            "items": [
+              {
+                "text": "Il n'y a pas de frais cachés ou de charges supplémentaires. Nous couvrons tous les coûts d'infrastructure et nous n'ajoutons aucun frais supplémentaires ou marge."
+              }
+            ]
+          }
+        ]
+      },
+      "transaction": {
+        "title": "Frais de transaction",
+        "sections": [
+          {
+            "subtitle": "2% + 200 F CFA par transaction",
+            "items": [
+              {
+                "text": "lomi. est actuellement construit sur SPI pour le traitement des paiements d'argent mobile, et notre structure tarifaire est conçue pour couvrir les frais d'infrastructure de 1% à 1.5% avec les nôtres."
+              },
+              {
+                "text": "Pour le traitement des paiements par carte de crédit, nous utilisons actuellement Stripe et nous couvrons leurs frais de 3.2% + 30 $ en facturant 4% + 0.40 $ par transaction. Cependant, ils imposent certains frais supplémentaires pour certaines transactions que nous devons transmettre."
+              }
+            ]
+          }
+        ]
+      },
+      "additional": {
+        "title": "Frais supplémentaires",
+        "sections": [
+          {
+            "subtitle": "+1.5% pour les cartes internationales"
+          },
+          {
+            "subtitle": "+0.5% pour les paiements d'abonnement"
+          }
+        ]
+      },
+      "example": {
+        "title": "Exemples",
+        "sections": [
+          {
+            "subtitle": "Répartition des paiements pour un abonnement de 20 000 F CFA en Côte d'Ivoire",
+            "items": [
+              {
+                "text": "Regardons un exemple de répartition avec nos tarifs appliqués. Voici un paiement d'un abonnement de 20 000 F CFA en Côte d'Ivoire utilisant l'argent mobile."
+              }
+            ],
+            "table": [
+              { "label": "Prix du produit", "value": "20 000 F CFA" },
+              { "label": "Valeur totale de la transaction", "value": "20 000 F CFA" },
+              { "label": "Frais de transaction (2% + 200 XOF)", "value": "600 F CFA" },
+              { "label": "Montant que vous recevez", "value": "19 400 F CFA" }
+            ]
+          },
+          {
+            "subtitle": "Répartition des paiements pour un abonnement de 30 $ par mois",
+            "items": [
+              {
+                "text": "Voici le même abonnement payé cette fois en USD en utilisant une carte de crédit."
+              }
+            ],
+            "table": [
+              { "label": "Prix du produit", "value": "30 $" },
+              { "label": "Valeur totale de la transaction", "value": "30 $" },
+              { "label": "Frais d'abonnement (0.5%)", "value": "0.15 $" },
+              { "label": "Frais de transaction (4% + 0.40 $)", "value": "1.60 $" },
+              { "label": "Montant que vous recevez", "value": "28.25 $" }
+            ]
+          }
+        ]
+      },
+      "refunds": {
+        "title": "Remboursements",
+        "sections": [
+          {
+            "subtitle": "Remboursements complets et partiels",
+            "items": [
+              {
+                "text": "Vous pouvez émettre des remboursements complets ou partiels sur lomi. à vos clients. Cependant, les frais de transaction initiaux ne sont pas remboursés car les réseaux de cartes de crédit et les PSP les facturent indépendamment d'un remboursement futur.",
+                "bubble": "lomi. se réserve le droit d'émettre des remboursements à notre discrétion jusqu'à 60 jours après l'achat dans le cadre de nos efforts pour réduire continuellement et de manière proactive les rétrofacturations qui vous coûtent 15 $ par litige. Nous n'exerçons ce droit que dans ce but et dans l'intérêt de réduire les rétrofacturations et les frais pour vous."
+              }
+            ]
+          }
+        ]
+      },
+      "dispute": {
+        "title": "Rétrofacturation",
+        "sections": [
+          {
+            "subtitle": "Pas de rétrofacturation sur l'argent mobile",
+            "items": [
+              {
+                "text": "Il n'est pas possible d'ouvrir une rétrofacturation sur les transactions d'argent mobile."
+              }
+            ]
+          },
+          {
+            "subtitle": "Gestion des litiges",
+            "items": [
+              {
+                "text": "Parfois, les clients peuvent ouvrir un litige via leur banque pour un achat effectué par carte de crédit. Les litiges coûtent 15 $ quel que soit le résultat et sont déduits directement de votre solde. Ces frais sont facturés par les réseaux de cartes de crédit sous-jacents et les PSP et, par conséquent, nous ne pouvons pas les rembourser. Cependant, nous travaillons continuellement pour réduire de manière proactive le taux de rétrofacturations pour être à ou en dessous des normes de l'industrie.",
+                "bubble": "Les réseaux de cartes de crédit imposent des programmes de surveillance, des pénalités et des coûts de rétrofacturation plus élevés pour les vendeurs ayant des taux de rétrofacturation élevés (~0.7%+). Étant donné que lomi. agit en tant que Marchand d'Enregistrement, nous surveillons donc toujours et prévenons de manière proactive que notre taux se rapproche de ces seuils. Dans de rares cas, nous pourrions avoir besoin d'intervenir et même de suspendre votre compte à moins que des mesures rapides et proactives ne soient prises pour réduire les rétrofacturations à un niveau acceptable."
+              }
+            ]
+          }
+        ]
+      },
+      "payout": {
+        "title": "Frais de paiement",
+        "sections": [
+          {
+            "subtitle": "Bien que les paiements puissent entraîner des frais facturés par les fournisseurs de paiement, lomi. n'ajoute pas de frais supplémentaires ou de marge.",
+            "items": [
+              {
+                "text": "lomi. ne gagne rien sur les retraits de marchands, nous nous efforçons de les rendre entièrement gratuits. Nous offrons également des retraits instantanés pour l'argent mobile et les transferts bancaires internationaux, vous gardant en total contrôle du moment où émettre des paiements."
+              }
+            ],
+            "providers": [
+              {
+                "name": "SPI",
+                "fees": [
+                  "1% au niveau national de votre pays, 2% lors de l'envoi vers un autre pays UEMOA (Côte d'Ivoire, Burkina Faso, Niger, Senegal, Guinée, Mali, Bénin, Togo)"
+                ]
+              },
+              {
+                "name": "Stripe",
+                "fees": [
+                  "2 $ par mois de paiement(s) actif(s)",
+                  "0.25% + 0.25 $ par paiement"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "volume": {
+        "title": "Tarification personnalisée",
+        "sections": [
+          {
+            "subtitle": "Tarification personnalisée pour les entreprises en croissance",
+            "items": [
+              {
+                "text": "Entreprise importante ou en forte croissance ? Nous pouvons offrir une tarification personnalisée pour mieux s'adapter à vos besoins. Contactez-nous pour plus d'informations."
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
   "privacy": {
     "description": "Comprendre notre engagement en matière de confidentialité",
     "footer_date": "Dernière mise à jour : 6 novembre 2025",
