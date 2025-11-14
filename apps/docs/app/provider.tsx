@@ -6,6 +6,7 @@ import type { ReactNode } from 'react';
 import { TooltipProvider } from '@radix-ui/react-tooltip';
 import { TranslationProvider } from '@/lib/contexts/translation-context';
 import { GithubStarsProvider } from '@/lib/hooks/use-github-stars';
+import { Toaster } from 'sonner';
 
 const SearchDialog = dynamic(() => import('@/components/ui/search'), {
   ssr: false,
@@ -41,6 +42,7 @@ export function Provider({ children }: { children: ReactNode }) {
               dangerouslySetInnerHTML={{ __html: inject }}
             />
             {children}
+            <Toaster />
           </TooltipProvider>
         </GithubStarsProvider>
       </TranslationProvider>

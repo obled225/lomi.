@@ -269,10 +269,13 @@ export function IntegrationsDropdown({
                         />
                       </div>
                     </div>
-                    <p className={`text-sm font-semibold leading-tight flex-1 ${hoveredIcon === `feature-${index}`
-                      ? 'text-zinc-900 dark:text-zinc-100'
-                      : 'text-zinc-600 dark:text-zinc-400'
-                      }`}>
+                    <p
+                      className={`text-sm font-semibold leading-tight flex-1 ${
+                        hoveredIcon === `feature-${index}`
+                          ? 'text-zinc-900 dark:text-zinc-100'
+                          : 'text-zinc-600 dark:text-zinc-400'
+                      }`}
+                    >
                       {feature.name}
                     </p>
                   </div>
@@ -323,10 +326,13 @@ export function IntegrationsDropdown({
                     </div>
                   </div>
                   <div className="flex-1 min-w-0 pl-1.5">
-                    <p className={`text-sm font-semibold leading-tight ${hoveredIcon === product.id
-                      ? 'text-zinc-900 dark:text-zinc-100'
-                      : 'text-zinc-600 dark:text-zinc-400'
-                      }`}>
+                    <p
+                      className={`text-sm font-semibold leading-tight ${
+                        hoveredIcon === product.id
+                          ? 'text-zinc-900 dark:text-zinc-100'
+                          : 'text-zinc-600 dark:text-zinc-400'
+                      }`}
+                    >
                       {product.name}
                     </p>
                     <p className="text-xs text-muted-foreground mt-0.5 line-clamp-1 leading-tight">
@@ -334,8 +340,9 @@ export function IntegrationsDropdown({
                     </p>
                   </div>
                   <ChevronDown
-                    className={`h-3 w-3 text-muted-foreground transition-transform shrink-0 ${expandedSections.includes(product.id) ? 'rotate-180' : ''
-                      }`}
+                    className={`h-3 w-3 text-muted-foreground transition-transform shrink-0 ${
+                      expandedSections.includes(product.id) ? 'rotate-180' : ''
+                    }`}
                   />
                 </div>
               </CardHeader>

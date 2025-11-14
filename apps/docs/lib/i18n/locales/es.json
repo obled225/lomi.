@@ -3,6 +3,13 @@
     "backHome": "Volver al inicio",
     "backToBlog": "Volver a artículos",
     "byAuthor": "Por {author}",
+    "categories": {
+      "case-study": "Estudio de caso",
+      "news": "Noticias",
+      "opinion": "Opinión",
+      "online-business": "Comercio electrónico",
+      "payments": "Pagos"
+    },
     "copied": "Copiado",
     "copiedDesc": "El enlace ha sido copiado a tu portapapeles.",
     "copyErrorDesc": "No se pudo copiar el enlace al portapapeles.",
@@ -160,6 +167,7 @@
     "bceao_accreditation": "lomi. está actualmente en proceso de acreditación como proveedor de servicios de pago por la BCEAO.",
     "company": {
       "blog": "Blog",
+      "careers": "Carreras",
       "openSource": "Código abierto",
       "story": "Historia",
       "title": "Empresa"
@@ -284,8 +292,14 @@
             ],
             "table": [
               { "label": "Precio del producto", "value": "20 000 F CFA" },
-              { "label": "Valor total de la transacción", "value": "20 000 F CFA" },
-              { "label": "Tarifa de transacción (2% + 200 XOF)", "value": "600 F CFA" },
+              {
+                "label": "Valor total de la transacción",
+                "value": "20 000 F CFA"
+              },
+              {
+                "label": "Tarifa de transacción (2% + 200 XOF)",
+                "value": "600 F CFA"
+              },
               { "label": "Monto que recibes", "value": "19 400 F CFA" }
             ]
           },
@@ -300,7 +314,10 @@
               { "label": "Precio del producto", "value": "30 $" },
               { "label": "Valor total de la transacción", "value": "30 $" },
               { "label": "Tarifa de suscripción (0.5%)", "value": "0.15 $" },
-              { "label": "Tarifa de transacción (4% + 0.40 $)", "value": "1.60 $" },
+              {
+                "label": "Tarifa de transacción (4% + 0.40 $)",
+                "value": "1.60 $"
+              },
               { "label": "Monto que recibes", "value": "28.25 $" }
             ]
           }

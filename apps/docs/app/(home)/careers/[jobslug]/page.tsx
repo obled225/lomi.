@@ -10,16 +10,22 @@ interface PageProps {
   }>;
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
   const { jobslug: jobSlug } = await params;
   const language = await detectLanguage();
 
   const job = await getJobBySlugServer(jobSlug);
-  const title = job?.title || (t('careers.job_opportunity', language) as string);
+  const title =
+    job?.title || (t('careers.job_opportunity', language) as string);
 
   return {
     title: `${title}`,
-    description: (t('careers.apply_for_role', language) as string).replace('{{title}}', title),
+    description: (t('careers.apply_for_role', language) as string).replace(
+      '{{title}}',
+      title,
+    ),
   };
 }
 

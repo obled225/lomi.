@@ -4,6 +4,7 @@ import SimpleImage from '@/components/home/hero-image';
 import { t } from '@/lib/i18n/translations';
 import { Section } from '@/components/ui/section';
 import Link from 'next/link';
+import { playClickSound } from '@/lib/utils/sound';
 
 interface CareersSectionProps {
   mobileJoinUsImage?: {
@@ -26,7 +27,7 @@ export function CareersSection({ mobileJoinUsImage }: CareersSectionProps) {
             </h2>
           </div>
           {/* Join Us Button */}
-          <Link href="/careers">
+          <Link href="/careers" onClick={playClickSound}>
             <Button variant="blue" size="header" className="self-start">
               {String(t('careers.join_us', currentLanguage))}
             </Button>

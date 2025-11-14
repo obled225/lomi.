@@ -10,7 +10,7 @@ import { animations } from '@/lib/utils/lottie-animations';
 import { useTheme } from '@/lib/hooks/use-theme';
 import { useThemeAnimation } from '@/lib/hooks/use-theme-animation';
 import {
-  FacebookIcon,
+  DiscordIcon,
   GitHubIcon,
   LinkedInIcon,
   XIcon,
@@ -122,14 +122,14 @@ export function Footer() {
                       <XIcon className="h-[22px] w-[22px] translate-y-[-0.5px] -translate-x-px" />
                     </Link>
                     <Link
-                      href="https://www.facebook.com/lomiafrica"
+                      href="https://discord.gg/rvUFkHM2kv"
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={playClickSound}
-                      className="text-black dark:text-white hover:text-[#1877F2] dark:hover:text-[#1877F2] inline-flex items-center transition-colors"
-                      aria-label="Follow us on Facebook"
+                      className="text-black dark:text-white hover:text-[#5865F2] dark:hover:text-[#5865F2] inline-flex items-center transition-colors"
+                      aria-label="Join our Discord server"
                     >
-                      <FacebookIcon className="h-[20px] w-[20px]" />
+                      <DiscordIcon className="h-[23px] w-[23px]" />
                     </Link>
                     <Link
                       href="https://www.linkedin.com/company/lomiafri"
@@ -142,7 +142,7 @@ export function Footer() {
                       <LinkedInIcon className="h-[20px] w-[20px]" />
                     </Link>
                     <Link
-                      href="https://slack.lomi.africa"
+                      href="https://join.slack.com/t/lomi-a/shared_invite/zt-3hezykfvo-eW1jX6IkXAqht875Y1wUOw"
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={playClickSound}
@@ -411,6 +411,27 @@ export function Footer() {
                             strokeLinejoin="round"
                             strokeWidth={2}
                             d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+                          />
+                        </svg>
+                      ),
+                    },
+                    {
+                      name: t('footer.company.careers'),
+                      link: '/careers',
+                      color: '',
+                      icon: (
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-4 w-4 ml-1 transition-transform duration-300 transform group-hover:translate-x-1 opacity-0 group-hover:opacity-100"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m8 0V8a2 2 0 01-2 2H8a2 2 0 01-2-2V6m8 0H8"
                           />
                         </svg>
                       ),

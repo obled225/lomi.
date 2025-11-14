@@ -3,6 +3,13 @@
     "backHome": "Retour à l'accueil",
     "backToBlog": "Retour au blog",
     "byAuthor": "Par {author}",
+    "categories": {
+      "case-study": "Étude de cas",
+      "news": "News",
+      "opinion": "Opinion",
+      "online-business": "E-commerce",
+      "payments": "Paiements"
+    },
     "copied": "Copié",
     "copiedDesc": "Le lien a été copié dans votre presse-papiers.",
     "copyErrorDesc": "Impossible de copier le lien dans le presse-papiers.",
@@ -160,6 +167,7 @@
     "bceao_accreditation": "lomi. est actuellement en cours d'accréditation en tant que prestataire de services de paiement par la BCEAO.",
     "company": {
       "blog": "Blog",
+      "careers": "Carrières",
       "openSource": "Open-source",
       "story": "À propos",
       "title": "Entreprise"
@@ -284,8 +292,14 @@
             ],
             "table": [
               { "label": "Prix du produit", "value": "20 000 F CFA" },
-              { "label": "Valeur totale de la transaction", "value": "20 000 F CFA" },
-              { "label": "Frais de transaction (2% + 200 XOF)", "value": "600 F CFA" },
+              {
+                "label": "Valeur totale de la transaction",
+                "value": "20 000 F CFA"
+              },
+              {
+                "label": "Frais de transaction (2% + 200 XOF)",
+                "value": "600 F CFA"
+              },
               { "label": "Montant que vous recevez", "value": "19 400 F CFA" }
             ]
           },
@@ -300,7 +314,10 @@
               { "label": "Prix du produit", "value": "30 $" },
               { "label": "Valeur totale de la transaction", "value": "30 $" },
               { "label": "Frais d'abonnement (0.5%)", "value": "0.15 $" },
-              { "label": "Frais de transaction (4% + 0.40 $)", "value": "1.60 $" },
+              {
+                "label": "Frais de transaction (4% + 0.40 $)",
+                "value": "1.60 $"
+              },
               { "label": "Montant que vous recevez", "value": "28.25 $" }
             ]
           }

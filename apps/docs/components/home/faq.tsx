@@ -68,7 +68,10 @@ const FaqSection = React.forwardRef<HTMLElement, FaqSectionProps>(
                       'hover:bg-muted/50',
                     )}
                   >
-                    <AccordionTrigger className="w-full px-0 py-2 h-auto justify-between hover:bg-transparent items-start flex-wrap sm:flex-nowrap [&[data-state=open]>svg]:rotate-180">
+                    <AccordionTrigger
+                      onClick={playClickSound}
+                      className="w-full px-0 py-2 h-auto justify-between hover:bg-transparent items-start flex-wrap sm:flex-nowrap [&[data-state=open]>svg]:rotate-180"
+                    >
                       <h3
                         className={cn(
                           'text-base sm:text-lg font-medium transition-colors duration-200 text-left leading-relaxed',

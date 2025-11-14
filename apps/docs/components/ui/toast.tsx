@@ -8,9 +8,7 @@ interface ToastOptions {
 }
 
 export function toast({ type = 'info', description }: ToastOptions) {
-  const isDark =
-    typeof document !== 'undefined' &&
-    document.documentElement.classList.contains('dark');
+  const isDark = document.documentElement.classList.contains('dark');
 
   switch (type) {
     case 'success':

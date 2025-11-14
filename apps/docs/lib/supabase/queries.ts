@@ -1,10 +1,13 @@
-import { createClient } from "@/lib/supabase/client";
-import type { Database } from "@/lib/types/database.types";
+import { createClient } from '@/lib/supabase/client';
+import type { Database } from '@/lib/types/database.types';
 
-export type Job = Database["public"]["Tables"]["jobs"]["Row"];
-export type JobApplication = Database["public"]["Tables"]["job_applications"]["Row"];
-export type JobApplicationInsert = Database["public"]["Tables"]["job_applications"]["Insert"];
-export type JobApplicationUpdate = Database["public"]["Tables"]["job_applications"]["Update"];
+export type Job = Database['public']['Tables']['jobs']['Row'];
+export type JobApplication =
+  Database['public']['Tables']['job_applications']['Row'];
+export type JobApplicationInsert =
+  Database['public']['Tables']['job_applications']['Insert'];
+export type JobApplicationUpdate =
+  Database['public']['Tables']['job_applications']['Update'];
 
 // Fetch a single job by slug
 export async function getJobBySlug(slug: string): Promise<Job | null> {
@@ -32,7 +35,10 @@ export async function getJobBySlug(slug: string): Promise<Job | null> {
 // Create a job application
 export async function createJobApplication(
   jobId: string,
-  applicationData: Omit<JobApplicationInsert, 'job_id' | 'created_at' | 'updated_at' | 'id' | 'status'>
+  applicationData: Omit<
+    JobApplicationInsert,
+    'job_id' | 'created_at' | 'updated_at' | 'id' | 'status'
+  >,
 ): Promise<JobApplication> {
   const supabase = createClient();
 
@@ -54,7 +60,10 @@ export async function createJobApplication(
 }
 
 // Upload resume to storage
-export async function uploadResume(file: File, applicationId: string): Promise<string> {
+export async function uploadResume(
+  file: File,
+  applicationId: string,
+): Promise<string> {
   const supabase = createClient();
 
   // Create a unique filename
@@ -74,9 +83,9 @@ export async function uploadResume(file: File, applicationId: string): Promise<s
   }
 
   // Get the public URL
-  const { data: { publicUrl } } = supabase.storage
-    .from('resumes')
-    .getPublicUrl(fileName);
+  const {
+    data: { publicUrl },
+  } = supabase.storage.from('resumes').getPublicUrl(fileName);
 
   return publicUrl;
 }

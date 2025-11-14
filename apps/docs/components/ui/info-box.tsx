@@ -72,7 +72,7 @@ const infoBoxTextVariants = cva('leading-relaxed', {
 
 export interface InfoBoxProps
   extends React.HTMLAttributes<HTMLDivElement>,
-  VariantProps<typeof infoBoxVariants> {
+    VariantProps<typeof infoBoxVariants> {
   children: React.ReactNode;
 }
 

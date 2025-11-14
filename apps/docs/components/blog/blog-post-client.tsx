@@ -17,7 +17,6 @@ import { ShareModal } from '@/components/blog/share-modal';
 import { playClickSound } from '@/lib/utils/sound';
 import '../../app/styles/blog.css';
 
-
 // Helper function to get category from post
 const getPostCategory = (post: Post): string => {
   // First try to get from categories array
@@ -155,7 +154,6 @@ export default function BlogPostClient({ slug }: BlogPostClientProps) {
     }
     return undefined; // Explicitly return undefined for the other code path
   }, [post, loading]); // Rerun effect if post or loading state changes
-
 
   useEffect(() => {
     const fetchPost = async () => {

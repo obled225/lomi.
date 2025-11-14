@@ -1,7 +1,7 @@
-import { createClient } from "@/lib/supabase/server";
-import type { Database } from "@/lib/types/database.types";
+import { createClient } from '@/lib/supabase/server';
+import type { Database } from '@/lib/types/database.types';
 
-export type Job = Database["public"]["Tables"]["jobs"]["Row"];
+export type Job = Database['public']['Tables']['jobs']['Row'];
 
 // Server-side function to fetch all active jobs
 export async function getActiveJobsServer(): Promise<Job[]> {
@@ -36,7 +36,7 @@ export async function getUniqueDepartmentsServer(): Promise<string[]> {
   }
 
   // Extract unique departments
-  const departments = [...new Set((data || []).map(job => job.department))];
+  const departments = [...new Set((data || []).map((job) => job.department))];
   return departments.sort();
 }
 
@@ -78,6 +78,6 @@ export async function getUniqueLocationsServer(): Promise<string[]> {
   }
 
   // Extract unique locations
-  const locations = [...new Set((data || []).map(job => job.location))];
+  const locations = [...new Set((data || []).map((job) => job.location))];
   return locations.sort();
 }

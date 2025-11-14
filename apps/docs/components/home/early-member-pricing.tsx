@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { SingleSwirl } from '@/components/preview/swirls';
 import { useTranslation } from '@/lib/contexts/translation-context';
 import { t } from '@/lib/i18n/translations';
+import { playClickSound } from '@/lib/utils/sound';
 
 export function EarlyMemberPricing() {
   const { currentLanguage } = useTranslation();
@@ -70,7 +71,13 @@ export function EarlyMemberPricing() {
               </div>
             </div>
             <div className="flex justify-center gap-4 -mt-2 md:-mt-4 px-4">
-              <Button type="button" variant="outline" size="header" asChild>
+              <Button
+                type="button"
+                variant="outline"
+                size="header"
+                asChild
+                onClick={playClickSound}
+              >
                 <a
                   href="docs/core/merchant-of-record/pricing"
                   target="_blank"
@@ -80,7 +87,13 @@ export function EarlyMemberPricing() {
                   {t('earlyMemberPricing.learnMore') as string}
                 </a>
               </Button>
-              <Button type="button" variant="blue" size="header" asChild>
+              <Button
+                type="button"
+                variant="blue"
+                size="header"
+                asChild
+                onClick={playClickSound}
+              >
                 <Link href="https://dashboard.lomi.africa/sign-in">
                   {t('earlyMemberPricing.getStarted') as string}
                 </Link>

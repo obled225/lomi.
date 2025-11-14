@@ -3,6 +3,13 @@
     "backHome": "返回首页",
     "backToBlog": "返回文章",
     "byAuthor": "作者：{author}",
+    "categories": {
+      "case-study": "案例",
+      "news": "新闻",
+      "opinion": "意见",
+      "online-business": "在线业务",
+      "payments": "支付"
+    },
     "copied": "已复制",
     "copiedDesc": "链接已复制到您的剪贴板。",
     "copyErrorDesc": "无法将链接复制到剪贴板。",
@@ -160,6 +167,7 @@
     "bceao_accreditation": "lomi. 目前正在由 BCEAO 进行支付服务提供商认证程序。",
     "company": {
       "blog": "博客",
+      "careers": "职业",
       "openSource": "开源",
       "story": "故事",
       "title": "公司"
@@ -361,10 +369,7 @@
               },
               {
                 "name": "Stripe",
-                "fees": [
-                  "每月2美元的活跃付款",
-                  "每次付款0.25% + 0.25美元"
-                ]
+                "fees": ["每月2美元的活跃付款", "每次付款0.25% + 0.25美元"]
               }
             ]
           }
