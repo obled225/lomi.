@@ -2056,48 +2056,45 @@ export type Database = {
       }
       jobs: {
         Row: {
-          benefits: string[] | null
+          about_description: string
+          applying_description: string
           created_at: string
           department: string
-          description: string
           id: string
           is_active: boolean | null
           location: string
-          requirements: string[] | null
           responsibilities: string[] | null
-          salary: string | null
+          role_description: string
           slug: string
           title: string
           type: string
           updated_at: string
         }
         Insert: {
-          benefits?: string[] | null
+          about_description: string
+          applying_description: string
           created_at?: string
           department: string
-          description: string
           id?: string
           is_active?: boolean | null
           location: string
-          requirements?: string[] | null
           responsibilities?: string[] | null
-          salary?: string | null
+          role_description: string
           slug: string
           title: string
           type: string
           updated_at?: string
         }
         Update: {
-          benefits?: string[] | null
+          about_description?: string
+          applying_description?: string
           created_at?: string
           department?: string
-          description?: string
           id?: string
           is_active?: boolean | null
           location?: string
-          requirements?: string[] | null
           responsibilities?: string[] | null
-          salary?: string | null
+          role_description?: string
           slug?: string
           title?: string
           type?: string

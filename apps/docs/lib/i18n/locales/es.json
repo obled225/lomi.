@@ -22,7 +22,36 @@
   },
   "careers": {
     "join_us": "Únete a nosotros",
-    "title": "Una empresa de software open-source enfocada en eliminar las barreras de pago."
+    "title": "Una empresa de software open-source enfocada en eliminar las barreras de pago.",
+    "description": "Descubre oportunidades emocionantes y únete a nuestro equipo de ingenieros y emprendedores apasionados.",
+    "job_opportunity": "Oportunidad laboral",
+    "apply_for_role": "Aplica para el puesto de {{title}} en lomi.",
+    "open_roles": "Puestos disponibles",
+    "all_teams": "Todos los equipos",
+    "all_locations": "Todas las ubicaciones",
+    "apply": "Aplicar",
+    "job_not_found": "Trabajo no encontrado",
+    "job_does_not_exist": "El puesto que buscas no existe.",
+    "failed_to_load_job": "Error al cargar los detalles del trabajo. Por favor, inténtalo de nuevo más tarde."
+  },
+  "job_application": {
+    "apply_for_role": "Aplicar para este puesto",
+    "name": "Nombre",
+    "email": "Email",
+    "resume": "Currículum",
+    "linkedin": "LinkedIn",
+    "github": "GitHub",
+    "project_note": "Por favor escribe una nota breve sobre un proyecto del que estés orgulloso",
+    "submitting": "Enviando...",
+    "submit_application": "Enviar aplicación",
+    "application_submitted": "¡Aplicación enviada!",
+    "thank_you_message": "Gracias por aplicar para el puesto de {{jobTitle}}. Revisaremos tu aplicación y nos pondremos en contacto contigo en 3-5 días hábiles.",
+    "file_too_large": "Archivo demasiado grande",
+    "file_too_large_desc": "Por favor selecciona un archivo de menos de 5MB.",
+    "invalid_file_type": "Tipo de archivo inválido",
+    "invalid_file_type_desc": "Por favor sube un documento PDF o Word.",
+    "submission_failed": "Error en el envío",
+    "submission_failed_desc": "Por favor inténtalo de nuevo más tarde."
   },
   "changelog": {
     "description": "Mantente actualizado con todas las últimas actualizaciones, mejoras y correcciones a lomi.",

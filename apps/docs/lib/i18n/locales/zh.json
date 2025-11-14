@@ -22,7 +22,36 @@
   },
   "careers": {
     "join_us": "加入我们",
-    "title": "lomi. 是一个专注于消除支付障碍的软件公司。"
+    "title": "lomi. 是一个专注于消除支付障碍的软件公司。",
+    "description": "发现激动人心的机会，加入我们充满激情的工程师和企业家团队。",
+    "job_opportunity": "职位机会",
+    "apply_for_role": "申请 lomi 的 {{title}} 职位。",
+    "open_roles": "开放职位",
+    "all_teams": "所有团队",
+    "all_locations": "所有地点",
+    "apply": "申请",
+    "job_not_found": "未找到职位",
+    "job_does_not_exist": "您寻找的职位不存在。",
+    "failed_to_load_job": "加载职位详情失败。请稍后重试。"
+  },
+  "job_application": {
+    "apply_for_role": "申请此职位",
+    "name": "姓名",
+    "email": "邮箱",
+    "resume": "简历",
+    "linkedin": "LinkedIn",
+    "github": "GitHub",
+    "project_note": "请简要写下您引以为豪的一个项目",
+    "submitting": "提交中...",
+    "submit_application": "提交申请",
+    "application_submitted": "申请已提交！",
+    "thank_you_message": "感谢您申请 {{jobTitle}} 职位。我们将在 3-5 个工作日内审核您的申请并与您联系。",
+    "file_too_large": "文件过大",
+    "file_too_large_desc": "请选择小于 5MB 的文件。",
+    "invalid_file_type": "无效的文件类型",
+    "invalid_file_type_desc": "请上传 PDF 或 Word 文档。",
+    "submission_failed": "提交失败",
+    "submission_failed_desc": "请稍后重试。"
   },
   "changelog": {
     "description": "保持更新，了解我们产品的最新更新、改进和修复。",

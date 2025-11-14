@@ -22,7 +22,36 @@
   },
   "careers": {
     "join_us": "Join us",
-    "title": "An open-source software company focused on removing payment barriers."
+    "title": "An open-source software company focused on removing payment barriers.",
+    "description": "Discover exciting opportunities and join our team of passionate engineers and entrepreneurs.",
+    "job_opportunity": "Job opportunity",
+    "apply_for_role": "Apply for the {{title}} role at lomi.",
+    "open_roles": "Open roles",
+    "all_teams": "All teams",
+    "all_locations": "All locations",
+    "apply": "Apply",
+    "job_not_found": "Job not found",
+    "job_does_not_exist": "The job position you're looking for doesn't exist.",
+    "failed_to_load_job": "Failed to load job details. Please try again later."
+  },
+  "job_application": {
+    "apply_for_role": "Apply for this role",
+    "name": "Name",
+    "email": "Email",
+    "resume": "Resume",
+    "linkedin": "LinkedIn",
+    "github": "GitHub",
+    "project_note": "Please write a short note on a project you're proud of",
+    "submitting": "Submitting...",
+    "submit_application": "Submit application",
+    "application_submitted": "Application submitted!",
+    "thank_you_message": "Thank you for applying for the {{jobTitle}} position. We'll review your application and get back to you within 3-5 business days.",
+    "file_too_large": "File too large",
+    "file_too_large_desc": "Please select a file smaller than 5MB.",
+    "invalid_file_type": "Invalid file type",
+    "invalid_file_type_desc": "Please upload a PDF or Word document.",
+    "submission_failed": "Submission failed",
+    "submission_failed_desc": "Please try again later."
   },
   "changelog": {
     "description": "Stay updated with all the latest updates, improvements, and fixes to lomi.",

@@ -1,4 +1,83 @@
-// import { createClient } from "@/lib/supabase/server";
-// import { redirect } from "next/navigation";
-// import type { Database } from "@/lib/types/database";
-// import logger from "@/lib/utils/logger";
+import { createClient } from "@/lib/supabase/server";
+import type { Database } from "@/lib/types/database.types";
+
+export type Job = Database["public"]["Tables"]["jobs"]["Row"];
+
+// Server-side function to fetch all active jobs
+export async function getActiveJobsServer(): Promise<Job[]> {
+  const supabase = await createClient();
+
+  const { data, error } = await supabase
+    .from('jobs')
+    .select('*')
+    .eq('is_active', true)
+    .order('created_at', { ascending: false });
+
+  if (error) {
+    console.error('Error fetching jobs:', error);
+    throw new Error('Failed to fetch jobs');
+  }
+
+  return data || [];
+}
+
+// Server-side function to get unique departments
+export async function getUniqueDepartmentsServer(): Promise<string[]> {
+  const supabase = await createClient();
+
+  const { data, error } = await supabase
+    .from('jobs')
+    .select('department')
+    .eq('is_active', true);
+
+  if (error) {
+    console.error('Error fetching departments:', error);
+    throw new Error('Failed to fetch departments');
+  }
+
+  // Extract unique departments
+  const departments = [...new Set((data || []).map(job => job.department))];
+  return departments.sort();
+}
+
+// Server-side function to fetch a single job by slug
+export async function getJobBySlugServer(slug: string): Promise<Job | null> {
+  const supabase = await createClient();
+
+  const { data, error } = await supabase
+    .from('jobs')
+    .select('*')
+    .eq('slug', slug)
+    .eq('is_active', true)
+    .single();
+
+  if (error) {
+    if (error.code === 'PGRST116') {
+      // No rows found
+      return null;
+    }
+    console.error('Error fetching job:', error);
+    throw new Error('Failed to fetch job');
+  }
+
+  return data;
+}
+
+// Server-side function to get unique locations
+export async function getUniqueLocationsServer(): Promise<string[]> {
+  const supabase = await createClient();
+
+  const { data, error } = await supabase
+    .from('jobs')
+    .select('location')
+    .eq('is_active', true);
+
+  if (error) {
+    console.error('Error fetching locations:', error);
+    throw new Error('Failed to fetch locations');
+  }
+
+  // Extract unique locations
+  const locations = [...new Set((data || []).map(job => job.location))];
+  return locations.sort();
+}
