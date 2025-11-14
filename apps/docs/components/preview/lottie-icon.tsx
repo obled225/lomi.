@@ -147,7 +147,7 @@ const LottieIconComponent = ({
         style={{ width: size, height: size }}
       >
         {isLoading ? (
-          <Spinner className="size-3" />
+          <Spinner />
         ) : (
           <div className="w-full h-full bg-muted-foreground/20 rounded-sm animate-pulse" />
         )}

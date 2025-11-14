@@ -13,6 +13,7 @@
     "mdx": "pnpm exec fumadocs-mdx",
     "format": "prettier --write .",
     "map": "tsx --env-file=.env lib/scripts/generate_sitemap.ts",
+    "test-types": "/opt/homebrew/bin/supabase gen types typescript --project-id hmowopdkhqbwvxawfxuw > lib/types/database.types.ts",
     "types": "/opt/homebrew/bin/supabase gen types typescript --project-id mdswvokxrnfggrujsfjd > src/lib/types/database.ts"
   },
   "dependencies": {

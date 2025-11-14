@@ -13,7 +13,7 @@ export default function Spinner({ className = '' }: SpinnerProps) {
         strokeLinecap="round"
         strokeLinejoin="round"
         xmlns="http://www.w3.org/2000/svg"
-        className={`size-4 animate-spin stroke-zinc-400 ${className}`}
+        className={`size-5 animate-spin stroke-zinc-400 ${className}`}
         style={{
           shapeRendering: 'geometricPrecision',
           imageRendering: 'crisp-edges',
