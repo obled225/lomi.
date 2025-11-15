@@ -9,7 +9,7 @@ import {
   formatCurrency,
   parseFormattedNumber,
   type Currency,
-} from '@/lib/utils/formatter';
+} from '@/lib/utils/format";
 import { Card, CardContent } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Slider } from '@/components/ui/slider';
@@ -184,10 +184,9 @@ export default function PricingTool() {
             }
           }}
           className={
-            `px-4 sm:px-6 py-2 transition-colors ${
-              currency === curr
-                ? 'bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-white'
-                : 'bg-transparent hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-600 dark:text-zinc-400'
+            `px-4 sm:px-6 py-2 transition-colors ${currency === curr
+              ? 'bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-white'
+              : 'bg-transparent hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-600 dark:text-zinc-400'
             } ${index < arr.length - 1 ? 'border-r border-zinc-200 dark:border-zinc-800' : ''}` // Add right border except for last
           }
         >
@@ -351,11 +350,11 @@ export default function PricingTool() {
                                   // Otherwise, format the parsed number if valid, default to raw state if parsing failed unexpectedly
                                   return parsedNum !== null
                                     ? formatCurrency(parsedNum, currency, {
-                                        style: 'decimal',
-                                        minimumFractionDigits: 0,
-                                        maximumFractionDigits:
-                                          currency === 'XOF' ? 0 : 1,
-                                      })
+                                      style: 'decimal',
+                                      minimumFractionDigits: 0,
+                                      maximumFractionDigits:
+                                        currency === 'XOF' ? 0 : 1,
+                                    })
                                     : averageAmount; // Fallback to raw state
                                 })()}
                                 onChange={handleAverageAmountChange}
@@ -420,16 +419,16 @@ export default function PricingTool() {
                                     typeof transactionCount === 'number'
                                       ? transactionCount
                                       : parseFormattedNumber(
-                                          transactionCount.toString(),
-                                        );
+                                        transactionCount.toString(),
+                                      );
                                   // Format if parsedNum is a valid number (not null)
                                   return parsedNum !== null
                                     ? formatCurrency(parsedNum, currency, {
-                                        // Use currency for locale consistency
-                                        style: 'decimal',
-                                        minimumFractionDigits: 0,
-                                        maximumFractionDigits: 0,
-                                      })
+                                      // Use currency for locale consistency
+                                      style: 'decimal',
+                                      minimumFractionDigits: 0,
+                                      maximumFractionDigits: 0,
+                                    })
                                     : transactionCount; // Fallback to raw state if parsing fails
                                 })()}
                                 onChange={handleTransactionCountChange}
@@ -446,7 +445,7 @@ export default function PricingTool() {
                                 step={1}
                                 value={[
                                   typeof transactionCount === 'number' &&
-                                  transactionCount >= 0
+                                    transactionCount >= 0
                                     ? transactionCount
                                     : 0,
                                 ]}
