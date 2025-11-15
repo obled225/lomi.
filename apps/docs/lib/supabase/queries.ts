@@ -42,21 +42,35 @@ export async function createJobApplication(
 ): Promise<JobApplication> {
   const supabase = createClient();
 
-  const { data, error } = await supabase
-    .from('job_applications')
-    .insert({
-      job_id: jobId,
-      ...applicationData,
-    })
-    .select()
-    .single();
+  // Use the RPC function which also sends notification email
+  const { data, error } = await supabase.rpc('create_job_application', {
+    p_job_id: jobId,
+    p_name: applicationData.name,
+    p_email: applicationData.email,
+    p_linkedin_url: applicationData.linkedin_url,
+    p_github_url: applicationData.github_url,
+    p_project_note: applicationData.project_note,
+    p_resume_url: applicationData.resume_url,
+  });
 
   if (error) {
     console.error('Error creating job application:', error);
     throw new Error('Failed to submit application');
   }
 
-  return data;
+  // Fetch the created application data
+  const { data: application, error: fetchError } = await supabase
+    .from('job_applications')
+    .select()
+    .eq('id', data)
+    .single();
+
+  if (fetchError) {
+    console.error('Error fetching created application:', fetchError);
+    throw new Error('Application submitted but failed to retrieve details');
+  }
+
+  return application;
 }
 
 // Upload resume to storage
