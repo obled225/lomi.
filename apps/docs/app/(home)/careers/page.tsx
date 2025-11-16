@@ -17,11 +17,20 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function CareersPage() {
-  const [jobs, departments, locations] = await Promise.all([
-    getActiveJobsServer(),
-    getUniqueDepartmentsServer(),
-    getUniqueLocationsServer(),
-  ]);
+  let jobs: Awaited<ReturnType<typeof getActiveJobsServer>> = [];
+  let departments: Awaited<ReturnType<typeof getUniqueDepartmentsServer>> = [];
+  let locations: Awaited<ReturnType<typeof getUniqueLocationsServer>> = [];
+
+  try {
+    [jobs, departments, locations] = await Promise.all([
+      getActiveJobsServer(),
+      getUniqueDepartmentsServer(),
+      getUniqueLocationsServer(),
+    ]);
+  } catch (error) {
+    console.error('Failed to fetch careers data during build:', error);
+    // Provide fallback empty arrays - the client component can handle empty data
+  }
 
   return (
     <main className="flex-1 pt-0">
