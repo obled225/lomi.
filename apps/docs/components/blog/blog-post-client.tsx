@@ -15,7 +15,6 @@ import { Button } from '@/components/ui/button';
 import { Share2 } from 'lucide-react';
 import { ShareModal } from '@/components/blog/share-modal';
 import { playClickSound } from '@/lib/utils/sound';
-import '../../app/styles/blog.css';
 
 // Helper function to get category from post
 const getPostCategory = (post: Post): string => {

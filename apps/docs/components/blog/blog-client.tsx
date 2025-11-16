@@ -11,7 +11,6 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { BlogArticleCard } from './blog-article-card';
 import { playClickSound } from '@/lib/utils/sound';
-import '../../app/styles/blog.css';
 
 export default function BlogClient() {
   const [posts, setPosts] = useState<Post[]>([]);

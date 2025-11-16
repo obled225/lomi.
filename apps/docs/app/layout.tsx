@@ -1,4 +1,4 @@
-import './global.css';
+import './globals.css';
 import type { Metadata, Viewport } from 'next';
 import { Body } from '@/app/layout.client';
 import { Provider } from './provider';
