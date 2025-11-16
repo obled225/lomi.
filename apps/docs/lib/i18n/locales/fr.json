@@ -52,7 +52,7 @@
     "submitting": "Envoi en cours...",
     "submit_application": "Soumettre la candidature",
     "application_submitted": "Candidature soumise !",
-    "thank_you_message": "Merci d'avoir postulé pour le poste de {{jobTitle}}. Nous examinerons votre candidature et vous contacterons dans les 3-5 jours ouvrables.",
+    "thank_you_message": "Merci d'avoir postulé pour le poste de {{jobTitle}}. Nous examinerons votre candidature et vous contacterons dès que possible.",
     "file_too_large": "Fichier trop volumineux",
     "file_too_large_desc": "Veuillez sélectionner un fichier de moins de 5 Mo.",
     "invalid_file_type": "Type de fichier invalide",

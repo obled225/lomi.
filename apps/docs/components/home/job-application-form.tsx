@@ -1,14 +1,13 @@
 'use client';
 
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { SplitInput } from '@/components/ui/split-input';
-import { Upload, CheckCircle } from 'lucide-react';
+import { Upload } from 'lucide-react';
 import { useToast } from '@/lib/hooks/use-toast';
 import { useTranslation } from '@/lib/contexts/translation-context';
 import { t } from '@/lib/i18n/translations';
@@ -132,23 +131,7 @@ export function JobApplicationForm({
   };
 
   if (isSubmitted) {
-    return (
-      <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        className="text-center py-12"
-      >
-        <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
-        <h3 className="text-xl font-semibold text-foreground mb-2">
-          {String(t('job_application.application_submitted', currentLanguage))}
-        </h3>
-        <p className="text-muted-foreground">
-          {String(
-            t('job_application.thank_you_message', currentLanguage),
-          ).replace('{{jobTitle}}', jobTitle)}
-        </p>
-      </motion.div>
-    );
+    return null;
   }
 
   return (
@@ -216,11 +199,10 @@ export function JobApplicationForm({
               <label
                 htmlFor="resume"
                 onClick={playClickSound}
-                className={`flex items-center justify-center rounded-sm px-3 py-2 text-sm cursor-pointer transition-colors h-8 ${
-                  resume
-                    ? 'bg-[#56A5F9] text-white border-[#56A5F9] dark:bg-sky-900 dark:text-sky-300'
-                    : 'border border-gray-200 bg-slate-50 text-muted-foreground hover:bg-slate-100 dark:bg-zinc-800 dark:hover:bg-zinc-700 dark:border-[0.15px] dark:border-gray-700/20'
-                }`}
+                className={`flex items-center justify-center rounded-sm px-3 py-2 text-sm cursor-pointer transition-colors h-8 ${resume
+                  ? 'bg-[#56A5F9] text-white border-[#56A5F9] dark:bg-sky-900 dark:text-sky-300'
+                  : 'border border-gray-200 bg-slate-50 text-muted-foreground hover:bg-slate-100 dark:bg-zinc-800 dark:hover:bg-zinc-700 dark:border-[0.15px] dark:border-gray-700/20'
+                  }`}
               >
                 <Upload className="w-4 h-4 mr-2" />
                 {resume ? resume.name : 'Upload file'}

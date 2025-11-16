@@ -52,7 +52,7 @@
     "submitting": "Enviando...",
     "submit_application": "Enviar aplicación",
     "application_submitted": "¡Aplicación enviada!",
-    "thank_you_message": "Gracias por aplicar para el puesto de {{jobTitle}}. Revisaremos tu aplicación y nos pondremos en contacto contigo en 3-5 días hábiles.",
+    "thank_you_message": "Gracias por aplicar para el puesto de {{jobTitle}}. Revisaremos tu aplicación y nos pondremos en contacto contigo lo antes posible.",
     "file_too_large": "Archivo demasiado grande",
     "file_too_large_desc": "Por favor selecciona un archivo de menos de 5MB.",
     "invalid_file_type": "Tipo de archivo inválido",

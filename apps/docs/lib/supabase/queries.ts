@@ -39,7 +39,7 @@ export async function createJobApplication(
     JobApplicationInsert,
     'job_id' | 'created_at' | 'updated_at' | 'id' | 'status'
   >,
-): Promise<JobApplication> {
+): Promise<string> {
   const supabase = createClient();
 
   // Use the RPC function which also sends notification email
@@ -58,19 +58,8 @@ export async function createJobApplication(
     throw new Error('Failed to submit application');
   }
 
-  // Fetch the created application data
-  const { data: application, error: fetchError } = await supabase
-    .from('job_applications')
-    .select()
-    .eq('id', data)
-    .single();
-
-  if (fetchError) {
-    console.error('Error fetching created application:', fetchError);
-    throw new Error('Application submitted but failed to retrieve details');
-  }
-
-  return application;
+  // Return the application ID (data contains the UUID returned by the RPC function)
+  return data;
 }
 
 // Upload resume to storage

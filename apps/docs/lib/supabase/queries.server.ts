@@ -1,11 +1,11 @@
-import { createClient } from '@/lib/supabase/server';
+import { createAnonymousClient } from '@/lib/supabase/server';
 import type { Database } from '@/lib/types/database.types';
 
 export type Job = Database['public']['Tables']['jobs']['Row'];
 
 // Server-side function to fetch all active jobs
 export async function getActiveJobsServer(): Promise<Job[]> {
-  const supabase = await createClient();
+  const supabase = createAnonymousClient();
 
   const { data, error } = await supabase
     .from('jobs')
@@ -23,7 +23,7 @@ export async function getActiveJobsServer(): Promise<Job[]> {
 
 // Server-side function to get unique departments
 export async function getUniqueDepartmentsServer(): Promise<string[]> {
-  const supabase = await createClient();
+  const supabase = createAnonymousClient();
 
   const { data, error } = await supabase
     .from('jobs')
@@ -42,7 +42,7 @@ export async function getUniqueDepartmentsServer(): Promise<string[]> {
 
 // Server-side function to fetch a single job by slug
 export async function getJobBySlugServer(slug: string): Promise<Job | null> {
-  const supabase = await createClient();
+  const supabase = createAnonymousClient();
 
   const { data, error } = await supabase
     .from('jobs')
@@ -65,7 +65,7 @@ export async function getJobBySlugServer(slug: string): Promise<Job | null> {
 
 // Server-side function to get unique locations
 export async function getUniqueLocationsServer(): Promise<string[]> {
-  const supabase = await createClient();
+  const supabase = createAnonymousClient();
 
   const { data, error } = await supabase
     .from('jobs')

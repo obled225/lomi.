@@ -52,7 +52,7 @@
     "submitting": "Submitting...",
     "submit_application": "Submit application",
     "application_submitted": "Application submitted!",
-    "thank_you_message": "Thank you for applying for the {{jobTitle}} position. We'll review your application and get back to you within 3-5 business days.",
+    "thank_you_message": "Thank you for applying for the {{jobTitle}} position. We'll review your application and get back to you as soon as possible.",
     "file_too_large": "File too large",
     "file_too_large_desc": "Please select a file smaller than 5MB.",
     "invalid_file_type": "Invalid file type",

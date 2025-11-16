@@ -35,13 +35,23 @@ export const t = (
     let found = true;
 
     for (const k of keys) {
-      if (
-        currentVal &&
-        typeof currentVal === 'object' &&
-        !Array.isArray(currentVal) &&
-        k in currentVal
-      ) {
-        currentVal = currentVal[k];
+      if (currentVal && typeof currentVal === 'object') {
+        if (Array.isArray(currentVal)) {
+          // Handle array indexing (e.g., "sections.0")
+          const index = parseInt(k, 10);
+          if (!isNaN(index) && index >= 0 && index < currentVal.length) {
+            currentVal = currentVal[index];
+          } else {
+            found = false;
+            break;
+          }
+        } else if (k in currentVal) {
+          // Handle object property access
+          currentVal = currentVal[k];
+        } else {
+          found = false;
+          break;
+        }
       } else {
         found = false;
         break;
@@ -90,15 +100,23 @@ function getFallbackValue(
   let currentVal: TranslationValue | undefined = obj;
 
   for (const keyPart of keys) {
-    if (
-      currentVal &&
-      typeof currentVal === 'object' &&
-      !Array.isArray(currentVal) &&
-      keyPart in currentVal
-    ) {
-      currentVal = currentVal[keyPart];
+    if (currentVal && typeof currentVal === 'object') {
+      if (Array.isArray(currentVal)) {
+        // Handle array indexing (e.g., "sections.0")
+        const index = parseInt(keyPart, 10);
+        if (!isNaN(index) && index >= 0 && index < currentVal.length) {
+          currentVal = currentVal[index];
+        } else {
+          return undefined;
+        }
+      } else if (keyPart in currentVal) {
+        // Handle object property access
+        currentVal = currentVal[keyPart];
+      } else {
+        return undefined; // Key not found
+      }
     } else {
-      return undefined; // Key not found or not an object
+      return undefined; // Not an object or array
     }
   }
 
