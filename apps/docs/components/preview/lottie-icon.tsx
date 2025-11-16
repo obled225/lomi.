@@ -30,7 +30,9 @@ interface LottieIconProps {
   autoplay?: boolean;
   initialFrame?: number; // Frame to show initially for better static visibility
   isHovered?: boolean; // External hover control
-  customColor?: [number, number, number]; // RGB values as decimals (0-1)
+  customColor?: [number, number, number]; // RGB values as decimals (0-1) - single color
+  lightColor?: [number, number, number]; // RGB values as decimals (0-1) - for light mode
+  darkColor?: [number, number, number]; // RGB values as decimals (0-1) - for dark mode
   ariaLabel?: string; // Accessible label for screen readers
 }
 
@@ -43,6 +45,8 @@ const LottieIconComponent = ({
   initialFrame,
   isHovered: externalHovered,
   customColor,
+  lightColor,
+  darkColor,
   ariaLabel,
 }: LottieIconProps): React.ReactElement => {
   const [internalHovered, setInternalHovered] = useState(false);
@@ -53,12 +57,16 @@ const LottieIconComponent = ({
 
   const isDark = resolvedTheme === 'dark';
   const color = useMemo(() => {
+    // Priority: lightColor/darkColor > customColor > default colors
+    if (lightColor && darkColor) {
+      return isDark ? darkColor : lightColor;
+    }
     if (customColor) return customColor;
     // Default to current text color - using pure white/black for maximum contrast
     return isDark
       ? ([1, 1, 1] as [number, number, number]) // Pure white in dark mode
       : ([0, 0, 0] as [number, number, number]); // Pure black in light mode
-  }, [isDark, customColor]);
+  }, [isDark, customColor, lightColor, darkColor]);
 
   // Use external hover state if provided, otherwise use internal state
   const isHovered =

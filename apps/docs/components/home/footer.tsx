@@ -378,20 +378,17 @@ export function Footer() {
                       rel: 'noopener noreferrer',
                       color: '',
                       icon: (
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="h-4 w-4 ml-1 transition-transform duration-300 transform group-hover:translate-x-1 opacity-0 group-hover:opacity-100"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M13 10V3L4 14h7v7l9-11h-7z"
-                          />
-                        </svg>
+                        <LottieIcon
+                          animationData={animations.bolt}
+                          size={14}
+                          loop={false}
+                          autoplay={false}
+                          initialFrame={0}
+                          lightColor={[0.322, 0.322, 0.357]}
+                          darkColor={[0.631, 0.631, 0.667]}
+                          className="ml-1 transition-transform duration-300 transform group-hover:translate-x-1 opacity-0 group-hover:opacity-100"
+                          ariaLabel="Story icon"
+                        />
                       ),
                     },
                     {
@@ -399,20 +396,17 @@ export function Footer() {
                       link: '/blog',
                       color: '',
                       icon: (
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="h-4 w-4 ml-1 transition-transform duration-300 transform group-hover:translate-x-1 opacity-0 group-hover:opacity-100"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
-                          />
-                        </svg>
+                        <LottieIcon
+                          animationData={animations.blog}
+                          size={14}
+                          loop={false}
+                          autoplay={false}
+                          initialFrame={0}
+                          lightColor={[0.322, 0.322, 0.357]}
+                          darkColor={[0.631, 0.631, 0.667]}
+                          className="ml-1 transition-transform duration-300 transform group-hover:translate-x-1 opacity-0 group-hover:opacity-100"
+                          ariaLabel="Blog icon"
+                        />
                       ),
                     },
                     {
@@ -420,20 +414,17 @@ export function Footer() {
                       link: '/careers',
                       color: '',
                       icon: (
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="h-4 w-4 ml-1 transition-transform duration-300 transform group-hover:translate-x-1 opacity-0 group-hover:opacity-100"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m8 0V8a2 2 0 01-2 2H8a2 2 0 01-2-2V6m8 0H8"
-                          />
-                        </svg>
+                        <LottieIcon
+                          animationData={animations.luggage}
+                          size={14}
+                          loop={false}
+                          autoplay={false}
+                          initialFrame={0}
+                          lightColor={[0.322, 0.322, 0.357]}
+                          darkColor={[0.631, 0.631, 0.667]}
+                          className="ml-1 transition-transform duration-300 transform group-hover:translate-x-1 opacity-0 group-hover:opacity-100"
+                          ariaLabel="Careers icon"
+                        />
                       ),
                     },
                     {
@@ -444,20 +435,17 @@ export function Footer() {
                       color:
                         'text-[#56A5F9] hover:text-[#52A1F8] dark:text-sky-300 dark:hover:text-sky-200',
                       icon: (
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="h-4 w-4 ml-1 transition-transform duration-300 transform group-hover:translate-x-1 opacity-0 group-hover:opacity-100"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                          />
-                        </svg>
+                        <LottieIcon
+                          animationData={animations.code}
+                          size={14}
+                          loop={false}
+                          autoplay={false}
+                          initialFrame={0}
+                          lightColor={[0.337, 0.647, 0.976]}
+                          darkColor={[0.49, 0.827, 0.988]}
+                          className="ml-1 transition-transform duration-300 transform group-hover:translate-x-1 opacity-0 group-hover:opacity-100"
+                          ariaLabel="Open source icon"
+                        />
                       ),
                     },
                   ].map((item) => (
