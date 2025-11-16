@@ -18,11 +18,13 @@ import { playCompletionSound, playClickSound } from '@/lib/utils/sound';
 interface JobApplicationFormProps {
   jobTitle: string;
   jobId: string;
+  onSubmit?: () => void;
 }
 
 export function JobApplicationForm({
   jobTitle,
   jobId,
+  onSubmit,
 }: JobApplicationFormProps) {
   const { currentLanguage } = useTranslation();
   const [formData, setFormData] = useState({
@@ -109,6 +111,7 @@ export function JobApplicationForm({
       });
 
       setIsSubmitted(true);
+      onSubmit?.();
       playCompletionSound();
       showToast({
         type: 'success',

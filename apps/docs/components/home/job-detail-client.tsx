@@ -54,6 +54,7 @@ export default function JobDetailClient({ jobSlug }: JobDetailClientProps) {
   const [job, setJob] = useState<Job | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [applicationSubmitted, setApplicationSubmitted] = useState(false);
 
   useEffect(() => {
     const fetchJob = async () => {
@@ -179,9 +180,15 @@ export default function JobDetailClient({ jobSlug }: JobDetailClientProps) {
           </div>
 
           {/* Application Form */}
-          <div className="mt-6 pt-12 border-t -mb-4">
-            <JobApplicationForm jobTitle={job.title} jobId={job.id} />
-          </div>
+          {!applicationSubmitted && (
+            <div className="mt-6 pt-12 border-t -mb-4">
+              <JobApplicationForm
+                jobTitle={job.title}
+                jobId={job.id}
+                onSubmit={() => setApplicationSubmitted(true)}
+              />
+            </div>
+          )}
         </motion.div>
       </div>
     </section>
