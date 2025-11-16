@@ -62,6 +62,30 @@ export async function createJobApplication(
   return data;
 }
 
+// Fetch a job application by ID (for checking application status)
+export async function getJobApplicationById(
+  applicationId: string,
+): Promise<JobApplication | null> {
+  const supabase = createClient();
+
+  const { data, error } = await supabase
+    .from('job_applications')
+    .select('*')
+    .eq('id', applicationId)
+    .single();
+
+  if (error) {
+    if (error.code === 'PGRST116') {
+      // No rows found
+      return null;
+    }
+    console.error('Error fetching job application:', error);
+    throw new Error('Failed to fetch job application');
+  }
+
+  return data;
+}
+
 // Upload resume to storage
 export async function uploadResume(
   file: File,

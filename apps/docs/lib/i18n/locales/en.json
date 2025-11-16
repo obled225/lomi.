@@ -30,6 +30,7 @@
   "careers": {
     "join_us": "Join us",
     "title": "An open-source software company focused on removing payment barriers.",
+    "title_page": "Careers",
     "description": "Discover exciting opportunities and join our team of passionate engineers and entrepreneurs.",
     "job_opportunity": "Job opportunity",
     "apply_for_role": "Apply for the {{title}} role at lomi.",
@@ -52,7 +53,7 @@
     "submitting": "Submitting...",
     "submit_application": "Submit application",
     "application_submitted": "Application submitted!",
-    "thank_you_message": "Thank you for applying for the {{jobTitle}} position. We'll review your application and get back to you as soon as possible.",
+    "thank_you_message": "Thank you for applying for the {{jobTitle}} position. We'll review your application and get back to you within 2 weeks.",
     "file_too_large": "File too large",
     "file_too_large_desc": "Please select a file smaller than 5MB.",
     "invalid_file_type": "Invalid file type",

@@ -11,7 +11,7 @@ import {
 export async function generateMetadata(): Promise<Metadata> {
   const language = await detectLanguage();
   return {
-    title: t('careers.title', language) as string,
+    title: t('careers.title_page', language) as string,
     description: t('careers.description', language) as string,
   };
 }
