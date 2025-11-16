@@ -9,7 +9,7 @@ import {
   formatCurrency,
   parseFormattedNumber,
   type Currency,
-} from '@/lib/utils/format";
+} from '@/lib/utils/format';
 import { Card, CardContent } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Slider } from '@/components/ui/slider';
