@@ -22,7 +22,6 @@ export type Database = {
           currency_code: Database["public"]["Enums"]["currency_code"]
           description: string | null
           history_id: string
-          merchant_id: string | null
           new_balance: number
           operation_type: string
           organization_id: string
@@ -46,7 +45,6 @@ export type Database = {
           currency_code: Database["public"]["Enums"]["currency_code"]
           description?: string | null
           history_id?: string
-          merchant_id?: string | null
           new_balance: number
           operation_type: string
           organization_id: string
@@ -70,7 +68,6 @@ export type Database = {
           currency_code?: Database["public"]["Enums"]["currency_code"]
           description?: string | null
           history_id?: string
-          merchant_id?: string | null
           new_balance?: number
           operation_type?: string
           organization_id?: string
@@ -92,7 +89,7 @@ export type Database = {
             foreignKeyName: "account_balance_history_account_id_fkey"
             columns: ["account_id"]
             isOneToOne: false
-            referencedRelation: "merchant_accounts"
+            referencedRelation: "accounts"
             referencedColumns: ["account_id"]
           },
           {
@@ -108,13 +105,6 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "currencies"
             referencedColumns: ["code"]
-          },
-          {
-            foreignKeyName: "account_balance_history_merchant_id_fkey"
-            columns: ["merchant_id"]
-            isOneToOne: false
-            referencedRelation: "merchants"
-            referencedColumns: ["merchant_id"]
           },
           {
             foreignKeyName: "account_balance_history_organization_id_fkey"
@@ -150,6 +140,90 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "transactions"
             referencedColumns: ["transaction_id"]
+          },
+        ]
+      }
+      accounts: {
+        Row: {
+          account_id: string
+          balance: number
+          created_at: string
+          currency_code: Database["public"]["Enums"]["currency_code"]
+          is_spi_account: boolean
+          organization_id: string
+          spi_account_balance: number | null
+          spi_account_balance_sync_error: string | null
+          spi_account_balance_synced_at: string | null
+          spi_account_number: string | null
+          spi_account_status:
+            | Database["public"]["Enums"]["spi_account_status"]
+            | null
+          spi_account_type:
+            | Database["public"]["Enums"]["spi_account_type"]
+            | null
+          spi_balance_sync_error: string | null
+          spi_last_balance_sync: string | null
+          spi_last_synced_balance: number | null
+          updated_at: string
+        }
+        Insert: {
+          account_id?: string
+          balance?: number
+          created_at?: string
+          currency_code?: Database["public"]["Enums"]["currency_code"]
+          is_spi_account?: boolean
+          organization_id: string
+          spi_account_balance?: number | null
+          spi_account_balance_sync_error?: string | null
+          spi_account_balance_synced_at?: string | null
+          spi_account_number?: string | null
+          spi_account_status?:
+            | Database["public"]["Enums"]["spi_account_status"]
+            | null
+          spi_account_type?:
+            | Database["public"]["Enums"]["spi_account_type"]
+            | null
+          spi_balance_sync_error?: string | null
+          spi_last_balance_sync?: string | null
+          spi_last_synced_balance?: number | null
+          updated_at?: string
+        }
+        Update: {
+          account_id?: string
+          balance?: number
+          created_at?: string
+          currency_code?: Database["public"]["Enums"]["currency_code"]
+          is_spi_account?: boolean
+          organization_id?: string
+          spi_account_balance?: number | null
+          spi_account_balance_sync_error?: string | null
+          spi_account_balance_synced_at?: string | null
+          spi_account_number?: string | null
+          spi_account_status?:
+            | Database["public"]["Enums"]["spi_account_status"]
+            | null
+          spi_account_type?:
+            | Database["public"]["Enums"]["spi_account_type"]
+            | null
+          spi_balance_sync_error?: string | null
+          spi_last_balance_sync?: string | null
+          spi_last_synced_balance?: number | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "accounts_currency_code_fkey"
+            columns: ["currency_code"]
+            isOneToOne: false
+            referencedRelation: "currencies"
+            referencedColumns: ["code"]
+          },
+          {
+            foreignKeyName: "accounts_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["organization_id"]
           },
         ]
       }
@@ -238,10 +312,10 @@ export type Database = {
         Row: {
           api_key: string
           created_at: string
+          created_by: string | null
           environment: string
           expiration_date: string | null
           is_active: boolean
-          merchant_id: string
           name: string
           organization_id: string
           updated_at: string
@@ -249,10 +323,10 @@ export type Database = {
         Insert: {
           api_key: string
           created_at?: string
+          created_by?: string | null
           environment?: string
           expiration_date?: string | null
           is_active?: boolean
-          merchant_id: string
           name: string
           organization_id: string
           updated_at?: string
@@ -260,18 +334,18 @@ export type Database = {
         Update: {
           api_key?: string
           created_at?: string
+          created_by?: string | null
           environment?: string
           expiration_date?: string | null
           is_active?: boolean
-          merchant_id?: string
           name?: string
           organization_id?: string
           updated_at?: string
         }
         Relationships: [
           {
-            foreignKeyName: "api_keys_merchant_id_fkey"
-            columns: ["merchant_id"]
+            foreignKeyName: "api_keys_created_by_fkey"
+            columns: ["created_by"]
             isOneToOne: false
             referencedRelation: "merchants"
             referencedColumns: ["merchant_id"]
@@ -529,10 +603,10 @@ export type Database = {
           account_id: string
           amount: number
           created_at: string
+          created_by: string | null
           currency_code: Database["public"]["Enums"]["currency_code"]
-          merchant_id: string
           metadata: Json | null
-          organization_id: string | null
+          organization_id: string
           payment_method_code:
             | Database["public"]["Enums"]["payment_method_code"]
             | null
@@ -547,10 +621,10 @@ export type Database = {
           account_id: string
           amount: number
           created_at?: string
+          created_by?: string | null
           currency_code: Database["public"]["Enums"]["currency_code"]
-          merchant_id: string
           metadata?: Json | null
-          organization_id?: string | null
+          organization_id: string
           payment_method_code?:
             | Database["public"]["Enums"]["payment_method_code"]
             | null
@@ -565,10 +639,10 @@ export type Database = {
           account_id?: string
           amount?: number
           created_at?: string
+          created_by?: string | null
           currency_code?: Database["public"]["Enums"]["currency_code"]
-          merchant_id?: string
           metadata?: Json | null
-          organization_id?: string | null
+          organization_id?: string
           payment_method_code?:
             | Database["public"]["Enums"]["payment_method_code"]
             | null
@@ -584,7 +658,7 @@ export type Database = {
             foreignKeyName: "beneficiary_payouts_account_id_fkey"
             columns: ["account_id"]
             isOneToOne: false
-            referencedRelation: "merchant_accounts"
+            referencedRelation: "accounts"
             referencedColumns: ["account_id"]
           },
           {
@@ -595,18 +669,18 @@ export type Database = {
             referencedColumns: ["account_id"]
           },
           {
+            foreignKeyName: "beneficiary_payouts_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "merchants"
+            referencedColumns: ["merchant_id"]
+          },
+          {
             foreignKeyName: "beneficiary_payouts_currency_code_fkey"
             columns: ["currency_code"]
             isOneToOne: false
             referencedRelation: "currencies"
             referencedColumns: ["code"]
-          },
-          {
-            foreignKeyName: "beneficiary_payouts_merchant_id_fkey"
-            columns: ["merchant_id"]
-            isOneToOne: false
-            referencedRelation: "merchants"
-            referencedColumns: ["merchant_id"]
           },
           {
             foreignKeyName: "beneficiary_payouts_organization_id_fkey"
@@ -619,7 +693,7 @@ export type Database = {
             foreignKeyName: "beneficiary_payouts_payout_method_id_fkey"
             columns: ["payout_method_id"]
             isOneToOne: false
-            referencedRelation: "merchant_payout_methods"
+            referencedRelation: "payout_methods"
             referencedColumns: ["payout_method_id"]
           },
         ]
@@ -700,7 +774,6 @@ export type Database = {
         Row: {
           amount: number
           charged_to_customer_id: string | null
-          charged_to_merchant_id: string | null
           collected_at: string | null
           created_at: string
           currency_code: Database["public"]["Enums"]["currency_code"]
@@ -718,7 +791,6 @@ export type Database = {
         Insert: {
           amount: number
           charged_to_customer_id?: string | null
-          charged_to_merchant_id?: string | null
           collected_at?: string | null
           created_at?: string
           currency_code: Database["public"]["Enums"]["currency_code"]
@@ -736,7 +808,6 @@ export type Database = {
         Update: {
           amount?: number
           charged_to_customer_id?: string | null
-          charged_to_merchant_id?: string | null
           collected_at?: string | null
           created_at?: string
           currency_code?: Database["public"]["Enums"]["currency_code"]
@@ -758,13 +829,6 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "customers"
             referencedColumns: ["customer_id"]
-          },
-          {
-            foreignKeyName: "bnpl_fee_tracking_charged_to_merchant_id_fkey"
-            columns: ["charged_to_merchant_id"]
-            isOneToOne: false
-            referencedRelation: "merchants"
-            referencedColumns: ["merchant_id"]
           },
           {
             foreignKeyName: "bnpl_fee_tracking_currency_code_fkey"
@@ -814,6 +878,7 @@ export type Database = {
           cancel_url: string | null
           checkout_session_id: string
           created_at: string
+          created_by: string | null
           currency_code: Database["public"]["Enums"]["currency_code"]
           customer_email: string | null
           customer_id: string | null
@@ -823,7 +888,6 @@ export type Database = {
           installment_plan_id: string | null
           is_pos: boolean
           is_spi: boolean
-          merchant_id: string
           metadata: Json | null
           organization_id: string
           payment_link_id: string | null
@@ -852,6 +916,7 @@ export type Database = {
           cancel_url?: string | null
           checkout_session_id?: string
           created_at?: string
+          created_by?: string | null
           currency_code: Database["public"]["Enums"]["currency_code"]
           customer_email?: string | null
           customer_id?: string | null
@@ -861,7 +926,6 @@ export type Database = {
           installment_plan_id?: string | null
           is_pos?: boolean
           is_spi?: boolean
-          merchant_id: string
           metadata?: Json | null
           organization_id: string
           payment_link_id?: string | null
@@ -890,6 +954,7 @@ export type Database = {
           cancel_url?: string | null
           checkout_session_id?: string
           created_at?: string
+          created_by?: string | null
           currency_code?: Database["public"]["Enums"]["currency_code"]
           customer_email?: string | null
           customer_id?: string | null
@@ -899,7 +964,6 @@ export type Database = {
           installment_plan_id?: string | null
           is_pos?: boolean
           is_spi?: boolean
-          merchant_id?: string
           metadata?: Json | null
           organization_id?: string
           payment_link_id?: string | null
@@ -920,6 +984,13 @@ export type Database = {
         }
         Relationships: [
           {
+            foreignKeyName: "checkout_sessions_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "merchants"
+            referencedColumns: ["merchant_id"]
+          },
+          {
             foreignKeyName: "checkout_sessions_currency_code_fkey"
             columns: ["currency_code"]
             isOneToOne: false
@@ -932,13 +1003,6 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "customers"
             referencedColumns: ["customer_id"]
-          },
-          {
-            foreignKeyName: "checkout_sessions_merchant_id_fkey"
-            columns: ["merchant_id"]
-            isOneToOne: false
-            referencedRelation: "merchants"
-            referencedColumns: ["merchant_id"]
           },
           {
             foreignKeyName: "checkout_sessions_organization_id_fkey"
@@ -972,14 +1036,14 @@ export type Database = {
             foreignKeyName: "checkout_sessions_product_id_fkey"
             columns: ["product_id"]
             isOneToOne: false
-            referencedRelation: "merchant_products"
+            referencedRelation: "products"
             referencedColumns: ["product_id"]
           },
           {
             foreignKeyName: "checkout_sessions_subscription_id_fkey"
             columns: ["subscription_id"]
             isOneToOne: false
-            referencedRelation: "merchant_subscriptions"
+            referencedRelation: "subscriptions"
             referencedColumns: ["subscription_id"]
           },
           {
@@ -1113,7 +1177,7 @@ export type Database = {
             foreignKeyName: "coupon_product_links_product_id_fkey"
             columns: ["product_id"]
             isOneToOne: false
-            referencedRelation: "merchant_products"
+            referencedRelation: "products"
             referencedColumns: ["product_id"]
           },
         ]
@@ -1214,9 +1278,9 @@ export type Database = {
           conversion_type: Database["public"]["Enums"]["conversion_type"]
           converted_amount: number
           created_at: string
+          created_by: string | null
           from_currency: Database["public"]["Enums"]["currency_code"]
           id: string
-          merchant_id: string
           organization_id: string
           original_amount: number
           payout_id: string | null
@@ -1230,9 +1294,9 @@ export type Database = {
           conversion_type: Database["public"]["Enums"]["conversion_type"]
           converted_amount: number
           created_at?: string
+          created_by?: string | null
           from_currency: Database["public"]["Enums"]["currency_code"]
           id?: string
-          merchant_id: string
           organization_id: string
           original_amount: number
           payout_id?: string | null
@@ -1246,9 +1310,9 @@ export type Database = {
           conversion_type?: Database["public"]["Enums"]["conversion_type"]
           converted_amount?: number
           created_at?: string
+          created_by?: string | null
           from_currency?: Database["public"]["Enums"]["currency_code"]
           id?: string
-          merchant_id?: string
           organization_id?: string
           original_amount?: number
           payout_id?: string | null
@@ -1259,8 +1323,8 @@ export type Database = {
         }
         Relationships: [
           {
-            foreignKeyName: "currency_conversion_history_merchant_id_fkey"
-            columns: ["merchant_id"]
+            foreignKeyName: "currency_conversion_history_created_by_fkey"
+            columns: ["created_by"]
             isOneToOne: false
             referencedRelation: "merchants"
             referencedColumns: ["merchant_id"]
@@ -1329,12 +1393,12 @@ export type Database = {
         Row: {
           amount: number
           created_at: string
+          created_by: string | null
           currency_code: Database["public"]["Enums"]["currency_code"]
           customer_id: string
           customer_invoice_id: string
           description: string | null
           due_date: string
-          merchant_id: string
           metadata: Json | null
           organization_id: string
           status: Database["public"]["Enums"]["invoice_status"]
@@ -1343,12 +1407,12 @@ export type Database = {
         Insert: {
           amount: number
           created_at?: string
+          created_by?: string | null
           currency_code: Database["public"]["Enums"]["currency_code"]
           customer_id: string
           customer_invoice_id?: string
           description?: string | null
           due_date: string
-          merchant_id: string
           metadata?: Json | null
           organization_id: string
           status?: Database["public"]["Enums"]["invoice_status"]
@@ -1357,18 +1421,25 @@ export type Database = {
         Update: {
           amount?: number
           created_at?: string
+          created_by?: string | null
           currency_code?: Database["public"]["Enums"]["currency_code"]
           customer_id?: string
           customer_invoice_id?: string
           description?: string | null
           due_date?: string
-          merchant_id?: string
           metadata?: Json | null
           organization_id?: string
           status?: Database["public"]["Enums"]["invoice_status"]
           updated_at?: string
         }
         Relationships: [
+          {
+            foreignKeyName: "customer_invoices_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "merchants"
+            referencedColumns: ["merchant_id"]
+          },
           {
             foreignKeyName: "customer_invoices_currency_code_fkey"
             columns: ["currency_code"]
@@ -1382,13 +1453,6 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "customers"
             referencedColumns: ["customer_id"]
-          },
-          {
-            foreignKeyName: "customer_invoices_merchant_id_fkey"
-            columns: ["merchant_id"]
-            isOneToOne: false
-            referencedRelation: "merchants"
-            referencedColumns: ["merchant_id"]
           },
           {
             foreignKeyName: "customer_invoices_organization_id_fkey"
@@ -1405,12 +1469,12 @@ export type Database = {
           city: string | null
           country: string | null
           created_at: string
+          created_by: string | null
           customer_id: string
           deleted_at: string | null
           email: string | null
           is_business: boolean
           is_deleted: boolean
-          merchant_id: string
           metadata: Json | null
           name: string
           organization_id: string
@@ -1427,12 +1491,12 @@ export type Database = {
           city?: string | null
           country?: string | null
           created_at?: string
+          created_by?: string | null
           customer_id?: string
           deleted_at?: string | null
           email?: string | null
           is_business?: boolean
           is_deleted?: boolean
-          merchant_id: string
           metadata?: Json | null
           name: string
           organization_id: string
@@ -1449,12 +1513,12 @@ export type Database = {
           city?: string | null
           country?: string | null
           created_at?: string
+          created_by?: string | null
           customer_id?: string
           deleted_at?: string | null
           email?: string | null
           is_business?: boolean
           is_deleted?: boolean
-          merchant_id?: string
           metadata?: Json | null
           name?: string
           organization_id?: string
@@ -1468,8 +1532,8 @@ export type Database = {
         }
         Relationships: [
           {
-            foreignKeyName: "customers_merchant_id_fkey"
-            columns: ["merchant_id"]
+            foreignKeyName: "customers_created_by_fkey"
+            columns: ["created_by"]
             isOneToOne: false
             referencedRelation: "merchants"
             referencedColumns: ["merchant_id"]
@@ -1634,35 +1698,42 @@ export type Database = {
       events: {
         Row: {
           created_at: string
+          created_by: string | null
           customer_id: string | null
           event_data: Json | null
           event_id: string
           event_name: string
-          merchant_id: string | null
           metadata: Json | null
           organization_id: string | null
         }
         Insert: {
           created_at?: string
+          created_by?: string | null
           customer_id?: string | null
           event_data?: Json | null
           event_id?: string
           event_name: string
-          merchant_id?: string | null
           metadata?: Json | null
           organization_id?: string | null
         }
         Update: {
           created_at?: string
+          created_by?: string | null
           customer_id?: string | null
           event_data?: Json | null
           event_id?: string
           event_name?: string
-          merchant_id?: string | null
           metadata?: Json | null
           organization_id?: string | null
         }
         Relationships: [
+          {
+            foreignKeyName: "events_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "merchants"
+            referencedColumns: ["merchant_id"]
+          },
           {
             foreignKeyName: "events_customer_id_fkey"
             columns: ["customer_id"]
@@ -1671,14 +1742,52 @@ export type Database = {
             referencedColumns: ["customer_id"]
           },
           {
-            foreignKeyName: "events_merchant_id_fkey"
-            columns: ["merchant_id"]
+            foreignKeyName: "events_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["organization_id"]
+          },
+        ]
+      }
+      feedback: {
+        Row: {
+          created_at: string
+          created_by: string
+          id: string
+          message: string
+          organization_id: string
+          sentiment: string | null
+          status: Database["public"]["Enums"]["feedback_status"]
+        }
+        Insert: {
+          created_at?: string
+          created_by: string
+          id?: string
+          message: string
+          organization_id: string
+          sentiment?: string | null
+          status?: Database["public"]["Enums"]["feedback_status"]
+        }
+        Update: {
+          created_at?: string
+          created_by?: string
+          id?: string
+          message?: string
+          organization_id?: string
+          sentiment?: string | null
+          status?: Database["public"]["Enums"]["feedback_status"]
+        }
+        Relationships: [
+          {
+            foreignKeyName: "feedback_created_by_fkey"
+            columns: ["created_by"]
             isOneToOne: false
             referencedRelation: "merchants"
             referencedColumns: ["merchant_id"]
           },
           {
-            foreignKeyName: "events_organization_id_fkey"
+            foreignKeyName: "feedback_organization_id_fkey"
             columns: ["organization_id"]
             isOneToOne: false
             referencedRelation: "organizations"
@@ -1888,7 +1997,6 @@ export type Database = {
           customer_id: string
           installment_count: number
           is_spi_bnpl: boolean
-          merchant_id: string
           organization_id: string
           plan_id: string
           product_id: string | null
@@ -1904,7 +2012,6 @@ export type Database = {
           customer_id: string
           installment_count: number
           is_spi_bnpl?: boolean
-          merchant_id: string
           organization_id: string
           plan_id?: string
           product_id?: string | null
@@ -1920,7 +2027,6 @@ export type Database = {
           customer_id?: string
           installment_count?: number
           is_spi_bnpl?: boolean
-          merchant_id?: string
           organization_id?: string
           plan_id?: string
           product_id?: string | null
@@ -1946,13 +2052,6 @@ export type Database = {
             referencedColumns: ["customer_id"]
           },
           {
-            foreignKeyName: "installment_plans_merchant_id_fkey"
-            columns: ["merchant_id"]
-            isOneToOne: false
-            referencedRelation: "merchants"
-            referencedColumns: ["merchant_id"]
-          },
-          {
             foreignKeyName: "installment_plans_organization_id_fkey"
             columns: ["organization_id"]
             isOneToOne: false
@@ -1963,14 +2062,14 @@ export type Database = {
             foreignKeyName: "installment_plans_product_id_fkey"
             columns: ["product_id"]
             isOneToOne: false
-            referencedRelation: "merchant_products"
+            referencedRelation: "products"
             referencedColumns: ["product_id"]
           },
           {
             foreignKeyName: "installment_plans_subscription_id_fkey"
             columns: ["subscription_id"]
             isOneToOne: false
-            referencedRelation: "merchant_subscriptions"
+            referencedRelation: "subscriptions"
             referencedColumns: ["subscription_id"]
           },
         ]
@@ -2158,135 +2257,6 @@ export type Database = {
           },
         ]
       }
-      merchant_accounts: {
-        Row: {
-          account_id: string
-          balance: number
-          created_at: string
-          currency_code: Database["public"]["Enums"]["currency_code"]
-          is_spi_account: boolean
-          merchant_id: string | null
-          organization_id: string
-          spi_account_balance: number | null
-          spi_account_balance_sync_error: string | null
-          spi_account_balance_synced_at: string | null
-          spi_account_number: string | null
-          spi_account_status:
-            | Database["public"]["Enums"]["spi_account_status"]
-            | null
-          spi_account_type:
-            | Database["public"]["Enums"]["spi_account_type"]
-            | null
-          spi_balance_sync_error: string | null
-          spi_last_balance_sync: string | null
-          spi_last_synced_balance: number | null
-          updated_at: string
-        }
-        Insert: {
-          account_id?: string
-          balance?: number
-          created_at?: string
-          currency_code?: Database["public"]["Enums"]["currency_code"]
-          is_spi_account?: boolean
-          merchant_id?: string | null
-          organization_id: string
-          spi_account_balance?: number | null
-          spi_account_balance_sync_error?: string | null
-          spi_account_balance_synced_at?: string | null
-          spi_account_number?: string | null
-          spi_account_status?:
-            | Database["public"]["Enums"]["spi_account_status"]
-            | null
-          spi_account_type?:
-            | Database["public"]["Enums"]["spi_account_type"]
-            | null
-          spi_balance_sync_error?: string | null
-          spi_last_balance_sync?: string | null
-          spi_last_synced_balance?: number | null
-          updated_at?: string
-        }
-        Update: {
-          account_id?: string
-          balance?: number
-          created_at?: string
-          currency_code?: Database["public"]["Enums"]["currency_code"]
-          is_spi_account?: boolean
-          merchant_id?: string | null
-          organization_id?: string
-          spi_account_balance?: number | null
-          spi_account_balance_sync_error?: string | null
-          spi_account_balance_synced_at?: string | null
-          spi_account_number?: string | null
-          spi_account_status?:
-            | Database["public"]["Enums"]["spi_account_status"]
-            | null
-          spi_account_type?:
-            | Database["public"]["Enums"]["spi_account_type"]
-            | null
-          spi_balance_sync_error?: string | null
-          spi_last_balance_sync?: string | null
-          spi_last_synced_balance?: number | null
-          updated_at?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "merchant_accounts_currency_code_fkey"
-            columns: ["currency_code"]
-            isOneToOne: false
-            referencedRelation: "currencies"
-            referencedColumns: ["code"]
-          },
-          {
-            foreignKeyName: "merchant_accounts_merchant_id_fkey"
-            columns: ["merchant_id"]
-            isOneToOne: false
-            referencedRelation: "merchants"
-            referencedColumns: ["merchant_id"]
-          },
-          {
-            foreignKeyName: "merchant_accounts_organization_id_fkey"
-            columns: ["organization_id"]
-            isOneToOne: false
-            referencedRelation: "organizations"
-            referencedColumns: ["organization_id"]
-          },
-        ]
-      }
-      merchant_feedback: {
-        Row: {
-          created_at: string
-          id: string
-          merchant_id: string
-          message: string
-          sentiment: string | null
-          status: Database["public"]["Enums"]["feedback_status"]
-        }
-        Insert: {
-          created_at?: string
-          id?: string
-          merchant_id: string
-          message: string
-          sentiment?: string | null
-          status?: Database["public"]["Enums"]["feedback_status"]
-        }
-        Update: {
-          created_at?: string
-          id?: string
-          merchant_id?: string
-          message?: string
-          sentiment?: string | null
-          status?: Database["public"]["Enums"]["feedback_status"]
-        }
-        Relationships: [
-          {
-            foreignKeyName: "merchant_feedback_merchant_id_fkey"
-            columns: ["merchant_id"]
-            isOneToOne: false
-            referencedRelation: "merchants"
-            referencedColumns: ["merchant_id"]
-          },
-        ]
-      }
       merchant_organization_links: {
         Row: {
           action: Database["public"]["Enums"]["permission_action"] | null
@@ -2350,437 +2320,8 @@ export type Database = {
           },
         ]
       }
-      merchant_outstanding_balance: {
-        Row: {
-          amount: number
-          balance_id: string
-          currency_code: Database["public"]["Enums"]["currency_code"]
-          merchant_id: string
-          metadata: Json | null
-          organization_id: string
-          updated_at: string
-        }
-        Insert: {
-          amount?: number
-          balance_id?: string
-          currency_code?: Database["public"]["Enums"]["currency_code"]
-          merchant_id: string
-          metadata?: Json | null
-          organization_id: string
-          updated_at?: string
-        }
-        Update: {
-          amount?: number
-          balance_id?: string
-          currency_code?: Database["public"]["Enums"]["currency_code"]
-          merchant_id?: string
-          metadata?: Json | null
-          organization_id?: string
-          updated_at?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "merchant_outstanding_balance_currency_code_fkey"
-            columns: ["currency_code"]
-            isOneToOne: false
-            referencedRelation: "currencies"
-            referencedColumns: ["code"]
-          },
-          {
-            foreignKeyName: "merchant_outstanding_balance_merchant_id_fkey"
-            columns: ["merchant_id"]
-            isOneToOne: false
-            referencedRelation: "merchants"
-            referencedColumns: ["merchant_id"]
-          },
-          {
-            foreignKeyName: "merchant_outstanding_balance_organization_id_fkey"
-            columns: ["organization_id"]
-            isOneToOne: false
-            referencedRelation: "organizations"
-            referencedColumns: ["organization_id"]
-          },
-        ]
-      }
-      merchant_payout_methods: {
-        Row: {
-          account_name: string
-          account_number: string
-          auto_withdrawal_day: number | null
-          auto_withdrawal_enabled: boolean
-          auto_withdrawal_last_run: string | null
-          auto_withdrawal_method: string | null
-          auto_withdrawal_mobile_provider:
-            | Database["public"]["Enums"]["provider_code"]
-            | null
-          bank_code: string | null
-          bank_name: string
-          branch_code: string | null
-          country: string | null
-          created_at: string
-          is_default: boolean
-          is_spi_enabled: boolean
-          is_uemoa: boolean
-          is_valid: boolean
-          merchant_id: string
-          organization_id: string
-          payout_method_id: string
-          payout_method_type: string | null
-          spi_account_number: string | null
-          spi_alias_mbno: string | null
-          spi_alias_shid: string | null
-          spi_alias_type: string | null
-          updated_at: string
-        }
-        Insert: {
-          account_name: string
-          account_number: string
-          auto_withdrawal_day?: number | null
-          auto_withdrawal_enabled?: boolean
-          auto_withdrawal_last_run?: string | null
-          auto_withdrawal_method?: string | null
-          auto_withdrawal_mobile_provider?:
-            | Database["public"]["Enums"]["provider_code"]
-            | null
-          bank_code?: string | null
-          bank_name: string
-          branch_code?: string | null
-          country?: string | null
-          created_at?: string
-          is_default?: boolean
-          is_spi_enabled?: boolean
-          is_uemoa?: boolean
-          is_valid?: boolean
-          merchant_id: string
-          organization_id: string
-          payout_method_id?: string
-          payout_method_type?: string | null
-          spi_account_number?: string | null
-          spi_alias_mbno?: string | null
-          spi_alias_shid?: string | null
-          spi_alias_type?: string | null
-          updated_at?: string
-        }
-        Update: {
-          account_name?: string
-          account_number?: string
-          auto_withdrawal_day?: number | null
-          auto_withdrawal_enabled?: boolean
-          auto_withdrawal_last_run?: string | null
-          auto_withdrawal_method?: string | null
-          auto_withdrawal_mobile_provider?:
-            | Database["public"]["Enums"]["provider_code"]
-            | null
-          bank_code?: string | null
-          bank_name?: string
-          branch_code?: string | null
-          country?: string | null
-          created_at?: string
-          is_default?: boolean
-          is_spi_enabled?: boolean
-          is_uemoa?: boolean
-          is_valid?: boolean
-          merchant_id?: string
-          organization_id?: string
-          payout_method_id?: string
-          payout_method_type?: string | null
-          spi_account_number?: string | null
-          spi_alias_mbno?: string | null
-          spi_alias_shid?: string | null
-          spi_alias_type?: string | null
-          updated_at?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "merchant_payout_methods_merchant_id_fkey"
-            columns: ["merchant_id"]
-            isOneToOne: false
-            referencedRelation: "merchants"
-            referencedColumns: ["merchant_id"]
-          },
-          {
-            foreignKeyName: "merchant_payout_methods_organization_id_fkey"
-            columns: ["organization_id"]
-            isOneToOne: false
-            referencedRelation: "organizations"
-            referencedColumns: ["organization_id"]
-          },
-          {
-            foreignKeyName: "merchant_payout_methods_spi_alias_shid_fkey"
-            columns: ["spi_alias_shid"]
-            isOneToOne: false
-            referencedRelation: "spi_account_aliases"
-            referencedColumns: ["alias_id"]
-          },
-        ]
-      }
-      merchant_products: {
-        Row: {
-          created_at: string
-          currency_code: Database["public"]["Enums"]["currency_code"]
-          description: string | null
-          display_on_storefront: boolean
-          image_url: string | null
-          is_active: boolean
-          merchant_id: string
-          name: string
-          organization_id: string
-          price: number
-          product_id: string
-          updated_at: string
-        }
-        Insert: {
-          created_at?: string
-          currency_code: Database["public"]["Enums"]["currency_code"]
-          description?: string | null
-          display_on_storefront?: boolean
-          image_url?: string | null
-          is_active?: boolean
-          merchant_id: string
-          name: string
-          organization_id: string
-          price: number
-          product_id?: string
-          updated_at?: string
-        }
-        Update: {
-          created_at?: string
-          currency_code?: Database["public"]["Enums"]["currency_code"]
-          description?: string | null
-          display_on_storefront?: boolean
-          image_url?: string | null
-          is_active?: boolean
-          merchant_id?: string
-          name?: string
-          organization_id?: string
-          price?: number
-          product_id?: string
-          updated_at?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "merchant_products_currency_code_fkey"
-            columns: ["currency_code"]
-            isOneToOne: false
-            referencedRelation: "currencies"
-            referencedColumns: ["code"]
-          },
-          {
-            foreignKeyName: "merchant_products_merchant_id_fkey"
-            columns: ["merchant_id"]
-            isOneToOne: false
-            referencedRelation: "merchants"
-            referencedColumns: ["merchant_id"]
-          },
-          {
-            foreignKeyName: "merchant_products_organization_id_fkey"
-            columns: ["organization_id"]
-            isOneToOne: false
-            referencedRelation: "organizations"
-            referencedColumns: ["organization_id"]
-          },
-        ]
-      }
-      merchant_stripe_connect: {
-        Row: {
-          business_type: string | null
-          charges_enabled: boolean
-          company_domicile_country: string | null
-          created_at: string
-          details_submitted: boolean
-          merchant_id: string
-          onboarding_status: string | null
-          org_stripe_country: string | null
-          organization_id: string
-          payouts_enabled: boolean
-          requirements_disabled_reason: string | null
-          requirements_due: Json | null
-          requirements_eventually_due: Json | null
-          stripe_account_id: string
-          stripe_account_type: string
-          stripe_connect_id: string
-          stripe_dashboard_url: string | null
-          stripe_metadata: Json | null
-          updated_at: string
-        }
-        Insert: {
-          business_type?: string | null
-          charges_enabled?: boolean
-          company_domicile_country?: string | null
-          created_at?: string
-          details_submitted?: boolean
-          merchant_id: string
-          onboarding_status?: string | null
-          org_stripe_country?: string | null
-          organization_id: string
-          payouts_enabled?: boolean
-          requirements_disabled_reason?: string | null
-          requirements_due?: Json | null
-          requirements_eventually_due?: Json | null
-          stripe_account_id: string
-          stripe_account_type?: string
-          stripe_connect_id?: string
-          stripe_dashboard_url?: string | null
-          stripe_metadata?: Json | null
-          updated_at?: string
-        }
-        Update: {
-          business_type?: string | null
-          charges_enabled?: boolean
-          company_domicile_country?: string | null
-          created_at?: string
-          details_submitted?: boolean
-          merchant_id?: string
-          onboarding_status?: string | null
-          org_stripe_country?: string | null
-          organization_id?: string
-          payouts_enabled?: boolean
-          requirements_disabled_reason?: string | null
-          requirements_due?: Json | null
-          requirements_eventually_due?: Json | null
-          stripe_account_id?: string
-          stripe_account_type?: string
-          stripe_connect_id?: string
-          stripe_dashboard_url?: string | null
-          stripe_metadata?: Json | null
-          updated_at?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "merchant_stripe_connect_merchant_id_fkey"
-            columns: ["merchant_id"]
-            isOneToOne: false
-            referencedRelation: "merchants"
-            referencedColumns: ["merchant_id"]
-          },
-          {
-            foreignKeyName: "merchant_stripe_connect_organization_id_fkey"
-            columns: ["organization_id"]
-            isOneToOne: true
-            referencedRelation: "organizations"
-            referencedColumns: ["organization_id"]
-          },
-        ]
-      }
-      merchant_subscriptions: {
-        Row: {
-          created_at: string
-          customer_id: string
-          end_date: string | null
-          merchant_id: string
-          metadata: Json | null
-          next_billing_date: string | null
-          organization_id: string
-          plan_id: string
-          start_date: string
-          status: Database["public"]["Enums"]["subscription_status"]
-          subscription_id: string
-          updated_at: string
-        }
-        Insert: {
-          created_at?: string
-          customer_id: string
-          end_date?: string | null
-          merchant_id: string
-          metadata?: Json | null
-          next_billing_date?: string | null
-          organization_id: string
-          plan_id: string
-          start_date: string
-          status?: Database["public"]["Enums"]["subscription_status"]
-          subscription_id?: string
-          updated_at?: string
-        }
-        Update: {
-          created_at?: string
-          customer_id?: string
-          end_date?: string | null
-          merchant_id?: string
-          metadata?: Json | null
-          next_billing_date?: string | null
-          organization_id?: string
-          plan_id?: string
-          start_date?: string
-          status?: Database["public"]["Enums"]["subscription_status"]
-          subscription_id?: string
-          updated_at?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "merchant_subscriptions_customer_id_fkey"
-            columns: ["customer_id"]
-            isOneToOne: false
-            referencedRelation: "customers"
-            referencedColumns: ["customer_id"]
-          },
-          {
-            foreignKeyName: "merchant_subscriptions_merchant_id_fkey"
-            columns: ["merchant_id"]
-            isOneToOne: false
-            referencedRelation: "merchants"
-            referencedColumns: ["merchant_id"]
-          },
-          {
-            foreignKeyName: "merchant_subscriptions_organization_id_fkey"
-            columns: ["organization_id"]
-            isOneToOne: false
-            referencedRelation: "organizations"
-            referencedColumns: ["organization_id"]
-          },
-          {
-            foreignKeyName: "merchant_subscriptions_plan_id_fkey"
-            columns: ["plan_id"]
-            isOneToOne: false
-            referencedRelation: "subscription_plans"
-            referencedColumns: ["plan_id"]
-          },
-        ]
-      }
-      merchant_withdrawal_notifications: {
-        Row: {
-          created_at: string
-          email: string
-          merchant_id: string
-          notification_id: string
-          organization_id: string
-          updated_at: string
-        }
-        Insert: {
-          created_at?: string
-          email: string
-          merchant_id: string
-          notification_id?: string
-          organization_id: string
-          updated_at?: string
-        }
-        Update: {
-          created_at?: string
-          email?: string
-          merchant_id?: string
-          notification_id?: string
-          organization_id?: string
-          updated_at?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "merchant_withdrawal_notifications_merchant_id_fkey"
-            columns: ["merchant_id"]
-            isOneToOne: false
-            referencedRelation: "merchants"
-            referencedColumns: ["merchant_id"]
-          },
-          {
-            foreignKeyName: "merchant_withdrawal_notifications_organization_id_fkey"
-            columns: ["organization_id"]
-            isOneToOne: false
-            referencedRelation: "organizations"
-            referencedColumns: ["organization_id"]
-          },
-        ]
-      }
       merchants: {
         Row: {
-          arr: number
           avatar_url: string | null
           country: string | null
           created_at: string
@@ -2788,14 +2329,11 @@ export type Database = {
           email: string
           is_deleted: boolean
           merchant_id: string
-          merchant_lifetime_value: number
           metadata: Json | null
-          mrr: number
           name: string | null
           onboarded: boolean
           onboarding_status: Database["public"]["Enums"]["onboarding_status"]
           phone_number: string | null
-          pin_code: string | null
           preferred_language: string
           referral_code: string | null
           retry_payment_every: number | null
@@ -2805,7 +2343,6 @@ export type Database = {
           updated_at: string
         }
         Insert: {
-          arr?: number
           avatar_url?: string | null
           country?: string | null
           created_at?: string
@@ -2813,14 +2350,11 @@ export type Database = {
           email: string
           is_deleted?: boolean
           merchant_id?: string
-          merchant_lifetime_value?: number
           metadata?: Json | null
-          mrr?: number
           name?: string | null
           onboarded?: boolean
           onboarding_status?: Database["public"]["Enums"]["onboarding_status"]
           phone_number?: string | null
-          pin_code?: string | null
           preferred_language?: string
           referral_code?: string | null
           retry_payment_every?: number | null
@@ -2830,7 +2364,6 @@ export type Database = {
           updated_at?: string
         }
         Update: {
-          arr?: number
           avatar_url?: string | null
           country?: string | null
           created_at?: string
@@ -2838,14 +2371,11 @@ export type Database = {
           email?: string
           is_deleted?: boolean
           merchant_id?: string
-          merchant_lifetime_value?: number
           metadata?: Json | null
-          mrr?: number
           name?: string | null
           onboarded?: boolean
           onboarding_status?: Database["public"]["Enums"]["onboarding_status"]
           phone_number?: string | null
-          pin_code?: string | null
           preferred_language?: string
           referral_code?: string | null
           retry_payment_every?: number | null
@@ -2972,6 +2502,7 @@ export type Database = {
           merchant_id: string | null
           message: string
           notification_id: string
+          organization_id: string
           type: Database["public"]["Enums"]["notification_type"]
         }
         Insert: {
@@ -2980,6 +2511,7 @@ export type Database = {
           merchant_id?: string | null
           message: string
           notification_id?: string
+          organization_id: string
           type: Database["public"]["Enums"]["notification_type"]
         }
         Update: {
@@ -2988,6 +2520,7 @@ export type Database = {
           merchant_id?: string | null
           message?: string
           notification_id?: string
+          organization_id?: string
           type?: Database["public"]["Enums"]["notification_type"]
         }
         Relationships: [
@@ -2997,6 +2530,13 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "merchants"
             referencedColumns: ["merchant_id"]
+          },
+          {
+            foreignKeyName: "notifications_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["organization_id"]
           },
         ]
       }
@@ -3135,7 +2675,7 @@ export type Database = {
             foreignKeyName: "organization_fee_links_product_id_fkey"
             columns: ["product_id"]
             isOneToOne: false
-            referencedRelation: "merchant_products"
+            referencedRelation: "products"
             referencedColumns: ["product_id"]
           },
         ]
@@ -3323,12 +2863,13 @@ export type Database = {
       organization_kyc: {
         Row: {
           address_proof_url: string | null
+          approved_at: string | null
           authorized_signatory_email: string | null
           authorized_signatory_name: string | null
           business_description: string | null
           business_registration_url: string | null
-          kyc_approved_at: string | null
-          kyc_submitted_at: string | null
+          created_at: string | null
+          created_by: string | null
           legal_city: string | null
           legal_country: string | null
           legal_organization_name: string | null
@@ -3336,7 +2877,6 @@ export type Database = {
           legal_region: string | null
           legal_representative_id_url: string | null
           legal_street: string | null
-          merchant_id: string
           organization_id: string
           proof_of_business: string | null
           proof_of_business_url: string | null
@@ -3345,12 +2885,13 @@ export type Database = {
         }
         Insert: {
           address_proof_url?: string | null
+          approved_at?: string | null
           authorized_signatory_email?: string | null
           authorized_signatory_name?: string | null
           business_description?: string | null
           business_registration_url?: string | null
-          kyc_approved_at?: string | null
-          kyc_submitted_at?: string | null
+          created_at?: string | null
+          created_by?: string | null
           legal_city?: string | null
           legal_country?: string | null
           legal_organization_name?: string | null
@@ -3358,7 +2899,6 @@ export type Database = {
           legal_region?: string | null
           legal_representative_id_url?: string | null
           legal_street?: string | null
-          merchant_id: string
           organization_id: string
           proof_of_business?: string | null
           proof_of_business_url?: string | null
@@ -3367,12 +2907,13 @@ export type Database = {
         }
         Update: {
           address_proof_url?: string | null
+          approved_at?: string | null
           authorized_signatory_email?: string | null
           authorized_signatory_name?: string | null
           business_description?: string | null
           business_registration_url?: string | null
-          kyc_approved_at?: string | null
-          kyc_submitted_at?: string | null
+          created_at?: string | null
+          created_by?: string | null
           legal_city?: string | null
           legal_country?: string | null
           legal_organization_name?: string | null
@@ -3380,7 +2921,6 @@ export type Database = {
           legal_region?: string | null
           legal_representative_id_url?: string | null
           legal_street?: string | null
-          merchant_id?: string
           organization_id?: string
           proof_of_business?: string | null
           proof_of_business_url?: string | null
@@ -3389,8 +2929,8 @@ export type Database = {
         }
         Relationships: [
           {
-            foreignKeyName: "organization_kyc_merchant_id_fkey"
-            columns: ["merchant_id"]
+            foreignKeyName: "organization_kyc_created_by_fkey"
+            columns: ["created_by"]
             isOneToOne: false
             referencedRelation: "merchants"
             referencedColumns: ["merchant_id"]
@@ -3398,7 +2938,7 @@ export type Database = {
           {
             foreignKeyName: "organization_kyc_organization_id_fkey"
             columns: ["organization_id"]
-            isOneToOne: false
+            isOneToOne: true
             referencedRelation: "organizations"
             referencedColumns: ["organization_id"]
           },
@@ -3469,6 +3009,7 @@ export type Database = {
       }
       organizations: {
         Row: {
+          arr: number
           created_at: string
           default_currency: Database["public"]["Enums"]["currency_code"]
           deleted_at: string | null
@@ -3478,10 +3019,13 @@ export type Database = {
           is_deleted: boolean
           is_starter_business: boolean
           logo_url: string | null
+          merchant_lifetime_value: number
           metadata: Json | null
+          mrr: number
           name: string
           organization_id: string
           phone_number: string
+          pin_code: string | null
           slug: string | null
           status: Database["public"]["Enums"]["organization_status"]
           storefront_enabled: boolean
@@ -3494,6 +3038,7 @@ export type Database = {
           website_url: string | null
         }
         Insert: {
+          arr?: number
           created_at?: string
           default_currency?: Database["public"]["Enums"]["currency_code"]
           deleted_at?: string | null
@@ -3503,10 +3048,13 @@ export type Database = {
           is_deleted?: boolean
           is_starter_business?: boolean
           logo_url?: string | null
+          merchant_lifetime_value?: number
           metadata?: Json | null
+          mrr?: number
           name: string
           organization_id?: string
           phone_number: string
+          pin_code?: string | null
           slug?: string | null
           status?: Database["public"]["Enums"]["organization_status"]
           storefront_enabled?: boolean
@@ -3519,6 +3067,7 @@ export type Database = {
           website_url?: string | null
         }
         Update: {
+          arr?: number
           created_at?: string
           default_currency?: Database["public"]["Enums"]["currency_code"]
           deleted_at?: string | null
@@ -3528,10 +3077,13 @@ export type Database = {
           is_deleted?: boolean
           is_starter_business?: boolean
           logo_url?: string | null
+          merchant_lifetime_value?: number
           metadata?: Json | null
+          mrr?: number
           name?: string
           organization_id?: string
           phone_number?: string
+          pin_code?: string | null
           slug?: string | null
           status?: Database["public"]["Enums"]["organization_status"]
           storefront_enabled?: boolean
@@ -3545,6 +3097,48 @@ export type Database = {
         }
         Relationships: []
       }
+      outstanding_balances: {
+        Row: {
+          amount: number
+          balance_id: string
+          currency_code: Database["public"]["Enums"]["currency_code"]
+          metadata: Json | null
+          organization_id: string
+          updated_at: string
+        }
+        Insert: {
+          amount?: number
+          balance_id?: string
+          currency_code?: Database["public"]["Enums"]["currency_code"]
+          metadata?: Json | null
+          organization_id: string
+          updated_at?: string
+        }
+        Update: {
+          amount?: number
+          balance_id?: string
+          currency_code?: Database["public"]["Enums"]["currency_code"]
+          metadata?: Json | null
+          organization_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "outstanding_balances_currency_code_fkey"
+            columns: ["currency_code"]
+            isOneToOne: false
+            referencedRelation: "currencies"
+            referencedColumns: ["code"]
+          },
+          {
+            foreignKeyName: "outstanding_balances_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["organization_id"]
+          },
+        ]
+      }
       payment_links: {
         Row: {
           allow_coupon_code: boolean
@@ -3552,12 +3146,12 @@ export type Database = {
           allowed_providers: Database["public"]["Enums"]["provider_code"][]
           cancel_url: string | null
           created_at: string
+          created_by: string | null
           currency_code: Database["public"]["Enums"]["currency_code"]
           expires_at: string | null
           is_active: boolean
           link_id: string
           link_type: Database["public"]["Enums"]["link_type"]
-          merchant_id: string
           metadata: Json | null
           organization_id: string
           plan_id: string | null
@@ -3577,12 +3171,12 @@ export type Database = {
           allowed_providers?: Database["public"]["Enums"]["provider_code"][]
           cancel_url?: string | null
           created_at?: string
+          created_by?: string | null
           currency_code: Database["public"]["Enums"]["currency_code"]
           expires_at?: string | null
           is_active?: boolean
           link_id?: string
           link_type: Database["public"]["Enums"]["link_type"]
-          merchant_id: string
           metadata?: Json | null
           organization_id: string
           plan_id?: string | null
@@ -3602,12 +3196,12 @@ export type Database = {
           allowed_providers?: Database["public"]["Enums"]["provider_code"][]
           cancel_url?: string | null
           created_at?: string
+          created_by?: string | null
           currency_code?: Database["public"]["Enums"]["currency_code"]
           expires_at?: string | null
           is_active?: boolean
           link_id?: string
           link_type?: Database["public"]["Enums"]["link_type"]
-          merchant_id?: string
           metadata?: Json | null
           organization_id?: string
           plan_id?: string | null
@@ -3623,18 +3217,18 @@ export type Database = {
         }
         Relationships: [
           {
+            foreignKeyName: "payment_links_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "merchants"
+            referencedColumns: ["merchant_id"]
+          },
+          {
             foreignKeyName: "payment_links_currency_code_fkey"
             columns: ["currency_code"]
             isOneToOne: false
             referencedRelation: "currencies"
             referencedColumns: ["code"]
-          },
-          {
-            foreignKeyName: "payment_links_merchant_id_fkey"
-            columns: ["merchant_id"]
-            isOneToOne: false
-            referencedRelation: "merchants"
-            referencedColumns: ["merchant_id"]
           },
           {
             foreignKeyName: "payment_links_organization_id_fkey"
@@ -3654,7 +3248,7 @@ export type Database = {
             foreignKeyName: "payment_links_product_id_fkey"
             columns: ["product_id"]
             isOneToOne: false
-            referencedRelation: "merchant_products"
+            referencedRelation: "products"
             referencedColumns: ["product_id"]
           },
         ]
@@ -3686,11 +3280,11 @@ export type Database = {
         Row: {
           amount: number
           created_at: string
+          created_by: string | null
           currency_code: Database["public"]["Enums"]["currency_code"]
           customer_id: string | null
           description: string | null
           expiry_date: string
-          merchant_id: string
           organization_id: string
           payment_link: string | null
           payment_reference: string | null
@@ -3730,11 +3324,11 @@ export type Database = {
         Insert: {
           amount: number
           created_at?: string
+          created_by?: string | null
           currency_code: Database["public"]["Enums"]["currency_code"]
           customer_id?: string | null
           description?: string | null
           expiry_date: string
-          merchant_id: string
           organization_id: string
           payment_link?: string | null
           payment_reference?: string | null
@@ -3774,11 +3368,11 @@ export type Database = {
         Update: {
           amount?: number
           created_at?: string
+          created_by?: string | null
           currency_code?: Database["public"]["Enums"]["currency_code"]
           customer_id?: string | null
           description?: string | null
           expiry_date?: string
-          merchant_id?: string
           organization_id?: string
           payment_link?: string | null
           payment_reference?: string | null
@@ -3817,6 +3411,13 @@ export type Database = {
         }
         Relationships: [
           {
+            foreignKeyName: "payment_requests_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "merchants"
+            referencedColumns: ["merchant_id"]
+          },
+          {
             foreignKeyName: "payment_requests_currency_code_fkey"
             columns: ["currency_code"]
             isOneToOne: false
@@ -3831,13 +3432,6 @@ export type Database = {
             referencedColumns: ["customer_id"]
           },
           {
-            foreignKeyName: "payment_requests_merchant_id_fkey"
-            columns: ["merchant_id"]
-            isOneToOne: false
-            referencedRelation: "merchants"
-            referencedColumns: ["merchant_id"]
-          },
-          {
             foreignKeyName: "payment_requests_organization_id_fkey"
             columns: ["organization_id"]
             isOneToOne: false
@@ -3846,15 +3440,117 @@ export type Database = {
           },
         ]
       }
+      payout_methods: {
+        Row: {
+          account_name: string
+          account_number: string
+          auto_withdrawal_day: number | null
+          auto_withdrawal_enabled: boolean
+          auto_withdrawal_last_run: string | null
+          auto_withdrawal_method: string | null
+          auto_withdrawal_mobile_provider:
+            | Database["public"]["Enums"]["provider_code"]
+            | null
+          bank_code: string | null
+          bank_name: string
+          branch_code: string | null
+          country: string | null
+          created_at: string
+          is_default: boolean
+          is_spi_enabled: boolean
+          is_uemoa: boolean
+          is_valid: boolean
+          organization_id: string
+          payout_method_id: string
+          payout_method_type: string | null
+          spi_account_number: string | null
+          spi_alias_mbno: string | null
+          spi_alias_shid: string | null
+          spi_alias_type: string | null
+          updated_at: string
+        }
+        Insert: {
+          account_name: string
+          account_number: string
+          auto_withdrawal_day?: number | null
+          auto_withdrawal_enabled?: boolean
+          auto_withdrawal_last_run?: string | null
+          auto_withdrawal_method?: string | null
+          auto_withdrawal_mobile_provider?:
+            | Database["public"]["Enums"]["provider_code"]
+            | null
+          bank_code?: string | null
+          bank_name: string
+          branch_code?: string | null
+          country?: string | null
+          created_at?: string
+          is_default?: boolean
+          is_spi_enabled?: boolean
+          is_uemoa?: boolean
+          is_valid?: boolean
+          organization_id: string
+          payout_method_id?: string
+          payout_method_type?: string | null
+          spi_account_number?: string | null
+          spi_alias_mbno?: string | null
+          spi_alias_shid?: string | null
+          spi_alias_type?: string | null
+          updated_at?: string
+        }
+        Update: {
+          account_name?: string
+          account_number?: string
+          auto_withdrawal_day?: number | null
+          auto_withdrawal_enabled?: boolean
+          auto_withdrawal_last_run?: string | null
+          auto_withdrawal_method?: string | null
+          auto_withdrawal_mobile_provider?:
+            | Database["public"]["Enums"]["provider_code"]
+            | null
+          bank_code?: string | null
+          bank_name?: string
+          branch_code?: string | null
+          country?: string | null
+          created_at?: string
+          is_default?: boolean
+          is_spi_enabled?: boolean
+          is_uemoa?: boolean
+          is_valid?: boolean
+          organization_id?: string
+          payout_method_id?: string
+          payout_method_type?: string | null
+          spi_account_number?: string | null
+          spi_alias_mbno?: string | null
+          spi_alias_shid?: string | null
+          spi_alias_type?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "payout_methods_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["organization_id"]
+          },
+          {
+            foreignKeyName: "payout_methods_spi_alias_shid_fkey"
+            columns: ["spi_alias_shid"]
+            isOneToOne: false
+            referencedRelation: "spi_account_aliases"
+            referencedColumns: ["alias_id"]
+          },
+        ]
+      }
       payouts: {
         Row: {
           account_id: string
           amount: number
           created_at: string
+          created_by: string | null
           currency_code: Database["public"]["Enums"]["currency_code"]
-          merchant_id: string
           metadata: Json | null
-          organization_id: string | null
+          organization_id: string
           payment_method_code:
             | Database["public"]["Enums"]["payment_method_code"]
             | null
@@ -3868,10 +3564,10 @@ export type Database = {
           account_id: string
           amount: number
           created_at?: string
+          created_by?: string | null
           currency_code: Database["public"]["Enums"]["currency_code"]
-          merchant_id: string
           metadata?: Json | null
-          organization_id?: string | null
+          organization_id: string
           payment_method_code?:
             | Database["public"]["Enums"]["payment_method_code"]
             | null
@@ -3885,10 +3581,10 @@ export type Database = {
           account_id?: string
           amount?: number
           created_at?: string
+          created_by?: string | null
           currency_code?: Database["public"]["Enums"]["currency_code"]
-          merchant_id?: string
           metadata?: Json | null
-          organization_id?: string | null
+          organization_id?: string
           payment_method_code?:
             | Database["public"]["Enums"]["payment_method_code"]
             | null
@@ -3903,7 +3599,7 @@ export type Database = {
             foreignKeyName: "payouts_account_id_fkey"
             columns: ["account_id"]
             isOneToOne: false
-            referencedRelation: "merchant_accounts"
+            referencedRelation: "accounts"
             referencedColumns: ["account_id"]
           },
           {
@@ -3914,18 +3610,18 @@ export type Database = {
             referencedColumns: ["account_id"]
           },
           {
+            foreignKeyName: "payouts_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "merchants"
+            referencedColumns: ["merchant_id"]
+          },
+          {
             foreignKeyName: "payouts_currency_code_fkey"
             columns: ["currency_code"]
             isOneToOne: false
             referencedRelation: "currencies"
             referencedColumns: ["code"]
-          },
-          {
-            foreignKeyName: "payouts_merchant_id_fkey"
-            columns: ["merchant_id"]
-            isOneToOne: false
-            referencedRelation: "merchants"
-            referencedColumns: ["merchant_id"]
           },
           {
             foreignKeyName: "payouts_organization_id_fkey"
@@ -3938,7 +3634,7 @@ export type Database = {
             foreignKeyName: "payouts_payout_method_id_fkey"
             columns: ["payout_method_id"]
             isOneToOne: false
-            referencedRelation: "merchant_payout_methods"
+            referencedRelation: "payout_methods"
             referencedColumns: ["payout_method_id"]
           },
         ]
@@ -4028,7 +3724,6 @@ export type Database = {
           currency_code: Database["public"]["Enums"]["currency_code"]
           description: string | null
           due_date: string
-          merchant_id: string
           metadata: Json | null
           organization_id: string
           platform_invoice_id: string
@@ -4041,7 +3736,6 @@ export type Database = {
           currency_code: Database["public"]["Enums"]["currency_code"]
           description?: string | null
           due_date: string
-          merchant_id: string
           metadata?: Json | null
           organization_id: string
           platform_invoice_id?: string
@@ -4054,7 +3748,6 @@ export type Database = {
           currency_code?: Database["public"]["Enums"]["currency_code"]
           description?: string | null
           due_date?: string
-          merchant_id?: string
           metadata?: Json | null
           organization_id?: string
           platform_invoice_id?: string
@@ -4068,13 +3761,6 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "currencies"
             referencedColumns: ["code"]
-          },
-          {
-            foreignKeyName: "platform_invoices_merchant_id_fkey"
-            columns: ["merchant_id"]
-            isOneToOne: false
-            referencedRelation: "merchants"
-            referencedColumns: ["merchant_id"]
           },
           {
             foreignKeyName: "platform_invoices_organization_id_fkey"
@@ -4220,6 +3906,73 @@ export type Database = {
         }
         Relationships: []
       }
+      products: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          currency_code: Database["public"]["Enums"]["currency_code"]
+          description: string | null
+          display_on_storefront: boolean
+          image_url: string | null
+          is_active: boolean
+          name: string
+          organization_id: string
+          price: number
+          product_id: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          currency_code: Database["public"]["Enums"]["currency_code"]
+          description?: string | null
+          display_on_storefront?: boolean
+          image_url?: string | null
+          is_active?: boolean
+          name: string
+          organization_id: string
+          price: number
+          product_id?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          currency_code?: Database["public"]["Enums"]["currency_code"]
+          description?: string | null
+          display_on_storefront?: boolean
+          image_url?: string | null
+          is_active?: boolean
+          name?: string
+          organization_id?: string
+          price?: number
+          product_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "products_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "merchants"
+            referencedColumns: ["merchant_id"]
+          },
+          {
+            foreignKeyName: "products_currency_code_fkey"
+            columns: ["currency_code"]
+            isOneToOne: false
+            referencedRelation: "currencies"
+            referencedColumns: ["code"]
+          },
+          {
+            foreignKeyName: "products_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["organization_id"]
+          },
+        ]
+      }
       providers: {
         Row: {
           code: Database["public"]["Enums"]["provider_code"]
@@ -4246,8 +3999,8 @@ export type Database = {
           error_message: string | null
           error_url: string | null
           ipn_callback_url: string | null
-          merchant_id: string
           notif_token: string | null
+          organization_id: string
           pay_address: string | null
           pay_amount: number | null
           pay_currency: string | null
@@ -4281,8 +4034,8 @@ export type Database = {
           error_message?: string | null
           error_url?: string | null
           ipn_callback_url?: string | null
-          merchant_id: string
           notif_token?: string | null
+          organization_id: string
           pay_address?: string | null
           pay_amount?: number | null
           pay_currency?: string | null
@@ -4316,8 +4069,8 @@ export type Database = {
           error_message?: string | null
           error_url?: string | null
           ipn_callback_url?: string | null
-          merchant_id?: string
           notif_token?: string | null
+          organization_id?: string
           pay_address?: string | null
           pay_amount?: number | null
           pay_currency?: string | null
@@ -4346,11 +4099,11 @@ export type Database = {
         }
         Relationships: [
           {
-            foreignKeyName: "providers_transactions_merchant_id_fkey"
-            columns: ["merchant_id"]
+            foreignKeyName: "providers_transactions_organization_id_fkey"
+            columns: ["organization_id"]
             isOneToOne: false
-            referencedRelation: "merchants"
-            referencedColumns: ["merchant_id"]
+            referencedRelation: "organizations"
+            referencedColumns: ["organization_id"]
           },
           {
             foreignKeyName: "providers_transactions_provider_code_fkey"
@@ -4466,7 +4219,6 @@ export type Database = {
           created_at: string
           is_active: boolean
           is_default: boolean
-          merchant_id: string | null
           metadata: Json | null
           organization_id: string
           updated_at: string
@@ -4479,7 +4231,6 @@ export type Database = {
           created_at?: string
           is_active?: boolean
           is_default?: boolean
-          merchant_id?: string | null
           metadata?: Json | null
           organization_id: string
           updated_at?: string
@@ -4492,19 +4243,11 @@ export type Database = {
           created_at?: string
           is_active?: boolean
           is_default?: boolean
-          merchant_id?: string | null
           metadata?: Json | null
           organization_id?: string
           updated_at?: string
         }
         Relationships: [
-          {
-            foreignKeyName: "spi_account_aliases_merchant_id_fkey"
-            columns: ["merchant_id"]
-            isOneToOne: false
-            referencedRelation: "merchants"
-            referencedColumns: ["merchant_id"]
-          },
           {
             foreignKeyName: "spi_account_aliases_organization_id_fkey"
             columns: ["organization_id"]
@@ -4519,7 +4262,7 @@ export type Database = {
           cancellation_id: string
           compte_payeur: string
           created_at: string
-          merchant_id: string
+          created_by: string | null
           metadata: Json | null
           organization_id: string
           payee_accepted: boolean | null
@@ -4542,7 +4285,7 @@ export type Database = {
           cancellation_id?: string
           compte_payeur: string
           created_at?: string
-          merchant_id: string
+          created_by?: string | null
           metadata?: Json | null
           organization_id: string
           payee_accepted?: boolean | null
@@ -4565,7 +4308,7 @@ export type Database = {
           cancellation_id?: string
           compte_payeur?: string
           created_at?: string
-          merchant_id?: string
+          created_by?: string | null
           metadata?: Json | null
           organization_id?: string
           payee_accepted?: boolean | null
@@ -4586,8 +4329,8 @@ export type Database = {
         }
         Relationships: [
           {
-            foreignKeyName: "spi_payment_cancellation_requests_merchant_id_fkey"
-            columns: ["merchant_id"]
+            foreignKeyName: "spi_payment_cancellation_requests_created_by_fkey"
+            columns: ["created_by"]
             isOneToOne: false
             referencedRelation: "merchants"
             referencedColumns: ["merchant_id"]
@@ -4614,10 +4357,10 @@ export type Database = {
           checkout_session_id: string | null
           compte_paye: string
           created_at: string
+          created_by: string | null
           expires_at: string | null
           is_active: boolean
           is_used: boolean
-          merchant_id: string
           metadata: Json | null
           montant: number | null
           name: string
@@ -4638,10 +4381,10 @@ export type Database = {
           checkout_session_id?: string | null
           compte_paye: string
           created_at?: string
+          created_by?: string | null
           expires_at?: string | null
           is_active?: boolean
           is_used?: boolean
-          merchant_id: string
           metadata?: Json | null
           montant?: number | null
           name: string
@@ -4662,10 +4405,10 @@ export type Database = {
           checkout_session_id?: string | null
           compte_paye?: string
           created_at?: string
+          created_by?: string | null
           expires_at?: string | null
           is_active?: boolean
           is_used?: boolean
-          merchant_id?: string
           metadata?: Json | null
           montant?: number | null
           name?: string
@@ -4690,8 +4433,8 @@ export type Database = {
             referencedColumns: ["checkout_session_id"]
           },
           {
-            foreignKeyName: "spi_qr_codes_merchant_id_fkey"
-            columns: ["merchant_id"]
+            foreignKeyName: "spi_qr_codes_created_by_fkey"
+            columns: ["created_by"]
             isOneToOne: false
             referencedRelation: "merchants"
             referencedColumns: ["merchant_id"]
@@ -4721,7 +4464,7 @@ export type Database = {
             foreignKeyName: "spi_qr_codes_product_id_fkey"
             columns: ["product_id"]
             isOneToOne: false
-            referencedRelation: "merchant_products"
+            referencedRelation: "products"
             referencedColumns: ["product_id"]
           },
         ]
@@ -4729,9 +4472,9 @@ export type Database = {
       storefronts: {
         Row: {
           created_at: string
+          created_by: string | null
           description: string | null
           is_active: boolean
-          merchant_id: string
           name: string
           organization_id: string
           storefront_id: string
@@ -4740,9 +4483,9 @@ export type Database = {
         }
         Insert: {
           created_at?: string
+          created_by?: string | null
           description?: string | null
           is_active?: boolean
-          merchant_id: string
           name: string
           organization_id: string
           storefront_id?: string
@@ -4751,9 +4494,9 @@ export type Database = {
         }
         Update: {
           created_at?: string
+          created_by?: string | null
           description?: string | null
           is_active?: boolean
-          merchant_id?: string
           name?: string
           organization_id?: string
           storefront_id?: string
@@ -4762,8 +4505,8 @@ export type Database = {
         }
         Relationships: [
           {
-            foreignKeyName: "storefronts_merchant_id_fkey"
-            columns: ["merchant_id"]
+            foreignKeyName: "storefronts_created_by_fkey"
+            columns: ["created_by"]
             isOneToOne: false
             referencedRelation: "merchants"
             referencedColumns: ["merchant_id"]
@@ -4771,7 +4514,78 @@ export type Database = {
           {
             foreignKeyName: "storefronts_organization_id_fkey"
             columns: ["organization_id"]
-            isOneToOne: false
+            isOneToOne: true
+            referencedRelation: "organizations"
+            referencedColumns: ["organization_id"]
+          },
+        ]
+      }
+      stripe_connect: {
+        Row: {
+          business_type: string | null
+          charges_enabled: boolean
+          company_domicile_country: string | null
+          created_at: string
+          details_submitted: boolean
+          onboarding_status: string | null
+          org_stripe_country: string | null
+          organization_id: string
+          payouts_enabled: boolean
+          requirements_disabled_reason: string | null
+          requirements_due: Json | null
+          requirements_eventually_due: Json | null
+          stripe_account_id: string
+          stripe_account_type: string
+          stripe_connect_id: string
+          stripe_dashboard_url: string | null
+          stripe_metadata: Json | null
+          updated_at: string
+        }
+        Insert: {
+          business_type?: string | null
+          charges_enabled?: boolean
+          company_domicile_country?: string | null
+          created_at?: string
+          details_submitted?: boolean
+          onboarding_status?: string | null
+          org_stripe_country?: string | null
+          organization_id: string
+          payouts_enabled?: boolean
+          requirements_disabled_reason?: string | null
+          requirements_due?: Json | null
+          requirements_eventually_due?: Json | null
+          stripe_account_id: string
+          stripe_account_type?: string
+          stripe_connect_id?: string
+          stripe_dashboard_url?: string | null
+          stripe_metadata?: Json | null
+          updated_at?: string
+        }
+        Update: {
+          business_type?: string | null
+          charges_enabled?: boolean
+          company_domicile_country?: string | null
+          created_at?: string
+          details_submitted?: boolean
+          onboarding_status?: string | null
+          org_stripe_country?: string | null
+          organization_id?: string
+          payouts_enabled?: boolean
+          requirements_disabled_reason?: string | null
+          requirements_due?: Json | null
+          requirements_eventually_due?: Json | null
+          stripe_account_id?: string
+          stripe_account_type?: string
+          stripe_connect_id?: string
+          stripe_dashboard_url?: string | null
+          stripe_metadata?: Json | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "stripe_connect_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: true
             referencedRelation: "organizations"
             referencedColumns: ["organization_id"]
           },
@@ -4783,6 +4597,7 @@ export type Database = {
           billing_frequency: Database["public"]["Enums"]["frequency"]
           charge_day: number | null
           created_at: string
+          created_by: string | null
           currency_code: Database["public"]["Enums"]["currency_code"]
           description: string | null
           display_on_storefront: boolean
@@ -4792,7 +4607,6 @@ export type Database = {
           first_payment_type: Database["public"]["Enums"]["first_payment_type"]
           image_url: string | null
           is_active: boolean
-          merchant_id: string
           metadata: Json | null
           name: string
           organization_id: string
@@ -4804,6 +4618,7 @@ export type Database = {
           billing_frequency: Database["public"]["Enums"]["frequency"]
           charge_day?: number | null
           created_at?: string
+          created_by?: string | null
           currency_code?: Database["public"]["Enums"]["currency_code"]
           description?: string | null
           display_on_storefront?: boolean
@@ -4813,7 +4628,6 @@ export type Database = {
           first_payment_type?: Database["public"]["Enums"]["first_payment_type"]
           image_url?: string | null
           is_active?: boolean
-          merchant_id: string
           metadata?: Json | null
           name: string
           organization_id: string
@@ -4825,6 +4639,7 @@ export type Database = {
           billing_frequency?: Database["public"]["Enums"]["frequency"]
           charge_day?: number | null
           created_at?: string
+          created_by?: string | null
           currency_code?: Database["public"]["Enums"]["currency_code"]
           description?: string | null
           display_on_storefront?: boolean
@@ -4834,7 +4649,6 @@ export type Database = {
           first_payment_type?: Database["public"]["Enums"]["first_payment_type"]
           image_url?: string | null
           is_active?: boolean
-          merchant_id?: string
           metadata?: Json | null
           name?: string
           organization_id?: string
@@ -4843,18 +4657,18 @@ export type Database = {
         }
         Relationships: [
           {
+            foreignKeyName: "subscription_plans_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "merchants"
+            referencedColumns: ["merchant_id"]
+          },
+          {
             foreignKeyName: "subscription_plans_currency_code_fkey"
             columns: ["currency_code"]
             isOneToOne: false
             referencedRelation: "currencies"
             referencedColumns: ["code"]
-          },
-          {
-            foreignKeyName: "subscription_plans_merchant_id_fkey"
-            columns: ["merchant_id"]
-            isOneToOne: false
-            referencedRelation: "merchants"
-            referencedColumns: ["merchant_id"]
           },
           {
             foreignKeyName: "subscription_plans_organization_id_fkey"
@@ -4865,12 +4679,86 @@ export type Database = {
           },
         ]
       }
+      subscriptions: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          customer_id: string
+          end_date: string | null
+          metadata: Json | null
+          next_billing_date: string | null
+          organization_id: string
+          plan_id: string
+          start_date: string
+          status: Database["public"]["Enums"]["subscription_status"]
+          subscription_id: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          customer_id: string
+          end_date?: string | null
+          metadata?: Json | null
+          next_billing_date?: string | null
+          organization_id: string
+          plan_id: string
+          start_date: string
+          status?: Database["public"]["Enums"]["subscription_status"]
+          subscription_id?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          customer_id?: string
+          end_date?: string | null
+          metadata?: Json | null
+          next_billing_date?: string | null
+          organization_id?: string
+          plan_id?: string
+          start_date?: string
+          status?: Database["public"]["Enums"]["subscription_status"]
+          subscription_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "subscriptions_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "merchants"
+            referencedColumns: ["merchant_id"]
+          },
+          {
+            foreignKeyName: "subscriptions_customer_id_fkey"
+            columns: ["customer_id"]
+            isOneToOne: false
+            referencedRelation: "customers"
+            referencedColumns: ["customer_id"]
+          },
+          {
+            foreignKeyName: "subscriptions_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["organization_id"]
+          },
+          {
+            foreignKeyName: "subscriptions_plan_id_fkey"
+            columns: ["plan_id"]
+            isOneToOne: false
+            referencedRelation: "subscription_plans"
+            referencedColumns: ["plan_id"]
+          },
+        ]
+      }
       support_requests: {
         Row: {
           category: Database["public"]["Enums"]["support_category"]
           created_at: string
+          created_by: string | null
           image_url: string | null
-          merchant_id: string
           message: string
           organization_id: string
           priority: Database["public"]["Enums"]["support_priority"]
@@ -4881,8 +4769,8 @@ export type Database = {
         Insert: {
           category: Database["public"]["Enums"]["support_category"]
           created_at?: string
+          created_by?: string | null
           image_url?: string | null
-          merchant_id: string
           message: string
           organization_id: string
           priority?: Database["public"]["Enums"]["support_priority"]
@@ -4893,8 +4781,8 @@ export type Database = {
         Update: {
           category?: Database["public"]["Enums"]["support_category"]
           created_at?: string
+          created_by?: string | null
           image_url?: string | null
-          merchant_id?: string
           message?: string
           organization_id?: string
           priority?: Database["public"]["Enums"]["support_priority"]
@@ -4904,88 +4792,14 @@ export type Database = {
         }
         Relationships: [
           {
-            foreignKeyName: "support_requests_merchant_id_fkey"
-            columns: ["merchant_id"]
+            foreignKeyName: "support_requests_created_by_fkey"
+            columns: ["created_by"]
             isOneToOne: false
             referencedRelation: "merchants"
             referencedColumns: ["merchant_id"]
           },
           {
             foreignKeyName: "support_requests_organization_id_fkey"
-            columns: ["organization_id"]
-            isOneToOne: false
-            referencedRelation: "organizations"
-            referencedColumns: ["organization_id"]
-          },
-        ]
-      }
-      team_balance_access_rules: {
-        Row: {
-          account_id: string | null
-          approval_required: boolean
-          can_view: boolean
-          can_withdraw: boolean
-          created_at: string
-          currency_code: Database["public"]["Enums"]["currency_code"] | null
-          merchant_id: string | null
-          organization_id: string
-          role: Database["public"]["Enums"]["member_role"]
-          rule_id: string
-          updated_at: string
-          withdraw_limit: number | null
-        }
-        Insert: {
-          account_id?: string | null
-          approval_required?: boolean
-          can_view?: boolean
-          can_withdraw?: boolean
-          created_at?: string
-          currency_code?: Database["public"]["Enums"]["currency_code"] | null
-          merchant_id?: string | null
-          organization_id: string
-          role: Database["public"]["Enums"]["member_role"]
-          rule_id?: string
-          updated_at?: string
-          withdraw_limit?: number | null
-        }
-        Update: {
-          account_id?: string | null
-          approval_required?: boolean
-          can_view?: boolean
-          can_withdraw?: boolean
-          created_at?: string
-          currency_code?: Database["public"]["Enums"]["currency_code"] | null
-          merchant_id?: string | null
-          organization_id?: string
-          role?: Database["public"]["Enums"]["member_role"]
-          rule_id?: string
-          updated_at?: string
-          withdraw_limit?: number | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "team_balance_access_rules_account_id_fkey"
-            columns: ["account_id"]
-            isOneToOne: false
-            referencedRelation: "merchant_accounts"
-            referencedColumns: ["account_id"]
-          },
-          {
-            foreignKeyName: "team_balance_access_rules_account_id_fkey"
-            columns: ["account_id"]
-            isOneToOne: false
-            referencedRelation: "merchant_balance_summary"
-            referencedColumns: ["account_id"]
-          },
-          {
-            foreignKeyName: "team_balance_access_rules_merchant_id_fkey"
-            columns: ["merchant_id"]
-            isOneToOne: false
-            referencedRelation: "merchants"
-            referencedColumns: ["merchant_id"]
-          },
-          {
-            foreignKeyName: "team_balance_access_rules_organization_id_fkey"
             columns: ["organization_id"]
             isOneToOne: false
             referencedRelation: "organizations"
@@ -5023,7 +4837,6 @@ export type Database = {
           gross_amount: number
           is_bnpl: boolean
           is_pos: boolean
-          merchant_id: string
           metadata: Json | null
           net_amount: number
           organization_id: string
@@ -5068,7 +4881,6 @@ export type Database = {
           gross_amount: number
           is_bnpl?: boolean
           is_pos?: boolean
-          merchant_id: string
           metadata?: Json | null
           net_amount: number
           organization_id: string
@@ -5113,7 +4925,6 @@ export type Database = {
           gross_amount?: number
           is_bnpl?: boolean
           is_pos?: boolean
-          merchant_id?: string
           metadata?: Json | null
           net_amount?: number
           organization_id?: string
@@ -5177,13 +4988,6 @@ export type Database = {
             referencedColumns: ["fee_structure_id"]
           },
           {
-            foreignKeyName: "transactions_merchant_id_fkey"
-            columns: ["merchant_id"]
-            isOneToOne: false
-            referencedRelation: "merchants"
-            referencedColumns: ["merchant_id"]
-          },
-          {
             foreignKeyName: "transactions_organization_id_fkey"
             columns: ["organization_id"]
             isOneToOne: false
@@ -5201,7 +5005,7 @@ export type Database = {
             foreignKeyName: "transactions_product_id_fkey"
             columns: ["product_id"]
             isOneToOne: false
-            referencedRelation: "merchant_products"
+            referencedRelation: "products"
             referencedColumns: ["product_id"]
           },
           {
@@ -5215,7 +5019,7 @@ export type Database = {
             foreignKeyName: "transactions_subscription_id_fkey"
             columns: ["subscription_id"]
             isOneToOne: false
-            referencedRelation: "merchant_subscriptions"
+            referencedRelation: "subscriptions"
             referencedColumns: ["subscription_id"]
           },
         ]
@@ -5230,7 +5034,6 @@ export type Database = {
           headers: Json | null
           ip_address: string | null
           log_id: string
-          merchant_id: string
           montant: number | null
           organization_id: string
           payload: Json
@@ -5254,7 +5057,6 @@ export type Database = {
           headers?: Json | null
           ip_address?: string | null
           log_id?: string
-          merchant_id: string
           montant?: number | null
           organization_id: string
           payload: Json
@@ -5278,7 +5080,6 @@ export type Database = {
           headers?: Json | null
           ip_address?: string | null
           log_id?: string
-          merchant_id?: string
           montant?: number | null
           organization_id?: string
           payload?: Json
@@ -5302,13 +5103,6 @@ export type Database = {
             referencedColumns: ["webhook_id"]
           },
           {
-            foreignKeyName: "webhook_delivery_logs_merchant_id_fkey"
-            columns: ["merchant_id"]
-            isOneToOne: false
-            referencedRelation: "merchants"
-            referencedColumns: ["merchant_id"]
-          },
-          {
             foreignKeyName: "webhook_delivery_logs_organization_id_fkey"
             columns: ["organization_id"]
             isOneToOne: false
@@ -5328,13 +5122,13 @@ export type Database = {
         Row: {
           authorized_events: Database["public"]["Enums"]["webhook_event"][]
           created_at: string
+          created_by: string | null
           deleted_at: string | null
           is_active: boolean
           last_payload: Json | null
           last_response_body: string | null
           last_response_status: number | null
           last_triggered_at: string | null
-          merchant_id: string
           metadata: Json | null
           organization_id: string
           retry_count: number | null
@@ -5348,13 +5142,13 @@ export type Database = {
         Insert: {
           authorized_events?: Database["public"]["Enums"]["webhook_event"][]
           created_at?: string
+          created_by?: string | null
           deleted_at?: string | null
           is_active?: boolean
           last_payload?: Json | null
           last_response_body?: string | null
           last_response_status?: number | null
           last_triggered_at?: string | null
-          merchant_id: string
           metadata?: Json | null
           organization_id: string
           retry_count?: number | null
@@ -5368,13 +5162,13 @@ export type Database = {
         Update: {
           authorized_events?: Database["public"]["Enums"]["webhook_event"][]
           created_at?: string
+          created_by?: string | null
           deleted_at?: string | null
           is_active?: boolean
           last_payload?: Json | null
           last_response_body?: string | null
           last_response_status?: number | null
           last_triggered_at?: string | null
-          merchant_id?: string
           metadata?: Json | null
           organization_id?: string
           retry_count?: number | null
@@ -5387,14 +5181,46 @@ export type Database = {
         }
         Relationships: [
           {
-            foreignKeyName: "webhooks_merchant_id_fkey"
-            columns: ["merchant_id"]
+            foreignKeyName: "webhooks_created_by_fkey"
+            columns: ["created_by"]
             isOneToOne: false
             referencedRelation: "merchants"
             referencedColumns: ["merchant_id"]
           },
           {
             foreignKeyName: "webhooks_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["organization_id"]
+          },
+        ]
+      }
+      withdrawal_notifications: {
+        Row: {
+          created_at: string
+          email: string
+          notification_id: string
+          organization_id: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          notification_id?: string
+          organization_id: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          notification_id?: string
+          organization_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "withdrawal_notifications_organization_id_fkey"
             columns: ["organization_id"]
             isOneToOne: false
             referencedRelation: "organizations"
@@ -5411,7 +5237,6 @@ export type Database = {
           created_at: string | null
           currency_code: Database["public"]["Enums"]["currency_code"] | null
           is_spi_account: boolean | null
-          merchant_id: string | null
           organization_id: string | null
           revenue_balance: number | null
           spi_account_number: string | null
@@ -5432,7 +5257,6 @@ export type Database = {
           created_at?: string | null
           currency_code?: Database["public"]["Enums"]["currency_code"] | null
           is_spi_account?: boolean | null
-          merchant_id?: string | null
           organization_id?: string | null
           revenue_balance?: number | null
           spi_account_number?: string | null
@@ -5453,7 +5277,6 @@ export type Database = {
           created_at?: string | null
           currency_code?: Database["public"]["Enums"]["currency_code"] | null
           is_spi_account?: boolean | null
-          merchant_id?: string | null
           organization_id?: string | null
           revenue_balance?: number | null
           spi_account_number?: string | null
@@ -5470,21 +5293,14 @@ export type Database = {
         }
         Relationships: [
           {
-            foreignKeyName: "merchant_accounts_currency_code_fkey"
+            foreignKeyName: "accounts_currency_code_fkey"
             columns: ["currency_code"]
             isOneToOne: false
             referencedRelation: "currencies"
             referencedColumns: ["code"]
           },
           {
-            foreignKeyName: "merchant_accounts_merchant_id_fkey"
-            columns: ["merchant_id"]
-            isOneToOne: false
-            referencedRelation: "merchants"
-            referencedColumns: ["merchant_id"]
-          },
-          {
-            foreignKeyName: "merchant_accounts_organization_id_fkey"
+            foreignKeyName: "accounts_organization_id_fkey"
             columns: ["organization_id"]
             isOneToOne: false
             referencedRelation: "organizations"
@@ -5645,13 +5461,6 @@ export type Database = {
           total_fee: number
         }[]
       }
-      calculate_merchant_mrr: {
-        Args: { p_merchant_id: string }
-        Returns: {
-          arr: number
-          mrr: number
-        }[]
-      }
       calculate_organization_fees: {
         Args: { p_amount: number; p_product_id: string; p_quantity?: number }
         Returns: {
@@ -5671,6 +5480,13 @@ export type Database = {
           mrr: number
           total_revenue: number
           total_transactions: number
+        }[]
+      }
+      calculate_organization_mrr: {
+        Args: { p_organization_id: string }
+        Returns: {
+          arr: number
+          mrr: number
         }[]
       }
       calculate_payout_fee: {
@@ -5753,7 +5569,7 @@ export type Database = {
         Returns: boolean
       }
       check_stripe_connect_status: {
-        Args: { p_merchant_id: string; p_organization_id?: string }
+        Args: { p_organization_id: string }
         Returns: Json
       }
       cleanup_expired_payment_links: { Args: never; Returns: number }
@@ -6154,13 +5970,13 @@ export type Database = {
         Returns: {
           authorized_events: Database["public"]["Enums"]["webhook_event"][]
           created_at: string
+          created_by: string | null
           deleted_at: string | null
           is_active: boolean
           last_payload: Json | null
           last_response_body: string | null
           last_response_status: number | null
           last_triggered_at: string | null
-          merchant_id: string
           metadata: Json | null
           organization_id: string
           retry_count: number | null
@@ -6223,7 +6039,6 @@ export type Database = {
           p_amount?: number
           p_currency_code?: Database["public"]["Enums"]["currency_code"]
           p_expiration_minutes?: number
-          p_merchant_id: string
           p_metadata?: Json
           p_organization_id: string
           p_plan_id?: string
@@ -6263,7 +6078,6 @@ export type Database = {
       create_static_qr_code_for_product_or_plan: {
         Args: {
           p_currency_code?: Database["public"]["Enums"]["currency_code"]
-          p_merchant_id: string
           p_metadata?: Json
           p_name: string
           p_organization_id: string
@@ -6276,9 +6090,8 @@ export type Database = {
         Args: {
           p_business_type?: string
           p_company_domicile_country?: string
-          p_merchant_id?: string
           p_org_stripe_country?: string
-          p_organization_id?: string
+          p_organization_id: string
           p_stripe_account_id: string
           p_stripe_account_type?: string
           p_stripe_metadata?: Json
@@ -6304,20 +6117,15 @@ export type Database = {
       }
       create_subscription: {
         Args: {
-          p_amount: number
-          p_billing_frequency: Database["public"]["Enums"]["frequency"]
-          p_currency_code?: Database["public"]["Enums"]["currency_code"]
           p_customer_id: string
-          p_description: string
-          p_email_notifications: Json
-          p_failed_payment_action: string
+          p_end_date?: string
           p_merchant_id: string
-          p_metadata: Json
-          p_name: string
+          p_metadata?: Json
+          p_next_billing_date?: string
           p_organization_id: string
-          p_retry_payment_every?: number
+          p_plan_id: string
           p_start_date: string
-          p_total_retries?: number
+          p_status?: Database["public"]["Enums"]["subscription_status"]
         }
         Returns: string
       }
@@ -6645,8 +6453,8 @@ export type Database = {
           account_id: string
           amount: number
           created_at: string
+          created_by: string
           currency_code: Database["public"]["Enums"]["currency_code"]
-          merchant_id: string
           metadata: Json
           organization_id: string
           payment_method_code: Database["public"]["Enums"]["payment_method_code"]
@@ -6999,34 +6807,6 @@ export type Database = {
           organization_name: string
         }[]
       }
-      fetch_merchant_payout_methods: {
-        Args: { p_merchant_id: string; p_organization_id: string }
-        Returns: {
-          account_name: string
-          account_number: string
-          auto_withdrawal_day: number
-          auto_withdrawal_enabled: boolean
-          auto_withdrawal_last_run: string
-          auto_withdrawal_method: string
-          auto_withdrawal_mobile_provider: Database["public"]["Enums"]["provider_code"]
-          bank_code: string
-          bank_name: string
-          branch_code: string
-          country: string
-          created_at: string
-          id: string
-          is_default: boolean
-          is_spi_enabled: boolean
-          is_uemoa: boolean
-          is_valid: boolean
-          payout_method_type: string
-          spi_account_number: string
-          spi_alias_mbno: string
-          spi_alias_shid: string
-          spi_alias_type: string
-          updated_at: string
-        }[]
-      }
       fetch_mrr_metrics_custom_range: {
         Args: {
           p_end_date: string
@@ -7184,13 +6964,13 @@ export type Database = {
             Returns: {
               authorized_events: Database["public"]["Enums"]["webhook_event"][]
               created_at: string
+              created_by: string | null
               deleted_at: string | null
               is_active: boolean
               last_payload: Json | null
               last_response_body: string | null
               last_response_status: number | null
               last_triggered_at: string | null
-              merchant_id: string
               metadata: Json | null
               organization_id: string
               retry_count: number | null
@@ -7218,13 +6998,13 @@ export type Database = {
             Returns: {
               authorized_events: Database["public"]["Enums"]["webhook_event"][]
               created_at: string
+              created_by: string | null
               deleted_at: string | null
               is_active: boolean
               last_payload: Json | null
               last_response_body: string | null
               last_response_status: number | null
               last_triggered_at: string | null
-              merchant_id: string
               metadata: Json | null
               organization_id: string
               retry_count: number | null
@@ -7437,7 +7217,6 @@ export type Database = {
       fetch_provider_distribution_custom_range: {
         Args: {
           p_end_date: string
-          p_merchant_id: string
           p_organization_id: string
           p_start_date: string
         }
@@ -7556,7 +7335,6 @@ export type Database = {
       fetch_revenue_custom_range: {
         Args: {
           p_end_date: string
-          p_merchant_id: string
           p_organization_id: string
           p_start_date: string
         }
@@ -7776,7 +7554,7 @@ export type Database = {
         Args: {
           p_end_date?: string
           p_limit?: number
-          p_merchant_id: string
+          p_organization_id: string
           p_start_date?: string
         }
         Returns: {
@@ -7993,8 +7771,8 @@ export type Database = {
         Returns: {
           amount: number
           created_at: string
+          created_by: string
           currency_code: Database["public"]["Enums"]["currency_code"]
-          merchant_id: string
           metadata: Json
           payout_id: string
           status: Database["public"]["Enums"]["payout_status"]
@@ -8478,28 +8256,6 @@ export type Database = {
           total_refunds: number
         }[]
       }
-      get_merchant_stripe_connect: {
-        Args: { p_merchant_id: string; p_organization_id?: string }
-        Returns: {
-          business_type: string
-          charges_enabled: boolean
-          company_domicile_country: string
-          created_at: string
-          details_submitted: boolean
-          onboarding_status: string
-          org_stripe_country: string
-          payouts_enabled: boolean
-          requirements_disabled_reason: string
-          requirements_due: Json
-          requirements_eventually_due: Json
-          stripe_account_id: string
-          stripe_account_type: string
-          stripe_connect_id: string
-          stripe_dashboard_url: string
-          stripe_metadata: Json
-          updated_at: string
-        }[]
-      }
       get_merchant_transaction_stats: {
         Args: { p_merchant_id: string }
         Returns: {
@@ -8516,7 +8272,6 @@ export type Database = {
           p_custom_end?: string
           p_custom_start?: string
           p_date_range?: string
-          p_merchant_id: string
           p_organization_id: string
         }
         Returns: Json
@@ -8618,9 +8373,9 @@ export type Database = {
       get_organization_kyc_status: {
         Args: { p_merchant_id: string; p_organization_id: string }
         Returns: {
+          approved_at: string
           business_description: string
-          kyc_approved_at: string
-          kyc_submitted_at: string
+          created_at: string
           legal_representative_id_url: string
           status: Database["public"]["Enums"]["kyc_status"]
         }[]
@@ -8739,7 +8494,6 @@ export type Database = {
           p_custom_end?: string
           p_custom_start?: string
           p_date_range?: string
-          p_merchant_id: string
           p_organization_id: string
         }
         Returns: Json
@@ -8749,7 +8503,6 @@ export type Database = {
           p_custom_end?: string
           p_custom_start?: string
           p_date_range?: string
-          p_merchant_id: string
           p_organization_id: string
         }
         Returns: number
@@ -8759,18 +8512,12 @@ export type Database = {
           p_custom_end?: string
           p_custom_start?: string
           p_date_range?: string
-          p_merchant_id: string
           p_organization_id: string
         }
         Returns: number
       }
       get_pos_transactions: {
-        Args: {
-          p_limit?: number
-          p_merchant_id: string
-          p_offset?: number
-          p_organization_id: string
-        }
+        Args: { p_limit?: number; p_offset?: number; p_organization_id: string }
         Returns: {
           amount: number
           checkout_session_id: string
@@ -8908,13 +8655,13 @@ export type Database = {
         Returns: {
           authorized_events: Database["public"]["Enums"]["webhook_event"][]
           created_at: string
+          created_by: string | null
           deleted_at: string | null
           is_active: boolean
           last_payload: Json | null
           last_response_body: string | null
           last_response_status: number | null
           last_triggered_at: string | null
-          merchant_id: string
           metadata: Json | null
           organization_id: string
           retry_count: number | null
@@ -8995,11 +8742,32 @@ export type Database = {
         Args: { p_stripe_account_id: string }
         Returns: {
           business_type: string
-          merchant_id: string
           onboarding_status: string
           organization_id: string
           stripe_account_type: string
           stripe_connect_id: string
+        }[]
+      }
+      get_stripe_connect_info: {
+        Args: { p_organization_id: string }
+        Returns: {
+          business_type: string
+          charges_enabled: boolean
+          company_domicile_country: string
+          created_at: string
+          details_submitted: boolean
+          onboarding_status: string
+          org_stripe_country: string
+          payouts_enabled: boolean
+          requirements_disabled_reason: string
+          requirements_due: Json
+          requirements_eventually_due: Json
+          stripe_account_id: string
+          stripe_account_type: string
+          stripe_connect_id: string
+          stripe_dashboard_url: string
+          stripe_metadata: Json
+          updated_at: string
         }[]
       }
       get_subscription_history: {
@@ -9194,13 +8962,13 @@ export type Database = {
         Returns: {
           authorized_events: Database["public"]["Enums"]["webhook_event"][]
           created_at: string
+          created_by: string | null
           deleted_at: string | null
           is_active: boolean
           last_payload: Json | null
           last_response_body: string | null
           last_response_status: number | null
           last_triggered_at: string | null
-          merchant_id: string
           metadata: Json | null
           organization_id: string
           retry_count: number | null
@@ -9234,7 +9002,6 @@ export type Database = {
           headers: Json
           ip_address: string
           log_id: string
-          merchant_id: string
           organization_id: string
           payload: Json
           request_duration_ms: number
@@ -9634,12 +9401,12 @@ export type Database = {
         Returns: undefined
       }
       reactivate_valid_payment_links: { Args: never; Returns: number }
-      recalculate_all_merchants_mrr: {
+      recalculate_all_organizations_mrr: {
         Args: never
         Returns: {
           arr: number
-          merchant_id: string
           mrr: number
+          organization_id: string
         }[]
       }
       record_free_transaction: {
@@ -10119,13 +9886,13 @@ export type Database = {
         Returns: {
           authorized_events: Database["public"]["Enums"]["webhook_event"][]
           created_at: string
+          created_by: string | null
           deleted_at: string | null
           is_active: boolean
           last_payload: Json | null
           last_response_body: string | null
           last_response_status: number | null
           last_triggered_at: string | null
-          merchant_id: string
           metadata: Json | null
           organization_id: string
           retry_count: number | null
@@ -10176,12 +9943,12 @@ export type Database = {
           allowed_providers: Database["public"]["Enums"]["provider_code"][]
           cancel_url: string | null
           created_at: string
+          created_by: string | null
           currency_code: Database["public"]["Enums"]["currency_code"]
           expires_at: string | null
           is_active: boolean
           link_id: string
           link_type: Database["public"]["Enums"]["link_type"]
-          merchant_id: string
           metadata: Json | null
           organization_id: string
           plan_id: string | null
@@ -10257,7 +10024,6 @@ export type Database = {
           p_charges_enabled?: boolean
           p_company_domicile_country?: string
           p_details_submitted?: boolean
-          p_merchant_id?: string
           p_onboarding_status?: string
           p_org_stripe_country?: string
           p_organization_id?: string
