@@ -1,7 +1,7 @@
 /*
 lomi. API
 
-# lomi. API  The lomi. API provides a comprehensive payment processing platform for francophone WestAfrican businesses.  ## Authentication  All API requests require authentication using an API key. Include your API key in the `X-API-KEY` header.  ```bash curl https://api.lomi.africa/v1/customers \\   -H \"X-API-KEY: your_api_key_here\" ```  ## Rate limiting  API requests are rate-limited based on your plan. Rate limit headers are included in all responses.  ## Webhooks  Configure webhooks to receive real-time notifications about events in your account.  ## Environments  - **Live**: Production environment with real transactions - **Test**: Sandbox environment for development and testing
+Payment processing API for francophone West African businesses.
 
 API version: 1.1.0
 Contact: hello@lomi.africa
@@ -50,23 +50,47 @@ type APIClient struct {
 
 	// API Services
 
-	BNPLAPI *BNPLAPIService
+	BeneficiaryPayoutsAPI *BeneficiaryPayoutsAPIService
 
-	CheckoutAPI *CheckoutAPIService
+	CheckoutSessionsAPI *CheckoutSessionsAPIService
 
-	CoreAPI *CoreAPIService
+	CustomerInvoicesAPI *CustomerInvoicesAPIService
+
+	CustomersAPI *CustomersAPIService
+
+	DiscountCouponsAPI *DiscountCouponsAPIService
 
 	EventsAPI *EventsAPIService
 
+	InstallmentPaymentsAPI *InstallmentPaymentsAPIService
+
+	MeterBalancesAPI *MeterBalancesAPIService
+
+	MetersAPI *MetersAPIService
+
+	PaymentLinksAPI *PaymentLinksAPIService
+
+	PaymentRequestsAPI *PaymentRequestsAPIService
+
+	PayoutMethodsAPI *PayoutMethodsAPIService
+
 	PayoutsAPI *PayoutsAPIService
+
+	PricesAPI *PricesAPIService
 
 	ProductsAPI *ProductsAPIService
 
-	SPIAPI *SPIAPIService
+	RefundsAPI *RefundsAPIService
+
+	SPIAccountAliasesAPI *SPIAccountAliasesAPIService
+
+	SPIQRCodesAPI *SPIQRCodesAPIService
 
 	SubscriptionsAPI *SubscriptionsAPIService
 
-	UsageBillingAPI *UsageBillingAPIService
+	TransactionsAPI *TransactionsAPIService
+
+	WebhookDeliveryLogsAPI *WebhookDeliveryLogsAPIService
 
 	WebhooksAPI *WebhooksAPIService
 }
@@ -87,15 +111,27 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.common.client = c
 
 	// API Services
-	c.BNPLAPI = (*BNPLAPIService)(&c.common)
-	c.CheckoutAPI = (*CheckoutAPIService)(&c.common)
-	c.CoreAPI = (*CoreAPIService)(&c.common)
+	c.BeneficiaryPayoutsAPI = (*BeneficiaryPayoutsAPIService)(&c.common)
+	c.CheckoutSessionsAPI = (*CheckoutSessionsAPIService)(&c.common)
+	c.CustomerInvoicesAPI = (*CustomerInvoicesAPIService)(&c.common)
+	c.CustomersAPI = (*CustomersAPIService)(&c.common)
+	c.DiscountCouponsAPI = (*DiscountCouponsAPIService)(&c.common)
 	c.EventsAPI = (*EventsAPIService)(&c.common)
+	c.InstallmentPaymentsAPI = (*InstallmentPaymentsAPIService)(&c.common)
+	c.MeterBalancesAPI = (*MeterBalancesAPIService)(&c.common)
+	c.MetersAPI = (*MetersAPIService)(&c.common)
+	c.PaymentLinksAPI = (*PaymentLinksAPIService)(&c.common)
+	c.PaymentRequestsAPI = (*PaymentRequestsAPIService)(&c.common)
+	c.PayoutMethodsAPI = (*PayoutMethodsAPIService)(&c.common)
 	c.PayoutsAPI = (*PayoutsAPIService)(&c.common)
+	c.PricesAPI = (*PricesAPIService)(&c.common)
 	c.ProductsAPI = (*ProductsAPIService)(&c.common)
-	c.SPIAPI = (*SPIAPIService)(&c.common)
+	c.RefundsAPI = (*RefundsAPIService)(&c.common)
+	c.SPIAccountAliasesAPI = (*SPIAccountAliasesAPIService)(&c.common)
+	c.SPIQRCodesAPI = (*SPIQRCodesAPIService)(&c.common)
 	c.SubscriptionsAPI = (*SubscriptionsAPIService)(&c.common)
-	c.UsageBillingAPI = (*UsageBillingAPIService)(&c.common)
+	c.TransactionsAPI = (*TransactionsAPIService)(&c.common)
+	c.WebhookDeliveryLogsAPI = (*WebhookDeliveryLogsAPIService)(&c.common)
 	c.WebhooksAPI = (*WebhooksAPIService)(&c.common)
 
 	return c

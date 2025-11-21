@@ -20,20 +20,20 @@ export const API_RESOURCES: APIResourceConfig[] = [
   {
     tableName: 'customers',
     enabled: true,
-    tag: 'Core',
+    tag: 'Customers',
     description: 'Customer management - create and manage customer profiles',
   },
   {
     tableName: 'payment_requests',
     enabled: true,
-    tag: 'Core',
+    tag: 'Payment Requests',
     idField: 'request_id',
     description: 'Payment requests - create payment intents and track status',
   },
   {
     tableName: 'transactions',
     enabled: true,
-    tag: 'Core',
+    tag: 'Transactions',
     idField: 'transaction_id',
     description:
       'Transaction history - view completed and pending transactions',
@@ -48,7 +48,7 @@ export const API_RESOURCES: APIResourceConfig[] = [
   {
     tableName: 'refunds',
     enabled: true,
-    tag: 'Core',
+    tag: 'Refunds',
     idField: 'refund_id',
     description: 'Refund management - process and track refunds',
   },
@@ -62,7 +62,7 @@ export const API_RESOURCES: APIResourceConfig[] = [
   {
     tableName: 'prices',
     enabled: true,
-    tag: 'Products',
+    tag: 'Prices',
     idField: 'price_id',
     description: 'Pricing tiers - manage product pricing',
   },
@@ -77,14 +77,14 @@ export const API_RESOURCES: APIResourceConfig[] = [
   {
     tableName: 'discount_coupons',
     enabled: true,
-    tag: 'Subscriptions',
+    tag: 'Discount Coupons',
     idField: 'coupon_id',
     description: 'Discount coupons - create and manage promotional codes',
   },
   {
     tableName: 'customer_invoices',
     enabled: true,
-    tag: 'Subscriptions',
+    tag: 'Customer Invoices',
     idField: 'invoice_id',
     description: 'Customer invoices - view subscription invoices',
     operations: {
@@ -98,14 +98,14 @@ export const API_RESOURCES: APIResourceConfig[] = [
   {
     tableName: 'checkout_sessions',
     enabled: true,
-    tag: 'Checkout',
+    tag: 'Checkout Sessions',
     idField: 'session_id',
     description: 'Checkout sessions - create hosted payment pages',
   },
   {
     tableName: 'payment_links',
     enabled: true,
-    tag: 'Checkout',
+    tag: 'Payment Links',
     idField: 'link_id',
     description: 'Payment links - shareable payment URLs',
   },
@@ -119,7 +119,7 @@ export const API_RESOURCES: APIResourceConfig[] = [
   {
     tableName: 'payout_methods',
     enabled: true,
-    tag: 'Payouts',
+    tag: 'Payout Methods',
     idField: 'payout_method_id',
     description: 'Payout methods - manage beneficiary payout details',
     operations: {
@@ -133,7 +133,7 @@ export const API_RESOURCES: APIResourceConfig[] = [
   {
     tableName: 'beneficiary_payouts',
     enabled: true,
-    tag: 'Payouts',
+    tag: 'Beneficiary Payouts',
     idField: 'payout_id',
     description: 'Beneficiary payouts - track individual payout transfers',
     operations: {
@@ -147,7 +147,7 @@ export const API_RESOURCES: APIResourceConfig[] = [
   {
     tableName: 'installment_payments',
     enabled: true,
-    tag: 'BNPL',
+    tag: 'Installment Payments',
     idField: 'payment_id',
     description: 'BNPL installment payments - track installment payments',
     operations: {
@@ -161,14 +161,14 @@ export const API_RESOURCES: APIResourceConfig[] = [
   {
     tableName: 'spi_qr_codes',
     enabled: true,
-    tag: 'SPI',
+    tag: 'SPI QR Codes',
     idField: 'qr_code_id',
     description: 'SPI QR codes - generate and manage SPI QR payment codes',
   },
   {
     tableName: 'spi_account_aliases',
     enabled: true,
-    tag: 'SPI',
+    tag: 'SPI Account Aliases',
     idField: 'alias_id',
     description: 'SPI account aliases - manage SPI payment aliases',
     operations: {
@@ -190,7 +190,7 @@ export const API_RESOURCES: APIResourceConfig[] = [
   {
     tableName: 'webhook_delivery_logs',
     enabled: true,
-    tag: 'Webhooks',
+    tag: 'Webhook Delivery Logs',
     idField: 'log_id',
     description: 'Webhook event log - history of webhook deliveries',
     operations: {
@@ -218,14 +218,14 @@ export const API_RESOURCES: APIResourceConfig[] = [
   {
     tableName: 'meters',
     enabled: true,
-    tag: 'Usage Billing',
+    tag: 'Meters',
     idField: 'meter_id',
     description: 'Usage meters - track usage for usage-based billing',
   },
   {
     tableName: 'meter_balances',
     enabled: true,
-    tag: 'Usage Billing',
+    tag: 'Meter Balances',
     idField: 'balance_id',
     description: 'Meter balances - view current usage balances',
     operations: {

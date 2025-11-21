@@ -3695,7 +3695,7 @@ paths:
       summary: List customers
       description: Customer management - create and manage customer profiles
       tags:
-        - Core
+        - Customers
       security:
         - ApiKeyAuth: []
       parameters:
@@ -3753,7 +3753,7 @@ paths:
       summary: Create customer
       description: Customer management - create and manage customer profiles
       tags:
-        - Core
+        - Customers
       security:
         - ApiKeyAuth: []
       requestBody:
@@ -3791,7 +3791,7 @@ paths:
       summary: Retrieve customer
       description: Retrieve a specific customer by its unique identifier.
       tags:
-        - Core
+        - Customers
       security:
         - ApiKeyAuth: []
       parameters:
@@ -3820,7 +3820,7 @@ paths:
       summary: Update customer
       description: Update a specific customer. Only provided fields will be updated.
       tags:
-        - Core
+        - Customers
       security:
         - ApiKeyAuth: []
       parameters:
@@ -3866,7 +3866,7 @@ paths:
       summary: Delete customer
       description: Delete a specific customer. This action cannot be undone.
       tags:
-        - Core
+        - Customers
       security:
         - ApiKeyAuth: []
       parameters:
@@ -3892,7 +3892,7 @@ paths:
       summary: List payment requests
       description: Payment requests - create payment intents and track status
       tags:
-        - Core
+        - Payment Requests
       security:
         - ApiKeyAuth: []
       parameters:
@@ -3950,7 +3950,7 @@ paths:
       summary: Create payment request
       description: Payment requests - create payment intents and track status
       tags:
-        - Core
+        - Payment Requests
       security:
         - ApiKeyAuth: []
       requestBody:
@@ -3988,7 +3988,7 @@ paths:
       summary: Retrieve payment request
       description: Retrieve a specific payment request by its unique identifier.
       tags:
-        - Core
+        - Payment Requests
       security:
         - ApiKeyAuth: []
       parameters:
@@ -4017,7 +4017,7 @@ paths:
       summary: Update payment request
       description: Update a specific payment request. Only provided fields will be updated.
       tags:
-        - Core
+        - Payment Requests
       security:
         - ApiKeyAuth: []
       parameters:
@@ -4061,7 +4061,7 @@ paths:
       summary: Delete payment request
       description: Delete a specific payment request. This action cannot be undone.
       tags:
-        - Core
+        - Payment Requests
       security:
         - ApiKeyAuth: []
       parameters:
@@ -4087,7 +4087,7 @@ paths:
       summary: List transactions
       description: Transaction history - view completed and pending transactions
       tags:
-        - Core
+        - Transactions
       security:
         - ApiKeyAuth: []
       parameters:
@@ -4146,7 +4146,7 @@ paths:
       summary: Retrieve transaction
       description: Retrieve a specific transaction by its unique identifier.
       tags:
-        - Core
+        - Transactions
       security:
         - ApiKeyAuth: []
       parameters:
@@ -4176,7 +4176,7 @@ paths:
       summary: List refunds
       description: Refund management - process and track refunds
       tags:
-        - Core
+        - Refunds
       security:
         - ApiKeyAuth: []
       parameters:
@@ -4234,7 +4234,7 @@ paths:
       summary: Create refund
       description: Refund management - process and track refunds
       tags:
-        - Core
+        - Refunds
       security:
         - ApiKeyAuth: []
       requestBody:
@@ -4268,7 +4268,7 @@ paths:
       summary: Retrieve refund
       description: Retrieve a specific refund by its unique identifier.
       tags:
-        - Core
+        - Refunds
       security:
         - ApiKeyAuth: []
       parameters:
@@ -4297,7 +4297,7 @@ paths:
       summary: Update refund
       description: Update a specific refund. Only provided fields will be updated.
       tags:
-        - Core
+        - Refunds
       security:
         - ApiKeyAuth: []
       parameters:
@@ -4319,7 +4319,7 @@ paths:
                 summary: Sample refund update
                 value:
                   metadata:
-                    updated_at: '2025-11-21T12:46:27.077Z'
+                    updated_at: '2025-11-21T13:32:16.239Z'
                     updated_reason: Administrative update
       responses:
         '200':
@@ -4341,7 +4341,7 @@ paths:
       summary: Delete refund
       description: Delete a specific refund. This action cannot be undone.
       tags:
-        - Core
+        - Refunds
       security:
         - ApiKeyAuth: []
       parameters:
@@ -4565,7 +4565,7 @@ paths:
       summary: List prices
       description: Pricing tiers - manage product pricing
       tags:
-        - Products
+        - Prices
       security:
         - ApiKeyAuth: []
       parameters:
@@ -4623,7 +4623,7 @@ paths:
       summary: Create price
       description: Pricing tiers - manage product pricing
       tags:
-        - Products
+        - Prices
       security:
         - ApiKeyAuth: []
       requestBody:
@@ -4661,7 +4661,7 @@ paths:
       summary: Retrieve price
       description: Retrieve a specific price by its unique identifier.
       tags:
-        - Products
+        - Prices
       security:
         - ApiKeyAuth: []
       parameters:
@@ -4690,7 +4690,7 @@ paths:
       summary: Update price
       description: Update a specific price. Only provided fields will be updated.
       tags:
-        - Products
+        - Prices
       security:
         - ApiKeyAuth: []
       parameters:
@@ -4732,7 +4732,7 @@ paths:
       summary: Delete price
       description: Delete a specific price. This action cannot be undone.
       tags:
-        - Products
+        - Prices
       security:
         - ApiKeyAuth: []
       parameters:
@@ -4906,7 +4906,7 @@ paths:
                 value:
                   metadata:
                     plan: enterprise
-                    upgraded_at: '2025-11-21T12:46:27.078Z'
+                    upgraded_at: '2025-11-21T13:32:16.239Z'
       responses:
         '200':
           description: Subscription successfully updated
@@ -4953,7 +4953,7 @@ paths:
       summary: List discount coupons
       description: Discount coupons - create and manage promotional codes
       tags:
-        - Subscriptions
+        - Discount Coupons
       security:
         - ApiKeyAuth: []
       parameters:
@@ -5011,7 +5011,7 @@ paths:
       summary: Create discount coupon
       description: Discount coupons - create and manage promotional codes
       tags:
-        - Subscriptions
+        - Discount Coupons
       security:
         - ApiKeyAuth: []
       requestBody:
@@ -5050,7 +5050,7 @@ paths:
       summary: Retrieve discount coupon
       description: Retrieve a specific discount coupon by its unique identifier.
       tags:
-        - Subscriptions
+        - Discount Coupons
       security:
         - ApiKeyAuth: []
       parameters:
@@ -5079,7 +5079,7 @@ paths:
       summary: Update discount coupon
       description: Update a specific discount coupon. Only provided fields will be updated.
       tags:
-        - Subscriptions
+        - Discount Coupons
       security:
         - ApiKeyAuth: []
       parameters:
@@ -5122,7 +5122,7 @@ paths:
       summary: Delete discount coupon
       description: Delete a specific discount coupon. This action cannot be undone.
       tags:
-        - Subscriptions
+        - Discount Coupons
       security:
         - ApiKeyAuth: []
       parameters:
@@ -5148,7 +5148,7 @@ paths:
       summary: List customer invoices
       description: Customer invoices - view subscription invoices
       tags:
-        - Subscriptions
+        - Customer Invoices
       security:
         - ApiKeyAuth: []
       parameters:
@@ -5207,7 +5207,7 @@ paths:
       summary: Retrieve customer invoice
       description: Retrieve a specific customer invoice by its unique identifier.
       tags:
-        - Subscriptions
+        - Customer Invoices
       security:
         - ApiKeyAuth: []
       parameters:
@@ -5237,7 +5237,7 @@ paths:
       summary: List checkout sessions
       description: Checkout sessions - create hosted payment pages
       tags:
-        - Checkout
+        - Checkout Sessions
       security:
         - ApiKeyAuth: []
       parameters:
@@ -5295,7 +5295,7 @@ paths:
       summary: Create checkout session
       description: Checkout sessions - create hosted payment pages
       tags:
-        - Checkout
+        - Checkout Sessions
       security:
         - ApiKeyAuth: []
       requestBody:
@@ -5333,7 +5333,7 @@ paths:
       summary: Retrieve checkout session
       description: Retrieve a specific checkout session by its unique identifier.
       tags:
-        - Checkout
+        - Checkout Sessions
       security:
         - ApiKeyAuth: []
       parameters:
@@ -5362,7 +5362,7 @@ paths:
       summary: Update checkout session
       description: Update a specific checkout session. Only provided fields will be updated.
       tags:
-        - Checkout
+        - Checkout Sessions
       security:
         - ApiKeyAuth: []
       parameters:
@@ -5384,7 +5384,7 @@ paths:
                 summary: Sample checkout_session update
                 value:
                   metadata:
-                    updated_at: '2025-11-21T12:46:27.078Z'
+                    updated_at: '2025-11-21T13:32:16.240Z'
                     updated_reason: Administrative update
       responses:
         '200':
@@ -5406,7 +5406,7 @@ paths:
       summary: Delete checkout session
       description: Delete a specific checkout session. This action cannot be undone.
       tags:
-        - Checkout
+        - Checkout Sessions
       security:
         - ApiKeyAuth: []
       parameters:
@@ -5432,7 +5432,7 @@ paths:
       summary: List payment links
       description: Payment links - shareable payment URLs
       tags:
-        - Checkout
+        - Payment Links
       security:
         - ApiKeyAuth: []
       parameters:
@@ -5490,7 +5490,7 @@ paths:
       summary: Create payment link
       description: Payment links - shareable payment URLs
       tags:
-        - Checkout
+        - Payment Links
       security:
         - ApiKeyAuth: []
       requestBody:
@@ -5527,7 +5527,7 @@ paths:
       summary: Retrieve payment link
       description: Retrieve a specific payment link by its unique identifier.
       tags:
-        - Checkout
+        - Payment Links
       security:
         - ApiKeyAuth: []
       parameters:
@@ -5556,7 +5556,7 @@ paths:
       summary: Update payment link
       description: Update a specific payment link. Only provided fields will be updated.
       tags:
-        - Checkout
+        - Payment Links
       security:
         - ApiKeyAuth: []
       parameters:
@@ -5578,7 +5578,7 @@ paths:
                 summary: Sample payment_link update
                 value:
                   metadata:
-                    updated_at: '2025-11-21T12:46:27.079Z'
+                    updated_at: '2025-11-21T13:32:16.240Z'
                     updated_reason: Administrative update
       responses:
         '200':
@@ -5600,7 +5600,7 @@ paths:
       summary: Delete payment link
       description: Delete a specific payment link. This action cannot be undone.
       tags:
-        - Checkout
+        - Payment Links
       security:
         - ApiKeyAuth: []
       parameters:
@@ -5771,7 +5771,7 @@ paths:
                 summary: Sample payout update
                 value:
                   metadata:
-                    updated_at: '2025-11-21T12:46:27.079Z'
+                    updated_at: '2025-11-21T13:32:16.240Z'
                     updated_reason: Administrative update
       responses:
         '200':
@@ -5819,7 +5819,7 @@ paths:
       summary: List payout methods
       description: Payout methods - manage beneficiary payout details
       tags:
-        - Payouts
+        - Payout Methods
       security:
         - ApiKeyAuth: []
       parameters:
@@ -5878,7 +5878,7 @@ paths:
       summary: Retrieve payout method
       description: Retrieve a specific payout method by its unique identifier.
       tags:
-        - Payouts
+        - Payout Methods
       security:
         - ApiKeyAuth: []
       parameters:
@@ -5908,7 +5908,7 @@ paths:
       summary: List beneficiary payouts
       description: Beneficiary payouts - track individual payout transfers
       tags:
-        - Payouts
+        - Beneficiary Payouts
       security:
         - ApiKeyAuth: []
       parameters:
@@ -5966,7 +5966,7 @@ paths:
       summary: Create beneficiary payout
       description: Beneficiary payouts - track individual payout transfers
       tags:
-        - Payouts
+        - Beneficiary Payouts
       security:
         - ApiKeyAuth: []
       requestBody:
@@ -6000,7 +6000,7 @@ paths:
       summary: Retrieve beneficiary payout
       description: Retrieve a specific beneficiary payout by its unique identifier.
       tags:
-        - Payouts
+        - Beneficiary Payouts
       security:
         - ApiKeyAuth: []
       parameters:
@@ -6030,7 +6030,7 @@ paths:
       summary: List installment payments
       description: BNPL installment payments - track installment payments
       tags:
-        - BNPL
+        - Installment Payments
       security:
         - ApiKeyAuth: []
       parameters:
@@ -6089,7 +6089,7 @@ paths:
       summary: Retrieve installment payment
       description: Retrieve a specific installment payment by its unique identifier.
       tags:
-        - BNPL
+        - Installment Payments
       security:
         - ApiKeyAuth: []
       parameters:
@@ -6119,7 +6119,7 @@ paths:
       summary: List spi qr codes
       description: SPI QR codes - generate and manage SPI QR payment codes
       tags:
-        - SPI
+        - SPI QR Codes
       security:
         - ApiKeyAuth: []
       parameters:
@@ -6177,7 +6177,7 @@ paths:
       summary: Create spi qr code
       description: SPI QR codes - generate and manage SPI QR payment codes
       tags:
-        - SPI
+        - SPI QR Codes
       security:
         - ApiKeyAuth: []
       requestBody:
@@ -6213,7 +6213,7 @@ paths:
       summary: Retrieve spi qr code
       description: Retrieve a specific spi qr code by its unique identifier.
       tags:
-        - SPI
+        - SPI QR Codes
       security:
         - ApiKeyAuth: []
       parameters:
@@ -6242,7 +6242,7 @@ paths:
       summary: Update spi qr code
       description: Update a specific spi qr code. Only provided fields will be updated.
       tags:
-        - SPI
+        - SPI QR Codes
       security:
         - ApiKeyAuth: []
       parameters:
@@ -6264,7 +6264,7 @@ paths:
                 summary: Sample spi_qr_code update
                 value:
                   metadata:
-                    updated_at: '2025-11-21T12:46:27.079Z'
+                    updated_at: '2025-11-21T13:32:16.241Z'
                     updated_reason: Administrative update
       responses:
         '200':
@@ -6286,7 +6286,7 @@ paths:
       summary: Delete spi qr code
       description: Delete a specific spi qr code. This action cannot be undone.
       tags:
-        - SPI
+        - SPI QR Codes
       security:
         - ApiKeyAuth: []
       parameters:
@@ -6312,7 +6312,7 @@ paths:
       summary: List spi account aliases
       description: SPI account aliases - manage SPI payment aliases
       tags:
-        - SPI
+        - SPI Account Aliases
       security:
         - ApiKeyAuth: []
       parameters:
@@ -6371,7 +6371,7 @@ paths:
       summary: Retrieve spi account aliase
       description: Retrieve a specific spi account aliase by its unique identifier.
       tags:
-        - SPI
+        - SPI Account Aliases
       security:
         - ApiKeyAuth: []
       parameters:
@@ -6595,7 +6595,7 @@ paths:
       summary: List webhook delivery logs
       description: Webhook event log - history of webhook deliveries
       tags:
-        - Webhooks
+        - Webhook Delivery Logs
       security:
         - ApiKeyAuth: []
       parameters:
@@ -6654,7 +6654,7 @@ paths:
       summary: Retrieve webhook delivery log
       description: Retrieve a specific webhook delivery log by its unique identifier.
       tags:
-        - Webhooks
+        - Webhook Delivery Logs
       security:
         - ApiKeyAuth: []
       parameters:
@@ -6773,7 +6773,7 @@ paths:
       summary: List meters
       description: Usage meters - track usage for usage-based billing
       tags:
-        - Usage Billing
+        - Meters
       security:
         - ApiKeyAuth: []
       parameters:
@@ -6831,7 +6831,7 @@ paths:
       summary: Create meter
       description: Usage meters - track usage for usage-based billing
       tags:
-        - Usage Billing
+        - Meters
       security:
         - ApiKeyAuth: []
       requestBody:
@@ -6865,7 +6865,7 @@ paths:
       summary: Retrieve meter
       description: Retrieve a specific meter by its unique identifier.
       tags:
-        - Usage Billing
+        - Meters
       security:
         - ApiKeyAuth: []
       parameters:
@@ -6894,7 +6894,7 @@ paths:
       summary: Update meter
       description: Update a specific meter. Only provided fields will be updated.
       tags:
-        - Usage Billing
+        - Meters
       security:
         - ApiKeyAuth: []
       parameters:
@@ -6916,7 +6916,7 @@ paths:
                 summary: Sample meter update
                 value:
                   metadata:
-                    updated_at: '2025-11-21T12:46:27.080Z'
+                    updated_at: '2025-11-21T13:32:16.241Z'
                     updated_reason: Administrative update
       responses:
         '200':
@@ -6938,7 +6938,7 @@ paths:
       summary: Delete meter
       description: Delete a specific meter. This action cannot be undone.
       tags:
-        - Usage Billing
+        - Meters
       security:
         - ApiKeyAuth: []
       parameters:
@@ -6964,7 +6964,7 @@ paths:
       summary: List meter balances
       description: Meter balances - view current usage balances
       tags:
-        - Usage Billing
+        - Meter Balances
       security:
         - ApiKeyAuth: []
       parameters:
@@ -7023,7 +7023,7 @@ paths:
       summary: Retrieve meter balance
       description: Retrieve a specific meter balance by its unique identifier.
       tags:
-        - Usage Billing
+        - Meter Balances
       security:
         - ApiKeyAuth: []
       parameters:
@@ -7048,47 +7048,47 @@ paths:
         '500':
           $ref: '#/components/responses/InternalError'
 tags:
-  - name: Core
+  - name: Customers
     description: Customer management - create and manage customer profiles
-  - name: Core
+  - name: Payment Requests
     description: Payment requests - create payment intents and track status
-  - name: Core
+  - name: Transactions
     description: Transaction history - view completed and pending transactions
-  - name: Core
+  - name: Refunds
     description: Refund management - process and track refunds
   - name: Products
     description: Product catalog - manage one-time and recurring products
-  - name: Products
+  - name: Prices
     description: Pricing tiers - manage product pricing
   - name: Subscriptions
     description: Subscription management - create and manage recurring billing
-  - name: Subscriptions
+  - name: Discount Coupons
     description: Discount coupons - create and manage promotional codes
-  - name: Subscriptions
+  - name: Customer Invoices
     description: Customer invoices - view subscription invoices
-  - name: Checkout
+  - name: Checkout Sessions
     description: Checkout sessions - create hosted payment pages
-  - name: Checkout
+  - name: Payment Links
     description: Payment links - shareable payment URLs
   - name: Payouts
     description: Payout management - transfer funds to beneficiaries
-  - name: Payouts
+  - name: Payout Methods
     description: Payout methods - manage beneficiary payout details
-  - name: Payouts
+  - name: Beneficiary Payouts
     description: Beneficiary payouts - track individual payout transfers
-  - name: BNPL
+  - name: Installment Payments
     description: BNPL installment payments - track installment payments
-  - name: SPI
+  - name: SPI QR Codes
     description: SPI QR codes - generate and manage SPI QR payment codes
-  - name: SPI
+  - name: SPI Account Aliases
     description: SPI account aliases - manage SPI payment aliases
   - name: Webhooks
     description: Webhook configuration - receive real-time event notifications
-  - name: Webhooks
+  - name: Webhook Delivery Logs
     description: Webhook event log - history of webhook deliveries
   - name: Events
     description: Events - view account activity events
-  - name: Usage Billing
+  - name: Meters
     description: Usage meters - track usage for usage-based billing
-  - name: Usage Billing
+  - name: Meter Balances
     description: Meter balances - view current usage balances

@@ -1,7 +1,7 @@
 'use server';
 
 import { getLomiClient } from '../client';
-import type { customers_create, payment_requests_create } from '@lomiafrica/sdk';
+import type { customers_create, payment_requests_create } from '@lomi./sdk';
 
 /**
  * Server Action: Create a customer

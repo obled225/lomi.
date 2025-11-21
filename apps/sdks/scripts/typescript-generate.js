@@ -57,3 +57,7 @@ content = content.replace(/BASE: '.*'/, "BASE: 'https://api.lomi.africa/v1'");
 writeFileSync(openAPIPath, content, 'utf-8');
 
 console.log('✅ TypeScript SDK generated successfully!');
+
+// Run post-generation script to create SDK wrapper
+console.log('🔧 Running post-generation script...');
+execSync('node ../scripts/post-generate-sdk.js', { cwd: join(__dirname, '../ts'), stdio: 'inherit' });

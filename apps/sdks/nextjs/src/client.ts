@@ -1,4 +1,4 @@
-import { LomiSDK } from '@lomiafrica/sdk';
+import { LomiSDK } from '@lomi./sdk';
 
 let clientInstance: LomiSDK | null = null;
 

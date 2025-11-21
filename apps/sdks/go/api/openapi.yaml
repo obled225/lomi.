@@ -4,32 +4,7 @@ info:
     email: hello@lomi.africa
     name: lomi. Support
     url: https://lomi.africa
-  description: |-
-    # lomi. API
-
-    The lomi. API provides a comprehensive payment processing platform for francophone WestAfrican businesses.
-
-    ## Authentication
-
-    All API requests require authentication using an API key. Include your API key in the `X-API-KEY` header.
-
-    ```bash
-    curl https://api.lomi.africa/v1/customers \
-      -H "X-API-KEY: your_api_key_here"
-    ```
-
-    ## Rate limiting
-
-    API requests are rate-limited based on your plan. Rate limit headers are included in all responses.
-
-    ## Webhooks
-
-    Configure webhooks to receive real-time notifications about events in your account.
-
-    ## Environments
-
-    - **Live**: Production environment with real transactions
-    - **Test**: Sandbox environment for development and testing
+  description: Payment processing API for francophone West African businesses.
   license:
     name: MIT
     url: https://opensource.org/licenses/MIT
@@ -44,49 +19,49 @@ security:
 - ApiKeyAuth: []
 tags:
 - description: Customer management - create and manage customer profiles
-  name: Core
+  name: Customers
 - description: Payment requests - create payment intents and track status
-  name: Core
+  name: Payment Requests
 - description: Transaction history - view completed and pending transactions
-  name: Core
+  name: Transactions
 - description: Refund management - process and track refunds
-  name: Core
+  name: Refunds
 - description: Product catalog - manage one-time and recurring products
   name: Products
 - description: Pricing tiers - manage product pricing
-  name: Products
+  name: Prices
 - description: Subscription management - create and manage recurring billing
   name: Subscriptions
 - description: Discount coupons - create and manage promotional codes
-  name: Subscriptions
+  name: Discount Coupons
 - description: Customer invoices - view subscription invoices
-  name: Subscriptions
+  name: Customer Invoices
 - description: Checkout sessions - create hosted payment pages
-  name: Checkout
+  name: Checkout Sessions
 - description: Payment links - shareable payment URLs
-  name: Checkout
+  name: Payment Links
 - description: Payout management - transfer funds to beneficiaries
   name: Payouts
 - description: Payout methods - manage beneficiary payout details
-  name: Payouts
+  name: Payout Methods
 - description: Beneficiary payouts - track individual payout transfers
-  name: Payouts
+  name: Beneficiary Payouts
 - description: BNPL installment payments - track installment payments
-  name: BNPL
+  name: Installment Payments
 - description: SPI QR codes - generate and manage SPI QR payment codes
-  name: SPI
+  name: SPI QR Codes
 - description: SPI account aliases - manage SPI payment aliases
-  name: SPI
+  name: SPI Account Aliases
 - description: Webhook configuration - receive real-time event notifications
   name: Webhooks
 - description: Webhook event log - history of webhook deliveries
-  name: Webhooks
+  name: Webhook Delivery Logs
 - description: Events - view account activity events
   name: Events
 - description: Usage meters - track usage for usage-based billing
-  name: Usage Billing
+  name: Meters
 - description: Meter balances - view current usage balances
-  name: Usage Billing
+  name: Meter Balances
 paths:
   /customers:
     get:
@@ -146,7 +121,7 @@ paths:
       - ApiKeyAuth: []
       summary: List customers
       tags:
-      - Core
+      - Customers
     post:
       description: Customer management - create and manage customer profiles
       operationId: createCustomer
@@ -195,7 +170,7 @@ paths:
       - ApiKeyAuth: []
       summary: Create customer
       tags:
-      - Core
+      - Customers
   /customers/{customer_id}:
     delete:
       description: Delete a specific customer. This action cannot be undone.
@@ -235,7 +210,7 @@ paths:
       - ApiKeyAuth: []
       summary: Delete customer
       tags:
-      - Core
+      - Customers
     get:
       description: Retrieve a specific customer by its unique identifier.
       operationId: retrieveCustomer
@@ -278,7 +253,7 @@ paths:
       - ApiKeyAuth: []
       summary: Retrieve customer
       tags:
-      - Core
+      - Customers
     patch:
       description: Update a specific customer. Only provided fields will be updated.
       operationId: updateCustomer
@@ -342,7 +317,7 @@ paths:
       - ApiKeyAuth: []
       summary: Update customer
       tags:
-      - Core
+      - Customers
   /payment_requests:
     get:
       description: Payment requests - create payment intents and track status
@@ -401,7 +376,7 @@ paths:
       - ApiKeyAuth: []
       summary: List payment requests
       tags:
-      - Core
+      - Payment Requests
     post:
       description: Payment requests - create payment intents and track status
       operationId: createPaymentRequest
@@ -450,7 +425,7 @@ paths:
       - ApiKeyAuth: []
       summary: Create payment request
       tags:
-      - Core
+      - Payment Requests
   /payment_requests/{request_id}:
     delete:
       description: Delete a specific payment request. This action cannot be undone.
@@ -490,7 +465,7 @@ paths:
       - ApiKeyAuth: []
       summary: Delete payment request
       tags:
-      - Core
+      - Payment Requests
     get:
       description: Retrieve a specific payment request by its unique identifier.
       operationId: retrievePaymentRequest
@@ -533,7 +508,7 @@ paths:
       - ApiKeyAuth: []
       summary: Retrieve payment request
       tags:
-      - Core
+      - Payment Requests
     patch:
       description: Update a specific payment request. Only provided fields will be
         updated.
@@ -596,7 +571,7 @@ paths:
       - ApiKeyAuth: []
       summary: Update payment request
       tags:
-      - Core
+      - Payment Requests
   /transactions:
     get:
       description: Transaction history - view completed and pending transactions
@@ -655,7 +630,7 @@ paths:
       - ApiKeyAuth: []
       summary: List transactions
       tags:
-      - Core
+      - Transactions
   /transactions/{transaction_id}:
     get:
       description: Retrieve a specific transaction by its unique identifier.
@@ -699,7 +674,7 @@ paths:
       - ApiKeyAuth: []
       summary: Retrieve transaction
       tags:
-      - Core
+      - Transactions
   /refunds:
     get:
       description: Refund management - process and track refunds
@@ -758,7 +733,7 @@ paths:
       - ApiKeyAuth: []
       summary: List refunds
       tags:
-      - Core
+      - Refunds
     post:
       description: Refund management - process and track refunds
       operationId: createRefund
@@ -803,7 +778,7 @@ paths:
       - ApiKeyAuth: []
       summary: Create refund
       tags:
-      - Core
+      - Refunds
   /refunds/{refund_id}:
     delete:
       description: Delete a specific refund. This action cannot be undone.
@@ -843,7 +818,7 @@ paths:
       - ApiKeyAuth: []
       summary: Delete refund
       tags:
-      - Core
+      - Refunds
     get:
       description: Retrieve a specific refund by its unique identifier.
       operationId: retrieveRefund
@@ -886,7 +861,7 @@ paths:
       - ApiKeyAuth: []
       summary: Retrieve refund
       tags:
-      - Core
+      - Refunds
     patch:
       description: Update a specific refund. Only provided fields will be updated.
       operationId: updateRefund
@@ -908,7 +883,7 @@ paths:
                 summary: Sample refund update
                 value:
                   metadata:
-                    updated_at: 2025-11-21T09:45:11.331Z
+                    updated_at: 2025-11-21T13:32:16.239Z
                     updated_reason: Administrative update
             schema:
               $ref: "#/components/schemas/refunds_update"
@@ -948,7 +923,7 @@ paths:
       - ApiKeyAuth: []
       summary: Update refund
       tags:
-      - Core
+      - Refunds
   /products:
     get:
       description: Product catalog - manage one-time and recurring products
@@ -1263,7 +1238,7 @@ paths:
       - ApiKeyAuth: []
       summary: List prices
       tags:
-      - Products
+      - Prices
     post:
       description: Pricing tiers - manage product pricing
       operationId: createPrice
@@ -1312,7 +1287,7 @@ paths:
       - ApiKeyAuth: []
       summary: Create price
       tags:
-      - Products
+      - Prices
   /prices/{price_id}:
     delete:
       description: Delete a specific price. This action cannot be undone.
@@ -1352,7 +1327,7 @@ paths:
       - ApiKeyAuth: []
       summary: Delete price
       tags:
-      - Products
+      - Prices
     get:
       description: Retrieve a specific price by its unique identifier.
       operationId: retrievePrice
@@ -1395,7 +1370,7 @@ paths:
       - ApiKeyAuth: []
       summary: Retrieve price
       tags:
-      - Products
+      - Prices
     patch:
       description: Update a specific price. Only provided fields will be updated.
       operationId: updatePrice
@@ -1455,7 +1430,7 @@ paths:
       - ApiKeyAuth: []
       summary: Update price
       tags:
-      - Products
+      - Prices
   /subscriptions:
     get:
       description: Subscription management - create and manage recurring billing
@@ -1669,7 +1644,7 @@ paths:
                 value:
                   metadata:
                     plan: enterprise
-                    upgraded_at: 2025-11-21T09:45:11.331Z
+                    upgraded_at: 2025-11-21T13:32:16.239Z
             schema:
               $ref: "#/components/schemas/subscriptions_update"
         required: true
@@ -1767,7 +1742,7 @@ paths:
       - ApiKeyAuth: []
       summary: List discount coupons
       tags:
-      - Subscriptions
+      - Discount Coupons
     post:
       description: Discount coupons - create and manage promotional codes
       operationId: createDiscountCoupon
@@ -1817,7 +1792,7 @@ paths:
       - ApiKeyAuth: []
       summary: Create discount coupon
       tags:
-      - Subscriptions
+      - Discount Coupons
   /discount_coupons/{coupon_id}:
     delete:
       description: Delete a specific discount coupon. This action cannot be undone.
@@ -1857,7 +1832,7 @@ paths:
       - ApiKeyAuth: []
       summary: Delete discount coupon
       tags:
-      - Subscriptions
+      - Discount Coupons
     get:
       description: Retrieve a specific discount coupon by its unique identifier.
       operationId: retrieveDiscountCoupon
@@ -1900,7 +1875,7 @@ paths:
       - ApiKeyAuth: []
       summary: Retrieve discount coupon
       tags:
-      - Subscriptions
+      - Discount Coupons
     patch:
       description: Update a specific discount coupon. Only provided fields will be
         updated.
@@ -1962,7 +1937,7 @@ paths:
       - ApiKeyAuth: []
       summary: Update discount coupon
       tags:
-      - Subscriptions
+      - Discount Coupons
   /customer_invoices:
     get:
       description: Customer invoices - view subscription invoices
@@ -2021,7 +1996,7 @@ paths:
       - ApiKeyAuth: []
       summary: List customer invoices
       tags:
-      - Subscriptions
+      - Customer Invoices
   /customer_invoices/{invoice_id}:
     get:
       description: Retrieve a specific customer invoice by its unique identifier.
@@ -2065,7 +2040,7 @@ paths:
       - ApiKeyAuth: []
       summary: Retrieve customer invoice
       tags:
-      - Subscriptions
+      - Customer Invoices
   /checkout_sessions:
     get:
       description: Checkout sessions - create hosted payment pages
@@ -2124,7 +2099,7 @@ paths:
       - ApiKeyAuth: []
       summary: List checkout sessions
       tags:
-      - Checkout
+      - Checkout Sessions
     post:
       description: Checkout sessions - create hosted payment pages
       operationId: createCheckoutSession
@@ -2173,7 +2148,7 @@ paths:
       - ApiKeyAuth: []
       summary: Create checkout session
       tags:
-      - Checkout
+      - Checkout Sessions
   /checkout_sessions/{session_id}:
     delete:
       description: Delete a specific checkout session. This action cannot be undone.
@@ -2213,7 +2188,7 @@ paths:
       - ApiKeyAuth: []
       summary: Delete checkout session
       tags:
-      - Checkout
+      - Checkout Sessions
     get:
       description: Retrieve a specific checkout session by its unique identifier.
       operationId: retrieveCheckoutSession
@@ -2256,7 +2231,7 @@ paths:
       - ApiKeyAuth: []
       summary: Retrieve checkout session
       tags:
-      - Checkout
+      - Checkout Sessions
     patch:
       description: Update a specific checkout session. Only provided fields will be
         updated.
@@ -2279,7 +2254,7 @@ paths:
                 summary: Sample checkout_session update
                 value:
                   metadata:
-                    updated_at: 2025-11-21T09:45:11.332Z
+                    updated_at: 2025-11-21T13:32:16.240Z
                     updated_reason: Administrative update
             schema:
               $ref: "#/components/schemas/checkout_sessions_update"
@@ -2319,7 +2294,7 @@ paths:
       - ApiKeyAuth: []
       summary: Update checkout session
       tags:
-      - Checkout
+      - Checkout Sessions
   /payment_links:
     get:
       description: Payment links - shareable payment URLs
@@ -2378,7 +2353,7 @@ paths:
       - ApiKeyAuth: []
       summary: List payment links
       tags:
-      - Checkout
+      - Payment Links
     post:
       description: Payment links - shareable payment URLs
       operationId: createPaymentLink
@@ -2426,7 +2401,7 @@ paths:
       - ApiKeyAuth: []
       summary: Create payment link
       tags:
-      - Checkout
+      - Payment Links
   /payment_links/{link_id}:
     delete:
       description: Delete a specific payment link. This action cannot be undone.
@@ -2466,7 +2441,7 @@ paths:
       - ApiKeyAuth: []
       summary: Delete payment link
       tags:
-      - Checkout
+      - Payment Links
     get:
       description: Retrieve a specific payment link by its unique identifier.
       operationId: retrievePaymentLink
@@ -2509,7 +2484,7 @@ paths:
       - ApiKeyAuth: []
       summary: Retrieve payment link
       tags:
-      - Checkout
+      - Payment Links
     patch:
       description: Update a specific payment link. Only provided fields will be updated.
       operationId: updatePaymentLink
@@ -2531,7 +2506,7 @@ paths:
                 summary: Sample payment_link update
                 value:
                   metadata:
-                    updated_at: 2025-11-21T09:45:11.332Z
+                    updated_at: 2025-11-21T13:32:16.240Z
                     updated_reason: Administrative update
             schema:
               $ref: "#/components/schemas/payment_links_update"
@@ -2571,7 +2546,7 @@ paths:
       - ApiKeyAuth: []
       summary: Update payment link
       tags:
-      - Checkout
+      - Payment Links
   /payouts:
     get:
       description: Payout management - transfer funds to beneficiaries
@@ -2782,7 +2757,7 @@ paths:
                 summary: Sample payout update
                 value:
                   metadata:
-                    updated_at: 2025-11-21T09:45:11.332Z
+                    updated_at: 2025-11-21T13:32:16.240Z
                     updated_reason: Administrative update
             schema:
               $ref: "#/components/schemas/payouts_update"
@@ -2881,7 +2856,7 @@ paths:
       - ApiKeyAuth: []
       summary: List payout methods
       tags:
-      - Payouts
+      - Payout Methods
   /payout_methods/{payout_method_id}:
     get:
       description: Retrieve a specific payout method by its unique identifier.
@@ -2925,7 +2900,7 @@ paths:
       - ApiKeyAuth: []
       summary: Retrieve payout method
       tags:
-      - Payouts
+      - Payout Methods
   /beneficiary_payouts:
     get:
       description: Beneficiary payouts - track individual payout transfers
@@ -2984,7 +2959,7 @@ paths:
       - ApiKeyAuth: []
       summary: List beneficiary payouts
       tags:
-      - Payouts
+      - Beneficiary Payouts
     post:
       description: Beneficiary payouts - track individual payout transfers
       operationId: createBeneficiaryPayout
@@ -3029,7 +3004,7 @@ paths:
       - ApiKeyAuth: []
       summary: Create beneficiary payout
       tags:
-      - Payouts
+      - Beneficiary Payouts
   /beneficiary_payouts/{payout_id}:
     get:
       description: Retrieve a specific beneficiary payout by its unique identifier.
@@ -3073,7 +3048,7 @@ paths:
       - ApiKeyAuth: []
       summary: Retrieve beneficiary payout
       tags:
-      - Payouts
+      - Beneficiary Payouts
   /installment_payments:
     get:
       description: BNPL installment payments - track installment payments
@@ -3132,7 +3107,7 @@ paths:
       - ApiKeyAuth: []
       summary: List installment payments
       tags:
-      - BNPL
+      - Installment Payments
   /installment_payments/{payment_id}:
     get:
       description: Retrieve a specific installment payment by its unique identifier.
@@ -3176,7 +3151,7 @@ paths:
       - ApiKeyAuth: []
       summary: Retrieve installment payment
       tags:
-      - BNPL
+      - Installment Payments
   /spi_qr_codes:
     get:
       description: SPI QR codes - generate and manage SPI QR payment codes
@@ -3235,7 +3210,7 @@ paths:
       - ApiKeyAuth: []
       summary: List spi qr codes
       tags:
-      - SPI
+      - SPI QR Codes
     post:
       description: SPI QR codes - generate and manage SPI QR payment codes
       operationId: createSpiQrCode
@@ -3282,7 +3257,7 @@ paths:
       - ApiKeyAuth: []
       summary: Create spi qr code
       tags:
-      - SPI
+      - SPI QR Codes
   /spi_qr_codes/{qr_code_id}:
     delete:
       description: Delete a specific spi qr code. This action cannot be undone.
@@ -3322,7 +3297,7 @@ paths:
       - ApiKeyAuth: []
       summary: Delete spi qr code
       tags:
-      - SPI
+      - SPI QR Codes
     get:
       description: Retrieve a specific spi qr code by its unique identifier.
       operationId: retrieveSpiQrCode
@@ -3365,7 +3340,7 @@ paths:
       - ApiKeyAuth: []
       summary: Retrieve spi qr code
       tags:
-      - SPI
+      - SPI QR Codes
     patch:
       description: Update a specific spi qr code. Only provided fields will be updated.
       operationId: updateSpiQrCode
@@ -3387,7 +3362,7 @@ paths:
                 summary: Sample spi_qr_code update
                 value:
                   metadata:
-                    updated_at: 2025-11-21T09:45:11.332Z
+                    updated_at: 2025-11-21T13:32:16.241Z
                     updated_reason: Administrative update
             schema:
               $ref: "#/components/schemas/spi_qr_codes_update"
@@ -3427,7 +3402,7 @@ paths:
       - ApiKeyAuth: []
       summary: Update spi qr code
       tags:
-      - SPI
+      - SPI QR Codes
   /spi_account_aliases:
     get:
       description: SPI account aliases - manage SPI payment aliases
@@ -3486,7 +3461,7 @@ paths:
       - ApiKeyAuth: []
       summary: List spi account aliases
       tags:
-      - SPI
+      - SPI Account Aliases
   /spi_account_aliases/{alias_id}:
     get:
       description: Retrieve a specific spi account aliase by its unique identifier.
@@ -3530,7 +3505,7 @@ paths:
       - ApiKeyAuth: []
       summary: Retrieve spi account aliase
       tags:
-      - SPI
+      - SPI Account Aliases
   /webhooks:
     get:
       description: Webhook configuration - receive real-time event notifications
@@ -3841,7 +3816,7 @@ paths:
       - ApiKeyAuth: []
       summary: List webhook delivery logs
       tags:
-      - Webhooks
+      - Webhook Delivery Logs
   /webhook_delivery_logs/{log_id}:
     get:
       description: Retrieve a specific webhook delivery log by its unique identifier.
@@ -3885,7 +3860,7 @@ paths:
       - ApiKeyAuth: []
       summary: Retrieve webhook delivery log
       tags:
-      - Webhooks
+      - Webhook Delivery Logs
   /events:
     get:
       description: Events - view account activity events
@@ -4047,7 +4022,7 @@ paths:
       - ApiKeyAuth: []
       summary: List meters
       tags:
-      - Usage Billing
+      - Meters
     post:
       description: Usage meters - track usage for usage-based billing
       operationId: createMeter
@@ -4092,7 +4067,7 @@ paths:
       - ApiKeyAuth: []
       summary: Create meter
       tags:
-      - Usage Billing
+      - Meters
   /meters/{meter_id}:
     delete:
       description: Delete a specific meter. This action cannot be undone.
@@ -4132,7 +4107,7 @@ paths:
       - ApiKeyAuth: []
       summary: Delete meter
       tags:
-      - Usage Billing
+      - Meters
     get:
       description: Retrieve a specific meter by its unique identifier.
       operationId: retrieveMeter
@@ -4175,7 +4150,7 @@ paths:
       - ApiKeyAuth: []
       summary: Retrieve meter
       tags:
-      - Usage Billing
+      - Meters
     patch:
       description: Update a specific meter. Only provided fields will be updated.
       operationId: updateMeter
@@ -4197,7 +4172,7 @@ paths:
                 summary: Sample meter update
                 value:
                   metadata:
-                    updated_at: 2025-11-21T09:45:11.332Z
+                    updated_at: 2025-11-21T13:32:16.241Z
                     updated_reason: Administrative update
             schema:
               $ref: "#/components/schemas/meters_update"
@@ -4237,7 +4212,7 @@ paths:
       - ApiKeyAuth: []
       summary: Update meter
       tags:
-      - Usage Billing
+      - Meters
   /meter_balances:
     get:
       description: Meter balances - view current usage balances
@@ -4296,7 +4271,7 @@ paths:
       - ApiKeyAuth: []
       summary: List meter balances
       tags:
-      - Usage Billing
+      - Meter Balances
   /meter_balances/{balance_id}:
     get:
       description: Retrieve a specific meter balance by its unique identifier.
@@ -4340,7 +4315,7 @@ paths:
       - ApiKeyAuth: []
       summary: Retrieve meter balance
       tags:
-      - Usage Billing
+      - Meter Balances
 components:
   responses:
     BadRequest:
