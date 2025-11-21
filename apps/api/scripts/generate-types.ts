@@ -1,6 +1,6 @@
 import { parse } from 'yaml';
 import { writeFileSync, readFileSync } from 'fs';
-import { join, resolve } from 'path';
+import { resolve } from 'path';
 import { existsSync, mkdirSync } from 'fs';
 
 interface SchemaObject {

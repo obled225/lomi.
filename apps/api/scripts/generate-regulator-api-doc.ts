@@ -9,7 +9,6 @@ import {
   WidthType,
   TextRun,
   AlignmentType,
-  PageBreak,
   IBordersOptions,
   BorderStyle,
   VerticalAlign,

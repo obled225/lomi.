@@ -2,8 +2,8 @@ import { parse } from 'yaml';
 import { writeFileSync, readFileSync, mkdirSync, existsSync } from 'fs';
 import { join, resolve } from 'path';
 
-const OPENAPI_PATH = resolve(__dirname, '../openapi/spec.yaml');
-const OUTPUT_DIR = resolve(__dirname, '../src/client');
+const OPENAPI_PATH = resolve(__dirname, '@/openapi/spec.yaml');
+const OUTPUT_DIR = resolve(__dirname, '@/src/client');
 
 interface PathItem {
   get?: OperationObject;

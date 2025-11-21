@@ -5,7 +5,7 @@ import * as path from 'path';
 
 // Paths with fixed path resolution
 const migrationsDir = '/Users/babacar/Projects/lomi./apps/dashboard/supabase/migrations';
-const clientDir = resolve(__dirname, '../src/client');
+const clientDir = resolve(__dirname, '@/src/client');
 
 console.log(`Looking for SQL files in: ${migrationsDir}`);
 console.log(`Looking for client files in: ${clientDir}`);

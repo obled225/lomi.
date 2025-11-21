@@ -1,0 +1,557 @@
+import * as fs from 'fs';
+import * as path from 'path';
+import { parseDatabaseTypes, tableSchemaToOpenAPI } from './parse-database-types';
+import { getEnabledResources, isEnumExposed, type APIResourceConfig } from './api-config';
+
+/**
+ * OpenAPI Spec Generator
+ * 
+ * Automatically generates OpenAPI 3.0 specification from database.types.ts
+ * This ensures the API spec is ALWAYS in sync with the actual database schema
+ */
+
+interface OpenAPISpec {
+  openapi: string;
+  info: any;
+  servers: any[];
+  security: any[];
+  components: {
+    securitySchemes: any;
+    schemas: Record<string, any>;
+    responses: Record<string, any>;
+  };
+  paths: Record<string, any>;
+  tags: any[];
+}
+
+/**
+ * Generate CRUD paths for a resource
+ */
+function generateCRUDPaths(
+  tableName: string,
+  idField: string = `${tableName.slice(0, -1)}_id`
+): Record<string, any> {
+  const singularName = tableName.endsWith('s') ? tableName.slice(0, -1) : tableName;
+  
+  return {
+    [`/${tableName}`]: {
+      get: {
+        summary: `List ${tableName}`,
+        description: `Retrieve a paginated list of ${tableName}`,
+        tags: [singularName],
+        security: [{ ApiKeyAuth: [] }],
+        parameters: [
+          {
+            name: 'limit',
+            in: 'query',
+            description: 'Maximum number of items to return',
+            schema: { type: 'integer', default: 20, maximum: 100 },
+          },
+          {
+            name: 'offset',
+            in: 'query',
+            description: 'Number of items to skip',
+            schema: { type: 'integer', default: 0 },
+          },
+          {
+            name: 'sort',
+            in: 'query',
+            description: 'Sort order (e.g., created_at:desc)',
+            schema: { type: 'string' },
+          },
+        ],
+        responses: {
+          '200': {
+            description: 'Successful response',
+            content: {
+              'application/json': {
+                schema: {
+                  type: 'object',
+                  properties: {
+                    data: {
+                      type: 'array',
+                      items: { $ref: `#/components/schemas/${tableName}` },
+                    },
+                    pagination: {
+                      type: 'object',
+                      properties: {
+                        limit: { type: 'integer' },
+                        offset: { type: 'integer' },
+                        total: { type: 'integer' },
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
+          '401': { $ref: '#/components/responses/Unauthorized' },
+          '500': { $ref: '#/components/responses/InternalError' },
+        },
+      },
+      post: {
+        summary: `Create ${singularName}`,
+        description: `Create a new ${singularName}`,
+        tags: [singularName],
+        security: [{ ApiKeyAuth: [] }],
+        requestBody: {
+          required: true,
+          content: {
+            'application/json': {
+              schema: { $ref: `#/components/schemas/${tableName}_create` },
+            },
+          },
+        },
+        responses: {
+          '201': {
+            description: 'Successfully created',
+            content: {
+              'application/json': {
+                schema: { $ref: `#/components/schemas/${tableName}` },
+              },
+            },
+          },
+          '400': { $ref: '#/components/responses/BadRequest' },
+          '401': { $ref: '#/components/responses/Unauthorized' },
+          '500': { $ref: '#/components/responses/InternalError' },
+        },
+      },
+    },
+    [`/${tableName}/{${idField}}`]: {
+      get: {
+        summary: `Get ${singularName}`,
+        description: `Retrieve a specific ${singularName} by ID`,
+        tags: [singularName],
+        security: [{ ApiKeyAuth: [] }],
+        parameters: [
+          {
+            name: idField,
+            in: 'path',
+            required: true,
+            description: `The ${singularName} ID`,
+            schema: { type: 'string', format: 'uuid' },
+          },
+        ],
+        responses: {
+          '200': {
+            description: 'Successful response',
+            content: {
+              'application/json': {
+                schema: { $ref: `#/components/schemas/${tableName}` },
+              },
+            },
+          },
+          '404': { $ref: '#/components/responses/NotFound' },
+          '401': { $ref: '#/components/responses/Unauthorized' },
+          '500': { $ref: '#/components/responses/InternalError' },
+        },
+      },
+      patch: {
+        summary: `Update ${singularName}`,
+        description: `Update a specific ${singularName}`,
+        tags: [singularName],
+        security: [{ ApiKeyAuth: [] }],
+        parameters: [
+          {
+            name: idField,
+            in: 'path',
+            required: true,
+            description: `The ${singularName} ID`,
+            schema: { type: 'string', format: 'uuid' },
+          },
+        ],
+        requestBody: {
+          required: true,
+          content: {
+            'application/json': {
+              schema: { $ref: `#/components/schemas/${tableName}_update` },
+            },
+          },
+        },
+        responses: {
+          '200': {
+            description: 'Successfully updated',
+            content: {
+              'application/json': {
+                schema: { $ref: `#/components/schemas/${tableName}` },
+              },
+            },
+          },
+          '400': { $ref: '#/components/responses/BadRequest' },
+          '404': { $ref: '#/components/responses/NotFound' },
+          '401': { $ref: '#/components/responses/Unauthorized' },
+          '500': { $ref: '#/components/responses/InternalError' },
+        },
+      },
+      delete: {
+        summary: `Delete ${singularName}`,
+        description: `Delete a specific ${singularName}`,
+        tags: [singularName],
+        security: [{ ApiKeyAuth: [] }],
+        parameters: [
+          {
+            name: idField,
+            in: 'path',
+            required: true,
+            description: `The ${singularName} ID`,
+            schema: { type: 'string', format: 'uuid' },
+          },
+        ],
+        responses: {
+          '204': {
+            description: 'Successfully deleted',
+          },
+          '404': { $ref: '#/components/responses/NotFound' },
+          '401': { $ref: '#/components/responses/Unauthorized' },
+          '500': { $ref: '#/components/responses/InternalError' },
+        },
+      },
+    },
+  };
+}
+
+/**
+ * Generate CRUD paths with configuration support
+ */
+function generateCRUDPathsWithConfig(
+  tableName: string,
+  idField: string,
+  config: APIResourceConfig
+): Record<string, any> {
+  const paths = generateCRUDPaths(tableName, idField);
+  
+  // Filter operations based on configuration
+  const operations = config.operations || {
+    list: true,
+    get: true,
+    create: true,
+    update: true,
+    delete: true,
+  };
+  
+  const filteredPaths: Record<string, any> = {};
+  
+  // Handle collection endpoints (list, create)
+  if (paths[`/${tableName}`]) {
+    const collectionPath: any = {};
+    
+    if (operations.list !== false && paths[`/${tableName}`].get) {
+      collectionPath.get = paths[`/${tableName}`].get;
+    }
+    
+    if (operations.create !== false && paths[`/${tableName}`].post) {
+      collectionPath.post = paths[`/${tableName}`].post;
+    }
+    
+    if (Object.keys(collectionPath).length > 0) {
+      filteredPaths[`/${tableName}`] = collectionPath;
+    }
+  }
+  
+  // Handle item endpoints (get, update, delete)
+  if (paths[`/${tableName}/{${idField}}`]) {
+    const itemPath: any = {};
+    
+    if (operations.get !== false && paths[`/${tableName}/{${idField}}`].get) {
+      itemPath.get = paths[`/${tableName}/{${idField}}`].get;
+    }
+    
+    if (operations.update !== false && paths[`/${tableName}/{${idField}}`].patch) {
+      itemPath.patch = paths[`/${tableName}/{${idField}}`].patch;
+    }
+    
+    if (operations.delete !== false && paths[`/${tableName}/{${idField}}`].delete) {
+      itemPath.delete = paths[`/${tableName}/{${idField}}`].delete;
+    }
+    
+    if (Object.keys(itemPath).length > 0) {
+      filteredPaths[`/${tableName}/{${idField}}`] = itemPath;
+    }
+  }
+  
+  return filteredPaths;
+}
+
+/**
+ * Main function to generate the OpenAPI spec from database types
+ */
+function generateOpenAPISpec(): OpenAPISpec {
+  console.log('📖 Parsing database.types.ts...\n');
+  
+  // Parse the actual database types file (shared source of truth)
+  const dbTypesPath = path.join(__dirname, '../../../../apps/docs/lib/types/database.types.ts');
+  const { tables, enums } = parseDatabaseTypes(dbTypesPath);
+
+  console.log(`✅ Found ${tables.size} tables`);
+  console.log(`✅ Found ${enums.size} enums\n`);
+
+  // Base OpenAPI spec
+  const spec: OpenAPISpec = {
+    openapi: '3.0.3',
+    info: {
+      title: 'lomi. API',
+      version: '1.0.0',
+      description: `
+# lomi. API
+
+The lomi. API provides a comprehensive payment processing platform for francophone WestAfrican businesses.
+
+## Authentication
+
+All API requests require authentication using an API key. Include your API key in the \`X-API-KEY\` header.
+
+\`\`\`bash
+curl https://api.lomi.africa/v1/customers \\
+  -H "X-API-KEY: your_api_key_here"
+\`\`\`
+
+## Rate limiting
+
+API requests are rate-limited based on your plan. Rate limit headers are included in all responses.
+
+## Webhooks
+
+Configure webhooks to receive real-time notifications about events in your account.
+
+## Environments
+
+- **Live**: Production environment with real transactions
+- **Test**: Sandbox environment for development and testing
+      `.trim(),
+      contact: {
+        name: 'lomi. Support',
+        email: 'hello@lomi.africa',
+        url: 'https://lomi.africa',
+      },
+      license: {
+        name: 'MIT',
+        url: 'https://opensource.org/licenses/MIT',
+      },
+    },
+    servers: [
+      {
+        url: 'https://api.lomi.africa/v1',
+        description: 'Production server',
+      },
+      {
+        url: 'https://sandbox.api.lomi.africa/v1',
+        description: 'Sandbox server',
+      },
+    ],
+    security: [{ ApiKeyAuth: [] }],
+    components: {
+      securitySchemes: {
+        ApiKeyAuth: {
+          type: 'apiKey',
+          in: 'header',
+          name: 'X-API-KEY',
+          description: 'API key for authentication. Get yours from the lomi. dashboard.',
+        },
+      },
+      schemas: {},
+      responses: {
+        BadRequest: {
+          description: 'Bad request - Invalid input',
+          content: {
+            'application/json': {
+              schema: { $ref: '#/components/schemas/Error' },
+            },
+          },
+        },
+        Unauthorized: {
+          description: 'Unauthorized - Invalid or missing API key',
+          content: {
+            'application/json': {
+              schema: { $ref: '#/components/schemas/Error' },
+            },
+          },
+        },
+        NotFound: {
+          description: 'Not found - Resource does not exist',
+          content: {
+            'application/json': {
+              schema: { $ref: '#/components/schemas/Error' },
+            },
+          },
+        },
+        InternalError: {
+          description: 'Internal server error',
+          content: {
+            'application/json': {
+              schema: { $ref: '#/components/schemas/Error' },
+            },
+          },
+        },
+      },
+    },
+    paths: {},
+    tags: [],
+  };
+
+  // Convert all tables to OpenAPI schemas
+  const allSchemas: Record<string, any> = {};
+  
+  tables.forEach((table) => {
+    const schemas = tableSchemaToOpenAPI(table);
+    Object.assign(allSchemas, schemas);
+  });
+
+  // Add enums as schemas
+  enums.forEach((enumDef, enumName) => {
+    allSchemas[enumName] = {
+      type: 'string',
+      enum: enumDef.values,
+      description: `Enum: ${enumName}`,
+    };
+  });
+
+  // Add Error schema
+  allSchemas.Error = {
+    type: 'object',
+    properties: {
+      error: {
+        type: 'object',
+        properties: {
+          code: { type: 'string' },
+          message: { type: 'string' },
+          details: { type: 'object' },
+        },
+      },
+    },
+  };
+
+  spec.components.schemas = allSchemas;
+
+  // Get enabled API resources from configuration
+  const enabledResources = getEnabledResources();
+  
+  console.log(`📡 Exposing ${enabledResources.length} resources via API\n`);
+
+  // Filter schemas to only include enabled resources
+  const enabledTableNames = new Set(enabledResources.map(r => r.tableName));
+  const filteredSchemas: Record<string, any> = {};
+  
+  // First pass: Include schemas for enabled resources
+  Object.entries(allSchemas).forEach(([schemaName, schema]) => {
+    // Check if this schema belongs to an enabled resource
+    const isEnabledResource = enabledTableNames.has(schemaName) ||
+      Array.from(enabledTableNames).some(tableName => 
+        schemaName === `${tableName}_create` || 
+        schemaName === `${tableName}_update`
+      );
+    
+    // Always include common schemas (Error, etc.)
+    const isCommonSchema = schemaName === 'Error';
+    
+    if (isEnabledResource || isCommonSchema) {
+      filteredSchemas[schemaName] = schema;
+    }
+  });
+  
+  // Second pass: Find and include referenced enums
+  const referencedEnums = new Set<string>();
+  
+  function findEnumReferences(obj: any) {
+    if (!obj || typeof obj !== 'object') return;
+    
+    // Check if this is an enum reference
+    if (obj.type === 'string' && obj.enum && Array.isArray(obj.enum)) {
+      // This might be an inline enum, but we'll also check schema names
+      return;
+    }
+    
+    // Recursively search properties
+    Object.values(obj).forEach(value => {
+      if (typeof value === 'object') {
+        findEnumReferences(value);
+      }
+    });
+  }
+  
+  // Scan filtered schemas for enum usage
+  Object.values(filteredSchemas).forEach(schema => {
+    findEnumReferences(schema);
+  });
+  
+  // Add enums to filtered schemas (using configuration)
+  enums.forEach((enumDef, enumName) => {
+    if (isEnumExposed(enumName) || referencedEnums.has(enumName)) {
+      if (!filteredSchemas[enumName]) {
+        filteredSchemas[enumName] = {
+          type: 'string',
+          enum: enumDef.values,
+          description: `Enum: ${enumName}`,
+        };
+      }
+    }
+  });
+  
+  // Replace all schemas with filtered ones
+  spec.components.schemas = filteredSchemas;
+  
+  console.log(`📋 Filtered schemas: ${Object.keys(filteredSchemas).length} (from ${Object.keys(allSchemas).length} total)`);
+
+  // Generate paths and tags for each enabled resource
+  enabledResources.forEach((resource) => {
+    if (tables.has(resource.tableName)) {
+      const singularName = resource.displayName || 
+        (resource.tableName.endsWith('s') ? resource.tableName.slice(0, -1) : resource.tableName);
+      
+      // Add tag
+      spec.tags.push({
+        name: resource.tag || singularName,
+        description: resource.description || `Operations related to ${resource.tableName}`,
+      });
+
+      // Generate CRUD paths with custom configuration
+      const idField = resource.idField || `${singularName}_id`;
+      const paths = generateCRUDPathsWithConfig(resource.tableName, idField, resource);
+      Object.assign(spec.paths, paths);
+    }
+  });
+
+  return spec;
+}
+
+/**
+ * Main execution
+ */
+function main() {
+  console.log('🚀 Generating OpenAPI specification from database schema...\n');
+
+  try {
+    const spec = generateOpenAPISpec();
+
+    // Write to YAML file
+    const outputPath = path.join(__dirname, '../spec.yaml');
+    const yaml = require('js-yaml');
+    const yamlContent = yaml.dump(spec, {
+      indent: 2,
+      lineWidth: -1,
+      noRefs: true,
+    });
+
+    fs.writeFileSync(outputPath, yamlContent, 'utf8');
+
+    console.log('✅ OpenAPI spec generated successfully!');
+    console.log(`📄 Output: ${outputPath}`);
+    console.log(`📊 Resources: ${spec.tags.length}`);
+    console.log(`🛣️  Paths: ${Object.keys(spec.paths).length}`);
+    console.log(`📋 Schemas: ${Object.keys(spec.components.schemas).length}`);
+    console.log('\n💡 Next steps:');
+    console.log('   1. Review the generated spec');
+    console.log('   2. Run: npm run generate:docs (to generate documentation)');
+    console.log('   3. Generate SDKs from this spec\n');
+  } catch (error) {
+    console.error('❌ Error generating OpenAPI spec:');
+    console.error(error);
+    process.exit(1);
+  }
+}
+
+// Run if executed directly
+if (require.main === module) {
+  main();
+}
+
+export { generateOpenAPISpec };

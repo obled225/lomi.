@@ -1,0 +1,30 @@
+{
+  "name": "@lomi/sdk-javascript",
+  "version": "1.0.0",
+  "description": "Official JavaScript SDK for the lomi. API",
+  "type": "module",
+  "main": "dist/index.js",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "generate": "node ../scripts/typescript-generate.js && tsc",
+    "build": "tsc"
+  },
+  "keywords": [
+    "lomi",
+    "payments",
+    "sdk",
+    "javascript"
+  ],
+  "author": "lomi. <hello@lomi.africa>",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.13.2"
+  },
+  "devDependencies": {
+    "openapi-typescript-codegen": "^0.29.0",
+    "typescript": "^5.9.3"
+  }
+}

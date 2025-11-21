@@ -22,5 +22,6 @@
 
 # others
 .env
+lib/types/database.types.ts
 .env.production
 next-env.d.ts

@@ -1,6 +1,6 @@
 import { readFileSync } from 'fs';
 import { join, resolve } from 'path';
-import * as Types from '../src/types/api';
+import * as Types from '@/src/types/api';
 
 // Path to SQL schema file - Fixed path resolution
 const schemaPath = resolve(join(__dirname, '../../dashboard/supabase/migrations/20240828000002_db.sql'));

@@ -1,7 +1,6 @@
 import {
   MerchantsClient,
   ProductsClient,
-  SubscriptionsClient,
   TransactionsClient,
   CheckoutSessionsClient,
   ProvidersClient,
@@ -26,7 +25,6 @@ export class LomiSDK {
   // Client instances
   public readonly merchants: MerchantsClient;
   public readonly products: ProductsClient;
-  public readonly subscriptions: SubscriptionsClient;
   public readonly transactions: TransactionsClient;
   public readonly checkoutSessions: CheckoutSessionsClient;
   public readonly providers: ProvidersClient;
@@ -42,7 +40,6 @@ export class LomiSDK {
     // Initialize clients
     this.merchants = new MerchantsClient(config.baseUrl, config.apiKey);
     this.products = new ProductsClient(config.baseUrl, config.apiKey);
-    this.subscriptions = new SubscriptionsClient(config.baseUrl, config.apiKey);
     this.transactions = new TransactionsClient(config.baseUrl, config.apiKey);
     this.checkoutSessions = new CheckoutSessionsClient(
       config.baseUrl,

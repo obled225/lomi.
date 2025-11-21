@@ -1,21 +1,121 @@
 // Generated TypeScript types from OpenAPI specification
 
-export enum CurrencyCode {
+export enum bnpl_status {
+  pending = 'pending',
+  collected = 'collected',
+  waived = 'waived',
+  refunded = 'refunded',
+}
+
+export enum checkout_session_status {
+  open = 'open',
+  completed = 'completed',
+  expired = 'expired',
+}
+
+export enum currency_code {
   XOF = 'XOF',
   USD = 'USD',
   EUR = 'EUR',
-  GHS = 'GHS',
-  NGN = 'NGN',
-  KES = 'KES',
-  MRO = 'MRO',
 }
 
-export enum TransactionType {
-  payment = 'payment',
-  instalment = 'instalment',
+export enum frequency {
+  weekly = 'weekly',
+  bi_weekly = 'bi-weekly',
+  monthly = 'monthly',
+  bi_monthly = 'bi-monthly',
+  quarterly = 'quarterly',
+  semi_annual = 'semi-annual',
+  yearly = 'yearly',
 }
 
-export enum TransactionStatus {
+export enum invoice_status {
+  sent = 'sent',
+  paid = 'paid',
+  overdue = 'overdue',
+  cancelled = 'cancelled',
+}
+
+export enum payment_method_code {
+  CARDS = 'CARDS',
+  MOBILE_MONEY = 'MOBILE_MONEY',
+  BANK_TRANSFER = 'BANK_TRANSFER',
+  BNPL = 'BNPL',
+  FREE = 'FREE',
+}
+
+export enum payout_status {
+  pending = 'pending',
+  processing = 'processing',
+  completed = 'completed',
+  failed = 'failed',
+}
+
+export enum pricing_model_enum {
+  standard = 'standard',
+  pay_what_you_want = 'pay_what_you_want',
+  tiered = 'tiered',
+  volume = 'volume',
+}
+
+export enum product_type_enum {
+  one_time = 'one_time',
+  recurring = 'recurring',
+  usage_based = 'usage_based',
+}
+
+export enum provider_code {
+  WAVE = 'WAVE',
+  JUMBO = 'JUMBO',
+  MTN = 'MTN',
+  STRIPE = 'STRIPE',
+  SPI = 'SPI',
+  CYBERSOURCE = 'CYBERSOURCE',
+  FREE = 'FREE',
+}
+
+export enum refund_status {
+  pending = 'pending',
+  completed = 'completed',
+  failed = 'failed',
+}
+
+export enum spi_account_status {
+  OUVERT = 'OUVERT',
+  BLOQUE = 'BLOQUE',
+  CLOTURE = 'CLOTURE',
+}
+
+export enum spi_account_type {
+  CACC = 'CACC',
+  CARD = 'CARD',
+  CASH = 'CASH',
+  CHAR = 'CHAR',
+  CISH = 'CISH',
+  CURR = 'CURR',
+  DPST = 'DPST',
+  SVGS = 'SVGS',
+  ULAA = 'ULAA',
+}
+
+export enum spi_payment_status {
+  INITIE = 'INITIE',
+  ENVOYE = 'ENVOYE',
+  IRREVOCABLE = 'IRREVOCABLE',
+  REJETE = 'REJETE',
+}
+
+export enum subscription_status {
+  pending = 'pending',
+  active = 'active',
+  paused = 'paused',
+  cancelled = 'cancelled',
+  expired = 'expired',
+  past_due = 'past_due',
+  trial = 'trial',
+}
+
+export enum transaction_status {
   pending = 'pending',
   completed = 'completed',
   failed = 'failed',
@@ -23,80 +123,7 @@ export enum TransactionStatus {
   expired = 'expired',
 }
 
-export enum ProviderCode {
-  ORANGE = 'ORANGE',
-  WAVE = 'WAVE',
-  ECOBANK = 'ECOBANK',
-  MTN = 'MTN',
-  NOWPAYMENTS = 'NOWPAYMENTS',
-  APPLE = 'APPLE',
-  GOOGLE = 'GOOGLE',
-  MOOV = 'MOOV',
-  AIRTEL = 'AIRTEL',
-  MPESA = 'MPESA',
-  OPAY = 'OPAY',
-  PAYPAL = 'PAYPAL',
-  OZOW = 'OZOW',
-  OTHER = 'OTHER',
-}
-
-export enum PaymentMethodCode {
-  CARDS = 'CARDS',
-  MOBILE_MONEY = 'MOBILE_MONEY',
-  E_WALLET = 'E_WALLET',
-  APPLE_PAY = 'APPLE_PAY',
-  GOOGLE_PAY = 'GOOGLE_PAY',
-  USSD = 'USSD',
-  QR_CODE = 'QR_CODE',
-  BANK_TRANSFER = 'BANK_TRANSFER',
-  CRYPTO = 'CRYPTO',
-  PAYPAL = 'PAYPAL',
-  OTHER = 'OTHER',
-}
-
-export enum BillingFrequency {
-  weekly = 'weekly',
-  bi_weekly = 'bi-weekly',
-  monthly = 'monthly',
-  bi_monthly = 'bi-monthly',
-  quarterly = 'quarterly',
-  semi_annual = 'semi-annual',
-  yearly = 'yearly',
-}
-
-export enum Frequency {
-  weekly = 'weekly',
-  bi_weekly = 'bi-weekly',
-  monthly = 'monthly',
-  bi_monthly = 'bi-monthly',
-  quarterly = 'quarterly',
-  semi_annual = 'semi-annual',
-  yearly = 'yearly',
-}
-
-export enum FailedPaymentAction {
-  cancel = 'cancel',
-  pause = 'pause',
-  continue = 'continue',
-}
-
-export enum FirstPaymentType {
-  initial = 'initial',
-  non_initial = 'non_initial',
-}
-
-export enum MemberRole {
-  Admin = 'Admin',
-  Member = 'Member',
-}
-
-export enum PaymentLinkType {
-  product = 'product',
-  plan = 'plan',
-  instant = 'instant',
-}
-
-export enum WebhookEvent {
+export enum webhook_event {
   PAYMENT_CREATED = 'PAYMENT_CREATED',
   PAYMENT_SUCCEEDED = 'PAYMENT_SUCCEEDED',
   PAYMENT_FAILED = 'PAYMENT_FAILED',
@@ -111,406 +138,1544 @@ export enum WebhookEvent {
   PROVIDER_STATUS_CHANGED = 'PROVIDER_STATUS_CHANGED',
 }
 
-export enum RefundStatus {
-  pending = 'pending',
-  completed = 'completed',
-  failed = 'failed',
+export interface beneficiary_payouts extends Record<string, unknown> {
+  account_id?: string;
+  amount?: number;
+  created_at?: Date;
+  created_by?: string;
+  currency_code?: string;
+  metadata?: Record<string, unknown>;
+  organization_id?: string;
+  payment_method_code?: string;
+  payout_id?: string;
+  payout_method_id?: string;
+  provider_code?: string;
+  spi_bulk_instruction_id?: string;
+  status?: string;
+  updated_at?: Date;
+  [key: string]: unknown;
 }
 
-export enum CheckoutSessionStatus {
-  open = 'open',
-  completed = 'completed',
-  expired = 'expired',
+export interface beneficiary_payouts_create extends Record<string, unknown> {
+  account_id?: string;
+  amount?: number;
+  created_at?: Date;
+  created_by?: string;
+  currency_code?: string;
+  metadata?: Record<string, unknown>;
+  organization_id?: string;
+  payment_method_code?: string;
+  payout_id?: string;
+  payout_method_id?: string;
+  provider_code?: string;
+  spi_bulk_instruction_id?: string;
+  status?: string;
+  updated_at?: Date;
+  [key: string]: unknown;
 }
 
-export enum SubscriptionStatus {
-  pending = 'pending',
-  active = 'active',
-  paused = 'paused',
-  cancelled = 'cancelled',
-  expired = 'expired',
-  past_due = 'past_due',
-  trial = 'trial',
+export interface beneficiary_payouts_update extends Record<string, unknown> {
+  account_id?: string;
+  amount?: number;
+  created_at?: Date;
+  created_by?: string;
+  currency_code?: string;
+  metadata?: Record<string, unknown>;
+  organization_id?: string;
+  payment_method_code?: string;
+  payout_id?: string;
+  payout_method_id?: string;
+  provider_code?: string;
+  spi_bulk_instruction_id?: string;
+  status?: string;
+  updated_at?: Date;
+  [key: string]: unknown;
 }
 
-export enum PayoutStatus {
-  pending = 'pending',
-  processing = 'processing',
-  completed = 'completed',
-  failed = 'failed',
+export interface checkout_sessions extends Record<string, unknown> {
+  allow_coupon_code?: boolean;
+  allow_quantity?: boolean;
+  allowed_providers?: string;
+  amount?: number;
+  cancel_url?: string;
+  checkout_session_id?: string;
+  created_at?: Date;
+  created_by?: string;
+  currency_code?: string;
+  customer_email?: string;
+  customer_id?: string;
+  customer_name?: string;
+  customer_phone?: string;
+  environment?: string;
+  expires_at?: Date;
+  installment_plan_id?: string;
+  is_pos?: boolean;
+  is_spi?: boolean;
+  metadata?: Record<string, unknown>;
+  organization_id?: string;
+  payment_link_id?: string;
+  payment_request_id?: string;
+  price_id?: string;
+  product_id?: string;
+  public_description?: string;
+  qr_code_data?: Record<string, unknown>;
+  qr_code_type?: string;
+  quantity?: number;
+  spi_account_number?: string;
+  spi_qr_code_id?: string;
+  status?: string;
+  subscription_id?: string;
+  success_url?: string;
+  title?: string;
+  updated_at?: Date;
+  [key: string]: unknown;
 }
 
-export enum OrganizationStatus {
-  active = 'active',
-  inactive = 'inactive',
-  suspended = 'suspended',
+export interface checkout_sessions_create extends Record<string, unknown> {
+  allow_coupon_code?: boolean;
+  allow_quantity?: boolean;
+  allowed_providers?: string;
+  amount?: number;
+  cancel_url?: string;
+  checkout_session_id?: string;
+  created_at?: Date;
+  created_by?: string;
+  currency_code?: string;
+  customer_email?: string;
+  customer_id?: string;
+  customer_name?: string;
+  customer_phone?: string;
+  environment?: string;
+  expires_at?: Date;
+  installment_plan_id?: string;
+  is_pos?: boolean;
+  is_spi?: boolean;
+  metadata?: Record<string, unknown>;
+  organization_id?: string;
+  payment_link_id?: string;
+  payment_request_id?: string;
+  price_id?: string;
+  product_id?: string;
+  public_description?: string;
+  qr_code_data?: Record<string, unknown>;
+  qr_code_type?: string;
+  quantity?: number;
+  spi_account_number?: string;
+  spi_qr_code_id?: string;
+  status?: string;
+  subscription_id?: string;
+  success_url?: string;
+  title?: string;
+  updated_at?: Date;
+  [key: string]: unknown;
 }
 
-export enum FeeType {
-  percentage = 'percentage',
-  fixed = 'fixed',
-  both = 'both',
+export interface checkout_sessions_update extends Record<string, unknown> {
+  allow_coupon_code?: boolean;
+  allow_quantity?: boolean;
+  allowed_providers?: string;
+  amount?: number;
+  cancel_url?: string;
+  checkout_session_id?: string;
+  created_at?: Date;
+  created_by?: string;
+  currency_code?: string;
+  customer_email?: string;
+  customer_id?: string;
+  customer_name?: string;
+  customer_phone?: string;
+  environment?: string;
+  expires_at?: Date;
+  installment_plan_id?: string;
+  is_pos?: boolean;
+  is_spi?: boolean;
+  metadata?: Record<string, unknown>;
+  organization_id?: string;
+  payment_link_id?: string;
+  payment_request_id?: string;
+  price_id?: string;
+  product_id?: string;
+  public_description?: string;
+  qr_code_data?: Record<string, unknown>;
+  qr_code_type?: string;
+  quantity?: number;
+  spi_account_number?: string;
+  spi_qr_code_id?: string;
+  status?: string;
+  subscription_id?: string;
+  success_url?: string;
+  title?: string;
+  updated_at?: Date;
+  [key: string]: unknown;
 }
 
-export enum ProviderBusinessType {
-  fintech = 'fintech',
-  other = 'other',
+export interface customer_invoices extends Record<string, unknown> {
+  amount?: number;
+  created_at?: Date;
+  created_by?: string;
+  currency_code?: string;
+  customer_id?: string;
+  customer_invoice_id?: string;
+  description?: string;
+  due_date?: string;
+  metadata?: Record<string, unknown>;
+  organization_id?: string;
+  status?: string;
+  updated_at?: Date;
+  [key: string]: unknown;
+}
+
+export interface customer_invoices_create extends Record<string, unknown> {
+  amount?: number;
+  created_at?: Date;
+  created_by?: string;
+  currency_code?: string;
+  customer_id?: string;
+  customer_invoice_id?: string;
+  description?: string;
+  due_date?: string;
+  metadata?: Record<string, unknown>;
+  organization_id?: string;
+  status?: string;
+  updated_at?: Date;
+  [key: string]: unknown;
+}
+
+export interface customer_invoices_update extends Record<string, unknown> {
+  amount?: number;
+  created_at?: Date;
+  created_by?: string;
+  currency_code?: string;
+  customer_id?: string;
+  customer_invoice_id?: string;
+  description?: string;
+  due_date?: string;
+  metadata?: Record<string, unknown>;
+  organization_id?: string;
+  status?: string;
+  updated_at?: Date;
+  [key: string]: unknown;
+}
+
+export interface customers extends Record<string, unknown> {
+  address?: string;
+  city?: string;
+  country?: string;
+  created_at?: Date;
+  created_by?: string;
+  customer_id?: string;
+  deleted_at?: Date;
+  email?: string;
+  environment?: string;
+  is_business?: boolean;
+  is_deleted?: boolean;
+  metadata?: Record<string, unknown>;
+  name?: string;
+  organization_id?: string;
+  phone_number?: string;
+  postal_code?: string;
+  spi_alias_mbno?: string;
+  spi_alias_shid?: string;
+  spi_primary_alias?: string;
+  updated_at?: Date;
+  whatsapp_number?: string;
+  [key: string]: unknown;
+}
+
+export interface customers_create extends Record<string, unknown> {
+  address?: string;
+  city?: string;
+  country?: string;
+  created_at?: Date;
+  created_by?: string;
+  customer_id?: string;
+  deleted_at?: Date;
+  email?: string;
+  environment?: string;
+  is_business?: boolean;
+  is_deleted?: boolean;
+  metadata?: Record<string, unknown>;
+  name?: string;
+  organization_id?: string;
+  phone_number?: string;
+  postal_code?: string;
+  spi_alias_mbno?: string;
+  spi_alias_shid?: string;
+  spi_primary_alias?: string;
+  updated_at?: Date;
+  whatsapp_number?: string;
+  [key: string]: unknown;
+}
+
+export interface customers_update extends Record<string, unknown> {
+  address?: string;
+  city?: string;
+  country?: string;
+  created_at?: Date;
+  created_by?: string;
+  customer_id?: string;
+  deleted_at?: Date;
+  email?: string;
+  environment?: string;
+  is_business?: boolean;
+  is_deleted?: boolean;
+  metadata?: Record<string, unknown>;
+  name?: string;
+  organization_id?: string;
+  phone_number?: string;
+  postal_code?: string;
+  spi_alias_mbno?: string;
+  spi_alias_shid?: string;
+  spi_primary_alias?: string;
+  updated_at?: Date;
+  whatsapp_number?: string;
+  [key: string]: unknown;
+}
+
+export interface discount_coupons extends Record<string, unknown> {
+  applies_to_product_types?: string;
+  code?: string;
+  coupon_id?: string;
+  created_at?: Date;
+  current_uses?: number;
+  customer_type?: string;
+  description?: string;
+  discount_fixed_amount?: number;
+  discount_percentage?: number;
+  discount_type?: string;
+  environment?: string;
+  expires_at?: Date;
+  is_active?: boolean;
+  is_organization_wide?: boolean;
+  max_quantity_per_use?: number;
+  max_uses?: number;
+  organization_id?: string;
+  scope_type?: string;
+  updated_at?: Date;
+  usage_frequency_limit?: string;
+  usage_limit_value?: number;
+  valid_from?: string;
+  [key: string]: unknown;
+}
+
+export interface discount_coupons_create extends Record<string, unknown> {
+  applies_to_product_types?: string;
+  code?: string;
+  coupon_id?: string;
+  created_at?: Date;
+  current_uses?: number;
+  customer_type?: string;
+  description?: string;
+  discount_fixed_amount?: number;
+  discount_percentage?: number;
+  discount_type?: string;
+  environment?: string;
+  expires_at?: Date;
+  is_active?: boolean;
+  is_organization_wide?: boolean;
+  max_quantity_per_use?: number;
+  max_uses?: number;
+  organization_id?: string;
+  scope_type?: string;
+  updated_at?: Date;
+  usage_frequency_limit?: string;
+  usage_limit_value?: number;
+  valid_from?: string;
+  [key: string]: unknown;
+}
+
+export interface discount_coupons_update extends Record<string, unknown> {
+  applies_to_product_types?: string;
+  code?: string;
+  coupon_id?: string;
+  created_at?: Date;
+  current_uses?: number;
+  customer_type?: string;
+  description?: string;
+  discount_fixed_amount?: number;
+  discount_percentage?: number;
+  discount_type?: string;
+  environment?: string;
+  expires_at?: Date;
+  is_active?: boolean;
+  is_organization_wide?: boolean;
+  max_quantity_per_use?: number;
+  max_uses?: number;
+  organization_id?: string;
+  scope_type?: string;
+  updated_at?: Date;
+  usage_frequency_limit?: string;
+  usage_limit_value?: number;
+  valid_from?: string;
+  [key: string]: unknown;
+}
+
+export interface events extends Record<string, unknown> {
+  created_at?: Date;
+  created_by?: string;
+  customer_id?: string;
+  event_data?: Record<string, unknown>;
+  event_id?: string;
+  event_name?: string;
+  metadata?: Record<string, unknown>;
+  organization_id?: string;
+  product_id?: string;
+  [key: string]: unknown;
+}
+
+export interface events_create extends Record<string, unknown> {
+  created_at?: Date;
+  created_by?: string;
+  customer_id?: string;
+  event_data?: Record<string, unknown>;
+  event_id?: string;
+  event_name?: string;
+  metadata?: Record<string, unknown>;
+  organization_id?: string;
+  product_id?: string;
+  [key: string]: unknown;
+}
+
+export interface events_update extends Record<string, unknown> {
+  created_at?: Date;
+  created_by?: string;
+  customer_id?: string;
+  event_data?: Record<string, unknown>;
+  event_id?: string;
+  event_name?: string;
+  metadata?: Record<string, unknown>;
+  organization_id?: string;
+  product_id?: string;
+  [key: string]: unknown;
+}
+
+export interface installment_payments extends Record<string, unknown> {
+  amount?: number;
+  created_at?: Date;
+  due_date?: string;
+  installment_id?: string;
+  interest_amount?: number;
+  paid_at?: Date;
+  payment_link?: string;
+  payment_method_code?: string;
+  plan_id?: string;
+  principal_amount?: number;
+  processing_fee?: number;
+  provider_code?: string;
+  sequence_number?: number;
+  spi_payment_request_id?: string;
+  spi_tx_id?: string;
+  status?: string;
+  transaction_id?: string;
+  updated_at?: Date;
+  [key: string]: unknown;
+}
+
+export interface installment_payments_create extends Record<string, unknown> {
+  amount?: number;
+  created_at?: Date;
+  due_date?: string;
+  installment_id?: string;
+  interest_amount?: number;
+  paid_at?: Date;
+  payment_link?: string;
+  payment_method_code?: string;
+  plan_id?: string;
+  principal_amount?: number;
+  processing_fee?: number;
+  provider_code?: string;
+  sequence_number?: number;
+  spi_payment_request_id?: string;
+  spi_tx_id?: string;
+  status?: string;
+  transaction_id?: string;
+  updated_at?: Date;
+  [key: string]: unknown;
+}
+
+export interface installment_payments_update extends Record<string, unknown> {
+  amount?: number;
+  created_at?: Date;
+  due_date?: string;
+  installment_id?: string;
+  interest_amount?: number;
+  paid_at?: Date;
+  payment_link?: string;
+  payment_method_code?: string;
+  plan_id?: string;
+  principal_amount?: number;
+  processing_fee?: number;
+  provider_code?: string;
+  sequence_number?: number;
+  spi_payment_request_id?: string;
+  spi_tx_id?: string;
+  status?: string;
+  transaction_id?: string;
+  updated_at?: Date;
+  [key: string]: unknown;
+}
+
+export interface meter_balances extends Record<string, unknown> {
+  balance?: number;
+  balance_id?: string;
+  billable_organization_id?: string;
+  consumed_units?: number;
+  created_at?: Date;
+  credited_units?: number;
+  customer_id?: string;
+  last_event_id?: string;
+  meter_id?: string;
+  updated_at?: Date;
+  [key: string]: unknown;
+}
+
+export interface meter_balances_create extends Record<string, unknown> {
+  balance?: number;
+  balance_id?: string;
+  billable_organization_id?: string;
+  consumed_units?: number;
+  created_at?: Date;
+  credited_units?: number;
+  customer_id?: string;
+  last_event_id?: string;
+  meter_id?: string;
+  updated_at?: Date;
+  [key: string]: unknown;
+}
+
+export interface meter_balances_update extends Record<string, unknown> {
+  balance?: number;
+  balance_id?: string;
+  billable_organization_id?: string;
+  consumed_units?: number;
+  created_at?: Date;
+  credited_units?: number;
+  customer_id?: string;
+  last_event_id?: string;
+  meter_id?: string;
+  updated_at?: Date;
+  [key: string]: unknown;
+}
+
+export interface meters extends Record<string, unknown> {
+  aggregation?: Record<string, unknown>;
+  created_at?: Date;
+  filter?: Record<string, unknown>;
+  is_active?: boolean;
+  meter_id?: string;
+  name?: string;
+  organization_id?: string;
+  product_id?: string;
+  updated_at?: Date;
+  [key: string]: unknown;
+}
+
+export interface meters_create extends Record<string, unknown> {
+  aggregation?: Record<string, unknown>;
+  created_at?: Date;
+  filter?: Record<string, unknown>;
+  is_active?: boolean;
+  meter_id?: string;
+  name?: string;
+  organization_id?: string;
+  product_id?: string;
+  updated_at?: Date;
+  [key: string]: unknown;
+}
+
+export interface meters_update extends Record<string, unknown> {
+  aggregation?: Record<string, unknown>;
+  created_at?: Date;
+  filter?: Record<string, unknown>;
+  is_active?: boolean;
+  meter_id?: string;
+  name?: string;
+  organization_id?: string;
+  product_id?: string;
+  updated_at?: Date;
+  [key: string]: unknown;
+}
+
+export interface payment_links extends Record<string, unknown> {
+  allow_coupon_code?: boolean;
+  allow_quantity?: boolean;
+  allowed_providers?: string;
+  amount?: number;
+  cancel_url?: string;
+  created_at?: Date;
+  created_by?: string;
+  currency_code?: string;
+  environment?: string;
+  expires_at?: Date;
+  is_active?: boolean;
+  link_id?: string;
+  link_type?: string;
+  metadata?: Record<string, unknown>;
+  organization_id?: string;
+  price_id?: string;
+  private_description?: string;
+  product_id?: string;
+  public_description?: string;
+  quantity?: number;
+  success_url?: string;
+  title?: string;
+  updated_at?: Date;
+  url?: string;
+  [key: string]: unknown;
+}
+
+export interface payment_links_create extends Record<string, unknown> {
+  allow_coupon_code?: boolean;
+  allow_quantity?: boolean;
+  allowed_providers?: string;
+  amount?: number;
+  cancel_url?: string;
+  created_at?: Date;
+  created_by?: string;
+  currency_code?: string;
+  environment?: string;
+  expires_at?: Date;
+  is_active?: boolean;
+  link_id?: string;
+  link_type?: string;
+  metadata?: Record<string, unknown>;
+  organization_id?: string;
+  price_id?: string;
+  private_description?: string;
+  product_id?: string;
+  public_description?: string;
+  quantity?: number;
+  success_url?: string;
+  title?: string;
+  updated_at?: Date;
+  url?: string;
+  [key: string]: unknown;
+}
+
+export interface payment_links_update extends Record<string, unknown> {
+  allow_coupon_code?: boolean;
+  allow_quantity?: boolean;
+  allowed_providers?: string;
+  amount?: number;
+  cancel_url?: string;
+  created_at?: Date;
+  created_by?: string;
+  currency_code?: string;
+  environment?: string;
+  expires_at?: Date;
+  is_active?: boolean;
+  link_id?: string;
+  link_type?: string;
+  metadata?: Record<string, unknown>;
+  organization_id?: string;
+  price_id?: string;
+  private_description?: string;
+  product_id?: string;
+  public_description?: string;
+  quantity?: number;
+  success_url?: string;
+  title?: string;
+  updated_at?: Date;
+  url?: string;
+  [key: string]: unknown;
+}
+
+export interface payment_requests extends Record<string, unknown> {
+  amount?: number;
+  created_at?: Date;
+  created_by?: string;
+  currency_code?: string;
+  customer_id?: string;
+  description?: string;
+  environment?: string;
+  expiry_date?: string;
+  organization_id?: string;
+  payment_link?: string;
+  payment_reference?: string;
+  request_id?: string;
+  spi_account_number?: string;
+  spi_bulk_instruction_id?: string;
+  spi_confirmation?: boolean;
+  spi_date_envoi?: string;
+  spi_date_irrevocabilite?: string;
+  spi_date_limite_paiement?: string;
+  spi_date_limite_reponse?: string;
+  spi_date_rejet?: string;
+  spi_debit_differe?: boolean;
+  spi_end2end_id?: string;
+  spi_payeur_alias?: string;
+  spi_payeur_nom?: string;
+  spi_payeur_pays?: string;
+  spi_payment_request_category?: string;
+  spi_payment_status?: string;
+  spi_ref_doc_numero?: string;
+  spi_ref_doc_type?: string;
+  spi_rejection_reason?: string;
+  spi_remise_amount?: number;
+  spi_remise_rate?: number;
+  spi_tx_id?: string;
+  status?: string;
+  updated_at?: Date;
+  [key: string]: unknown;
+}
+
+export interface payment_requests_create extends Record<string, unknown> {
+  amount?: number;
+  created_at?: Date;
+  created_by?: string;
+  currency_code?: string;
+  customer_id?: string;
+  description?: string;
+  environment?: string;
+  expiry_date?: string;
+  organization_id?: string;
+  payment_link?: string;
+  payment_reference?: string;
+  request_id?: string;
+  spi_account_number?: string;
+  spi_bulk_instruction_id?: string;
+  spi_confirmation?: boolean;
+  spi_date_envoi?: string;
+  spi_date_irrevocabilite?: string;
+  spi_date_limite_paiement?: string;
+  spi_date_limite_reponse?: string;
+  spi_date_rejet?: string;
+  spi_debit_differe?: boolean;
+  spi_end2end_id?: string;
+  spi_payeur_alias?: string;
+  spi_payeur_nom?: string;
+  spi_payeur_pays?: string;
+  spi_payment_request_category?: string;
+  spi_payment_status?: string;
+  spi_ref_doc_numero?: string;
+  spi_ref_doc_type?: string;
+  spi_rejection_reason?: string;
+  spi_remise_amount?: number;
+  spi_remise_rate?: number;
+  spi_tx_id?: string;
+  status?: string;
+  updated_at?: Date;
+  [key: string]: unknown;
+}
+
+export interface payment_requests_update extends Record<string, unknown> {
+  amount?: number;
+  created_at?: Date;
+  created_by?: string;
+  currency_code?: string;
+  customer_id?: string;
+  description?: string;
+  environment?: string;
+  expiry_date?: string;
+  organization_id?: string;
+  payment_link?: string;
+  payment_reference?: string;
+  request_id?: string;
+  spi_account_number?: string;
+  spi_bulk_instruction_id?: string;
+  spi_confirmation?: boolean;
+  spi_date_envoi?: string;
+  spi_date_irrevocabilite?: string;
+  spi_date_limite_paiement?: string;
+  spi_date_limite_reponse?: string;
+  spi_date_rejet?: string;
+  spi_debit_differe?: boolean;
+  spi_end2end_id?: string;
+  spi_payeur_alias?: string;
+  spi_payeur_nom?: string;
+  spi_payeur_pays?: string;
+  spi_payment_request_category?: string;
+  spi_payment_status?: string;
+  spi_ref_doc_numero?: string;
+  spi_ref_doc_type?: string;
+  spi_rejection_reason?: string;
+  spi_remise_amount?: number;
+  spi_remise_rate?: number;
+  spi_tx_id?: string;
+  status?: string;
+  updated_at?: Date;
+  [key: string]: unknown;
+}
+
+export interface payout_methods extends Record<string, unknown> {
+  account_name?: string;
+  account_number?: string;
+  auto_withdrawal_day?: number;
+  auto_withdrawal_enabled?: boolean;
+  auto_withdrawal_last_run?: string;
+  auto_withdrawal_method?: string;
+  auto_withdrawal_mobile_provider?: string;
+  bank_code?: string;
+  bank_name?: string;
+  branch_code?: string;
+  country?: string;
+  created_at?: Date;
+  is_default?: boolean;
+  is_spi_enabled?: boolean;
+  is_uemoa?: boolean;
+  is_valid?: boolean;
+  organization_id?: string;
+  payout_method_id?: string;
+  payout_method_type?: string;
+  spi_account_number?: string;
+  spi_alias_mbno?: string;
+  spi_alias_shid?: string;
+  spi_alias_type?: string;
+  updated_at?: Date;
+  [key: string]: unknown;
+}
+
+export interface payout_methods_create extends Record<string, unknown> {
+  account_name?: string;
+  account_number?: string;
+  auto_withdrawal_day?: number;
+  auto_withdrawal_enabled?: boolean;
+  auto_withdrawal_last_run?: string;
+  auto_withdrawal_method?: string;
+  auto_withdrawal_mobile_provider?: string;
+  bank_code?: string;
+  bank_name?: string;
+  branch_code?: string;
+  country?: string;
+  created_at?: Date;
+  is_default?: boolean;
+  is_spi_enabled?: boolean;
+  is_uemoa?: boolean;
+  is_valid?: boolean;
+  organization_id?: string;
+  payout_method_id?: string;
+  payout_method_type?: string;
+  spi_account_number?: string;
+  spi_alias_mbno?: string;
+  spi_alias_shid?: string;
+  spi_alias_type?: string;
+  updated_at?: Date;
+  [key: string]: unknown;
+}
+
+export interface payout_methods_update extends Record<string, unknown> {
+  account_name?: string;
+  account_number?: string;
+  auto_withdrawal_day?: number;
+  auto_withdrawal_enabled?: boolean;
+  auto_withdrawal_last_run?: string;
+  auto_withdrawal_method?: string;
+  auto_withdrawal_mobile_provider?: string;
+  bank_code?: string;
+  bank_name?: string;
+  branch_code?: string;
+  country?: string;
+  created_at?: Date;
+  is_default?: boolean;
+  is_spi_enabled?: boolean;
+  is_uemoa?: boolean;
+  is_valid?: boolean;
+  organization_id?: string;
+  payout_method_id?: string;
+  payout_method_type?: string;
+  spi_account_number?: string;
+  spi_alias_mbno?: string;
+  spi_alias_shid?: string;
+  spi_alias_type?: string;
+  updated_at?: Date;
+  [key: string]: unknown;
+}
+
+export interface payouts extends Record<string, unknown> {
+  account_id?: string;
+  amount?: number;
+  created_at?: Date;
+  created_by?: string;
+  currency_code?: string;
+  environment?: string;
+  metadata?: Record<string, unknown>;
+  organization_id?: string;
+  payment_method_code?: string;
+  payout_id?: string;
+  payout_method_id?: string;
+  provider_code?: string;
+  status?: string;
+  updated_at?: Date;
+  [key: string]: unknown;
+}
+
+export interface payouts_create extends Record<string, unknown> {
+  account_id?: string;
+  amount?: number;
+  created_at?: Date;
+  created_by?: string;
+  currency_code?: string;
+  environment?: string;
+  metadata?: Record<string, unknown>;
+  organization_id?: string;
+  payment_method_code?: string;
+  payout_id?: string;
+  payout_method_id?: string;
+  provider_code?: string;
+  status?: string;
+  updated_at?: Date;
+  [key: string]: unknown;
+}
+
+export interface payouts_update extends Record<string, unknown> {
+  account_id?: string;
+  amount?: number;
+  created_at?: Date;
+  created_by?: string;
+  currency_code?: string;
+  environment?: string;
+  metadata?: Record<string, unknown>;
+  organization_id?: string;
+  payment_method_code?: string;
+  payout_id?: string;
+  payout_method_id?: string;
+  provider_code?: string;
+  status?: string;
+  updated_at?: Date;
+  [key: string]: unknown;
+}
+
+export interface prices extends Record<string, unknown> {
+  amount?: number;
+  billing_interval?: string;
+  created_at?: Date;
+  currency_code?: string;
+  environment?: string;
+  is_active?: boolean;
+  is_default?: boolean;
+  maximum_amount?: number;
+  metadata?: Record<string, unknown>;
+  minimum_amount?: number;
+  organization_id?: string;
+  price_id?: string;
+  pricing_model?: string;
+  product_id?: string;
+  provider_price_id?: string;
+  provider_product_id?: string;
+  updated_at?: Date;
+  [key: string]: unknown;
+}
+
+export interface prices_create extends Record<string, unknown> {
+  amount?: number;
+  billing_interval?: string;
+  created_at?: Date;
+  currency_code?: string;
+  environment?: string;
+  is_active?: boolean;
+  is_default?: boolean;
+  maximum_amount?: number;
+  metadata?: Record<string, unknown>;
+  minimum_amount?: number;
+  organization_id?: string;
+  price_id?: string;
+  pricing_model?: string;
+  product_id?: string;
+  provider_price_id?: string;
+  provider_product_id?: string;
+  updated_at?: Date;
+  [key: string]: unknown;
+}
+
+export interface prices_update extends Record<string, unknown> {
+  amount?: number;
+  billing_interval?: string;
+  created_at?: Date;
+  currency_code?: string;
+  environment?: string;
+  is_active?: boolean;
+  is_default?: boolean;
+  maximum_amount?: number;
+  metadata?: Record<string, unknown>;
+  minimum_amount?: number;
+  organization_id?: string;
+  price_id?: string;
+  pricing_model?: string;
+  product_id?: string;
+  provider_price_id?: string;
+  provider_product_id?: string;
+  updated_at?: Date;
+  [key: string]: unknown;
+}
+
+export interface products extends Record<string, unknown> {
+  billing_frequency?: string;
+  charge_day?: number;
+  created_at?: Date;
+  created_by?: string;
+  description?: string;
+  display_on_storefront?: boolean;
+  environment?: string;
+  failed_payment_action?: string;
+  first_payment_type?: string;
+  image_url?: string;
+  is_active?: boolean;
+  metadata?: Record<string, unknown>;
+  name?: string;
+  organization_id?: string;
+  product_id?: string;
+  product_type?: string;
+  updated_at?: Date;
+  usage_aggregation?: string;
+  usage_unit?: string;
+  [key: string]: unknown;
+}
+
+export interface products_create extends Record<string, unknown> {
+  billing_frequency?: string;
+  charge_day?: number;
+  created_at?: Date;
+  created_by?: string;
+  description?: string;
+  display_on_storefront?: boolean;
+  environment?: string;
+  failed_payment_action?: string;
+  first_payment_type?: string;
+  image_url?: string;
+  is_active?: boolean;
+  metadata?: Record<string, unknown>;
+  name?: string;
+  organization_id?: string;
+  product_id?: string;
+  product_type?: string;
+  updated_at?: Date;
+  usage_aggregation?: string;
+  usage_unit?: string;
+  [key: string]: unknown;
+}
+
+export interface products_update extends Record<string, unknown> {
+  billing_frequency?: string;
+  charge_day?: number;
+  created_at?: Date;
+  created_by?: string;
+  description?: string;
+  display_on_storefront?: boolean;
+  environment?: string;
+  failed_payment_action?: string;
+  first_payment_type?: string;
+  image_url?: string;
+  is_active?: boolean;
+  metadata?: Record<string, unknown>;
+  name?: string;
+  organization_id?: string;
+  product_id?: string;
+  product_type?: string;
+  updated_at?: Date;
+  usage_aggregation?: string;
+  usage_unit?: string;
+  [key: string]: unknown;
+}
+
+export interface refunds extends Record<string, unknown> {
+  amount?: number;
+  created_at?: Date;
+  environment?: string;
+  fee_amount?: number;
+  metadata?: Record<string, unknown>;
+  reason?: string;
+  refund_id?: string;
+  refunded_amount?: number;
+  spi_account_number?: string;
+  spi_end2end_id?: string;
+  spi_fund_return_status?: string;
+  spi_motif_code?: string;
+  spi_rejection_reason?: string;
+  spi_retour_date_demande?: string;
+  spi_retour_date_irrevocabilite?: string;
+  spi_tx_id?: string;
+  status?: string;
+  transaction_id?: string;
+  updated_at?: Date;
+  [key: string]: unknown;
+}
+
+export interface refunds_create extends Record<string, unknown> {
+  amount?: number;
+  created_at?: Date;
+  environment?: string;
+  fee_amount?: number;
+  metadata?: Record<string, unknown>;
+  reason?: string;
+  refund_id?: string;
+  refunded_amount?: number;
+  spi_account_number?: string;
+  spi_end2end_id?: string;
+  spi_fund_return_status?: string;
+  spi_motif_code?: string;
+  spi_rejection_reason?: string;
+  spi_retour_date_demande?: string;
+  spi_retour_date_irrevocabilite?: string;
+  spi_tx_id?: string;
+  status?: string;
+  transaction_id?: string;
+  updated_at?: Date;
+  [key: string]: unknown;
+}
+
+export interface refunds_update extends Record<string, unknown> {
+  amount?: number;
+  created_at?: Date;
+  environment?: string;
+  fee_amount?: number;
+  metadata?: Record<string, unknown>;
+  reason?: string;
+  refund_id?: string;
+  refunded_amount?: number;
+  spi_account_number?: string;
+  spi_end2end_id?: string;
+  spi_fund_return_status?: string;
+  spi_motif_code?: string;
+  spi_rejection_reason?: string;
+  spi_retour_date_demande?: string;
+  spi_retour_date_irrevocabilite?: string;
+  spi_tx_id?: string;
+  status?: string;
+  transaction_id?: string;
+  updated_at?: Date;
+  [key: string]: unknown;
+}
+
+export interface spi_account_aliases extends Record<string, unknown> {
+  account_number?: string;
+  alias_id?: string;
+  alias_key?: string;
+  alias_type?: string;
+  created_at?: Date;
+  is_active?: boolean;
+  is_default?: boolean;
+  metadata?: Record<string, unknown>;
+  organization_id?: string;
+  updated_at?: Date;
+  [key: string]: unknown;
+}
+
+export interface spi_account_aliases_create extends Record<string, unknown> {
+  account_number?: string;
+  alias_id?: string;
+  alias_key?: string;
+  alias_type?: string;
+  created_at?: Date;
+  is_active?: boolean;
+  is_default?: boolean;
+  metadata?: Record<string, unknown>;
+  organization_id?: string;
+  updated_at?: Date;
+  [key: string]: unknown;
+}
+
+export interface spi_account_aliases_update extends Record<string, unknown> {
+  account_number?: string;
+  alias_id?: string;
+  alias_key?: string;
+  alias_type?: string;
+  created_at?: Date;
+  is_active?: boolean;
+  is_default?: boolean;
+  metadata?: Record<string, unknown>;
+  organization_id?: string;
+  updated_at?: Date;
+  [key: string]: unknown;
+}
+
+export interface spi_qr_codes extends Record<string, unknown> {
+  categorie?: string;
+  checkout_session_id?: string;
+  compte_paye?: string;
+  created_at?: Date;
+  created_by?: string;
+  environment?: string;
+  expires_at?: Date;
+  is_active?: boolean;
+  is_used?: boolean;
+  metadata?: Record<string, unknown>;
+  montant?: number;
+  name?: string;
+  organization_id?: string;
+  payeur_alias?: string;
+  payment_request_id?: string;
+  plan_id?: string;
+  product_id?: string;
+  qr_code_data?: string;
+  qr_code_id?: string;
+  qr_code_image_data?: string;
+  qr_code_image_url?: string;
+  qr_code_type?: string;
+  updated_at?: Date;
+  [key: string]: unknown;
+}
+
+export interface spi_qr_codes_create extends Record<string, unknown> {
+  categorie?: string;
+  checkout_session_id?: string;
+  compte_paye?: string;
+  created_at?: Date;
+  created_by?: string;
+  environment?: string;
+  expires_at?: Date;
+  is_active?: boolean;
+  is_used?: boolean;
+  metadata?: Record<string, unknown>;
+  montant?: number;
+  name?: string;
+  organization_id?: string;
+  payeur_alias?: string;
+  payment_request_id?: string;
+  plan_id?: string;
+  product_id?: string;
+  qr_code_data?: string;
+  qr_code_id?: string;
+  qr_code_image_data?: string;
+  qr_code_image_url?: string;
+  qr_code_type?: string;
+  updated_at?: Date;
+  [key: string]: unknown;
+}
+
+export interface spi_qr_codes_update extends Record<string, unknown> {
+  categorie?: string;
+  checkout_session_id?: string;
+  compte_paye?: string;
+  created_at?: Date;
+  created_by?: string;
+  environment?: string;
+  expires_at?: Date;
+  is_active?: boolean;
+  is_used?: boolean;
+  metadata?: Record<string, unknown>;
+  montant?: number;
+  name?: string;
+  organization_id?: string;
+  payeur_alias?: string;
+  payment_request_id?: string;
+  plan_id?: string;
+  product_id?: string;
+  qr_code_data?: string;
+  qr_code_id?: string;
+  qr_code_image_data?: string;
+  qr_code_image_url?: string;
+  qr_code_type?: string;
+  updated_at?: Date;
+  [key: string]: unknown;
+}
+
+export interface subscriptions extends Record<string, unknown> {
+  created_at?: Date;
+  created_by?: string;
+  customer_id?: string;
+  end_date?: string;
+  environment?: string;
+  metadata?: Record<string, unknown>;
+  next_billing_date?: string;
+  organization_id?: string;
+  price_id?: string;
+  product_id?: string;
+  start_date?: string;
+  status?: string;
+  subscription_id?: string;
+  updated_at?: Date;
+  [key: string]: unknown;
+}
+
+export interface subscriptions_create extends Record<string, unknown> {
+  created_at?: Date;
+  created_by?: string;
+  customer_id?: string;
+  end_date?: string;
+  environment?: string;
+  metadata?: Record<string, unknown>;
+  next_billing_date?: string;
+  organization_id?: string;
+  price_id?: string;
+  product_id?: string;
+  start_date?: string;
+  status?: string;
+  subscription_id?: string;
+  updated_at?: Date;
+  [key: string]: unknown;
+}
+
+export interface subscriptions_update extends Record<string, unknown> {
+  created_at?: Date;
+  created_by?: string;
+  customer_id?: string;
+  end_date?: string;
+  environment?: string;
+  metadata?: Record<string, unknown>;
+  next_billing_date?: string;
+  organization_id?: string;
+  price_id?: string;
+  product_id?: string;
+  start_date?: string;
+  status?: string;
+  subscription_id?: string;
+  updated_at?: Date;
+  [key: string]: unknown;
+}
+
+export interface transactions extends Record<string, unknown> {
+  checkout_session_id?: string;
+  created_at?: Date;
+  currency_code?: string;
+  customer_id?: string;
+  description?: string;
+  discount_amount?: number;
+  environment?: string;
+  fee_amount?: number;
+  fee_structure_id?: string;
+  gross_amount?: number;
+  is_bnpl?: boolean;
+  is_pos?: boolean;
+  metadata?: Record<string, unknown>;
+  net_amount?: number;
+  organization_id?: string;
+  payment_method_code?: string;
+  price_id?: string;
+  product_id?: string;
+  provider_code?: string;
+  quantity?: number;
+  spi_account_number?: string;
+  spi_bulk_instruction_id?: string;
+  spi_date_envoi?: string;
+  spi_date_irrevocabilite?: string;
+  spi_discount_amount?: number;
+  spi_discount_rate?: number;
+  spi_end2end_id?: string;
+  spi_payment_category?: string;
+  spi_payment_flow_type?: string;
+  spi_payment_status?: string;
+  spi_rejection_reason?: string;
+  spi_tx_id?: string;
+  status?: string;
+  subscription_id?: string;
+  transaction_id?: string;
+  transaction_type?: string;
+  updated_at?: Date;
+  [key: string]: unknown;
+}
+
+export interface transactions_create extends Record<string, unknown> {
+  checkout_session_id?: string;
+  created_at?: Date;
+  currency_code?: string;
+  customer_id?: string;
+  description?: string;
+  discount_amount?: number;
+  environment?: string;
+  fee_amount?: number;
+  fee_structure_id?: string;
+  gross_amount?: number;
+  is_bnpl?: boolean;
+  is_pos?: boolean;
+  metadata?: Record<string, unknown>;
+  net_amount?: number;
+  organization_id?: string;
+  payment_method_code?: string;
+  price_id?: string;
+  product_id?: string;
+  provider_code?: string;
+  quantity?: number;
+  spi_account_number?: string;
+  spi_bulk_instruction_id?: string;
+  spi_date_envoi?: string;
+  spi_date_irrevocabilite?: string;
+  spi_discount_amount?: number;
+  spi_discount_rate?: number;
+  spi_end2end_id?: string;
+  spi_payment_category?: string;
+  spi_payment_flow_type?: string;
+  spi_payment_status?: string;
+  spi_rejection_reason?: string;
+  spi_tx_id?: string;
+  status?: string;
+  subscription_id?: string;
+  transaction_id?: string;
+  transaction_type?: string;
+  updated_at?: Date;
+  [key: string]: unknown;
+}
+
+export interface transactions_update extends Record<string, unknown> {
+  checkout_session_id?: string;
+  created_at?: Date;
+  currency_code?: string;
+  customer_id?: string;
+  description?: string;
+  discount_amount?: number;
+  environment?: string;
+  fee_amount?: number;
+  fee_structure_id?: string;
+  gross_amount?: number;
+  is_bnpl?: boolean;
+  is_pos?: boolean;
+  metadata?: Record<string, unknown>;
+  net_amount?: number;
+  organization_id?: string;
+  payment_method_code?: string;
+  price_id?: string;
+  product_id?: string;
+  provider_code?: string;
+  quantity?: number;
+  spi_account_number?: string;
+  spi_bulk_instruction_id?: string;
+  spi_date_envoi?: string;
+  spi_date_irrevocabilite?: string;
+  spi_discount_amount?: number;
+  spi_discount_rate?: number;
+  spi_end2end_id?: string;
+  spi_payment_category?: string;
+  spi_payment_flow_type?: string;
+  spi_payment_status?: string;
+  spi_rejection_reason?: string;
+  spi_tx_id?: string;
+  status?: string;
+  subscription_id?: string;
+  transaction_id?: string;
+  transaction_type?: string;
+  updated_at?: Date;
+  [key: string]: unknown;
+}
+
+export interface webhook_delivery_logs extends Record<string, unknown> {
+  attempt_number?: number;
+  compte_paye?: string;
+  compte_payeur?: string;
+  created_at?: Date;
+  event_type?: string;
+  headers?: Record<string, unknown>;
+  ip_address?: string;
+  log_id?: string;
+  montant?: number;
+  organization_id?: string;
+  payload?: Record<string, unknown>;
+  request_duration_ms?: number;
+  response_body?: string;
+  response_status?: number;
+  spi_event_code?: string;
+  spi_tx_id?: string;
+  success?: boolean;
+  user_agent?: string;
+  webhook_id?: string;
+  [key: string]: unknown;
+}
+
+export interface webhook_delivery_logs_create extends Record<string, unknown> {
+  attempt_number?: number;
+  compte_paye?: string;
+  compte_payeur?: string;
+  created_at?: Date;
+  event_type?: string;
+  headers?: Record<string, unknown>;
+  ip_address?: string;
+  log_id?: string;
+  montant?: number;
+  organization_id?: string;
+  payload?: Record<string, unknown>;
+  request_duration_ms?: number;
+  response_body?: string;
+  response_status?: number;
+  spi_event_code?: string;
+  spi_tx_id?: string;
+  success?: boolean;
+  user_agent?: string;
+  webhook_id?: string;
+  [key: string]: unknown;
+}
+
+export interface webhook_delivery_logs_update extends Record<string, unknown> {
+  attempt_number?: number;
+  compte_paye?: string;
+  compte_payeur?: string;
+  created_at?: Date;
+  event_type?: string;
+  headers?: Record<string, unknown>;
+  ip_address?: string;
+  log_id?: string;
+  montant?: number;
+  organization_id?: string;
+  payload?: Record<string, unknown>;
+  request_duration_ms?: number;
+  response_body?: string;
+  response_status?: number;
+  spi_event_code?: string;
+  spi_tx_id?: string;
+  success?: boolean;
+  user_agent?: string;
+  webhook_id?: string;
+  [key: string]: unknown;
+}
+
+export interface webhooks extends Record<string, unknown> {
+  authorized_events?: string;
+  created_at?: Date;
+  created_by?: string;
+  deleted_at?: Date;
+  environment?: string;
+  is_active?: boolean;
+  last_payload?: Record<string, unknown>;
+  last_response_body?: string;
+  last_response_status?: number;
+  last_triggered_at?: Date;
+  metadata?: Record<string, unknown>;
+  organization_id?: string;
+  retry_count?: number;
+  spi_event_types?: string;
+  supports_spi?: boolean;
+  updated_at?: Date;
+  url?: string;
+  verification_token?: string;
+  webhook_id?: string;
+  [key: string]: unknown;
+}
+
+export interface webhooks_create extends Record<string, unknown> {
+  authorized_events?: string;
+  created_at?: Date;
+  created_by?: string;
+  deleted_at?: Date;
+  environment?: string;
+  is_active?: boolean;
+  last_payload?: Record<string, unknown>;
+  last_response_body?: string;
+  last_response_status?: number;
+  last_triggered_at?: Date;
+  metadata?: Record<string, unknown>;
+  organization_id?: string;
+  retry_count?: number;
+  spi_event_types?: string;
+  supports_spi?: boolean;
+  updated_at?: Date;
+  url?: string;
+  verification_token?: string;
+  webhook_id?: string;
+  [key: string]: unknown;
+}
+
+export interface webhooks_update extends Record<string, unknown> {
+  authorized_events?: string;
+  created_at?: Date;
+  created_by?: string;
+  deleted_at?: Date;
+  environment?: string;
+  is_active?: boolean;
+  last_payload?: Record<string, unknown>;
+  last_response_body?: string;
+  last_response_status?: number;
+  last_triggered_at?: Date;
+  metadata?: Record<string, unknown>;
+  organization_id?: string;
+  retry_count?: number;
+  spi_event_types?: string;
+  supports_spi?: boolean;
+  updated_at?: Date;
+  url?: string;
+  verification_token?: string;
+  webhook_id?: string;
+  [key: string]: unknown;
 }
 
 export interface Error extends Record<string, unknown> {
-  code?: string;
-  message?: string;
-  details?: Record<string, unknown>;
-  [key: string]: unknown;
-}
-
-export interface Currency extends Record<string, unknown> {
-  code: CurrencyCode;
-  name: string;
-  [key: string]: unknown;
-}
-
-export interface Fee extends Record<string, unknown> {
-  fee_id: string;
-  name: string;
-  transaction_type: TransactionType;
-  fee_type: FeeType;
-  percentage: number;
-  fixed_amount: number;
-  currency_code: CurrencyCode;
-  payment_method_code?: PaymentMethodCode;
-  provider_code?: ProviderCode;
-  created_at?: Date;
-  updated_at?: Date;
-  [key: string]: unknown;
-}
-
-export interface Merchant extends Record<string, unknown> {
-  merchant_id?: string;
-  name?: string;
-  email?: string;
-  phone_number?: string;
-  organization_id?: string;
-  country?: string;
-  mrr?: number;
-  arr?: number;
-  merchant_lifetime_value?: number;
-  retry_payment_every?: number;
-  total_retries?: number;
-  metadata?: Record<string, unknown>;
-  created_at?: Date;
-  updated_at?: Date;
-  [key: string]: unknown;
-}
-
-export interface ConnectedProvider extends Record<string, unknown> {
-  provider_code?: ProviderCode;
-  name?: string;
-  description?: string;
-  is_connected?: boolean;
-  provider_merchant_id?: string;
-  provider_business_type?: ProviderBusinessType;
-  phone_number?: string;
-  is_phone_verified?: boolean;
-  metadata?: Record<string, unknown>;
-  created_at?: Date;
-  updated_at?: Date;
-  [key: string]: unknown;
-}
-
-export interface OrganizationProviderSettings extends Record<string, unknown> {
-  organization_id: string;
-  provider_code: ProviderCode;
-  provider_merchant_id?: string;
-  is_connected: boolean;
-  phone_number?: string;
-  is_phone_verified: boolean;
-  metadata?: Record<string, unknown>;
-  created_at?: Date;
-  updated_at?: Date;
-  [key: string]: unknown;
-}
-
-export interface CreateProduct extends Record<string, unknown> {
-  name: string;
-  description?: string;
-  price: number;
-  currency_code: CurrencyCode;
-  is_active?: boolean;
-  [key: string]: unknown;
-}
-
-export interface Product extends Record<string, unknown> {
-  // Extends CreateProduct
-  product_id?: string;
-  merchant_id?: string;
-  organization_id?: string;
-  created_at?: Date;
-  updated_at?: Date;
-  [key: string]: unknown;
-}
-
-export interface CreateSubscriptionPlan extends Record<string, unknown> {
-  name: string;
-  description?: string;
-  amount: number;
-  currency_code: CurrencyCode;
-  billing_frequency: BillingFrequency;
-  failed_payment_action?: FailedPaymentAction;
-  charge_day?: number;
-  metadata?: Record<string, unknown>;
-  is_active?: boolean;
-  first_payment_type?: FirstPaymentType;
-  [key: string]: unknown;
-}
-
-export interface SubscriptionPlan extends Record<string, unknown> {
-  // Extends CreateSubscriptionPlan
-  plan_id?: string;
-  merchant_id?: string;
-  organization_id?: string;
-  created_at?: Date;
-  updated_at?: Date;
-  [key: string]: unknown;
-}
-
-export interface Subscription extends Record<string, unknown> {
-  subscription_id: string;
-  merchant_id: string;
-  organization_id: string;
-  plan_id: string;
-  customer_id: string;
-  status: SubscriptionStatus;
-  start_date: string;
-  end_date?: string;
-  next_billing_date?: string;
-  metadata?: Record<string, unknown>;
-  created_at?: Date;
-  updated_at?: Date;
-  [key: string]: unknown;
-}
-
-export interface CreateSubscription extends Record<string, unknown> {
-  merchant_id: string;
-  organization_id: string;
-  plan_id: string;
-  customer_id: string;
-  start_date: string;
-  metadata?: Record<string, unknown>;
-  [key: string]: unknown;
-}
-
-export interface CreateTransaction extends Record<string, unknown> {
-  merchant_id: string;
-  organization_id: string;
-  customer_id: string;
-  product_id?: string;
-  subscription_id?: string;
-  transaction_type: TransactionType;
-  description?: string;
-  quantity?: number;
-  metadata?: Record<string, unknown>;
-  gross_amount: number;
-  fee_amount: number;
-  net_amount: number;
-  fee_reference: string;
-  currency_code: CurrencyCode;
-  provider_code: ProviderCode;
-  payment_method_code: PaymentMethodCode;
-  [key: string]: unknown;
-}
-
-export interface Transaction extends Record<string, unknown> {
-  // Extends CreateTransaction
-  transaction_id?: string;
-  status?: TransactionStatus;
-  quantity?: number;
-  created_at?: Date;
-  updated_at?: Date;
-  [key: string]: unknown;
-}
-
-export interface CreateCheckoutSession extends Record<string, unknown> {
-  merchant_id: string;
-  organization_id: string;
-  title?: string;
-  public_description?: string;
-  product_id?: string;
-  subscription_id?: string;
-  plan_id?: string;
-  amount: number;
-  currency_code: CurrencyCode;
-  success_url: string;
-  cancel_url: string;
-  allowed_providers: Array<ProviderCode>;
-  customer_id?: string;
-  customer_email?: string;
-  customer_phone?: string;
-  customer_name?: string;
-  allow_coupon_code?: boolean;
-  allow_quantity?: boolean;
-  quantity?: number;
-  metadata?: Record<string, unknown>;
-  [key: string]: unknown;
-}
-
-export interface CheckoutSession extends Record<string, unknown> {
-  // Extends CreateCheckoutSession
-  checkout_session_id?: string;
-  payment_link_id?: string;
-  url?: string;
-  allow_quantity?: boolean;
-  quantity?: number;
-  status?: CheckoutSessionStatus;
-  created_at?: Date;
-  updated_at?: Date;
-  expires_at?: Date;
-  [key: string]: unknown;
-}
-
-export interface Provider extends Record<string, unknown> {
-  code?: ProviderCode;
-  name?: string;
-  description?: string;
-  payment_methods?: Array<PaymentMethodCode>;
-  is_connected?: boolean;
-  [key: string]: unknown;
-}
-
-export interface Refund extends Record<string, unknown> {
-  refund_id: string;
-  transaction_id: string;
-  amount: number;
-  refunded_amount: number;
-  fee_amount: number;
-  status: RefundStatus;
-  reason?: string;
-  metadata?: Record<string, unknown>;
-  created_at?: Date;
-  updated_at?: Date;
-  [key: string]: unknown;
-}
-
-export interface CreateRefund extends Record<string, unknown> {
-  transaction_id: string;
-  amount: number;
-  reason?: string;
-  metadata?: Record<string, unknown>;
-  [key: string]: unknown;
-}
-
-export interface Customer extends Record<string, unknown> {
-  customer_id: string;
-  merchant_id: string;
-  organization_id: string;
-  name: string;
-  email?: string;
-  phone_number?: string;
-  whatsapp_number?: string;
-  country?: string;
-  city?: string;
-  address?: string;
-  postal_code?: string;
-  is_business?: boolean;
-  metadata?: Record<string, unknown>;
-  created_at?: Date;
-  updated_at?: Date;
-  [key: string]: unknown;
-}
-
-export interface CreateCustomer extends Record<string, unknown> {
-  merchant_id: string;
-  organization_id: string;
-  name: string;
-  email?: string;
-  phone_number?: string;
-  whatsapp_number?: string;
-  country?: string;
-  city?: string;
-  address?: string;
-  postal_code?: string;
-  is_business?: boolean;
-  metadata?: Record<string, unknown>;
-  [key: string]: unknown;
-}
-
-export interface MerchantOrganizationLink extends Record<string, unknown> {
-  merchant_org_id: string;
-  merchant_id?: string;
-  organization_id: string;
-  role: MemberRole;
-  store_handle: string;
-  created_at?: Date;
-  updated_at?: Date;
-  [key: string]: unknown;
-}
-
-export interface MerchantAccount extends Record<string, unknown> {
-  account_id: string;
-  merchant_id?: string;
-  organization_id: string;
-  balance: number;
-  currency_code: CurrencyCode;
-  created_at?: Date;
-  updated_at?: Date;
-  [key: string]: unknown;
-}
-
-export interface CreatePaymentLink extends Record<string, unknown> {
-  merchant_id?: string;
-  organization_id?: string;
-  link_type: PaymentLinkType;
-  product_id?: string;
-  plan_id?: string;
-  title: string;
-  public_description?: string;
-  price?: number;
-  currency_code: CurrencyCode;
-  allowed_providers?: Array<ProviderCode>;
-  allow_coupon_code?: boolean;
-  allow_quantity?: boolean;
-  quantity?: number;
-  is_active?: boolean;
-  expires_at?: Date;
-  success_url?: string;
-  cancel_url?: string;
-  metadata?: Record<string, unknown>;
-  [key: string]: unknown;
-}
-
-export interface PaymentLink extends Record<string, unknown> {
-  // Extends CreatePaymentLink
-  link_id?: string;
-  organization_id?: string;
-  url?: string;
-  allow_quantity?: boolean;
-  quantity?: number;
-  created_at?: Date;
-  updated_at?: Date;
-  [key: string]: unknown;
-}
-
-export interface CreateWebhook extends Record<string, unknown> {
-  merchant_id: string;
-  organization_id: string;
-  url: string;
-  authorized_events: Array<WebhookEvent>;
-  is_active?: boolean;
-  metadata?: Record<string, unknown>;
-  [key: string]: unknown;
-}
-
-export interface Webhook extends Record<string, unknown> {
-  // Extends CreateWebhook
-  webhook_id?: string;
-  verification_token?: string;
-  last_triggered_at?: Date;
-  last_payload?: Record<string, unknown>;
-  last_response_status?: number;
-  last_response_body?: string;
-  retry_count?: number;
-  created_at?: Date;
-  updated_at?: Date;
+  error?: Record<string, unknown>;
   [key: string]: unknown;
 }
 

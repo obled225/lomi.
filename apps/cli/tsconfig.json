@@ -11,6 +11,11 @@
         "rootDir": "./src",
         "declaration": true,
         "resolveJsonModule": true,
+        "paths": {
+            "@/*": [
+                "./*"
+            ]
+        },
         "types": [
             "node"
         ]
