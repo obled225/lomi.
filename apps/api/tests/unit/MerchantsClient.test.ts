@@ -31,14 +31,14 @@ describe('MerchantsClient', () => {
       timezone: 'UTC',
       metadata: { test: 'data' },
       created_at: new Date('2024-01-17T00:00:00Z'),
-      updated_at: new Date('2024-01-17T00:00:00Z')
+      updated_at: new Date('2024-01-17T00:00:00Z'),
     };
 
     it('should get merchant details successfully', async () => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
         status: 200,
-        json: () => Promise.resolve(mockMerchant)
+        json: () => Promise.resolve(mockMerchant),
       } as Response);
 
       const result = await client.get(mockMerchantId);
@@ -49,9 +49,9 @@ describe('MerchantsClient', () => {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            'X-API-KEY': mockApiKey
-          }
-        })
+            'X-API-KEY': mockApiKey,
+          },
+        }),
       );
 
       expect(result).toBeInstanceOf(ApiResult);
@@ -70,7 +70,7 @@ describe('MerchantsClient', () => {
         is_phone_verified: true,
         metadata: { test: 'data1' },
         created_at: new Date('2024-01-17T00:00:00Z'),
-        updated_at: new Date('2024-01-17T00:00:00Z')
+        updated_at: new Date('2024-01-17T00:00:00Z'),
       },
       {
         provider_code: Types.ProviderCode.WAVE,
@@ -79,15 +79,15 @@ describe('MerchantsClient', () => {
         is_phone_verified: true,
         metadata: { test: 'data2' },
         created_at: new Date('2024-01-17T00:00:00Z'),
-        updated_at: new Date('2024-01-17T00:00:00Z')
-      }
+        updated_at: new Date('2024-01-17T00:00:00Z'),
+      },
     ];
 
     it('should list connected providers successfully', async () => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
         status: 200,
-        json: () => Promise.resolve(mockConnectedProviders)
+        json: () => Promise.resolve(mockConnectedProviders),
       } as Response);
 
       const result = await client.merchantProviders(mockMerchantId);
@@ -98,9 +98,9 @@ describe('MerchantsClient', () => {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            'X-API-KEY': mockApiKey
-          }
-        })
+            'X-API-KEY': mockApiKey,
+          },
+        }),
       );
 
       expect(result).toBeInstanceOf(ApiResult);
@@ -112,16 +112,16 @@ describe('MerchantsClient', () => {
   // Add tests for getMerchantMrr
   describe('getMerchantMrr', () => {
     const mockMerchantId = '123e4567-e89b-12d3-a456-426614174000';
-    const mockMrrData = { 
-      amount: 5000, 
-      currency_code: 'USD' 
+    const mockMrrData = {
+      amount: 5000,
+      currency_code: 'USD',
     };
 
     it('should get merchant MRR successfully', async () => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
         status: 200,
-        json: () => Promise.resolve(mockMrrData)
+        json: () => Promise.resolve(mockMrrData),
       } as Response);
 
       const result = await client.getMerchantMrr(mockMerchantId);
@@ -132,9 +132,9 @@ describe('MerchantsClient', () => {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            'X-API-KEY': mockApiKey
-          }
-        })
+            'X-API-KEY': mockApiKey,
+          },
+        }),
       );
 
       expect(result).toBeInstanceOf(ApiResult);
@@ -146,16 +146,16 @@ describe('MerchantsClient', () => {
   // Add tests for getMerchantArr
   describe('getMerchantArr', () => {
     const mockMerchantId = '123e4567-e89b-12d3-a456-426614174000';
-    const mockArrData = { 
-      amount: 60000, 
-      currency_code: 'USD' 
+    const mockArrData = {
+      amount: 60000,
+      currency_code: 'USD',
     };
 
     it('should get merchant ARR successfully', async () => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
         status: 200,
-        json: () => Promise.resolve(mockArrData)
+        json: () => Promise.resolve(mockArrData),
       } as Response);
 
       const result = await client.getMerchantArr(mockMerchantId);
@@ -166,9 +166,9 @@ describe('MerchantsClient', () => {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            'X-API-KEY': mockApiKey
-          }
-        })
+            'X-API-KEY': mockApiKey,
+          },
+        }),
       );
 
       expect(result).toBeInstanceOf(ApiResult);
@@ -181,21 +181,21 @@ describe('MerchantsClient', () => {
   describe('getMerchantBalance', () => {
     const mockMerchantId = '123e4567-e89b-12d3-a456-426614174000';
     const mockBalanceData = [
-      { 
+      {
         currency_code: 'USD',
-        balance: 10000
+        balance: 10000,
       },
       {
         currency_code: 'EUR',
-        balance: 5000
-      }
+        balance: 5000,
+      },
     ];
 
     it('should get merchant balance successfully without parameters', async () => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
         status: 200,
-        json: () => Promise.resolve(mockBalanceData)
+        json: () => Promise.resolve(mockBalanceData),
       } as Response);
 
       const result = await client.getMerchantBalance(mockMerchantId);
@@ -206,9 +206,9 @@ describe('MerchantsClient', () => {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            'X-API-KEY': mockApiKey
-          }
-        })
+            'X-API-KEY': mockApiKey,
+          },
+        }),
       );
 
       expect(result).toBeInstanceOf(ApiResult);
@@ -218,19 +218,21 @@ describe('MerchantsClient', () => {
 
     it('should get merchant balance successfully with currency parameter', async () => {
       const filteredBalanceData = [
-        { 
+        {
           currency_code: 'USD',
-          balance: 10000
-        }
+          balance: 10000,
+        },
       ];
-      
+
       mockFetch.mockResolvedValueOnce({
         ok: true,
         status: 200,
-        json: () => Promise.resolve(filteredBalanceData)
+        json: () => Promise.resolve(filteredBalanceData),
       } as Response);
 
-      const result = await client.getMerchantBalance(mockMerchantId, { currency_code: 'USD' });
+      const result = await client.getMerchantBalance(mockMerchantId, {
+        currency_code: 'USD',
+      });
 
       expect(mockFetch).toHaveBeenCalledWith(
         `https://api.test.com/merchants/${mockMerchantId}/balance?currency_code=USD`,
@@ -238,9 +240,9 @@ describe('MerchantsClient', () => {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            'X-API-KEY': mockApiKey
-          }
-        })
+            'X-API-KEY': mockApiKey,
+          },
+        }),
       );
 
       expect(result).toBeInstanceOf(ApiResult);
@@ -260,7 +262,7 @@ describe('MerchantsClient', () => {
         balance: 10000,
         currency_code: Types.CurrencyCode.USD,
         created_at: new Date('2024-01-17T00:00:00Z'),
-        updated_at: new Date('2024-01-17T00:00:00Z')
+        updated_at: new Date('2024-01-17T00:00:00Z'),
       },
       {
         account_id: 'acc_456',
@@ -269,15 +271,15 @@ describe('MerchantsClient', () => {
         balance: 5000,
         currency_code: Types.CurrencyCode.EUR,
         created_at: new Date('2024-01-17T00:00:00Z'),
-        updated_at: new Date('2024-01-17T00:00:00Z')
-      }
+        updated_at: new Date('2024-01-17T00:00:00Z'),
+      },
     ];
 
     it('should list merchant accounts successfully without parameters', async () => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
         status: 200,
-        json: () => Promise.resolve(mockAccountsData)
+        json: () => Promise.resolve(mockAccountsData),
       } as Response);
 
       const result = await client.listMerchantAccounts(mockMerchantId);
@@ -288,9 +290,9 @@ describe('MerchantsClient', () => {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            'X-API-KEY': mockApiKey
-          }
-        })
+            'X-API-KEY': mockApiKey,
+          },
+        }),
       );
 
       expect(result).toBeInstanceOf(ApiResult);
@@ -300,14 +302,16 @@ describe('MerchantsClient', () => {
 
     it('should list merchant accounts successfully with currency parameter', async () => {
       const filteredAccountsData = [mockAccountsData[0]]; // Just the USD account
-      
+
       mockFetch.mockResolvedValueOnce({
         ok: true,
         status: 200,
-        json: () => Promise.resolve(filteredAccountsData)
+        json: () => Promise.resolve(filteredAccountsData),
       } as Response);
 
-      const result = await client.listMerchantAccounts(mockMerchantId, { currency_code: 'USD' });
+      const result = await client.listMerchantAccounts(mockMerchantId, {
+        currency_code: 'USD',
+      });
 
       expect(mockFetch).toHaveBeenCalledWith(
         `https://api.test.com/merchants/${mockMerchantId}/accounts?currency_code=USD`,
@@ -315,9 +319,9 @@ describe('MerchantsClient', () => {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            'X-API-KEY': mockApiKey
-          }
-        })
+            'X-API-KEY': mockApiKey,
+          },
+        }),
       );
 
       expect(result).toBeInstanceOf(ApiResult);
@@ -335,18 +339,19 @@ describe('MerchantsClient', () => {
       by_status: {
         completed: { count: 120, amount: 40000 },
         pending: { count: 20, amount: 5000 },
-        failed: { count: 10, amount: 0 }
-      }
+        failed: { count: 10, amount: 0 },
+      },
     };
 
     it('should get merchant transactions summary successfully without parameters', async () => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
         status: 200,
-        json: () => Promise.resolve(mockSummaryData)
+        json: () => Promise.resolve(mockSummaryData),
       } as Response);
 
-      const result = await client.getMerchantTransactionsSummary(mockMerchantId);
+      const result =
+        await client.getMerchantTransactionsSummary(mockMerchantId);
 
       expect(mockFetch).toHaveBeenCalledWith(
         `https://api.test.com/merchants/${mockMerchantId}/transactions/summary`,
@@ -354,9 +359,9 @@ describe('MerchantsClient', () => {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            'X-API-KEY': mockApiKey
-          }
-        })
+            'X-API-KEY': mockApiKey,
+          },
+        }),
       );
 
       expect(result).toBeInstanceOf(ApiResult);
@@ -371,23 +376,26 @@ describe('MerchantsClient', () => {
         by_status: {
           completed: { count: 40, amount: 12000 },
           pending: { count: 8, amount: 3000 },
-          failed: { count: 2, amount: 0 }
-        }
+          failed: { count: 2, amount: 0 },
+        },
       };
-      
+
       mockFetch.mockResolvedValueOnce({
         ok: true,
         status: 200,
-        json: () => Promise.resolve(filteredSummaryData)
+        json: () => Promise.resolve(filteredSummaryData),
       } as Response);
 
       const params = {
         start_date: '2023-01-01',
         end_date: '2023-12-31',
-        currency_code: 'USD'
+        currency_code: 'USD',
       };
-      
-      const result = await client.getMerchantTransactionsSummary(mockMerchantId, params);
+
+      const result = await client.getMerchantTransactionsSummary(
+        mockMerchantId,
+        params,
+      );
 
       expect(mockFetch).toHaveBeenCalledWith(
         `https://api.test.com/merchants/${mockMerchantId}/transactions/summary?start_date=2023-01-01&end_date=2023-12-31&currency_code=USD`,
@@ -395,9 +403,9 @@ describe('MerchantsClient', () => {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            'X-API-KEY': mockApiKey
-          }
-        })
+            'X-API-KEY': mockApiKey,
+          },
+        }),
       );
 
       expect(result).toBeInstanceOf(ApiResult);
@@ -433,11 +441,16 @@ describe('MerchantsClient', () => {
 
     describe('create (Subscription Plan)', () => {
       it('should create a subscription plan successfully', async () => {
-        const mockResponsePlan = { ...mockSubscriptionPlan, name: mockCreateData.name, billing_frequency: mockCreateData.billing_frequency, amount: mockCreateData.amount };
+        const mockResponsePlan = {
+          ...mockSubscriptionPlan,
+          name: mockCreateData.name,
+          billing_frequency: mockCreateData.billing_frequency,
+          amount: mockCreateData.amount,
+        };
         mockFetch.mockResolvedValueOnce({
           ok: true,
           status: 201,
-          json: () => Promise.resolve(mockResponsePlan)
+          json: () => Promise.resolve(mockResponsePlan),
         } as Response);
 
         const result = await client.create(mockMerchantId, mockCreateData);
@@ -446,9 +459,11 @@ describe('MerchantsClient', () => {
           `https://api.test.com/merchants/${mockMerchantId}/subscriptions`,
           expect.objectContaining({
             method: 'POST',
-            headers: expect.objectContaining({ 'Content-Type': 'application/json' }),
+            headers: expect.objectContaining({
+              'Content-Type': 'application/json',
+            }),
             body: JSON.stringify(mockCreateData),
-          })
+          }),
         );
         expect(result.status).toBe(201);
         expect(result.data).toEqual(mockResponsePlan);
@@ -457,27 +472,27 @@ describe('MerchantsClient', () => {
 
     describe('list (Subscription Plans)', () => {
       it('should list subscription plans successfully', async () => {
-         mockFetch.mockResolvedValueOnce({
+        mockFetch.mockResolvedValueOnce({
           ok: true,
           status: 200,
-          json: () => Promise.resolve([mockSubscriptionPlan])
+          json: () => Promise.resolve([mockSubscriptionPlan]),
         } as Response);
 
         const result = await client.list(mockMerchantId);
 
         expect(mockFetch).toHaveBeenCalledWith(
           `https://api.test.com/merchants/${mockMerchantId}/subscriptions`,
-          expect.objectContaining({ method: 'GET' })
+          expect.objectContaining({ method: 'GET' }),
         );
         expect(result.status).toBe(200);
         expect(result.data).toEqual([mockSubscriptionPlan]);
       });
 
-       it('should list subscription plans with pagination successfully', async () => {
-         mockFetch.mockResolvedValueOnce({
+      it('should list subscription plans with pagination successfully', async () => {
+        mockFetch.mockResolvedValueOnce({
           ok: true,
           status: 200,
-          json: () => Promise.resolve([]) // Expect empty array for second page
+          json: () => Promise.resolve([]), // Expect empty array for second page
         } as Response);
 
         const params = { limit: '10', offset: '10' };
@@ -485,7 +500,7 @@ describe('MerchantsClient', () => {
 
         expect(mockFetch).toHaveBeenCalledWith(
           `https://api.test.com/merchants/${mockMerchantId}/subscriptions?limit=10&offset=10`,
-          expect.objectContaining({ method: 'GET' })
+          expect.objectContaining({ method: 'GET' }),
         );
         expect(result.status).toBe(200);
         expect(result.data).toEqual([]);
@@ -497,14 +512,17 @@ describe('MerchantsClient', () => {
         mockFetch.mockResolvedValueOnce({
           ok: true,
           status: 200,
-          json: () => Promise.resolve(mockSubscriptionPlan)
+          json: () => Promise.resolve(mockSubscriptionPlan),
         } as Response);
 
-        const result = await client.getSubscriptionPlan(mockMerchantId, mockPlanId);
+        const result = await client.getSubscriptionPlan(
+          mockMerchantId,
+          mockPlanId,
+        );
 
         expect(mockFetch).toHaveBeenCalledWith(
           `https://api.test.com/merchants/${mockMerchantId}/subscriptions/${mockPlanId}`,
-          expect.objectContaining({ method: 'GET' })
+          expect.objectContaining({ method: 'GET' }),
         );
         expect(result.status).toBe(200);
         expect(result.data).toEqual(mockSubscriptionPlan);
@@ -512,23 +530,31 @@ describe('MerchantsClient', () => {
     });
 
     describe('updateSubscriptionPlan', () => {
-       it('should update a subscription plan successfully', async () => {
+      it('should update a subscription plan successfully', async () => {
         const updateData = { is_active: false, metadata: { updated: true } };
-        const updatedPlan = { ...mockSubscriptionPlan, ...updateData, updated_at: new Date() };
-         mockFetch.mockResolvedValueOnce({
+        const updatedPlan = {
+          ...mockSubscriptionPlan,
+          ...updateData,
+          updated_at: new Date(),
+        };
+        mockFetch.mockResolvedValueOnce({
           ok: true,
           status: 200,
-          json: () => Promise.resolve(updatedPlan)
+          json: () => Promise.resolve(updatedPlan),
         } as Response);
 
-        const result = await client.updateSubscriptionPlan(mockMerchantId, mockPlanId, updateData);
+        const result = await client.updateSubscriptionPlan(
+          mockMerchantId,
+          mockPlanId,
+          updateData,
+        );
 
         expect(mockFetch).toHaveBeenCalledWith(
           `https://api.test.com/merchants/${mockMerchantId}/subscriptions/${mockPlanId}`,
           expect.objectContaining({
             method: 'PATCH',
             body: JSON.stringify(updateData),
-          })
+          }),
         );
         expect(result.status).toBe(200);
         expect(result.data).toEqual(updatedPlan);
@@ -537,21 +563,24 @@ describe('MerchantsClient', () => {
 
     describe('deleteSubscriptionPlan', () => {
       it('should delete a subscription plan successfully', async () => {
-         mockFetch.mockResolvedValueOnce({
+        mockFetch.mockResolvedValueOnce({
           ok: true,
           status: 204, // No Content
-          json: () => Promise.resolve(undefined)
+          json: () => Promise.resolve(undefined),
         } as Response);
 
-        const result = await client.deleteSubscriptionPlan(mockMerchantId, mockPlanId);
+        const result = await client.deleteSubscriptionPlan(
+          mockMerchantId,
+          mockPlanId,
+        );
 
         expect(mockFetch).toHaveBeenCalledWith(
           `https://api.test.com/merchants/${mockMerchantId}/subscriptions/${mockPlanId}`,
-          expect.objectContaining({ method: 'DELETE' })
+          expect.objectContaining({ method: 'DELETE' }),
         );
         expect(result.status).toBe(204);
         expect(result.data).toBeUndefined();
       });
     });
   }); // End of Subscription Plans describe block
-}); 
+});

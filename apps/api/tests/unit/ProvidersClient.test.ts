@@ -22,25 +22,25 @@ describe('ProvidersClient', () => {
       {
         code: Types.ProviderCode.ORANGE,
         name: 'Orange Money',
-        description: 'Mobile money service by Orange'
+        description: 'Mobile money service by Orange',
       },
       {
         code: Types.ProviderCode.WAVE,
         name: 'Wave',
-        description: 'Digital payment service'
+        description: 'Digital payment service',
       },
       {
         code: Types.ProviderCode.ECOBANK,
         name: 'Ecobank',
-        description: 'Pan-African banking group'
-      }
+        description: 'Pan-African banking group',
+      },
     ];
 
     it('should list available payment providers successfully', async () => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
         status: 200,
-        json: () => Promise.resolve(mockProviders)
+        json: () => Promise.resolve(mockProviders),
       } as Response);
 
       const result = await client.providers();
@@ -51,9 +51,9 @@ describe('ProvidersClient', () => {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            'X-API-KEY': mockApiKey
-          }
-        })
+            'X-API-KEY': mockApiKey,
+          },
+        }),
       );
 
       expect(result).toBeInstanceOf(ApiResult);
@@ -61,4 +61,4 @@ describe('ProvidersClient', () => {
       expect(result.data).toEqual(mockProviders);
     });
   });
-}); 
+});

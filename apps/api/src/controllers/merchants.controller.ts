@@ -1,21 +1,21 @@
-import { Request, Response } from "express";
-import { createClient } from "@supabase/supabase-js";
-import { Merchant } from "../types/api";
+import { Request, Response } from 'express';
+import { createClient } from '@supabase/supabase-js';
+import { Merchant } from '../types/api';
 
 // Initialize Supabase client
-const supabaseUrl = process.env.SUPABASE_URL || "";
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || "";
+const supabaseUrl = process.env.SUPABASE_URL || '';
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
 const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
 // Error codes for better client-side error handling
 enum ErrorCode {
-  INVALID_REQUEST = "INVALID_REQUEST",
-  UNAUTHORIZED = "UNAUTHORIZED",
-  NOT_FOUND = "NOT_FOUND",
-  MERCHANT_NOT_FOUND = "MERCHANT_NOT_FOUND",
-  DATABASE_ERROR = "DATABASE_ERROR",
-  INTERNAL_ERROR = "INTERNAL_ERROR",
-  MISSING_PARAMETER = "MISSING_PARAMETER",
+  INVALID_REQUEST = 'INVALID_REQUEST',
+  UNAUTHORIZED = 'UNAUTHORIZED',
+  NOT_FOUND = 'NOT_FOUND',
+  MERCHANT_NOT_FOUND = 'MERCHANT_NOT_FOUND',
+  DATABASE_ERROR = 'DATABASE_ERROR',
+  INTERNAL_ERROR = 'INTERNAL_ERROR',
+  MISSING_PARAMETER = 'MISSING_PARAMETER',
 }
 
 // Standardized error response creator
@@ -64,13 +64,13 @@ export const getMerchant = async (req: Request, res: Response) => {
           createErrorResponse(
             401,
             ErrorCode.UNAUTHORIZED,
-            "Merchant ID not found",
+            'Merchant ID not found',
           ),
         );
     }
 
     // Use RPC function to get merchant details
-    const { data, error } = await supabase.rpc("get_merchant_details", {
+    const { data, error } = await supabase.rpc('get_merchant_details', {
       p_merchant_id: merchantId,
     });
 
@@ -81,7 +81,7 @@ export const getMerchant = async (req: Request, res: Response) => {
           createErrorResponse(
             500,
             ErrorCode.DATABASE_ERROR,
-            "Failed to retrieve merchant details",
+            'Failed to retrieve merchant details',
             error.message,
           ),
         );
@@ -95,7 +95,7 @@ export const getMerchant = async (req: Request, res: Response) => {
           createErrorResponse(
             404,
             ErrorCode.MERCHANT_NOT_FOUND,
-            "Merchant not found",
+            'Merchant not found',
           ),
         );
     }
@@ -111,7 +111,7 @@ export const getMerchant = async (req: Request, res: Response) => {
           createErrorResponse(
             404,
             ErrorCode.NOT_FOUND,
-            "No merchant data found",
+            'No merchant data found',
           ),
         );
     }
@@ -138,15 +138,15 @@ export const getMerchant = async (req: Request, res: Response) => {
       data: merchant,
     });
   } catch (error: any) {
-    logError(error, "getMerchant", req);
+    logError(error, 'getMerchant', req);
     res
       .status(500)
       .json(
         createErrorResponse(
           500,
           ErrorCode.INTERNAL_ERROR,
-          "Internal server error",
-          process.env.NODE_ENV === "production" ? undefined : error.message,
+          'Internal server error',
+          process.env.NODE_ENV === 'production' ? undefined : error.message,
         ),
       );
   }
@@ -169,13 +169,13 @@ export const getMerchantMrr = async (req: Request, res: Response) => {
           createErrorResponse(
             401,
             ErrorCode.UNAUTHORIZED,
-            "Merchant ID not found",
+            'Merchant ID not found',
           ),
         );
     }
 
     // Use dedicated MRR RPC function
-    const { data, error } = await supabase.rpc("get_merchant_mrr", {
+    const { data, error } = await supabase.rpc('get_merchant_mrr', {
       p_merchant_id: merchantId,
     });
 
@@ -186,7 +186,7 @@ export const getMerchantMrr = async (req: Request, res: Response) => {
           createErrorResponse(
             500,
             ErrorCode.DATABASE_ERROR,
-            "Failed to retrieve merchant MRR",
+            'Failed to retrieve merchant MRR',
             error.message,
           ),
         );
@@ -200,7 +200,7 @@ export const getMerchantMrr = async (req: Request, res: Response) => {
           createErrorResponse(
             404,
             ErrorCode.MERCHANT_NOT_FOUND,
-            "Merchant not found",
+            'Merchant not found',
           ),
         );
     }
@@ -213,7 +213,7 @@ export const getMerchantMrr = async (req: Request, res: Response) => {
       return res
         .status(404)
         .json(
-          createErrorResponse(404, ErrorCode.NOT_FOUND, "No MRR data found"),
+          createErrorResponse(404, ErrorCode.NOT_FOUND, 'No MRR data found'),
         );
     }
 
@@ -222,20 +222,20 @@ export const getMerchantMrr = async (req: Request, res: Response) => {
       data: {
         merchant_id: mrrData.merchant_id,
         mrr: mrrData.mrr,
-        currency_code: mrrData.currency_code || "XOF", // Use the currency from the function or default
+        currency_code: mrrData.currency_code || 'XOF', // Use the currency from the function or default
         as_of_date: new Date().toISOString(),
       },
     });
   } catch (error: any) {
-    logError(error, "getMerchantMrr", req);
+    logError(error, 'getMerchantMrr', req);
     res
       .status(500)
       .json(
         createErrorResponse(
           500,
           ErrorCode.INTERNAL_ERROR,
-          "Internal server error",
-          process.env.NODE_ENV === "production" ? undefined : error.message,
+          'Internal server error',
+          process.env.NODE_ENV === 'production' ? undefined : error.message,
         ),
       );
   }
@@ -258,13 +258,13 @@ export const getMerchantArr = async (req: Request, res: Response) => {
           createErrorResponse(
             401,
             ErrorCode.UNAUTHORIZED,
-            "Merchant ID not found",
+            'Merchant ID not found',
           ),
         );
     }
 
     // Use dedicated ARR RPC function
-    const { data, error } = await supabase.rpc("get_merchant_arr", {
+    const { data, error } = await supabase.rpc('get_merchant_arr', {
       p_merchant_id: merchantId,
     });
 
@@ -275,7 +275,7 @@ export const getMerchantArr = async (req: Request, res: Response) => {
           createErrorResponse(
             500,
             ErrorCode.DATABASE_ERROR,
-            "Failed to retrieve merchant ARR",
+            'Failed to retrieve merchant ARR',
             error.message,
           ),
         );
@@ -289,7 +289,7 @@ export const getMerchantArr = async (req: Request, res: Response) => {
           createErrorResponse(
             404,
             ErrorCode.MERCHANT_NOT_FOUND,
-            "Merchant not found",
+            'Merchant not found',
           ),
         );
     }
@@ -302,7 +302,7 @@ export const getMerchantArr = async (req: Request, res: Response) => {
       return res
         .status(404)
         .json(
-          createErrorResponse(404, ErrorCode.NOT_FOUND, "No ARR data found"),
+          createErrorResponse(404, ErrorCode.NOT_FOUND, 'No ARR data found'),
         );
     }
 
@@ -311,20 +311,20 @@ export const getMerchantArr = async (req: Request, res: Response) => {
       data: {
         merchant_id: arrData.merchant_id,
         arr: arrData.arr,
-        currency_code: arrData.currency_code || "XOF", // Use the currency from the function or default
+        currency_code: arrData.currency_code || 'XOF', // Use the currency from the function or default
         as_of_date: new Date().toISOString(),
       },
     });
   } catch (error: any) {
-    logError(error, "getMerchantArr", req);
+    logError(error, 'getMerchantArr', req);
     res
       .status(500)
       .json(
         createErrorResponse(
           500,
           ErrorCode.INTERNAL_ERROR,
-          "Internal server error",
-          process.env.NODE_ENV === "production" ? undefined : error.message,
+          'Internal server error',
+          process.env.NODE_ENV === 'production' ? undefined : error.message,
         ),
       );
   }
@@ -349,7 +349,7 @@ export const getMerchantBalance = async (req: Request, res: Response) => {
           createErrorResponse(
             401,
             ErrorCode.UNAUTHORIZED,
-            "Merchant ID not found",
+            'Merchant ID not found',
           ),
         );
     }
@@ -361,13 +361,13 @@ export const getMerchantBalance = async (req: Request, res: Response) => {
           createErrorResponse(
             400,
             ErrorCode.MISSING_PARAMETER,
-            "Currency code is required",
+            'Currency code is required',
           ),
         );
     }
 
     // Use RPC function to get merchant balance for the specified currency
-    const { data, error } = await supabase.rpc("get_merchant_balance", {
+    const { data, error } = await supabase.rpc('get_merchant_balance', {
       p_merchant_id: merchantId,
       p_currency_code: currency_code,
     });
@@ -379,7 +379,7 @@ export const getMerchantBalance = async (req: Request, res: Response) => {
           createErrorResponse(
             500,
             ErrorCode.DATABASE_ERROR,
-            "Failed to retrieve merchant balance",
+            'Failed to retrieve merchant balance',
             error.message,
           ),
         );
@@ -395,15 +395,15 @@ export const getMerchantBalance = async (req: Request, res: Response) => {
       },
     });
   } catch (error: any) {
-    logError(error, "getMerchantBalance", req);
+    logError(error, 'getMerchantBalance', req);
     res
       .status(500)
       .json(
         createErrorResponse(
           500,
           ErrorCode.INTERNAL_ERROR,
-          "Internal server error",
-          process.env.NODE_ENV === "production" ? undefined : error.message,
+          'Internal server error',
+          process.env.NODE_ENV === 'production' ? undefined : error.message,
         ),
       );
   }

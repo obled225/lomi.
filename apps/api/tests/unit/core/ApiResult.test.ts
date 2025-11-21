@@ -45,4 +45,4 @@ describe('ApiResult', () => {
     expect(result.status).toBe(status);
     expect(result.data).toBe(data);
   });
-}); 
+});

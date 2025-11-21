@@ -1,21 +1,21 @@
-import { Request, Response, NextFunction } from "express";
-import winston from "winston";
+import { Request, Response, NextFunction } from 'express';
+import winston from 'winston';
 
 // Configure logger
 const transports: winston.transport[] = [new winston.transports.Console()];
 
 // Only add file transports when not in production (not on Vercel)
-if (process.env.NODE_ENV !== "production") {
-  transports.push(new winston.transports.File({ filename: "logs/errors.log" }));
+if (process.env.NODE_ENV !== 'production') {
+  transports.push(new winston.transports.File({ filename: 'logs/errors.log' }));
 }
 
 const logger = winston.createLogger({
-  level: "error",
+  level: 'error',
   format: winston.format.combine(
     winston.format.timestamp(),
     winston.format.json(),
   ),
-  defaultMeta: { service: "api-error-handler" },
+  defaultMeta: { service: 'api-error-handler' },
   transports,
 });
 
@@ -42,14 +42,14 @@ export class APIError extends Error {
   constructor(
     message: string,
     status = 500,
-    code = "internal_error",
+    code = 'internal_error',
     details?: any,
   ) {
     super(message);
     this.status = status;
     this.code = code;
     this.details = details;
-    this.name = "APIError";
+    this.name = 'APIError';
   }
 }
 
@@ -70,7 +70,7 @@ export const errorHandler = (
     method: req.method,
     ip: req.ip,
     status: (err as APIError).status || 500,
-    code: (err as APIError).code || "internal_error",
+    code: (err as APIError).code || 'internal_error',
   });
 
   // Determine if this is a custom API error or a standard error
@@ -79,9 +79,9 @@ export const errorHandler = (
   // Prepare the error response
   const errorResponse: ErrorResponse = {
     error: {
-      message: err.message || "Internal server error",
+      message: err.message || 'Internal server error',
       status: isAPIError ? (err as APIError).status : 500,
-      code: isAPIError ? (err as APIError).code : "internal_error",
+      code: isAPIError ? (err as APIError).code : 'internal_error',
     },
   };
 
@@ -107,7 +107,7 @@ export const notFoundHandler = (
   const err = new APIError(
     `Route not found: ${req.method} ${req.path}`,
     404,
-    "not_found",
+    'not_found',
   );
   next(err);
 };

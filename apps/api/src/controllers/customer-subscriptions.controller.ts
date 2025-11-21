@@ -1,23 +1,23 @@
-import { Request, Response } from "express";
-import { createClient } from "@supabase/supabase-js";
-import { z } from "zod";
-import { SubscriptionStatus } from "../types/api";
-import * as Types from "../types/api"; // Import generated types
+import { Request, Response } from 'express';
+import { createClient } from '@supabase/supabase-js';
+import { z } from 'zod';
+import { SubscriptionStatus } from '../types/api';
+import * as Types from '../types/api'; // Import generated types
 
 // Initialize Supabase client
-const supabaseUrl = process.env.SUPABASE_URL || "";
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || "";
+const supabaseUrl = process.env.SUPABASE_URL || '';
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
 const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
 // Error codes
 enum ErrorCode {
-  INVALID_REQUEST = "INVALID_REQUEST",
-  UNAUTHORIZED = "UNAUTHORIZED",
-  FORBIDDEN = "FORBIDDEN",
-  NOT_FOUND = "NOT_FOUND",
-  CONFLICT = "CONFLICT",
-  DATABASE_ERROR = "DATABASE_ERROR",
-  INTERNAL_ERROR = "INTERNAL_ERROR",
+  INVALID_REQUEST = 'INVALID_REQUEST',
+  UNAUTHORIZED = 'UNAUTHORIZED',
+  FORBIDDEN = 'FORBIDDEN',
+  NOT_FOUND = 'NOT_FOUND',
+  CONFLICT = 'CONFLICT',
+  DATABASE_ERROR = 'DATABASE_ERROR',
+  INTERNAL_ERROR = 'INTERNAL_ERROR',
 }
 
 // Standardized error response creator
@@ -45,7 +45,7 @@ function logError(error: any, context: string, req: Request) {
     (req as any).merchantId ||
     req.params?.merchant_id ||
     req.query?.merchant_id ||
-    "N/A";
+    'N/A';
   console.error(`Error in ${context}:`, {
     error: error.message || error,
     stack: error.stack, // Include stack trace for better debugging
@@ -65,7 +65,7 @@ function handleDatabaseError(error: any, req: Request, context: string) {
 
   let status = 500;
   let code = ErrorCode.DATABASE_ERROR;
-  let message = "Database operation failed";
+  let message = 'Database operation failed';
   let details: any = {
     db_code: error.code,
     db_message: error.message,
@@ -74,22 +74,22 @@ function handleDatabaseError(error: any, req: Request, context: string) {
   };
 
   switch (error.code) {
-    case "PGRST116": // Resource not found (PostgREST specific)
-    case "22P02": // Invalid input syntax (e.g., bad UUID) - Treat as Not Found for get/update/delete
+    case 'PGRST116': // Resource not found (PostgREST specific)
+    case '22P02': // Invalid input syntax (e.g., bad UUID) - Treat as Not Found for get/update/delete
       status = 404;
       code = ErrorCode.NOT_FOUND;
-      message = "Resource not found";
+      message = 'Resource not found';
       break;
-    case "23503": // Foreign key violation
+    case '23503': // Foreign key violation
       status = 409; // Conflict - Cannot delete/update due to related records
       code = ErrorCode.CONFLICT;
       message =
-        "Operation violates foreign key constraint. Related records exist.";
+        'Operation violates foreign key constraint. Related records exist.';
       break;
-    case "23505": // Unique violation
+    case '23505': // Unique violation
       status = 409;
       code = ErrorCode.CONFLICT;
-      message = "Resource already exists or violates unique constraint";
+      message = 'Resource already exists or violates unique constraint';
       break;
     // Add more specific mappings as needed
   }
@@ -121,15 +121,15 @@ const updateCustomerSubscriptionSchema = z
     metadata: z.record(z.any()).optional(),
   })
   .refine((data) => Object.keys(data).length > 0, {
-    message: "At least one field must be provided for update",
+    message: 'At least one field must be provided for update',
   });
 
 // Common parameter schemas
 const subscriptionIdParamSchema = z.object({
-  subscription_id: z.string().uuid("Invalid Subscription ID format"),
+  subscription_id: z.string().uuid('Invalid Subscription ID format'),
 });
 const merchantIdQuerySchema = z.object({
-  merchant_id: z.string().uuid("Invalid Merchant ID format"),
+  merchant_id: z.string().uuid('Invalid Merchant ID format'),
 });
 /**
  * List customer subscriptions
@@ -138,7 +138,7 @@ export const listCustomerSubscriptions = async (
   req: Request,
   res: Response,
 ) => {
-  const context = "listCustomerSubscriptions";
+  const context = 'listCustomerSubscriptions';
   try {
     // Validate merchant_id parameter
     const merchantValidation = merchantIdQuerySchema.safeParse(req.query);
@@ -149,7 +149,7 @@ export const listCustomerSubscriptions = async (
           createErrorResponse(
             400,
             ErrorCode.INVALID_REQUEST,
-            "Invalid or missing merchant_id",
+            'Invalid or missing merchant_id',
             merchantValidation.error.format(),
           ),
         );
@@ -166,7 +166,7 @@ export const listCustomerSubscriptions = async (
     );
 
     // Call the RPC function to list customer subscriptions
-    const { data, error } = await supabase.rpc("list_customer_subscriptions", {
+    const { data, error } = await supabase.rpc('list_customer_subscriptions', {
       p_merchant_id: merchant_id,
       p_customer_id: customer_id || null,
       p_status: status || null,
@@ -201,8 +201,8 @@ export const listCustomerSubscriptions = async (
         createErrorResponse(
           500,
           ErrorCode.INTERNAL_ERROR,
-          "An unexpected error occurred",
-          process.env.NODE_ENV === "production" ? undefined : error.message,
+          'An unexpected error occurred',
+          process.env.NODE_ENV === 'production' ? undefined : error.message,
         ),
       );
   }
@@ -212,7 +212,7 @@ export const listCustomerSubscriptions = async (
  * Get subscription details
  */
 export const getSubscription = async (req: Request, res: Response) => {
-  const context = "getSubscription";
+  const context = 'getSubscription';
   try {
     // Validate subscription_id parameter
     const subscriptionValidation = subscriptionIdParamSchema.safeParse(
@@ -225,7 +225,7 @@ export const getSubscription = async (req: Request, res: Response) => {
           createErrorResponse(
             400,
             ErrorCode.INVALID_REQUEST,
-            "Invalid subscription_id",
+            'Invalid subscription_id',
             subscriptionValidation.error.format(),
           ),
         );
@@ -240,7 +240,7 @@ export const getSubscription = async (req: Request, res: Response) => {
           createErrorResponse(
             400,
             ErrorCode.INVALID_REQUEST,
-            "Invalid or missing merchant_id",
+            'Invalid or missing merchant_id',
             merchantValidation.error.format(),
           ),
         );
@@ -254,7 +254,7 @@ export const getSubscription = async (req: Request, res: Response) => {
     );
 
     // Call the RPC function to get customer subscription details
-    const { data, error } = await supabase.rpc("get_customer_subscription", {
+    const { data, error } = await supabase.rpc('get_customer_subscription', {
       p_subscription_id: subscription_id,
       p_merchant_id: merchant_id,
     });
@@ -276,7 +276,7 @@ export const getSubscription = async (req: Request, res: Response) => {
           createErrorResponse(
             404,
             ErrorCode.NOT_FOUND,
-            "Subscription not found",
+            'Subscription not found',
           ),
         );
     }
@@ -293,8 +293,8 @@ export const getSubscription = async (req: Request, res: Response) => {
         createErrorResponse(
           500,
           ErrorCode.INTERNAL_ERROR,
-          "An unexpected error occurred",
-          process.env.NODE_ENV === "production" ? undefined : error.message,
+          'An unexpected error occurred',
+          process.env.NODE_ENV === 'production' ? undefined : error.message,
         ),
       );
   }
@@ -304,7 +304,7 @@ export const getSubscription = async (req: Request, res: Response) => {
  * Update subscription
  */
 export const updateSubscription = async (req: Request, res: Response) => {
-  const context = "updateSubscription";
+  const context = 'updateSubscription';
   try {
     // Validate subscription_id parameter
     const subscriptionValidation = subscriptionIdParamSchema.safeParse(
@@ -317,7 +317,7 @@ export const updateSubscription = async (req: Request, res: Response) => {
           createErrorResponse(
             400,
             ErrorCode.INVALID_REQUEST,
-            "Invalid subscription_id",
+            'Invalid subscription_id',
             subscriptionValidation.error.format(),
           ),
         );
@@ -332,7 +332,7 @@ export const updateSubscription = async (req: Request, res: Response) => {
           createErrorResponse(
             400,
             ErrorCode.INVALID_REQUEST,
-            "Invalid or missing merchant_id",
+            'Invalid or missing merchant_id',
             merchantValidation.error.format(),
           ),
         );
@@ -352,7 +352,7 @@ export const updateSubscription = async (req: Request, res: Response) => {
           createErrorResponse(
             400,
             ErrorCode.INVALID_REQUEST,
-            "Invalid request data",
+            'Invalid request data',
             validationResult.error.format(),
           ),
         );
@@ -365,7 +365,7 @@ export const updateSubscription = async (req: Request, res: Response) => {
 
     // Call the RPC function to update customer subscription
     const { data: updated, error: updateError } = await supabase.rpc(
-      "update_customer_subscription",
+      'update_customer_subscription',
       {
         p_subscription_id: subscription_id,
         p_merchant_id: merchant_id,
@@ -396,7 +396,7 @@ export const updateSubscription = async (req: Request, res: Response) => {
           createErrorResponse(
             404,
             ErrorCode.NOT_FOUND,
-            "Subscription not found or update failed",
+            'Subscription not found or update failed',
           ),
         );
     }
@@ -406,7 +406,7 @@ export const updateSubscription = async (req: Request, res: Response) => {
 
     // Get the updated subscription details
     const { data: updatedSubscription, error: fetchError } = await supabase.rpc(
-      "get_customer_subscription",
+      'get_customer_subscription',
       {
         p_subscription_id: subscription_id,
         p_merchant_id: merchant_id,
@@ -419,9 +419,9 @@ export const updateSubscription = async (req: Request, res: Response) => {
       updatedSubscription.length === 0
     ) {
       const fetchErrorMessage =
-        "Subscription updated but failed to retrieve details";
+        'Subscription updated but failed to retrieve details';
       logError(
-        fetchError || new Error("get_customer_subscription returned no data"),
+        fetchError || new Error('get_customer_subscription returned no data'),
         `${context} - fetch after update`,
         req,
       );
@@ -432,7 +432,7 @@ export const updateSubscription = async (req: Request, res: Response) => {
         data: {
           subscription_id: subscription_id,
           updated_fields: Object.keys(updateData),
-          environment: process.env.NODE_ENV || "development",
+          environment: process.env.NODE_ENV || 'development',
         },
       });
     }
@@ -449,8 +449,8 @@ export const updateSubscription = async (req: Request, res: Response) => {
         createErrorResponse(
           500,
           ErrorCode.INTERNAL_ERROR,
-          "An unexpected error occurred",
-          process.env.NODE_ENV === "production" ? undefined : error.message,
+          'An unexpected error occurred',
+          process.env.NODE_ENV === 'production' ? undefined : error.message,
         ),
       );
   }
@@ -460,7 +460,7 @@ export const updateSubscription = async (req: Request, res: Response) => {
  * Cancel subscription
  */
 export const cancelSubscription = async (req: Request, res: Response) => {
-  const context = "cancelSubscription";
+  const context = 'cancelSubscription';
   try {
     // Validate subscription_id parameter
     const subscriptionValidation = subscriptionIdParamSchema.safeParse(
@@ -473,7 +473,7 @@ export const cancelSubscription = async (req: Request, res: Response) => {
           createErrorResponse(
             400,
             ErrorCode.INVALID_REQUEST,
-            "Invalid subscription_id",
+            'Invalid subscription_id',
             subscriptionValidation.error.format(),
           ),
         );
@@ -488,7 +488,7 @@ export const cancelSubscription = async (req: Request, res: Response) => {
           createErrorResponse(
             400,
             ErrorCode.INVALID_REQUEST,
-            "Invalid or missing merchant_id",
+            'Invalid or missing merchant_id',
             merchantValidation.error.format(),
           ),
         );
@@ -503,7 +503,7 @@ export const cancelSubscription = async (req: Request, res: Response) => {
 
     // Call the RPC function to cancel customer subscription
     const { data: cancelled, error: cancelError } = await supabase.rpc(
-      "cancel_customer_subscription",
+      'cancel_customer_subscription',
       {
         p_subscription_id: subscription_id,
         p_merchant_id: merchant_id,
@@ -529,7 +529,7 @@ export const cancelSubscription = async (req: Request, res: Response) => {
           createErrorResponse(
             404,
             ErrorCode.NOT_FOUND,
-            "Subscription not found or cancellation failed",
+            'Subscription not found or cancellation failed',
           ),
         );
     }
@@ -539,7 +539,7 @@ export const cancelSubscription = async (req: Request, res: Response) => {
 
     // Get the updated subscription details
     const { data: updatedSubscription, error: fetchError } = await supabase.rpc(
-      "get_customer_subscription",
+      'get_customer_subscription',
       {
         p_subscription_id: subscription_id,
         p_merchant_id: merchant_id,
@@ -552,9 +552,9 @@ export const cancelSubscription = async (req: Request, res: Response) => {
       updatedSubscription.length === 0
     ) {
       const fetchErrorMessage =
-        "Subscription cancelled but failed to retrieve details";
+        'Subscription cancelled but failed to retrieve details';
       logError(
-        fetchError || new Error("get_customer_subscription returned no data"),
+        fetchError || new Error('get_customer_subscription returned no data'),
         `${context} - fetch after cancel`,
         req,
       );
@@ -564,8 +564,8 @@ export const cancelSubscription = async (req: Request, res: Response) => {
         message: fetchErrorMessage,
         data: {
           subscription_id: subscription_id,
-          status: "cancelled",
-          environment: process.env.NODE_ENV || "development",
+          status: 'cancelled',
+          environment: process.env.NODE_ENV || 'development',
         },
       });
     }
@@ -582,8 +582,8 @@ export const cancelSubscription = async (req: Request, res: Response) => {
         createErrorResponse(
           500,
           ErrorCode.INTERNAL_ERROR,
-          "An unexpected error occurred",
-          process.env.NODE_ENV === "production" ? undefined : error.message,
+          'An unexpected error occurred',
+          process.env.NODE_ENV === 'production' ? undefined : error.message,
         ),
       );
   }

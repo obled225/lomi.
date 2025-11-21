@@ -1,10 +1,10 @@
-import { Request, Response, NextFunction } from "express";
-import { createClient } from "@supabase/supabase-js";
-import * as crypto from "crypto";
+import { Request, Response, NextFunction } from 'express';
+import { createClient } from '@supabase/supabase-js';
+import * as crypto from 'crypto';
 
 // Initialize Supabase client
-const supabaseUrl = process.env.SUPABASE_URL || "";
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || "";
+const supabaseUrl = process.env.SUPABASE_URL || '';
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
 
 const supabase = createClient(supabaseUrl, supabaseServiceKey, {
   auth: {
@@ -31,14 +31,14 @@ export const verifyWebhookSignature = async (
 ) => {
   try {
     // Get the signature and webhook ID from headers
-    const signature = req.headers["x-merchant-signature"] as string;
-    const webhookId = req.headers["x-webhook-id"] as string;
+    const signature = req.headers['x-merchant-signature'] as string;
+    const webhookId = req.headers['x-webhook-id'] as string;
 
     // Validate required headers
     if (!signature) {
       return res.status(401).json({
         error: {
-          message: "Missing X-Merchant-Signature header",
+          message: 'Missing X-Merchant-Signature header',
         },
       });
     }
@@ -46,20 +46,20 @@ export const verifyWebhookSignature = async (
     if (!webhookId) {
       return res.status(401).json({
         error: {
-          message: "Missing X-Webhook-ID header",
+          message: 'Missing X-Webhook-ID header',
         },
       });
     }
 
     // Fetch the webhook configuration from the database
-    const { data: webhook, error } = await supabase.rpc("get_webhook_by_id", {
+    const { data: webhook, error } = await supabase.rpc('get_webhook_by_id', {
       p_webhook_id: webhookId,
     });
 
     if (error || !webhook || webhook.length === 0) {
       return res.status(401).json({
         error: {
-          message: "Invalid webhook configuration",
+          message: 'Invalid webhook configuration',
         },
       });
     }
@@ -70,19 +70,19 @@ export const verifyWebhookSignature = async (
     if (!verificationToken) {
       return res.status(500).json({
         error: {
-          message: "Webhook configuration error: missing verification token",
+          message: 'Webhook configuration error: missing verification token',
         },
       });
     }
 
     // Convert raw body to string if it exists
-    const rawBody = req.body ? JSON.stringify(req.body) : "";
+    const rawBody = req.body ? JSON.stringify(req.body) : '';
 
     // Generate expected signature
     const expectedSignature = crypto
-      .createHmac("sha256", verificationToken)
+      .createHmac('sha256', verificationToken)
       .update(rawBody)
-      .digest("hex");
+      .digest('hex');
 
     // Compare signatures (constant-time comparison to prevent timing attacks)
     const isValid = crypto.timingSafeEqual(
@@ -93,7 +93,7 @@ export const verifyWebhookSignature = async (
     if (!isValid) {
       return res.status(401).json({
         error: {
-          message: "Invalid webhook signature",
+          message: 'Invalid webhook signature',
         },
       });
     }
@@ -106,10 +106,10 @@ export const verifyWebhookSignature = async (
     // Continue processing the request
     next();
   } catch (error: any) {
-    console.error("Webhook verification error:", error);
+    console.error('Webhook verification error:', error);
     return res.status(500).json({
       error: {
-        message: "Failed to verify webhook signature",
+        message: 'Failed to verify webhook signature',
         details: error.message,
       },
     });

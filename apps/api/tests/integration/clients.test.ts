@@ -10,7 +10,7 @@ global.fetch = mockFetch;
 describe('Client Methods', () => {
   const sdk = new LomiSDK({
     baseUrl: 'https://sandbox.api.lomi.africa/v1',
-    apiKey: 'lomi_sk_test_123'
+    apiKey: 'lomi_sk_test_123',
   });
 
   beforeEach(() => {
@@ -28,10 +28,11 @@ describe('Client Methods', () => {
       mockFetch.mockResolvedValueOnce({
         ok: false,
         status: 400,
-        json: () => Promise.resolve({
-          code: 'INVALID_REQUEST',
-          message: 'Invalid request'
-        })
+        json: () =>
+          Promise.resolve({
+            code: 'INVALID_REQUEST',
+            message: 'Invalid request',
+          }),
       } as Response);
 
       await expect(sdk.ping.list()).rejects.toThrow(ApiError);
@@ -41,7 +42,7 @@ describe('Client Methods', () => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
         status: 204,
-        json: () => Promise.resolve(undefined)
+        json: () => Promise.resolve(undefined),
       } as Response);
 
       const result = await sdk.ping.list();
@@ -58,20 +59,21 @@ describe('Client Methods', () => {
         currency_code: Types.CurrencyCode.XOF,
         is_active: true,
         display_on_storefront: true,
-        metadata: {}
+        metadata: {},
       };
 
       mockFetch.mockResolvedValueOnce({
         ok: true,
         status: 201,
-        json: () => Promise.resolve({
-          ...mockProduct,
-          product_id: 'prod_123',
-          merchant_id: 'merchant_123',
-          organization_id: 'org_123',
-          created_at: new Date().toISOString(),
-          updated_at: new Date().toISOString()
-        })
+        json: () =>
+          Promise.resolve({
+            ...mockProduct,
+            product_id: 'prod_123',
+            merchant_id: 'merchant_123',
+            organization_id: 'org_123',
+            created_at: new Date().toISOString(),
+            updated_at: new Date().toISOString(),
+          }),
       } as Response);
 
       const result = await sdk.products.create(mockProduct);
@@ -82,20 +84,21 @@ describe('Client Methods', () => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
         status: 200,
-        json: () => Promise.resolve({
-          product_id: 'prod_123',
-          merchant_id: 'merchant_123',
-          organization_id: 'org_123',
-          name: 'Test Product',
-          description: 'A test product',
-          price: 1000,
-          currency_code: Types.CurrencyCode.XOF,
-          is_active: true,
-          display_on_storefront: true,
-          metadata: {},
-          created_at: new Date().toISOString(),
-          updated_at: new Date().toISOString()
-        })
+        json: () =>
+          Promise.resolve({
+            product_id: 'prod_123',
+            merchant_id: 'merchant_123',
+            organization_id: 'org_123',
+            name: 'Test Product',
+            description: 'A test product',
+            price: 1000,
+            currency_code: Types.CurrencyCode.XOF,
+            is_active: true,
+            display_on_storefront: true,
+            metadata: {},
+            created_at: new Date().toISOString(),
+            updated_at: new Date().toISOString(),
+          }),
       } as Response);
 
       const result = await sdk.products.getProduct('prod_123');
@@ -106,20 +109,23 @@ describe('Client Methods', () => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
         status: 200,
-        json: () => Promise.resolve([{
-          product_id: 'prod_123',
-          merchant_id: 'merchant_123',
-          organization_id: 'org_123',
-          name: 'Test Product',
-          description: 'A test product',
-          price: 1000,
-          currency_code: Types.CurrencyCode.XOF,
-          is_active: true,
-          display_on_storefront: true,
-          metadata: {},
-          created_at: new Date().toISOString(),
-          updated_at: new Date().toISOString()
-        }])
+        json: () =>
+          Promise.resolve([
+            {
+              product_id: 'prod_123',
+              merchant_id: 'merchant_123',
+              organization_id: 'org_123',
+              name: 'Test Product',
+              description: 'A test product',
+              price: 1000,
+              currency_code: Types.CurrencyCode.XOF,
+              is_active: true,
+              display_on_storefront: true,
+              metadata: {},
+              created_at: new Date().toISOString(),
+              updated_at: new Date().toISOString(),
+            },
+          ]),
       } as Response);
 
       const result = await sdk.products.list('merchant_123');
@@ -130,7 +136,7 @@ describe('Client Methods', () => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
         status: 204,
-        json: () => Promise.resolve(undefined)
+        json: () => Promise.resolve(undefined),
       } as Response);
 
       const result = await sdk.products.deleteProduct('prod_123');
@@ -150,20 +156,21 @@ describe('Client Methods', () => {
         charge_day: 1,
         metadata: {},
         display_on_storefront: true,
-        first_payment_type: Types.FirstPaymentType.initial
+        first_payment_type: Types.FirstPaymentType.initial,
       };
 
       mockFetch.mockResolvedValueOnce({
         ok: true,
         status: 201,
-        json: () => Promise.resolve({
-          ...mockPlan,
-          plan_id: 'plan_123',
-          merchant_id: 'merchant_123',
-          organization_id: 'org_123',
-          created_at: new Date().toISOString(),
-          updated_at: new Date().toISOString()
-        })
+        json: () =>
+          Promise.resolve({
+            ...mockPlan,
+            plan_id: 'plan_123',
+            merchant_id: 'merchant_123',
+            organization_id: 'org_123',
+            created_at: new Date().toISOString(),
+            updated_at: new Date().toISOString(),
+          }),
       } as Response);
 
       const result = await sdk.subscriptions.create(mockPlan);
@@ -174,23 +181,26 @@ describe('Client Methods', () => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
         status: 200,
-        json: () => Promise.resolve([{
-          plan_id: 'plan_123',
-          merchant_id: 'merchant_123',
-          organization_id: 'org_123',
-          name: 'Test Plan',
-          description: 'A test subscription plan',
-          amount: 1000,
-          currency_code: Types.CurrencyCode.XOF,
-          billing_frequency: Types.BillingFrequency.monthly,
-          failed_payment_action: Types.FailedPaymentAction.pause,
-          charge_day: 1,
-          metadata: {},
-          display_on_storefront: true,
-          first_payment_type: Types.FirstPaymentType.initial,
-          created_at: new Date().toISOString(),
-          updated_at: new Date().toISOString()
-        }])
+        json: () =>
+          Promise.resolve([
+            {
+              plan_id: 'plan_123',
+              merchant_id: 'merchant_123',
+              organization_id: 'org_123',
+              name: 'Test Plan',
+              description: 'A test subscription plan',
+              amount: 1000,
+              currency_code: Types.CurrencyCode.XOF,
+              billing_frequency: Types.BillingFrequency.monthly,
+              failed_payment_action: Types.FailedPaymentAction.pause,
+              charge_day: 1,
+              metadata: {},
+              display_on_storefront: true,
+              first_payment_type: Types.FirstPaymentType.initial,
+              created_at: new Date().toISOString(),
+              updated_at: new Date().toISOString(),
+            },
+          ]),
       } as Response);
 
       const result = await sdk.subscriptions.list('merchant_123');
@@ -203,26 +213,29 @@ describe('Client Methods', () => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
         status: 200,
-        json: () => Promise.resolve([{
-          transaction_id: 'txn_123',
-          merchant_id: 'merchant_123',
-          organization_id: 'org_123',
-          customer_id: 'cust_123',
-          transaction_type: Types.TransactionType.payment,
-          description: 'Test transaction',
-          reference_id: 'ref_123',
-          metadata: {},
-          gross_amount: 1000,
-          fee_amount: 50,
-          net_amount: 950,
-          fee_reference: 'XOF/WAVE Mobile Money Fee',
-          currency_code: Types.CurrencyCode.XOF,
-          provider_code: Types.ProviderCode.WAVE,
-          payment_method_code: Types.PaymentMethodCode.E_WALLET,
-          status: 'completed',
-          created_at: new Date().toISOString(),
-          updated_at: new Date().toISOString()
-        }])
+        json: () =>
+          Promise.resolve([
+            {
+              transaction_id: 'txn_123',
+              merchant_id: 'merchant_123',
+              organization_id: 'org_123',
+              customer_id: 'cust_123',
+              transaction_type: Types.TransactionType.payment,
+              description: 'Test transaction',
+              reference_id: 'ref_123',
+              metadata: {},
+              gross_amount: 1000,
+              fee_amount: 50,
+              net_amount: 950,
+              fee_reference: 'XOF/WAVE Mobile Money Fee',
+              currency_code: Types.CurrencyCode.XOF,
+              provider_code: Types.ProviderCode.WAVE,
+              payment_method_code: Types.PaymentMethodCode.E_WALLET,
+              status: 'completed',
+              created_at: new Date().toISOString(),
+              updated_at: new Date().toISOString(),
+            },
+          ]),
       } as Response);
 
       const result = await sdk.transactions.transactionsList('merchant_123');
@@ -234,26 +247,27 @@ describe('Client Methods', () => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
         status: 200,
-        json: () => Promise.resolve({
-          transaction_id: 'txn_123',
-          merchant_id: 'merchant_123',
-          organization_id: 'org_123',
-          customer_id: 'cust_123',
-          transaction_type: Types.TransactionType.payment,
-          description: 'Test transaction',
-          reference_id: 'ref_123',
-          metadata: {},
-          gross_amount: 1000,
-          fee_amount: 50,
-          net_amount: 950,
-          fee_reference: 'XOF/WAVE Mobile Money Fee',
-          currency_code: Types.CurrencyCode.XOF,
-          provider_code: Types.ProviderCode.WAVE,
-          payment_method_code: Types.PaymentMethodCode.E_WALLET,
-          status: 'completed',
-          created_at: new Date().toISOString(),
-          updated_at: new Date().toISOString()
-        })
+        json: () =>
+          Promise.resolve({
+            transaction_id: 'txn_123',
+            merchant_id: 'merchant_123',
+            organization_id: 'org_123',
+            customer_id: 'cust_123',
+            transaction_type: Types.TransactionType.payment,
+            description: 'Test transaction',
+            reference_id: 'ref_123',
+            metadata: {},
+            gross_amount: 1000,
+            fee_amount: 50,
+            net_amount: 950,
+            fee_reference: 'XOF/WAVE Mobile Money Fee',
+            currency_code: Types.CurrencyCode.XOF,
+            provider_code: Types.ProviderCode.WAVE,
+            payment_method_code: Types.PaymentMethodCode.E_WALLET,
+            status: 'completed',
+            created_at: new Date().toISOString(),
+            updated_at: new Date().toISOString(),
+          }),
       } as Response);
 
       const result = await sdk.transactions.getTransactionById('txn_123');
@@ -274,23 +288,25 @@ describe('Client Methods', () => {
         metadata: {},
         amount: 1000,
         currency_code: Types.CurrencyCode.XOF,
-        allowed_providers: [Types.ProviderCode.WAVE]
+        allowed_providers: [Types.ProviderCode.WAVE],
       };
 
       mockFetch.mockResolvedValueOnce({
         ok: true,
         status: 201,
-        json: () => Promise.resolve({
-          ...mockSession,
-          checkout_session_id: 'cs_123',
-          url: 'https://checkout.lomi.africa/cs_123',
-          status: 'open',
-          created_at: new Date().toISOString(),
-          expires_at: new Date(Date.now() + 3600000).toISOString()
-        })
+        json: () =>
+          Promise.resolve({
+            ...mockSession,
+            checkout_session_id: 'cs_123',
+            url: 'https://checkout.lomi.africa/cs_123',
+            status: 'open',
+            created_at: new Date().toISOString(),
+            expires_at: new Date(Date.now() + 3600000).toISOString(),
+          }),
       } as Response);
 
-      const result = await sdk.checkoutSessions.createCheckoutSession(mockSession);
+      const result =
+        await sdk.checkoutSessions.createCheckoutSession(mockSession);
       expect(result.data.checkout_session_id).toBe('cs_123');
     });
 
@@ -298,23 +314,27 @@ describe('Client Methods', () => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
         status: 200,
-        json: () => Promise.resolve([{
-          checkout_session_id: 'cs_123',
-          merchant_id: 'merchant_123',
-          success_url: 'https://example.com/success',
-          cancel_url: 'https://example.com/cancel',
-          provider_codes: [Types.ProviderCode.WAVE],
-          customer_email: 'test@example.com',
-          customer_name: 'Test Customer',
-          metadata: {},
-          url: 'https://checkout.lomi.africa/cs_123',
-          status: 'completed',
-          created_at: new Date().toISOString(),
-          expires_at: new Date(Date.now() + 3600000).toISOString()
-        }])
+        json: () =>
+          Promise.resolve([
+            {
+              checkout_session_id: 'cs_123',
+              merchant_id: 'merchant_123',
+              success_url: 'https://example.com/success',
+              cancel_url: 'https://example.com/cancel',
+              provider_codes: [Types.ProviderCode.WAVE],
+              customer_email: 'test@example.com',
+              customer_name: 'Test Customer',
+              metadata: {},
+              url: 'https://checkout.lomi.africa/cs_123',
+              status: 'completed',
+              created_at: new Date().toISOString(),
+              expires_at: new Date(Date.now() + 3600000).toISOString(),
+            },
+          ]),
       } as Response);
 
-      const result = await sdk.checkoutSessions.listCheckoutSessions('merchant_123');
+      const result =
+        await sdk.checkoutSessions.listCheckoutSessions('merchant_123');
       expect(result.data).toHaveLength(1);
       expect(result.data[0].checkout_session_id).toBe('cs_123');
     });
@@ -323,20 +343,21 @@ describe('Client Methods', () => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
         status: 200,
-        json: () => Promise.resolve({
-          checkout_session_id: 'cs_123',
-          merchant_id: 'merchant_123',
-          success_url: 'https://example.com/success',
-          cancel_url: 'https://example.com/cancel',
-          provider_codes: [Types.ProviderCode.WAVE],
-          customer_email: 'test@example.com',
-          customer_name: 'Test Customer',
-          metadata: {},
-          url: 'https://checkout.lomi.africa/cs_123',
-          status: 'completed',
-          created_at: new Date().toISOString(),
-          expires_at: new Date(Date.now() + 3600000).toISOString()
-        })
+        json: () =>
+          Promise.resolve({
+            checkout_session_id: 'cs_123',
+            merchant_id: 'merchant_123',
+            success_url: 'https://example.com/success',
+            cancel_url: 'https://example.com/cancel',
+            provider_codes: [Types.ProviderCode.WAVE],
+            customer_email: 'test@example.com',
+            customer_name: 'Test Customer',
+            metadata: {},
+            url: 'https://checkout.lomi.africa/cs_123',
+            status: 'completed',
+            created_at: new Date().toISOString(),
+            expires_at: new Date(Date.now() + 3600000).toISOString(),
+          }),
       } as Response);
 
       const result = await sdk.checkoutSessions.getCheckoutSession('cs_123');
@@ -349,17 +370,18 @@ describe('Client Methods', () => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
         status: 200,
-        json: () => Promise.resolve({
-          merchant_id: 'merchant_123',
-          name: 'Test Merchant',
-          email: 'merchant@example.com',
-          phone_number: '+1234567890',
-          onboarded: true,
-          country: 'SN',
-          metadata: {},
-          created_at: new Date().toISOString(),
-          updated_at: new Date().toISOString()
-        })
+        json: () =>
+          Promise.resolve({
+            merchant_id: 'merchant_123',
+            name: 'Test Merchant',
+            email: 'merchant@example.com',
+            phone_number: '+1234567890',
+            onboarded: true,
+            country: 'SN',
+            metadata: {},
+            created_at: new Date().toISOString(),
+            updated_at: new Date().toISOString(),
+          }),
       } as Response);
 
       const result = await sdk.merchants.get('merchant_123');
@@ -370,15 +392,18 @@ describe('Client Methods', () => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
         status: 200,
-        json: () => Promise.resolve([{
-          provider_code: Types.ProviderCode.WAVE,
-          is_connected: true,
-          phone_number: '+1234567890',
-          is_phone_verified: true,
-          metadata: {},
-          created_at: new Date().toISOString(),
-          updated_at: new Date().toISOString()
-        }])
+        json: () =>
+          Promise.resolve([
+            {
+              provider_code: Types.ProviderCode.WAVE,
+              is_connected: true,
+              phone_number: '+1234567890',
+              is_phone_verified: true,
+              metadata: {},
+              created_at: new Date().toISOString(),
+              updated_at: new Date().toISOString(),
+            },
+          ]),
       } as Response);
 
       const result = await sdk.merchants.merchantProviders('merchant_123');
@@ -391,17 +416,22 @@ describe('Client Methods', () => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
         status: 200,
-        json: () => Promise.resolve([{
-          code: Types.ProviderCode.WAVE,
-          name: 'Wave',
-          description: 'Wave Mobile Money',
-          logo_url: 'https://example.com/wave.png',
-          payment_methods: [{
-            code: Types.PaymentMethodCode.E_WALLET,
-            name: 'E-Wallet',
-            description: 'Mobile Money Wallet'
-          }]
-        }])
+        json: () =>
+          Promise.resolve([
+            {
+              code: Types.ProviderCode.WAVE,
+              name: 'Wave',
+              description: 'Wave Mobile Money',
+              logo_url: 'https://example.com/wave.png',
+              payment_methods: [
+                {
+                  code: Types.PaymentMethodCode.E_WALLET,
+                  name: 'E-Wallet',
+                  description: 'Mobile Money Wallet',
+                },
+              ],
+            },
+          ]),
       } as Response);
 
       const result = await sdk.providers.providers();
@@ -414,11 +444,11 @@ describe('Client Methods', () => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
         status: 200,
-        json: () => Promise.resolve({ message: 'pong' })
+        json: () => Promise.resolve({ message: 'pong' }),
       } as Response);
 
       const result = await sdk.ping.list();
       expect(result.data.message).toBe('pong');
     });
   });
-}); 
+});

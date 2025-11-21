@@ -1,4 +1,11 @@
-import { describe, expect, it, jest, beforeEach, afterEach } from '@jest/globals';
+import {
+  describe,
+  expect,
+  it,
+  jest,
+  beforeEach,
+  afterEach,
+} from '@jest/globals';
 import { CustomersClient } from '../../src/client/CustomersClient';
 import { ApiResult } from '../../src/client/core/ApiResult';
 import * as Types from '../../src/types/api';
@@ -35,7 +42,7 @@ describe('CustomersClient', () => {
       address: '123 Main St',
       postal_code: '10001',
       is_business: false,
-      metadata: { source: 'test' }
+      metadata: { source: 'test' },
     };
 
     const mockCustomerResponse: Types.Customer = {
@@ -52,11 +59,13 @@ describe('CustomersClient', () => {
       is_business: mockCreateCustomerData.is_business,
       metadata: mockCreateCustomerData.metadata,
       created_at: new Date('2024-01-17T00:00:00Z'),
-      updated_at: new Date('2024-01-17T00:00:00Z')
+      updated_at: new Date('2024-01-17T00:00:00Z'),
     };
 
     it('should create a customer successfully', async () => {
-      mockRequest.mockResolvedValueOnce(new ApiResult(201, mockCustomerResponse));
+      mockRequest.mockResolvedValueOnce(
+        new ApiResult(201, mockCustomerResponse),
+      );
       const result = await client.createCustomer(mockCreateCustomerData);
       expect(result.status).toBe(201);
       expect(result.data).toEqual(mockCustomerResponse);
@@ -79,7 +88,7 @@ describe('CustomersClient', () => {
         phone_number: '+1234567890',
         name: 'John Doe',
         created_at: new Date('2024-01-17T00:00:00Z'),
-        updated_at: new Date('2024-01-17T00:00:00Z')
+        updated_at: new Date('2024-01-17T00:00:00Z'),
       },
       {
         customer_id: '123e4567-e89b-12d3-a456-426614174002',
@@ -89,8 +98,8 @@ describe('CustomersClient', () => {
         phone_number: '+1234567891',
         name: 'Jane Smith',
         created_at: new Date('2024-01-17T00:00:00Z'),
-        updated_at: new Date('2024-01-17T00:00:00Z')
-      }
+        updated_at: new Date('2024-01-17T00:00:00Z'),
+      },
     ];
 
     it('should list customers successfully', async () => {
@@ -108,7 +117,7 @@ describe('CustomersClient', () => {
       const mockMerchantId = 'merchant_123';
       const filters = {
         email: 'customer1@example.com',
-        phone_number: '+1234567890'
+        phone_number: '+1234567890',
       };
       const mockFilteredList = [mockCustomers[0]];
 
@@ -135,7 +144,7 @@ describe('CustomersClient', () => {
       phone_number: '+1234567890',
       name: 'John Doe',
       created_at: new Date('2024-01-17T00:00:00Z'),
-      updated_at: new Date('2024-01-17T00:00:00Z')
+      updated_at: new Date('2024-01-17T00:00:00Z'),
     };
 
     it('should get a customer successfully', async () => {
@@ -154,7 +163,7 @@ describe('CustomersClient', () => {
     const mockCustomerId = '123e4567-e89b-12d3-a456-426614174001';
     const mockUpdateData = {
       name: 'Johnny Doe Jr',
-      metadata: { updated: true }
+      metadata: { updated: true },
     };
 
     const mockUpdatedCustomer: Types.Customer = {
@@ -166,12 +175,17 @@ describe('CustomersClient', () => {
       name: mockUpdateData.name,
       metadata: mockUpdateData.metadata,
       created_at: new Date('2024-01-17T00:00:00Z'),
-      updated_at: new Date('2024-01-17T00:00:00Z')
+      updated_at: new Date('2024-01-17T00:00:00Z'),
     };
 
     it('should update a customer successfully', async () => {
-      mockRequest.mockResolvedValueOnce(new ApiResult(200, mockUpdatedCustomer));
-      const result = await client.updateCustomer(mockCustomerId, mockUpdateData);
+      mockRequest.mockResolvedValueOnce(
+        new ApiResult(200, mockUpdatedCustomer),
+      );
+      const result = await client.updateCustomer(
+        mockCustomerId,
+        mockUpdateData,
+      );
       expect(result.data).toEqual(mockUpdatedCustomer);
       expect(mockRequest).toHaveBeenCalledWith({
         method: 'PATCH',
@@ -196,4 +210,4 @@ describe('CustomersClient', () => {
       });
     });
   });
-}); 
+});

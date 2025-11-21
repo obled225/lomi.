@@ -23,4 +23,4 @@ const config: Config.InitialOptions = {
   verbose: true,
 };
 
-export default config; 
+export default config;

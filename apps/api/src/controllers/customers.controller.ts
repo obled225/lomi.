@@ -1,21 +1,21 @@
-import { Request, Response } from "express";
-import { createClient } from "@supabase/supabase-js";
-import { z } from "zod";
-import { Customer } from "../types/api";
+import { Request, Response } from 'express';
+import { createClient } from '@supabase/supabase-js';
+import { z } from 'zod';
+import { Customer } from '../types/api';
 
 // Initialize Supabase client
-const supabaseUrl = process.env.SUPABASE_URL || "";
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || "";
+const supabaseUrl = process.env.SUPABASE_URL || '';
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
 const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
 // Error codes for better client-side error handling
 enum ErrorCode {
-  INVALID_REQUEST = "INVALID_REQUEST",
-  UNAUTHORIZED = "UNAUTHORIZED",
-  FORBIDDEN = "FORBIDDEN",
-  NOT_FOUND = "NOT_FOUND",
-  DATABASE_ERROR = "DATABASE_ERROR",
-  INTERNAL_ERROR = "INTERNAL_ERROR",
+  INVALID_REQUEST = 'INVALID_REQUEST',
+  UNAUTHORIZED = 'UNAUTHORIZED',
+  FORBIDDEN = 'FORBIDDEN',
+  NOT_FOUND = 'NOT_FOUND',
+  DATABASE_ERROR = 'DATABASE_ERROR',
+  INTERNAL_ERROR = 'INTERNAL_ERROR',
 }
 
 // Standardized error response creator
@@ -91,7 +91,7 @@ export const createCustomer = async (req: Request, res: Response) => {
           createErrorResponse(
             400,
             ErrorCode.INVALID_REQUEST,
-            "Invalid request body",
+            'Invalid request body',
             validationResult.error.format(),
           ),
         );
@@ -120,35 +120,35 @@ export const createCustomer = async (req: Request, res: Response) => {
           createErrorResponse(
             401,
             ErrorCode.UNAUTHORIZED,
-            "Merchant ID or Organization ID not found",
+            'Merchant ID or Organization ID not found',
           ),
         );
     }
 
     // Use RPC function to create customer - modified to match the function definition
-    const { data, error } = await supabase.rpc("create_customer", {
+    const { data, error } = await supabase.rpc('create_customer', {
       p_merchant_id: merchantId,
       p_organization_id: organizationId,
       p_name: name,
-      p_email: email || "",
-      p_phone_number: phone_number || "",
-      p_whatsapp_number: whatsapp_number || "",
-      p_country: country || "",
-      p_city: city || "",
-      p_address: address || "",
-      p_postal_code: postal_code || "",
+      p_email: email || '',
+      p_phone_number: phone_number || '',
+      p_whatsapp_number: whatsapp_number || '',
+      p_country: country || '',
+      p_city: city || '',
+      p_address: address || '',
+      p_postal_code: postal_code || '',
       p_is_business: is_business || false,
     });
 
     if (error) {
-      logError(error, "createCustomer", req);
+      logError(error, 'createCustomer', req);
       return res
         .status(500)
         .json(
           createErrorResponse(
             500,
             ErrorCode.DATABASE_ERROR,
-            "Failed to create customer",
+            'Failed to create customer',
             error.message,
           ),
         );
@@ -175,15 +175,15 @@ export const createCustomer = async (req: Request, res: Response) => {
       },
     });
   } catch (error: any) {
-    logError(error, "createCustomer", req);
+    logError(error, 'createCustomer', req);
     res
       .status(500)
       .json(
         createErrorResponse(
           500,
           ErrorCode.INTERNAL_ERROR,
-          "Internal server error",
-          process.env.NODE_ENV === "production" ? undefined : error.message,
+          'Internal server error',
+          process.env.NODE_ENV === 'production' ? undefined : error.message,
         ),
       );
   }
@@ -204,25 +204,25 @@ export const getCustomer = async (req: Request, res: Response) => {
           createErrorResponse(
             401,
             ErrorCode.UNAUTHORIZED,
-            "Merchant ID not found",
+            'Merchant ID not found',
           ),
         );
     }
 
     // Use the fetch_customer_api function which returns any customer regardless of transaction status
-    const { data, error } = await supabase.rpc("fetch_customer_api", {
+    const { data, error } = await supabase.rpc('fetch_customer_api', {
       p_customer_id: id,
     });
 
     if (error) {
-      logError(error, "getCustomer", req);
+      logError(error, 'getCustomer', req);
       return res
         .status(500)
         .json(
           createErrorResponse(
             500,
             ErrorCode.DATABASE_ERROR,
-            "Failed to retrieve customer",
+            'Failed to retrieve customer',
             error.message,
           ),
         );
@@ -232,7 +232,7 @@ export const getCustomer = async (req: Request, res: Response) => {
       return res
         .status(404)
         .json(
-          createErrorResponse(404, ErrorCode.NOT_FOUND, "Customer not found"),
+          createErrorResponse(404, ErrorCode.NOT_FOUND, 'Customer not found'),
         );
     }
 
@@ -241,15 +241,15 @@ export const getCustomer = async (req: Request, res: Response) => {
       data: data[0] as Customer,
     });
   } catch (error: any) {
-    logError(error, "getCustomer", req);
+    logError(error, 'getCustomer', req);
     res
       .status(500)
       .json(
         createErrorResponse(
           500,
           ErrorCode.INTERNAL_ERROR,
-          "Internal server error",
-          process.env.NODE_ENV === "production" ? undefined : error.message,
+          'Internal server error',
+          process.env.NODE_ENV === 'production' ? undefined : error.message,
         ),
       );
   }
@@ -273,7 +273,7 @@ export const updateCustomer = async (req: Request, res: Response) => {
           createErrorResponse(
             400,
             ErrorCode.INVALID_REQUEST,
-            "Invalid request body",
+            'Invalid request body',
             validationResult.error.format(),
           ),
         );
@@ -299,28 +299,28 @@ export const updateCustomer = async (req: Request, res: Response) => {
           createErrorResponse(
             401,
             ErrorCode.UNAUTHORIZED,
-            "Merchant ID not found",
+            'Merchant ID not found',
           ),
         );
     }
 
     // First, check if customer exists and belongs to the merchant
     const { data: customerData, error: customerError } = await supabase.rpc(
-      "fetch_customer",
+      'fetch_customer',
       {
         p_customer_id: id,
       },
     );
 
     if (customerError) {
-      logError(customerError, "updateCustomer - checking customer", req);
+      logError(customerError, 'updateCustomer - checking customer', req);
       return res
         .status(500)
         .json(
           createErrorResponse(
             500,
             ErrorCode.DATABASE_ERROR,
-            "Failed to verify customer",
+            'Failed to verify customer',
             customerError.message,
           ),
         );
@@ -330,34 +330,34 @@ export const updateCustomer = async (req: Request, res: Response) => {
       return res
         .status(404)
         .json(
-          createErrorResponse(404, ErrorCode.NOT_FOUND, "Customer not found"),
+          createErrorResponse(404, ErrorCode.NOT_FOUND, 'Customer not found'),
         );
     }
 
     // Use RPC function to update customer with the correct parameters
-    const { error } = await supabase.rpc("update_customer", {
+    const { error } = await supabase.rpc('update_customer', {
       p_customer_id: id,
       p_name: name || customerData.name,
-      p_email: email || customerData.email || "",
-      p_phone_number: phone_number || customerData.phone_number || "",
-      p_whatsapp_number: whatsapp_number || customerData.whatsapp_number || "",
-      p_country: country || customerData.country || "",
-      p_city: city || customerData.city || "",
-      p_address: address || customerData.address || "",
-      p_postal_code: postal_code || customerData.postal_code || "",
+      p_email: email || customerData.email || '',
+      p_phone_number: phone_number || customerData.phone_number || '',
+      p_whatsapp_number: whatsapp_number || customerData.whatsapp_number || '',
+      p_country: country || customerData.country || '',
+      p_city: city || customerData.city || '',
+      p_address: address || customerData.address || '',
+      p_postal_code: postal_code || customerData.postal_code || '',
       p_is_business:
         is_business !== undefined ? is_business : customerData.is_business,
     });
 
     if (error) {
-      logError(error, "updateCustomer", req);
+      logError(error, 'updateCustomer', req);
       return res
         .status(500)
         .json(
           createErrorResponse(
             500,
             ErrorCode.DATABASE_ERROR,
-            "Failed to update customer",
+            'Failed to update customer',
             error.message,
           ),
         );
@@ -365,14 +365,14 @@ export const updateCustomer = async (req: Request, res: Response) => {
 
     // Get the updated customer data
     const { data: updatedCustomer, error: fetchError } = await supabase.rpc(
-      "fetch_customer",
+      'fetch_customer',
       {
         p_customer_id: id,
       },
     );
 
     if (fetchError) {
-      logError(fetchError, "updateCustomer - fetching updated customer", req);
+      logError(fetchError, 'updateCustomer - fetching updated customer', req);
       // Don't return an error here, we'll just use what we have
     }
 
@@ -384,15 +384,15 @@ export const updateCustomer = async (req: Request, res: Response) => {
       },
     });
   } catch (error: any) {
-    logError(error, "updateCustomer", req);
+    logError(error, 'updateCustomer', req);
     res
       .status(500)
       .json(
         createErrorResponse(
           500,
           ErrorCode.INTERNAL_ERROR,
-          "Internal server error",
-          process.env.NODE_ENV === "production" ? undefined : error.message,
+          'Internal server error',
+          process.env.NODE_ENV === 'production' ? undefined : error.message,
         ),
       );
   }
@@ -413,13 +413,13 @@ export const listCustomers = async (req: Request, res: Response) => {
           createErrorResponse(
             401,
             ErrorCode.UNAUTHORIZED,
-            "Merchant ID not found",
+            'Merchant ID not found',
           ),
         );
     }
 
     // Use fetch_customers_api RPC function which returns ALL customers regardless of transaction status
-    const { data, error } = await supabase.rpc("fetch_customers_api", {
+    const { data, error } = await supabase.rpc('fetch_customers_api', {
       p_merchant_id: merchantId,
       p_search_term: email ? email : phone_number ? phone_number : null,
       p_customer_type: null,
@@ -428,14 +428,14 @@ export const listCustomers = async (req: Request, res: Response) => {
     });
 
     if (error) {
-      logError(error, "listCustomers", req);
+      logError(error, 'listCustomers', req);
       return res
         .status(500)
         .json(
           createErrorResponse(
             500,
             ErrorCode.DATABASE_ERROR,
-            "Failed to list customers",
+            'Failed to list customers',
             error.message,
           ),
         );
@@ -450,15 +450,15 @@ export const listCustomers = async (req: Request, res: Response) => {
       },
     });
   } catch (error: any) {
-    logError(error, "listCustomers", req);
+    logError(error, 'listCustomers', req);
     res
       .status(500)
       .json(
         createErrorResponse(
           500,
           ErrorCode.INTERNAL_ERROR,
-          "Internal server error",
-          process.env.NODE_ENV === "production" ? undefined : error.message,
+          'Internal server error',
+          process.env.NODE_ENV === 'production' ? undefined : error.message,
         ),
       );
   }
@@ -479,25 +479,25 @@ export const deleteCustomer = async (req: Request, res: Response) => {
           createErrorResponse(
             401,
             ErrorCode.UNAUTHORIZED,
-            "Merchant ID not found",
+            'Merchant ID not found',
           ),
         );
     }
 
     // Use RPC function to delete customer - modified to match the function definition
-    const { data, error } = await supabase.rpc("delete_customer", {
+    const { data, error } = await supabase.rpc('delete_customer', {
       p_customer_id: id,
     });
 
     if (error) {
-      logError(error, "deleteCustomer", req);
+      logError(error, 'deleteCustomer', req);
       return res
         .status(500)
         .json(
           createErrorResponse(
             500,
             ErrorCode.DATABASE_ERROR,
-            "Failed to delete customer",
+            'Failed to delete customer',
             error.message,
           ),
         );
@@ -511,15 +511,15 @@ export const deleteCustomer = async (req: Request, res: Response) => {
       },
     });
   } catch (error: any) {
-    logError(error, "deleteCustomer", req);
+    logError(error, 'deleteCustomer', req);
     res
       .status(500)
       .json(
         createErrorResponse(
           500,
           ErrorCode.INTERNAL_ERROR,
-          "Internal server error",
-          process.env.NODE_ENV === "production" ? undefined : error.message,
+          'Internal server error',
+          process.env.NODE_ENV === 'production' ? undefined : error.message,
         ),
       );
   }

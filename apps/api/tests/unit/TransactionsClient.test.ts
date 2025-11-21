@@ -1,4 +1,11 @@
-import { describe, expect, it, jest, beforeEach, afterEach } from '@jest/globals';
+import {
+  describe,
+  expect,
+  it,
+  jest,
+  beforeEach,
+  afterEach,
+} from '@jest/globals';
 import { TransactionsClient } from '../../src/client/TransactionsClient';
 import { ApiResult } from '../../src/client/core/ApiResult';
 import { BaseClient } from '../../src/client/BaseClient';
@@ -31,7 +38,9 @@ describe('TransactionsClient', () => {
     const mockTransactionList = [{ id: 'txn_1', amount: 100 }];
 
     it('should list transactions successfully', async () => {
-      mockRequest.mockResolvedValueOnce(new ApiResult(200, mockTransactionList));
+      mockRequest.mockResolvedValueOnce(
+        new ApiResult(200, mockTransactionList),
+      );
       const result = await client.transactionsList(mockMerchantId);
       expect(result.data).toEqual(mockTransactionList);
       expect(mockRequest).toHaveBeenCalledWith({
@@ -43,10 +52,17 @@ describe('TransactionsClient', () => {
 
     // Test case for potential errors (e.g., invalid merchant_id)
     it('should handle API errors when listing transactions', async () => {
-      const errorResponse = { status: 404, body: { message: 'Merchant not found' } };
-      mockRequest.mockRejectedValueOnce(new ApiError(errorResponse.status, errorResponse.body));
+      const errorResponse = {
+        status: 404,
+        body: { message: 'Merchant not found' },
+      };
+      mockRequest.mockRejectedValueOnce(
+        new ApiError(errorResponse.status, errorResponse.body),
+      );
 
-      await expect(client.transactionsList(mockMerchantId)).rejects.toThrow(ApiError);
+      await expect(client.transactionsList(mockMerchantId)).rejects.toThrow(
+        ApiError,
+      );
       expect(mockRequest).toHaveBeenCalledWith({
         method: 'GET',
         path: '/transactions',
@@ -57,10 +73,16 @@ describe('TransactionsClient', () => {
 
   describe('getTransactionById', () => {
     const mockTransactionId = 'txn_xyz';
-    const mockTransactionData = { id: mockTransactionId, amount: 500, status: 'succeeded' };
+    const mockTransactionData = {
+      id: mockTransactionId,
+      amount: 500,
+      status: 'succeeded',
+    };
 
     it('should get a transaction by ID successfully', async () => {
-      mockRequest.mockResolvedValueOnce(new ApiResult(200, mockTransactionData));
+      mockRequest.mockResolvedValueOnce(
+        new ApiResult(200, mockTransactionData),
+      );
       const result = await client.getTransactionById(mockTransactionId);
       expect(result.data).toEqual(mockTransactionData);
       expect(mockRequest).toHaveBeenCalledWith({
@@ -96,4 +118,4 @@ describe('TransactionsClient', () => {
     // ... add tests for error handling ...
   });
   */
-}); 
+});

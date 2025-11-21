@@ -8,7 +8,7 @@ describe('ApiError', () => {
     const body: ErrorBody = {
       message: 'Validation error',
       code: 'INVALID_INPUT',
-      details: { field: 'email' }
+      details: { field: 'email' },
     };
 
     const error = new ApiError(status, body);
@@ -24,7 +24,7 @@ describe('ApiError', () => {
   it('should create an instance with minimal body', () => {
     const status = 500;
     const body: ErrorBody = {
-      message: 'Internal server error'
+      message: 'Internal server error',
     };
 
     const error = new ApiError(status, body);
@@ -46,4 +46,4 @@ describe('ApiError', () => {
     expect(error.body).toBe(body);
     expect(error.message).toBe(`API Error ${status}: {}`);
   });
-}); 
+});

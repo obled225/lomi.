@@ -19,11 +19,11 @@ describe('PingClient', () => {
   describe('list', () => {
     it('should ping the API successfully', async () => {
       const mockResponse = { message: 'pong' };
-      
+
       mockFetch.mockResolvedValueOnce({
         ok: true,
         status: 200,
-        json: () => Promise.resolve(mockResponse)
+        json: () => Promise.resolve(mockResponse),
       } as Response);
 
       const result = await client.list();
@@ -34,9 +34,9 @@ describe('PingClient', () => {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            'X-API-KEY': mockApiKey
-          }
-        })
+            'X-API-KEY': mockApiKey,
+          },
+        }),
       );
 
       expect(result).toBeInstanceOf(ApiResult);
@@ -44,4 +44,4 @@ describe('PingClient', () => {
       expect(result.data).toEqual(mockResponse);
     });
   });
-}); 
+});

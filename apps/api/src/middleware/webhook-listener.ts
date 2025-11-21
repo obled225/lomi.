@@ -1,7 +1,7 @@
-import { Request, Response, NextFunction } from "express";
-import { WebhookEvent } from "../types/api";
-import { TransactionStatus, SubscriptionStatus } from "../types/api";
-import { notifyTransactionEvent } from "../services/webhook-sender";
+import { Request, Response, NextFunction } from 'express';
+import { WebhookEvent } from '../types/api';
+import { TransactionStatus, SubscriptionStatus } from '../types/api';
+import { notifyTransactionEvent } from '../services/webhook-sender';
 
 // Extend the Express Request interface to include organizationId
 declare global {
@@ -16,18 +16,18 @@ declare global {
  * Enum for database webhook events
  */
 export enum DatabaseWebhookEvent {
-  PAYMENT_CREATED = "payment.created",
-  PAYMENT_SUCCEEDED = "payment.succeeded",
-  PAYMENT_FAILED = "payment.failed",
-  PAYMENT_CANCELED = "payment.canceled",
-  REFUND_CREATED = "refund.created",
-  REFUND_COMPLETED = "refund.completed",
-  REFUND_FAILED = "refund.failed",
-  SUBSCRIPTION_CREATED = "subscription.created",
-  SUBSCRIPTION_RENEWED = "subscription.renewed",
-  SUBSCRIPTION_CANCELED = "subscription.canceled",
-  CHECKOUT_COMPLETED = "checkout.completed",
-  PROVIDER_STATUS_CHANGED = "provider.status_changed",
+  PAYMENT_CREATED = 'payment.created',
+  PAYMENT_SUCCEEDED = 'payment.succeeded',
+  PAYMENT_FAILED = 'payment.failed',
+  PAYMENT_CANCELED = 'payment.canceled',
+  REFUND_CREATED = 'refund.created',
+  REFUND_COMPLETED = 'refund.completed',
+  REFUND_FAILED = 'refund.failed',
+  SUBSCRIPTION_CREATED = 'subscription.created',
+  SUBSCRIPTION_RENEWED = 'subscription.renewed',
+  SUBSCRIPTION_CANCELED = 'subscription.canceled',
+  CHECKOUT_COMPLETED = 'checkout.completed',
+  PROVIDER_STATUS_CHANGED = 'provider.status_changed',
 }
 
 /**
@@ -37,15 +37,15 @@ export const mapTransactionStatusToDbEvent = (
   status: TransactionStatus,
 ): DatabaseWebhookEvent => {
   switch (status) {
-    case "pending":
+    case 'pending':
       return DatabaseWebhookEvent.PAYMENT_CREATED;
-    case "completed":
+    case 'completed':
       return DatabaseWebhookEvent.PAYMENT_SUCCEEDED;
-    case "failed":
+    case 'failed':
       return DatabaseWebhookEvent.PAYMENT_FAILED;
-    case "refunded":
+    case 'refunded':
       return DatabaseWebhookEvent.REFUND_COMPLETED;
-    case "expired":
+    case 'expired':
       return DatabaseWebhookEvent.CHECKOUT_COMPLETED;
     default:
       return DatabaseWebhookEvent.PROVIDER_STATUS_CHANGED;
@@ -64,14 +64,14 @@ export const mapSubscriptionStatusToDbEvent = (
   }
 
   switch (status) {
-    case "active":
+    case 'active':
       return DatabaseWebhookEvent.SUBSCRIPTION_RENEWED;
-    case "cancelled":
+    case 'cancelled':
       return DatabaseWebhookEvent.SUBSCRIPTION_CANCELED;
-    case "paused":
-    case "expired":
-    case "past_due":
-    case "trial":
+    case 'paused':
+    case 'expired':
+    case 'past_due':
+    case 'trial':
       return DatabaseWebhookEvent.PROVIDER_STATUS_CHANGED;
     default:
       return DatabaseWebhookEvent.PROVIDER_STATUS_CHANGED;
@@ -85,15 +85,15 @@ export const mapTransactionStatusToEvent = (
   status: TransactionStatus,
 ): WebhookEvent => {
   switch (status) {
-    case "pending":
+    case 'pending':
       return WebhookEvent.PAYMENT_CREATED;
-    case "completed":
+    case 'completed':
       return WebhookEvent.PAYMENT_SUCCEEDED;
-    case "failed":
+    case 'failed':
       return WebhookEvent.PAYMENT_FAILED;
-    case "refunded":
+    case 'refunded':
       return WebhookEvent.REFUND_COMPLETED;
-    case "expired":
+    case 'expired':
       return WebhookEvent.CHECKOUT_COMPLETED; // No direct mapping, using closest
     default:
       return WebhookEvent.PAYMENT_CREATED; // Default fallback
@@ -112,9 +112,9 @@ export const mapSubscriptionStatusToEvent = (
   }
 
   switch (status) {
-    case "active":
+    case 'active':
       return WebhookEvent.SUBSCRIPTION_RENEWED;
-    case "cancelled":
+    case 'cancelled':
       return WebhookEvent.SUBSCRIPTION_CANCELED;
     default:
       return WebhookEvent.SUBSCRIPTION_CREATED; // Default fallback
@@ -128,7 +128,7 @@ function extractResponseData(body: any): any {
   if (!body) return null;
 
   // If body is string, parse it
-  const responseData = typeof body === "string" ? JSON.parse(body) : body;
+  const responseData = typeof body === 'string' ? JSON.parse(body) : body;
 
   // Return data if it exists
   return responseData && responseData.data ? responseData.data : null;
@@ -180,7 +180,7 @@ export const webhookListener = (
             setTimeout(() => {
               notifyTransactionEvent(organizationId, event, transaction).catch(
                 (error) => {
-                  console.error("Failed to send webhook notification:", error);
+                  console.error('Failed to send webhook notification:', error);
                 },
               );
             }, 0);
@@ -194,7 +194,7 @@ export const webhookListener = (
           const subscription = responseData.subscription || responseData;
           if (subscription.status && subscription.id) {
             // Check if this is a new subscription (POST request)
-            const isNewSubscription = req.method === "POST";
+            const isNewSubscription = req.method === 'POST';
             const event = mapSubscriptionStatusToEvent(
               subscription.status,
               isNewSubscription,
@@ -205,7 +205,7 @@ export const webhookListener = (
               notifyTransactionEvent(organizationId, event, subscription).catch(
                 (error) => {
                   console.error(
-                    "Failed to send subscription webhook notification:",
+                    'Failed to send subscription webhook notification:',
                     error,
                   );
                 },
@@ -223,7 +223,7 @@ export const webhookListener = (
           const refund = responseData.refund || responseData;
           if (refund.status && refund.id) {
             const event =
-              refund.status === "completed"
+              refund.status === 'completed'
                 ? WebhookEvent.REFUND_COMPLETED
                 : WebhookEvent.REFUND_CREATED;
 
@@ -232,7 +232,7 @@ export const webhookListener = (
               notifyTransactionEvent(organizationId, event, refund).catch(
                 (error) => {
                   console.error(
-                    "Failed to send refund webhook notification:",
+                    'Failed to send refund webhook notification:',
                     error,
                   );
                 },
@@ -243,10 +243,10 @@ export const webhookListener = (
         // Handle checkout session completion
         else if (
           responseData.checkout_session ||
-          (responseData.id && responseData.status === "completed")
+          (responseData.id && responseData.status === 'completed')
         ) {
           const checkoutSession = responseData.checkout_session || responseData;
-          if (checkoutSession.status === "completed" && checkoutSession.id) {
+          if (checkoutSession.status === 'completed' && checkoutSession.id) {
             // Trigger webhook notification asynchronously
             setTimeout(() => {
               notifyTransactionEvent(
@@ -255,7 +255,7 @@ export const webhookListener = (
                 checkoutSession,
               ).catch((error) => {
                 console.error(
-                  "Failed to send checkout webhook notification:",
+                  'Failed to send checkout webhook notification:',
                   error,
                 );
               });
@@ -264,7 +264,7 @@ export const webhookListener = (
         }
       } catch (error) {
         // Just log the error, don't disrupt the response
-        console.error("Error processing response for webhooks:", error);
+        console.error('Error processing response for webhooks:', error);
       }
     }
 
@@ -286,17 +286,17 @@ export const subscriptionWebhookListener = (
 ) => {
   // Only check PATCH or PUT requests which modify subscriptions
   if (
-    (req.method === "PATCH" || req.method === "PUT") &&
-    req.path.includes("/subscriptions/")
+    (req.method === 'PATCH' || req.method === 'PUT') &&
+    req.path.includes('/subscriptions/')
   ) {
     // Extract the subscription ID from the URL
-    const subscriptionId = req.path.split("/").pop();
+    const subscriptionId = req.path.split('/').pop();
 
     // Store the original status if we're updating a subscription
     const originalStatus = req.body && req.body.status;
 
     // After the request completes, check if the status changed
-    res.on("finish", () => {
+    res.on('finish', () => {
       if (
         res.statusCode >= 200 &&
         res.statusCode < 300 &&
@@ -321,7 +321,7 @@ export const subscriptionWebhookListener = (
             event,
             subscription as any,
           ).catch((error) => {
-            console.error("Failed to send webhook notification:", error);
+            console.error('Failed to send webhook notification:', error);
           });
         }, 0);
       }
@@ -341,17 +341,17 @@ export const refundWebhookListener = (
 ) => {
   // Only check PATCH or PUT requests which modify refunds
   if (
-    (req.method === "PATCH" || req.method === "PUT") &&
-    req.path.includes("/refunds/")
+    (req.method === 'PATCH' || req.method === 'PUT') &&
+    req.path.includes('/refunds/')
   ) {
     // Extract the refund ID from the URL
-    const refundId = req.path.split("/").pop();
+    const refundId = req.path.split('/').pop();
 
     // Store the original status if we're updating a refund
     const originalStatus = req.body && req.body.status;
 
     // After the request completes, check if the status changed
-    res.on("finish", () => {
+    res.on('finish', () => {
       if (
         res.statusCode >= 200 &&
         res.statusCode < 300 &&
@@ -360,7 +360,7 @@ export const refundWebhookListener = (
         req.organizationId
       ) {
         const event =
-          originalStatus === "completed"
+          originalStatus === 'completed'
             ? WebhookEvent.REFUND_COMPLETED
             : WebhookEvent.REFUND_CREATED;
 
@@ -379,7 +379,7 @@ export const refundWebhookListener = (
             event,
             refund as any,
           ).catch((error) => {
-            console.error("Failed to send webhook notification:", error);
+            console.error('Failed to send webhook notification:', error);
           });
         }, 0);
       }
@@ -404,16 +404,16 @@ export const triggerWebhookEvent = async (
     organization_id: organizationId,
     status:
       event === WebhookEvent.PAYMENT_SUCCEEDED
-        ? "completed"
+        ? 'completed'
         : event === WebhookEvent.PAYMENT_FAILED
-          ? "failed"
+          ? 'failed'
           : event === WebhookEvent.PAYMENT_CREATED
-            ? "pending"
+            ? 'pending'
             : event === WebhookEvent.REFUND_COMPLETED
-              ? "refunded"
+              ? 'refunded'
               : event === WebhookEvent.CHECKOUT_COMPLETED
-                ? "expired"
-                : "pending",
+                ? 'expired'
+                : 'pending',
   };
 
   // Notify all webhooks for this organization about the event

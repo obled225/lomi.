@@ -1,5 +1,5 @@
-import { Request, Response, NextFunction } from "express";
-import { createClient } from "@supabase/supabase-js";
+import { Request, Response, NextFunction } from 'express';
+import { createClient } from '@supabase/supabase-js';
 
 // Extend the Express Request type declaration from auth.ts
 declare global {
@@ -7,7 +7,7 @@ declare global {
     interface Request {
       organizationId?: string;
       merchantId?: string;
-      apiEnvironment?: "test" | "live";
+      apiEnvironment?: 'test' | 'live';
     }
   }
 }
@@ -22,7 +22,7 @@ export const trackApiUsage = (
   next: NextFunction,
 ) => {
   // Skip tracking for non-API routes or if no organization ID is set
-  if (!req.path.startsWith("/v1") || !req.organizationId) {
+  if (!req.path.startsWith('/v1') || !req.organizationId) {
     return next();
   }
 
@@ -43,7 +43,7 @@ export const trackApiUsage = (
     const responseTimeMs = Math.round(hrTime[0] * 1000 + hrTime[1] / 1000000);
 
     // Get API key from request
-    const apiKey = req.headers["x-api-key"] as string;
+    const apiKey = req.headers['x-api-key'] as string;
 
     // Only track if we have an API key
     if (apiKey) {
@@ -58,9 +58,9 @@ export const trackApiUsage = (
         req.method,
         res.statusCode,
         responseTimeMs,
-        req.ip || "",
+        req.ip || '',
       ).catch((err) => {
-        console.error("Failed to log API usage:", err);
+        console.error('Failed to log API usage:', err);
       });
     }
 
@@ -78,8 +78,8 @@ export const trackApiUsage = (
 function normalizeEndpoint(path: string): string {
   // Replace UUIDs and numeric IDs with :id placeholder
   return path
-    .replace(/\/[a-f0-9-]{36}(?=\/|$)/g, "/:id")
-    .replace(/\/\d+(?=\/|$)/g, "/:id");
+    .replace(/\/[a-f0-9-]{36}(?=\/|$)/g, '/:id')
+    .replace(/\/\d+(?=\/|$)/g, '/:id');
 }
 
 /**
@@ -96,11 +96,11 @@ async function logApiUsage(
 ): Promise<void> {
   try {
     // Initialize Supabase client
-    const supabaseUrl = process.env.SUPABASE_URL || "";
-    const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || "";
+    const supabaseUrl = process.env.SUPABASE_URL || '';
+    const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
 
     if (!supabaseUrl || !supabaseServiceKey) {
-      console.error("Supabase credentials missing");
+      console.error('Supabase credentials missing');
       return;
     }
 
@@ -112,7 +112,7 @@ async function logApiUsage(
     });
 
     // Call the RPC function to log API usage
-    await supabase.rpc("log_api_usage", {
+    await supabase.rpc('log_api_usage', {
       p_organization_id: organizationId,
       p_api_key: apiKey,
       p_endpoint: endpoint,
@@ -122,6 +122,6 @@ async function logApiUsage(
       p_ip_address: ipAddress,
     });
   } catch (error) {
-    console.error("Failed to log API usage to database:", error);
+    console.error('Failed to log API usage to database:', error);
   }
 }

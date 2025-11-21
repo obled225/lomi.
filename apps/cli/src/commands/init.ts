@@ -1,16 +1,16 @@
-import { Command } from "commander";
-import inquirer from "inquirer";
-import chalk from "chalk";
-import ora from "ora";
-import { writeFile, mkdir, access } from "fs/promises";
-import { join } from "path";
-import { execSync } from "child_process";
-import { saveConfig } from "../utils/config.js";
+import { Command } from 'commander';
+import inquirer from 'inquirer';
+import chalk from 'chalk';
+import ora from 'ora';
+import { writeFile, mkdir, access } from 'fs/promises';
+import { join } from 'path';
+import { execSync } from 'child_process';
+import { saveConfig } from '../utils/config.js';
 // Assuming verifyWebhookSignature and LomiWebhookEvent are exported by the main 'lomi.' package
 // import type { LomiWebhookEvent } from 'lomi.';
 // import { verifyWebhookSignature } from 'lomi.';
 
-const command = new Command("init");
+const command = new Command('init');
 
 // ASCII Art from lomi.md
 const lomiArtLines = `
@@ -23,7 +23,7 @@ const lomiArtLines = `
 ╚══════╝ ╚═════╝ ╚═╝     ╚═╝╚═╝╚═╝
 `
   .trim()
-  .split("\n"); // Split into an array of lines
+  .split('\n'); // Split into an array of lines
 
 const getClientTemplate = (isTypeScript: boolean) => `\
 ${
@@ -56,7 +56,7 @@ ${isTypeScript ? 'export default lomiApi;' : 'module.exports = { lomiApi };'}
 `;
 
 const getCheckoutSessionTemplate = (isTypeScript: boolean) => {
-  const fileExtension = isTypeScript ? "ts" : "js";
+  const fileExtension = isTypeScript ? 'ts' : 'js';
   return `\
 ${
   isTypeScript
@@ -119,7 +119,7 @@ createCheckout();
 };
 
 const getWebhookHandlerTemplate = (isTypeScript: boolean) => {
-  const fileExtension = isTypeScript ? "ts" : "js";
+  const fileExtension = isTypeScript ? 'ts' : 'js';
   return `\
 ${
   isTypeScript
@@ -271,49 +271,49 @@ LOMI_WEBHOOK_SECRET=whsec_your_webhook_secret_here
 LOMI_API_URL=https://api.lomi.africa/v1`;
 
 command
-  .description("Initialize a new lomi. project with example code")
+  .description('Initialize a new lomi. project with example code')
   .action(async () => {
     // Add a blank line before the art
-    console.log(); 
+    console.log();
     // Display ASCII Art first, line by line
     lomiArtLines.forEach((line) => console.log(line));
     console.log(chalk.blue("\nWelcome to lomi.! Let's set up your project.\n")); // Add newline before welcome
 
     const answers = await inquirer.prompt([
       {
-        type: "password", // Changed from 'input' to 'password'
-        name: "apiKey",
-        message: `Enter your ${chalk.yellow("API key")} (from https://lomi.africa/portal/settings/api-keys):`,
-        mask: "*", // Optional: Define the mask character
+        type: 'password', // Changed from 'input' to 'password'
+        name: 'apiKey',
+        message: `Enter your ${chalk.yellow('API key')} (from https://lomi.africa/portal/settings/api-keys):`,
+        mask: '*', // Optional: Define the mask character
         validate: (input: string) =>
-          input.length > 0 || "API key cannot be empty",
+          input.length > 0 || 'API key cannot be empty',
       },
       {
-        type: "list",
-        name: "environment",
-        message: "Which environment API should the examples use?",
+        type: 'list',
+        name: 'environment',
+        message: 'Which environment API should the examples use?',
         choices: [
-          { name: "Production (live transactions)", value: "production" },
-          { name: "Sandbox (for testing)", value: "sandbox" },
+          { name: 'Production (live transactions)', value: 'production' },
+          { name: 'Sandbox (for testing)', value: 'sandbox' },
         ],
-        default: "production",
+        default: 'production',
       },
       {
-        type: "list",
-        name: "language",
-        message: "Generate example code in:",
-        choices: ["TypeScript", "JavaScript"],
-        default: "TypeScript",
+        type: 'list',
+        name: 'language',
+        message: 'Generate example code in:',
+        choices: ['TypeScript', 'JavaScript'],
+        default: 'TypeScript',
       },
     ]);
 
-    const isTypeScript = answers.language === "TypeScript";
-    const fileExtension = isTypeScript ? "ts" : "js";
-    const spinner = ora("Setting up your lomi. project...").start();
+    const isTypeScript = answers.language === 'TypeScript';
+    const fileExtension = isTypeScript ? 'ts' : 'js';
+    const spinner = ora('Setting up your lomi. project...').start();
 
     try {
       const projectDir = process.cwd();
-      const projectName = projectDir.split("/").pop() || "lomi-project";
+      const projectName = projectDir.split('/').pop() || 'lomi-project';
 
       // Save basic config (optional, could rely solely on .env)
       await saveConfig({
@@ -322,10 +322,10 @@ command
         environment: answers.environment,
         language: answers.language,
       });
-      spinner.text = "Creating directories...";
+      spinner.text = 'Creating directories...';
       // Create lib/lomi. and examples directories
-      const clientLibDir = join(projectDir, "lib", "lomi."); // New nested directory
-      const examplesDir = join(projectDir, "examples");
+      const clientLibDir = join(projectDir, 'lib', 'lomi.'); // New nested directory
+      const examplesDir = join(projectDir, 'examples');
       await mkdir(clientLibDir, { recursive: true }); // Create nested dir
       await mkdir(examplesDir, { recursive: true });
 
@@ -354,29 +354,29 @@ command
       );
 
       // Create .env file
-      spinner.text = "Creating .env file...";
-      const envPath = join(projectDir, ".env");
-      let envContent = envTemplate.replace("your_api_key_here", answers.apiKey);
+      spinner.text = 'Creating .env file...';
+      const envPath = join(projectDir, '.env');
+      let envContent = envTemplate.replace('your_api_key_here', answers.apiKey);
       // Replace webhook secret placeholder - user still needs to manually add it
       // envContent = envContent.replace('whsec_your_webhook_secret_here', 'YOUR_SECRET_HERE'); // Maybe don't prompt for secret?
-      if (answers.environment === "sandbox") {
+      if (answers.environment === 'sandbox') {
         envContent = envContent.replace(
-          "https://api.lomi.africa/v1",
-          "https://sandbox.api.lomi.africa/v1",
+          'https://api.lomi.africa/v1',
+          'https://sandbox.api.lomi.africa/v1',
         );
       }
       try {
-        await writeFile(envPath, envContent, { flag: "wx" }); // wx prevents overwriting
+        await writeFile(envPath, envContent, { flag: 'wx' }); // wx prevents overwriting
         spinner.info(
           chalk.gray(
-            "Created .env file. Remember to add your LOMI_WEBHOOK_SECRET.",
+            'Created .env file. Remember to add your LOMI_WEBHOOK_SECRET.',
           ),
         );
       } catch (error) {
-        if ((error as NodeJS.ErrnoException).code === "EEXIST") {
+        if ((error as NodeJS.ErrnoException).code === 'EEXIST') {
           spinner.warn(
             chalk.yellow(
-              ".env file already exists. API key and URL not added automatically. Please update manually.",
+              '.env file already exists. API key and URL not added automatically. Please update manually.',
             ),
           );
         } else {
@@ -387,114 +387,121 @@ command
       // Check for package.json before installing dependencies
       let canInstallDeps = true;
       try {
-        await access(join(projectDir, "package.json"));
+        await access(join(projectDir, 'package.json'));
       } catch (error) {
         // package.json doesn't exist, try to create it
         spinner.stopAndPersist({
-          symbol: chalk.yellow("!"),
-          text: chalk.yellow("No `package.json` found."),
+          symbol: chalk.yellow('!'),
+          text: chalk.yellow('No `package.json` found.'),
         });
-        spinner.start("Running `pnpm init`...");
+        spinner.start('Running `pnpm init`...');
         try {
-          execSync("pnpm init", { cwd: projectDir, stdio: "ignore" });
-          spinner.succeed("`pnpm init` completed.");
+          execSync('pnpm init', { cwd: projectDir, stdio: 'ignore' });
+          spinner.succeed('`pnpm init` completed.');
           // Now we can proceed to install dependencies
           canInstallDeps = true;
         } catch (initError) {
-          spinner.fail(chalk.red("Failed to run `pnpm init`."));
+          spinner.fail(chalk.red('Failed to run `pnpm init`.'));
           console.error(
-            chalk.yellow("Could not automatically initialize the project."),
+            chalk.yellow('Could not automatically initialize the project.'),
           );
           console.warn(
             chalk.gray(
-              "Please run `pnpm init` (or equivalent) in your project directory manually,",
+              'Please run `pnpm init` (or equivalent) in your project directory manually,',
             ),
           );
-          console.warn(chalk.gray("and then run `pnpm add @lomi./sdk dotenv`."));
+          console.warn(
+            chalk.gray('and then run `pnpm add @lomi./sdk dotenv`.'),
+          );
           canInstallDeps = false; // Ensure we don't try to install deps after init failure
         }
       }
 
       // Install dependencies if package.json exists (or was just created)
       if (canInstallDeps) {
-        spinner.text = "Installing necessary dependencies (@lomi./sdk, dotenv)...";
+        spinner.text =
+          'Installing necessary dependencies (@lomi./sdk, dotenv)...';
         try {
-          execSync("pnpm add @lomi./sdk dotenv");
-          spinner.info("Installed dependencies: @lomi./sdk, dotenv");
+          execSync('pnpm add @lomi./sdk dotenv');
+          spinner.info('Installed dependencies: @lomi./sdk, dotenv');
         } catch (installError) {
-          spinner.fail(chalk.red("Dependency installation failed."));
-          console.error(chalk.yellow("Could not run `pnpm add @lomi./sdk dotenv`."));
+          spinner.fail(chalk.red('Dependency installation failed.'));
+          console.error(
+            chalk.yellow('Could not run `pnpm add @lomi./sdk dotenv`.'),
+          );
           // Don't repeat the package.json advice here if canInstallDeps was true
           console.warn(
-            chalk.gray("You may need to run `pnpm add @lomi./sdk dotenv` manually."),
+            chalk.gray(
+              'You may need to run `pnpm add @lomi./sdk dotenv` manually.',
+            ),
           );
         }
       }
 
-      spinner.succeed(chalk.green("lomi. project initialized successfully!"));
+      spinner.succeed(chalk.green('lomi. project initialized successfully!'));
 
-      console.log(chalk.bold("\nCreated the following files:"));
+      console.log(chalk.bold('\nCreated the following files:'));
       console.log(
         chalk.cyan(`- lib/lomi./client.${fileExtension}`),
-        "- lomi. client setup",
+        '- lomi. client setup',
       ); // Updated path
       console.log(
         chalk.cyan(`- examples/create-checkout-session.${fileExtension}`),
-        "- Example: Creating a Checkout Session",
+        '- Example: Creating a Checkout Session',
       );
       console.log(
         chalk.cyan(`- examples/webhook-handler.${fileExtension}`),
-        "- Example: Basic webhook handler server",
+        '- Example: Basic webhook handler server',
       );
       console.log(
-        chalk.cyan("- .env"),
-        `- Environment variables (API key ${answers.environment === "sandbox" ? "set to Sandbox URL" : "set to Production URL"})`,
+        chalk.cyan('- .env'),
+        `- Environment variables (API key ${answers.environment === 'sandbox' ? 'set to Sandbox URL' : 'set to Production URL'})`,
       );
       console.log(
         chalk.yellow(
-          "  -> Remember to add your LOMI_WEBHOOK_SECRET to the .env file!",
+          '  -> Remember to add your LOMI_WEBHOOK_SECRET to the .env file!',
         ),
       );
 
-      console.log(chalk.bold("\n🚀 Quick Start:"));
+      console.log(chalk.bold('\n🚀 Quick Start:'));
       console.log(
-        chalk.blue("1."),
-        `Fill in placeholder values (like ${chalk.yellow("your_merchant_id")}, ${chalk.yellow("price_xxx")}) in the example files.`,
+        chalk.blue('1.'),
+        `Fill in placeholder values (like ${chalk.yellow('your_merchant_id')}, ${chalk.yellow('price_xxx')}) in the example files.`,
       );
       console.log(
-        chalk.blue("2."),
-        `Add your webhook secret to the ${chalk.yellow(".env")} file.`,
+        chalk.blue('2.'),
+        `Add your webhook secret to the ${chalk.yellow('.env')} file.`,
       );
-      console.log(chalk.blue("3."), "Run the examples:");
+      console.log(chalk.blue('3.'), 'Run the examples:');
       if (isTypeScript) {
         console.log(
           chalk.gray(
-            "  (Ensure you have ts-node installed: pnpm add -g ts-node)",
+            '  (Ensure you have ts-node installed: pnpm add -g ts-node)',
           ),
         );
         console.log(
-          `   ${chalk.green("ts-node")} examples/create-checkout-session.ts`,
+          `   ${chalk.green('ts-node')} examples/create-checkout-session.ts`,
         );
-        console.log(`   ${chalk.green("ts-node")} examples/webhook-handler.ts`);
+        console.log(`   ${chalk.green('ts-node')} examples/webhook-handler.ts`);
       } else {
         console.log(
-          `   ${chalk.green("node")} examples/create-checkout-session.js`,
+          `   ${chalk.green('node')} examples/create-checkout-session.js`,
         );
-        console.log(`   ${chalk.green("node")} examples/webhook-handler.js`);
+        console.log(`   ${chalk.green('node')} examples/webhook-handler.js`);
       }
       console.log(
-        chalk.blue("4."),
-        `For local webhook testing, use ${chalk.green("lomi dev")} or a tool like ngrok/localtunnel to expose the webhook handler.`,
+        chalk.blue('4.'),
+        `For local webhook testing, use ${chalk.green('lomi dev')} or a tool like ngrok/localtunnel to expose the webhook handler.`,
       );
       console.log(
-        "\n📚 Documentation:",
-        chalk.blueBright("https://docs.lomi.africa"),
+        '\n📚 Documentation:',
+        chalk.blueBright('https://docs.lomi.africa'),
       ); // Update if needed
     } catch (error) {
-      spinner.fail("Failed to initialize project");
+      spinner.fail('Failed to initialize project');
       console.error(
         chalk.red(
-          error instanceof Error ? error.message : "An unknown error occurred",
+          error instanceof Error ? error.message : 'An unknown error occurred',
         ),
       );
       process.exit(1);

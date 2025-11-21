@@ -5,7 +5,10 @@
 import { parseDatabaseTypes } from './parse-database-types';
 import * as path from 'path';
 
-const dbTypesPath = path.join(__dirname, '../../../../apps/docs/lib/types/database.types.ts');
+const dbTypesPath = path.join(
+  __dirname,
+  '../../../../apps/docs/lib/types/database.types.ts',
+);
 const { tables, enums } = parseDatabaseTypes(dbTypesPath);
 
 console.log(`\n📊 Found ${tables.size} tables:\n`);

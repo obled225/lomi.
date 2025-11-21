@@ -1,23 +1,23 @@
-import { Request, Response } from "express";
-import { createClient } from "@supabase/supabase-js";
-import { z } from "zod";
-import axios from "axios"; // Import axios for HTTP requests
-import { WebhookEvent } from "../types/api";
+import { Request, Response } from 'express';
+import { createClient } from '@supabase/supabase-js';
+import { z } from 'zod';
+import axios from 'axios'; // Import axios for HTTP requests
+import { WebhookEvent } from '../types/api';
 
 // Shared Error Handling (Assuming similar structure to transactions.controller.ts)
 // If this doesn't exist, it needs to be created/imported from a shared location.
 enum ErrorCode {
-  INVALID_REQUEST = "INVALID_REQUEST",
-  UNAUTHORIZED = "UNAUTHORIZED",
-  FORBIDDEN = "FORBIDDEN",
-  NOT_FOUND = "NOT_FOUND",
-  CONFLICT = "CONFLICT",
-  DATABASE_ERROR = "DATABASE_ERROR",
-  INTERNAL_ERROR = "INTERNAL_ERROR",
-  WEBHOOK_DELIVERY_FAILED = "WEBHOOK_DELIVERY_FAILED",
-  EDGE_FUNCTION_ERROR = "EDGE_FUNCTION_ERROR",
-  EDGE_FUNCTION_HTTP_ERROR = "EDGE_FUNCTION_HTTP_ERROR",
-  EDGE_FUNCTION_TIMEOUT = "EDGE_FUNCTION_TIMEOUT",
+  INVALID_REQUEST = 'INVALID_REQUEST',
+  UNAUTHORIZED = 'UNAUTHORIZED',
+  FORBIDDEN = 'FORBIDDEN',
+  NOT_FOUND = 'NOT_FOUND',
+  CONFLICT = 'CONFLICT',
+  DATABASE_ERROR = 'DATABASE_ERROR',
+  INTERNAL_ERROR = 'INTERNAL_ERROR',
+  WEBHOOK_DELIVERY_FAILED = 'WEBHOOK_DELIVERY_FAILED',
+  EDGE_FUNCTION_ERROR = 'EDGE_FUNCTION_ERROR',
+  EDGE_FUNCTION_HTTP_ERROR = 'EDGE_FUNCTION_HTTP_ERROR',
+  EDGE_FUNCTION_TIMEOUT = 'EDGE_FUNCTION_TIMEOUT',
 }
 
 function createErrorResponse(
@@ -39,7 +39,7 @@ function createErrorResponse(
 
 // Consistent error logging (Assuming similar structure to transactions.controller.ts)
 function logError(error: any, context: string, req: Request) {
-  const orgId = req.organizationId || "N/A"; // Use organizationId if available
+  const orgId = req.organizationId || 'N/A'; // Use organizationId if available
   console.error(`Error in ${context}:`, {
     error: error.message || error,
     stack: error.stack,
@@ -58,7 +58,7 @@ function handleDatabaseError(error: any, req: Request, context: string) {
 
   let status = 500;
   let code = ErrorCode.DATABASE_ERROR;
-  let message = "Database operation failed";
+  let message = 'Database operation failed';
   let details: any = {
     db_code: error.code,
     db_message: error.message,
@@ -67,24 +67,24 @@ function handleDatabaseError(error: any, req: Request, context: string) {
   };
 
   // Add specific mappings as needed
-  if (error.message && error.message.includes("already exists")) {
+  if (error.message && error.message.includes('already exists')) {
     status = 409;
     code = ErrorCode.CONFLICT;
-    message = "A webhook with this URL already exists for your organization";
+    message = 'A webhook with this URL already exists for your organization';
     details = undefined; // Don't expose DB details for conflict
-  } else if (error.message && error.message.includes("Permission denied")) {
+  } else if (error.message && error.message.includes('Permission denied')) {
     status = 403;
     code = ErrorCode.FORBIDDEN;
-    message = "Permission denied for this operation.";
+    message = 'Permission denied for this operation.';
     details = undefined;
   }
 
   switch (error.code) {
     // Add more specific PostgREST/DB error code mappings if necessary
-    case "PGRST116": // Resource not found
+    case 'PGRST116': // Resource not found
       status = 404;
       code = ErrorCode.NOT_FOUND;
-      message = "Resource not found";
+      message = 'Resource not found';
       break;
   }
 
@@ -93,9 +93,9 @@ function handleDatabaseError(error: any, req: Request, context: string) {
 // End Shared Error Handling
 
 // Environment variables
-const supabaseUrl = process.env.SUPABASE_URL || "";
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || "";
-const supabaseAnonKey = process.env.SUPABASE_ANON_KEY || ""; // Get Anon key
+const supabaseUrl = process.env.SUPABASE_URL || '';
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
+const supabaseAnonKey = process.env.SUPABASE_ANON_KEY || ''; // Get Anon key
 const supabaseEdgeFunctionBase =
   process.env.SUPABASE_FUNCTIONS_URL || `${supabaseUrl}/functions/v1`; // Base URL for functions
 
@@ -152,7 +152,7 @@ function transformWebhookToResponse(webhook: DbWebhook) {
     !webhook.url
   ) {
     // Handle the case where webhook data is incomplete or invalid
-    console.error("Invalid webhook data for transformation:", webhook);
+    console.error('Invalid webhook data for transformation:', webhook);
     // Return a default structure or null, depending on how you want to handle this
     return null; // Or throw an error, or return a structure indicating an issue
   }
@@ -176,7 +176,7 @@ function transformWebhookToResponse(webhook: DbWebhook) {
 async function getMerchantFromOrganization(
   organizationId: string,
 ): Promise<string | null> {
-  const context = "getMerchantFromOrganization";
+  const context = 'getMerchantFromOrganization';
   // Log the organizationId being used
   console.info(
     `[${context}] Attempting to find merchant for organization ID: ${organizationId}`,
@@ -186,7 +186,7 @@ async function getMerchantFromOrganization(
   // A more robust UUID validation library could be used here.
   if (
     !organizationId ||
-    typeof organizationId !== "string" ||
+    typeof organizationId !== 'string' ||
     organizationId.length !== 36
   ) {
     console.error(
@@ -197,7 +197,7 @@ async function getMerchantFromOrganization(
 
   try {
     const { data, error } = await supabase.rpc(
-      "get_merchant_from_organization",
+      'get_merchant_from_organization',
       {
         p_organization_id: organizationId,
       },
@@ -241,18 +241,18 @@ async function getMerchantFromOrganization(
 
 // --- Helper Function to Map API Enum to DB Enum ---
 const apiToDbWebhookEventMap: { [key in WebhookEvent]: string } = {
-  [WebhookEvent.PAYMENT_CREATED]: "payment.created",
-  [WebhookEvent.PAYMENT_SUCCEEDED]: "payment.succeeded",
-  [WebhookEvent.PAYMENT_FAILED]: "payment.failed",
-  [WebhookEvent.PAYMENT_CANCELED]: "payment.canceled",
-  [WebhookEvent.REFUND_CREATED]: "refund.created",
-  [WebhookEvent.REFUND_COMPLETED]: "refund.completed",
-  [WebhookEvent.REFUND_FAILED]: "refund.failed",
-  [WebhookEvent.SUBSCRIPTION_CREATED]: "subscription.created",
-  [WebhookEvent.SUBSCRIPTION_RENEWED]: "subscription.renewed",
-  [WebhookEvent.SUBSCRIPTION_CANCELED]: "subscription.canceled",
-  [WebhookEvent.CHECKOUT_COMPLETED]: "checkout.completed",
-  [WebhookEvent.PROVIDER_STATUS_CHANGED]: "provider.status_changed",
+  [WebhookEvent.PAYMENT_CREATED]: 'payment.created',
+  [WebhookEvent.PAYMENT_SUCCEEDED]: 'payment.succeeded',
+  [WebhookEvent.PAYMENT_FAILED]: 'payment.failed',
+  [WebhookEvent.PAYMENT_CANCELED]: 'payment.canceled',
+  [WebhookEvent.REFUND_CREATED]: 'refund.created',
+  [WebhookEvent.REFUND_COMPLETED]: 'refund.completed',
+  [WebhookEvent.REFUND_FAILED]: 'refund.failed',
+  [WebhookEvent.SUBSCRIPTION_CREATED]: 'subscription.created',
+  [WebhookEvent.SUBSCRIPTION_RENEWED]: 'subscription.renewed',
+  [WebhookEvent.SUBSCRIPTION_CANCELED]: 'subscription.canceled',
+  [WebhookEvent.CHECKOUT_COMPLETED]: 'checkout.completed',
+  [WebhookEvent.PROVIDER_STATUS_CHANGED]: 'provider.status_changed',
 };
 
 function transformApiEventsToDbEvents(apiEvents: WebhookEvent[]): string[] {
@@ -265,7 +265,7 @@ function transformApiEventsToDbEvents(apiEvents: WebhookEvent[]): string[] {
  * List all webhooks for the authenticated organization
  */
 export const listWebhooks = async (req: Request, res: Response) => {
-  const context = "listWebhooks";
+  const context = 'listWebhooks';
   try {
     const organizationId = req.organizationId;
     if (!organizationId) {
@@ -275,7 +275,7 @@ export const listWebhooks = async (req: Request, res: Response) => {
           createErrorResponse(
             401,
             ErrorCode.UNAUTHORIZED,
-            "Organization ID not found in request.",
+            'Organization ID not found in request.',
           ),
         );
     }
@@ -288,14 +288,14 @@ export const listWebhooks = async (req: Request, res: Response) => {
           createErrorResponse(
             404,
             ErrorCode.NOT_FOUND,
-            "Merchant account not found for this organization.",
+            'Merchant account not found for this organization.',
           ),
         );
     }
 
     // Use Supabase RPC function to fetch webhooks
     const { data: webhooks, error } = await supabase.rpc(
-      "fetch_organization_webhooks", // Assuming this function filters by merchant_id correctly
+      'fetch_organization_webhooks', // Assuming this function filters by merchant_id correctly
       {
         p_merchant_id: merchantId,
       },
@@ -321,7 +321,7 @@ export const listWebhooks = async (req: Request, res: Response) => {
         createErrorResponse(
           500,
           ErrorCode.INTERNAL_ERROR,
-          "An unexpected error occurred while listing webhooks.",
+          'An unexpected error occurred while listing webhooks.',
         ),
       );
   }
@@ -331,7 +331,7 @@ export const listWebhooks = async (req: Request, res: Response) => {
  * Create a new webhook for the authenticated organization
  */
 export const createWebhook = async (req: Request, res: Response) => {
-  const context = "createWebhook";
+  const context = 'createWebhook';
   try {
     const organizationId = req.organizationId;
     if (!organizationId) {
@@ -345,7 +345,7 @@ export const createWebhook = async (req: Request, res: Response) => {
           createErrorResponse(
             401,
             ErrorCode.UNAUTHORIZED,
-            "Organization ID not found in request.",
+            'Organization ID not found in request.',
           ),
         );
     }
@@ -364,7 +364,7 @@ export const createWebhook = async (req: Request, res: Response) => {
           createErrorResponse(
             400,
             ErrorCode.INVALID_REQUEST,
-            "Invalid request body",
+            'Invalid request body',
             validationResult.error.format(),
           ),
         );
@@ -385,14 +385,14 @@ export const createWebhook = async (req: Request, res: Response) => {
           createErrorResponse(
             404,
             ErrorCode.NOT_FOUND,
-            "Merchant account not found for this organization.",
+            'Merchant account not found for this organization.',
           ),
         );
     }
 
     // Call Supabase RPC function to create webhook
     // We expect this function to return the webhook_id
-    const { data: webhookId, error } = await supabase.rpc("create_webhook", {
+    const { data: webhookId, error } = await supabase.rpc('create_webhook', {
       p_merchant_id: merchantId,
       p_organization_id: organizationId,
       p_url: url,
@@ -407,7 +407,7 @@ export const createWebhook = async (req: Request, res: Response) => {
         .status(500)
         .json(
           handleDatabaseError(
-            error || new Error("Webhook ID not returned from create_webhook"),
+            error || new Error('Webhook ID not returned from create_webhook'),
             req,
             context,
           ),
@@ -416,7 +416,7 @@ export const createWebhook = async (req: Request, res: Response) => {
 
     // Fetch the newly created webhook to get all details, including the secret
     const { data: newWebhookData, error: fetchError } = await supabase.rpc(
-      "get_webhook", // Use get_webhook which should return the full row including secret
+      'get_webhook', // Use get_webhook which should return the full row including secret
       {
         p_webhook_id: webhookId, // Use the returned ID
         p_merchant_id: merchantId, // Filter by merchant to ensure ownership
@@ -425,7 +425,7 @@ export const createWebhook = async (req: Request, res: Response) => {
 
     if (fetchError || !newWebhookData || newWebhookData.length === 0) {
       logError(
-        fetchError || new Error("Newly created webhook not found"),
+        fetchError || new Error('Newly created webhook not found'),
         context,
         req,
       );
@@ -435,7 +435,7 @@ export const createWebhook = async (req: Request, res: Response) => {
           createErrorResponse(
             500,
             ErrorCode.INTERNAL_ERROR,
-            "Failed to fetch created webhook after creation.",
+            'Failed to fetch created webhook after creation.',
           ),
         );
     }
@@ -447,7 +447,7 @@ export const createWebhook = async (req: Request, res: Response) => {
     const responseData = transformWebhookToResponse(createdWebhook);
     if (!responseData) {
       logError(
-        new Error("Failed to transform newly created webhook"),
+        new Error('Failed to transform newly created webhook'),
         context,
         req,
       );
@@ -457,7 +457,7 @@ export const createWebhook = async (req: Request, res: Response) => {
           createErrorResponse(
             500,
             ErrorCode.INTERNAL_ERROR,
-            "Internal error processing webhook data.",
+            'Internal error processing webhook data.',
           ),
         );
     }
@@ -475,7 +475,7 @@ export const createWebhook = async (req: Request, res: Response) => {
         createErrorResponse(
           500,
           ErrorCode.INTERNAL_ERROR,
-          "An unexpected error occurred while creating the webhook.",
+          'An unexpected error occurred while creating the webhook.',
         ),
       );
   }
@@ -485,7 +485,7 @@ export const createWebhook = async (req: Request, res: Response) => {
  * Get a specific webhook by ID
  */
 export const getWebhook = async (req: Request, res: Response) => {
-  const context = "getWebhook";
+  const context = 'getWebhook';
   try {
     const organizationId = req.organizationId;
     if (!organizationId) {
@@ -495,21 +495,21 @@ export const getWebhook = async (req: Request, res: Response) => {
           createErrorResponse(
             401,
             ErrorCode.UNAUTHORIZED,
-            "Organization ID not found in request.",
+            'Organization ID not found in request.',
           ),
         );
     }
     const webhookId = req.params.id; // Assuming ID is in path params
 
     // Basic validation for webhookId format (e.g., UUID) could be added here
-    if (!webhookId || typeof webhookId !== "string") {
+    if (!webhookId || typeof webhookId !== 'string') {
       return res
         .status(400)
         .json(
           createErrorResponse(
             400,
             ErrorCode.INVALID_REQUEST,
-            "Invalid Webhook ID format.",
+            'Invalid Webhook ID format.',
           ),
         );
     }
@@ -523,13 +523,13 @@ export const getWebhook = async (req: Request, res: Response) => {
           createErrorResponse(
             404,
             ErrorCode.NOT_FOUND,
-            "Merchant account not found for this organization.",
+            'Merchant account not found for this organization.',
           ),
         );
     }
 
     // Use RPC function to get webhook, filtering by merchant ID
-    const { data: webhookData, error } = await supabase.rpc("get_webhook", {
+    const { data: webhookData, error } = await supabase.rpc('get_webhook', {
       p_webhook_id: webhookId,
       p_merchant_id: merchantId, // Ensure we only get webhooks for this merchant
     });
@@ -542,20 +542,20 @@ export const getWebhook = async (req: Request, res: Response) => {
       return res
         .status(404)
         .json(
-          createErrorResponse(404, ErrorCode.NOT_FOUND, "Webhook not found."),
+          createErrorResponse(404, ErrorCode.NOT_FOUND, 'Webhook not found.'),
         );
     }
 
     const responseData = transformWebhookToResponse(webhookData[0]);
     if (!responseData) {
-      logError(new Error("Failed to transform webhook"), context, req);
+      logError(new Error('Failed to transform webhook'), context, req);
       return res
         .status(500)
         .json(
           createErrorResponse(
             500,
             ErrorCode.INTERNAL_ERROR,
-            "Internal error processing webhook data.",
+            'Internal error processing webhook data.',
           ),
         );
     }
@@ -571,7 +571,7 @@ export const getWebhook = async (req: Request, res: Response) => {
         createErrorResponse(
           500,
           ErrorCode.INTERNAL_ERROR,
-          "An unexpected error occurred while fetching the webhook.",
+          'An unexpected error occurred while fetching the webhook.',
         ),
       );
   }
@@ -581,7 +581,7 @@ export const getWebhook = async (req: Request, res: Response) => {
  * Update a webhook
  */
 export const updateWebhook = async (req: Request, res: Response) => {
-  const context = "updateWebhook";
+  const context = 'updateWebhook';
   try {
     const organizationId = req.organizationId;
     if (!organizationId) {
@@ -591,19 +591,19 @@ export const updateWebhook = async (req: Request, res: Response) => {
           createErrorResponse(
             401,
             ErrorCode.UNAUTHORIZED,
-            "Organization ID not found in request.",
+            'Organization ID not found in request.',
           ),
         );
     }
     const webhookId = req.params.id;
-    if (!webhookId || typeof webhookId !== "string") {
+    if (!webhookId || typeof webhookId !== 'string') {
       return res
         .status(400)
         .json(
           createErrorResponse(
             400,
             ErrorCode.INVALID_REQUEST,
-            "Invalid Webhook ID format.",
+            'Invalid Webhook ID format.',
           ),
         );
     }
@@ -618,7 +618,7 @@ export const updateWebhook = async (req: Request, res: Response) => {
           createErrorResponse(
             400,
             ErrorCode.INVALID_REQUEST,
-            "Invalid request body",
+            'Invalid request body',
             validationResult.error.format(),
           ),
         );
@@ -633,7 +633,7 @@ export const updateWebhook = async (req: Request, res: Response) => {
           createErrorResponse(
             404,
             ErrorCode.NOT_FOUND,
-            "Merchant account not found for this organization.",
+            'Merchant account not found for this organization.',
           ),
         );
     }
@@ -652,7 +652,7 @@ export const updateWebhook = async (req: Request, res: Response) => {
     // --- End Transformation ---
 
     // Call Supabase RPC function to update webhook, now passing merchantId
-    const { data: updated, error } = await supabase.rpc("update_webhook", {
+    const { data: updated, error } = await supabase.rpc('update_webhook', {
       p_webhook_id: webhookId,
       p_merchant_id: merchantId, // Pass merchantId for authorization in RPC
       p_url: url,
@@ -675,14 +675,14 @@ export const updateWebhook = async (req: Request, res: Response) => {
           createErrorResponse(
             404,
             ErrorCode.NOT_FOUND,
-            "Webhook not found or permission denied.",
+            'Webhook not found or permission denied.',
           ),
         );
     }
 
     // Fetch the updated webhook to return it (optional, could just return 200 OK)
     const { data: webhookData, error: getError } = await supabase.rpc(
-      "get_webhook",
+      'get_webhook',
       {
         p_webhook_id: webhookId,
         p_merchant_id: merchantId,
@@ -691,7 +691,7 @@ export const updateWebhook = async (req: Request, res: Response) => {
 
     if (getError || !webhookData || webhookData.length === 0) {
       logError(
-        getError || new Error("Updated webhook not found after update"),
+        getError || new Error('Updated webhook not found after update'),
         context,
         req,
       );
@@ -701,21 +701,21 @@ export const updateWebhook = async (req: Request, res: Response) => {
           createErrorResponse(
             500,
             ErrorCode.INTERNAL_ERROR,
-            "Failed to fetch updated webhook details.",
+            'Failed to fetch updated webhook details.',
           ),
         );
     }
 
     const responseData = transformWebhookToResponse(webhookData[0]);
     if (!responseData) {
-      logError(new Error("Failed to transform updated webhook"), context, req);
+      logError(new Error('Failed to transform updated webhook'), context, req);
       return res
         .status(500)
         .json(
           createErrorResponse(
             500,
             ErrorCode.INTERNAL_ERROR,
-            "Internal error processing webhook data.",
+            'Internal error processing webhook data.',
           ),
         );
     }
@@ -731,7 +731,7 @@ export const updateWebhook = async (req: Request, res: Response) => {
         createErrorResponse(
           500,
           ErrorCode.INTERNAL_ERROR,
-          "An unexpected error occurred while updating the webhook.",
+          'An unexpected error occurred while updating the webhook.',
         ),
       );
   }
@@ -741,7 +741,7 @@ export const updateWebhook = async (req: Request, res: Response) => {
  * Delete a webhook
  */
 export const deleteWebhook = async (req: Request, res: Response) => {
-  const context = "deleteWebhook";
+  const context = 'deleteWebhook';
   try {
     const organizationId = req.organizationId;
     if (!organizationId) {
@@ -751,19 +751,19 @@ export const deleteWebhook = async (req: Request, res: Response) => {
           createErrorResponse(
             401,
             ErrorCode.UNAUTHORIZED,
-            "Organization ID not found in request.",
+            'Organization ID not found in request.',
           ),
         );
     }
     const webhookId = req.params.id;
-    if (!webhookId || typeof webhookId !== "string") {
+    if (!webhookId || typeof webhookId !== 'string') {
       return res
         .status(400)
         .json(
           createErrorResponse(
             400,
             ErrorCode.INVALID_REQUEST,
-            "Invalid Webhook ID format.",
+            'Invalid Webhook ID format.',
           ),
         );
     }
@@ -777,7 +777,7 @@ export const deleteWebhook = async (req: Request, res: Response) => {
           createErrorResponse(
             404,
             ErrorCode.NOT_FOUND,
-            "Merchant account not found for this organization.",
+            'Merchant account not found for this organization.',
           ),
         );
     }
@@ -785,7 +785,7 @@ export const deleteWebhook = async (req: Request, res: Response) => {
     // Controller pre-check removed, RPC handles authorization
 
     // Call Supabase RPC function to delete webhook, passing merchantId
-    const { data: deleted, error } = await supabase.rpc("delete_webhook", {
+    const { data: deleted, error } = await supabase.rpc('delete_webhook', {
       p_webhook_id: webhookId,
       p_merchant_id: merchantId, // Pass merchantId for authorization
     });
@@ -802,7 +802,7 @@ export const deleteWebhook = async (req: Request, res: Response) => {
           createErrorResponse(
             404,
             ErrorCode.NOT_FOUND,
-            "Webhook not found or permission denied.",
+            'Webhook not found or permission denied.',
           ),
         );
     }
@@ -816,7 +816,7 @@ export const deleteWebhook = async (req: Request, res: Response) => {
         createErrorResponse(
           500,
           ErrorCode.INTERNAL_ERROR,
-          "An unexpected error occurred while deleting the webhook.",
+          'An unexpected error occurred while deleting the webhook.',
         ),
       );
   }
@@ -826,7 +826,7 @@ export const deleteWebhook = async (req: Request, res: Response) => {
  * Test webhook by sending a test event
  */
 export async function testWebhook(req: Request, res: Response): Promise<void> {
-  const context = "testWebhook";
+  const context = 'testWebhook';
   try {
     const organizationId = req.organizationId;
     if (!organizationId) {
@@ -836,20 +836,20 @@ export async function testWebhook(req: Request, res: Response): Promise<void> {
           createErrorResponse(
             401,
             ErrorCode.UNAUTHORIZED,
-            "Organization ID not found in request.",
+            'Organization ID not found in request.',
           ),
         );
       return;
     }
     const webhookId = req.params.id;
-    if (!webhookId || typeof webhookId !== "string") {
+    if (!webhookId || typeof webhookId !== 'string') {
       res
         .status(400)
         .json(
           createErrorResponse(
             400,
             ErrorCode.INVALID_REQUEST,
-            "Invalid Webhook ID format.",
+            'Invalid Webhook ID format.',
           ),
         );
       return;
@@ -864,7 +864,7 @@ export async function testWebhook(req: Request, res: Response): Promise<void> {
           createErrorResponse(
             404,
             ErrorCode.NOT_FOUND,
-            "Merchant account not found for this organization.",
+            'Merchant account not found for this organization.',
           ),
         );
       return;
@@ -883,7 +883,7 @@ export async function testWebhook(req: Request, res: Response): Promise<void> {
         {
           headers: {
             Authorization: `Bearer ${supabaseAnonKey}`, // Use Anon Key for Edge Function auth
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
           },
           timeout: 15000, // Add a timeout (e.g., 15 seconds)
         },
@@ -895,7 +895,7 @@ export async function testWebhook(req: Request, res: Response): Promise<void> {
         res.json({
           data: {
             success: true,
-            message: "Test webhook sent successfully.",
+            message: 'Test webhook sent successfully.',
             webhook_id: webhookId,
             details: `Webhook endpoint responded with status ${functionResponse.data.status}.`,
             log_id: functionResponse.data.log_id, // Include log_id if returned by function
@@ -910,7 +910,7 @@ export async function testWebhook(req: Request, res: Response): Promise<void> {
           // Use 400 or maybe 502 Bad Gateway? 400 seems reasonable.
           createErrorResponse(
             400, // Use the status reported by the function? or a generic failure code?
-            "WEBHOOK_DELIVERY_FAILED",
+            'WEBHOOK_DELIVERY_FAILED',
             `Test webhook sent, but endpoint failed with status ${functionResponse.data.status}.`,
             {
               log_id: functionResponse.data.log_id,
@@ -930,8 +930,8 @@ export async function testWebhook(req: Request, res: Response): Promise<void> {
         res.status(functionResponse.status).json(
           createErrorResponse(
             functionResponse.status,
-            "EDGE_FUNCTION_ERROR",
-            `Failed to execute test webhook function: ${functionResponse.data?.error || "Unknown error"}`,
+            'EDGE_FUNCTION_ERROR',
+            `Failed to execute test webhook function: ${functionResponse.data?.error || 'Unknown error'}`,
             functionResponse.data, // Include details from the function response if available
           ),
         );
@@ -940,7 +940,7 @@ export async function testWebhook(req: Request, res: Response): Promise<void> {
       logError(axiosError, `${context} (Axios Call to Edge Function)`, req);
       let status = 500;
       let code = ErrorCode.INTERNAL_ERROR;
-      let message = "Failed to call the test webhook function.";
+      let message = 'Failed to call the test webhook function.';
       let details: any = { functionUrl: edgeFunctionUrl };
 
       if (axiosError.response) {
@@ -955,7 +955,7 @@ export async function testWebhook(req: Request, res: Response): Promise<void> {
         status = 504; // Gateway Timeout
         code = ErrorCode.EDGE_FUNCTION_TIMEOUT;
         message =
-          "No response received from the test webhook function (timeout).";
+          'No response received from the test webhook function (timeout).';
       } else {
         // Something happened in setting up the request that triggered an Error
         message = `Error setting up request to test webhook function: ${axiosError.message}`;
@@ -974,7 +974,7 @@ export async function testWebhook(req: Request, res: Response): Promise<void> {
         createErrorResponse(
           500,
           ErrorCode.INTERNAL_ERROR,
-          "An unexpected error occurred before testing the webhook.",
+          'An unexpected error occurred before testing the webhook.',
         ),
       );
   }
@@ -987,7 +987,7 @@ export async function getWebhookDeliveryLogs(
   req: Request,
   res: Response,
 ): Promise<void> {
-  const context = "getWebhookDeliveryLogs";
+  const context = 'getWebhookDeliveryLogs';
   try {
     const organizationId = req.organizationId;
     if (!organizationId) {
@@ -997,20 +997,20 @@ export async function getWebhookDeliveryLogs(
           createErrorResponse(
             401,
             ErrorCode.UNAUTHORIZED,
-            "Organization ID not found in request.",
+            'Organization ID not found in request.',
           ),
         );
       return;
     }
     const webhookId = req.params.id;
-    if (!webhookId || typeof webhookId !== "string") {
+    if (!webhookId || typeof webhookId !== 'string') {
       res
         .status(400)
         .json(
           createErrorResponse(
             400,
             ErrorCode.INVALID_REQUEST,
-            "Invalid Webhook ID format.",
+            'Invalid Webhook ID format.',
           ),
         );
       return;
@@ -1023,8 +1023,8 @@ export async function getWebhookDeliveryLogs(
       Math.max(1, parseInt(req.query.limit as string) || 25),
     ); // Clamp limit 1-100
     const offset = Math.max(0, parseInt(req.query.offset as string) || 0);
-    const successOnly = req.query.success === "true";
-    const failedOnly = req.query.failed === "true";
+    const successOnly = req.query.success === 'true';
+    const failedOnly = req.query.failed === 'true';
 
     // Get merchant ID for this organization
     const merchantId = await getMerchantFromOrganization(organizationId);
@@ -1035,7 +1035,7 @@ export async function getWebhookDeliveryLogs(
           createErrorResponse(
             404,
             ErrorCode.NOT_FOUND,
-            "Merchant account not found for this organization.",
+            'Merchant account not found for this organization.',
           ),
         );
       return;
@@ -1045,7 +1045,7 @@ export async function getWebhookDeliveryLogs(
     // For now, we rely on the RPC filtering or add a pre-check like others if needed.
     // Let's assume the RPC needs merchant_id:
     const { data: logs, error } = await supabase.rpc(
-      "get_webhook_delivery_logs",
+      'get_webhook_delivery_logs',
       {
         p_webhook_id: webhookId,
         p_merchant_id: merchantId, // Assuming RPC needs this for authorization
@@ -1099,7 +1099,7 @@ export async function getWebhookDeliveryLogs(
         createErrorResponse(
           500,
           ErrorCode.INTERNAL_ERROR,
-          "An unexpected error occurred while retrieving webhook delivery logs.",
+          'An unexpected error occurred while retrieving webhook delivery logs.',
         ),
       );
   }
@@ -1113,7 +1113,7 @@ export async function retryWebhookDelivery(
   req: Request,
   res: Response,
 ): Promise<void> {
-  const context = "retryWebhookDelivery";
+  const context = 'retryWebhookDelivery';
   try {
     const organizationId = req.organizationId;
     if (!organizationId) {
@@ -1123,7 +1123,7 @@ export async function retryWebhookDelivery(
           createErrorResponse(
             401,
             ErrorCode.UNAUTHORIZED,
-            "Organization ID not found in request.",
+            'Organization ID not found in request.',
           ),
         );
       return;
@@ -1133,9 +1133,9 @@ export async function retryWebhookDelivery(
 
     if (
       !webhookId ||
-      typeof webhookId !== "string" ||
+      typeof webhookId !== 'string' ||
       !logId ||
-      typeof logId !== "string"
+      typeof logId !== 'string'
     ) {
       res
         .status(400)
@@ -1143,7 +1143,7 @@ export async function retryWebhookDelivery(
           createErrorResponse(
             400,
             ErrorCode.INVALID_REQUEST,
-            "Invalid Webhook ID or Log ID format.",
+            'Invalid Webhook ID or Log ID format.',
           ),
         );
       return;
@@ -1158,7 +1158,7 @@ export async function retryWebhookDelivery(
           createErrorResponse(
             404,
             ErrorCode.NOT_FOUND,
-            "Merchant account not found for this organization.",
+            'Merchant account not found for this organization.',
           ),
         );
       return;
@@ -1167,7 +1167,7 @@ export async function retryWebhookDelivery(
     // Assuming retry_webhook_delivery RPC handles merchant_id authorization or we add it.
     // Let's assume the RPC needs merchant_id:
     const { data: retrySuccessful, error } = await supabase.rpc(
-      "retry_webhook_delivery",
+      'retry_webhook_delivery',
       {
         p_webhook_id: webhookId,
         p_log_id: logId,
@@ -1188,7 +1188,7 @@ export async function retryWebhookDelivery(
           createErrorResponse(
             404,
             ErrorCode.NOT_FOUND,
-            "Webhook delivery log not found, not failed, or permission denied.",
+            'Webhook delivery log not found, not failed, or permission denied.',
           ),
         );
       return;
@@ -1197,7 +1197,7 @@ export async function retryWebhookDelivery(
     res.json({
       data: {
         success: true,
-        message: "Webhook delivery queued for retry",
+        message: 'Webhook delivery queued for retry',
         webhook_id: webhookId,
         log_id: logId,
       },
@@ -1210,7 +1210,7 @@ export async function retryWebhookDelivery(
         createErrorResponse(
           500,
           ErrorCode.INTERNAL_ERROR,
-          "An unexpected error occurred while retrying webhook delivery.",
+          'An unexpected error occurred while retrying webhook delivery.',
         ),
       );
   }

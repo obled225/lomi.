@@ -1,4 +1,11 @@
-import { describe, expect, it, jest, beforeEach, afterEach } from '@jest/globals';
+import {
+  describe,
+  expect,
+  it,
+  jest,
+  beforeEach,
+  afterEach,
+} from '@jest/globals';
 import { CustomerSubscriptionsClient } from '../../src/client/CustomerSubscriptionsClient';
 import { BaseClient } from '../../src/client/BaseClient';
 import { ApiResult } from '../../src/client/core/ApiResult';
@@ -28,7 +35,9 @@ describe('CustomerSubscriptionsClient', () => {
     const mockSubscriptionList = [{ id: 'sub_1', status: 'active' }];
 
     it('should list subscriptions successfully with only merchant_id', async () => {
-      mockRequest.mockResolvedValueOnce(new ApiResult(200, mockSubscriptionList));
+      mockRequest.mockResolvedValueOnce(
+        new ApiResult(200, mockSubscriptionList),
+      );
       const result = await client.listCustomerSubscriptions(mockMerchantId); // Pass merchant_id directly
       expect(result.data).toEqual(mockSubscriptionList);
       expect(mockRequest).toHaveBeenCalledWith({
@@ -40,8 +49,13 @@ describe('CustomerSubscriptionsClient', () => {
 
     it('should list subscriptions successfully with optional params', async () => {
       const optionalParams = { customer_id: 'cust_abc', status: 'active' };
-      mockRequest.mockResolvedValueOnce(new ApiResult(200, mockSubscriptionList));
-      const result = await client.listCustomerSubscriptions(mockMerchantId, optionalParams); // Pass optionalParams as second arg
+      mockRequest.mockResolvedValueOnce(
+        new ApiResult(200, mockSubscriptionList),
+      );
+      const result = await client.listCustomerSubscriptions(
+        mockMerchantId,
+        optionalParams,
+      ); // Pass optionalParams as second arg
       expect(result.data).toEqual(mockSubscriptionList);
       expect(mockRequest).toHaveBeenCalledWith({
         method: 'GET',
@@ -59,13 +73,21 @@ describe('CustomerSubscriptionsClient', () => {
     const mockSubscriptionData = { id: mockSubscriptionId, status: 'trialing' };
 
     it('should get a subscription successfully', async () => {
-      mockRequest.mockResolvedValueOnce(new ApiResult(200, mockSubscriptionData));
-      const result = await client.getSubscription(mockSubscriptionId, mockMerchantId); // Pass both IDs
+      mockRequest.mockResolvedValueOnce(
+        new ApiResult(200, mockSubscriptionData),
+      );
+      const result = await client.getSubscription(
+        mockSubscriptionId,
+        mockMerchantId,
+      ); // Pass both IDs
       expect(result.data).toEqual(mockSubscriptionData);
       expect(mockRequest).toHaveBeenCalledWith({
         method: 'GET',
         path: '/customer-subscriptions/{subscription_id}', // Use path template
-        params: { subscription_id: mockSubscriptionId, merchant_id: mockMerchantId }, // Expect both params
+        params: {
+          subscription_id: mockSubscriptionId,
+          merchant_id: mockMerchantId,
+        }, // Expect both params
       });
     });
 
@@ -76,16 +98,28 @@ describe('CustomerSubscriptionsClient', () => {
     const mockSubscriptionId = 'sub_abc';
     const mockMerchantId = 'merchant_custsub_3'; // Added merchant_id
     const mockUpdateData = { status: 'canceled' }; // Example: updating status
-    const mockUpdatedSubscription = { id: mockSubscriptionId, ...mockUpdateData };
+    const mockUpdatedSubscription = {
+      id: mockSubscriptionId,
+      ...mockUpdateData,
+    };
 
     it('should update a subscription successfully', async () => {
-      mockRequest.mockResolvedValueOnce(new ApiResult(200, mockUpdatedSubscription));
-      const result = await client.updateSubscription(mockSubscriptionId, mockMerchantId, mockUpdateData); // Pass all three args
+      mockRequest.mockResolvedValueOnce(
+        new ApiResult(200, mockUpdatedSubscription),
+      );
+      const result = await client.updateSubscription(
+        mockSubscriptionId,
+        mockMerchantId,
+        mockUpdateData,
+      ); // Pass all three args
       expect(result.data).toEqual(mockUpdatedSubscription);
       expect(mockRequest).toHaveBeenCalledWith({
         method: 'PATCH',
         path: '/customer-subscriptions/{subscription_id}', // Use path template
-        params: { subscription_id: mockSubscriptionId, merchant_id: mockMerchantId }, // Expect both params
+        params: {
+          subscription_id: mockSubscriptionId,
+          merchant_id: mockMerchantId,
+        }, // Expect both params
         data: mockUpdateData,
       });
     });
@@ -99,15 +133,21 @@ describe('CustomerSubscriptionsClient', () => {
 
     it('should cancel a subscription successfully', async () => {
       mockRequest.mockResolvedValueOnce(new ApiResult(204, undefined)); // Expect 204 No Content
-      const result = await client.cancelSubscription(mockSubscriptionId, mockMerchantId); // Pass both IDs
+      const result = await client.cancelSubscription(
+        mockSubscriptionId,
+        mockMerchantId,
+      ); // Pass both IDs
       expect(result.status).toBe(204);
       expect(mockRequest).toHaveBeenCalledWith({
         method: 'DELETE',
         path: '/customer-subscriptions/{subscription_id}', // Use path template
-        params: { subscription_id: mockSubscriptionId, merchant_id: mockMerchantId }, // Expect both params
+        params: {
+          subscription_id: mockSubscriptionId,
+          merchant_id: mockMerchantId,
+        }, // Expect both params
       });
     });
 
     // ... add tests for error handling ...
   });
-}); 
+});

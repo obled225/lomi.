@@ -22,7 +22,7 @@ describe('RefundsClient', () => {
       transaction_id: '123e4567-e89b-12d3-a456-426614174000',
       amount: 1000,
       reason: 'Customer request',
-      metadata: { source: 'test' }
+      metadata: { source: 'test' },
     };
 
     const mockRefundResponse: Types.Refund = {
@@ -35,14 +35,14 @@ describe('RefundsClient', () => {
       metadata: mockCreateRefundData.metadata,
       status: Types.RefundStatus.pending,
       created_at: new Date('2024-01-17T00:00:00Z'),
-      updated_at: new Date('2024-01-17T00:00:00Z')
+      updated_at: new Date('2024-01-17T00:00:00Z'),
     };
 
     it('should create a refund successfully', async () => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
         status: 201,
-        json: () => Promise.resolve(mockRefundResponse)
+        json: () => Promise.resolve(mockRefundResponse),
       } as Response);
 
       const result = await client.createRefund(mockCreateRefundData);
@@ -53,10 +53,10 @@ describe('RefundsClient', () => {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'X-API-KEY': mockApiKey
+            'X-API-KEY': mockApiKey,
           },
-          body: JSON.stringify(mockCreateRefundData)
-        })
+          body: JSON.stringify(mockCreateRefundData),
+        }),
       );
 
       expect(result).toBeInstanceOf(ApiResult);
@@ -77,14 +77,14 @@ describe('RefundsClient', () => {
       reason: 'Customer request',
       metadata: { source: 'test' },
       created_at: new Date('2024-01-17T00:00:00Z'),
-      updated_at: new Date('2024-01-17T00:00:00Z')
+      updated_at: new Date('2024-01-17T00:00:00Z'),
     };
 
     it('should get a refund successfully', async () => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
         status: 200,
-        json: () => Promise.resolve(mockRefund)
+        json: () => Promise.resolve(mockRefund),
       } as Response);
 
       const result = await client.getRefund(mockRefundId);
@@ -95,9 +95,9 @@ describe('RefundsClient', () => {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            'X-API-KEY': mockApiKey
-          }
-        })
+            'X-API-KEY': mockApiKey,
+          },
+        }),
       );
 
       expect(result).toBeInstanceOf(ApiResult);
@@ -110,7 +110,7 @@ describe('RefundsClient', () => {
     const mockRefundId = '123e4567-e89b-12d3-a456-426614174001';
     const mockUpdateData = {
       status: Types.RefundStatus.completed,
-      metadata: { reason: 'Processed' }
+      metadata: { reason: 'Processed' },
     };
 
     const mockUpdatedRefund: Types.Refund = {
@@ -123,14 +123,14 @@ describe('RefundsClient', () => {
       reason: 'Customer request',
       metadata: { reason: 'Processed' },
       created_at: new Date('2024-01-17T00:00:00Z'),
-      updated_at: new Date('2024-01-17T00:00:00Z')
+      updated_at: new Date('2024-01-17T00:00:00Z'),
     };
 
     it('should update a refund successfully', async () => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
         status: 200,
-        json: () => Promise.resolve(mockUpdatedRefund)
+        json: () => Promise.resolve(mockUpdatedRefund),
       } as Response);
 
       const result = await client.updateRefund(mockRefundId, mockUpdateData);
@@ -141,10 +141,10 @@ describe('RefundsClient', () => {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
-            'X-API-KEY': mockApiKey
+            'X-API-KEY': mockApiKey,
           },
-          body: JSON.stringify(mockUpdateData)
-        })
+          body: JSON.stringify(mockUpdateData),
+        }),
       );
 
       expect(result).toBeInstanceOf(ApiResult);
@@ -152,4 +152,4 @@ describe('RefundsClient', () => {
       expect(result.data).toEqual(mockUpdatedRefund);
     });
   });
-}); 
+});

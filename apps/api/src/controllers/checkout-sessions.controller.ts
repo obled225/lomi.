@@ -1,32 +1,39 @@
-import { Request, Response } from "express";
-import { createClient } from "@supabase/supabase-js";
-import { z } from "zod";
+import { Request, Response } from 'express';
+import { createClient } from '@supabase/supabase-js';
+import { z } from 'zod';
 import {
   CurrencyCode,
   ProviderCode,
   CheckoutSessionStatus,
-} from "../types/api";
+} from '../types/api';
 
 // Initialize Supabase client
-const supabaseUrl = process.env.SUPABASE_URL || "";
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || "";
+const supabaseUrl = process.env.SUPABASE_URL || '';
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
 const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
 // Define currently supported providers and currencies
-const SUPPORTED_PROVIDERS = ["ORANGE", "WAVE", "NOWPAYMENTS", "MTN", "STRIPE", "SPI"];
-const SUPPORTED_CURRENCIES = ["XOF", "USD", "EUR"];
+const SUPPORTED_PROVIDERS = [
+  'ORANGE',
+  'WAVE',
+  'NOWPAYMENTS',
+  'MTN',
+  'STRIPE',
+  'SPI',
+];
+const SUPPORTED_CURRENCIES = ['XOF', 'USD', 'EUR'];
 
 // Error codes for better client-side error handling
 enum ErrorCode {
-  INVALID_REQUEST = "INVALID_REQUEST",
-  UNAUTHORIZED = "UNAUTHORIZED",
-  FORBIDDEN = "FORBIDDEN",
-  NOT_FOUND = "NOT_FOUND",
-  INVALID_REFERENCE = "INVALID_REFERENCE",
-  UNSUPPORTED_CURRENCY = "UNSUPPORTED_CURRENCY",
-  UNSUPPORTED_PROVIDER = "UNSUPPORTED_PROVIDER",
-  DATABASE_ERROR = "DATABASE_ERROR",
-  INTERNAL_ERROR = "INTERNAL_ERROR",
+  INVALID_REQUEST = 'INVALID_REQUEST',
+  UNAUTHORIZED = 'UNAUTHORIZED',
+  FORBIDDEN = 'FORBIDDEN',
+  NOT_FOUND = 'NOT_FOUND',
+  INVALID_REFERENCE = 'INVALID_REFERENCE',
+  UNSUPPORTED_CURRENCY = 'UNSUPPORTED_CURRENCY',
+  UNSUPPORTED_PROVIDER = 'UNSUPPORTED_PROVIDER',
+  DATABASE_ERROR = 'DATABASE_ERROR',
+  INTERNAL_ERROR = 'INTERNAL_ERROR',
 }
 
 // Standardized error response creator
@@ -96,7 +103,7 @@ export const createCheckoutSession = async (req: Request, res: Response) => {
           createErrorResponse(
             400,
             ErrorCode.INVALID_REQUEST,
-            "Invalid request body",
+            'Invalid request body',
             validationResult.error.format(),
           ),
         );
@@ -111,7 +118,7 @@ export const createCheckoutSession = async (req: Request, res: Response) => {
             400,
             ErrorCode.UNSUPPORTED_CURRENCY,
             `Currency ${validationResult.data.currency_code} is not currently supported`,
-            `Currently supported currencies: ${SUPPORTED_CURRENCIES.join(", ")}`,
+            `Currently supported currencies: ${SUPPORTED_CURRENCIES.join(', ')}`,
           ),
         );
     }
@@ -128,8 +135,8 @@ export const createCheckoutSession = async (req: Request, res: Response) => {
           createErrorResponse(
             400,
             ErrorCode.UNSUPPORTED_PROVIDER,
-            "One or more selected payment providers are not currently supported",
-            `Currently supported providers: ${SUPPORTED_PROVIDERS.join(", ")}`,
+            'One or more selected payment providers are not currently supported',
+            `Currently supported providers: ${SUPPORTED_PROVIDERS.join(', ')}`,
           ),
         );
     }
@@ -165,7 +172,7 @@ export const createCheckoutSession = async (req: Request, res: Response) => {
           createErrorResponse(
             401,
             ErrorCode.UNAUTHORIZED,
-            "Merchant ID or Organization ID not found",
+            'Merchant ID or Organization ID not found',
           ),
         );
     }
@@ -184,11 +191,11 @@ export const createCheckoutSession = async (req: Request, res: Response) => {
         if (product_id) {
           // Get product price and currency using RPC function
           const { data: productData, error: productError } = await supabase.rpc(
-            "get_product_for_checkout",
+            'get_product_for_checkout',
             {
               p_product_id: product_id,
               p_merchant_id: merchantId,
-            }
+            },
           );
 
           if (productError || !productData) {
@@ -206,29 +213,34 @@ export const createCheckoutSession = async (req: Request, res: Response) => {
           // ALWAYS use the authoritative product price from database
           finalAmount = productData.price * finalQuantity;
           calculatedCurrency = productData.currency_code;
-          
+
           // Warn if provided amount doesn't match the calculated amount
           if (providedAmount && Math.abs(providedAmount - finalAmount) > 0.01) {
-            console.warn(`Provided amount (${providedAmount}) doesn't match calculated amount (${finalAmount}) for product ${product_id}. Using calculated amount.`);
+            console.warn(
+              `Provided amount (${providedAmount}) doesn't match calculated amount (${finalAmount}) for product ${product_id}. Using calculated amount.`,
+            );
           }
-          
+
           // For products, allow quantity changes by default unless explicitly disabled
           if (allow_quantity === undefined) {
             finalAllowQuantity = true;
           }
-          
+
           // Inherit coupon settings from product if not explicitly set
-          if (allow_coupon_code === undefined && productData.allow_coupon_code !== undefined) {
+          if (
+            allow_coupon_code === undefined &&
+            productData.allow_coupon_code !== undefined
+          ) {
             finalAllowCouponCode = productData.allow_coupon_code;
           }
         } else if (plan_id) {
           // Get plan amount and currency using RPC function
           const { data: planData, error: planError } = await supabase.rpc(
-            "get_plan_for_checkout",
+            'get_plan_for_checkout',
             {
               p_plan_id: plan_id,
               p_merchant_id: merchantId,
-            }
+            },
           );
 
           if (planError || !planData) {
@@ -248,14 +260,23 @@ export const createCheckoutSession = async (req: Request, res: Response) => {
           calculatedCurrency = planData.currency_code;
           finalQuantity = 1; // Force quantity to 1 for plans
           finalAllowQuantity = false; // Plans shouldn't allow quantity changes
-          
+
           // Warn if provided amount doesn't match the plan amount
-          if (providedAmount && finalAmount && Math.abs(providedAmount - finalAmount) > 0.01) {
-            console.warn(`Provided amount (${providedAmount}) doesn't match plan amount (${finalAmount}) for plan ${plan_id}. Using plan amount.`);
+          if (
+            providedAmount &&
+            finalAmount &&
+            Math.abs(providedAmount - finalAmount) > 0.01
+          ) {
+            console.warn(
+              `Provided amount (${providedAmount}) doesn't match plan amount (${finalAmount}) for plan ${plan_id}. Using plan amount.`,
+            );
           }
-          
+
           // Inherit coupon settings from plan if not explicitly set
-          if (allow_coupon_code === undefined && planData.allow_coupon_code !== undefined) {
+          if (
+            allow_coupon_code === undefined &&
+            planData.allow_coupon_code !== undefined
+          ) {
             finalAllowCouponCode = planData.allow_coupon_code;
           }
         }
@@ -266,7 +287,7 @@ export const createCheckoutSession = async (req: Request, res: Response) => {
             createErrorResponse(
               500,
               ErrorCode.DATABASE_ERROR,
-              "Failed to fetch product/plan details",
+              'Failed to fetch product/plan details',
             ),
           );
       }
@@ -293,13 +314,13 @@ export const createCheckoutSession = async (req: Request, res: Response) => {
           createErrorResponse(
             400,
             ErrorCode.INVALID_REQUEST,
-            "Amount is required for instant payments (no product_id or plan_id provided)",
+            'Amount is required for instant payments (no product_id or plan_id provided)',
           ),
         );
     }
 
     // Use RPC function to create checkout session
-    const { data, error } = await supabase.rpc("create_checkout_session", {
+    const { data, error } = await supabase.rpc('create_checkout_session', {
       p_merchant_id: merchantId,
       p_organization_id: organizationId,
       p_success_url: success_url,
@@ -322,30 +343,30 @@ export const createCheckoutSession = async (req: Request, res: Response) => {
     });
 
     if (error) {
-      console.error("Error creating checkout session:", error);
+      console.error('Error creating checkout session:', error);
 
       // Handle specific database errors
-      if (error.message.includes("unique constraint")) {
+      if (error.message.includes('unique constraint')) {
         return res
           .status(409)
           .json(
             createErrorResponse(
               409,
-              "RESOURCE_CONFLICT",
-              "A resource with this identifier already exists",
+              'RESOURCE_CONFLICT',
+              'A resource with this identifier already exists',
               error.message,
             ),
           );
       }
 
-      if (error.message.includes("foreign key constraint")) {
+      if (error.message.includes('foreign key constraint')) {
         return res
           .status(400)
           .json(
             createErrorResponse(
               400,
-              "INVALID_REFERENCE",
-              "Referenced resource does not exist",
+              'INVALID_REFERENCE',
+              'Referenced resource does not exist',
               error.message,
             ),
           );
@@ -357,7 +378,7 @@ export const createCheckoutSession = async (req: Request, res: Response) => {
           createErrorResponse(
             500,
             ErrorCode.DATABASE_ERROR,
-            "Failed to create checkout session",
+            'Failed to create checkout session',
             error.message,
           ),
         );
@@ -365,7 +386,7 @@ export const createCheckoutSession = async (req: Request, res: Response) => {
 
     // Format the response
     const checkoutSessionId = data;
-    const checkoutUrl = `${process.env.CHECKOUT_URL || "https://checkout.lomi.africa"}/checkout/${checkoutSessionId.checkout_session_id}`;
+    const checkoutUrl = `${process.env.CHECKOUT_URL || 'https://checkout.lomi.africa'}/checkout/${checkoutSessionId.checkout_session_id}`;
     const expiresAt = new Date();
     expiresAt.setMinutes(expiresAt.getMinutes() + expiration_minutes);
     const createdAt = new Date();
@@ -389,19 +410,19 @@ export const createCheckoutSession = async (req: Request, res: Response) => {
         allow_coupon_code: finalAllowCouponCode,
         allow_quantity: finalAllowQuantity,
         quantity: finalQuantity,
-        environment: process.env.NODE_ENV === "production" ? "live" : "test",
+        environment: process.env.NODE_ENV === 'production' ? 'live' : 'test',
       },
     });
   } catch (error: any) {
-    logError(error, "createCheckoutSession", req);
+    logError(error, 'createCheckoutSession', req);
     res
       .status(500)
       .json(
         createErrorResponse(
           500,
           ErrorCode.INTERNAL_ERROR,
-          "Internal server error",
-          process.env.NODE_ENV === "production" ? undefined : error.message,
+          'Internal server error',
+          process.env.NODE_ENV === 'production' ? undefined : error.message,
         ),
       );
   }
@@ -422,13 +443,13 @@ export const getCheckoutSession = async (req: Request, res: Response) => {
           createErrorResponse(
             401,
             ErrorCode.UNAUTHORIZED,
-            "Merchant ID not found",
+            'Merchant ID not found',
           ),
         );
     }
 
     // Use RPC function to get checkout session
-    const { data, error } = await supabase.rpc("get_checkout_session", {
+    const { data, error } = await supabase.rpc('get_checkout_session', {
       p_checkout_session_id: id,
     });
 
@@ -439,7 +460,7 @@ export const getCheckoutSession = async (req: Request, res: Response) => {
           createErrorResponse(
             500,
             ErrorCode.DATABASE_ERROR,
-            "Failed to retrieve checkout session",
+            'Failed to retrieve checkout session',
             error.message,
           ),
         );
@@ -452,7 +473,7 @@ export const getCheckoutSession = async (req: Request, res: Response) => {
           createErrorResponse(
             404,
             ErrorCode.NOT_FOUND,
-            "Checkout session not found",
+            'Checkout session not found',
           ),
         );
     }
@@ -471,7 +492,7 @@ export const getCheckoutSession = async (req: Request, res: Response) => {
     }
 
     // Format the session for the API response
-    const checkoutUrl = `${process.env.CHECKOUT_URL || "https://checkout.lomi.africa"}/checkout/${data.checkout_session_id}`;
+    const checkoutUrl = `${process.env.CHECKOUT_URL || 'https://checkout.lomi.africa'}/checkout/${data.checkout_session_id}`;
 
     res.json({
       data: {
@@ -502,15 +523,15 @@ export const getCheckoutSession = async (req: Request, res: Response) => {
       },
     });
   } catch (error: any) {
-    logError(error, "getCheckoutSession", req);
+    logError(error, 'getCheckoutSession', req);
     res
       .status(500)
       .json(
         createErrorResponse(
           500,
           ErrorCode.INTERNAL_ERROR,
-          "Internal server error",
-          process.env.NODE_ENV === "production" ? undefined : error.message,
+          'Internal server error',
+          process.env.NODE_ENV === 'production' ? undefined : error.message,
         ),
       );
   }
@@ -531,13 +552,13 @@ export const listCheckoutSessions = async (req: Request, res: Response) => {
           createErrorResponse(
             401,
             ErrorCode.UNAUTHORIZED,
-            "Merchant ID not found",
+            'Merchant ID not found',
           ),
         );
     }
 
     // Use RPC function to list checkout sessions
-    const { data, error } = await supabase.rpc("list_checkout_sessions", {
+    const { data, error } = await supabase.rpc('list_checkout_sessions', {
       p_merchant_id: merchantId,
       p_status: (status as string) || null,
       p_limit: Number(limit),
@@ -546,10 +567,10 @@ export const listCheckoutSessions = async (req: Request, res: Response) => {
 
     if (error) {
       // Check for logs constraint error specifically
-      if (error.message.includes("logs_severity_check")) {
+      if (error.message.includes('logs_severity_check')) {
         console.error(
-          "Database severity constraint error in list_checkout_sessions RPC function. " +
-            "The function is likely using an invalid severity value when logging. " +
+          'Database severity constraint error in list_checkout_sessions RPC function. ' +
+            'The function is likely using an invalid severity value when logging. ' +
             "You need to update the RPC function to use a valid severity value (e.g., 'notice' instead of 'NOTICE').",
         );
       }
@@ -560,7 +581,7 @@ export const listCheckoutSessions = async (req: Request, res: Response) => {
           createErrorResponse(
             500,
             ErrorCode.DATABASE_ERROR,
-            "Failed to list checkout sessions",
+            'Failed to list checkout sessions',
             error.message,
           ),
         );
@@ -568,7 +589,7 @@ export const listCheckoutSessions = async (req: Request, res: Response) => {
 
     // Format the sessions for the API response
     const formattedSessions = data.map((session: any) => {
-      const checkoutUrl = `${process.env.CHECKOUT_URL || "https://checkout.lomi.africa"}/checkout/${session.checkout_session_id}`;
+      const checkoutUrl = `${process.env.CHECKOUT_URL || 'https://checkout.lomi.africa'}/checkout/${session.checkout_session_id}`;
 
       // Return the formatted session object within the map function
       return {
@@ -610,15 +631,15 @@ export const listCheckoutSessions = async (req: Request, res: Response) => {
       },
     });
   } catch (error: any) {
-    logError(error, "listCheckoutSessions", req);
+    logError(error, 'listCheckoutSessions', req);
     res
       .status(500)
       .json(
         createErrorResponse(
           500,
           ErrorCode.INTERNAL_ERROR,
-          "Internal server error",
-          process.env.NODE_ENV === "production" ? undefined : error.message,
+          'Internal server error',
+          process.env.NODE_ENV === 'production' ? undefined : error.message,
         ),
       );
   }

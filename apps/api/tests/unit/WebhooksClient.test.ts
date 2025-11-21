@@ -24,10 +24,10 @@ describe('WebhooksClient', () => {
       url: 'https://webhook.test.com/endpoint',
       authorized_events: [
         Types.WebhookEvent.PAYMENT_SUCCEEDED,
-        Types.WebhookEvent.REFUND_COMPLETED
+        Types.WebhookEvent.REFUND_COMPLETED,
       ],
       is_active: true,
-      metadata: { test: 'data' }
+      metadata: { test: 'data' },
     };
 
     const mockWebhookResponse: Types.Webhook = {
@@ -40,14 +40,14 @@ describe('WebhooksClient', () => {
       last_response_body: '{"status":"ok"}',
       retry_count: 0,
       created_at: new Date('2024-01-17T00:00:00Z'),
-      updated_at: new Date('2024-01-17T00:00:00Z')
+      updated_at: new Date('2024-01-17T00:00:00Z'),
     };
 
     it('should create a webhook endpoint successfully', async () => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
         status: 201,
-        json: () => Promise.resolve(mockWebhookResponse)
+        json: () => Promise.resolve(mockWebhookResponse),
       } as Response);
 
       const result = await client.createWebhook(mockCreateWebhookData);
@@ -58,10 +58,10 @@ describe('WebhooksClient', () => {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'X-API-KEY': mockApiKey
+            'X-API-KEY': mockApiKey,
           },
-          body: JSON.stringify(mockCreateWebhookData)
-        })
+          body: JSON.stringify(mockCreateWebhookData),
+        }),
       );
 
       expect(result).toBeInstanceOf(ApiResult);
@@ -78,7 +78,7 @@ describe('WebhooksClient', () => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
         status: 200,
-        json: () => Promise.resolve(mockWebhookList)
+        json: () => Promise.resolve(mockWebhookList),
       } as Response);
 
       const result = await client.listWebhooks(mockMerchantId);
@@ -89,9 +89,9 @@ describe('WebhooksClient', () => {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            'X-API-KEY': mockApiKey
-          }
-        })
+            'X-API-KEY': mockApiKey,
+          },
+        }),
       );
 
       expect(result).toBeInstanceOf(ApiResult);
@@ -104,7 +104,7 @@ describe('WebhooksClient', () => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
         status: 200,
-        json: () => Promise.resolve(mockWebhookList)
+        json: () => Promise.resolve(mockWebhookList),
       } as Response);
 
       const result = await client.listWebhooks(mockMerchantId, optionalParams);
@@ -115,9 +115,9 @@ describe('WebhooksClient', () => {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            'X-API-KEY': mockApiKey
-          }
-        })
+            'X-API-KEY': mockApiKey,
+          },
+        }),
       );
 
       expect(result).toBeInstanceOf(ApiResult);
@@ -143,14 +143,14 @@ describe('WebhooksClient', () => {
       retry_count: 0,
       metadata: { test: 'data' },
       created_at: new Date('2024-01-17T00:00:00Z'),
-      updated_at: new Date('2024-01-17T00:00:00Z')
+      updated_at: new Date('2024-01-17T00:00:00Z'),
     };
 
     it('should get a webhook endpoint successfully', async () => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
         status: 200,
-        json: () => Promise.resolve(mockWebhook)
+        json: () => Promise.resolve(mockWebhook),
       } as Response);
 
       const result = await client.getWebhook(mockWebhookId);
@@ -161,9 +161,9 @@ describe('WebhooksClient', () => {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            'X-API-KEY': mockApiKey
-          }
-        })
+            'X-API-KEY': mockApiKey,
+          },
+        }),
       );
 
       expect(result).toBeInstanceOf(ApiResult);
@@ -179,10 +179,10 @@ describe('WebhooksClient', () => {
       authorized_events: [
         Types.WebhookEvent.PAYMENT_SUCCEEDED,
         Types.WebhookEvent.REFUND_COMPLETED,
-        Types.WebhookEvent.SUBSCRIPTION_RENEWED
+        Types.WebhookEvent.SUBSCRIPTION_RENEWED,
       ],
       is_active: false,
-      metadata: { test: 'updated' }
+      metadata: { test: 'updated' },
     };
 
     const mockUpdatedWebhook: Types.Webhook = {
@@ -197,14 +197,14 @@ describe('WebhooksClient', () => {
       last_response_body: '{"status":"ok"}',
       retry_count: 0,
       created_at: new Date('2024-01-17T00:00:00Z'),
-      updated_at: new Date('2024-01-17T00:00:00Z')
+      updated_at: new Date('2024-01-17T00:00:00Z'),
     };
 
     it('should update a webhook endpoint successfully', async () => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
         status: 200,
-        json: () => Promise.resolve(mockUpdatedWebhook)
+        json: () => Promise.resolve(mockUpdatedWebhook),
       } as Response);
 
       const result = await client.updateWebhook(mockWebhookId, mockUpdateData);
@@ -215,10 +215,10 @@ describe('WebhooksClient', () => {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
-            'X-API-KEY': mockApiKey
+            'X-API-KEY': mockApiKey,
           },
-          body: JSON.stringify(mockUpdateData)
-        })
+          body: JSON.stringify(mockUpdateData),
+        }),
       );
 
       expect(result).toBeInstanceOf(ApiResult);
@@ -234,7 +234,7 @@ describe('WebhooksClient', () => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
         status: 204,
-        json: () => Promise.resolve(undefined)
+        json: () => Promise.resolve(undefined),
       } as Response);
 
       const result = await client.deleteWebhook(mockWebhookId);
@@ -245,9 +245,9 @@ describe('WebhooksClient', () => {
           method: 'DELETE',
           headers: {
             'Content-Type': 'application/json',
-            'X-API-KEY': mockApiKey
-          }
-        })
+            'X-API-KEY': mockApiKey,
+          },
+        }),
       );
 
       expect(result).toBeInstanceOf(ApiResult);
@@ -267,7 +267,7 @@ describe('WebhooksClient', () => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
         status: 200,
-        json: () => Promise.resolve(mockResponse)
+        json: () => Promise.resolve(mockResponse),
       } as Response);
 
       const result = await client.regenerateWebhookSecret(mockWebhookId);
@@ -278,9 +278,9 @@ describe('WebhooksClient', () => {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'X-API-KEY': mockApiKey
-          }
-        })
+            'X-API-KEY': mockApiKey,
+          },
+        }),
       );
 
       expect(result).toBeInstanceOf(ApiResult);
@@ -293,14 +293,14 @@ describe('WebhooksClient', () => {
     const mockWebhookId = '123e4567-e89b-12d3-a456-426614174001';
     const mockResponse = {
       success: true,
-      message: 'Test webhook sent successfully'
+      message: 'Test webhook sent successfully',
     };
 
     it('should test a webhook successfully', async () => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
         status: 200,
-        json: () => Promise.resolve(mockResponse)
+        json: () => Promise.resolve(mockResponse),
       } as Response);
 
       const result = await client.testWebhook(mockWebhookId);
@@ -311,9 +311,9 @@ describe('WebhooksClient', () => {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'X-API-KEY': mockApiKey
-          }
-        })
+            'X-API-KEY': mockApiKey,
+          },
+        }),
       );
 
       expect(result).toBeInstanceOf(ApiResult);
@@ -321,4 +321,4 @@ describe('WebhooksClient', () => {
       expect(result.data).toEqual(mockResponse);
     });
   });
-}); 
+});

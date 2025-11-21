@@ -1,23 +1,23 @@
-import { Request, Response } from "express";
-import { createClient } from "@supabase/supabase-js";
-import { z } from "zod";
-import { CurrencyCode, PaymentLinkType, ProviderCode } from "../types/api";
+import { Request, Response } from 'express';
+import { createClient } from '@supabase/supabase-js';
+import { z } from 'zod';
+import { CurrencyCode, PaymentLinkType, ProviderCode } from '../types/api';
 
 // Initialize Supabase client
-const supabaseUrl = process.env.SUPABASE_URL || "";
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || "";
+const supabaseUrl = process.env.SUPABASE_URL || '';
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
 const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
 // Error codes for better client-side error handling
 enum ErrorCode {
-  INVALID_REQUEST = "INVALID_REQUEST",
-  UNAUTHORIZED = "UNAUTHORIZED",
-  FORBIDDEN = "FORBIDDEN",
-  NOT_FOUND = "NOT_FOUND",
-  RESOURCE_CONFLICT = "RESOURCE_CONFLICT",
-  INVALID_REFERENCE = "INVALID_REFERENCE",
-  DATABASE_ERROR = "DATABASE_ERROR",
-  INTERNAL_ERROR = "INTERNAL_ERROR",
+  INVALID_REQUEST = 'INVALID_REQUEST',
+  UNAUTHORIZED = 'UNAUTHORIZED',
+  FORBIDDEN = 'FORBIDDEN',
+  NOT_FOUND = 'NOT_FOUND',
+  RESOURCE_CONFLICT = 'RESOURCE_CONFLICT',
+  INVALID_REFERENCE = 'INVALID_REFERENCE',
+  DATABASE_ERROR = 'DATABASE_ERROR',
+  INTERNAL_ERROR = 'INTERNAL_ERROR',
 }
 
 // Standardized error response creator
@@ -112,7 +112,7 @@ const updatePaymentLinkApiSchema = z.object({
  * Create a payment link
  */
 export const createPaymentLink = async (req: Request, res: Response) => {
-  const context = "createPaymentLink";
+  const context = 'createPaymentLink';
   try {
     // Validate request body
     const validationResult = createPaymentLinkSchema.safeParse(req.body);
@@ -123,7 +123,7 @@ export const createPaymentLink = async (req: Request, res: Response) => {
           createErrorResponse(
             400,
             ErrorCode.INVALID_REQUEST,
-            "Invalid request data",
+            'Invalid request data',
             validationResult.error.format(),
           ),
         );
@@ -138,7 +138,7 @@ export const createPaymentLink = async (req: Request, res: Response) => {
     if (!merchantId) {
       // This error should ideally not be hit if auth middleware is working
       logError(
-        "Merchant ID missing from authenticated request context",
+        'Merchant ID missing from authenticated request context',
         context,
         req,
       );
@@ -148,7 +148,7 @@ export const createPaymentLink = async (req: Request, res: Response) => {
           createErrorResponse(
             401,
             ErrorCode.UNAUTHORIZED,
-            "Authentication error: Merchant ID could not be determined from API key.",
+            'Authentication error: Merchant ID could not be determined from API key.',
           ),
         );
     }
@@ -156,7 +156,7 @@ export const createPaymentLink = async (req: Request, res: Response) => {
     // Fetch organization_id if not available in context (middleware should provide this too ideally)
     if (!organizationId) {
       const { data: orgData, error: orgError } = await supabase.rpc(
-        "get_merchant_organization_id",
+        'get_merchant_organization_id',
         { p_merchant_id: merchantId },
       );
 
@@ -185,7 +185,7 @@ export const createPaymentLink = async (req: Request, res: Response) => {
 
     // Call create_payment_link RPC using IDs from context/lookup
     const { data: linkId, error: createRpcError } = await supabase.rpc(
-      "create_payment_link",
+      'create_payment_link',
       {
         p_merchant_id: merchantId, // Use validated merchantId from context
         p_organization_id: organizationId, // Use validated organizationId from context/lookup
@@ -210,7 +210,7 @@ export const createPaymentLink = async (req: Request, res: Response) => {
       logError(createRpcError, `${context} - create_payment_link RPC`, req);
       if (
         createRpcError?.message.includes(
-          "duplicate key value violates unique constraint",
+          'duplicate key value violates unique constraint',
         )
       ) {
         return res
@@ -219,19 +219,19 @@ export const createPaymentLink = async (req: Request, res: Response) => {
             createErrorResponse(
               409,
               ErrorCode.RESOURCE_CONFLICT,
-              "A payment link with similar properties (e.g., URL) might already exist.",
+              'A payment link with similar properties (e.g., URL) might already exist.',
               createRpcError.message,
             ),
           );
       }
-      if (createRpcError?.message.includes("foreign key constraint")) {
+      if (createRpcError?.message.includes('foreign key constraint')) {
         return res
           .status(400)
           .json(
             createErrorResponse(
               400,
               ErrorCode.INVALID_REFERENCE,
-              "Invalid reference: Ensure product_id or plan_id exists.",
+              'Invalid reference: Ensure product_id or plan_id exists.',
               createRpcError.message,
             ),
           );
@@ -242,7 +242,7 @@ export const createPaymentLink = async (req: Request, res: Response) => {
           createErrorResponse(
             500,
             ErrorCode.DATABASE_ERROR,
-            "Failed to create payment link in database",
+            'Failed to create payment link in database',
             createRpcError?.message,
           ),
         );
@@ -250,7 +250,7 @@ export const createPaymentLink = async (req: Request, res: Response) => {
 
     // Get newly created payment link details
     const { data: paymentLink, error: fetchError } = await supabase.rpc(
-      "get_payment_link",
+      'get_payment_link',
       {
         p_link_id: linkId, // Use the ID returned by create_payment_link
         p_merchant_id: merchantId,
@@ -269,7 +269,7 @@ export const createPaymentLink = async (req: Request, res: Response) => {
           createErrorResponse(
             500,
             ErrorCode.DATABASE_ERROR,
-            "Payment link created but failed to retrieve details",
+            'Payment link created but failed to retrieve details',
             fetchError?.message,
           ),
         );
@@ -287,8 +287,8 @@ export const createPaymentLink = async (req: Request, res: Response) => {
         createErrorResponse(
           500,
           ErrorCode.INTERNAL_ERROR,
-          "Internal server error",
-          process.env.NODE_ENV === "production" ? undefined : error.message,
+          'Internal server error',
+          process.env.NODE_ENV === 'production' ? undefined : error.message,
         ),
       );
   }
@@ -298,15 +298,15 @@ export const createPaymentLink = async (req: Request, res: Response) => {
  * List payment links for a merchant
  */
 export const listPaymentLinks = async (req: Request, res: Response) => {
-  const context = "listPaymentLinks";
+  const context = 'listPaymentLinks';
   try {
     const {
       link_type,
       currency_code,
       is_active,
-      page = "1",
-      page_size = "50",
-      include_expired = "false",
+      page = '1',
+      page_size = '50',
+      include_expired = 'false',
     } = req.query;
 
     const merchantId = req.merchantId;
@@ -320,7 +320,7 @@ export const listPaymentLinks = async (req: Request, res: Response) => {
           createErrorResponse(
             401,
             ErrorCode.UNAUTHORIZED,
-            "Authentication required: Merchant ID not found in request context.",
+            'Authentication required: Merchant ID not found in request context.',
           ),
         );
     }
@@ -341,24 +341,24 @@ export const listPaymentLinks = async (req: Request, res: Response) => {
           createErrorResponse(
             400,
             ErrorCode.INVALID_REQUEST,
-            "Invalid pagination parameters: page must be >= 1, page_size must be between 1 and 100.",
+            'Invalid pagination parameters: page must be >= 1, page_size must be between 1 and 100.',
           ),
         );
     }
 
     // Call fetch_payment_links RPC function
     const { data, error: listError } = await supabase.rpc(
-      "fetch_payment_links",
+      'fetch_payment_links',
       {
         p_merchant_id: merchantId as string,
         p_organization_id: (organizationId as string) || null,
         p_link_type: (link_type as PaymentLinkType) || null,
         p_currency_code: (currency_code as CurrencyCode) || null,
         p_is_active:
-          is_active === "true" ? true : is_active === "false" ? false : null,
+          is_active === 'true' ? true : is_active === 'false' ? false : null,
         p_page: pageNum,
         p_page_size: pageSizeNum,
-        p_include_expired: include_expired === "true",
+        p_include_expired: include_expired === 'true',
       },
     );
 
@@ -370,7 +370,7 @@ export const listPaymentLinks = async (req: Request, res: Response) => {
           createErrorResponse(
             500,
             ErrorCode.DATABASE_ERROR,
-            "Failed to list payment links",
+            'Failed to list payment links',
             listError.message,
           ),
         );
@@ -393,8 +393,8 @@ export const listPaymentLinks = async (req: Request, res: Response) => {
         createErrorResponse(
           500,
           ErrorCode.INTERNAL_ERROR,
-          "Internal server error",
-          process.env.NODE_ENV === "production" ? undefined : error.message,
+          'Internal server error',
+          process.env.NODE_ENV === 'production' ? undefined : error.message,
         ),
       );
   }
@@ -404,7 +404,7 @@ export const listPaymentLinks = async (req: Request, res: Response) => {
  * Get payment link details
  */
 export const getPaymentLink = async (req: Request, res: Response) => {
-  const context = "getPaymentLink";
+  const context = 'getPaymentLink';
   try {
     const { link_id } = req.params;
     const merchantId = req.merchantId; // Get from auth middleware
@@ -416,12 +416,12 @@ export const getPaymentLink = async (req: Request, res: Response) => {
           createErrorResponse(
             401,
             ErrorCode.UNAUTHORIZED,
-            "Authentication required: Merchant ID not found in request context.",
+            'Authentication required: Merchant ID not found in request context.',
           ),
         );
     }
 
-    if (!link_id || typeof link_id !== "string") {
+    if (!link_id || typeof link_id !== 'string') {
       // Basic validation
       return res
         .status(400)
@@ -429,13 +429,13 @@ export const getPaymentLink = async (req: Request, res: Response) => {
           createErrorResponse(
             400,
             ErrorCode.INVALID_REQUEST,
-            "Valid link_id path parameter is required.",
+            'Valid link_id path parameter is required.',
           ),
         );
     }
 
     // Call get_payment_link RPC function
-    const { data, error: getError } = await supabase.rpc("get_payment_link", {
+    const { data, error: getError } = await supabase.rpc('get_payment_link', {
       p_link_id: link_id,
       p_merchant_id: merchantId, // Filter by merchant_id for security
     });
@@ -448,7 +448,7 @@ export const getPaymentLink = async (req: Request, res: Response) => {
           createErrorResponse(
             500,
             ErrorCode.DATABASE_ERROR,
-            "Failed to retrieve payment link",
+            'Failed to retrieve payment link',
             getError.message,
           ),
         );
@@ -478,8 +478,8 @@ export const getPaymentLink = async (req: Request, res: Response) => {
         createErrorResponse(
           500,
           ErrorCode.INTERNAL_ERROR,
-          "Internal server error",
-          process.env.NODE_ENV === "production" ? undefined : error.message,
+          'Internal server error',
+          process.env.NODE_ENV === 'production' ? undefined : error.message,
         ),
       );
   }
@@ -489,7 +489,7 @@ export const getPaymentLink = async (req: Request, res: Response) => {
  * Update payment link
  */
 export const updatePaymentLink = async (req: Request, res: Response) => {
-  const context = "updatePaymentLink";
+  const context = 'updatePaymentLink';
   try {
     const { link_id } = req.params;
     const merchantId = req.merchantId; // Get from auth middleware
@@ -501,19 +501,19 @@ export const updatePaymentLink = async (req: Request, res: Response) => {
           createErrorResponse(
             401,
             ErrorCode.UNAUTHORIZED,
-            "Authentication required: Merchant ID not found in request context.",
+            'Authentication required: Merchant ID not found in request context.',
           ),
         );
     }
 
-    if (!link_id || typeof link_id !== "string") {
+    if (!link_id || typeof link_id !== 'string') {
       return res
         .status(400)
         .json(
           createErrorResponse(
             400,
             ErrorCode.INVALID_REQUEST,
-            "Valid link_id path parameter is required.",
+            'Valid link_id path parameter is required.',
           ),
         );
     }
@@ -527,7 +527,7 @@ export const updatePaymentLink = async (req: Request, res: Response) => {
           createErrorResponse(
             400,
             ErrorCode.INVALID_REQUEST,
-            "Invalid request data for update",
+            'Invalid request data for update',
             validationResult.error.format(),
           ),
         );
@@ -538,7 +538,7 @@ export const updatePaymentLink = async (req: Request, res: Response) => {
     // Add check: Ensure the link belongs to the authenticated merchant before updating
     // This requires a preliminary check using get_payment_link or similar
     const { data: existingLink, error: checkError } = await supabase.rpc(
-      "get_payment_link",
+      'get_payment_link',
       { p_link_id: link_id, p_merchant_id: merchantId },
     );
 
@@ -558,7 +558,7 @@ export const updatePaymentLink = async (req: Request, res: Response) => {
 
     // Call update_payment_link RPC, passing null for fields not allowed in API update
     const { data: updatedLinkResult, error: updateError } = await supabase.rpc(
-      "update_payment_link",
+      'update_payment_link',
       {
         p_link_id: link_id,
         // API Updatable fields:
@@ -582,7 +582,7 @@ export const updatePaymentLink = async (req: Request, res: Response) => {
       // Handle potential specific errors from update
       if (
         updateError?.message.includes(
-          "duplicate key value violates unique constraint",
+          'duplicate key value violates unique constraint',
         )
       ) {
         return res
@@ -591,7 +591,7 @@ export const updatePaymentLink = async (req: Request, res: Response) => {
             createErrorResponse(
               409,
               ErrorCode.RESOURCE_CONFLICT,
-              "Update failed: This would create a conflict (e.g., duplicate URL).",
+              'Update failed: This would create a conflict (e.g., duplicate URL).',
               updateError.message,
             ),
           );
@@ -602,7 +602,7 @@ export const updatePaymentLink = async (req: Request, res: Response) => {
           createErrorResponse(
             500,
             ErrorCode.DATABASE_ERROR,
-            "Failed to update payment link",
+            'Failed to update payment link',
             updateError.message,
           ),
         );
@@ -611,7 +611,7 @@ export const updatePaymentLink = async (req: Request, res: Response) => {
     // If updatedLinkResult is null or empty array, it might mean the RPC doesn't return the full object,
     // or the update affected 0 rows (already checked above). Refetch to be sure.
     const { data: finalLink, error: finalFetchError } = await supabase.rpc(
-      "get_payment_link",
+      'get_payment_link',
       { p_link_id: link_id, p_merchant_id: merchantId },
     );
 
@@ -623,7 +623,7 @@ export const updatePaymentLink = async (req: Request, res: Response) => {
           createErrorResponse(
             500,
             ErrorCode.DATABASE_ERROR,
-            "Payment link updated, but failed to retrieve final details.",
+            'Payment link updated, but failed to retrieve final details.',
             finalFetchError?.message,
           ),
         );
@@ -641,8 +641,8 @@ export const updatePaymentLink = async (req: Request, res: Response) => {
         createErrorResponse(
           500,
           ErrorCode.INTERNAL_ERROR,
-          "Internal server error",
-          process.env.NODE_ENV === "production" ? undefined : error.message,
+          'Internal server error',
+          process.env.NODE_ENV === 'production' ? undefined : error.message,
         ),
       );
   }
@@ -652,7 +652,7 @@ export const updatePaymentLink = async (req: Request, res: Response) => {
  * Delete payment link
  */
 export const deletePaymentLink = async (req: Request, res: Response) => {
-  const context = "deletePaymentLink";
+  const context = 'deletePaymentLink';
   try {
     const { link_id } = req.params;
     const merchantId = req.merchantId; // Get from auth middleware
@@ -664,26 +664,26 @@ export const deletePaymentLink = async (req: Request, res: Response) => {
           createErrorResponse(
             401,
             ErrorCode.UNAUTHORIZED,
-            "Authentication required: Merchant ID not found in request context.",
+            'Authentication required: Merchant ID not found in request context.',
           ),
         );
     }
 
-    if (!link_id || typeof link_id !== "string") {
+    if (!link_id || typeof link_id !== 'string') {
       return res
         .status(400)
         .json(
           createErrorResponse(
             400,
             ErrorCode.INVALID_REQUEST,
-            "Valid link_id path parameter is required.",
+            'Valid link_id path parameter is required.',
           ),
         );
     }
 
     // Add check: Ensure the link belongs to the authenticated merchant before deleting
     const { data: existingLink, error: checkError } = await supabase.rpc(
-      "get_payment_link",
+      'get_payment_link',
       { p_link_id: link_id, p_merchant_id: merchantId },
     );
 
@@ -703,7 +703,7 @@ export const deletePaymentLink = async (req: Request, res: Response) => {
 
     // Call safe_delete_payment_link RPC
     const { data: success, error: deleteError } = await supabase.rpc(
-      "safe_delete_payment_link",
+      'safe_delete_payment_link',
       { p_link_id: link_id },
     );
 
@@ -715,7 +715,7 @@ export const deletePaymentLink = async (req: Request, res: Response) => {
           createErrorResponse(
             500,
             ErrorCode.DATABASE_ERROR,
-            "Failed to delete payment link",
+            'Failed to delete payment link',
             deleteError.message,
           ),
         );
@@ -729,7 +729,7 @@ export const deletePaymentLink = async (req: Request, res: Response) => {
           createErrorResponse(
             404,
             ErrorCode.NOT_FOUND,
-            "Payment link not found or could not be deleted (it may have been deleted already).",
+            'Payment link not found or could not be deleted (it may have been deleted already).',
           ),
         );
     }
@@ -743,8 +743,8 @@ export const deletePaymentLink = async (req: Request, res: Response) => {
         createErrorResponse(
           500,
           ErrorCode.INTERNAL_ERROR,
-          "Internal server error",
-          process.env.NODE_ENV === "production" ? undefined : error.message,
+          'Internal server error',
+          process.env.NODE_ENV === 'production' ? undefined : error.message,
         ),
       );
   }

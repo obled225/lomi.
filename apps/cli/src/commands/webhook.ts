@@ -1,10 +1,10 @@
-import { Command } from "commander";
-import inquirer from "inquirer";
-import chalk from "chalk";
-import ora from "ora";
-import { makeRequest } from "../utils/api.js";
-import { WEBHOOK_EVENTS } from "../config/constants.js";
-import { ensureLoggedIn } from "../utils/config.js";
+import { Command } from 'commander';
+import inquirer from 'inquirer';
+import chalk from 'chalk';
+import ora from 'ora';
+import { makeRequest } from '../utils/api.js';
+import { WEBHOOK_EVENTS } from '../config/constants.js';
+import { ensureLoggedIn } from '../utils/config.js';
 
 interface Webhook {
   webhook_id: string;
@@ -18,55 +18,55 @@ interface Webhook {
   updated_at: string;
 }
 
-const command = new Command("webhook");
+const command = new Command('webhook');
 
-command.description("Manage webhook endpoints (requires login)").action(() => {
+command.description('Manage webhook endpoints (requires login)').action(() => {
   ensureLoggedIn();
-  console.log(chalk.blue("Use subcommands: register, list"));
+  console.log(chalk.blue('Use subcommands: register, list'));
   command.outputHelp();
 });
 
 command
-  .command("register")
-  .description("Register a new webhook endpoint")
+  .command('register')
+  .description('Register a new webhook endpoint')
   .action(async () => {
     ensureLoggedIn();
     const answers = await inquirer.prompt([
       {
-        type: "input",
-        name: "merchantId",
-        message: "Enter your merchant ID:",
+        type: 'input',
+        name: 'merchantId',
+        message: 'Enter your merchant ID:',
         validate: (input: string) =>
-          input.length > 0 || "Merchant ID is required",
+          input.length > 0 || 'Merchant ID is required',
       },
       {
-        type: "input",
-        name: "url",
-        message: "Enter the webhook URL:",
+        type: 'input',
+        name: 'url',
+        message: 'Enter the webhook URL:',
         validate: (input: string) => {
           try {
             new URL(input);
             return true;
           } catch {
-            return "Please enter a valid URL";
+            return 'Please enter a valid URL';
           }
         },
       },
       {
-        type: "checkbox",
-        name: "authorizedEvents",
-        message: "Select events to subscribe to:",
+        type: 'checkbox',
+        name: 'authorizedEvents',
+        message: 'Select events to subscribe to:',
         choices: WEBHOOK_EVENTS,
         validate: (input: string[]) =>
-          input.length > 0 || "Select at least one event",
+          input.length > 0 || 'Select at least one event',
       },
     ]);
 
-    const spinner = ora("Registering webhook endpoint...").start();
+    const spinner = ora('Registering webhook endpoint...').start();
 
     try {
-      const webhook = await makeRequest<Webhook>("/webhooks", {
-        method: "POST",
+      const webhook = await makeRequest<Webhook>('/webhooks', {
+        method: 'POST',
         body: JSON.stringify({
           merchant_id: answers.merchantId,
           url: answers.url,
@@ -75,68 +75,68 @@ command
         }),
       });
 
-      spinner.succeed("Webhook endpoint registered successfully!");
-      console.log("\nWebhook details:");
-      console.log(chalk.blue("Webhook ID:"), webhook.webhook_id);
-      console.log(chalk.blue("URL:"), webhook.url);
-      console.log(chalk.blue("Events:"), webhook.authorized_events.join(", "));
+      spinner.succeed('Webhook endpoint registered successfully!');
+      console.log('\nWebhook details:');
+      console.log(chalk.blue('Webhook ID:'), webhook.webhook_id);
+      console.log(chalk.blue('URL:'), webhook.url);
+      console.log(chalk.blue('Events:'), webhook.authorized_events.join(', '));
       console.log(
-        chalk.blue("Verification Token:"),
+        chalk.blue('Verification Token:'),
         webhook.verification_token,
       );
     } catch (error) {
-      spinner.fail("Failed to register webhook endpoint");
+      spinner.fail('Failed to register webhook endpoint');
       console.error(
-        chalk.red(error instanceof Error ? error.message : "Unknown error"),
+        chalk.red(error instanceof Error ? error.message : 'Unknown error'),
       );
       process.exit(1);
     }
   });
 
 command
-  .command("list")
-  .description("List webhook endpoints")
-  .requiredOption("-m, --merchant-id <id>", "Merchant ID")
+  .command('list')
+  .description('List webhook endpoints')
+  .requiredOption('-m, --merchant-id <id>', 'Merchant ID')
   .action(async (options) => {
     ensureLoggedIn();
-    const spinner = ora("Fetching webhook endpoints...").start();
+    const spinner = ora('Fetching webhook endpoints...').start();
 
     try {
-      const webhooks = await makeRequest<Webhook[]>("/webhooks", {
-        method: "GET",
+      const webhooks = await makeRequest<Webhook[]>('/webhooks', {
+        method: 'GET',
         headers: {
-          "X-Merchant-ID": options.merchantId,
+          'X-Merchant-ID': options.merchantId,
         },
       });
 
       spinner.stop();
 
       if (webhooks.length === 0) {
-        console.log(chalk.yellow("\nNo webhook endpoints found."));
+        console.log(chalk.yellow('\nNo webhook endpoints found.'));
         return;
       }
 
-      console.log("\nWebhook endpoints:");
+      console.log('\nWebhook endpoints:');
       webhooks.forEach((webhook) => {
-        console.log("\n" + chalk.blue("Webhook ID:"), webhook.webhook_id);
-        console.log(chalk.blue("URL:"), webhook.url);
+        console.log('\n' + chalk.blue('Webhook ID:'), webhook.webhook_id);
+        console.log(chalk.blue('URL:'), webhook.url);
         console.log(
-          chalk.blue("Events:"),
-          webhook.authorized_events.join(", "),
+          chalk.blue('Events:'),
+          webhook.authorized_events.join(', '),
         );
         console.log(
-          chalk.blue("Status:"),
-          webhook.is_active ? "Active" : "Inactive",
+          chalk.blue('Status:'),
+          webhook.is_active ? 'Active' : 'Inactive',
         );
         console.log(
-          chalk.blue("Last Triggered:"),
-          webhook.last_triggered_at || "Never",
+          chalk.blue('Last Triggered:'),
+          webhook.last_triggered_at || 'Never',
         );
       });
     } catch (error) {
-      spinner.fail("Failed to fetch webhook endpoints");
+      spinner.fail('Failed to fetch webhook endpoints');
       console.error(
-        chalk.red(error instanceof Error ? error.message : "Unknown error"),
+        chalk.red(error instanceof Error ? error.message : 'Unknown error'),
       );
       process.exit(1);
     }

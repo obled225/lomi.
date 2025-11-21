@@ -1,11 +1,18 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import { parseDatabaseTypes, tableSchemaToOpenAPI } from './parse-database-types';
-import { getEnabledResources, isEnumExposed, type APIResourceConfig } from './api-config';
+import {
+  parseDatabaseTypes,
+  tableSchemaToOpenAPI,
+} from './parse-database-types';
+import {
+  getEnabledResources,
+  isEnumExposed,
+  type APIResourceConfig,
+} from './api-config';
 
 /**
  * OpenAPI Spec Generator
- * 
+ *
  * Automatically generates OpenAPI 3.0 specification from database.types.ts
  * This ensures the API spec is ALWAYS in sync with the actual database schema
  */
@@ -29,10 +36,12 @@ interface OpenAPISpec {
  */
 function generateCRUDPaths(
   tableName: string,
-  idField: string = `${tableName.slice(0, -1)}_id`
+  idField: string = `${tableName.slice(0, -1)}_id`,
 ): Record<string, any> {
-  const singularName = tableName.endsWith('s') ? tableName.slice(0, -1) : tableName;
-  
+  const singularName = tableName.endsWith('s')
+    ? tableName.slice(0, -1)
+    : tableName;
+
   return {
     [`/${tableName}`]: {
       get: {
@@ -216,10 +225,10 @@ function generateCRUDPaths(
 function generateCRUDPathsWithConfig(
   tableName: string,
   idField: string,
-  config: APIResourceConfig
+  config: APIResourceConfig,
 ): Record<string, any> {
   const paths = generateCRUDPaths(tableName, idField);
-  
+
   // Filter operations based on configuration
   const operations = config.operations || {
     list: true,
@@ -228,47 +237,53 @@ function generateCRUDPathsWithConfig(
     update: true,
     delete: true,
   };
-  
+
   const filteredPaths: Record<string, any> = {};
-  
+
   // Handle collection endpoints (list, create)
   if (paths[`/${tableName}`]) {
     const collectionPath: any = {};
-    
+
     if (operations.list !== false && paths[`/${tableName}`].get) {
       collectionPath.get = paths[`/${tableName}`].get;
     }
-    
+
     if (operations.create !== false && paths[`/${tableName}`].post) {
       collectionPath.post = paths[`/${tableName}`].post;
     }
-    
+
     if (Object.keys(collectionPath).length > 0) {
       filteredPaths[`/${tableName}`] = collectionPath;
     }
   }
-  
+
   // Handle item endpoints (get, update, delete)
   if (paths[`/${tableName}/{${idField}}`]) {
     const itemPath: any = {};
-    
+
     if (operations.get !== false && paths[`/${tableName}/{${idField}}`].get) {
       itemPath.get = paths[`/${tableName}/{${idField}}`].get;
     }
-    
-    if (operations.update !== false && paths[`/${tableName}/{${idField}}`].patch) {
+
+    if (
+      operations.update !== false &&
+      paths[`/${tableName}/{${idField}}`].patch
+    ) {
       itemPath.patch = paths[`/${tableName}/{${idField}}`].patch;
     }
-    
-    if (operations.delete !== false && paths[`/${tableName}/{${idField}}`].delete) {
+
+    if (
+      operations.delete !== false &&
+      paths[`/${tableName}/{${idField}}`].delete
+    ) {
       itemPath.delete = paths[`/${tableName}/{${idField}}`].delete;
     }
-    
+
     if (Object.keys(itemPath).length > 0) {
       filteredPaths[`/${tableName}/{${idField}}`] = itemPath;
     }
   }
-  
+
   return filteredPaths;
 }
 
@@ -277,9 +292,12 @@ function generateCRUDPathsWithConfig(
  */
 function generateOpenAPISpec(): OpenAPISpec {
   console.log('📖 Parsing database.types.ts...\n');
-  
+
   // Parse the actual database types file (shared source of truth)
-  const dbTypesPath = path.join(__dirname, '../../../../apps/docs/lib/types/database.types.ts');
+  const dbTypesPath = path.join(
+    __dirname,
+    '../../../../apps/docs/lib/types/database.types.ts',
+  );
   const { tables, enums } = parseDatabaseTypes(dbTypesPath);
 
   console.log(`✅ Found ${tables.size} tables`);
@@ -345,7 +363,8 @@ Configure webhooks to receive real-time notifications about events in your accou
           type: 'apiKey',
           in: 'header',
           name: 'X-API-KEY',
-          description: 'API key for authentication. Get yours from the lomi. dashboard.',
+          description:
+            'API key for authentication. Get yours from the lomi. dashboard.',
         },
       },
       schemas: {},
@@ -390,7 +409,7 @@ Configure webhooks to receive real-time notifications about events in your accou
 
   // Convert all tables to OpenAPI schemas
   const allSchemas: Record<string, any> = {};
-  
+
   tables.forEach((table) => {
     const schemas = tableSchemaToOpenAPI(table);
     Object.assign(allSchemas, schemas);
@@ -424,55 +443,57 @@ Configure webhooks to receive real-time notifications about events in your accou
 
   // Get enabled API resources from configuration
   const enabledResources = getEnabledResources();
-  
+
   console.log(`📡 Exposing ${enabledResources.length} resources via API\n`);
 
   // Filter schemas to only include enabled resources
-  const enabledTableNames = new Set(enabledResources.map(r => r.tableName));
+  const enabledTableNames = new Set(enabledResources.map((r) => r.tableName));
   const filteredSchemas: Record<string, any> = {};
-  
+
   // First pass: Include schemas for enabled resources
   Object.entries(allSchemas).forEach(([schemaName, schema]) => {
     // Check if this schema belongs to an enabled resource
-    const isEnabledResource = enabledTableNames.has(schemaName) ||
-      Array.from(enabledTableNames).some(tableName => 
-        schemaName === `${tableName}_create` || 
-        schemaName === `${tableName}_update`
+    const isEnabledResource =
+      enabledTableNames.has(schemaName) ||
+      Array.from(enabledTableNames).some(
+        (tableName) =>
+          schemaName === `${tableName}_create` ||
+          schemaName === `${tableName}_update`,
       );
-    
+
     // Always include common schemas (Error, etc.)
     const isCommonSchema = schemaName === 'Error';
-    
+
     if (isEnabledResource || isCommonSchema) {
       filteredSchemas[schemaName] = schema;
     }
   });
-  
+
   // Second pass: Find and include referenced enums
   const referencedEnums = new Set<string>();
-  
+
   function findEnumReferences(obj: any) {
     if (!obj || typeof obj !== 'object') return;
-    
+
     // Check if this is an enum reference
     if (obj.type === 'string' && obj.enum && Array.isArray(obj.enum)) {
       // This might be an inline enum, but we'll also check schema names
       return;
     }
-    
+
     // Recursively search properties
-    Object.values(obj).forEach(value => {
+    Object.values(obj).forEach((value) => {
       if (typeof value === 'object') {
         findEnumReferences(value);
       }
     });
   }
-  
+
   // Scan filtered schemas for enum usage
-  Object.values(filteredSchemas).forEach(schema => {
+  Object.values(filteredSchemas).forEach((schema) => {
     findEnumReferences(schema);
   });
-  
+
   // Add enums to filtered schemas (using configuration)
   enums.forEach((enumDef, enumName) => {
     if (isEnumExposed(enumName) || referencedEnums.has(enumName)) {
@@ -485,27 +506,37 @@ Configure webhooks to receive real-time notifications about events in your accou
       }
     }
   });
-  
+
   // Replace all schemas with filtered ones
   spec.components.schemas = filteredSchemas;
-  
-  console.log(`📋 Filtered schemas: ${Object.keys(filteredSchemas).length} (from ${Object.keys(allSchemas).length} total)`);
+
+  console.log(
+    `📋 Filtered schemas: ${Object.keys(filteredSchemas).length} (from ${Object.keys(allSchemas).length} total)`,
+  );
 
   // Generate paths and tags for each enabled resource
   enabledResources.forEach((resource) => {
     if (tables.has(resource.tableName)) {
-      const singularName = resource.displayName || 
-        (resource.tableName.endsWith('s') ? resource.tableName.slice(0, -1) : resource.tableName);
-      
+      const singularName =
+        resource.displayName ||
+        (resource.tableName.endsWith('s')
+          ? resource.tableName.slice(0, -1)
+          : resource.tableName);
+
       // Add tag
       spec.tags.push({
         name: resource.tag || singularName,
-        description: resource.description || `Operations related to ${resource.tableName}`,
+        description:
+          resource.description || `Operations related to ${resource.tableName}`,
       });
 
       // Generate CRUD paths with custom configuration
       const idField = resource.idField || `${singularName}_id`;
-      const paths = generateCRUDPathsWithConfig(resource.tableName, idField, resource);
+      const paths = generateCRUDPathsWithConfig(
+        resource.tableName,
+        idField,
+        resource,
+      );
       Object.assign(spec.paths, paths);
     }
   });

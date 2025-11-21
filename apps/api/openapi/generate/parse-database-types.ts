@@ -1,6 +1,6 @@
 /**
  * Database Types Parser
- * 
+ *
  * Parses database.types.ts and extracts table schemas automatically
  * This ensures the OpenAPI spec is always in sync with the actual database
  */
@@ -41,7 +41,7 @@ export function parseDatabaseTypes(filePath: string): {
     'database.types.ts',
     sourceCode,
     ts.ScriptTarget.Latest,
-    true
+    true,
   );
 
   const tables = new Map<string, TableSchema>();
@@ -70,16 +70,23 @@ export function parseDatabaseTypes(filePath: string): {
 /**
  * Extract table definitions from Database type
  */
-function extractTables(databaseType: ts.TypeLiteralNode, tables: Map<string, TableSchema>) {
+function extractTables(
+  databaseType: ts.TypeLiteralNode,
+  tables: Map<string, TableSchema>,
+) {
   // Find public property
   const publicProp = databaseType.members.find(
     (member): member is ts.PropertySignature =>
       ts.isPropertySignature(member) &&
       ts.isIdentifier(member.name) &&
-      member.name.text === 'public'
+      member.name.text === 'public',
   );
 
-  if (!publicProp || !publicProp.type || !ts.isTypeLiteralNode(publicProp.type)) {
+  if (
+    !publicProp ||
+    !publicProp.type ||
+    !ts.isTypeLiteralNode(publicProp.type)
+  ) {
     return;
   }
 
@@ -88,10 +95,14 @@ function extractTables(databaseType: ts.TypeLiteralNode, tables: Map<string, Tab
     (member): member is ts.PropertySignature =>
       ts.isPropertySignature(member) &&
       ts.isIdentifier(member.name) &&
-      member.name.text === 'Tables'
+      member.name.text === 'Tables',
   );
 
-  if (!tablesProp || !tablesProp.type || !ts.isTypeLiteralNode(tablesProp.type)) {
+  if (
+    !tablesProp ||
+    !tablesProp.type ||
+    !ts.isTypeLiteralNode(tablesProp.type)
+  ) {
     return;
   }
 
@@ -114,7 +125,10 @@ function extractTables(databaseType: ts.TypeLiteralNode, tables: Map<string, Tab
 /**
  * Extract Row, Insert, Update types from a table
  */
-function extractTableSchema(tableName: string, tableNode: ts.TypeLiteralNode): TableSchema | null {
+function extractTableSchema(
+  tableName: string,
+  tableNode: ts.TypeLiteralNode,
+): TableSchema | null {
   const schema: TableSchema = {
     tableName,
     row: {},
@@ -125,12 +139,24 @@ function extractTableSchema(tableName: string, tableNode: ts.TypeLiteralNode): T
   tableNode.members.forEach((member) => {
     if (ts.isPropertySignature(member) && ts.isIdentifier(member.name)) {
       const propName = member.name.text;
-      
-      if (propName === 'Row' && member.type && ts.isTypeLiteralNode(member.type)) {
+
+      if (
+        propName === 'Row' &&
+        member.type &&
+        ts.isTypeLiteralNode(member.type)
+      ) {
         schema.row = extractProperties(member.type, false);
-      } else if (propName === 'Insert' && member.type && ts.isTypeLiteralNode(member.type)) {
+      } else if (
+        propName === 'Insert' &&
+        member.type &&
+        ts.isTypeLiteralNode(member.type)
+      ) {
         schema.insert = extractProperties(member.type, true);
-      } else if (propName === 'Update' && member.type && ts.isTypeLiteralNode(member.type)) {
+      } else if (
+        propName === 'Update' &&
+        member.type &&
+        ts.isTypeLiteralNode(member.type)
+      ) {
         schema.update = extractProperties(member.type, true);
       }
     }
@@ -142,7 +168,10 @@ function extractTableSchema(tableName: string, tableNode: ts.TypeLiteralNode): T
 /**
  * Extract properties from a type literal (Row, Insert, or Update)
  */
-function extractProperties(typeNode: ts.TypeLiteralNode, isOptional: boolean): Record<string, PropertyInfo> {
+function extractProperties(
+  typeNode: ts.TypeLiteralNode,
+  isOptional: boolean,
+): Record<string, PropertyInfo> {
   const properties: Record<string, PropertyInfo> = {};
 
   typeNode.members.forEach((member) => {
@@ -167,7 +196,9 @@ function extractProperties(typeNode: ts.TypeLiteralNode, isOptional: boolean): R
 /**
  * Extract type information from a TypeScript type node
  */
-function extractTypeInfo(typeNode: ts.TypeNode): Omit<PropertyInfo, 'required'> {
+function extractTypeInfo(
+  typeNode: ts.TypeNode,
+): Omit<PropertyInfo, 'required'> {
   const info: Omit<PropertyInfo, 'required'> = {
     type: 'string',
     nullable: false,
@@ -177,7 +208,7 @@ function extractTypeInfo(typeNode: ts.TypeNode): Omit<PropertyInfo, 'required'> 
   if (ts.isUnionTypeNode(typeNode)) {
     const types = typeNode.types;
     const nonNullTypes = types.filter((t) => !isNullType(t));
-    
+
     if (types.length > nonNullTypes.length) {
       info.nullable = true;
     }
@@ -206,7 +237,7 @@ function extractSimpleType(typeNode: ts.TypeNode): Partial<PropertyInfo> {
   // Handle literal types
   if (ts.isLiteralTypeNode(typeNode)) {
     if (ts.isStringLiteral(typeNode.literal)) {
-      return { 
+      return {
         type: 'string',
         enum: [typeNode.literal.text],
       };
@@ -214,8 +245,10 @@ function extractSimpleType(typeNode: ts.TypeNode): Partial<PropertyInfo> {
     if (ts.isNumericLiteral(typeNode.literal)) {
       return { type: 'number' };
     }
-    if (typeNode.literal.kind === ts.SyntaxKind.TrueKeyword || 
-        typeNode.literal.kind === ts.SyntaxKind.FalseKeyword) {
+    if (
+      typeNode.literal.kind === ts.SyntaxKind.TrueKeyword ||
+      typeNode.literal.kind === ts.SyntaxKind.FalseKeyword
+    ) {
       return { type: 'boolean' };
     }
   }
@@ -256,15 +289,22 @@ function isNullType(typeNode: ts.TypeNode): boolean {
 /**
  * Extract enum definitions
  */
-function extractEnums(databaseType: ts.TypeLiteralNode, enums: Map<string, EnumDefinition>) {
+function extractEnums(
+  databaseType: ts.TypeLiteralNode,
+  enums: Map<string, EnumDefinition>,
+) {
   const publicProp = databaseType.members.find(
     (member): member is ts.PropertySignature =>
       ts.isPropertySignature(member) &&
       ts.isIdentifier(member.name) &&
-      member.name.text === 'public'
+      member.name.text === 'public',
   );
 
-  if (!publicProp || !publicProp.type || !ts.isTypeLiteralNode(publicProp.type)) {
+  if (
+    !publicProp ||
+    !publicProp.type ||
+    !ts.isTypeLiteralNode(publicProp.type)
+  ) {
     return;
   }
 
@@ -272,7 +312,7 @@ function extractEnums(databaseType: ts.TypeLiteralNode, enums: Map<string, EnumD
     (member): member is ts.PropertySignature =>
       ts.isPropertySignature(member) &&
       ts.isIdentifier(member.name) &&
-      member.name.text === 'Enums'
+      member.name.text === 'Enums',
   );
 
   if (!enumsProp || !enumsProp.type || !ts.isTypeLiteralNode(enumsProp.type)) {
@@ -287,7 +327,10 @@ function extractEnums(databaseType: ts.TypeLiteralNode, enums: Map<string, EnumD
       if (enumType && ts.isUnionTypeNode(enumType)) {
         const values: string[] = [];
         enumType.types.forEach((typeNode) => {
-          if (ts.isLiteralTypeNode(typeNode) && ts.isStringLiteral(typeNode.literal)) {
+          if (
+            ts.isLiteralTypeNode(typeNode) &&
+            ts.isStringLiteral(typeNode.literal)
+          ) {
             values.push(typeNode.literal.text);
           }
         });
@@ -332,7 +375,9 @@ export function tableSchemaToOpenAPI(table: TableSchema) {
 /**
  * Convert properties to OpenAPI format
  */
-function propertiesToOpenAPI(properties: Record<string, PropertyInfo>): Record<string, any> {
+function propertiesToOpenAPI(
+  properties: Record<string, PropertyInfo>,
+): Record<string, any> {
   const result: Record<string, any> = {};
 
   Object.entries(properties).forEach(([name, prop]) => {

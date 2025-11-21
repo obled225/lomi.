@@ -11,17 +11,17 @@ import {
   WebhooksClient,
   CustomersClient,
   RefundsClient,
-  PaymentLinksClient
+  PaymentLinksClient,
 } from '../../src/client';
 
 describe('LomiSDK', () => {
   const baseUrl = 'https://api.example.com';
   const apiKey = 'test-api-key';
-  
+
   describe('constructor', () => {
     it('should initialize with baseUrl and apiKey', () => {
       const sdk = new LomiSDK({ baseUrl, apiKey });
-      
+
       expect(sdk).toBeInstanceOf(LomiSDK);
       expect(sdk.merchants).toBeInstanceOf(MerchantsClient);
       expect(sdk.products).toBeInstanceOf(ProductsClient);
@@ -35,21 +35,21 @@ describe('LomiSDK', () => {
       expect(sdk.refunds).toBeInstanceOf(RefundsClient);
       expect(sdk.paymentLinks).toBeInstanceOf(PaymentLinksClient);
     });
-    
+
     it('should initialize with only baseUrl', () => {
       const sdk = new LomiSDK({ baseUrl });
-      
+
       expect(sdk).toBeInstanceOf(LomiSDK);
       expect(sdk.merchants).toBeInstanceOf(MerchantsClient);
       // Test one client to ensure it works without API key
       expect(sdk.ping).toBeInstanceOf(PingClient);
     });
   });
-  
+
   describe('static init', () => {
     it('should initialize SDK with static method', () => {
       const sdk = LomiSDK.init({ baseUrl, apiKey });
-      
+
       expect(sdk).toBeInstanceOf(LomiSDK);
       expect(sdk.merchants).toBeInstanceOf(MerchantsClient);
       expect(sdk.products).toBeInstanceOf(ProductsClient);
@@ -63,14 +63,14 @@ describe('LomiSDK', () => {
       expect(sdk.refunds).toBeInstanceOf(RefundsClient);
       expect(sdk.paymentLinks).toBeInstanceOf(PaymentLinksClient);
     });
-    
+
     it('should initialize with only baseUrl using static method', () => {
       const sdk = LomiSDK.init({ baseUrl });
-      
+
       expect(sdk).toBeInstanceOf(LomiSDK);
       expect(sdk.merchants).toBeInstanceOf(MerchantsClient);
       // Test one client to ensure it works without API key
       expect(sdk.ping).toBeInstanceOf(PingClient);
     });
   });
-}); 
+});

@@ -15,13 +15,15 @@ export class BaseClient {
     this.apiKey = apiKey;
   }
 
-  protected async request<T>(options: ApiRequestOptions): Promise<ApiResult<T>> {
+  protected async request<T>(
+    options: ApiRequestOptions,
+  ): Promise<ApiResult<T>> {
     const { method, path, params, data } = options;
-    
+
     // First replace path parameters
     let resolvedPath = path;
     const queryParams: Record<string, string> = {};
-    
+
     if (params) {
       Object.entries(params).forEach(([key, value]) => {
         if (value !== undefined) {
@@ -36,7 +38,7 @@ export class BaseClient {
     }
 
     const url = new URL(resolvedPath, this.baseUrl);
-    
+
     // Add remaining params as query parameters
     Object.entries(queryParams).forEach(([key, value]) => {
       url.searchParams.append(key, value);
@@ -58,11 +60,17 @@ export class BaseClient {
       });
 
       if (!response.ok) {
-        const errorData = await response.json() as Record<string, any>;
+        const errorData = (await response.json()) as Record<string, any>;
         const errorBody: ErrorBody = {
-          message: typeof errorData.message === 'string' ? errorData.message : 'Unknown error',
+          message:
+            typeof errorData.message === 'string'
+              ? errorData.message
+              : 'Unknown error',
           code: typeof errorData.code === 'string' ? errorData.code : undefined,
-          details: typeof errorData.details === 'object' ? errorData.details : undefined
+          details:
+            typeof errorData.details === 'object'
+              ? errorData.details
+              : undefined,
         };
         throw new ApiError(response.status, errorBody);
       }
@@ -71,7 +79,7 @@ export class BaseClient {
         return new ApiResult<T>(response.status, undefined as T);
       }
 
-      const responseData = await response.json() as T;
+      const responseData = (await response.json()) as T;
       return new ApiResult(response.status, responseData);
     } catch (error) {
       if (error instanceof ApiError) {

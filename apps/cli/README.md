@@ -21,6 +21,7 @@ lomi. login
 ```
 
 **Process:**
+
 1. Initiates device authorization flow
 2. Prompts you to copy a `user_code`
 3. Opens a browser to a `verification_uri` for you to paste the code and authorize
@@ -37,6 +38,7 @@ lomi. init
 ```
 
 **Process:**
+
 1. Prompts for your API key, target environment (Production/Sandbox), and language (TS/JS)
 2. Creates:
    - `lib/lomi./client.(ts|js)`: SDK client setup
@@ -57,6 +59,7 @@ lomi. status
 ```
 
 **Process:**
+
 1. Verifies login status (requires prior `lomi. login`)
 2. Checks if the globally stored `cliToken` exists
 3. Tests connection to the lomi. API `/health` endpoint

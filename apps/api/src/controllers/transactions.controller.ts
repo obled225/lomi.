@@ -1,22 +1,22 @@
-import { Request, Response } from "express";
-import { createClient } from "@supabase/supabase-js";
-import { z } from "zod";
-import * as Types from "../types/api"; // Import generated types
+import { Request, Response } from 'express';
+import { createClient } from '@supabase/supabase-js';
+import { z } from 'zod';
+import * as Types from '../types/api'; // Import generated types
 
 // Initialize Supabase client
-const supabaseUrl = process.env.SUPABASE_URL || "";
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || "";
+const supabaseUrl = process.env.SUPABASE_URL || '';
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
 const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
 // Error codes (Consider moving to a shared location)
 enum ErrorCode {
-  INVALID_REQUEST = "INVALID_REQUEST",
-  UNAUTHORIZED = "UNAUTHORIZED",
-  FORBIDDEN = "FORBIDDEN",
-  NOT_FOUND = "NOT_FOUND",
-  CONFLICT = "CONFLICT",
-  DATABASE_ERROR = "DATABASE_ERROR",
-  INTERNAL_ERROR = "INTERNAL_ERROR",
+  INVALID_REQUEST = 'INVALID_REQUEST',
+  UNAUTHORIZED = 'UNAUTHORIZED',
+  FORBIDDEN = 'FORBIDDEN',
+  NOT_FOUND = 'NOT_FOUND',
+  CONFLICT = 'CONFLICT',
+  DATABASE_ERROR = 'DATABASE_ERROR',
+  INTERNAL_ERROR = 'INTERNAL_ERROR',
 }
 
 // Standardized error response creator (Consider moving to a shared location)
@@ -39,7 +39,7 @@ function createErrorResponse(
 
 // Consistent error logging (Consider moving to a shared location)
 function logError(error: any, context: string, req: Request) {
-  const merchantId = req.merchantId || req.params?.id || "N/A";
+  const merchantId = req.merchantId || req.params?.id || 'N/A';
   console.error(`Error in ${context}:`, {
     error: error.message || error,
     stack: error.stack,
@@ -59,7 +59,7 @@ function handleDatabaseError(error: any, req: Request, context: string) {
 
   let status = 500;
   let code = ErrorCode.DATABASE_ERROR;
-  let message = "Database operation failed";
+  let message = 'Database operation failed';
   let details: any = {
     db_code: error.code,
     db_message: error.message,
@@ -68,11 +68,11 @@ function handleDatabaseError(error: any, req: Request, context: string) {
   };
 
   switch (error.code) {
-    case "PGRST116": // Resource not found (PostgREST specific)
-    case "22P02": // Invalid input syntax (e.g., bad UUID)
+    case 'PGRST116': // Resource not found (PostgREST specific)
+    case '22P02': // Invalid input syntax (e.g., bad UUID)
       status = 404;
       code = ErrorCode.NOT_FOUND;
-      message = "Resource not found or invalid ID format";
+      message = 'Resource not found or invalid ID format';
       break;
     // Add more specific mappings as needed
   }
@@ -82,14 +82,14 @@ function handleDatabaseError(error: any, req: Request, context: string) {
 
 // Validation schema for transaction ID path parameter
 const transactionIdParamSchema = z.object({
-  transaction_id: z.string().uuid("Invalid Transaction ID format"),
+  transaction_id: z.string().uuid('Invalid Transaction ID format'),
 });
 
 /**
  * List transactions for a merchant
  */
 export const listTransactions = async (req: Request, res: Response) => {
-  const context = "listTransactions";
+  const context = 'listTransactions';
   try {
     const merchantId = req.merchantId; // Provided by authenticateAPIKey middleware
 
@@ -101,7 +101,7 @@ export const listTransactions = async (req: Request, res: Response) => {
           createErrorResponse(
             401,
             ErrorCode.UNAUTHORIZED,
-            "Authentication failed: Merchant ID not found in request.",
+            'Authentication failed: Merchant ID not found in request.',
           ),
         );
     }
@@ -112,8 +112,8 @@ export const listTransactions = async (req: Request, res: Response) => {
       provider,
       from_date,
       to_date,
-      limit = "20", // Default limit
-      page = "1", // Default page
+      limit = '20', // Default limit
+      page = '1', // Default page
     } = req.query;
 
     // Basic validation for limit and page (can be enhanced with Zod)
@@ -134,7 +134,7 @@ export const listTransactions = async (req: Request, res: Response) => {
           createErrorResponse(
             400,
             ErrorCode.INVALID_REQUEST,
-            "Invalid pagination parameters (limit must be 1-100, page >= 1)",
+            'Invalid pagination parameters (limit must be 1-100, page >= 1)',
           ),
         );
     }
@@ -145,11 +145,11 @@ export const listTransactions = async (req: Request, res: Response) => {
     let statusArray: Types.TransactionStatus[] | null = null;
     if (status) {
       // Basic validation for status enum could be added here
-      statusArray = (status as string).split(",") as Types.TransactionStatus[];
+      statusArray = (status as string).split(',') as Types.TransactionStatus[];
     }
 
     // List transactions using RPC function
-    const { data, error } = await supabase.rpc("list_transactions", {
+    const { data, error } = await supabase.rpc('list_transactions', {
       p_merchant_id: merchantId,
       p_status: statusArray,
       p_provider: (provider as string) || null,
@@ -180,7 +180,7 @@ export const listTransactions = async (req: Request, res: Response) => {
         // Note: The RPC function needs to return a total count for accurate pagination
         // total: data.length, // This is incorrect, needs total count from DB/RPC
       },
-      environment: process.env.NODE_ENV === "production" ? "live" : "test",
+      environment: process.env.NODE_ENV === 'production' ? 'live' : 'test',
     });
   } catch (error: any) {
     logError(error, context, req);
@@ -190,8 +190,8 @@ export const listTransactions = async (req: Request, res: Response) => {
         createErrorResponse(
           500,
           ErrorCode.INTERNAL_ERROR,
-          "An unexpected internal server error occurred while listing transactions",
-          process.env.NODE_ENV === "production" ? undefined : error.message,
+          'An unexpected internal server error occurred while listing transactions',
+          process.env.NODE_ENV === 'production' ? undefined : error.message,
         ),
       );
   }
@@ -201,7 +201,7 @@ export const listTransactions = async (req: Request, res: Response) => {
  * Get a transaction by ID
  */
 export const getTransactionById = async (req: Request, res: Response) => {
-  const context = "getTransactionById";
+  const context = 'getTransactionById';
   try {
     const merchantId = req.merchantId; // Provided by authenticateAPIKey middleware
 
@@ -213,7 +213,7 @@ export const getTransactionById = async (req: Request, res: Response) => {
           createErrorResponse(
             401,
             ErrorCode.UNAUTHORIZED,
-            "Authentication failed: Merchant ID not found in request.",
+            'Authentication failed: Merchant ID not found in request.',
           ),
         );
     }
@@ -227,7 +227,7 @@ export const getTransactionById = async (req: Request, res: Response) => {
           createErrorResponse(
             400,
             ErrorCode.INVALID_REQUEST,
-            "Invalid Transaction ID in URL",
+            'Invalid Transaction ID in URL',
             paramValidation.error.format(),
           ),
         );
@@ -235,7 +235,7 @@ export const getTransactionById = async (req: Request, res: Response) => {
     const { transaction_id: transactionId } = paramValidation.data;
 
     // Get transaction using RPC function
-    const { data, error } = await supabase.rpc("get_transaction", {
+    const { data, error } = await supabase.rpc('get_transaction', {
       p_transaction_id: transactionId,
       p_merchant_id: merchantId, // Pass merchantId for authorization check in DB
     });
@@ -253,7 +253,7 @@ export const getTransactionById = async (req: Request, res: Response) => {
           createErrorResponse(
             404,
             ErrorCode.NOT_FOUND,
-            "Transaction not found or does not belong to this merchant",
+            'Transaction not found or does not belong to this merchant',
           ),
         );
     }
@@ -263,7 +263,7 @@ export const getTransactionById = async (req: Request, res: Response) => {
     res.status(200).json({
       success: true,
       data: transaction, // Return the full transaction object
-      environment: process.env.NODE_ENV === "production" ? "live" : "test",
+      environment: process.env.NODE_ENV === 'production' ? 'live' : 'test',
     });
   } catch (error: any) {
     logError(error, context, req);
@@ -273,8 +273,8 @@ export const getTransactionById = async (req: Request, res: Response) => {
         createErrorResponse(
           500,
           ErrorCode.INTERNAL_ERROR,
-          "An unexpected internal server error occurred while fetching the transaction",
-          process.env.NODE_ENV === "production" ? undefined : error.message,
+          'An unexpected internal server error occurred while fetching the transaction',
+          process.env.NODE_ENV === 'production' ? undefined : error.message,
         ),
       );
   }

@@ -31,7 +31,7 @@ describe('PaymentLinksClient', () => {
       is_active: true,
       expires_at: new Date('2024-12-31T23:59:59Z'),
       success_url: 'https://example.com/success',
-      metadata: { test: 'data' }
+      metadata: { test: 'data' },
     };
 
     const mockPaymentLinkResponse: Types.PaymentLink = {
@@ -40,14 +40,14 @@ describe('PaymentLinksClient', () => {
       organization_id: '123e4567-e89b-12d3-a456-426614174003',
       url: 'https://pay.test.com/p/123e4567',
       created_at: new Date('2024-01-17T00:00:00Z'),
-      updated_at: new Date('2024-01-17T00:00:00Z')
+      updated_at: new Date('2024-01-17T00:00:00Z'),
     };
 
     it('should create a payment link successfully', async () => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
         status: 201,
-        json: () => Promise.resolve(mockPaymentLinkResponse)
+        json: () => Promise.resolve(mockPaymentLinkResponse),
       } as Response);
 
       const result = await client.createPaymentLink(mockCreatePaymentLinkData);
@@ -58,10 +58,10 @@ describe('PaymentLinksClient', () => {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'X-API-KEY': mockApiKey
+            'X-API-KEY': mockApiKey,
           },
-          body: JSON.stringify(mockCreatePaymentLinkData)
-        })
+          body: JSON.stringify(mockCreatePaymentLinkData),
+        }),
       );
 
       expect(result).toBeInstanceOf(ApiResult);
@@ -78,7 +78,7 @@ describe('PaymentLinksClient', () => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
         status: 200,
-        json: () => Promise.resolve(mockLinkList)
+        json: () => Promise.resolve(mockLinkList),
       } as Response);
 
       const result = await client.listPaymentLinks(mockMerchantId);
@@ -89,9 +89,9 @@ describe('PaymentLinksClient', () => {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            'X-API-KEY': mockApiKey
-          }
-        })
+            'X-API-KEY': mockApiKey,
+          },
+        }),
       );
 
       expect(result).toBeInstanceOf(ApiResult);
@@ -100,14 +100,21 @@ describe('PaymentLinksClient', () => {
     });
 
     it('should list payment links successfully with optional params', async () => {
-      const optionalParams = { link_type: 'donation', currency_code: 'XOF', is_active: 'true' };
+      const optionalParams = {
+        link_type: 'donation',
+        currency_code: 'XOF',
+        is_active: 'true',
+      };
       mockFetch.mockResolvedValueOnce({
         ok: true,
         status: 200,
-        json: () => Promise.resolve(mockLinkList)
+        json: () => Promise.resolve(mockLinkList),
       } as Response);
 
-      const result = await client.listPaymentLinks(mockMerchantId, optionalParams);
+      const result = await client.listPaymentLinks(
+        mockMerchantId,
+        optionalParams,
+      );
 
       expect(mockFetch).toHaveBeenCalledWith(
         `https://api.test.com/payment-links?merchant_id=${mockMerchantId}&link_type=${optionalParams.link_type}&currency_code=${optionalParams.currency_code}&is_active=${optionalParams.is_active}`,
@@ -115,9 +122,9 @@ describe('PaymentLinksClient', () => {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            'X-API-KEY': mockApiKey
-          }
-        })
+            'X-API-KEY': mockApiKey,
+          },
+        }),
       );
 
       expect(result).toBeInstanceOf(ApiResult);
@@ -146,14 +153,14 @@ describe('PaymentLinksClient', () => {
       success_url: 'https://example.com/success',
       metadata: { test: 'data' },
       created_at: new Date('2024-01-17T00:00:00Z'),
-      updated_at: new Date('2024-01-17T00:00:00Z')
+      updated_at: new Date('2024-01-17T00:00:00Z'),
     };
 
     it('should get a payment link successfully', async () => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
         status: 200,
-        json: () => Promise.resolve(mockPaymentLink)
+        json: () => Promise.resolve(mockPaymentLink),
       } as Response);
 
       const result = await client.getPaymentLink(mockLinkId);
@@ -164,9 +171,9 @@ describe('PaymentLinksClient', () => {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            'X-API-KEY': mockApiKey
-          }
-        })
+            'X-API-KEY': mockApiKey,
+          },
+        }),
       );
 
       expect(result).toBeInstanceOf(ApiResult);
@@ -187,7 +194,7 @@ describe('PaymentLinksClient', () => {
       is_active: false,
       expires_at: new Date('2025-12-31T23:59:59Z'),
       success_url: 'https://example.com/updated-success',
-      metadata: { test: 'updated' }
+      metadata: { test: 'updated' },
     };
 
     const mockUpdatedPaymentLink: Types.PaymentLink = {
@@ -199,14 +206,14 @@ describe('PaymentLinksClient', () => {
       url: 'https://pay.test.com/p/123e4567',
       product_id: '123e4567-e89b-12d3-a456-426614174003',
       created_at: new Date('2024-01-17T00:00:00Z'),
-      updated_at: new Date('2024-01-17T00:00:00Z')
+      updated_at: new Date('2024-01-17T00:00:00Z'),
     };
 
     it('should update a payment link successfully', async () => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
         status: 200,
-        json: () => Promise.resolve(mockUpdatedPaymentLink)
+        json: () => Promise.resolve(mockUpdatedPaymentLink),
       } as Response);
 
       const result = await client.updatePaymentLink(mockLinkId, mockUpdateData);
@@ -217,10 +224,10 @@ describe('PaymentLinksClient', () => {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
-            'X-API-KEY': mockApiKey
+            'X-API-KEY': mockApiKey,
           },
-          body: JSON.stringify(mockUpdateData)
-        })
+          body: JSON.stringify(mockUpdateData),
+        }),
       );
 
       expect(result).toBeInstanceOf(ApiResult);
@@ -236,7 +243,7 @@ describe('PaymentLinksClient', () => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
         status: 204,
-        json: () => Promise.resolve(undefined)
+        json: () => Promise.resolve(undefined),
       } as Response);
 
       const result = await client.deletePaymentLink(mockLinkId);
@@ -247,9 +254,9 @@ describe('PaymentLinksClient', () => {
           method: 'DELETE',
           headers: {
             'Content-Type': 'application/json',
-            'X-API-KEY': mockApiKey
-          }
-        })
+            'X-API-KEY': mockApiKey,
+          },
+        }),
       );
 
       expect(result).toBeInstanceOf(ApiResult);
@@ -257,4 +264,4 @@ describe('PaymentLinksClient', () => {
       expect(result.data).toBeUndefined();
     });
   });
-}); 
+});

@@ -1,7 +1,7 @@
-import express from "express";
-import cors from "cors";
-import helmet from "helmet";
-import docs from "./docs";
+import express from 'express';
+import cors from 'cors';
+import helmet from 'helmet';
+import docs from './docs';
 
 const app = express();
 
@@ -11,6 +11,6 @@ app.use(helmet());
 app.use(express.json());
 
 // API Documentation
-app.use("/docs", docs);
+app.use('/docs', docs);
 
 export default app;

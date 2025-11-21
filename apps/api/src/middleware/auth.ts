@@ -1,6 +1,6 @@
-import { Request, Response, NextFunction } from "express";
-import { createClient } from "@supabase/supabase-js";
-import jwt from "jsonwebtoken";
+import { Request, Response, NextFunction } from 'express';
+import { createClient } from '@supabase/supabase-js';
+import jwt from 'jsonwebtoken';
 
 /**
  * Extended Request interface to include organizationId
@@ -10,7 +10,7 @@ declare global {
     interface Request {
       organizationId?: string;
       merchantId?: string;
-      apiEnvironment?: "test" | "live";
+      apiEnvironment?: 'test' | 'live';
     }
   }
 }
@@ -29,18 +29,18 @@ export const authenticateJWT = async (
     if (!authHeader) {
       return res.status(401).json({
         error: {
-          message: "Authorization header missing",
+          message: 'Authorization header missing',
         },
       });
     }
 
     // Extract the token from the Authorization header
-    const token = authHeader.split(" ")[1];
+    const token = authHeader.split(' ')[1];
 
     if (!token) {
       return res.status(401).json({
         error: {
-          message: "Bearer token missing",
+          message: 'Bearer token missing',
         },
       });
     }
@@ -48,10 +48,10 @@ export const authenticateJWT = async (
     // Verify the JWT token using the JWT_SECRET from env variables
     const jwtSecret = process.env.JWT_SECRET;
     if (!jwtSecret) {
-      console.error("JWT_SECRET is missing in environment variables");
+      console.error('JWT_SECRET is missing in environment variables');
       return res.status(500).json({
         error: {
-          message: "Server configuration error",
+          message: 'Server configuration error',
         },
       });
     }
@@ -65,13 +65,13 @@ export const authenticateJWT = async (
 
       // Set the organization ID and environment from the token
       req.organizationId = decoded.organizationId;
-      req.apiEnvironment = (decoded.environment as "test" | "live") || "live";
+      req.apiEnvironment = (decoded.environment as 'test' | 'live') || 'live';
 
       next();
     } catch (jwtError) {
       return res.status(401).json({
         error: {
-          message: "Invalid token",
+          message: 'Invalid token',
           details: (jwtError as Error).message,
         },
       });
@@ -79,7 +79,7 @@ export const authenticateJWT = async (
   } catch (error: any) {
     return res.status(401).json({
       error: {
-        message: "Invalid token",
+        message: 'Invalid token',
         details: error.message,
       },
     });
@@ -95,25 +95,25 @@ export const authenticateAPIKey = async (
   next: NextFunction,
 ) => {
   try {
-    const apiKey = req.headers["x-api-key"] as string;
+    const apiKey = req.headers['x-api-key'] as string;
 
     if (!apiKey) {
       return res.status(401).json({
         error: {
-          message: "API key missing",
+          message: 'API key missing',
         },
       });
     }
 
     // Initialize Supabase client
-    const supabaseUrl = process.env.SUPABASE_URL || "";
-    const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || "";
+    const supabaseUrl = process.env.SUPABASE_URL || '';
+    const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
 
     if (!supabaseUrl || !supabaseServiceKey) {
-      console.error("Supabase credentials missing in environment variables");
+      console.error('Supabase credentials missing in environment variables');
       return res.status(500).json({
         error: {
-          message: "Server configuration error",
+          message: 'Server configuration error',
         },
       });
     }
@@ -126,14 +126,14 @@ export const authenticateAPIKey = async (
     });
 
     // Use the existing validate_api_key function from our migrations
-    const { data, error } = await supabase.rpc("validate_api_key", {
+    const { data, error } = await supabase.rpc('validate_api_key', {
       p_api_key: apiKey,
     });
 
     if (error || !data || data.length === 0) {
       return res.status(401).json({
         error: {
-          message: "Invalid API key",
+          message: 'Invalid API key',
         },
       });
     }
@@ -144,7 +144,7 @@ export const authenticateAPIKey = async (
     if (!validationResult.is_active) {
       return res.status(401).json({
         error: {
-          message: "API key is inactive",
+          message: 'API key is inactive',
         },
       });
     }
@@ -155,7 +155,7 @@ export const authenticateAPIKey = async (
     ) {
       return res.status(401).json({
         error: {
-          message: "API key has expired",
+          message: 'API key has expired',
         },
       });
     }
@@ -167,10 +167,10 @@ export const authenticateAPIKey = async (
 
     next();
   } catch (error: any) {
-    console.error("API key validation error:", error);
+    console.error('API key validation error:', error);
     return res.status(500).json({
       error: {
-        message: "Failed to authenticate API key",
+        message: 'Failed to authenticate API key',
         details: error.message,
       },
     });
@@ -196,7 +196,7 @@ export const addEnvironmentToResponse = (
         body.data.environment = req.apiEnvironment;
 
         // Add test flag if this is the test environment
-        if (req.apiEnvironment === "test") {
+        if (req.apiEnvironment === 'test') {
           body.data.test = true;
         }
       }
@@ -205,7 +205,7 @@ export const addEnvironmentToResponse = (
         body.environment = req.apiEnvironment;
 
         // Add test flag if this is the test environment
-        if (req.apiEnvironment === "test") {
+        if (req.apiEnvironment === 'test') {
           body.test = true;
         }
       }

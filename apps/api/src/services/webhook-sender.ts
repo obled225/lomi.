@@ -1,17 +1,23 @@
-import axios from "axios";
-import * as crypto from "crypto";
-import * as winston from "winston";
-import { createClient } from "@supabase/supabase-js";
-import { WebhookEvent, Webhook } from "../types/api";
-import { Transaction } from "../types/api";
-import { DatabaseWebhookEvent } from "../middleware/webhook-listener";
+import axios from 'axios';
+import * as crypto from 'crypto';
+import * as winston from 'winston';
+import { createClient } from '@supabase/supabase-js';
+import { WebhookEvent, Webhook } from '../types/api';
+import { Transaction } from '../types/api';
+import { DatabaseWebhookEvent } from '../middleware/webhook-listener';
 
 // Helper to add timeout to RPC calls
-const withTimeout = <T>(promise: Promise<T>, timeoutMs: number = 10000): Promise<T> => {
+const withTimeout = <T>(
+  promise: Promise<T>,
+  timeoutMs: number = 10000,
+): Promise<T> => {
   return Promise.race([
     promise,
     new Promise<T>((_, reject) =>
-      setTimeout(() => reject(new Error(`RPC call timed out after ${timeoutMs}ms`)), timeoutMs)
+      setTimeout(
+        () => reject(new Error(`RPC call timed out after ${timeoutMs}ms`)),
+        timeoutMs,
+      ),
     ),
   ]);
 };
@@ -26,8 +32,8 @@ interface WebhookDeliveryResult {
 }
 
 // Initialize Supabase client
-const supabaseUrl = process.env.SUPABASE_URL || "";
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || "";
+const supabaseUrl = process.env.SUPABASE_URL || '';
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
 
 const supabase = createClient(supabaseUrl, supabaseServiceKey, {
   auth: {
@@ -39,7 +45,7 @@ const supabase = createClient(supabaseUrl, supabaseServiceKey, {
   },
   global: {
     headers: {
-      'Connection': 'close', // Prevent connection pooling issues
+      Connection: 'close', // Prevent connection pooling issues
     },
   },
 });
@@ -48,23 +54,23 @@ const supabase = createClient(supabaseUrl, supabaseServiceKey, {
 const transports: winston.transport[] = [new winston.transports.Console()];
 
 // Only add file transports when not in production (not on Vercel)
-if (process.env.NODE_ENV !== "production") {
+if (process.env.NODE_ENV !== 'production') {
   transports.push(
     new winston.transports.File({
-      filename: "logs/webhook-errors.log",
-      level: "error",
+      filename: 'logs/webhook-errors.log',
+      level: 'error',
     }),
-    new winston.transports.File({ filename: "logs/webhooks.log" }),
+    new winston.transports.File({ filename: 'logs/webhooks.log' }),
   );
 }
 
 const logger = winston.createLogger({
-  level: "info",
+  level: 'info',
   format: winston.format.combine(
     winston.format.timestamp(),
     winston.format.json(),
   ),
-  defaultMeta: { service: "webhook-sender" },
+  defaultMeta: { service: 'webhook-sender' },
   transports,
 });
 
@@ -81,18 +87,21 @@ export const prepareWebhookPayload = (event: WebhookEvent, data: any): any => {
     event,
     timestamp,
     data,
-    lomi_environment: process.env.NODE_ENV || "development",
+    lomi_environment: process.env.NODE_ENV || 'development',
   };
 };
 
 /**
  * Generates a signature for the webhook payload using the webhook secret
  */
-export const generateSignature = (payloadString: string, secret: string): string => {
+export const generateSignature = (
+  payloadString: string,
+  secret: string,
+): string => {
   return crypto
-    .createHmac("sha256", secret)
+    .createHmac('sha256', secret)
     .update(payloadString)
-    .digest("hex");
+    .digest('hex');
 };
 
 /**
@@ -106,12 +115,12 @@ export const sendWebhook = async (
   retryDelay = 5000,
 ): Promise<boolean> => {
   logger.info({
-    message: "Attempting to send webhook",
+    message: 'Attempting to send webhook',
     webhookId: webhook.id,
     event,
     url: webhook.url,
     subscribedEvents: webhook.events,
-    active: webhook.active
+    active: webhook.active,
   });
 
   // Skip if webhook doesn't subscribe to this event
@@ -124,7 +133,7 @@ export const sendWebhook = async (
       message: `Webhook doesn't subscribe to event`,
       webhookId: webhook.id,
       event,
-      subscribedEvents: webhook.events
+      subscribedEvents: webhook.events,
     });
     return false;
   }
@@ -133,7 +142,7 @@ export const sendWebhook = async (
   if (!webhook.active) {
     logger.info({
       message: `Webhook is not active`,
-      webhookId: webhook.id
+      webhookId: webhook.id,
     });
     return false;
   }
@@ -152,10 +161,10 @@ export const sendWebhook = async (
       // Send the stringified payload directly.
       const response = await axios.post(webhook.url as string, payloadString, {
         headers: {
-          "Content-Type": "application/json",
-          "X-Lomi-Signature": signature,
-          "X-Lomi-Event": event,
-          "User-Agent": "Lomi-Webhook/1.0",
+          'Content-Type': 'application/json',
+          'X-Lomi-Signature': signature,
+          'X-Lomi-Event': event,
+          'User-Agent': 'Lomi-Webhook/1.0',
         },
         timeout: 10000, // 10 second timeout
       });
@@ -169,12 +178,14 @@ export const sendWebhook = async (
           await updateWebhookDeliveryStatus(
             webhook.id as string,
             response.status,
-            typeof lastResponseBody === 'string' ? lastResponseBody : JSON.stringify(lastResponseBody),
+            typeof lastResponseBody === 'string'
+              ? lastResponseBody
+              : JSON.stringify(lastResponseBody),
             payload,
           );
         } catch (updateError) {
           logger.error({
-            message: "Failed to update webhook delivery status",
+            message: 'Failed to update webhook delivery status',
             webhookId: webhook.id,
             error:
               updateError instanceof Error
@@ -184,7 +195,7 @@ export const sendWebhook = async (
         }
 
         logger.info({
-          message: "Webhook delivered successfully",
+          message: 'Webhook delivered successfully',
           webhookId: webhook.id,
           event,
           url: webhook.url,
@@ -204,10 +215,11 @@ export const sendWebhook = async (
       });
     } catch (error: any) {
       lastResponseStatus = error.response?.status;
-      lastResponseBody = error.response?.data || error.message || "Unknown error";
+      lastResponseBody =
+        error.response?.data || error.message || 'Unknown error';
 
       logger.error({
-        message: "Webhook delivery error",
+        message: 'Webhook delivery error',
         webhookId: webhook.id,
         event,
         url: webhook.url,
@@ -233,12 +245,14 @@ export const sendWebhook = async (
     await updateWebhookDeliveryStatus(
       webhook.id as string,
       lastResponseStatus || 0,
-      typeof lastResponseBody === 'string' ? lastResponseBody : JSON.stringify(lastResponseBody),
+      typeof lastResponseBody === 'string'
+        ? lastResponseBody
+        : JSON.stringify(lastResponseBody),
       payload,
     );
   } catch (updateError) {
     logger.error({
-      message: "Failed to update webhook delivery status after retries",
+      message: 'Failed to update webhook delivery status after retries',
       webhookId: webhook.id,
       error:
         updateError instanceof Error
@@ -248,7 +262,7 @@ export const sendWebhook = async (
   }
 
   logger.error({
-    message: "Webhook delivery failed after maximum retries",
+    message: 'Webhook delivery failed after maximum retries',
     webhookId: webhook.id,
     event,
     url: webhook.url,
@@ -268,7 +282,7 @@ export const notifyTransactionEvent = async (
 ): Promise<void> => {
   try {
     logger.info({
-      message: "Starting notifyTransactionEvent",
+      message: 'Starting notifyTransactionEvent',
       organizationId,
       event,
       transactionId: transaction.id,
@@ -278,11 +292,15 @@ export const notifyTransactionEvent = async (
     const webhooks = await fetchOrganizationWebhooks(organizationId, event);
 
     logger.info({
-      message: "Fetched webhooks for organization",
+      message: 'Fetched webhooks for organization',
       organizationId,
       event,
       webhookCount: webhooks.length,
-      webhooks: webhooks.map(w => ({ id: w.id, url: w.url, events: w.events }))
+      webhooks: webhooks.map((w) => ({
+        id: w.id,
+        url: w.url,
+        events: w.events,
+      })),
     });
 
     if (webhooks.length === 0) {
@@ -301,7 +319,7 @@ export const notifyTransactionEvent = async (
 
     // Log results
     const successful = results.filter(
-      (r) => r.status === "fulfilled" && r.value === true,
+      (r) => r.status === 'fulfilled' && r.value === true,
     ).length;
     const failed = webhooks.length - successful;
 
@@ -314,7 +332,7 @@ export const notifyTransactionEvent = async (
     });
   } catch (error: any) {
     logger.error({
-      message: "Failed to notify webhooks",
+      message: 'Failed to notify webhooks',
       error: error.message,
       organizationId,
       event,
@@ -334,7 +352,7 @@ async function updateWebhookDeliveryStatus(
 ): Promise<void> {
   try {
     // Use the new log_webhook_delivery function instead of update_webhook_delivery_status
-    const { error } = await supabase.rpc("log_webhook_delivery", {
+    const { error } = await supabase.rpc('log_webhook_delivery', {
       p_webhook_id: webhookId,
       p_merchant_id: payload.data?.merchant_id || payload.data?.organization_id,
       p_organization_id: payload.data?.organization_id,
@@ -353,9 +371,9 @@ async function updateWebhookDeliveryStatus(
   } catch (error) {
     // Log error using Winston logger
     logger.error({
-        message: "Error updating webhook delivery status",
-        webhookId: webhookId,
-        error: error instanceof Error ? error.message : String(error),
+      message: 'Error updating webhook delivery status',
+      webhookId: webhookId,
+      error: error instanceof Error ? error.message : String(error),
     });
     throw error;
   }
@@ -370,14 +388,14 @@ async function fetchOrganizationWebhooks(
 ): Promise<Webhook[]> {
   try {
     logger.info({
-      message: "Fetching webhooks for organization",
+      message: 'Fetching webhooks for organization',
       organizationId,
-      event
+      event,
     });
 
     // Get the merchant ID from the organization using RPC
     const { data: merchantId, error: merchantError } = await supabase.rpc(
-      "get_merchant_from_organization",
+      'get_merchant_from_organization',
       {
         p_organization_id: organizationId,
       },
@@ -385,33 +403,33 @@ async function fetchOrganizationWebhooks(
 
     if (merchantError || !merchantId) {
       logger.error({
-        message: "No merchant found for organization",
+        message: 'No merchant found for organization',
         organizationId,
         error: merchantError?.message,
-        merchantError
+        merchantError,
       });
       return [];
     }
 
     logger.info({
-      message: "Found merchant for organization",
+      message: 'Found merchant for organization',
       organizationId,
-      merchantId
+      merchantId,
     });
 
     // Convert our WebhookEvent to the database's webhook_event enum
     const dbEvent = event ? mapWebhookEventToDbEnum(event) : undefined;
 
     logger.info({
-      message: "Fetching webhooks with parameters",
+      message: 'Fetching webhooks with parameters',
       merchantId,
       dbEvent,
-      originalEvent: event
+      originalEvent: event,
     });
 
     // Fetch webhooks using the RPC function
     const { data: webhooks, error } = await supabase.rpc(
-      "fetch_organization_webhooks",
+      'fetch_organization_webhooks',
       {
         p_merchant_id: merchantId,
         p_event: dbEvent,
@@ -421,30 +439,36 @@ async function fetchOrganizationWebhooks(
 
     if (error) {
       logger.error({
-        message: "Failed to fetch webhooks",
+        message: 'Failed to fetch webhooks',
         organizationId,
         merchantId,
         error: error.message,
         dbEvent,
-        fullError: error
+        fullError: error,
       });
       return [];
     }
 
     logger.info({
-      message: "Fetched webhooks from database",
+      message: 'Fetched webhooks from database',
       organizationId,
       merchantId,
       webhookCount: webhooks ? webhooks.length : 0,
-      webhooks: webhooks ? webhooks.map((w: any) => ({ id: w.webhook_id, url: w.url, events: w.authorized_events })) : []
+      webhooks: webhooks
+        ? webhooks.map((w: any) => ({
+            id: w.webhook_id,
+            url: w.url,
+            events: w.authorized_events,
+          }))
+        : [],
     });
 
     if (!webhooks || webhooks.length === 0) {
       logger.warn({
-        message: "No webhooks found for organization",
+        message: 'No webhooks found for organization',
         organizationId,
         merchantId,
-        event: dbEvent
+        event: dbEvent,
       });
       return [];
     }
@@ -462,19 +486,23 @@ async function fetchOrganizationWebhooks(
     }));
 
     logger.info({
-      message: "Mapped webhooks successfully",
+      message: 'Mapped webhooks successfully',
       organizationId,
       mappedWebhookCount: mappedWebhooks.length,
-      mappedWebhooks: mappedWebhooks.map((w: any) => ({ id: w.id, url: w.url, events: w.events }))
+      mappedWebhooks: mappedWebhooks.map((w: any) => ({
+        id: w.id,
+        url: w.url,
+        events: w.events,
+      })),
     });
 
     return mappedWebhooks;
   } catch (error) {
     logger.error({
-      message: "Exception when fetching webhooks",
+      message: 'Exception when fetching webhooks',
       organizationId,
       error: error instanceof Error ? error.message : String(error),
-      stack: error instanceof Error ? error.stack : undefined
+      stack: error instanceof Error ? error.stack : undefined,
     });
     return [];
   }
@@ -486,7 +514,7 @@ async function fetchOrganizationWebhooks(
 function mapWebhookEventToDbEnum(event: WebhookEvent): DatabaseWebhookEvent {
   // Since WebhookEvent now uses database format, we can directly map
   const eventString = typeof event === 'string' ? event : String(event);
-  
+
   const mapping: Record<string, DatabaseWebhookEvent> = {
     // Direct mapping since both use dot notation now
     'payment.created': DatabaseWebhookEvent.PAYMENT_CREATED,
@@ -501,32 +529,32 @@ function mapWebhookEventToDbEnum(event: WebhookEvent): DatabaseWebhookEvent {
     'subscription.canceled': DatabaseWebhookEvent.SUBSCRIPTION_CANCELED,
     'checkout.completed': DatabaseWebhookEvent.CHECKOUT_COMPLETED,
     'provider.status_changed': DatabaseWebhookEvent.PROVIDER_STATUS_CHANGED,
-    
+
     // Legacy support for old UPPERCASE format
-    'PAYMENT_CREATED': DatabaseWebhookEvent.PAYMENT_CREATED,
-    'PAYMENT_SUCCEEDED': DatabaseWebhookEvent.PAYMENT_SUCCEEDED,
-    'PAYMENT_FAILED': DatabaseWebhookEvent.PAYMENT_FAILED,
-    'PAYMENT_CANCELED': DatabaseWebhookEvent.PAYMENT_CANCELED,
-    'REFUND_CREATED': DatabaseWebhookEvent.REFUND_CREATED,
-    'REFUND_COMPLETED': DatabaseWebhookEvent.REFUND_COMPLETED,
-    'REFUND_FAILED': DatabaseWebhookEvent.REFUND_FAILED,
-    'SUBSCRIPTION_CREATED': DatabaseWebhookEvent.SUBSCRIPTION_CREATED,
-    'SUBSCRIPTION_RENEWED': DatabaseWebhookEvent.SUBSCRIPTION_RENEWED,
-    'SUBSCRIPTION_CANCELED': DatabaseWebhookEvent.SUBSCRIPTION_CANCELED,
-    'CHECKOUT_COMPLETED': DatabaseWebhookEvent.CHECKOUT_COMPLETED,
-    'PROVIDER_STATUS_CHANGED': DatabaseWebhookEvent.PROVIDER_STATUS_CHANGED,
+    PAYMENT_CREATED: DatabaseWebhookEvent.PAYMENT_CREATED,
+    PAYMENT_SUCCEEDED: DatabaseWebhookEvent.PAYMENT_SUCCEEDED,
+    PAYMENT_FAILED: DatabaseWebhookEvent.PAYMENT_FAILED,
+    PAYMENT_CANCELED: DatabaseWebhookEvent.PAYMENT_CANCELED,
+    REFUND_CREATED: DatabaseWebhookEvent.REFUND_CREATED,
+    REFUND_COMPLETED: DatabaseWebhookEvent.REFUND_COMPLETED,
+    REFUND_FAILED: DatabaseWebhookEvent.REFUND_FAILED,
+    SUBSCRIPTION_CREATED: DatabaseWebhookEvent.SUBSCRIPTION_CREATED,
+    SUBSCRIPTION_RENEWED: DatabaseWebhookEvent.SUBSCRIPTION_RENEWED,
+    SUBSCRIPTION_CANCELED: DatabaseWebhookEvent.SUBSCRIPTION_CANCELED,
+    CHECKOUT_COMPLETED: DatabaseWebhookEvent.CHECKOUT_COMPLETED,
+    PROVIDER_STATUS_CHANGED: DatabaseWebhookEvent.PROVIDER_STATUS_CHANGED,
   };
 
   const result = mapping[eventString];
   if (!result) {
     logger.warn({
-      message: "Unknown webhook event, using default",
+      message: 'Unknown webhook event, using default',
       event: eventString,
-      availableEvents: Object.keys(mapping)
+      availableEvents: Object.keys(mapping),
     });
     return DatabaseWebhookEvent.PROVIDER_STATUS_CHANGED;
   }
-  
+
   return result;
 }
 
@@ -536,7 +564,7 @@ function mapWebhookEventToDbEnum(event: WebhookEvent): DatabaseWebhookEvent {
 function mapDbEnumToWebhookEvent(dbEvent: DatabaseWebhookEvent): WebhookEvent {
   // Handle string values from database
   const dbEventString = typeof dbEvent === 'string' ? dbEvent : String(dbEvent);
-  
+
   const mapping: Record<string, WebhookEvent> = {
     // Direct mapping since both use dot notation now
     'payment.created': WebhookEvent.PAYMENT_CREATED,
@@ -556,13 +584,13 @@ function mapDbEnumToWebhookEvent(dbEvent: DatabaseWebhookEvent): WebhookEvent {
   const result = mapping[dbEventString];
   if (!result) {
     logger.warn({
-      message: "Unknown database webhook event, using default",
+      message: 'Unknown database webhook event, using default',
       dbEvent: dbEventString,
-      availableEvents: Object.keys(mapping)
+      availableEvents: Object.keys(mapping),
     });
     return WebhookEvent.PROVIDER_STATUS_CHANGED;
   }
-  
+
   return result;
 }
 
@@ -577,7 +605,7 @@ export async function triggerMerchantWebhookForTransaction(
 ): Promise<void> {
   try {
     logger.info({
-      message: "Attempting to trigger merchant webhook",
+      message: 'Attempting to trigger merchant webhook',
       entityId,
       organizationId,
       event,
@@ -587,13 +615,13 @@ export async function triggerMerchantWebhookForTransaction(
 
     if (event === WebhookEvent.CHECKOUT_COMPLETED) {
       const { data: rpcResponse, error: rpcError } = await supabase.rpc(
-        "get_checkout_session_details_for_webhook",
+        'get_checkout_session_details_for_webhook',
         { p_checkout_session_id: entityId },
       );
 
       if (rpcError) {
         logger.error({
-          message: "RPC error fetching CheckoutSession for webhook trigger",
+          message: 'RPC error fetching CheckoutSession for webhook trigger',
           checkoutSessionId: entityId,
           organizationId,
           event,
@@ -603,11 +631,14 @@ export async function triggerMerchantWebhookForTransaction(
         });
         return;
       }
-      dataForWebhook = Array.isArray(rpcResponse) ? rpcResponse[0] : rpcResponse;
+      dataForWebhook = Array.isArray(rpcResponse)
+        ? rpcResponse[0]
+        : rpcResponse;
 
       if (!dataForWebhook) {
         logger.error({
-          message: "CheckoutSession not found for webhook trigger after RPC call",
+          message:
+            'CheckoutSession not found for webhook trigger after RPC call',
           checkoutSessionId: entityId,
           organizationId,
           event,
@@ -616,7 +647,7 @@ export async function triggerMerchantWebhookForTransaction(
       }
     } else {
       logger.info({
-        message: "Calling get_transaction RPC",
+        message: 'Calling get_transaction RPC',
         transactionId: entityId,
         organizationId,
         event,
@@ -624,35 +655,45 @@ export async function triggerMerchantWebhookForTransaction(
 
       // First get the merchant ID from the organization using RPC
       logger.info({
-        message: "Fetching merchant ID for organization",
+        message: 'Fetching merchant ID for organization',
         organizationId,
         event,
       });
 
       try {
         logger.info({
-          message: "About to call get_merchant_from_organization RPC",
+          message: 'About to call get_merchant_from_organization RPC',
           organizationId,
         });
 
         let rpcResult: any;
         try {
           const startTime = Date.now();
-          
+
           // Add timeout to RPC call using Promise.race
           const timeoutPromise = new Promise((_, reject) =>
-            setTimeout(() => reject(new Error(`get_merchant_from_organization RPC timed out after 15 seconds`)), 15000)
+            setTimeout(
+              () =>
+                reject(
+                  new Error(
+                    `get_merchant_from_organization RPC timed out after 15 seconds`,
+                  ),
+                ),
+              15000,
+            ),
           );
-          
+
           rpcResult = await Promise.race([
-            supabase.rpc("get_merchant_from_organization", { p_organization_id: organizationId }),
-            timeoutPromise
+            supabase.rpc('get_merchant_from_organization', {
+              p_organization_id: organizationId,
+            }),
+            timeoutPromise,
           ]);
-          
+
           const duration = Date.now() - startTime;
-          
+
           logger.info({
-            message: "get_merchant_from_organization RPC completed",
+            message: 'get_merchant_from_organization RPC completed',
             organizationId,
             duration,
             hasError: !!rpcResult.error,
@@ -662,10 +703,14 @@ export async function triggerMerchantWebhookForTransaction(
           });
         } catch (rpcException) {
           logger.error({
-            message: "get_merchant_from_organization RPC threw exception",
+            message: 'get_merchant_from_organization RPC threw exception',
             organizationId,
-            error: rpcException instanceof Error ? rpcException.message : String(rpcException),
-            stack: rpcException instanceof Error ? rpcException.stack : undefined,
+            error:
+              rpcException instanceof Error
+                ? rpcException.message
+                : String(rpcException),
+            stack:
+              rpcException instanceof Error ? rpcException.stack : undefined,
           });
           throw rpcException;
         }
@@ -674,7 +719,7 @@ export async function triggerMerchantWebhookForTransaction(
 
         if (merchantError) {
           logger.error({
-            message: "Error from get_merchant_from_organization RPC",
+            message: 'Error from get_merchant_from_organization RPC',
             organizationId,
             error: merchantError.message,
             errorCode: merchantError.code,
@@ -686,7 +731,8 @@ export async function triggerMerchantWebhookForTransaction(
 
         if (!merchantId) {
           logger.error({
-            message: "No merchant found for organization (null/undefined returned)",
+            message:
+              'No merchant found for organization (null/undefined returned)',
             organizationId,
             merchantIdValue: merchantId,
           });
@@ -694,47 +740,65 @@ export async function triggerMerchantWebhookForTransaction(
         }
 
         logger.info({
-          message: "Found merchant for organization, now fetching transaction",
+          message: 'Found merchant for organization, now fetching transaction',
           organizationId,
           merchantId,
-          transactionId: entityId
+          transactionId: entityId,
         });
 
         let transactionRpcResult: any;
         try {
           const transactionStartTime = Date.now();
-          
+
           // Add timeout to transaction RPC call using Promise.race
           const transactionTimeoutPromise = new Promise((_, reject) =>
-            setTimeout(() => reject(new Error(`get_transaction RPC timed out after 15 seconds`)), 15000)
+            setTimeout(
+              () =>
+                reject(
+                  new Error(`get_transaction RPC timed out after 15 seconds`),
+                ),
+              15000,
+            ),
           );
-          
+
           transactionRpcResult = await Promise.race([
-            supabase.rpc("get_transaction", { 
+            supabase.rpc('get_transaction', {
               p_transaction_id: entityId,
-              p_merchant_id: merchantId 
+              p_merchant_id: merchantId,
             }),
-            transactionTimeoutPromise
+            transactionTimeoutPromise,
           ]);
-          
+
           const transactionDuration = Date.now() - transactionStartTime;
 
           logger.info({
-            message: "get_transaction RPC response",
+            message: 'get_transaction RPC response',
             transactionId: entityId,
             duration: transactionDuration,
-            rpcError: transactionRpcResult.error ? transactionRpcResult.error.message : null,
-            rpcResponseType: Array.isArray(transactionRpcResult.data) ? 'array' : typeof transactionRpcResult.data,
-            rpcResponseLength: Array.isArray(transactionRpcResult.data) ? transactionRpcResult.data.length : null,
+            rpcError: transactionRpcResult.error
+              ? transactionRpcResult.error.message
+              : null,
+            rpcResponseType: Array.isArray(transactionRpcResult.data)
+              ? 'array'
+              : typeof transactionRpcResult.data,
+            rpcResponseLength: Array.isArray(transactionRpcResult.data)
+              ? transactionRpcResult.data.length
+              : null,
             rpcResponse: transactionRpcResult.data,
           });
         } catch (transactionRpcException) {
           logger.error({
-            message: "get_transaction RPC threw exception",
+            message: 'get_transaction RPC threw exception',
             transactionId: entityId,
             merchantId,
-            error: transactionRpcException instanceof Error ? transactionRpcException.message : String(transactionRpcException),
-            stack: transactionRpcException instanceof Error ? transactionRpcException.stack : undefined,
+            error:
+              transactionRpcException instanceof Error
+                ? transactionRpcException.message
+                : String(transactionRpcException),
+            stack:
+              transactionRpcException instanceof Error
+                ? transactionRpcException.stack
+                : undefined,
           });
           throw transactionRpcException;
         }
@@ -743,7 +807,7 @@ export async function triggerMerchantWebhookForTransaction(
 
         if (rpcError) {
           logger.error({
-            message: "RPC error fetching Transaction for webhook trigger",
+            message: 'RPC error fetching Transaction for webhook trigger',
             transactionId: entityId,
             organizationId,
             event,
@@ -753,11 +817,13 @@ export async function triggerMerchantWebhookForTransaction(
           });
           return;
         }
-        dataForWebhook = Array.isArray(rpcResponse) ? rpcResponse[0] : rpcResponse;
+        dataForWebhook = Array.isArray(rpcResponse)
+          ? rpcResponse[0]
+          : rpcResponse;
 
         if (!dataForWebhook) {
           logger.error({
-            message: "Transaction not found for webhook trigger after RPC call",
+            message: 'Transaction not found for webhook trigger after RPC call',
             transactionId: entityId,
             organizationId,
             event,
@@ -766,35 +832,42 @@ export async function triggerMerchantWebhookForTransaction(
         }
       } catch (unexpectedError) {
         logger.error({
-          message: "Unexpected error during merchant/transaction fetching",
+          message: 'Unexpected error during merchant/transaction fetching',
           organizationId,
           transactionId: entityId,
-          error: unexpectedError instanceof Error ? unexpectedError.message : String(unexpectedError),
-          stack: unexpectedError instanceof Error ? unexpectedError.stack : undefined,
+          error:
+            unexpectedError instanceof Error
+              ? unexpectedError.message
+              : String(unexpectedError),
+          stack:
+            unexpectedError instanceof Error
+              ? unexpectedError.stack
+              : undefined,
         });
         return;
       }
     }
 
     if (dataForWebhook.organization_id !== organizationId) {
-        logger.warn({
-            message: "Organization ID mismatch between function call and fetched data for webhook trigger",
-            entityId: dataForWebhook.id,
-            event,
-            expectedOrgIdForWebhookRouting: organizationId,
-            actualOrgIdInData: dataForWebhook.organization_id,
-        });
+      logger.warn({
+        message:
+          'Organization ID mismatch between function call and fetched data for webhook trigger',
+        entityId: dataForWebhook.id,
+        event,
+        expectedOrgIdForWebhookRouting: organizationId,
+        actualOrgIdInData: dataForWebhook.organization_id,
+      });
     }
 
     logger.info({
-      message: "Successfully fetched data for webhook, now notifying event",
+      message: 'Successfully fetched data for webhook, now notifying event',
       retrievedEntityId: dataForWebhook.id,
       organizationId,
       event,
     });
 
     logger.info({
-      message: "About to call notifyTransactionEvent",
+      message: 'About to call notifyTransactionEvent',
       organizationId,
       event,
       dataForWebhookId: dataForWebhook.id,
@@ -803,7 +876,7 @@ export async function triggerMerchantWebhookForTransaction(
     await notifyTransactionEvent(organizationId, event, dataForWebhook);
   } catch (error) {
     logger.error({
-      message: "Error in triggerMerchantWebhookForTransaction",
+      message: 'Error in triggerMerchantWebhookForTransaction',
       entityId,
       organizationId,
       event,
@@ -822,14 +895,17 @@ export async function sendTestWebhook(
 ): Promise<WebhookDeliveryResult> {
   try {
     // Get webhook details using RPC
-    const { data: webhooks, error: rpcError } = await supabase.rpc("get_webhook", {
-      p_webhook_id: webhookId,
-      p_merchant_id: merchantId,
-    });
+    const { data: webhooks, error: rpcError } = await supabase.rpc(
+      'get_webhook',
+      {
+        p_webhook_id: webhookId,
+        p_merchant_id: merchantId,
+      },
+    );
 
     if (rpcError) {
       logger.error({
-        message: "Failed to fetch webhook details for test",
+        message: 'Failed to fetch webhook details for test',
         webhookId,
         merchantId,
         error: rpcError.message,
@@ -838,26 +914,26 @@ export async function sendTestWebhook(
     }
     if (!webhooks || webhooks.length === 0) {
       logger.warn({
-        message: "Webhook not found for test",
+        message: 'Webhook not found for test',
         webhookId,
         merchantId,
       });
-      return { success: false, error: "Webhook not found", retryable: false };
+      return { success: false, error: 'Webhook not found', retryable: false };
     }
 
     const dbWebhook = webhooks[0];
 
     // Map dbWebhook to our Webhook interface
     const webhook: Webhook = {
-        id: dbWebhook.webhook_id,
-        organization_id: dbWebhook.organization_id,
-        url: dbWebhook.url,
-        events: dbWebhook.authorized_events.map(mapDbEnumToWebhookEvent),
-        secret: dbWebhook.verification_token,
-        active: dbWebhook.is_active,
-        created_at: new Date(dbWebhook.created_at),
-        updated_at: new Date(dbWebhook.updated_at),
-    }
+      id: dbWebhook.webhook_id,
+      organization_id: dbWebhook.organization_id,
+      url: dbWebhook.url,
+      events: dbWebhook.authorized_events.map(mapDbEnumToWebhookEvent),
+      secret: dbWebhook.verification_token,
+      active: dbWebhook.is_active,
+      created_at: new Date(dbWebhook.created_at),
+      updated_at: new Date(dbWebhook.updated_at),
+    };
 
     // Prepare test payload
     const testPayload = prepareWebhookPayload(WebhookEvent.PAYMENT_SUCCEEDED, {
@@ -865,8 +941,8 @@ export async function sendTestWebhook(
       merchant_id: merchantId,
       organization_id: webhook.organization_id, // Include org ID if available
       amount: 1000,
-      currency: "XOF", // Example currency
-      status: "completed",
+      currency: 'XOF', // Example currency
+      status: 'completed',
       test: true,
       created_at: new Date().toISOString(),
     });
@@ -874,7 +950,12 @@ export async function sendTestWebhook(
     // Use the existing sendWebhook logic (which includes retry)
     // But we don't need retries for a test, so call the internal sending part directly for simplicity?
     // Let's keep using sendWebhook, the retries won't hurt for a test.
-    const success = await sendWebhook(webhook, WebhookEvent.PAYMENT_SUCCEEDED, testPayload.data, 0); // 0 retries for test
+    const success = await sendWebhook(
+      webhook,
+      WebhookEvent.PAYMENT_SUCCEEDED,
+      testPayload.data,
+      0,
+    ); // 0 retries for test
 
     // We need to construct a WebhookDeliveryResult based on the boolean returned by sendWebhook
     // This requires sendWebhook to return more details or we fetch logs. Let's adapt slightly.
@@ -882,16 +963,23 @@ export async function sendTestWebhook(
     // Since sendWebhook only returns boolean, we'll simulate a result.
     // In a real scenario, we might fetch the last log entry for this webhook.
     if (success) {
-        logger.info({message: "Test webhook sent successfully (or first attempt succeeded)", webhookId});
-        return { success: true, statusCode: 200, retryable: false }; // Assume 200 on success
+      logger.info({
+        message: 'Test webhook sent successfully (or first attempt succeeded)',
+        webhookId,
+      });
+      return { success: true, statusCode: 200, retryable: false }; // Assume 200 on success
     } else {
-        logger.warn({message: "Test webhook failed", webhookId});
-        return { success: false, error: "Test webhook failed", retryable: false, statusCode: 500 }; // Assume failure
+      logger.warn({ message: 'Test webhook failed', webhookId });
+      return {
+        success: false,
+        error: 'Test webhook failed',
+        retryable: false,
+        statusCode: 500,
+      }; // Assume failure
     }
-
   } catch (error: any) {
     logger.error({
-      message: "Error sending test webhook",
+      message: 'Error sending test webhook',
       webhookId,
       error: error.message,
     });
@@ -911,18 +999,21 @@ export async function retryFailedWebhooks(): Promise<number> {
   try {
     // Get webhooks that need to be retried, limiting to those with fewer than 5 retries
     const { data: retryableWebhooks, error: rpcError } = await supabase.rpc(
-      "get_retryable_webhooks",
+      'get_retryable_webhooks',
       {
         p_max_retries: 5, // This RPC function needs to exist and return the right data
       },
     );
 
     if (rpcError) {
-      logger.error({message: "Failed to fetch retryable webhooks", error: rpcError.message});
+      logger.error({
+        message: 'Failed to fetch retryable webhooks',
+        error: rpcError.message,
+      });
       throw rpcError;
     }
     if (!retryableWebhooks || retryableWebhooks.length === 0) {
-      logger.info("No failed webhooks to retry");
+      logger.info('No failed webhooks to retry');
       return 0;
     }
 
@@ -945,17 +1036,17 @@ export async function retryFailedWebhooks(): Promise<number> {
     const retryPromises = retryableWebhooks.map(
       async (dbWebhook: RetryableWebhook) => {
         try {
-            // Map to Webhook interface
-            const webhook: Webhook = {
-                id: dbWebhook.webhook_id,
-                organization_id: dbWebhook.organization_id,
-                url: dbWebhook.url,
-                events: dbWebhook.authorized_events.map(mapDbEnumToWebhookEvent),
-                secret: dbWebhook.verification_token,
-                active: dbWebhook.is_active,
-                created_at: new Date(dbWebhook.created_at),
-                updated_at: new Date(dbWebhook.updated_at),
-            }
+          // Map to Webhook interface
+          const webhook: Webhook = {
+            id: dbWebhook.webhook_id,
+            organization_id: dbWebhook.organization_id,
+            url: dbWebhook.url,
+            events: dbWebhook.authorized_events.map(mapDbEnumToWebhookEvent),
+            secret: dbWebhook.verification_token,
+            active: dbWebhook.is_active,
+            created_at: new Date(dbWebhook.created_at),
+            updated_at: new Date(dbWebhook.updated_at),
+          };
 
           // Extract the original payload and event type
           const payload = dbWebhook.last_payload;
@@ -963,8 +1054,12 @@ export async function retryFailedWebhooks(): Promise<number> {
           const data = payload?.data; // Extract data from payload
 
           if (!event || !data) {
-              logger.warn({message: "Cannot retry webhook, missing event or data in last_payload", webhookId: webhook.id});
-              return false;
+            logger.warn({
+              message:
+                'Cannot retry webhook, missing event or data in last_payload',
+              webhookId: webhook.id,
+            });
+            return false;
           }
 
           // Retry sending using the existing sendWebhook function
@@ -973,19 +1068,35 @@ export async function retryFailedWebhooks(): Promise<number> {
           const success = await sendWebhook(webhook, event, data);
 
           if (success) {
-            logger.info({message: "Webhook retry successful", webhookId: webhook.id});
+            logger.info({
+              message: 'Webhook retry successful',
+              webhookId: webhook.id,
+            });
           } else {
-            logger.warn({message: "Webhook retry attempt failed", webhookId: webhook.id, retryCount: (dbWebhook.retry_count || 0) + 1});
+            logger.warn({
+              message: 'Webhook retry attempt failed',
+              webhookId: webhook.id,
+              retryCount: (dbWebhook.retry_count || 0) + 1,
+            });
           }
 
           return success;
         } catch (error: any) {
-          logger.error({message: "Error during webhook retry processing", webhookId: dbWebhook.webhook_id, error: error.message});
+          logger.error({
+            message: 'Error during webhook retry processing',
+            webhookId: dbWebhook.webhook_id,
+            error: error.message,
+          });
           // Log failure for this specific webhook retry attempt
           try {
-              await updateWebhookDeliveryStatus(dbWebhook.webhook_id, 0, `Retry error: ${error.message}`, dbWebhook.last_payload || {});
+            await updateWebhookDeliveryStatus(
+              dbWebhook.webhook_id,
+              0,
+              `Retry error: ${error.message}`,
+              dbWebhook.last_payload || {},
+            );
           } catch (logError) {
-              // ignore log error
+            // ignore log error
           }
           return false;
         }
@@ -1002,7 +1113,10 @@ export async function retryFailedWebhooks(): Promise<number> {
 
     return successCount;
   } catch (error: any) {
-    logger.error({message: "Failed to run retryFailedWebhooks job", error: error.message});
+    logger.error({
+      message: 'Failed to run retryFailedWebhooks job',
+      error: error.message,
+    });
     return 0;
   }
 }

@@ -29,7 +29,7 @@ describe('CheckoutSessionsClient', () => {
       cancel_url: 'https://cancel.test.com',
       allowed_providers: [Types.ProviderCode.ORANGE, Types.ProviderCode.WAVE],
       customer_email: 'test@example.com',
-      customer_name: 'Test Customer'
+      customer_name: 'Test Customer',
     };
 
     const mockResponse: Types.CheckoutSession = {
@@ -38,14 +38,14 @@ describe('CheckoutSessionsClient', () => {
       url: 'https://checkout.test.com/session',
       status: Types.CheckoutSessionStatus.open,
       created_at: new Date('2024-01-17T00:00:00Z'),
-      expires_at: new Date('2024-01-17T01:00:00Z')
+      expires_at: new Date('2024-01-17T01:00:00Z'),
     };
 
     it('should create a checkout session successfully', async () => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
         status: 201,
-        json: () => Promise.resolve(mockResponse)
+        json: () => Promise.resolve(mockResponse),
       } as Response);
 
       const result = await client.createCheckoutSession(mockCreateData);
@@ -56,10 +56,10 @@ describe('CheckoutSessionsClient', () => {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'X-API-KEY': mockApiKey
+            'X-API-KEY': mockApiKey,
           },
-          body: JSON.stringify(mockCreateData)
-        })
+          body: JSON.stringify(mockCreateData),
+        }),
       );
 
       expect(result).toBeInstanceOf(ApiResult);
@@ -85,18 +85,18 @@ describe('CheckoutSessionsClient', () => {
       url: 'https://checkout.test.com/session',
       status: Types.CheckoutSessionStatus.open,
       created_at: new Date('2024-01-17T00:00:00Z'),
-      expires_at: new Date('2024-01-17T01:00:00Z')
+      expires_at: new Date('2024-01-17T01:00:00Z'),
     };
 
     it('should list checkout sessions successfully with merchant_id and session_id filter', async () => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
         status: 200,
-        json: () => Promise.resolve([mockSession])
+        json: () => Promise.resolve([mockSession]),
       } as Response);
 
       const result = await client.listCheckoutSessions(mockMerchantId, {
-        checkout_session_id: mockSessionId
+        checkout_session_id: mockSessionId,
       });
 
       expect(mockFetch).toHaveBeenCalledWith(
@@ -105,9 +105,9 @@ describe('CheckoutSessionsClient', () => {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            'X-API-KEY': mockApiKey
-          }
-        })
+            'X-API-KEY': mockApiKey,
+          },
+        }),
       );
 
       expect(result).toBeInstanceOf(ApiResult);
@@ -120,10 +120,13 @@ describe('CheckoutSessionsClient', () => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
         status: 200,
-        json: () => Promise.resolve([mockSession])
+        json: () => Promise.resolve([mockSession]),
       } as Response);
       // Pass merchant_id first, then optional params object
-      const result = await client.listCheckoutSessions(mockMerchantId, optionalParams);
+      const result = await client.listCheckoutSessions(
+        mockMerchantId,
+        optionalParams,
+      );
       expect(result.data).toEqual([mockSession]);
       expect(mockFetch).toHaveBeenCalledWith(
         `https://api.test.com/checkout-sessions?merchant_id=${mockMerchantId}&checkout_session_id=${mockSessionId}`,
@@ -131,9 +134,9 @@ describe('CheckoutSessionsClient', () => {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            'X-API-KEY': mockApiKey
-          }
-        })
+            'X-API-KEY': mockApiKey,
+          },
+        }),
       );
     });
   });
@@ -154,14 +157,14 @@ describe('CheckoutSessionsClient', () => {
       url: 'https://checkout.test.com/session',
       status: Types.CheckoutSessionStatus.open,
       created_at: new Date('2024-01-17T00:00:00Z'),
-      expires_at: new Date('2024-01-17T01:00:00Z')
+      expires_at: new Date('2024-01-17T01:00:00Z'),
     };
 
     it('should get a checkout session by ID successfully', async () => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
         status: 200,
-        json: () => Promise.resolve(mockSession)
+        json: () => Promise.resolve(mockSession),
       } as Response);
 
       const result = await client.getCheckoutSession(mockSessionId);
@@ -172,9 +175,9 @@ describe('CheckoutSessionsClient', () => {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            'X-API-KEY': mockApiKey
-          }
-        })
+            'X-API-KEY': mockApiKey,
+          },
+        }),
       );
 
       expect(result).toBeInstanceOf(ApiResult);
@@ -183,4 +186,4 @@ describe('CheckoutSessionsClient', () => {
       expect(result.data.checkout_session_id).toBe(mockSessionId);
     });
   });
-}); 
+});

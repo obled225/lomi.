@@ -1678,4 +1678,3 @@ export interface Error extends Record<string, unknown> {
   error?: Record<string, unknown>;
   [key: string]: unknown;
 }
-

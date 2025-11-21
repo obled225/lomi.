@@ -25,7 +25,7 @@ describe('ProductsClient', () => {
       currency_code: Types.CurrencyCode.USD,
       image_url: 'https://example.com/image.jpg',
       is_active: true,
-      display_on_storefront: true
+      display_on_storefront: true,
     };
 
     const mockProductResponse: Types.Product = {
@@ -40,14 +40,14 @@ describe('ProductsClient', () => {
       is_active: mockCreateProductData.is_active,
       display_on_storefront: mockCreateProductData.display_on_storefront,
       created_at: new Date('2024-01-17T00:00:00Z'),
-      updated_at: new Date('2024-01-17T00:00:00Z')
+      updated_at: new Date('2024-01-17T00:00:00Z'),
     };
 
     it('should create a product successfully', async () => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
         status: 201,
-        json: () => Promise.resolve(mockProductResponse)
+        json: () => Promise.resolve(mockProductResponse),
       } as Response);
 
       const result = await client.create(mockCreateProductData);
@@ -58,10 +58,10 @@ describe('ProductsClient', () => {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'X-API-KEY': mockApiKey
+            'X-API-KEY': mockApiKey,
           },
-          body: JSON.stringify(mockCreateProductData)
-        })
+          body: JSON.stringify(mockCreateProductData),
+        }),
       );
 
       expect(result).toBeInstanceOf(ApiResult);
@@ -78,7 +78,7 @@ describe('ProductsClient', () => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
         status: 200,
-        json: () => Promise.resolve(mockProductList)
+        json: () => Promise.resolve(mockProductList),
       } as Response);
 
       const result = await client.list(mockMerchantId);
@@ -89,9 +89,9 @@ describe('ProductsClient', () => {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            'X-API-KEY': mockApiKey
-          }
-        })
+            'X-API-KEY': mockApiKey,
+          },
+        }),
       );
 
       expect(result).toBeInstanceOf(ApiResult);
@@ -101,9 +101,9 @@ describe('ProductsClient', () => {
 
     // Test case for when list is called without merchant_id (should error)
     // it('should handle missing merchant_id', async () => {
-      // Assuming the method requires merchant_id, test the error path
-      // mockRequest.mockRejectedValueOnce(new ApiError(400, { message: 'Missing merchant_id' }));
-      // await expect(client.list()).rejects.toThrow(ApiError);
+    // Assuming the method requires merchant_id, test the error path
+    // mockRequest.mockRejectedValueOnce(new ApiError(400, { message: 'Missing merchant_id' }));
+    // await expect(client.list()).rejects.toThrow(ApiError);
     // });
 
     // ... add tests for error handling ...
@@ -123,14 +123,14 @@ describe('ProductsClient', () => {
       is_active: true,
       display_on_storefront: true,
       created_at: new Date('2024-01-17T00:00:00Z'),
-      updated_at: new Date('2024-01-17T00:00:00Z')
+      updated_at: new Date('2024-01-17T00:00:00Z'),
     };
 
     it('should get a product successfully', async () => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
         status: 200,
-        json: () => Promise.resolve(mockProduct)
+        json: () => Promise.resolve(mockProduct),
       } as Response);
 
       const result = await client.getProduct(mockProductId);
@@ -141,9 +141,9 @@ describe('ProductsClient', () => {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            'X-API-KEY': mockApiKey
-          }
-        })
+            'X-API-KEY': mockApiKey,
+          },
+        }),
       );
 
       expect(result).toBeInstanceOf(ApiResult);
@@ -160,10 +160,13 @@ describe('ProductsClient', () => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
         status: 204,
-        json: () => Promise.resolve(undefined)
+        json: () => Promise.resolve(undefined),
       } as Response);
 
-      const result = await client.updateProductStatus(mockProductId, mockUpdateData);
+      const result = await client.updateProductStatus(
+        mockProductId,
+        mockUpdateData,
+      );
 
       expect(mockFetch).toHaveBeenCalledWith(
         `https://api.test.com/products/${mockProductId}`,
@@ -171,10 +174,10 @@ describe('ProductsClient', () => {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
-            'X-API-KEY': mockApiKey
+            'X-API-KEY': mockApiKey,
           },
-          body: JSON.stringify(mockUpdateData)
-        })
+          body: JSON.stringify(mockUpdateData),
+        }),
       );
 
       expect(result).toBeInstanceOf(ApiResult);
@@ -190,7 +193,7 @@ describe('ProductsClient', () => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
         status: 204,
-        json: () => Promise.resolve(undefined)
+        json: () => Promise.resolve(undefined),
       } as Response);
 
       const result = await client.deleteProduct(mockProductId);
@@ -201,9 +204,9 @@ describe('ProductsClient', () => {
           method: 'DELETE',
           headers: {
             'Content-Type': 'application/json',
-            'X-API-KEY': mockApiKey
-          }
-        })
+            'X-API-KEY': mockApiKey,
+          },
+        }),
       );
 
       expect(result).toBeInstanceOf(ApiResult);
@@ -211,4 +214,4 @@ describe('ProductsClient', () => {
       expect(result.data).toBeUndefined();
     });
   });
-}); 
+});

@@ -216,19 +216,24 @@ export class ApiError extends Error {
 
 function generateApiClients(paths: { [key: string]: PathItem }): void {
   // Group endpoints by tag/resource
-  const resources = new Map<string, { path: string; method: string; operation: OperationObject }[]>();
+  const resources = new Map<
+    string,
+    { path: string; method: string; operation: OperationObject }[]
+  >();
 
   Object.entries(paths).forEach(([path, pathItem]) => {
-    Object.entries(pathItem as Record<string, unknown>).forEach(([method, operation]) => {
-      if (method === 'parameters') return;
-      if (!isOperationObject(operation)) return;
+    Object.entries(pathItem as Record<string, unknown>).forEach(
+      ([method, operation]) => {
+        if (method === 'parameters') return;
+        if (!isOperationObject(operation)) return;
 
-      const resourceName = getResourceFromPath(path);
-      if (!resources.has(resourceName)) {
-        resources.set(resourceName, []);
-      }
-      resources.get(resourceName)?.push({ path, method, operation });
-    });
+        const resourceName = getResourceFromPath(path);
+        if (!resources.has(resourceName)) {
+          resources.set(resourceName, []);
+        }
+        resources.get(resourceName)?.push({ path, method, operation });
+      },
+    );
   });
 
   // Generate a client class for each resource
@@ -253,7 +258,7 @@ function getClientClassName(resource: string): string {
 
 function generateResourceClient(
   className: string,
-  endpoints: { path: string; method: string; operation: OperationObject }[]
+  endpoints: { path: string; method: string; operation: OperationObject }[],
 ): string {
   // Track used method names to avoid duplicates
   const usedMethodNames = new Set<string>();
@@ -261,14 +266,14 @@ function generateResourceClient(
   const methods = endpoints.map(({ path, method, operation }) => {
     // Use operationId directly if available
     let methodName = operation.operationId || getMethodName(path, method);
-    
+
     // Handle case where operationId is different than expected method name pattern
     // This is especially for WebhooksClient and similar clients
     if (!operation.operationId) {
       // Only apply transformations if we're using a generated method name
       methodName = methodName.charAt(0).toLowerCase() + methodName.slice(1);
     }
-    
+
     // If duplicate method name, add numeric suffix
     if (usedMethodNames.has(methodName)) {
       let counter = 2;
@@ -279,21 +284,21 @@ function generateResourceClient(
       }
       methodName = newMethodName;
     }
-    
+
     usedMethodNames.add(methodName);
-    
+
     // Generate method documentation
     const doc = generateMethodDocumentation(operation);
-    
+
     // Generate method parameters
     const params = getMethodParameters(path, operation);
-    
+
     // Generate method return type
     const returnType = getReturnType(operation);
-    
+
     // Generate method body
     const options = getRequestOptions(path, operation);
-    
+
     return `${doc}  public async ${methodName}(${params}): Promise<ApiResult<${returnType}>> {
     return this.request({
       method: '${method.toUpperCase()}',
@@ -301,7 +306,7 @@ function generateResourceClient(
     });
   }`;
   });
-  
+
   return `import { BaseClient } from './BaseClient';
 import { ApiResult } from './core/ApiResult';
 import * as Types from '../types/api';
@@ -366,8 +371,9 @@ export class ApiError extends Error {
 function getResourceFromPath(path: string): string {
   const parts = path.split('/').filter(Boolean);
   // Convert kebab-case to PascalCase
-  return parts[0].split('-')
-    .map(part => part.charAt(0).toUpperCase() + part.slice(1))
+  return parts[0]
+    .split('-')
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
     .join('');
 }
 
@@ -377,7 +383,7 @@ function capitalize(str: string): string {
 
 function getMethodName(path: string, method: string): string {
   const parts = path.split('/').filter(Boolean);
-  
+
   if (method === 'get') {
     // If the path has a query parameter for ID, use 'get'
     if (parts.length === 1) return 'list';
@@ -388,7 +394,7 @@ function getMethodName(path: string, method: string): string {
   if (method === 'put') return 'update';
   if (method === 'delete') return 'delete';
   if (method === 'patch') return 'patch';
-  
+
   return method;
 }
 
@@ -397,16 +403,17 @@ function getMethodParameters(path: string, operation: OperationObject): string {
   const optionalQueryParams: string[] = [];
 
   // 1. Path parameters (always first and required)
-  const pathParams = operation.parameters?.filter(p => p.in === 'path') || [];
-  pathParams.forEach(param => {
+  const pathParams = operation.parameters?.filter((p) => p.in === 'path') || [];
+  pathParams.forEach((param) => {
     params.push(`${param.name}: string`);
   });
 
   // 2. Required Query parameters (as individual required parameters)
-  const requiredQueryParams = operation.parameters?.filter(p => p.in === 'query' && p.required) || [];
-  requiredQueryParams.forEach(param => {
+  const requiredQueryParams =
+    operation.parameters?.filter((p) => p.in === 'query' && p.required) || [];
+  requiredQueryParams.forEach((param) => {
     // Assuming required query parameters are strings
-    params.push(`${param.name}: string`); 
+    params.push(`${param.name}: string`);
   });
 
   // 3. Request body (if present)
@@ -415,14 +422,15 @@ function getMethodParameters(path: string, operation: OperationObject): string {
     const type = getSchemaType(schema);
     // We determine if data is truly optional based on requestBody.required
     const isDataOptional = !(operation.requestBody as any).required; // Check the required flag
-    params.push(`data${isDataOptional ? '?' : ''}: ${type}`); 
+    params.push(`data${isDataOptional ? '?' : ''}: ${type}`);
   }
 
   // 4. Optional Query parameters (grouped into a single optional object)
-  const optionalQueryParamObjects = operation.parameters?.filter(p => p.in === 'query' && !p.required) || [];
+  const optionalQueryParamObjects =
+    operation.parameters?.filter((p) => p.in === 'query' && !p.required) || [];
   if (optionalQueryParamObjects.length > 0) {
     const optionalParamsString = optionalQueryParamObjects
-      .map(p => `${p.name}?: string`) // Assuming optional query params are strings
+      .map((p) => `${p.name}?: string`) // Assuming optional query params are strings
       .join(', ');
     // This must come *last* if data is required, or after required params if data is optional/absent
     params.push(`optionalParams?: { ${optionalParamsString} }`);
@@ -432,7 +440,8 @@ function getMethodParameters(path: string, operation: OperationObject): string {
 }
 
 function getReturnType(operation: OperationObject): string {
-  const successResponse = operation.responses['200'] || operation.responses['201'];
+  const successResponse =
+    operation.responses['200'] || operation.responses['201'];
   if (!successResponse?.content) return 'void';
 
   const schema = successResponse.content['application/json'].schema;
@@ -456,18 +465,20 @@ function getRequestOptions(path: string, operation: OperationObject): string {
   const allParams: string[] = [];
 
   // Path parameters
-  const pathParams = operation.parameters?.filter(p => p.in === 'path') || [];
-  pathParams.forEach(p => allParams.push(`${p.name}: ${p.name}`));
+  const pathParams = operation.parameters?.filter((p) => p.in === 'path') || [];
+  pathParams.forEach((p) => allParams.push(`${p.name}: ${p.name}`));
 
   // Required Query parameters
-  const requiredQueryParams = operation.parameters?.filter(p => p.in === 'query' && p.required) || [];
-  requiredQueryParams.forEach(p => allParams.push(`${p.name}: ${p.name}`));
+  const requiredQueryParams =
+    operation.parameters?.filter((p) => p.in === 'query' && p.required) || [];
+  requiredQueryParams.forEach((p) => allParams.push(`${p.name}: ${p.name}`));
 
   // Optional Query parameters (add from the optionalParams object)
-  const optionalQueryParamObjects = operation.parameters?.filter(p => p.in === 'query' && !p.required) || [];
+  const optionalQueryParamObjects =
+    operation.parameters?.filter((p) => p.in === 'query' && !p.required) || [];
   if (optionalQueryParamObjects.length > 0) {
     // Spread the optionalParams object if it exists and is provided
-    allParams.push('...optionalParams'); 
+    allParams.push('...optionalParams');
   }
 
   if (allParams.length > 0) {
@@ -492,4 +503,4 @@ function generateMethodDocumentation(operation: OperationObject): string {
   return lines.join('\n');
 }
 
-generateClient(); 
+generateClient();

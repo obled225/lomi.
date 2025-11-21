@@ -8,9 +8,14 @@ const TEST_API_KEY = process.env.TEST_API_KEY || '';
 const LIVE_API_KEY = process.env.LIVE_API_KEY || '';
 
 // Function to verify webhook signatures
-function verifySignature(payload: any, signature: string, secret: string): boolean {
+function verifySignature(
+  payload: any,
+  signature: string,
+  secret: string,
+): boolean {
   const hmac = crypto.createHmac('sha256', secret);
-  const payloadString = typeof payload === 'string' ? payload : JSON.stringify(payload);
+  const payloadString =
+    typeof payload === 'string' ? payload : JSON.stringify(payload);
   hmac.update(payloadString);
   const digest = hmac.digest('hex');
   return digest === signature;
@@ -21,8 +26,8 @@ const api = axios.create({
   baseURL: API_BASE_URL,
   headers: {
     'Content-Type': 'application/json',
-    'X-API-Key': API_KEY
-  }
+    'X-API-Key': API_KEY,
+  },
 });
 
 async function testWebhooks() {
@@ -39,12 +44,9 @@ async function testWebhooks() {
     const createResponse = await api.post('/v1/webhooks', {
       url: `https://webhook.site/${Date.now()}`,
       description: 'Test webhook',
-      authorized_events: [
-        'PAYMENT_SUCCEEDED',
-        'PAYMENT_FAILED'
-      ]
+      authorized_events: ['PAYMENT_SUCCEEDED', 'PAYMENT_FAILED'],
     });
-    
+
     const webhook = createResponse.data.data;
     console.log(`Created webhook with ID: ${webhook.id}`);
     console.log(`Webhook secret: ${webhook.secret}`);
@@ -61,10 +63,12 @@ async function testWebhooks() {
       authorized_events: [
         'PAYMENT_SUCCEEDED',
         'PAYMENT_FAILED',
-        'REFUND_COMPLETED'
-      ]
+        'REFUND_COMPLETED',
+      ],
     });
-    console.log(`Updated webhook events: ${updateResponse.data.data.events.join(', ')}`);
+    console.log(
+      `Updated webhook events: ${updateResponse.data.data.events.join(', ')}`,
+    );
 
     // 5. Test the webhook
     console.log(`\n5. Testing webhook ${webhook.id}...`);
@@ -72,8 +76,10 @@ async function testWebhooks() {
     console.log(`Test webhook response: ${JSON.stringify(testResponse.data)}`);
 
     // 6. Simulate a webhook delivery with signature verification
-    console.log(`\n6. Simulating webhook delivery with signature verification...`);
-    
+    console.log(
+      `\n6. Simulating webhook delivery with signature verification...`,
+    );
+
     // Sample payload that would be sent to a webhook endpoint
     const webhookPayload = {
       event_type: 'PAYMENT_SUCCEEDED',
@@ -82,63 +88,82 @@ async function testWebhooks() {
         id: `pmt_${Date.now()}`,
         amount: 5000,
         currency: 'XOF',
-        status: 'succeeded'
-      }
+        status: 'succeeded',
+      },
     };
-    
+
     // Generate a signature using the webhook secret
-    const signature = crypto.createHmac('sha256', webhook.secret)
+    const signature = crypto
+      .createHmac('sha256', webhook.secret)
       .update(JSON.stringify(webhookPayload))
       .digest('hex');
-    
+
     console.log(`Generated signature: ${signature}`);
-    
+
     // Verify the signature (simulating what the receiving server would do)
     const isValid = verifySignature(webhookPayload, signature, webhook.secret);
-    console.log(`Signature verification result: ${isValid ? 'Valid' : 'Invalid'}`);
-    
+    console.log(
+      `Signature verification result: ${isValid ? 'Valid' : 'Invalid'}`,
+    );
+
     // 7. Test environment-specific API keys
     if (TEST_API_KEY && LIVE_API_KEY) {
       console.log('\n7. Testing environment-specific API keys...');
-      
+
       // Create API clients with test and live API keys
       const testApi = axios.create({
         baseURL: API_BASE_URL,
         headers: {
           'Content-Type': 'application/json',
-          'X-API-Key': TEST_API_KEY
-        }
+          'X-API-Key': TEST_API_KEY,
+        },
       });
-      
+
       const liveApi = axios.create({
         baseURL: API_BASE_URL,
         headers: {
           'Content-Type': 'application/json',
-          'X-API-Key': LIVE_API_KEY
-        }
+          'X-API-Key': LIVE_API_KEY,
+        },
       });
-      
+
       // Test the test API key
       console.log('Testing with TEST API key...');
       try {
         const testKeyResponse = await testApi.get('/v1/webhooks');
-        console.log(`Test environment flag: ${testKeyResponse.data.data.environment === 'test' ? 'Present' : 'Missing'}`);
-        console.log(`Test flag: ${testKeyResponse.data.data.test === true ? 'Present' : 'Missing'}`);
+        console.log(
+          `Test environment flag: ${testKeyResponse.data.data.environment === 'test' ? 'Present' : 'Missing'}`,
+        );
+        console.log(
+          `Test flag: ${testKeyResponse.data.data.test === true ? 'Present' : 'Missing'}`,
+        );
       } catch (error) {
-        console.error('Error testing TEST API key:', (error as AxiosError).response?.data || (error as Error).message);
+        console.error(
+          'Error testing TEST API key:',
+          (error as AxiosError).response?.data || (error as Error).message,
+        );
       }
-      
+
       // Test the live API key
       console.log('Testing with LIVE API key...');
       try {
         const liveKeyResponse = await liveApi.get('/v1/webhooks');
-        console.log(`Live environment flag: ${liveKeyResponse.data.data.environment === 'live' ? 'Present' : 'Missing'}`);
-        console.log(`Live test flag: ${liveKeyResponse.data.data.test === undefined ? 'Correctly absent' : 'Incorrectly present'}`);
+        console.log(
+          `Live environment flag: ${liveKeyResponse.data.data.environment === 'live' ? 'Present' : 'Missing'}`,
+        );
+        console.log(
+          `Live test flag: ${liveKeyResponse.data.data.test === undefined ? 'Correctly absent' : 'Incorrectly present'}`,
+        );
       } catch (error) {
-        console.error('Error testing LIVE API key:', (error as AxiosError).response?.data || (error as Error).message);
+        console.error(
+          'Error testing LIVE API key:',
+          (error as AxiosError).response?.data || (error as Error).message,
+        );
       }
     } else {
-      console.log('\n7. Skipping environment-specific API key tests (keys not provided)');
+      console.log(
+        '\n7. Skipping environment-specific API key tests (keys not provided)',
+      );
     }
 
     // 8. Delete the webhook
@@ -150,7 +175,10 @@ async function testWebhooks() {
   } catch (error: unknown) {
     if (axios.isAxiosError(error)) {
       const axiosError = error as AxiosError;
-      console.error('Error testing webhooks:', axiosError.response?.data || axiosError.message);
+      console.error(
+        'Error testing webhooks:',
+        axiosError.response?.data || axiosError.message,
+      );
     } else {
       console.error('Error testing webhooks:', (error as Error).message);
     }
@@ -161,4 +189,4 @@ async function testWebhooks() {
 testWebhooks().catch((error: unknown) => {
   console.error('Error running test:', (error as Error).message);
   process.exit(1);
-}); 
+});

@@ -17,7 +17,10 @@ describe('Environment Handling', () => {
     });
 
     it('should initialize with custom baseUrl', () => {
-      const sdk = new LomiSDK({ baseUrl: 'https://custom.api.com', apiKey: 'lomi_sk_test_123' });
+      const sdk = new LomiSDK({
+        baseUrl: 'https://custom.api.com',
+        apiKey: 'lomi_sk_test_123',
+      });
       expect(sdk).toBeDefined();
     });
 
@@ -35,7 +38,7 @@ describe('Environment Handling', () => {
     beforeEach(() => {
       sdk = new LomiSDK({
         baseUrl: 'https://sandbox.api.lomi.africa/v1',
-        apiKey: testApiKey
+        apiKey: testApiKey,
       });
     });
 
@@ -43,7 +46,7 @@ describe('Environment Handling', () => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
         status: 200,
-        json: () => Promise.resolve({ message: 'pong' })
+        json: () => Promise.resolve({ message: 'pong' }),
       } as Response);
 
       await sdk.ping.list();
@@ -54,18 +57,16 @@ describe('Environment Handling', () => {
           method: 'GET',
           headers: expect.objectContaining({
             'Content-Type': 'application/json',
-            'X-API-KEY': testApiKey
-          })
-        })
+            'X-API-KEY': testApiKey,
+          }),
+        }),
       );
     });
 
     it('should handle network errors in test environment', async () => {
       mockFetch.mockRejectedValueOnce(new Error('Network error'));
 
-      await expect(sdk.ping.list())
-        .rejects
-        .toThrow('Network error');
+      await expect(sdk.ping.list()).rejects.toThrow('Network error');
     });
   });
 
@@ -76,7 +77,7 @@ describe('Environment Handling', () => {
     beforeEach(() => {
       sdk = new LomiSDK({
         baseUrl: 'https://api.lomi.africa/v1',
-        apiKey: liveApiKey
+        apiKey: liveApiKey,
       });
     });
 
@@ -84,7 +85,7 @@ describe('Environment Handling', () => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
         status: 200,
-        json: () => Promise.resolve({ message: 'pong' })
+        json: () => Promise.resolve({ message: 'pong' }),
       } as Response);
 
       await sdk.ping.list();
@@ -95,18 +96,16 @@ describe('Environment Handling', () => {
           method: 'GET',
           headers: expect.objectContaining({
             'Content-Type': 'application/json',
-            'X-API-KEY': liveApiKey
-          })
-        })
+            'X-API-KEY': liveApiKey,
+          }),
+        }),
       );
     });
 
     it('should handle network errors in live environment', async () => {
       mockFetch.mockRejectedValueOnce(new Error('Network error'));
 
-      await expect(sdk.ping.list())
-        .rejects
-        .toThrow('Network error');
+      await expect(sdk.ping.list()).rejects.toThrow('Network error');
     });
   });
 });

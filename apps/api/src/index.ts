@@ -9,10 +9,10 @@ import {
   CustomersClient,
   RefundsClient,
   PaymentLinksClient,
-} from "./client";
+} from './client';
 
-export * from "./types/api";
-export * from "./client";
+export * from './types/api';
+export * from './client';
 
 export interface LomiConfig {
   baseUrl: string;
