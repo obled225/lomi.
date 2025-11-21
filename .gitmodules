@@ -10,3 +10,6 @@
 [submodule "apps/dashboard"]
 	path = apps/dashboard
 	url = https://github.com/lomiafrica/dashboard.git
+[submodule "apps/jumbo"]
+	path = apps/jumbo
+	url = https://github.com/princemuichkine/jumbo.git
