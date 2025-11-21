@@ -1,13 +1,7 @@
 /**
- * Docs App Types
- * 
- * Minimal type definitions for the docs/careers application.
- * This file contains ONLY the types needed for the public-facing docs site.
- * 
- * NOTE: This is intentionally separate from database.types.ts to avoid
- * exposing the full database schema in the open-source repository.
+ * NOTE: This is not the full database.types to avoid
+ * exposing the database schema for security reasons.
  */
-
 export interface Database {
   public: {
     Tables: {
@@ -25,9 +19,6 @@ export interface Database {
   };
 }
 
-/**
- * Job Posting
- */
 export interface Job {
   id: string;
   created_at: string;
@@ -94,9 +85,6 @@ export interface JobUpdate {
   posted_by?: string | null;
 }
 
-/**
- * Job Application
- */
 export interface JobApplication {
   id: string;
   created_at: string;

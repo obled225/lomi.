@@ -5,7 +5,6 @@ node_modules/
 dist/
 build/
 /openapi/functions/
-openapi/spec.yaml
 
 # Environment
 .env
