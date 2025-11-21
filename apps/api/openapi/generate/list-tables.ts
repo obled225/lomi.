@@ -7,7 +7,7 @@ import * as path from 'path';
 
 const dbTypesPath = path.join(
   __dirname,
-  '../../../../apps/docs/lib/types/database.types.ts',
+  '@/apps/docs/lib/types/database.types.ts',
 );
 const { tables, enums } = parseDatabaseTypes(dbTypesPath);
 
