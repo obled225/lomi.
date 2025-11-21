@@ -11,10 +11,11 @@ package lomisdk
 
 import (
 	"context"
+	"testing"
+
+	openapiclient "github.com/lomiafrica/lomi-go-sdk"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"testing"
-	openapiclient "github.com/lomiafrica/lomi-go-sdk"
 )
 
 func Test_lomisdk_CustomerAPIService(t *testing.T) {
@@ -22,7 +23,7 @@ func Test_lomisdk_CustomerAPIService(t *testing.T) {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test CustomerAPIService CustomersCustomerIdDelete", func(t *testing.T) {
+	t.Run("Test customerAPIService CustomersCustomerIdDelete", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
@@ -35,7 +36,7 @@ func Test_lomisdk_CustomerAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test CustomerAPIService CustomersCustomerIdGet", func(t *testing.T) {
+	t.Run("Test customerAPIService CustomersCustomerIdGet", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
@@ -49,7 +50,7 @@ func Test_lomisdk_CustomerAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test CustomerAPIService CustomersCustomerIdPatch", func(t *testing.T) {
+	t.Run("Test customerAPIService CustomersCustomerIdPatch", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
@@ -63,7 +64,7 @@ func Test_lomisdk_CustomerAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test CustomerAPIService CustomersGet", func(t *testing.T) {
+	t.Run("Test customerAPIService CustomersGet", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
@@ -75,7 +76,7 @@ func Test_lomisdk_CustomerAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test CustomerAPIService CustomersPost", func(t *testing.T) {
+	t.Run("Test customerAPIService CustomersPost", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 

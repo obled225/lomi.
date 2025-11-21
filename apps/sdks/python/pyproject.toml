@@ -1,5 +1,5 @@
 [project]
-name = "lomi_sdk"
+name = "lomi"
 version = "1.0.0"
 description = "lomi. API"
 authors = [
@@ -41,7 +41,7 @@ extension-pkg-whitelist = "pydantic"
 
 [tool.mypy]
 files = [
-  "lomi_sdk",
+  "lomi",
   #"test",  # auto-generated tests
   "tests", # hand-written tests
 ]
@@ -79,7 +79,7 @@ disallow_any_generics = true
 
 [[tool.mypy.overrides]]
 module = [
-  "lomi_sdk.configuration",
+  "lomi.configuration",
 ]
 warn_unused_ignores = true
 strict_equality = true

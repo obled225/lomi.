@@ -27,7 +27,7 @@ class TestCustomersGet200ResponsePagination(unittest.TestCase):
         pass
 
     def make_instance(self, include_optional) -> CustomersGet200ResponsePagination:
-        """Test CustomersGet200ResponsePagination
+        """Test customersGet200ResponsePagination
             include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
@@ -46,7 +46,7 @@ class TestCustomersGet200ResponsePagination(unittest.TestCase):
         """
 
     def testCustomersGet200ResponsePagination(self):
-        """Test CustomersGet200ResponsePagination"""
+        """Test customersGet200ResponsePagination"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

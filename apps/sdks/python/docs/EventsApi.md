@@ -1,4 +1,4 @@
-# lomi_sdk.EventsApi
+# lomi.EventsApi
 
 All URIs are relative to *https://api.lomi.africa/v1*
 
@@ -20,14 +20,14 @@ Events - view account activity events
 * Api Key Authentication (ApiKeyAuth):
 
 ```python
-import lomi_sdk
-from lomi_sdk.models.list_events200_response import ListEvents200Response
-from lomi_sdk.rest import ApiException
+import lomi
+from lomi.models.list_events200_response import ListEvents200Response
+from lomi.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.lomi.africa/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lomi_sdk.Configuration(
+configuration = lomi.Configuration(
     host = "https://api.lomi.africa/v1"
 )
 
@@ -43,9 +43,9 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with lomi_sdk.ApiClient(configuration) as api_client:
+with lomi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lomi_sdk.EventsApi(api_client)
+    api_instance = lomi.EventsApi(api_client)
     limit = 20 # int | Maximum number of items to return (1-100) (optional) (default to 20)
     offset = 0 # int | Number of items to skip for pagination (optional) (default to 0)
     sort = 'created_at:desc' # str | Sort order. Format: `field:direction` (e.g., `created_at:desc`) (optional)
@@ -105,14 +105,14 @@ Retrieve a specific event by its unique identifier.
 * Api Key Authentication (ApiKeyAuth):
 
 ```python
-import lomi_sdk
-from lomi_sdk.models.events import Events
-from lomi_sdk.rest import ApiException
+import lomi
+from lomi.models.events import Events
+from lomi.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.lomi.africa/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lomi_sdk.Configuration(
+configuration = lomi.Configuration(
     host = "https://api.lomi.africa/v1"
 )
 
@@ -128,9 +128,9 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with lomi_sdk.ApiClient(configuration) as api_client:
+with lomi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lomi_sdk.EventsApi(api_client)
+    api_instance = lomi.EventsApi(api_client)
     event_id = 'event_id_example' # str | Unique identifier for the event
 
     try:

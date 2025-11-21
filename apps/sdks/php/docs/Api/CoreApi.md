@@ -54,7 +54,7 @@ $apiInstance = new LomiSDK\Api\CoreApi(
     new GuzzleHttp\Client(),
     $config
 );
-$customers_create = {"name":"Aminata Diallo","email":"aminata.diallo@example.com","phone_number":"+221771234567","metadata":{"customer_segment":"premium","referral_source":"instagram"}}; // \LomiSDK\Model\CustomersCreate
+$customers_create = {"name":"Aminata Diallo","email":"aminata.diallo@example.com","phone_number":"+225021234567","metadata":{"customer_segment":"premium","referral_source":"instagram"}}; // \LomiSDK\Model\CustomersCreate
 
 try {
     $result = $apiInstance->createCustomer($customers_create);
@@ -936,7 +936,7 @@ $apiInstance = new LomiSDK\Api\CoreApi(
     $config
 );
 $customer_id = 'customer_id_example'; // string | Unique identifier for the customer
-$customers_update = {"name":"Aminata Diallo-Kane","phone_number":"+221779876543","metadata":{"customer_segment":"vip","notes":"Upgraded to VIP tier"}}; // \LomiSDK\Model\CustomersUpdate
+$customers_update = {"name":"Aminata Diallo-Kane","phone_number":"+225779876543","metadata":{"customer_segment":"vip","notes":"Upgraded to VIP tier"}}; // \LomiSDK\Model\CustomersUpdate
 
 try {
     $result = $apiInstance->updateCustomer($customer_id, $customers_update);
@@ -1064,7 +1064,7 @@ $apiInstance = new LomiSDK\Api\CoreApi(
     $config
 );
 $refund_id = 'refund_id_example'; // string | Unique identifier for the refund
-$refunds_update = {"metadata":{"updated_at":"2025-11-21T09:45:11.331Z","updated_reason":"Administrative update"}}; // \LomiSDK\Model\RefundsUpdate
+$refunds_update = {"metadata":{"updated_at":"2025-11-21T12:46:27.077Z","updated_reason":"Administrative update"}}; // \LomiSDK\Model\RefundsUpdate
 
 try {
     $result = $apiInstance->updateRefund($refund_id, $refunds_update);

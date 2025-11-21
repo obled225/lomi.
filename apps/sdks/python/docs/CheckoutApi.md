@@ -1,4 +1,4 @@
-# lomi_sdk.CheckoutApi
+# lomi.CheckoutApi
 
 All URIs are relative to *https://api.lomi.africa/v1*
 
@@ -28,15 +28,15 @@ Checkout sessions - create hosted payment pages
 * Api Key Authentication (ApiKeyAuth):
 
 ```python
-import lomi_sdk
-from lomi_sdk.models.checkout_sessions import CheckoutSessions
-from lomi_sdk.models.checkout_sessions_create import CheckoutSessionsCreate
-from lomi_sdk.rest import ApiException
+import lomi
+from lomi.models.checkout_sessions import CheckoutSessions
+from lomi.models.checkout_sessions_create import CheckoutSessionsCreate
+from lomi.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.lomi.africa/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lomi_sdk.Configuration(
+configuration = lomi.Configuration(
     host = "https://api.lomi.africa/v1"
 )
 
@@ -52,9 +52,9 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with lomi_sdk.ApiClient(configuration) as api_client:
+with lomi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lomi_sdk.CheckoutApi(api_client)
+    api_instance = lomi.CheckoutApi(api_client)
     checkout_sessions_create = {"amount":15000,"currency_code":"XOF","product_id":"prod_1234567890abcdef","success_url":"https://example.com/success","cancel_url":"https://example.com/cancel","customer_email":"customer@example.com"} # CheckoutSessionsCreate | 
 
     try:
@@ -111,15 +111,15 @@ Payment links - shareable payment URLs
 * Api Key Authentication (ApiKeyAuth):
 
 ```python
-import lomi_sdk
-from lomi_sdk.models.payment_links import PaymentLinks
-from lomi_sdk.models.payment_links_create import PaymentLinksCreate
-from lomi_sdk.rest import ApiException
+import lomi
+from lomi.models.payment_links import PaymentLinks
+from lomi.models.payment_links_create import PaymentLinksCreate
+from lomi.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.lomi.africa/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lomi_sdk.Configuration(
+configuration = lomi.Configuration(
     host = "https://api.lomi.africa/v1"
 )
 
@@ -135,9 +135,9 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with lomi_sdk.ApiClient(configuration) as api_client:
+with lomi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lomi_sdk.CheckoutApi(api_client)
+    api_instance = lomi.CheckoutApi(api_client)
     payment_links_create = {"title":"Premium Membership","amount":50000,"currency_code":"XOF","description":"Annual premium membership","product_id":"prod_1234567890abcdef"} # PaymentLinksCreate | 
 
     try:
@@ -194,13 +194,13 @@ Delete a specific checkout session. This action cannot be undone.
 * Api Key Authentication (ApiKeyAuth):
 
 ```python
-import lomi_sdk
-from lomi_sdk.rest import ApiException
+import lomi
+from lomi.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.lomi.africa/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lomi_sdk.Configuration(
+configuration = lomi.Configuration(
     host = "https://api.lomi.africa/v1"
 )
 
@@ -216,9 +216,9 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with lomi_sdk.ApiClient(configuration) as api_client:
+with lomi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lomi_sdk.CheckoutApi(api_client)
+    api_instance = lomi.CheckoutApi(api_client)
     session_id = 'session_id_example' # str | Unique identifier for the checkout session
 
     try:
@@ -273,13 +273,13 @@ Delete a specific payment link. This action cannot be undone.
 * Api Key Authentication (ApiKeyAuth):
 
 ```python
-import lomi_sdk
-from lomi_sdk.rest import ApiException
+import lomi
+from lomi.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.lomi.africa/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lomi_sdk.Configuration(
+configuration = lomi.Configuration(
     host = "https://api.lomi.africa/v1"
 )
 
@@ -295,9 +295,9 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with lomi_sdk.ApiClient(configuration) as api_client:
+with lomi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lomi_sdk.CheckoutApi(api_client)
+    api_instance = lomi.CheckoutApi(api_client)
     link_id = 'link_id_example' # str | Unique identifier for the payment link
 
     try:
@@ -352,14 +352,14 @@ Checkout sessions - create hosted payment pages
 * Api Key Authentication (ApiKeyAuth):
 
 ```python
-import lomi_sdk
-from lomi_sdk.models.list_checkout_sessions200_response import ListCheckoutSessions200Response
-from lomi_sdk.rest import ApiException
+import lomi
+from lomi.models.list_checkout_sessions200_response import ListCheckoutSessions200Response
+from lomi.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.lomi.africa/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lomi_sdk.Configuration(
+configuration = lomi.Configuration(
     host = "https://api.lomi.africa/v1"
 )
 
@@ -375,9 +375,9 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with lomi_sdk.ApiClient(configuration) as api_client:
+with lomi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lomi_sdk.CheckoutApi(api_client)
+    api_instance = lomi.CheckoutApi(api_client)
     limit = 20 # int | Maximum number of items to return (1-100) (optional) (default to 20)
     offset = 0 # int | Number of items to skip for pagination (optional) (default to 0)
     sort = 'created_at:desc' # str | Sort order. Format: `field:direction` (e.g., `created_at:desc`) (optional)
@@ -437,14 +437,14 @@ Payment links - shareable payment URLs
 * Api Key Authentication (ApiKeyAuth):
 
 ```python
-import lomi_sdk
-from lomi_sdk.models.list_payment_links200_response import ListPaymentLinks200Response
-from lomi_sdk.rest import ApiException
+import lomi
+from lomi.models.list_payment_links200_response import ListPaymentLinks200Response
+from lomi.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.lomi.africa/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lomi_sdk.Configuration(
+configuration = lomi.Configuration(
     host = "https://api.lomi.africa/v1"
 )
 
@@ -460,9 +460,9 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with lomi_sdk.ApiClient(configuration) as api_client:
+with lomi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lomi_sdk.CheckoutApi(api_client)
+    api_instance = lomi.CheckoutApi(api_client)
     limit = 20 # int | Maximum number of items to return (1-100) (optional) (default to 20)
     offset = 0 # int | Number of items to skip for pagination (optional) (default to 0)
     sort = 'created_at:desc' # str | Sort order. Format: `field:direction` (e.g., `created_at:desc`) (optional)
@@ -522,14 +522,14 @@ Retrieve a specific checkout session by its unique identifier.
 * Api Key Authentication (ApiKeyAuth):
 
 ```python
-import lomi_sdk
-from lomi_sdk.models.checkout_sessions import CheckoutSessions
-from lomi_sdk.rest import ApiException
+import lomi
+from lomi.models.checkout_sessions import CheckoutSessions
+from lomi.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.lomi.africa/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lomi_sdk.Configuration(
+configuration = lomi.Configuration(
     host = "https://api.lomi.africa/v1"
 )
 
@@ -545,9 +545,9 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with lomi_sdk.ApiClient(configuration) as api_client:
+with lomi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lomi_sdk.CheckoutApi(api_client)
+    api_instance = lomi.CheckoutApi(api_client)
     session_id = 'session_id_example' # str | Unique identifier for the checkout session
 
     try:
@@ -604,14 +604,14 @@ Retrieve a specific payment link by its unique identifier.
 * Api Key Authentication (ApiKeyAuth):
 
 ```python
-import lomi_sdk
-from lomi_sdk.models.payment_links import PaymentLinks
-from lomi_sdk.rest import ApiException
+import lomi
+from lomi.models.payment_links import PaymentLinks
+from lomi.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.lomi.africa/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lomi_sdk.Configuration(
+configuration = lomi.Configuration(
     host = "https://api.lomi.africa/v1"
 )
 
@@ -627,9 +627,9 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with lomi_sdk.ApiClient(configuration) as api_client:
+with lomi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lomi_sdk.CheckoutApi(api_client)
+    api_instance = lomi.CheckoutApi(api_client)
     link_id = 'link_id_example' # str | Unique identifier for the payment link
 
     try:
@@ -686,15 +686,15 @@ Update a specific checkout session. Only provided fields will be updated.
 * Api Key Authentication (ApiKeyAuth):
 
 ```python
-import lomi_sdk
-from lomi_sdk.models.checkout_sessions import CheckoutSessions
-from lomi_sdk.models.checkout_sessions_update import CheckoutSessionsUpdate
-from lomi_sdk.rest import ApiException
+import lomi
+from lomi.models.checkout_sessions import CheckoutSessions
+from lomi.models.checkout_sessions_update import CheckoutSessionsUpdate
+from lomi.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.lomi.africa/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lomi_sdk.Configuration(
+configuration = lomi.Configuration(
     host = "https://api.lomi.africa/v1"
 )
 
@@ -710,11 +710,11 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with lomi_sdk.ApiClient(configuration) as api_client:
+with lomi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lomi_sdk.CheckoutApi(api_client)
+    api_instance = lomi.CheckoutApi(api_client)
     session_id = 'session_id_example' # str | Unique identifier for the checkout session
-    checkout_sessions_update = {"metadata":{"updated_at":"2025-11-21T09:45:11.332Z","updated_reason":"Administrative update"}} # CheckoutSessionsUpdate | 
+    checkout_sessions_update = {"metadata":{"updated_at":"2025-11-21T12:46:27.078Z","updated_reason":"Administrative update"}} # CheckoutSessionsUpdate | 
 
     try:
         # Update checkout session
@@ -772,15 +772,15 @@ Update a specific payment link. Only provided fields will be updated.
 * Api Key Authentication (ApiKeyAuth):
 
 ```python
-import lomi_sdk
-from lomi_sdk.models.payment_links import PaymentLinks
-from lomi_sdk.models.payment_links_update import PaymentLinksUpdate
-from lomi_sdk.rest import ApiException
+import lomi
+from lomi.models.payment_links import PaymentLinks
+from lomi.models.payment_links_update import PaymentLinksUpdate
+from lomi.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.lomi.africa/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lomi_sdk.Configuration(
+configuration = lomi.Configuration(
     host = "https://api.lomi.africa/v1"
 )
 
@@ -796,11 +796,11 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with lomi_sdk.ApiClient(configuration) as api_client:
+with lomi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lomi_sdk.CheckoutApi(api_client)
+    api_instance = lomi.CheckoutApi(api_client)
     link_id = 'link_id_example' # str | Unique identifier for the payment link
-    payment_links_update = {"metadata":{"updated_at":"2025-11-21T09:45:11.332Z","updated_reason":"Administrative update"}} # PaymentLinksUpdate | 
+    payment_links_update = {"metadata":{"updated_at":"2025-11-21T12:46:27.079Z","updated_reason":"Administrative update"}} # PaymentLinksUpdate | 
 
     try:
         # Update payment link

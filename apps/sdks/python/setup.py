@@ -3,7 +3,7 @@
 """
     lomi. API
 
-    # lomi. API  The lomi. API provides a comprehensive payment processing platform for francophone WestAfrican businesses.  ## Authentication  All API requests require authentication using an API key. Include your API key in the `X-API-KEY` header.  ```bash curl https://api.lomi.africa/v1/customers \\   -H \"X-API-KEY: your_api_key_here\" ```  ## Rate limiting  API requests are rate-limited based on your plan. Rate limit headers are included in all responses.  ## Webhooks  Configure webhooks to receive real-time notifications about events in your account.  ## Environments  - **Live**: Production environment with real transactions - **Test**: Sandbox environment for development and testing
+    Payment processing API for francophone West African businesses.
 
     The version of the OpenAPI document: 1.1.0
     Contact: hello@lomi.africa
@@ -45,7 +45,7 @@ setup(
     license="MIT",
     long_description_content_type='text/markdown',
     long_description="""\
-    # lomi. API  The lomi. API provides a comprehensive payment processing platform for francophone WestAfrican businesses.  ## Authentication  All API requests require authentication using an API key. Include your API key in the &#x60;X-API-KEY&#x60; header.  &#x60;&#x60;&#x60;bash curl https://api.lomi.africa/v1/customers \\   -H \&quot;X-API-KEY: your_api_key_here\&quot; &#x60;&#x60;&#x60;  ## Rate limiting  API requests are rate-limited based on your plan. Rate limit headers are included in all responses.  ## Webhooks  Configure webhooks to receive real-time notifications about events in your account.  ## Environments  - **Live**: Production environment with real transactions - **Test**: Sandbox environment for development and testing
+    Payment processing API for francophone West African businesses.
     """,  # noqa: E501
-    package_data={"lomi_sdk": ["py.typed"]},
+    package_data={"lomi": ["py.typed"]},
 )

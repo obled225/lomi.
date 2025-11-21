@@ -31,7 +31,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from lomi_sdk.models.payout_methods_update import PayoutMethodsUpdate
+from lomi.models.payout_methods_update import PayoutMethodsUpdate
 
 # TODO update the JSON string below
 json = "{}"

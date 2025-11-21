@@ -54,7 +54,7 @@ async function main() {
   console.log('  requestBody: {');
   console.log('    email: "customer@example.com",');
   console.log('    name: "John Doe",');
-  console.log('    phone: "+221771234567"');
+  console.log('    phone: "+225021234567"');
   console.log('  }');
   console.log('});\n');
   

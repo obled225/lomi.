@@ -27,7 +27,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from lomi_sdk.models.webhook_delivery_logs_update import WebhookDeliveryLogsUpdate
+from lomi.models.webhook_delivery_logs_update import WebhookDeliveryLogsUpdate
 
 # TODO update the JSON string below
 json = "{}"

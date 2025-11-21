@@ -27,7 +27,7 @@ class TestCustomerInvoices(unittest.TestCase):
         pass
 
     def make_instance(self, include_optional) -> CustomerInvoices:
-        """Test CustomerInvoices
+        """Test customerInvoices
             include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
@@ -55,7 +55,7 @@ class TestCustomerInvoices(unittest.TestCase):
         """
 
     def testCustomerInvoices(self):
-        """Test CustomerInvoices"""
+        """Test customerInvoices"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

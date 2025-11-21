@@ -1,4 +1,4 @@
-# lomi_sdk.WebhooksApi
+# lomi.WebhooksApi
 
 All URIs are relative to *https://api.lomi.africa/v1*
 
@@ -25,15 +25,15 @@ Webhook configuration - receive real-time event notifications
 * Api Key Authentication (ApiKeyAuth):
 
 ```python
-import lomi_sdk
-from lomi_sdk.models.webhooks import Webhooks
-from lomi_sdk.models.webhooks_create import WebhooksCreate
-from lomi_sdk.rest import ApiException
+import lomi
+from lomi.models.webhooks import Webhooks
+from lomi.models.webhooks_create import WebhooksCreate
+from lomi.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.lomi.africa/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lomi_sdk.Configuration(
+configuration = lomi.Configuration(
     host = "https://api.lomi.africa/v1"
 )
 
@@ -49,9 +49,9 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with lomi_sdk.ApiClient(configuration) as api_client:
+with lomi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lomi_sdk.WebhooksApi(api_client)
+    api_instance = lomi.WebhooksApi(api_client)
     webhooks_create = {"url":"https://api.example.com/webhooks/lomi","events":["payment.succeeded","payment.failed"],"description":"Production webhook endpoint","is_active":true} # WebhooksCreate | 
 
     try:
@@ -108,13 +108,13 @@ Delete a specific webhook. This action cannot be undone.
 * Api Key Authentication (ApiKeyAuth):
 
 ```python
-import lomi_sdk
-from lomi_sdk.rest import ApiException
+import lomi
+from lomi.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.lomi.africa/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lomi_sdk.Configuration(
+configuration = lomi.Configuration(
     host = "https://api.lomi.africa/v1"
 )
 
@@ -130,9 +130,9 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with lomi_sdk.ApiClient(configuration) as api_client:
+with lomi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lomi_sdk.WebhooksApi(api_client)
+    api_instance = lomi.WebhooksApi(api_client)
     webhook_id = 'webhook_id_example' # str | Unique identifier for the webhook
 
     try:
@@ -187,14 +187,14 @@ Webhook event log - history of webhook deliveries
 * Api Key Authentication (ApiKeyAuth):
 
 ```python
-import lomi_sdk
-from lomi_sdk.models.list_webhook_delivery_logs200_response import ListWebhookDeliveryLogs200Response
-from lomi_sdk.rest import ApiException
+import lomi
+from lomi.models.list_webhook_delivery_logs200_response import ListWebhookDeliveryLogs200Response
+from lomi.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.lomi.africa/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lomi_sdk.Configuration(
+configuration = lomi.Configuration(
     host = "https://api.lomi.africa/v1"
 )
 
@@ -210,9 +210,9 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with lomi_sdk.ApiClient(configuration) as api_client:
+with lomi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lomi_sdk.WebhooksApi(api_client)
+    api_instance = lomi.WebhooksApi(api_client)
     limit = 20 # int | Maximum number of items to return (1-100) (optional) (default to 20)
     offset = 0 # int | Number of items to skip for pagination (optional) (default to 0)
     sort = 'created_at:desc' # str | Sort order. Format: `field:direction` (e.g., `created_at:desc`) (optional)
@@ -272,14 +272,14 @@ Webhook configuration - receive real-time event notifications
 * Api Key Authentication (ApiKeyAuth):
 
 ```python
-import lomi_sdk
-from lomi_sdk.models.list_webhooks200_response import ListWebhooks200Response
-from lomi_sdk.rest import ApiException
+import lomi
+from lomi.models.list_webhooks200_response import ListWebhooks200Response
+from lomi.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.lomi.africa/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lomi_sdk.Configuration(
+configuration = lomi.Configuration(
     host = "https://api.lomi.africa/v1"
 )
 
@@ -295,9 +295,9 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with lomi_sdk.ApiClient(configuration) as api_client:
+with lomi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lomi_sdk.WebhooksApi(api_client)
+    api_instance = lomi.WebhooksApi(api_client)
     limit = 20 # int | Maximum number of items to return (1-100) (optional) (default to 20)
     offset = 0 # int | Number of items to skip for pagination (optional) (default to 0)
     sort = 'created_at:desc' # str | Sort order. Format: `field:direction` (e.g., `created_at:desc`) (optional)
@@ -357,14 +357,14 @@ Retrieve a specific webhook by its unique identifier.
 * Api Key Authentication (ApiKeyAuth):
 
 ```python
-import lomi_sdk
-from lomi_sdk.models.webhooks import Webhooks
-from lomi_sdk.rest import ApiException
+import lomi
+from lomi.models.webhooks import Webhooks
+from lomi.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.lomi.africa/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lomi_sdk.Configuration(
+configuration = lomi.Configuration(
     host = "https://api.lomi.africa/v1"
 )
 
@@ -380,9 +380,9 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with lomi_sdk.ApiClient(configuration) as api_client:
+with lomi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lomi_sdk.WebhooksApi(api_client)
+    api_instance = lomi.WebhooksApi(api_client)
     webhook_id = 'webhook_id_example' # str | Unique identifier for the webhook
 
     try:
@@ -439,14 +439,14 @@ Retrieve a specific webhook delivery log by its unique identifier.
 * Api Key Authentication (ApiKeyAuth):
 
 ```python
-import lomi_sdk
-from lomi_sdk.models.webhook_delivery_logs import WebhookDeliveryLogs
-from lomi_sdk.rest import ApiException
+import lomi
+from lomi.models.webhook_delivery_logs import WebhookDeliveryLogs
+from lomi.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.lomi.africa/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lomi_sdk.Configuration(
+configuration = lomi.Configuration(
     host = "https://api.lomi.africa/v1"
 )
 
@@ -462,9 +462,9 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with lomi_sdk.ApiClient(configuration) as api_client:
+with lomi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lomi_sdk.WebhooksApi(api_client)
+    api_instance = lomi.WebhooksApi(api_client)
     log_id = 'log_id_example' # str | Unique identifier for the webhook delivery log
 
     try:
@@ -521,15 +521,15 @@ Update a specific webhook. Only provided fields will be updated.
 * Api Key Authentication (ApiKeyAuth):
 
 ```python
-import lomi_sdk
-from lomi_sdk.models.webhooks import Webhooks
-from lomi_sdk.models.webhooks_update import WebhooksUpdate
-from lomi_sdk.rest import ApiException
+import lomi
+from lomi.models.webhooks import Webhooks
+from lomi.models.webhooks_update import WebhooksUpdate
+from lomi.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.lomi.africa/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lomi_sdk.Configuration(
+configuration = lomi.Configuration(
     host = "https://api.lomi.africa/v1"
 )
 
@@ -545,9 +545,9 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with lomi_sdk.ApiClient(configuration) as api_client:
+with lomi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lomi_sdk.WebhooksApi(api_client)
+    api_instance = lomi.WebhooksApi(api_client)
     webhook_id = 'webhook_id_example' # str | Unique identifier for the webhook
     webhooks_update = {"is_active":false,"description":"Temporarily disabled for maintenance"} # WebhooksUpdate | 
 

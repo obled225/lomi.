@@ -42,7 +42,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from lomi_sdk.models.transactions_update import TransactionsUpdate
+from lomi.models.transactions_update import TransactionsUpdate
 
 # TODO update the JSON string below
 json = "{}"

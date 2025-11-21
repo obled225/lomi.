@@ -40,7 +40,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from lomi_sdk.models.checkout_sessions_create import CheckoutSessionsCreate
+from lomi.models.checkout_sessions_create import CheckoutSessionsCreate
 
 # TODO update the JSON string below
 json = "{}"

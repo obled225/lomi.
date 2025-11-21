@@ -1,4 +1,4 @@
-# lomi_sdk.SPIApi
+# lomi.SPIApi
 
 All URIs are relative to *https://api.lomi.africa/v1*
 
@@ -25,15 +25,15 @@ SPI QR codes - generate and manage SPI QR payment codes
 * Api Key Authentication (ApiKeyAuth):
 
 ```python
-import lomi_sdk
-from lomi_sdk.models.spi_qr_codes import SpiQrCodes
-from lomi_sdk.models.spi_qr_codes_create import SpiQrCodesCreate
-from lomi_sdk.rest import ApiException
+import lomi
+from lomi.models.spi_qr_codes import SpiQrCodes
+from lomi.models.spi_qr_codes_create import SpiQrCodesCreate
+from lomi.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.lomi.africa/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lomi_sdk.Configuration(
+configuration = lomi.Configuration(
     host = "https://api.lomi.africa/v1"
 )
 
@@ -49,9 +49,9 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with lomi_sdk.ApiClient(configuration) as api_client:
+with lomi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lomi_sdk.SPIApi(api_client)
+    api_instance = lomi.SPIApi(api_client)
     spi_qr_codes_create = {"amount":5000,"currency_code":"XOF","description":"QR code for in-store payment","expires_at":"2024-12-31T23:59:59Z"} # SpiQrCodesCreate | 
 
     try:
@@ -108,13 +108,13 @@ Delete a specific spi qr code. This action cannot be undone.
 * Api Key Authentication (ApiKeyAuth):
 
 ```python
-import lomi_sdk
-from lomi_sdk.rest import ApiException
+import lomi
+from lomi.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.lomi.africa/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lomi_sdk.Configuration(
+configuration = lomi.Configuration(
     host = "https://api.lomi.africa/v1"
 )
 
@@ -130,9 +130,9 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with lomi_sdk.ApiClient(configuration) as api_client:
+with lomi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lomi_sdk.SPIApi(api_client)
+    api_instance = lomi.SPIApi(api_client)
     qr_code_id = 'qr_code_id_example' # str | Unique identifier for the spi qr code
 
     try:
@@ -187,14 +187,14 @@ SPI account aliases - manage SPI payment aliases
 * Api Key Authentication (ApiKeyAuth):
 
 ```python
-import lomi_sdk
-from lomi_sdk.models.list_spi_account_aliases200_response import ListSpiAccountAliases200Response
-from lomi_sdk.rest import ApiException
+import lomi
+from lomi.models.list_spi_account_aliases200_response import ListSpiAccountAliases200Response
+from lomi.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.lomi.africa/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lomi_sdk.Configuration(
+configuration = lomi.Configuration(
     host = "https://api.lomi.africa/v1"
 )
 
@@ -210,9 +210,9 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with lomi_sdk.ApiClient(configuration) as api_client:
+with lomi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lomi_sdk.SPIApi(api_client)
+    api_instance = lomi.SPIApi(api_client)
     limit = 20 # int | Maximum number of items to return (1-100) (optional) (default to 20)
     offset = 0 # int | Number of items to skip for pagination (optional) (default to 0)
     sort = 'created_at:desc' # str | Sort order. Format: `field:direction` (e.g., `created_at:desc`) (optional)
@@ -272,14 +272,14 @@ SPI QR codes - generate and manage SPI QR payment codes
 * Api Key Authentication (ApiKeyAuth):
 
 ```python
-import lomi_sdk
-from lomi_sdk.models.list_spi_qr_codes200_response import ListSpiQrCodes200Response
-from lomi_sdk.rest import ApiException
+import lomi
+from lomi.models.list_spi_qr_codes200_response import ListSpiQrCodes200Response
+from lomi.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.lomi.africa/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lomi_sdk.Configuration(
+configuration = lomi.Configuration(
     host = "https://api.lomi.africa/v1"
 )
 
@@ -295,9 +295,9 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with lomi_sdk.ApiClient(configuration) as api_client:
+with lomi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lomi_sdk.SPIApi(api_client)
+    api_instance = lomi.SPIApi(api_client)
     limit = 20 # int | Maximum number of items to return (1-100) (optional) (default to 20)
     offset = 0 # int | Number of items to skip for pagination (optional) (default to 0)
     sort = 'created_at:desc' # str | Sort order. Format: `field:direction` (e.g., `created_at:desc`) (optional)
@@ -357,14 +357,14 @@ Retrieve a specific spi account aliase by its unique identifier.
 * Api Key Authentication (ApiKeyAuth):
 
 ```python
-import lomi_sdk
-from lomi_sdk.models.spi_account_aliases import SpiAccountAliases
-from lomi_sdk.rest import ApiException
+import lomi
+from lomi.models.spi_account_aliases import SpiAccountAliases
+from lomi.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.lomi.africa/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lomi_sdk.Configuration(
+configuration = lomi.Configuration(
     host = "https://api.lomi.africa/v1"
 )
 
@@ -380,9 +380,9 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with lomi_sdk.ApiClient(configuration) as api_client:
+with lomi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lomi_sdk.SPIApi(api_client)
+    api_instance = lomi.SPIApi(api_client)
     alias_id = 'alias_id_example' # str | Unique identifier for the spi account aliase
 
     try:
@@ -439,14 +439,14 @@ Retrieve a specific spi qr code by its unique identifier.
 * Api Key Authentication (ApiKeyAuth):
 
 ```python
-import lomi_sdk
-from lomi_sdk.models.spi_qr_codes import SpiQrCodes
-from lomi_sdk.rest import ApiException
+import lomi
+from lomi.models.spi_qr_codes import SpiQrCodes
+from lomi.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.lomi.africa/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lomi_sdk.Configuration(
+configuration = lomi.Configuration(
     host = "https://api.lomi.africa/v1"
 )
 
@@ -462,9 +462,9 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with lomi_sdk.ApiClient(configuration) as api_client:
+with lomi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lomi_sdk.SPIApi(api_client)
+    api_instance = lomi.SPIApi(api_client)
     qr_code_id = 'qr_code_id_example' # str | Unique identifier for the spi qr code
 
     try:
@@ -521,15 +521,15 @@ Update a specific spi qr code. Only provided fields will be updated.
 * Api Key Authentication (ApiKeyAuth):
 
 ```python
-import lomi_sdk
-from lomi_sdk.models.spi_qr_codes import SpiQrCodes
-from lomi_sdk.models.spi_qr_codes_update import SpiQrCodesUpdate
-from lomi_sdk.rest import ApiException
+import lomi
+from lomi.models.spi_qr_codes import SpiQrCodes
+from lomi.models.spi_qr_codes_update import SpiQrCodesUpdate
+from lomi.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.lomi.africa/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lomi_sdk.Configuration(
+configuration = lomi.Configuration(
     host = "https://api.lomi.africa/v1"
 )
 
@@ -545,11 +545,11 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with lomi_sdk.ApiClient(configuration) as api_client:
+with lomi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lomi_sdk.SPIApi(api_client)
+    api_instance = lomi.SPIApi(api_client)
     qr_code_id = 'qr_code_id_example' # str | Unique identifier for the spi qr code
-    spi_qr_codes_update = {"metadata":{"updated_at":"2025-11-21T09:45:11.332Z","updated_reason":"Administrative update"}} # SpiQrCodesUpdate | 
+    spi_qr_codes_update = {"metadata":{"updated_at":"2025-11-21T12:46:27.079Z","updated_reason":"Administrative update"}} # SpiQrCodesUpdate | 
 
     try:
         # Update spi qr code

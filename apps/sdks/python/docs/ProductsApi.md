@@ -1,4 +1,4 @@
-# lomi_sdk.ProductsApi
+# lomi.ProductsApi
 
 All URIs are relative to *https://api.lomi.africa/v1*
 
@@ -28,15 +28,15 @@ Pricing tiers - manage product pricing
 * Api Key Authentication (ApiKeyAuth):
 
 ```python
-import lomi_sdk
-from lomi_sdk.models.prices import Prices
-from lomi_sdk.models.prices_create import PricesCreate
-from lomi_sdk.rest import ApiException
+import lomi
+from lomi.models.prices import Prices
+from lomi.models.prices_create import PricesCreate
+from lomi.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.lomi.africa/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lomi_sdk.Configuration(
+configuration = lomi.Configuration(
     host = "https://api.lomi.africa/v1"
 )
 
@@ -52,9 +52,9 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with lomi_sdk.ApiClient(configuration) as api_client:
+with lomi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lomi_sdk.ProductsApi(api_client)
+    api_instance = lomi.ProductsApi(api_client)
     prices_create = {"product_id":"prod_1234567890abcdef","amount":5000,"currency_code":"XOF","pricing_model":"flat_rate","billing_frequency":"monthly","is_active":true} # PricesCreate | 
 
     try:
@@ -111,15 +111,15 @@ Product catalog - manage one-time and recurring products
 * Api Key Authentication (ApiKeyAuth):
 
 ```python
-import lomi_sdk
-from lomi_sdk.models.products import Products
-from lomi_sdk.models.products_create import ProductsCreate
-from lomi_sdk.rest import ApiException
+import lomi
+from lomi.models.products import Products
+from lomi.models.products_create import ProductsCreate
+from lomi.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.lomi.africa/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lomi_sdk.Configuration(
+configuration = lomi.Configuration(
     host = "https://api.lomi.africa/v1"
 )
 
@@ -135,9 +135,9 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with lomi_sdk.ApiClient(configuration) as api_client:
+with lomi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lomi_sdk.ProductsApi(api_client)
+    api_instance = lomi.ProductsApi(api_client)
     products_create = {"name":"Premium Subscription","description":"Monthly premium access with all features","product_type":"recurring","is_active":true,"metadata":{"features":["analytics","api_access","priority_support"]}} # ProductsCreate | 
 
     try:
@@ -194,13 +194,13 @@ Delete a specific price. This action cannot be undone.
 * Api Key Authentication (ApiKeyAuth):
 
 ```python
-import lomi_sdk
-from lomi_sdk.rest import ApiException
+import lomi
+from lomi.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.lomi.africa/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lomi_sdk.Configuration(
+configuration = lomi.Configuration(
     host = "https://api.lomi.africa/v1"
 )
 
@@ -216,9 +216,9 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with lomi_sdk.ApiClient(configuration) as api_client:
+with lomi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lomi_sdk.ProductsApi(api_client)
+    api_instance = lomi.ProductsApi(api_client)
     price_id = 'price_id_example' # str | Unique identifier for the price
 
     try:
@@ -273,13 +273,13 @@ Delete a specific product. This action cannot be undone.
 * Api Key Authentication (ApiKeyAuth):
 
 ```python
-import lomi_sdk
-from lomi_sdk.rest import ApiException
+import lomi
+from lomi.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.lomi.africa/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lomi_sdk.Configuration(
+configuration = lomi.Configuration(
     host = "https://api.lomi.africa/v1"
 )
 
@@ -295,9 +295,9 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with lomi_sdk.ApiClient(configuration) as api_client:
+with lomi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lomi_sdk.ProductsApi(api_client)
+    api_instance = lomi.ProductsApi(api_client)
     product_id = 'product_id_example' # str | Unique identifier for the product
 
     try:
@@ -352,14 +352,14 @@ Pricing tiers - manage product pricing
 * Api Key Authentication (ApiKeyAuth):
 
 ```python
-import lomi_sdk
-from lomi_sdk.models.list_prices200_response import ListPrices200Response
-from lomi_sdk.rest import ApiException
+import lomi
+from lomi.models.list_prices200_response import ListPrices200Response
+from lomi.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.lomi.africa/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lomi_sdk.Configuration(
+configuration = lomi.Configuration(
     host = "https://api.lomi.africa/v1"
 )
 
@@ -375,9 +375,9 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with lomi_sdk.ApiClient(configuration) as api_client:
+with lomi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lomi_sdk.ProductsApi(api_client)
+    api_instance = lomi.ProductsApi(api_client)
     limit = 20 # int | Maximum number of items to return (1-100) (optional) (default to 20)
     offset = 0 # int | Number of items to skip for pagination (optional) (default to 0)
     sort = 'created_at:desc' # str | Sort order. Format: `field:direction` (e.g., `created_at:desc`) (optional)
@@ -437,14 +437,14 @@ Product catalog - manage one-time and recurring products
 * Api Key Authentication (ApiKeyAuth):
 
 ```python
-import lomi_sdk
-from lomi_sdk.models.list_products200_response import ListProducts200Response
-from lomi_sdk.rest import ApiException
+import lomi
+from lomi.models.list_products200_response import ListProducts200Response
+from lomi.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.lomi.africa/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lomi_sdk.Configuration(
+configuration = lomi.Configuration(
     host = "https://api.lomi.africa/v1"
 )
 
@@ -460,9 +460,9 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with lomi_sdk.ApiClient(configuration) as api_client:
+with lomi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lomi_sdk.ProductsApi(api_client)
+    api_instance = lomi.ProductsApi(api_client)
     limit = 20 # int | Maximum number of items to return (1-100) (optional) (default to 20)
     offset = 0 # int | Number of items to skip for pagination (optional) (default to 0)
     sort = 'created_at:desc' # str | Sort order. Format: `field:direction` (e.g., `created_at:desc`) (optional)
@@ -522,14 +522,14 @@ Retrieve a specific price by its unique identifier.
 * Api Key Authentication (ApiKeyAuth):
 
 ```python
-import lomi_sdk
-from lomi_sdk.models.prices import Prices
-from lomi_sdk.rest import ApiException
+import lomi
+from lomi.models.prices import Prices
+from lomi.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.lomi.africa/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lomi_sdk.Configuration(
+configuration = lomi.Configuration(
     host = "https://api.lomi.africa/v1"
 )
 
@@ -545,9 +545,9 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with lomi_sdk.ApiClient(configuration) as api_client:
+with lomi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lomi_sdk.ProductsApi(api_client)
+    api_instance = lomi.ProductsApi(api_client)
     price_id = 'price_id_example' # str | Unique identifier for the price
 
     try:
@@ -604,14 +604,14 @@ Retrieve a specific product by its unique identifier.
 * Api Key Authentication (ApiKeyAuth):
 
 ```python
-import lomi_sdk
-from lomi_sdk.models.products import Products
-from lomi_sdk.rest import ApiException
+import lomi
+from lomi.models.products import Products
+from lomi.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.lomi.africa/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lomi_sdk.Configuration(
+configuration = lomi.Configuration(
     host = "https://api.lomi.africa/v1"
 )
 
@@ -627,9 +627,9 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with lomi_sdk.ApiClient(configuration) as api_client:
+with lomi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lomi_sdk.ProductsApi(api_client)
+    api_instance = lomi.ProductsApi(api_client)
     product_id = 'product_id_example' # str | Unique identifier for the product
 
     try:
@@ -686,15 +686,15 @@ Update a specific price. Only provided fields will be updated.
 * Api Key Authentication (ApiKeyAuth):
 
 ```python
-import lomi_sdk
-from lomi_sdk.models.prices import Prices
-from lomi_sdk.models.prices_update import PricesUpdate
-from lomi_sdk.rest import ApiException
+import lomi
+from lomi.models.prices import Prices
+from lomi.models.prices_update import PricesUpdate
+from lomi.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.lomi.africa/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lomi_sdk.Configuration(
+configuration = lomi.Configuration(
     host = "https://api.lomi.africa/v1"
 )
 
@@ -710,9 +710,9 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with lomi_sdk.ApiClient(configuration) as api_client:
+with lomi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lomi_sdk.ProductsApi(api_client)
+    api_instance = lomi.ProductsApi(api_client)
     price_id = 'price_id_example' # str | Unique identifier for the price
     prices_update = {"is_active":false} # PricesUpdate | 
 
@@ -772,15 +772,15 @@ Update a specific product. Only provided fields will be updated.
 * Api Key Authentication (ApiKeyAuth):
 
 ```python
-import lomi_sdk
-from lomi_sdk.models.products import Products
-from lomi_sdk.models.products_update import ProductsUpdate
-from lomi_sdk.rest import ApiException
+import lomi
+from lomi.models.products import Products
+from lomi.models.products_update import ProductsUpdate
+from lomi.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.lomi.africa/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lomi_sdk.Configuration(
+configuration = lomi.Configuration(
     host = "https://api.lomi.africa/v1"
 )
 
@@ -796,9 +796,9 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with lomi_sdk.ApiClient(configuration) as api_client:
+with lomi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lomi_sdk.ProductsApi(api_client)
+    api_instance = lomi.ProductsApi(api_client)
     product_id = 'product_id_example' # str | Unique identifier for the product
     products_update = {"name":"Premium Plus Subscription","description":"Enhanced premium access with exclusive features","is_active":true} # ProductsUpdate | 
 

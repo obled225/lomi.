@@ -14,12 +14,12 @@ if [ "$git_host" = "" ]; then
 fi
 
 if [ "$git_user_id" = "" ]; then
-    git_user_id="lomiafrica"
+    git_user_id="lomi"
     echo "[INFO] No command line input provided. Set \$git_user_id to $git_user_id"
 fi
 
 if [ "$git_repo_id" = "" ]; then
-    git_repo_id="lomi-php-sdk"
+    git_repo_id="lomi-sdk"
     echo "[INFO] No command line input provided. Set \$git_repo_id to $git_repo_id"
 fi
 

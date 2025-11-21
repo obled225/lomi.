@@ -1,4 +1,4 @@
-# lomi_sdk.BNPLApi
+# lomi.BNPLApi
 
 All URIs are relative to *https://api.lomi.africa/v1*
 
@@ -20,14 +20,14 @@ BNPL installment payments - track installment payments
 * Api Key Authentication (ApiKeyAuth):
 
 ```python
-import lomi_sdk
-from lomi_sdk.models.list_installment_payments200_response import ListInstallmentPayments200Response
-from lomi_sdk.rest import ApiException
+import lomi
+from lomi.models.list_installment_payments200_response import ListInstallmentPayments200Response
+from lomi.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.lomi.africa/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lomi_sdk.Configuration(
+configuration = lomi.Configuration(
     host = "https://api.lomi.africa/v1"
 )
 
@@ -43,9 +43,9 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with lomi_sdk.ApiClient(configuration) as api_client:
+with lomi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lomi_sdk.BNPLApi(api_client)
+    api_instance = lomi.BNPLApi(api_client)
     limit = 20 # int | Maximum number of items to return (1-100) (optional) (default to 20)
     offset = 0 # int | Number of items to skip for pagination (optional) (default to 0)
     sort = 'created_at:desc' # str | Sort order. Format: `field:direction` (e.g., `created_at:desc`) (optional)
@@ -105,14 +105,14 @@ Retrieve a specific installment payment by its unique identifier.
 * Api Key Authentication (ApiKeyAuth):
 
 ```python
-import lomi_sdk
-from lomi_sdk.models.installment_payments import InstallmentPayments
-from lomi_sdk.rest import ApiException
+import lomi
+from lomi.models.installment_payments import InstallmentPayments
+from lomi.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.lomi.africa/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lomi_sdk.Configuration(
+configuration = lomi.Configuration(
     host = "https://api.lomi.africa/v1"
 )
 
@@ -128,9 +128,9 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with lomi_sdk.ApiClient(configuration) as api_client:
+with lomi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lomi_sdk.BNPLApi(api_client)
+    api_instance = lomi.BNPLApi(api_client)
     payment_id = 'payment_id_example' # str | Unique identifier for the installment payment
 
     try:

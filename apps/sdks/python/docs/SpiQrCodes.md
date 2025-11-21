@@ -33,7 +33,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from lomi_sdk.models.spi_qr_codes import SpiQrCodes
+from lomi.models.spi_qr_codes import SpiQrCodes
 
 # TODO update the JSON string below
 json = "{}"

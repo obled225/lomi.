@@ -1,8 +1,6 @@
-# lomi. TS SDK
+# lomi. TypeScript SDK
 
-Official Node.js SDK for interacting with the lomi. payment platform API.
-
-This SDK is automatically generated from the lomi. spec.
+Official Node.js SDK for interacting with the lomi. payment processing API.
 
 ## Installation
 
@@ -35,11 +33,9 @@ OpenAPI.HEADERS = {
 async function createNewCustomer() {
   try {
     const customerData: CreateCustomer = {
-      merchant_id: 'YOUR_MERCHANT_ID', // Usually obtained via authentication
-      organization_id: 'YOUR_ORGANIZATION_ID', // Usually obtained via authentication
-      name: 'Test Customer',
+      name: 'Test customer',
       email: 'customer@example.com',
-      phone_number: '+221771234567',
+      phone_number: '+225021234567',
     };
 
     const newCustomer: Customer = await CustomersService.createCustomer(customerData);

@@ -424,7 +424,7 @@ $apiInstance = new LomiSDK\Api\SPIApi(
     $config
 );
 $qr_code_id = 'qr_code_id_example'; // string | Unique identifier for the spi qr code
-$spi_qr_codes_update = {"metadata":{"updated_at":"2025-11-21T09:45:11.332Z","updated_reason":"Administrative update"}}; // \LomiSDK\Model\SpiQrCodesUpdate
+$spi_qr_codes_update = {"metadata":{"updated_at":"2025-11-21T12:46:27.079Z","updated_reason":"Administrative update"}}; // \LomiSDK\Model\SpiQrCodesUpdate
 
 try {
     $result = $apiInstance->updateSpiQrCode($qr_code_id, $spi_qr_codes_update);

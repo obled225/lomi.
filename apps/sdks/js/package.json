@@ -1,5 +1,5 @@
 {
-  "name": "@lomi/sdk-javascript",
+  "name": "@lomi./sdk-js",
   "version": "1.0.0",
   "description": "Official JavaScript SDK for the lomi. API",
   "type": "module",

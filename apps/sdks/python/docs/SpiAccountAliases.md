@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from lomi_sdk.models.spi_account_aliases import SpiAccountAliases
+from lomi.models.spi_account_aliases import SpiAccountAliases
 
 # TODO update the JSON string below
 json = "{}"

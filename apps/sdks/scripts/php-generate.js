@@ -22,8 +22,9 @@ try {
       -g php \\
       -o ${outputDir} \\
       --invoker-package Lomi\\\\SDK \\
-      --git-repo-id lomi-php-sdk \\
-      --git-user-id lomiafrica \\
+      --package-name lomi/sdk \\
+      --git-repo-id lomi-sdk \\
+      --git-user-id lomi \\
       --additional-properties=packageVersion=1.0.0 \\
       --skip-validate-spec`,
         { stdio: 'inherit' }

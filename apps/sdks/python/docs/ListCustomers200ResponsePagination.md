@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from lomi_sdk.models.list_customers200_response_pagination import ListCustomers200ResponsePagination
+from lomi.models.list_customers200_response_pagination import ListCustomers200ResponsePagination
 
 # TODO update the JSON string below
 json = "{}"

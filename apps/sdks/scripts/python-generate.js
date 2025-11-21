@@ -21,7 +21,7 @@ try {
       -i ${specPath} \\
       -g python \\
       -o ${outputDir} \\
-      --package-name lomi_sdk \\
+      --package-name lomi \\
       --additional-properties=projectName=lomi-sdk,packageVersion=1.0.0 \\
       --skip-validate-spec`,
         { stdio: 'inherit' }

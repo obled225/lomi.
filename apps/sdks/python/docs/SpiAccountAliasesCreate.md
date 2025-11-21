@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from lomi_sdk.models.spi_account_aliases_create import SpiAccountAliasesCreate
+from lomi.models.spi_account_aliases_create import SpiAccountAliasesCreate
 
 # TODO update the JSON string below
 json = "{}"

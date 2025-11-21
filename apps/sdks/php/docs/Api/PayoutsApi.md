@@ -617,7 +617,7 @@ $apiInstance = new LomiSDK\Api\PayoutsApi(
     $config
 );
 $payout_id = 'payout_id_example'; // string | Unique identifier for the payout
-$payouts_update = {"metadata":{"updated_at":"2025-11-21T09:45:11.332Z","updated_reason":"Administrative update"}}; // \LomiSDK\Model\PayoutsUpdate
+$payouts_update = {"metadata":{"updated_at":"2025-11-21T12:46:27.079Z","updated_reason":"Administrative update"}}; // \LomiSDK\Model\PayoutsUpdate
 
 try {
     $result = $apiInstance->updatePayout($payout_id, $payouts_update);

@@ -1,33 +1,64 @@
-# JavaScript SDK for lomi. API
+# lomi. JavaScript SDK
 
-Official JavaScript SDK for the [lomi.](https://lomi.africa) payments API.
+Official JavaScript SDK for interacting with the lomi. payment processing API.
 
 ## Installation
 
 ```bash
-npm install @lomi/sdk-javascript
+# Using pnpm
+pnpm add @lomi./sdk-js
+
+# Using npm
+npm install @lomi./sdk-js
+
+# Using yarn
+yarn add @lomi./sdk-js
 ```
 
 ## Usage
 
+Import the OpenAPI client and configure it with your API key. Then access the different API services.
+
 ```javascript
-import { LomiClient } from '@lomi/sdk-javascript';
+import { OpenAPI, CustomersService } from '@lomi./sdk-js';
 
-const client = new LomiClient({
-  apiKey: 'your_api_key_here'
-});
+// Configure your API key (obtainable from your lomi. dashboard)
+OpenAPI.HEADERS = {
+  'X-API-KEY': 'YOUR_LOMI_API_KEY',
+};
 
-// Create a customer
-const customer = await client.customers.create({
-  name: 'John Doe',
-  email: 'john@example.com'
-});
+// Optionally configure the base URL if not using the default production URL
+// OpenAPI.BASE = 'https://sandbox.api.lomi.africa/v1';
+
+async function createNewCustomer() {
+  try {
+    const customerData = {
+      name: 'Test customer',
+      email: 'customer@example.com',
+      phone_number: '+225021234567',
+    };
+
+    const newCustomer = await CustomersService.createCustomer(customerData);
+    console.log('Customer created:', newCustomer);
+
+  } catch (error) {
+    console.error('Error creating customer:', error);
+  }
+}
+
+createNewCustomer();
 ```
 
-## Documentation
+Refer to the `src/generated/services` directory and the [lomi. API documentation](https://docs.lomi.africa/docs) for details on available services and methods.
 
-For full documentation, visit [lomi. Docs](https://docs.lomi.africa).
+## Contributing
+
+Please refer to the main `CONTRIBUTING.md` in the monorepo.
+
+## Support
+
+Contact **hello@lomi.africa** or visit our [support center](https://lomi.africa/support).
 
 ## License
 
-MIT
+This project is licensed under the MIT License.

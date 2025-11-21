@@ -214,11 +214,10 @@ const DemoRevenueChart = () => {
           </span>
         </div>
         <span
-          className={`inline-flex items-center gap-1 px-2 py-1 rounded-sm text-xs font-medium w-fit ${
-            growthRate >= 0
+          className={`inline-flex items-center gap-1 px-2 py-1 rounded-sm text-xs font-medium w-fit ${growthRate >= 0
               ? 'bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-300'
               : 'bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300'
-          }`}
+            }`}
         >
           {growthRate >= 0 ? '+' : ''}
           {growthRate.toFixed(1)}%
@@ -444,15 +443,15 @@ export function FeaturesSection() {
                       animate={
                         inView
                           ? {
-                              opacity: 1,
-                              x: 0,
-                              transition: {
-                                delay: 0.5 + i * 0.1,
-                                type: 'spring',
-                                stiffness: 120,
-                                damping: 20,
-                              },
-                            }
+                            opacity: 1,
+                            x: 0,
+                            transition: {
+                              delay: 0.5 + i * 0.1,
+                              type: 'spring',
+                              stiffness: 120,
+                              damping: 20,
+                            },
+                          }
                           : {}
                       }
                       className="flex items-center justify-between p-1 h-12.5 bg-background border border-zinc-200 dark:border-zinc-800 rounded-sm hover:bg-muted/40 transition-colors duration-200"
@@ -464,19 +463,19 @@ export function FeaturesSection() {
                             alt={`${name} logo`}
                             width={
                               name === 'SPI' &&
-                              spiImages[spiImageIndex] === 'spi'
+                                spiImages[spiImageIndex] === 'spi'
                                 ? 24
                                 : 32
                             }
                             height={
                               name === 'SPI' &&
-                              spiImages[spiImageIndex] === 'spi'
+                                spiImages[spiImageIndex] === 'spi'
                                 ? 24
                                 : 32
                             }
                             className={
                               name === 'SPI' &&
-                              spiImages[spiImageIndex] === 'spi'
+                                spiImages[spiImageIndex] === 'spi'
                                 ? 'w-6 h-6 object-cover rounded-sm'
                                 : 'w-full h-full object-cover rounded-sm'
                             }
@@ -756,11 +755,10 @@ export function FeaturesSection() {
                         playClickSound();
                         setActiveTab('product');
                       }}
-                      className={`flex-1 px-3 pt-1.5 pb-2.5 text-sm font-normal rounded-sm transition-all duration-200 h-7.5 focus:outline-none focus:ring-0 focus:border-none ${
-                        activeTab === 'product'
+                      className={`flex-1 px-3 pt-1.5 pb-2.5 text-sm font-normal rounded-sm transition-all duration-200 h-7.5 focus:outline-none focus:ring-0 focus:border-none ${activeTab === 'product'
                           ? 'bg-[#E9EAEF] dark:bg-[#2A2B30] text-foreground shadow-sm border border-border/50'
                           : 'text-muted-foreground hover:text-foreground'
-                      }`}
+                        }`}
                     >
                       {String(
                         t('features.card3.tab_products', currentLanguage),
@@ -772,11 +770,10 @@ export function FeaturesSection() {
                         playClickSound();
                         setActiveTab('subscription');
                       }}
-                      className={`flex-1 px-3 pt-1.5 pb-2.5 text-sm font-normal rounded-sm transition-all duration-200 h-7.5 focus:outline-none focus:ring-0 focus:border-none ${
-                        activeTab === 'subscription'
+                      className={`flex-1 px-3 pt-1.5 pb-2.5 text-sm font-normal rounded-sm transition-all duration-200 h-7.5 focus:outline-none focus:ring-0 focus:border-none ${activeTab === 'subscription'
                           ? 'bg-[#E9EAEF] dark:bg-[#2A2B30] text-foreground shadow-sm border border-border/50'
                           : 'text-muted-foreground hover:text-foreground'
-                      }`}
+                        }`}
                     >
                       {String(
                         t('features.card3.tab_subscriptions', currentLanguage),
@@ -788,11 +785,10 @@ export function FeaturesSection() {
                         playClickSound();
                         setActiveTab('checkout');
                       }}
-                      className={`flex-1 px-3 pt-1.5 pb-2.5 text-sm font-normal rounded-sm transition-all duration-200 h-7.5 focus:outline-none focus:ring-0 focus:border-none ${
-                        activeTab === 'checkout'
+                      className={`flex-1 px-3 pt-1.5 pb-2.5 text-sm font-normal rounded-sm transition-all duration-200 h-7.5 focus:outline-none focus:ring-0 focus:border-none ${activeTab === 'checkout'
                           ? 'bg-[#E9EAEF] dark:bg-[#2A2B30] text-foreground shadow-sm border border-border/50'
                           : 'text-muted-foreground hover:text-foreground'
-                      }`}
+                        }`}
                     >
                       {String(
                         t('features.card3.tab_checkout', currentLanguage),
@@ -1027,7 +1023,7 @@ export function FeaturesSection() {
   const spiImages = ['orange', 'wave', 'mtn', 'airtel', 'moov', 'free'];
   const phoneNumbers = [
     { country: 'SN', number: '+221 77 123 45 67' },
-    { country: 'CI', number: '+225 07 12 34 56 78' },
+    { country: 'CI', number: '+225 01 12 34 56 78' },
     { country: 'SN', number: '+221 76 987 65 43' },
     { country: 'CI', number: '+225 05 87 65 43 21' },
     { country: 'SN', number: '+221 78 456 78 90' },

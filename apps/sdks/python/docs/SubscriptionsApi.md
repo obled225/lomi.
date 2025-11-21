@@ -1,4 +1,4 @@
-# lomi_sdk.SubscriptionsApi
+# lomi.SubscriptionsApi
 
 All URIs are relative to *https://api.lomi.africa/v1*
 
@@ -30,15 +30,15 @@ Discount coupons - create and manage promotional codes
 * Api Key Authentication (ApiKeyAuth):
 
 ```python
-import lomi_sdk
-from lomi_sdk.models.discount_coupons import DiscountCoupons
-from lomi_sdk.models.discount_coupons_create import DiscountCouponsCreate
-from lomi_sdk.rest import ApiException
+import lomi
+from lomi.models.discount_coupons import DiscountCoupons
+from lomi.models.discount_coupons_create import DiscountCouponsCreate
+from lomi.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.lomi.africa/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lomi_sdk.Configuration(
+configuration = lomi.Configuration(
     host = "https://api.lomi.africa/v1"
 )
 
@@ -54,9 +54,9 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with lomi_sdk.ApiClient(configuration) as api_client:
+with lomi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lomi_sdk.SubscriptionsApi(api_client)
+    api_instance = lomi.SubscriptionsApi(api_client)
     discount_coupons_create = {"code":"WELCOME2024","discount_type":"percentage","discount_percentage":20,"max_uses":100,"is_active":true,"expires_at":"2024-12-31T23:59:59Z","description":"Welcome discount for new customers"} # DiscountCouponsCreate | 
 
     try:
@@ -113,15 +113,15 @@ Subscription management - create and manage recurring billing
 * Api Key Authentication (ApiKeyAuth):
 
 ```python
-import lomi_sdk
-from lomi_sdk.models.subscriptions import Subscriptions
-from lomi_sdk.models.subscriptions_create import SubscriptionsCreate
-from lomi_sdk.rest import ApiException
+import lomi
+from lomi.models.subscriptions import Subscriptions
+from lomi.models.subscriptions_create import SubscriptionsCreate
+from lomi.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.lomi.africa/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lomi_sdk.Configuration(
+configuration = lomi.Configuration(
     host = "https://api.lomi.africa/v1"
 )
 
@@ -137,9 +137,9 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with lomi_sdk.ApiClient(configuration) as api_client:
+with lomi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lomi_sdk.SubscriptionsApi(api_client)
+    api_instance = lomi.SubscriptionsApi(api_client)
     subscriptions_create = {"customer_id":"cus_1234567890abcdef","product_id":"prod_1234567890abcdef","price_id":"price_1234567890abcdef","billing_frequency":"monthly","metadata":{"plan":"premium"}} # SubscriptionsCreate | 
 
     try:
@@ -196,13 +196,13 @@ Delete a specific discount coupon. This action cannot be undone.
 * Api Key Authentication (ApiKeyAuth):
 
 ```python
-import lomi_sdk
-from lomi_sdk.rest import ApiException
+import lomi
+from lomi.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.lomi.africa/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lomi_sdk.Configuration(
+configuration = lomi.Configuration(
     host = "https://api.lomi.africa/v1"
 )
 
@@ -218,9 +218,9 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with lomi_sdk.ApiClient(configuration) as api_client:
+with lomi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lomi_sdk.SubscriptionsApi(api_client)
+    api_instance = lomi.SubscriptionsApi(api_client)
     coupon_id = 'coupon_id_example' # str | Unique identifier for the discount coupon
 
     try:
@@ -275,13 +275,13 @@ Delete a specific subscription. This action cannot be undone.
 * Api Key Authentication (ApiKeyAuth):
 
 ```python
-import lomi_sdk
-from lomi_sdk.rest import ApiException
+import lomi
+from lomi.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.lomi.africa/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lomi_sdk.Configuration(
+configuration = lomi.Configuration(
     host = "https://api.lomi.africa/v1"
 )
 
@@ -297,9 +297,9 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with lomi_sdk.ApiClient(configuration) as api_client:
+with lomi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lomi_sdk.SubscriptionsApi(api_client)
+    api_instance = lomi.SubscriptionsApi(api_client)
     subscription_id = 'subscription_id_example' # str | Unique identifier for the subscription
 
     try:
@@ -354,14 +354,14 @@ Customer invoices - view subscription invoices
 * Api Key Authentication (ApiKeyAuth):
 
 ```python
-import lomi_sdk
-from lomi_sdk.models.list_customer_invoices200_response import ListCustomerInvoices200Response
-from lomi_sdk.rest import ApiException
+import lomi
+from lomi.models.list_customer_invoices200_response import ListCustomerInvoices200Response
+from lomi.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.lomi.africa/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lomi_sdk.Configuration(
+configuration = lomi.Configuration(
     host = "https://api.lomi.africa/v1"
 )
 
@@ -377,9 +377,9 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with lomi_sdk.ApiClient(configuration) as api_client:
+with lomi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lomi_sdk.SubscriptionsApi(api_client)
+    api_instance = lomi.SubscriptionsApi(api_client)
     limit = 20 # int | Maximum number of items to return (1-100) (optional) (default to 20)
     offset = 0 # int | Number of items to skip for pagination (optional) (default to 0)
     sort = 'created_at:desc' # str | Sort order. Format: `field:direction` (e.g., `created_at:desc`) (optional)
@@ -439,14 +439,14 @@ Discount coupons - create and manage promotional codes
 * Api Key Authentication (ApiKeyAuth):
 
 ```python
-import lomi_sdk
-from lomi_sdk.models.list_discount_coupons200_response import ListDiscountCoupons200Response
-from lomi_sdk.rest import ApiException
+import lomi
+from lomi.models.list_discount_coupons200_response import ListDiscountCoupons200Response
+from lomi.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.lomi.africa/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lomi_sdk.Configuration(
+configuration = lomi.Configuration(
     host = "https://api.lomi.africa/v1"
 )
 
@@ -462,9 +462,9 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with lomi_sdk.ApiClient(configuration) as api_client:
+with lomi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lomi_sdk.SubscriptionsApi(api_client)
+    api_instance = lomi.SubscriptionsApi(api_client)
     limit = 20 # int | Maximum number of items to return (1-100) (optional) (default to 20)
     offset = 0 # int | Number of items to skip for pagination (optional) (default to 0)
     sort = 'created_at:desc' # str | Sort order. Format: `field:direction` (e.g., `created_at:desc`) (optional)
@@ -524,14 +524,14 @@ Subscription management - create and manage recurring billing
 * Api Key Authentication (ApiKeyAuth):
 
 ```python
-import lomi_sdk
-from lomi_sdk.models.list_subscriptions200_response import ListSubscriptions200Response
-from lomi_sdk.rest import ApiException
+import lomi
+from lomi.models.list_subscriptions200_response import ListSubscriptions200Response
+from lomi.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.lomi.africa/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lomi_sdk.Configuration(
+configuration = lomi.Configuration(
     host = "https://api.lomi.africa/v1"
 )
 
@@ -547,9 +547,9 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with lomi_sdk.ApiClient(configuration) as api_client:
+with lomi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lomi_sdk.SubscriptionsApi(api_client)
+    api_instance = lomi.SubscriptionsApi(api_client)
     limit = 20 # int | Maximum number of items to return (1-100) (optional) (default to 20)
     offset = 0 # int | Number of items to skip for pagination (optional) (default to 0)
     sort = 'created_at:desc' # str | Sort order. Format: `field:direction` (e.g., `created_at:desc`) (optional)
@@ -609,14 +609,14 @@ Retrieve a specific customer invoice by its unique identifier.
 * Api Key Authentication (ApiKeyAuth):
 
 ```python
-import lomi_sdk
-from lomi_sdk.models.customer_invoices import CustomerInvoices
-from lomi_sdk.rest import ApiException
+import lomi
+from lomi.models.customer_invoices import CustomerInvoices
+from lomi.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.lomi.africa/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lomi_sdk.Configuration(
+configuration = lomi.Configuration(
     host = "https://api.lomi.africa/v1"
 )
 
@@ -632,9 +632,9 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with lomi_sdk.ApiClient(configuration) as api_client:
+with lomi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lomi_sdk.SubscriptionsApi(api_client)
+    api_instance = lomi.SubscriptionsApi(api_client)
     invoice_id = 'invoice_id_example' # str | Unique identifier for the customer invoice
 
     try:
@@ -691,14 +691,14 @@ Retrieve a specific discount coupon by its unique identifier.
 * Api Key Authentication (ApiKeyAuth):
 
 ```python
-import lomi_sdk
-from lomi_sdk.models.discount_coupons import DiscountCoupons
-from lomi_sdk.rest import ApiException
+import lomi
+from lomi.models.discount_coupons import DiscountCoupons
+from lomi.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.lomi.africa/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lomi_sdk.Configuration(
+configuration = lomi.Configuration(
     host = "https://api.lomi.africa/v1"
 )
 
@@ -714,9 +714,9 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with lomi_sdk.ApiClient(configuration) as api_client:
+with lomi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lomi_sdk.SubscriptionsApi(api_client)
+    api_instance = lomi.SubscriptionsApi(api_client)
     coupon_id = 'coupon_id_example' # str | Unique identifier for the discount coupon
 
     try:
@@ -773,14 +773,14 @@ Retrieve a specific subscription by its unique identifier.
 * Api Key Authentication (ApiKeyAuth):
 
 ```python
-import lomi_sdk
-from lomi_sdk.models.subscriptions import Subscriptions
-from lomi_sdk.rest import ApiException
+import lomi
+from lomi.models.subscriptions import Subscriptions
+from lomi.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.lomi.africa/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lomi_sdk.Configuration(
+configuration = lomi.Configuration(
     host = "https://api.lomi.africa/v1"
 )
 
@@ -796,9 +796,9 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with lomi_sdk.ApiClient(configuration) as api_client:
+with lomi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lomi_sdk.SubscriptionsApi(api_client)
+    api_instance = lomi.SubscriptionsApi(api_client)
     subscription_id = 'subscription_id_example' # str | Unique identifier for the subscription
 
     try:
@@ -855,15 +855,15 @@ Update a specific discount coupon. Only provided fields will be updated.
 * Api Key Authentication (ApiKeyAuth):
 
 ```python
-import lomi_sdk
-from lomi_sdk.models.discount_coupons import DiscountCoupons
-from lomi_sdk.models.discount_coupons_update import DiscountCouponsUpdate
-from lomi_sdk.rest import ApiException
+import lomi
+from lomi.models.discount_coupons import DiscountCoupons
+from lomi.models.discount_coupons_update import DiscountCouponsUpdate
+from lomi.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.lomi.africa/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lomi_sdk.Configuration(
+configuration = lomi.Configuration(
     host = "https://api.lomi.africa/v1"
 )
 
@@ -879,9 +879,9 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with lomi_sdk.ApiClient(configuration) as api_client:
+with lomi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lomi_sdk.SubscriptionsApi(api_client)
+    api_instance = lomi.SubscriptionsApi(api_client)
     coupon_id = 'coupon_id_example' # str | Unique identifier for the discount coupon
     discount_coupons_update = {"is_active":false,"max_uses":50} # DiscountCouponsUpdate | 
 
@@ -941,15 +941,15 @@ Update a specific subscription. Only provided fields will be updated.
 * Api Key Authentication (ApiKeyAuth):
 
 ```python
-import lomi_sdk
-from lomi_sdk.models.subscriptions import Subscriptions
-from lomi_sdk.models.subscriptions_update import SubscriptionsUpdate
-from lomi_sdk.rest import ApiException
+import lomi
+from lomi.models.subscriptions import Subscriptions
+from lomi.models.subscriptions_update import SubscriptionsUpdate
+from lomi.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.lomi.africa/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lomi_sdk.Configuration(
+configuration = lomi.Configuration(
     host = "https://api.lomi.africa/v1"
 )
 
@@ -965,11 +965,11 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with lomi_sdk.ApiClient(configuration) as api_client:
+with lomi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lomi_sdk.SubscriptionsApi(api_client)
+    api_instance = lomi.SubscriptionsApi(api_client)
     subscription_id = 'subscription_id_example' # str | Unique identifier for the subscription
-    subscriptions_update = {"metadata":{"plan":"enterprise","upgraded_at":"2025-11-21T09:45:11.331Z"}} # SubscriptionsUpdate | 
+    subscriptions_update = {"metadata":{"plan":"enterprise","upgraded_at":"2025-11-21T12:46:27.078Z"}} # SubscriptionsUpdate | 
 
     try:
         # Update subscription

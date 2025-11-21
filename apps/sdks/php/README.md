@@ -1,30 +1,6 @@
-# OpenAPIClient-php
+# lomi/sdk
 
-# lomi. API
-
-The lomi. API provides a comprehensive payment processing platform for francophone WestAfrican businesses.
-
-## Authentication
-
-All API requests require authentication using an API key. Include your API key in the `X-API-KEY` header.
-
-```bash
-curl https://api.lomi.africa/v1/customers \\
-  -H \"X-API-KEY: your_api_key_here\"
-```
-
-## Rate limiting
-
-API requests are rate-limited based on your plan. Rate limit headers are included in all responses.
-
-## Webhooks
-
-Configure webhooks to receive real-time notifications about events in your account.
-
-## Environments
-
-- **Live**: Production environment with real transactions
-- **Test**: Sandbox environment for development and testing
+Payment processing API for francophone West African businesses.
 
 For more information, please visit [https://lomi.africa](https://lomi.africa).
 
@@ -43,11 +19,11 @@ To install the bindings via [Composer](https://getcomposer.org/), add the follow
   "repositories": [
     {
       "type": "vcs",
-      "url": "https://github.com/lomiafrica/lomi-php-sdk.git"
+      "url": "https://github.com/lomi/lomi-sdk.git"
     }
   ],
   "require": {
-    "lomiafrica/lomi-php-sdk": "*@dev"
+    "lomi/lomi-sdk": "*@dev"
   }
 }
 ```
@@ -60,7 +36,7 @@ Download the files and include `autoload.php`:
 
 ```php
 <?php
-require_once('/path/to/OpenAPIClient-php/vendor/autoload.php');
+require_once('/path/to/lomi/sdk/vendor/autoload.php');
 ```
 
 ## Getting Started

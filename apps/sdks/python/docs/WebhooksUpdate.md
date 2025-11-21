@@ -23,7 +23,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from lomi_sdk.models.webhooks_update import WebhooksUpdate
+from lomi.models.webhooks_update import WebhooksUpdate
 
 # TODO update the JSON string below
 json = "{}"

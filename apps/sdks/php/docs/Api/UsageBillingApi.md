@@ -424,7 +424,7 @@ $apiInstance = new LomiSDK\Api\UsageBillingApi(
     $config
 );
 $meter_id = 'meter_id_example'; // string | Unique identifier for the meter
-$meters_update = {"metadata":{"updated_at":"2025-11-21T09:45:11.332Z","updated_reason":"Administrative update"}}; // \LomiSDK\Model\MetersUpdate
+$meters_update = {"metadata":{"updated_at":"2025-11-21T12:46:27.080Z","updated_reason":"Administrative update"}}; // \LomiSDK\Model\MetersUpdate
 
 try {
     $result = $apiInstance->updateMeter($meter_id, $meters_update);

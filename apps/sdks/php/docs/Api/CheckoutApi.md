@@ -550,7 +550,7 @@ $apiInstance = new LomiSDK\Api\CheckoutApi(
     $config
 );
 $session_id = 'session_id_example'; // string | Unique identifier for the checkout session
-$checkout_sessions_update = {"metadata":{"updated_at":"2025-11-21T09:45:11.332Z","updated_reason":"Administrative update"}}; // \LomiSDK\Model\CheckoutSessionsUpdate
+$checkout_sessions_update = {"metadata":{"updated_at":"2025-11-21T12:46:27.078Z","updated_reason":"Administrative update"}}; // \LomiSDK\Model\CheckoutSessionsUpdate
 
 try {
     $result = $apiInstance->updateCheckoutSession($session_id, $checkout_sessions_update);
@@ -614,7 +614,7 @@ $apiInstance = new LomiSDK\Api\CheckoutApi(
     $config
 );
 $link_id = 'link_id_example'; // string | Unique identifier for the payment link
-$payment_links_update = {"metadata":{"updated_at":"2025-11-21T09:45:11.332Z","updated_reason":"Administrative update"}}; // \LomiSDK\Model\PaymentLinksUpdate
+$payment_links_update = {"metadata":{"updated_at":"2025-11-21T12:46:27.079Z","updated_reason":"Administrative update"}}; // \LomiSDK\Model\PaymentLinksUpdate
 
 try {
     $result = $apiInstance->updatePaymentLink($link_id, $payment_links_update);

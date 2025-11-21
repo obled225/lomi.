@@ -32,7 +32,7 @@ function getExampleForResource(tableName: string): any {
     customers: {
       name: 'Aminata Diallo',
       email: 'aminata.diallo@example.com',
-      phone_number: '+221771234567',
+      phone_number: '+225021234567',
       metadata: {
         customer_segment: 'premium',
         referral_source: 'instagram',
@@ -130,7 +130,7 @@ function getUpdateExampleForResource(tableName: string): any {
   const examples: Record<string, any> = {
     customers: {
       name: 'Aminata Diallo-Kane',
-      phone_number: '+221779876543',
+      phone_number: '+225779876543',
       metadata: {
         customer_segment: 'vip',
         notes: 'Upgraded to VIP tier',
@@ -460,33 +460,7 @@ function generateOpenAPISpec(): OpenAPISpec {
     info: {
       title: 'lomi. API',
       version: '1.1.0',
-      description: `
-# lomi. API
-
-The lomi. API provides a comprehensive payment processing platform for francophone WestAfrican businesses.
-
-## Authentication
-
-All API requests require authentication using an API key. Include your API key in the \`X-API-KEY\` header.
-
-\`\`\`bash
-curl https://api.lomi.africa/v1/customers \\
-  -H "X-API-KEY: your_api_key_here"
-\`\`\`
-
-## Rate limiting
-
-API requests are rate-limited based on your plan. Rate limit headers are included in all responses.
-
-## Webhooks
-
-Configure webhooks to receive real-time notifications about events in your account.
-
-## Environments
-
-- **Live**: Production environment with real transactions
-- **Test**: Sandbox environment for development and testing
-      `.trim(),
+      description: 'Payment processing API for francophone West African businesses.',
       contact: {
         name: 'lomi. Support',
         email: 'hello@lomi.africa',

@@ -159,7 +159,7 @@ paths:
                 value:
                   name: Aminata Diallo
                   email: aminata.diallo@example.com
-                  phone_number: "+221771234567"
+                  phone_number: "+225021234567"
                   metadata:
                     customer_segment: premium
                     referral_source: instagram
@@ -300,7 +300,7 @@ paths:
                 summary: Sample customer update
                 value:
                   name: Aminata Diallo-Kane
-                  phone_number: "+221779876543"
+                  phone_number: "+225779876543"
                   metadata:
                     customer_segment: vip
                     notes: Upgraded to VIP tier

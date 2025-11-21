@@ -1,6 +1,6 @@
 {
-  "name": "@lomi/sdk-typescript",
-  "version": "1.0.0",
+  "name": "@lomi./sdk",
+  "version": "1.1.0",
   "description": "Official TypeScript SDK for the lomi. API",
   "type": "module",
   "main": "dist/index.js",
@@ -20,11 +20,10 @@
     "build": "tsc",
     "dev": "tsc --watch",
     "generate": "node ../scripts/typescript-generate.js",
-    "prepublishOnly": "npm run generate && npm run build",
-    "test": "echo \"Error: no test specified\" && exit 0"
-  },
+    "prepublishOnly": "npm run generate && npm run build"
+    },
   "keywords": [
-    "lomi",
+    "lomi.",
     "payments",
     "sdk",
     "api",
@@ -34,13 +33,13 @@
   ],
   "author": "lomi. <hello@lomi.africa> (https://lomi.africa)",
   "license": "MIT",
-  "homepage": "https://github.com/lomiafrica/lomi",
+  "homepage": "https://github.com/lomiafrica/lomi./",
   "bugs": {
-    "url": "https://github.com/lomiafrica/lomi/issues"
+    "url": "https://github.com/lomiafrica/lomi./issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lomiafrica/lomi.git",
+    "url": "git+https://github.com/lomiafrica/lomi./",
     "directory": "apps/sdks/typescript"
   },
   "engines": {

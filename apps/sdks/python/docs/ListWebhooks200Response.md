@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from lomi_sdk.models.list_webhooks200_response import ListWebhooks200Response
+from lomi.models.list_webhooks200_response import ListWebhooks200Response
 
 # TODO update the JSON string below
 json = "{}"

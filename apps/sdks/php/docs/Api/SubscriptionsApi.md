@@ -744,7 +744,7 @@ $apiInstance = new LomiSDK\Api\SubscriptionsApi(
     $config
 );
 $subscription_id = 'subscription_id_example'; // string | Unique identifier for the subscription
-$subscriptions_update = {"metadata":{"plan":"enterprise","upgraded_at":"2025-11-21T09:45:11.331Z"}}; // \LomiSDK\Model\SubscriptionsUpdate
+$subscriptions_update = {"metadata":{"plan":"enterprise","upgraded_at":"2025-11-21T12:46:27.078Z"}}; // \LomiSDK\Model\SubscriptionsUpdate
 
 try {
     $result = $apiInstance->updateSubscription($subscription_id, $subscriptions_update);

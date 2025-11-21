@@ -1,4 +1,4 @@
-# lomi_sdk.CoreApi
+# lomi.CoreApi
 
 All URIs are relative to *https://api.lomi.africa/v1*
 
@@ -35,15 +35,15 @@ Customer management - create and manage customer profiles
 * Api Key Authentication (ApiKeyAuth):
 
 ```python
-import lomi_sdk
-from lomi_sdk.models.customers import Customers
-from lomi_sdk.models.customers_create import CustomersCreate
-from lomi_sdk.rest import ApiException
+import lomi
+from lomi.models.customers import Customers
+from lomi.models.customers_create import CustomersCreate
+from lomi.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.lomi.africa/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lomi_sdk.Configuration(
+configuration = lomi.Configuration(
     host = "https://api.lomi.africa/v1"
 )
 
@@ -59,10 +59,10 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with lomi_sdk.ApiClient(configuration) as api_client:
+with lomi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lomi_sdk.CoreApi(api_client)
-    customers_create = {"name":"Aminata Diallo","email":"aminata.diallo@example.com","phone_number":"+221771234567","metadata":{"customer_segment":"premium","referral_source":"instagram"}} # CustomersCreate | 
+    api_instance = lomi.CoreApi(api_client)
+    customers_create = {"name":"Aminata Diallo","email":"aminata.diallo@example.com","phone_number":"+225021234567","metadata":{"customer_segment":"premium","referral_source":"instagram"}} # CustomersCreate | 
 
     try:
         # Create customer
@@ -118,15 +118,15 @@ Payment requests - create payment intents and track status
 * Api Key Authentication (ApiKeyAuth):
 
 ```python
-import lomi_sdk
-from lomi_sdk.models.payment_requests import PaymentRequests
-from lomi_sdk.models.payment_requests_create import PaymentRequestsCreate
-from lomi_sdk.rest import ApiException
+import lomi
+from lomi.models.payment_requests import PaymentRequests
+from lomi.models.payment_requests_create import PaymentRequestsCreate
+from lomi.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.lomi.africa/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lomi_sdk.Configuration(
+configuration = lomi.Configuration(
     host = "https://api.lomi.africa/v1"
 )
 
@@ -142,9 +142,9 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with lomi_sdk.ApiClient(configuration) as api_client:
+with lomi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lomi_sdk.CoreApi(api_client)
+    api_instance = lomi.CoreApi(api_client)
     payment_requests_create = {"amount":25000,"currency_code":"XOF","customer_id":"cus_1234567890abcdef","description":"Payment for premium subscription","metadata":{"order_id":"ORD-2024-001"}} # PaymentRequestsCreate | 
 
     try:
@@ -201,15 +201,15 @@ Refund management - process and track refunds
 * Api Key Authentication (ApiKeyAuth):
 
 ```python
-import lomi_sdk
-from lomi_sdk.models.refunds import Refunds
-from lomi_sdk.models.refunds_create import RefundsCreate
-from lomi_sdk.rest import ApiException
+import lomi
+from lomi.models.refunds import Refunds
+from lomi.models.refunds_create import RefundsCreate
+from lomi.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.lomi.africa/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lomi_sdk.Configuration(
+configuration = lomi.Configuration(
     host = "https://api.lomi.africa/v1"
 )
 
@@ -225,9 +225,9 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with lomi_sdk.ApiClient(configuration) as api_client:
+with lomi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lomi_sdk.CoreApi(api_client)
+    api_instance = lomi.CoreApi(api_client)
     refunds_create = {"name":"Sample refund","description":"Example refund object"} # RefundsCreate | 
 
     try:
@@ -284,13 +284,13 @@ Delete a specific customer. This action cannot be undone.
 * Api Key Authentication (ApiKeyAuth):
 
 ```python
-import lomi_sdk
-from lomi_sdk.rest import ApiException
+import lomi
+from lomi.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.lomi.africa/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lomi_sdk.Configuration(
+configuration = lomi.Configuration(
     host = "https://api.lomi.africa/v1"
 )
 
@@ -306,9 +306,9 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with lomi_sdk.ApiClient(configuration) as api_client:
+with lomi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lomi_sdk.CoreApi(api_client)
+    api_instance = lomi.CoreApi(api_client)
     customer_id = 'customer_id_example' # str | Unique identifier for the customer
 
     try:
@@ -363,13 +363,13 @@ Delete a specific payment request. This action cannot be undone.
 * Api Key Authentication (ApiKeyAuth):
 
 ```python
-import lomi_sdk
-from lomi_sdk.rest import ApiException
+import lomi
+from lomi.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.lomi.africa/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lomi_sdk.Configuration(
+configuration = lomi.Configuration(
     host = "https://api.lomi.africa/v1"
 )
 
@@ -385,9 +385,9 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with lomi_sdk.ApiClient(configuration) as api_client:
+with lomi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lomi_sdk.CoreApi(api_client)
+    api_instance = lomi.CoreApi(api_client)
     request_id = 'request_id_example' # str | Unique identifier for the payment request
 
     try:
@@ -442,13 +442,13 @@ Delete a specific refund. This action cannot be undone.
 * Api Key Authentication (ApiKeyAuth):
 
 ```python
-import lomi_sdk
-from lomi_sdk.rest import ApiException
+import lomi
+from lomi.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.lomi.africa/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lomi_sdk.Configuration(
+configuration = lomi.Configuration(
     host = "https://api.lomi.africa/v1"
 )
 
@@ -464,9 +464,9 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with lomi_sdk.ApiClient(configuration) as api_client:
+with lomi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lomi_sdk.CoreApi(api_client)
+    api_instance = lomi.CoreApi(api_client)
     refund_id = 'refund_id_example' # str | Unique identifier for the refund
 
     try:
@@ -521,14 +521,14 @@ Customer management - create and manage customer profiles
 * Api Key Authentication (ApiKeyAuth):
 
 ```python
-import lomi_sdk
-from lomi_sdk.models.list_customers200_response import ListCustomers200Response
-from lomi_sdk.rest import ApiException
+import lomi
+from lomi.models.list_customers200_response import ListCustomers200Response
+from lomi.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.lomi.africa/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lomi_sdk.Configuration(
+configuration = lomi.Configuration(
     host = "https://api.lomi.africa/v1"
 )
 
@@ -544,9 +544,9 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with lomi_sdk.ApiClient(configuration) as api_client:
+with lomi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lomi_sdk.CoreApi(api_client)
+    api_instance = lomi.CoreApi(api_client)
     limit = 20 # int | Maximum number of items to return (1-100) (optional) (default to 20)
     offset = 0 # int | Number of items to skip for pagination (optional) (default to 0)
     sort = 'created_at:desc' # str | Sort order. Format: `field:direction` (e.g., `created_at:desc`) (optional)
@@ -606,14 +606,14 @@ Payment requests - create payment intents and track status
 * Api Key Authentication (ApiKeyAuth):
 
 ```python
-import lomi_sdk
-from lomi_sdk.models.list_payment_requests200_response import ListPaymentRequests200Response
-from lomi_sdk.rest import ApiException
+import lomi
+from lomi.models.list_payment_requests200_response import ListPaymentRequests200Response
+from lomi.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.lomi.africa/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lomi_sdk.Configuration(
+configuration = lomi.Configuration(
     host = "https://api.lomi.africa/v1"
 )
 
@@ -629,9 +629,9 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with lomi_sdk.ApiClient(configuration) as api_client:
+with lomi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lomi_sdk.CoreApi(api_client)
+    api_instance = lomi.CoreApi(api_client)
     limit = 20 # int | Maximum number of items to return (1-100) (optional) (default to 20)
     offset = 0 # int | Number of items to skip for pagination (optional) (default to 0)
     sort = 'created_at:desc' # str | Sort order. Format: `field:direction` (e.g., `created_at:desc`) (optional)
@@ -691,14 +691,14 @@ Refund management - process and track refunds
 * Api Key Authentication (ApiKeyAuth):
 
 ```python
-import lomi_sdk
-from lomi_sdk.models.list_refunds200_response import ListRefunds200Response
-from lomi_sdk.rest import ApiException
+import lomi
+from lomi.models.list_refunds200_response import ListRefunds200Response
+from lomi.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.lomi.africa/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lomi_sdk.Configuration(
+configuration = lomi.Configuration(
     host = "https://api.lomi.africa/v1"
 )
 
@@ -714,9 +714,9 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with lomi_sdk.ApiClient(configuration) as api_client:
+with lomi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lomi_sdk.CoreApi(api_client)
+    api_instance = lomi.CoreApi(api_client)
     limit = 20 # int | Maximum number of items to return (1-100) (optional) (default to 20)
     offset = 0 # int | Number of items to skip for pagination (optional) (default to 0)
     sort = 'created_at:desc' # str | Sort order. Format: `field:direction` (e.g., `created_at:desc`) (optional)
@@ -776,14 +776,14 @@ Transaction history - view completed and pending transactions
 * Api Key Authentication (ApiKeyAuth):
 
 ```python
-import lomi_sdk
-from lomi_sdk.models.list_transactions200_response import ListTransactions200Response
-from lomi_sdk.rest import ApiException
+import lomi
+from lomi.models.list_transactions200_response import ListTransactions200Response
+from lomi.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.lomi.africa/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lomi_sdk.Configuration(
+configuration = lomi.Configuration(
     host = "https://api.lomi.africa/v1"
 )
 
@@ -799,9 +799,9 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with lomi_sdk.ApiClient(configuration) as api_client:
+with lomi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lomi_sdk.CoreApi(api_client)
+    api_instance = lomi.CoreApi(api_client)
     limit = 20 # int | Maximum number of items to return (1-100) (optional) (default to 20)
     offset = 0 # int | Number of items to skip for pagination (optional) (default to 0)
     sort = 'created_at:desc' # str | Sort order. Format: `field:direction` (e.g., `created_at:desc`) (optional)
@@ -861,14 +861,14 @@ Retrieve a specific customer by its unique identifier.
 * Api Key Authentication (ApiKeyAuth):
 
 ```python
-import lomi_sdk
-from lomi_sdk.models.customers import Customers
-from lomi_sdk.rest import ApiException
+import lomi
+from lomi.models.customers import Customers
+from lomi.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.lomi.africa/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lomi_sdk.Configuration(
+configuration = lomi.Configuration(
     host = "https://api.lomi.africa/v1"
 )
 
@@ -884,9 +884,9 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with lomi_sdk.ApiClient(configuration) as api_client:
+with lomi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lomi_sdk.CoreApi(api_client)
+    api_instance = lomi.CoreApi(api_client)
     customer_id = 'customer_id_example' # str | Unique identifier for the customer
 
     try:
@@ -943,14 +943,14 @@ Retrieve a specific payment request by its unique identifier.
 * Api Key Authentication (ApiKeyAuth):
 
 ```python
-import lomi_sdk
-from lomi_sdk.models.payment_requests import PaymentRequests
-from lomi_sdk.rest import ApiException
+import lomi
+from lomi.models.payment_requests import PaymentRequests
+from lomi.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.lomi.africa/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lomi_sdk.Configuration(
+configuration = lomi.Configuration(
     host = "https://api.lomi.africa/v1"
 )
 
@@ -966,9 +966,9 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with lomi_sdk.ApiClient(configuration) as api_client:
+with lomi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lomi_sdk.CoreApi(api_client)
+    api_instance = lomi.CoreApi(api_client)
     request_id = 'request_id_example' # str | Unique identifier for the payment request
 
     try:
@@ -1025,14 +1025,14 @@ Retrieve a specific refund by its unique identifier.
 * Api Key Authentication (ApiKeyAuth):
 
 ```python
-import lomi_sdk
-from lomi_sdk.models.refunds import Refunds
-from lomi_sdk.rest import ApiException
+import lomi
+from lomi.models.refunds import Refunds
+from lomi.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.lomi.africa/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lomi_sdk.Configuration(
+configuration = lomi.Configuration(
     host = "https://api.lomi.africa/v1"
 )
 
@@ -1048,9 +1048,9 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with lomi_sdk.ApiClient(configuration) as api_client:
+with lomi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lomi_sdk.CoreApi(api_client)
+    api_instance = lomi.CoreApi(api_client)
     refund_id = 'refund_id_example' # str | Unique identifier for the refund
 
     try:
@@ -1107,14 +1107,14 @@ Retrieve a specific transaction by its unique identifier.
 * Api Key Authentication (ApiKeyAuth):
 
 ```python
-import lomi_sdk
-from lomi_sdk.models.transactions import Transactions
-from lomi_sdk.rest import ApiException
+import lomi
+from lomi.models.transactions import Transactions
+from lomi.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.lomi.africa/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lomi_sdk.Configuration(
+configuration = lomi.Configuration(
     host = "https://api.lomi.africa/v1"
 )
 
@@ -1130,9 +1130,9 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with lomi_sdk.ApiClient(configuration) as api_client:
+with lomi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lomi_sdk.CoreApi(api_client)
+    api_instance = lomi.CoreApi(api_client)
     transaction_id = 'transaction_id_example' # str | Unique identifier for the transaction
 
     try:
@@ -1189,15 +1189,15 @@ Update a specific customer. Only provided fields will be updated.
 * Api Key Authentication (ApiKeyAuth):
 
 ```python
-import lomi_sdk
-from lomi_sdk.models.customers import Customers
-from lomi_sdk.models.customers_update import CustomersUpdate
-from lomi_sdk.rest import ApiException
+import lomi
+from lomi.models.customers import Customers
+from lomi.models.customers_update import CustomersUpdate
+from lomi.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.lomi.africa/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lomi_sdk.Configuration(
+configuration = lomi.Configuration(
     host = "https://api.lomi.africa/v1"
 )
 
@@ -1213,11 +1213,11 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with lomi_sdk.ApiClient(configuration) as api_client:
+with lomi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lomi_sdk.CoreApi(api_client)
+    api_instance = lomi.CoreApi(api_client)
     customer_id = 'customer_id_example' # str | Unique identifier for the customer
-    customers_update = {"name":"Aminata Diallo-Kane","phone_number":"+221779876543","metadata":{"customer_segment":"vip","notes":"Upgraded to VIP tier"}} # CustomersUpdate | 
+    customers_update = {"name":"Aminata Diallo-Kane","phone_number":"+225779876543","metadata":{"customer_segment":"vip","notes":"Upgraded to VIP tier"}} # CustomersUpdate | 
 
     try:
         # Update customer
@@ -1275,15 +1275,15 @@ Update a specific payment request. Only provided fields will be updated.
 * Api Key Authentication (ApiKeyAuth):
 
 ```python
-import lomi_sdk
-from lomi_sdk.models.payment_requests import PaymentRequests
-from lomi_sdk.models.payment_requests_update import PaymentRequestsUpdate
-from lomi_sdk.rest import ApiException
+import lomi
+from lomi.models.payment_requests import PaymentRequests
+from lomi.models.payment_requests_update import PaymentRequestsUpdate
+from lomi.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.lomi.africa/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lomi_sdk.Configuration(
+configuration = lomi.Configuration(
     host = "https://api.lomi.africa/v1"
 )
 
@@ -1299,9 +1299,9 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with lomi_sdk.ApiClient(configuration) as api_client:
+with lomi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lomi_sdk.CoreApi(api_client)
+    api_instance = lomi.CoreApi(api_client)
     request_id = 'request_id_example' # str | Unique identifier for the payment request
     payment_requests_update = {"metadata":{"order_id":"ORD-2024-001-UPDATED","notes":"Customer requested invoice"}} # PaymentRequestsUpdate | 
 
@@ -1361,15 +1361,15 @@ Update a specific refund. Only provided fields will be updated.
 * Api Key Authentication (ApiKeyAuth):
 
 ```python
-import lomi_sdk
-from lomi_sdk.models.refunds import Refunds
-from lomi_sdk.models.refunds_update import RefundsUpdate
-from lomi_sdk.rest import ApiException
+import lomi
+from lomi.models.refunds import Refunds
+from lomi.models.refunds_update import RefundsUpdate
+from lomi.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.lomi.africa/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lomi_sdk.Configuration(
+configuration = lomi.Configuration(
     host = "https://api.lomi.africa/v1"
 )
 
@@ -1385,11 +1385,11 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with lomi_sdk.ApiClient(configuration) as api_client:
+with lomi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lomi_sdk.CoreApi(api_client)
+    api_instance = lomi.CoreApi(api_client)
     refund_id = 'refund_id_example' # str | Unique identifier for the refund
-    refunds_update = {"metadata":{"updated_at":"2025-11-21T09:45:11.331Z","updated_reason":"Administrative update"}} # RefundsUpdate | 
+    refunds_update = {"metadata":{"updated_at":"2025-11-21T12:46:27.077Z","updated_reason":"Administrative update"}} # RefundsUpdate | 
 
     try:
         # Update refund

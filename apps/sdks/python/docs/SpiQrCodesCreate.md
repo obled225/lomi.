@@ -28,7 +28,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from lomi_sdk.models.spi_qr_codes_create import SpiQrCodesCreate
+from lomi.models.spi_qr_codes_create import SpiQrCodesCreate
 
 # TODO update the JSON string below
 json = "{}"

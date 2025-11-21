@@ -244,14 +244,4 @@ model_webhooks.go
 model_webhooks_create.go
 model_webhooks_update.go
 response.go
-test/api_bnpl_test.go
-test/api_checkout_test.go
-test/api_core_test.go
-test/api_events_test.go
-test/api_payouts_test.go
-test/api_products_test.go
-test/api_spi_test.go
-test/api_subscriptions_test.go
-test/api_usage_billing_test.go
-test/api_webhooks_test.go
 utils.go

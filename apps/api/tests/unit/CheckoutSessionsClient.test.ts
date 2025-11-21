@@ -29,7 +29,7 @@ describe('CheckoutSessionsClient', () => {
       cancel_url: 'https://cancel.test.com',
       allowed_providers: [Types.ProviderCode.ORANGE, Types.ProviderCode.WAVE],
       customer_email: 'test@example.com',
-      customer_name: 'Test Customer',
+      customer_name: 'Test customer',
     };
 
     const mockResponse: Types.CheckoutSession = {

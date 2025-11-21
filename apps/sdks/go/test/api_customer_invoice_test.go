@@ -11,10 +11,11 @@ package lomisdk
 
 import (
 	"context"
+	"testing"
+
+	openapiclient "github.com/lomiafrica/lomi-go-sdk"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"testing"
-	openapiclient "github.com/lomiafrica/lomi-go-sdk"
 )
 
 func Test_lomisdk_CustomerInvoiceAPIService(t *testing.T) {
@@ -22,7 +23,7 @@ func Test_lomisdk_CustomerInvoiceAPIService(t *testing.T) {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test CustomerInvoiceAPIService CustomerInvoicesGet", func(t *testing.T) {
+	t.Run("Test customerInvoiceAPIService CustomerInvoicesGet", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
@@ -34,7 +35,7 @@ func Test_lomisdk_CustomerInvoiceAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test CustomerInvoiceAPIService CustomerInvoicesInvoiceIdGet", func(t *testing.T) {
+	t.Run("Test customerInvoiceAPIService CustomerInvoicesInvoiceIdGet", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 

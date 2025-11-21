@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from lomi_sdk.models.meters_update import MetersUpdate
+from lomi.models.meters_update import MetersUpdate
 
 # TODO update the JSON string below
 json = "{}"

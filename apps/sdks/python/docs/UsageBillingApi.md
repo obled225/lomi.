@@ -1,4 +1,4 @@
-# lomi_sdk.UsageBillingApi
+# lomi.UsageBillingApi
 
 All URIs are relative to *https://api.lomi.africa/v1*
 
@@ -25,15 +25,15 @@ Usage meters - track usage for usage-based billing
 * Api Key Authentication (ApiKeyAuth):
 
 ```python
-import lomi_sdk
-from lomi_sdk.models.meters import Meters
-from lomi_sdk.models.meters_create import MetersCreate
-from lomi_sdk.rest import ApiException
+import lomi
+from lomi.models.meters import Meters
+from lomi.models.meters_create import MetersCreate
+from lomi.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.lomi.africa/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lomi_sdk.Configuration(
+configuration = lomi.Configuration(
     host = "https://api.lomi.africa/v1"
 )
 
@@ -49,9 +49,9 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with lomi_sdk.ApiClient(configuration) as api_client:
+with lomi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lomi_sdk.UsageBillingApi(api_client)
+    api_instance = lomi.UsageBillingApi(api_client)
     meters_create = {"name":"Sample meter","description":"Example meter object"} # MetersCreate | 
 
     try:
@@ -108,13 +108,13 @@ Delete a specific meter. This action cannot be undone.
 * Api Key Authentication (ApiKeyAuth):
 
 ```python
-import lomi_sdk
-from lomi_sdk.rest import ApiException
+import lomi
+from lomi.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.lomi.africa/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lomi_sdk.Configuration(
+configuration = lomi.Configuration(
     host = "https://api.lomi.africa/v1"
 )
 
@@ -130,9 +130,9 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with lomi_sdk.ApiClient(configuration) as api_client:
+with lomi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lomi_sdk.UsageBillingApi(api_client)
+    api_instance = lomi.UsageBillingApi(api_client)
     meter_id = 'meter_id_example' # str | Unique identifier for the meter
 
     try:
@@ -187,14 +187,14 @@ Meter balances - view current usage balances
 * Api Key Authentication (ApiKeyAuth):
 
 ```python
-import lomi_sdk
-from lomi_sdk.models.list_meter_balances200_response import ListMeterBalances200Response
-from lomi_sdk.rest import ApiException
+import lomi
+from lomi.models.list_meter_balances200_response import ListMeterBalances200Response
+from lomi.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.lomi.africa/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lomi_sdk.Configuration(
+configuration = lomi.Configuration(
     host = "https://api.lomi.africa/v1"
 )
 
@@ -210,9 +210,9 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with lomi_sdk.ApiClient(configuration) as api_client:
+with lomi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lomi_sdk.UsageBillingApi(api_client)
+    api_instance = lomi.UsageBillingApi(api_client)
     limit = 20 # int | Maximum number of items to return (1-100) (optional) (default to 20)
     offset = 0 # int | Number of items to skip for pagination (optional) (default to 0)
     sort = 'created_at:desc' # str | Sort order. Format: `field:direction` (e.g., `created_at:desc`) (optional)
@@ -272,14 +272,14 @@ Usage meters - track usage for usage-based billing
 * Api Key Authentication (ApiKeyAuth):
 
 ```python
-import lomi_sdk
-from lomi_sdk.models.list_meters200_response import ListMeters200Response
-from lomi_sdk.rest import ApiException
+import lomi
+from lomi.models.list_meters200_response import ListMeters200Response
+from lomi.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.lomi.africa/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lomi_sdk.Configuration(
+configuration = lomi.Configuration(
     host = "https://api.lomi.africa/v1"
 )
 
@@ -295,9 +295,9 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with lomi_sdk.ApiClient(configuration) as api_client:
+with lomi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lomi_sdk.UsageBillingApi(api_client)
+    api_instance = lomi.UsageBillingApi(api_client)
     limit = 20 # int | Maximum number of items to return (1-100) (optional) (default to 20)
     offset = 0 # int | Number of items to skip for pagination (optional) (default to 0)
     sort = 'created_at:desc' # str | Sort order. Format: `field:direction` (e.g., `created_at:desc`) (optional)
@@ -357,14 +357,14 @@ Retrieve a specific meter by its unique identifier.
 * Api Key Authentication (ApiKeyAuth):
 
 ```python
-import lomi_sdk
-from lomi_sdk.models.meters import Meters
-from lomi_sdk.rest import ApiException
+import lomi
+from lomi.models.meters import Meters
+from lomi.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.lomi.africa/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lomi_sdk.Configuration(
+configuration = lomi.Configuration(
     host = "https://api.lomi.africa/v1"
 )
 
@@ -380,9 +380,9 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with lomi_sdk.ApiClient(configuration) as api_client:
+with lomi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lomi_sdk.UsageBillingApi(api_client)
+    api_instance = lomi.UsageBillingApi(api_client)
     meter_id = 'meter_id_example' # str | Unique identifier for the meter
 
     try:
@@ -439,14 +439,14 @@ Retrieve a specific meter balance by its unique identifier.
 * Api Key Authentication (ApiKeyAuth):
 
 ```python
-import lomi_sdk
-from lomi_sdk.models.meter_balances import MeterBalances
-from lomi_sdk.rest import ApiException
+import lomi
+from lomi.models.meter_balances import MeterBalances
+from lomi.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.lomi.africa/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lomi_sdk.Configuration(
+configuration = lomi.Configuration(
     host = "https://api.lomi.africa/v1"
 )
 
@@ -462,9 +462,9 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with lomi_sdk.ApiClient(configuration) as api_client:
+with lomi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lomi_sdk.UsageBillingApi(api_client)
+    api_instance = lomi.UsageBillingApi(api_client)
     balance_id = 'balance_id_example' # str | Unique identifier for the meter balance
 
     try:
@@ -521,15 +521,15 @@ Update a specific meter. Only provided fields will be updated.
 * Api Key Authentication (ApiKeyAuth):
 
 ```python
-import lomi_sdk
-from lomi_sdk.models.meters import Meters
-from lomi_sdk.models.meters_update import MetersUpdate
-from lomi_sdk.rest import ApiException
+import lomi
+from lomi.models.meters import Meters
+from lomi.models.meters_update import MetersUpdate
+from lomi.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.lomi.africa/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lomi_sdk.Configuration(
+configuration = lomi.Configuration(
     host = "https://api.lomi.africa/v1"
 )
 
@@ -545,11 +545,11 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with lomi_sdk.ApiClient(configuration) as api_client:
+with lomi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lomi_sdk.UsageBillingApi(api_client)
+    api_instance = lomi.UsageBillingApi(api_client)
     meter_id = 'meter_id_example' # str | Unique identifier for the meter
-    meters_update = {"metadata":{"updated_at":"2025-11-21T09:45:11.332Z","updated_reason":"Administrative update"}} # MetersUpdate | 
+    meters_update = {"metadata":{"updated_at":"2025-11-21T12:46:27.080Z","updated_reason":"Administrative update"}} # MetersUpdate | 
 
     try:
         # Update meter

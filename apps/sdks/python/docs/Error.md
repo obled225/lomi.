@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from lomi_sdk.models.error import Error
+from lomi.models.error import Error
 
 # TODO update the JSON string below
 json = "{}"
