@@ -12,7 +12,7 @@
     "verify:types": "ts-node scripts/verify-types.ts",
     "verify:endpoints": "ts-node scripts/verify-endpoints.ts",
     "verify:all": "npm run verify:types && npm run verify:endpoints",
-    "generate:spec": "ts-node openapi/generator/generate-spec.ts",
+    "generate:spec": "ts-node openapi/generate/generate-spec.ts",
     "generate:types": "npm run verify:types && ts-node scripts/generate-types.ts",
     "generate:client": "npm run verify:endpoints && ts-node scripts/generate-client.ts",
     "generate:all": "npm run verify:all && npm run generate:types && npm run generate:client",

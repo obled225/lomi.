@@ -18,8 +18,5 @@
     "sdk"
   ],
   "author": "lomi. <hello@lomi.africa>",
-  "license": "MIT",
-  "devDependencies": {
-    "@openapitools/openapi-generator-cli": "^2.25.2"
-  }
+  "license": "MIT"
 }
