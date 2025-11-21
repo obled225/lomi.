@@ -36,7 +36,7 @@ use \LomiSDK\ObjectSerializer;
  * SpiAccountAliases Class Doc Comment
  *
  * @category Class
- * @description spi_account_aliases object
+ * @description spi account aliases resource object
  * @package  LomiSDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -394,7 +394,7 @@ class SpiAccountAliases implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets alias_id
      *
-     * @param string|null $alias_id alias_id
+     * @param string|null $alias_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -475,7 +475,7 @@ class SpiAccountAliases implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets created_at
      *
-     * @param \DateTime|null $created_at created_at
+     * @param \DateTime|null $created_at ISO 8601 datetime
      *
      * @return self
      */
@@ -502,7 +502,7 @@ class SpiAccountAliases implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets is_active
      *
-     * @param bool|null $is_active is_active
+     * @param bool|null $is_active Whether this resource is currently active
      *
      * @return self
      */
@@ -556,7 +556,7 @@ class SpiAccountAliases implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets metadata
      *
-     * @param object|null $metadata metadata
+     * @param object|null $metadata Set of key-value pairs for storing additional information
      *
      * @return self
      */
@@ -583,7 +583,7 @@ class SpiAccountAliases implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets organization_id
      *
-     * @param string|null $organization_id organization_id
+     * @param string|null $organization_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -610,7 +610,7 @@ class SpiAccountAliases implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets updated_at
      *
-     * @param \DateTime|null $updated_at updated_at
+     * @param \DateTime|null $updated_at ISO 8601 datetime
      *
      * @return self
      */

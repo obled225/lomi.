@@ -36,7 +36,7 @@ use \LomiSDK\ObjectSerializer;
  * DiscountCoupons Class Doc Comment
  *
  * @category Class
- * @description discount_coupons object
+ * @description discount coupons resource object
  * @package  LomiSDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -505,7 +505,7 @@ class DiscountCoupons implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets coupon_id
      *
-     * @param string|null $coupon_id coupon_id
+     * @param string|null $coupon_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -532,7 +532,7 @@ class DiscountCoupons implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets created_at
      *
-     * @param \DateTime|null $created_at created_at
+     * @param \DateTime|null $created_at ISO 8601 datetime
      *
      * @return self
      */
@@ -748,7 +748,7 @@ class DiscountCoupons implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets expires_at
      *
-     * @param \DateTime|null $expires_at expires_at
+     * @param \DateTime|null $expires_at ISO 8601 datetime
      *
      * @return self
      */
@@ -775,7 +775,7 @@ class DiscountCoupons implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets is_active
      *
-     * @param bool|null $is_active is_active
+     * @param bool|null $is_active Whether this resource is currently active
      *
      * @return self
      */
@@ -883,7 +883,7 @@ class DiscountCoupons implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets organization_id
      *
-     * @param string|null $organization_id organization_id
+     * @param string|null $organization_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -937,7 +937,7 @@ class DiscountCoupons implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets updated_at
      *
-     * @param \DateTime|null $updated_at updated_at
+     * @param \DateTime|null $updated_at ISO 8601 datetime
      *
      * @return self
      */

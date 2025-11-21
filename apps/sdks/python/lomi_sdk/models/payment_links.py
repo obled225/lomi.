@@ -19,7 +19,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictFloat, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from uuid import UUID
 from typing import Optional, Set
@@ -27,32 +27,32 @@ from typing_extensions import Self
 
 class PaymentLinks(BaseModel):
     """
-    payment_links object
+    payment links resource object
     """ # noqa: E501
     allow_coupon_code: Optional[StrictBool] = None
     allow_quantity: Optional[StrictBool] = None
     allowed_providers: Optional[StrictStr] = None
-    amount: Optional[Union[StrictFloat, StrictInt]] = None
-    cancel_url: Optional[StrictStr] = None
-    created_at: Optional[datetime] = None
+    amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Amount in the smallest currency unit (e.g., cents for USD, same for XOF)")
+    cancel_url: Optional[StrictStr] = Field(default=None, description="URL/URI")
+    created_at: Optional[datetime] = Field(default=None, description="ISO 8601 datetime")
     created_by: Optional[StrictStr] = None
-    currency_code: Optional[StrictStr] = None
+    currency_code: Optional[StrictStr] = Field(default=None, description="Three-letter ISO currency code (e.g., XOF, USD, EUR)")
     environment: Optional[StrictStr] = None
-    expires_at: Optional[datetime] = None
-    is_active: Optional[StrictBool] = None
-    link_id: Optional[UUID] = None
+    expires_at: Optional[datetime] = Field(default=None, description="ISO 8601 datetime")
+    is_active: Optional[StrictBool] = Field(default=None, description="Whether this resource is currently active")
+    link_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
     link_type: Optional[StrictStr] = None
-    metadata: Optional[Dict[str, Any]] = None
-    organization_id: Optional[UUID] = None
-    price_id: Optional[UUID] = None
+    metadata: Optional[Dict[str, Any]] = Field(default=None, description="Set of key-value pairs for storing additional information")
+    organization_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
+    price_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
     private_description: Optional[StrictStr] = None
-    product_id: Optional[UUID] = None
+    product_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
     public_description: Optional[StrictStr] = None
     quantity: Optional[Union[StrictFloat, StrictInt]] = None
-    success_url: Optional[StrictStr] = None
+    success_url: Optional[StrictStr] = Field(default=None, description="URL/URI")
     title: Optional[StrictStr] = None
-    updated_at: Optional[datetime] = None
-    url: Optional[StrictStr] = None
+    updated_at: Optional[datetime] = Field(default=None, description="ISO 8601 datetime")
+    url: Optional[StrictStr] = Field(default=None, description="URL/URI")
     __properties: ClassVar[List[str]] = ["allow_coupon_code", "allow_quantity", "allowed_providers", "amount", "cancel_url", "created_at", "created_by", "currency_code", "environment", "expires_at", "is_active", "link_id", "link_type", "metadata", "organization_id", "price_id", "private_description", "product_id", "public_description", "quantity", "success_url", "title", "updated_at", "url"]
 
     model_config = ConfigDict(
@@ -85,8 +85,14 @@ class PaymentLinks(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set([
+            "created_at",
+            "created_by",
+            "updated_at",
         ])
 
         _dict = self.model_dump(

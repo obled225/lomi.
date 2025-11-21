@@ -101,18 +101,18 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 # Enter a context with an instance of the API client
 with lomi_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lomi_sdk.BeneficiaryPayoutApi(api_client)
-    limit = 20 # int | Maximum number of items to return (optional) (default to 20)
-    offset = 0 # int | Number of items to skip (optional) (default to 0)
-    sort = 'sort_example' # str | Sort order (e.g., created_at:desc) (optional)
+    api_instance = lomi_sdk.BNPLApi(api_client)
+    limit = 20 # int | Maximum number of items to return (1-100) (optional) (default to 20)
+    offset = 0 # int | Number of items to skip for pagination (optional) (default to 0)
+    sort = 'created_at:desc' # str | Sort order. Format: `field:direction` (e.g., `created_at:desc`) (optional)
 
     try:
-        # List beneficiary_payouts
-        api_response = api_instance.beneficiary_payouts_get(limit=limit, offset=offset, sort=sort)
-        print("The response of BeneficiaryPayoutApi->beneficiary_payouts_get:\n")
+        # List installment payments
+        api_response = api_instance.list_installment_payments(limit=limit, offset=offset, sort=sort)
+        print("The response of BNPLApi->list_installment_payments:\n")
         pprint(api_response)
     except ApiException as e:
-        print("Exception when calling BeneficiaryPayoutApi->beneficiary_payouts_get: %s\n" % e)
+        print("Exception when calling BNPLApi->list_installment_payments: %s\n" % e)
 
 ```
 
@@ -122,201 +122,201 @@ All URIs are relative to *https://api.lomi.africa/v1*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*BeneficiaryPayoutApi* | [**beneficiary_payouts_get**](docs/BeneficiaryPayoutApi.md#beneficiary_payouts_get) | **GET** /beneficiary_payouts | List beneficiary_payouts
-*BeneficiaryPayoutApi* | [**beneficiary_payouts_payout_id_get**](docs/BeneficiaryPayoutApi.md#beneficiary_payouts_payout_id_get) | **GET** /beneficiary_payouts/{payout_id} | Get beneficiary_payout
-*BeneficiaryPayoutApi* | [**beneficiary_payouts_post**](docs/BeneficiaryPayoutApi.md#beneficiary_payouts_post) | **POST** /beneficiary_payouts | Create beneficiary_payout
-*CheckoutSessionApi* | [**checkout_sessions_get**](docs/CheckoutSessionApi.md#checkout_sessions_get) | **GET** /checkout_sessions | List checkout_sessions
-*CheckoutSessionApi* | [**checkout_sessions_post**](docs/CheckoutSessionApi.md#checkout_sessions_post) | **POST** /checkout_sessions | Create checkout_session
-*CheckoutSessionApi* | [**checkout_sessions_session_id_delete**](docs/CheckoutSessionApi.md#checkout_sessions_session_id_delete) | **DELETE** /checkout_sessions/{session_id} | Delete checkout_session
-*CheckoutSessionApi* | [**checkout_sessions_session_id_get**](docs/CheckoutSessionApi.md#checkout_sessions_session_id_get) | **GET** /checkout_sessions/{session_id} | Get checkout_session
-*CheckoutSessionApi* | [**checkout_sessions_session_id_patch**](docs/CheckoutSessionApi.md#checkout_sessions_session_id_patch) | **PATCH** /checkout_sessions/{session_id} | Update checkout_session
-*CustomerApi* | [**customers_customer_id_delete**](docs/CustomerApi.md#customers_customer_id_delete) | **DELETE** /customers/{customer_id} | Delete customer
-*CustomerApi* | [**customers_customer_id_get**](docs/CustomerApi.md#customers_customer_id_get) | **GET** /customers/{customer_id} | Get customer
-*CustomerApi* | [**customers_customer_id_patch**](docs/CustomerApi.md#customers_customer_id_patch) | **PATCH** /customers/{customer_id} | Update customer
-*CustomerApi* | [**customers_get**](docs/CustomerApi.md#customers_get) | **GET** /customers | List customers
-*CustomerApi* | [**customers_post**](docs/CustomerApi.md#customers_post) | **POST** /customers | Create customer
-*CustomerInvoiceApi* | [**customer_invoices_get**](docs/CustomerInvoiceApi.md#customer_invoices_get) | **GET** /customer_invoices | List customer_invoices
-*CustomerInvoiceApi* | [**customer_invoices_invoice_id_get**](docs/CustomerInvoiceApi.md#customer_invoices_invoice_id_get) | **GET** /customer_invoices/{invoice_id} | Get customer_invoice
-*DiscountCouponApi* | [**discount_coupons_coupon_id_delete**](docs/DiscountCouponApi.md#discount_coupons_coupon_id_delete) | **DELETE** /discount_coupons/{coupon_id} | Delete discount_coupon
-*DiscountCouponApi* | [**discount_coupons_coupon_id_get**](docs/DiscountCouponApi.md#discount_coupons_coupon_id_get) | **GET** /discount_coupons/{coupon_id} | Get discount_coupon
-*DiscountCouponApi* | [**discount_coupons_coupon_id_patch**](docs/DiscountCouponApi.md#discount_coupons_coupon_id_patch) | **PATCH** /discount_coupons/{coupon_id} | Update discount_coupon
-*DiscountCouponApi* | [**discount_coupons_get**](docs/DiscountCouponApi.md#discount_coupons_get) | **GET** /discount_coupons | List discount_coupons
-*DiscountCouponApi* | [**discount_coupons_post**](docs/DiscountCouponApi.md#discount_coupons_post) | **POST** /discount_coupons | Create discount_coupon
-*EventApi* | [**events_event_id_get**](docs/EventApi.md#events_event_id_get) | **GET** /events/{event_id} | Get event
-*EventApi* | [**events_get**](docs/EventApi.md#events_get) | **GET** /events | List events
-*InstallmentPaymentApi* | [**installment_payments_get**](docs/InstallmentPaymentApi.md#installment_payments_get) | **GET** /installment_payments | List installment_payments
-*InstallmentPaymentApi* | [**installment_payments_payment_id_get**](docs/InstallmentPaymentApi.md#installment_payments_payment_id_get) | **GET** /installment_payments/{payment_id} | Get installment_payment
-*MeterApi* | [**meters_get**](docs/MeterApi.md#meters_get) | **GET** /meters | List meters
-*MeterApi* | [**meters_meter_id_delete**](docs/MeterApi.md#meters_meter_id_delete) | **DELETE** /meters/{meter_id} | Delete meter
-*MeterApi* | [**meters_meter_id_get**](docs/MeterApi.md#meters_meter_id_get) | **GET** /meters/{meter_id} | Get meter
-*MeterApi* | [**meters_meter_id_patch**](docs/MeterApi.md#meters_meter_id_patch) | **PATCH** /meters/{meter_id} | Update meter
-*MeterApi* | [**meters_post**](docs/MeterApi.md#meters_post) | **POST** /meters | Create meter
-*MeterBalanceApi* | [**meter_balances_balance_id_get**](docs/MeterBalanceApi.md#meter_balances_balance_id_get) | **GET** /meter_balances/{balance_id} | Get meter_balance
-*MeterBalanceApi* | [**meter_balances_get**](docs/MeterBalanceApi.md#meter_balances_get) | **GET** /meter_balances | List meter_balances
-*PaymentLinkApi* | [**payment_links_get**](docs/PaymentLinkApi.md#payment_links_get) | **GET** /payment_links | List payment_links
-*PaymentLinkApi* | [**payment_links_link_id_delete**](docs/PaymentLinkApi.md#payment_links_link_id_delete) | **DELETE** /payment_links/{link_id} | Delete payment_link
-*PaymentLinkApi* | [**payment_links_link_id_get**](docs/PaymentLinkApi.md#payment_links_link_id_get) | **GET** /payment_links/{link_id} | Get payment_link
-*PaymentLinkApi* | [**payment_links_link_id_patch**](docs/PaymentLinkApi.md#payment_links_link_id_patch) | **PATCH** /payment_links/{link_id} | Update payment_link
-*PaymentLinkApi* | [**payment_links_post**](docs/PaymentLinkApi.md#payment_links_post) | **POST** /payment_links | Create payment_link
-*PaymentRequestApi* | [**payment_requests_get**](docs/PaymentRequestApi.md#payment_requests_get) | **GET** /payment_requests | List payment_requests
-*PaymentRequestApi* | [**payment_requests_post**](docs/PaymentRequestApi.md#payment_requests_post) | **POST** /payment_requests | Create payment_request
-*PaymentRequestApi* | [**payment_requests_request_id_delete**](docs/PaymentRequestApi.md#payment_requests_request_id_delete) | **DELETE** /payment_requests/{request_id} | Delete payment_request
-*PaymentRequestApi* | [**payment_requests_request_id_get**](docs/PaymentRequestApi.md#payment_requests_request_id_get) | **GET** /payment_requests/{request_id} | Get payment_request
-*PaymentRequestApi* | [**payment_requests_request_id_patch**](docs/PaymentRequestApi.md#payment_requests_request_id_patch) | **PATCH** /payment_requests/{request_id} | Update payment_request
-*PayoutApi* | [**payouts_get**](docs/PayoutApi.md#payouts_get) | **GET** /payouts | List payouts
-*PayoutApi* | [**payouts_payout_id_delete**](docs/PayoutApi.md#payouts_payout_id_delete) | **DELETE** /payouts/{payout_id} | Delete payout
-*PayoutApi* | [**payouts_payout_id_get**](docs/PayoutApi.md#payouts_payout_id_get) | **GET** /payouts/{payout_id} | Get payout
-*PayoutApi* | [**payouts_payout_id_patch**](docs/PayoutApi.md#payouts_payout_id_patch) | **PATCH** /payouts/{payout_id} | Update payout
-*PayoutApi* | [**payouts_post**](docs/PayoutApi.md#payouts_post) | **POST** /payouts | Create payout
-*PayoutMethodApi* | [**payout_methods_get**](docs/PayoutMethodApi.md#payout_methods_get) | **GET** /payout_methods | List payout_methods
-*PayoutMethodApi* | [**payout_methods_payout_method_id_get**](docs/PayoutMethodApi.md#payout_methods_payout_method_id_get) | **GET** /payout_methods/{payout_method_id} | Get payout_method
-*PriceApi* | [**prices_get**](docs/PriceApi.md#prices_get) | **GET** /prices | List prices
-*PriceApi* | [**prices_post**](docs/PriceApi.md#prices_post) | **POST** /prices | Create price
-*PriceApi* | [**prices_price_id_delete**](docs/PriceApi.md#prices_price_id_delete) | **DELETE** /prices/{price_id} | Delete price
-*PriceApi* | [**prices_price_id_get**](docs/PriceApi.md#prices_price_id_get) | **GET** /prices/{price_id} | Get price
-*PriceApi* | [**prices_price_id_patch**](docs/PriceApi.md#prices_price_id_patch) | **PATCH** /prices/{price_id} | Update price
-*ProductApi* | [**products_get**](docs/ProductApi.md#products_get) | **GET** /products | List products
-*ProductApi* | [**products_post**](docs/ProductApi.md#products_post) | **POST** /products | Create product
-*ProductApi* | [**products_product_id_delete**](docs/ProductApi.md#products_product_id_delete) | **DELETE** /products/{product_id} | Delete product
-*ProductApi* | [**products_product_id_get**](docs/ProductApi.md#products_product_id_get) | **GET** /products/{product_id} | Get product
-*ProductApi* | [**products_product_id_patch**](docs/ProductApi.md#products_product_id_patch) | **PATCH** /products/{product_id} | Update product
-*RefundApi* | [**refunds_get**](docs/RefundApi.md#refunds_get) | **GET** /refunds | List refunds
-*RefundApi* | [**refunds_post**](docs/RefundApi.md#refunds_post) | **POST** /refunds | Create refund
-*RefundApi* | [**refunds_refund_id_delete**](docs/RefundApi.md#refunds_refund_id_delete) | **DELETE** /refunds/{refund_id} | Delete refund
-*RefundApi* | [**refunds_refund_id_get**](docs/RefundApi.md#refunds_refund_id_get) | **GET** /refunds/{refund_id} | Get refund
-*RefundApi* | [**refunds_refund_id_patch**](docs/RefundApi.md#refunds_refund_id_patch) | **PATCH** /refunds/{refund_id} | Update refund
-*SpiAccountAliaseApi* | [**spi_account_aliases_alias_id_get**](docs/SpiAccountAliaseApi.md#spi_account_aliases_alias_id_get) | **GET** /spi_account_aliases/{alias_id} | Get spi_account_aliase
-*SpiAccountAliaseApi* | [**spi_account_aliases_get**](docs/SpiAccountAliaseApi.md#spi_account_aliases_get) | **GET** /spi_account_aliases | List spi_account_aliases
-*SpiQrCodeApi* | [**spi_qr_codes_get**](docs/SpiQrCodeApi.md#spi_qr_codes_get) | **GET** /spi_qr_codes | List spi_qr_codes
-*SpiQrCodeApi* | [**spi_qr_codes_post**](docs/SpiQrCodeApi.md#spi_qr_codes_post) | **POST** /spi_qr_codes | Create spi_qr_code
-*SpiQrCodeApi* | [**spi_qr_codes_qr_code_id_delete**](docs/SpiQrCodeApi.md#spi_qr_codes_qr_code_id_delete) | **DELETE** /spi_qr_codes/{qr_code_id} | Delete spi_qr_code
-*SpiQrCodeApi* | [**spi_qr_codes_qr_code_id_get**](docs/SpiQrCodeApi.md#spi_qr_codes_qr_code_id_get) | **GET** /spi_qr_codes/{qr_code_id} | Get spi_qr_code
-*SpiQrCodeApi* | [**spi_qr_codes_qr_code_id_patch**](docs/SpiQrCodeApi.md#spi_qr_codes_qr_code_id_patch) | **PATCH** /spi_qr_codes/{qr_code_id} | Update spi_qr_code
-*SubscriptionApi* | [**subscriptions_get**](docs/SubscriptionApi.md#subscriptions_get) | **GET** /subscriptions | List subscriptions
-*SubscriptionApi* | [**subscriptions_post**](docs/SubscriptionApi.md#subscriptions_post) | **POST** /subscriptions | Create subscription
-*SubscriptionApi* | [**subscriptions_subscription_id_delete**](docs/SubscriptionApi.md#subscriptions_subscription_id_delete) | **DELETE** /subscriptions/{subscription_id} | Delete subscription
-*SubscriptionApi* | [**subscriptions_subscription_id_get**](docs/SubscriptionApi.md#subscriptions_subscription_id_get) | **GET** /subscriptions/{subscription_id} | Get subscription
-*SubscriptionApi* | [**subscriptions_subscription_id_patch**](docs/SubscriptionApi.md#subscriptions_subscription_id_patch) | **PATCH** /subscriptions/{subscription_id} | Update subscription
-*TransactionApi* | [**transactions_get**](docs/TransactionApi.md#transactions_get) | **GET** /transactions | List transactions
-*TransactionApi* | [**transactions_transaction_id_get**](docs/TransactionApi.md#transactions_transaction_id_get) | **GET** /transactions/{transaction_id} | Get transaction
-*WebhookApi* | [**webhooks_get**](docs/WebhookApi.md#webhooks_get) | **GET** /webhooks | List webhooks
-*WebhookApi* | [**webhooks_post**](docs/WebhookApi.md#webhooks_post) | **POST** /webhooks | Create webhook
-*WebhookApi* | [**webhooks_webhook_id_delete**](docs/WebhookApi.md#webhooks_webhook_id_delete) | **DELETE** /webhooks/{webhook_id} | Delete webhook
-*WebhookApi* | [**webhooks_webhook_id_get**](docs/WebhookApi.md#webhooks_webhook_id_get) | **GET** /webhooks/{webhook_id} | Get webhook
-*WebhookApi* | [**webhooks_webhook_id_patch**](docs/WebhookApi.md#webhooks_webhook_id_patch) | **PATCH** /webhooks/{webhook_id} | Update webhook
-*WebhookDeliveryLogApi* | [**webhook_delivery_logs_get**](docs/WebhookDeliveryLogApi.md#webhook_delivery_logs_get) | **GET** /webhook_delivery_logs | List webhook_delivery_logs
-*WebhookDeliveryLogApi* | [**webhook_delivery_logs_log_id_get**](docs/WebhookDeliveryLogApi.md#webhook_delivery_logs_log_id_get) | **GET** /webhook_delivery_logs/{log_id} | Get webhook_delivery_log
+*BNPLApi* | [**list_installment_payments**](docs/BNPLApi.md#list_installment_payments) | **GET** /installment_payments | List installment payments
+*BNPLApi* | [**retrieve_installment_payment**](docs/BNPLApi.md#retrieve_installment_payment) | **GET** /installment_payments/{payment_id} | Retrieve installment payment
+*CheckoutApi* | [**create_checkout_session**](docs/CheckoutApi.md#create_checkout_session) | **POST** /checkout_sessions | Create checkout session
+*CheckoutApi* | [**create_payment_link**](docs/CheckoutApi.md#create_payment_link) | **POST** /payment_links | Create payment link
+*CheckoutApi* | [**delete_checkout_session**](docs/CheckoutApi.md#delete_checkout_session) | **DELETE** /checkout_sessions/{session_id} | Delete checkout session
+*CheckoutApi* | [**delete_payment_link**](docs/CheckoutApi.md#delete_payment_link) | **DELETE** /payment_links/{link_id} | Delete payment link
+*CheckoutApi* | [**list_checkout_sessions**](docs/CheckoutApi.md#list_checkout_sessions) | **GET** /checkout_sessions | List checkout sessions
+*CheckoutApi* | [**list_payment_links**](docs/CheckoutApi.md#list_payment_links) | **GET** /payment_links | List payment links
+*CheckoutApi* | [**retrieve_checkout_session**](docs/CheckoutApi.md#retrieve_checkout_session) | **GET** /checkout_sessions/{session_id} | Retrieve checkout session
+*CheckoutApi* | [**retrieve_payment_link**](docs/CheckoutApi.md#retrieve_payment_link) | **GET** /payment_links/{link_id} | Retrieve payment link
+*CheckoutApi* | [**update_checkout_session**](docs/CheckoutApi.md#update_checkout_session) | **PATCH** /checkout_sessions/{session_id} | Update checkout session
+*CheckoutApi* | [**update_payment_link**](docs/CheckoutApi.md#update_payment_link) | **PATCH** /payment_links/{link_id} | Update payment link
+*CoreApi* | [**create_customer**](docs/CoreApi.md#create_customer) | **POST** /customers | Create customer
+*CoreApi* | [**create_payment_request**](docs/CoreApi.md#create_payment_request) | **POST** /payment_requests | Create payment request
+*CoreApi* | [**create_refund**](docs/CoreApi.md#create_refund) | **POST** /refunds | Create refund
+*CoreApi* | [**delete_customer**](docs/CoreApi.md#delete_customer) | **DELETE** /customers/{customer_id} | Delete customer
+*CoreApi* | [**delete_payment_request**](docs/CoreApi.md#delete_payment_request) | **DELETE** /payment_requests/{request_id} | Delete payment request
+*CoreApi* | [**delete_refund**](docs/CoreApi.md#delete_refund) | **DELETE** /refunds/{refund_id} | Delete refund
+*CoreApi* | [**list_customers**](docs/CoreApi.md#list_customers) | **GET** /customers | List customers
+*CoreApi* | [**list_payment_requests**](docs/CoreApi.md#list_payment_requests) | **GET** /payment_requests | List payment requests
+*CoreApi* | [**list_refunds**](docs/CoreApi.md#list_refunds) | **GET** /refunds | List refunds
+*CoreApi* | [**list_transactions**](docs/CoreApi.md#list_transactions) | **GET** /transactions | List transactions
+*CoreApi* | [**retrieve_customer**](docs/CoreApi.md#retrieve_customer) | **GET** /customers/{customer_id} | Retrieve customer
+*CoreApi* | [**retrieve_payment_request**](docs/CoreApi.md#retrieve_payment_request) | **GET** /payment_requests/{request_id} | Retrieve payment request
+*CoreApi* | [**retrieve_refund**](docs/CoreApi.md#retrieve_refund) | **GET** /refunds/{refund_id} | Retrieve refund
+*CoreApi* | [**retrieve_transaction**](docs/CoreApi.md#retrieve_transaction) | **GET** /transactions/{transaction_id} | Retrieve transaction
+*CoreApi* | [**update_customer**](docs/CoreApi.md#update_customer) | **PATCH** /customers/{customer_id} | Update customer
+*CoreApi* | [**update_payment_request**](docs/CoreApi.md#update_payment_request) | **PATCH** /payment_requests/{request_id} | Update payment request
+*CoreApi* | [**update_refund**](docs/CoreApi.md#update_refund) | **PATCH** /refunds/{refund_id} | Update refund
+*EventsApi* | [**list_events**](docs/EventsApi.md#list_events) | **GET** /events | List events
+*EventsApi* | [**retrieve_event**](docs/EventsApi.md#retrieve_event) | **GET** /events/{event_id} | Retrieve event
+*PayoutsApi* | [**create_beneficiary_payout**](docs/PayoutsApi.md#create_beneficiary_payout) | **POST** /beneficiary_payouts | Create beneficiary payout
+*PayoutsApi* | [**create_payout**](docs/PayoutsApi.md#create_payout) | **POST** /payouts | Create payout
+*PayoutsApi* | [**delete_payout**](docs/PayoutsApi.md#delete_payout) | **DELETE** /payouts/{payout_id} | Delete payout
+*PayoutsApi* | [**list_beneficiary_payouts**](docs/PayoutsApi.md#list_beneficiary_payouts) | **GET** /beneficiary_payouts | List beneficiary payouts
+*PayoutsApi* | [**list_payout_methods**](docs/PayoutsApi.md#list_payout_methods) | **GET** /payout_methods | List payout methods
+*PayoutsApi* | [**list_payouts**](docs/PayoutsApi.md#list_payouts) | **GET** /payouts | List payouts
+*PayoutsApi* | [**retrieve_beneficiary_payout**](docs/PayoutsApi.md#retrieve_beneficiary_payout) | **GET** /beneficiary_payouts/{payout_id} | Retrieve beneficiary payout
+*PayoutsApi* | [**retrieve_payout**](docs/PayoutsApi.md#retrieve_payout) | **GET** /payouts/{payout_id} | Retrieve payout
+*PayoutsApi* | [**retrieve_payout_method**](docs/PayoutsApi.md#retrieve_payout_method) | **GET** /payout_methods/{payout_method_id} | Retrieve payout method
+*PayoutsApi* | [**update_payout**](docs/PayoutsApi.md#update_payout) | **PATCH** /payouts/{payout_id} | Update payout
+*ProductsApi* | [**create_price**](docs/ProductsApi.md#create_price) | **POST** /prices | Create price
+*ProductsApi* | [**create_product**](docs/ProductsApi.md#create_product) | **POST** /products | Create product
+*ProductsApi* | [**delete_price**](docs/ProductsApi.md#delete_price) | **DELETE** /prices/{price_id} | Delete price
+*ProductsApi* | [**delete_product**](docs/ProductsApi.md#delete_product) | **DELETE** /products/{product_id} | Delete product
+*ProductsApi* | [**list_prices**](docs/ProductsApi.md#list_prices) | **GET** /prices | List prices
+*ProductsApi* | [**list_products**](docs/ProductsApi.md#list_products) | **GET** /products | List products
+*ProductsApi* | [**retrieve_price**](docs/ProductsApi.md#retrieve_price) | **GET** /prices/{price_id} | Retrieve price
+*ProductsApi* | [**retrieve_product**](docs/ProductsApi.md#retrieve_product) | **GET** /products/{product_id} | Retrieve product
+*ProductsApi* | [**update_price**](docs/ProductsApi.md#update_price) | **PATCH** /prices/{price_id} | Update price
+*ProductsApi* | [**update_product**](docs/ProductsApi.md#update_product) | **PATCH** /products/{product_id} | Update product
+*SPIApi* | [**create_spi_qr_code**](docs/SPIApi.md#create_spi_qr_code) | **POST** /spi_qr_codes | Create spi qr code
+*SPIApi* | [**delete_spi_qr_code**](docs/SPIApi.md#delete_spi_qr_code) | **DELETE** /spi_qr_codes/{qr_code_id} | Delete spi qr code
+*SPIApi* | [**list_spi_account_aliases**](docs/SPIApi.md#list_spi_account_aliases) | **GET** /spi_account_aliases | List spi account aliases
+*SPIApi* | [**list_spi_qr_codes**](docs/SPIApi.md#list_spi_qr_codes) | **GET** /spi_qr_codes | List spi qr codes
+*SPIApi* | [**retrieve_spi_account_aliase**](docs/SPIApi.md#retrieve_spi_account_aliase) | **GET** /spi_account_aliases/{alias_id} | Retrieve spi account aliase
+*SPIApi* | [**retrieve_spi_qr_code**](docs/SPIApi.md#retrieve_spi_qr_code) | **GET** /spi_qr_codes/{qr_code_id} | Retrieve spi qr code
+*SPIApi* | [**update_spi_qr_code**](docs/SPIApi.md#update_spi_qr_code) | **PATCH** /spi_qr_codes/{qr_code_id} | Update spi qr code
+*SubscriptionsApi* | [**create_discount_coupon**](docs/SubscriptionsApi.md#create_discount_coupon) | **POST** /discount_coupons | Create discount coupon
+*SubscriptionsApi* | [**create_subscription**](docs/SubscriptionsApi.md#create_subscription) | **POST** /subscriptions | Create subscription
+*SubscriptionsApi* | [**delete_discount_coupon**](docs/SubscriptionsApi.md#delete_discount_coupon) | **DELETE** /discount_coupons/{coupon_id} | Delete discount coupon
+*SubscriptionsApi* | [**delete_subscription**](docs/SubscriptionsApi.md#delete_subscription) | **DELETE** /subscriptions/{subscription_id} | Delete subscription
+*SubscriptionsApi* | [**list_customer_invoices**](docs/SubscriptionsApi.md#list_customer_invoices) | **GET** /customer_invoices | List customer invoices
+*SubscriptionsApi* | [**list_discount_coupons**](docs/SubscriptionsApi.md#list_discount_coupons) | **GET** /discount_coupons | List discount coupons
+*SubscriptionsApi* | [**list_subscriptions**](docs/SubscriptionsApi.md#list_subscriptions) | **GET** /subscriptions | List subscriptions
+*SubscriptionsApi* | [**retrieve_customer_invoice**](docs/SubscriptionsApi.md#retrieve_customer_invoice) | **GET** /customer_invoices/{invoice_id} | Retrieve customer invoice
+*SubscriptionsApi* | [**retrieve_discount_coupon**](docs/SubscriptionsApi.md#retrieve_discount_coupon) | **GET** /discount_coupons/{coupon_id} | Retrieve discount coupon
+*SubscriptionsApi* | [**retrieve_subscription**](docs/SubscriptionsApi.md#retrieve_subscription) | **GET** /subscriptions/{subscription_id} | Retrieve subscription
+*SubscriptionsApi* | [**update_discount_coupon**](docs/SubscriptionsApi.md#update_discount_coupon) | **PATCH** /discount_coupons/{coupon_id} | Update discount coupon
+*SubscriptionsApi* | [**update_subscription**](docs/SubscriptionsApi.md#update_subscription) | **PATCH** /subscriptions/{subscription_id} | Update subscription
+*UsageBillingApi* | [**create_meter**](docs/UsageBillingApi.md#create_meter) | **POST** /meters | Create meter
+*UsageBillingApi* | [**delete_meter**](docs/UsageBillingApi.md#delete_meter) | **DELETE** /meters/{meter_id} | Delete meter
+*UsageBillingApi* | [**list_meter_balances**](docs/UsageBillingApi.md#list_meter_balances) | **GET** /meter_balances | List meter balances
+*UsageBillingApi* | [**list_meters**](docs/UsageBillingApi.md#list_meters) | **GET** /meters | List meters
+*UsageBillingApi* | [**retrieve_meter**](docs/UsageBillingApi.md#retrieve_meter) | **GET** /meters/{meter_id} | Retrieve meter
+*UsageBillingApi* | [**retrieve_meter_balance**](docs/UsageBillingApi.md#retrieve_meter_balance) | **GET** /meter_balances/{balance_id} | Retrieve meter balance
+*UsageBillingApi* | [**update_meter**](docs/UsageBillingApi.md#update_meter) | **PATCH** /meters/{meter_id} | Update meter
+*WebhooksApi* | [**create_webhook**](docs/WebhooksApi.md#create_webhook) | **POST** /webhooks | Create webhook
+*WebhooksApi* | [**delete_webhook**](docs/WebhooksApi.md#delete_webhook) | **DELETE** /webhooks/{webhook_id} | Delete webhook
+*WebhooksApi* | [**list_webhook_delivery_logs**](docs/WebhooksApi.md#list_webhook_delivery_logs) | **GET** /webhook_delivery_logs | List webhook delivery logs
+*WebhooksApi* | [**list_webhooks**](docs/WebhooksApi.md#list_webhooks) | **GET** /webhooks | List webhooks
+*WebhooksApi* | [**retrieve_webhook**](docs/WebhooksApi.md#retrieve_webhook) | **GET** /webhooks/{webhook_id} | Retrieve webhook
+*WebhooksApi* | [**retrieve_webhook_delivery_log**](docs/WebhooksApi.md#retrieve_webhook_delivery_log) | **GET** /webhook_delivery_logs/{log_id} | Retrieve webhook delivery log
+*WebhooksApi* | [**update_webhook**](docs/WebhooksApi.md#update_webhook) | **PATCH** /webhooks/{webhook_id} | Update webhook
 
 
 ## Documentation For Models
 
  - [BeneficiaryPayouts](docs/BeneficiaryPayouts.md)
  - [BeneficiaryPayoutsCreate](docs/BeneficiaryPayoutsCreate.md)
- - [BeneficiaryPayoutsGet200Response](docs/BeneficiaryPayoutsGet200Response.md)
  - [BeneficiaryPayoutsUpdate](docs/BeneficiaryPayoutsUpdate.md)
  - [BnplStatus](docs/BnplStatus.md)
  - [CheckoutSessionStatus](docs/CheckoutSessionStatus.md)
  - [CheckoutSessions](docs/CheckoutSessions.md)
  - [CheckoutSessionsCreate](docs/CheckoutSessionsCreate.md)
- - [CheckoutSessionsGet200Response](docs/CheckoutSessionsGet200Response.md)
  - [CheckoutSessionsUpdate](docs/CheckoutSessionsUpdate.md)
  - [CurrencyCode](docs/CurrencyCode.md)
  - [CustomerInvoices](docs/CustomerInvoices.md)
  - [CustomerInvoicesCreate](docs/CustomerInvoicesCreate.md)
- - [CustomerInvoicesGet200Response](docs/CustomerInvoicesGet200Response.md)
  - [CustomerInvoicesUpdate](docs/CustomerInvoicesUpdate.md)
  - [Customers](docs/Customers.md)
  - [CustomersCreate](docs/CustomersCreate.md)
- - [CustomersGet200Response](docs/CustomersGet200Response.md)
- - [CustomersGet200ResponsePagination](docs/CustomersGet200ResponsePagination.md)
  - [CustomersUpdate](docs/CustomersUpdate.md)
  - [DiscountCoupons](docs/DiscountCoupons.md)
  - [DiscountCouponsCreate](docs/DiscountCouponsCreate.md)
- - [DiscountCouponsGet200Response](docs/DiscountCouponsGet200Response.md)
  - [DiscountCouponsUpdate](docs/DiscountCouponsUpdate.md)
  - [Error](docs/Error.md)
  - [ErrorError](docs/ErrorError.md)
  - [Events](docs/Events.md)
  - [EventsCreate](docs/EventsCreate.md)
- - [EventsGet200Response](docs/EventsGet200Response.md)
  - [EventsUpdate](docs/EventsUpdate.md)
  - [Frequency](docs/Frequency.md)
  - [InstallmentPayments](docs/InstallmentPayments.md)
  - [InstallmentPaymentsCreate](docs/InstallmentPaymentsCreate.md)
- - [InstallmentPaymentsGet200Response](docs/InstallmentPaymentsGet200Response.md)
  - [InstallmentPaymentsUpdate](docs/InstallmentPaymentsUpdate.md)
  - [InvoiceStatus](docs/InvoiceStatus.md)
+ - [ListBeneficiaryPayouts200Response](docs/ListBeneficiaryPayouts200Response.md)
+ - [ListCheckoutSessions200Response](docs/ListCheckoutSessions200Response.md)
+ - [ListCustomerInvoices200Response](docs/ListCustomerInvoices200Response.md)
+ - [ListCustomers200Response](docs/ListCustomers200Response.md)
+ - [ListCustomers200ResponsePagination](docs/ListCustomers200ResponsePagination.md)
+ - [ListDiscountCoupons200Response](docs/ListDiscountCoupons200Response.md)
+ - [ListEvents200Response](docs/ListEvents200Response.md)
+ - [ListInstallmentPayments200Response](docs/ListInstallmentPayments200Response.md)
+ - [ListMeterBalances200Response](docs/ListMeterBalances200Response.md)
+ - [ListMeters200Response](docs/ListMeters200Response.md)
+ - [ListPaymentLinks200Response](docs/ListPaymentLinks200Response.md)
+ - [ListPaymentRequests200Response](docs/ListPaymentRequests200Response.md)
+ - [ListPayoutMethods200Response](docs/ListPayoutMethods200Response.md)
+ - [ListPayouts200Response](docs/ListPayouts200Response.md)
+ - [ListPrices200Response](docs/ListPrices200Response.md)
+ - [ListProducts200Response](docs/ListProducts200Response.md)
+ - [ListRefunds200Response](docs/ListRefunds200Response.md)
+ - [ListSpiAccountAliases200Response](docs/ListSpiAccountAliases200Response.md)
+ - [ListSpiQrCodes200Response](docs/ListSpiQrCodes200Response.md)
+ - [ListSubscriptions200Response](docs/ListSubscriptions200Response.md)
+ - [ListTransactions200Response](docs/ListTransactions200Response.md)
+ - [ListWebhookDeliveryLogs200Response](docs/ListWebhookDeliveryLogs200Response.md)
+ - [ListWebhooks200Response](docs/ListWebhooks200Response.md)
  - [MeterBalances](docs/MeterBalances.md)
  - [MeterBalancesCreate](docs/MeterBalancesCreate.md)
- - [MeterBalancesGet200Response](docs/MeterBalancesGet200Response.md)
  - [MeterBalancesUpdate](docs/MeterBalancesUpdate.md)
  - [Meters](docs/Meters.md)
  - [MetersCreate](docs/MetersCreate.md)
- - [MetersGet200Response](docs/MetersGet200Response.md)
  - [MetersUpdate](docs/MetersUpdate.md)
  - [PaymentLinks](docs/PaymentLinks.md)
  - [PaymentLinksCreate](docs/PaymentLinksCreate.md)
- - [PaymentLinksGet200Response](docs/PaymentLinksGet200Response.md)
  - [PaymentLinksUpdate](docs/PaymentLinksUpdate.md)
  - [PaymentMethodCode](docs/PaymentMethodCode.md)
  - [PaymentRequests](docs/PaymentRequests.md)
  - [PaymentRequestsCreate](docs/PaymentRequestsCreate.md)
- - [PaymentRequestsGet200Response](docs/PaymentRequestsGet200Response.md)
  - [PaymentRequestsUpdate](docs/PaymentRequestsUpdate.md)
  - [PayoutMethods](docs/PayoutMethods.md)
  - [PayoutMethodsCreate](docs/PayoutMethodsCreate.md)
- - [PayoutMethodsGet200Response](docs/PayoutMethodsGet200Response.md)
  - [PayoutMethodsUpdate](docs/PayoutMethodsUpdate.md)
  - [PayoutStatus](docs/PayoutStatus.md)
  - [Payouts](docs/Payouts.md)
  - [PayoutsCreate](docs/PayoutsCreate.md)
- - [PayoutsGet200Response](docs/PayoutsGet200Response.md)
  - [PayoutsUpdate](docs/PayoutsUpdate.md)
  - [Prices](docs/Prices.md)
  - [PricesCreate](docs/PricesCreate.md)
- - [PricesGet200Response](docs/PricesGet200Response.md)
  - [PricesUpdate](docs/PricesUpdate.md)
  - [PricingModelEnum](docs/PricingModelEnum.md)
  - [ProductTypeEnum](docs/ProductTypeEnum.md)
  - [Products](docs/Products.md)
  - [ProductsCreate](docs/ProductsCreate.md)
- - [ProductsGet200Response](docs/ProductsGet200Response.md)
  - [ProductsUpdate](docs/ProductsUpdate.md)
  - [ProviderCode](docs/ProviderCode.md)
  - [RefundStatus](docs/RefundStatus.md)
  - [Refunds](docs/Refunds.md)
  - [RefundsCreate](docs/RefundsCreate.md)
- - [RefundsGet200Response](docs/RefundsGet200Response.md)
  - [RefundsUpdate](docs/RefundsUpdate.md)
  - [SpiAccountAliases](docs/SpiAccountAliases.md)
  - [SpiAccountAliasesCreate](docs/SpiAccountAliasesCreate.md)
- - [SpiAccountAliasesGet200Response](docs/SpiAccountAliasesGet200Response.md)
  - [SpiAccountAliasesUpdate](docs/SpiAccountAliasesUpdate.md)
  - [SpiAccountStatus](docs/SpiAccountStatus.md)
  - [SpiAccountType](docs/SpiAccountType.md)
  - [SpiPaymentStatus](docs/SpiPaymentStatus.md)
  - [SpiQrCodes](docs/SpiQrCodes.md)
  - [SpiQrCodesCreate](docs/SpiQrCodesCreate.md)
- - [SpiQrCodesGet200Response](docs/SpiQrCodesGet200Response.md)
  - [SpiQrCodesUpdate](docs/SpiQrCodesUpdate.md)
  - [SubscriptionStatus](docs/SubscriptionStatus.md)
  - [Subscriptions](docs/Subscriptions.md)
  - [SubscriptionsCreate](docs/SubscriptionsCreate.md)
- - [SubscriptionsGet200Response](docs/SubscriptionsGet200Response.md)
  - [SubscriptionsUpdate](docs/SubscriptionsUpdate.md)
  - [TransactionStatus](docs/TransactionStatus.md)
  - [Transactions](docs/Transactions.md)
  - [TransactionsCreate](docs/TransactionsCreate.md)
- - [TransactionsGet200Response](docs/TransactionsGet200Response.md)
  - [TransactionsUpdate](docs/TransactionsUpdate.md)
  - [WebhookDeliveryLogs](docs/WebhookDeliveryLogs.md)
  - [WebhookDeliveryLogsCreate](docs/WebhookDeliveryLogsCreate.md)
- - [WebhookDeliveryLogsGet200Response](docs/WebhookDeliveryLogsGet200Response.md)
  - [WebhookDeliveryLogsUpdate](docs/WebhookDeliveryLogsUpdate.md)
  - [WebhookEvent](docs/WebhookEvent.md)
  - [Webhooks](docs/Webhooks.md)
  - [WebhooksCreate](docs/WebhooksCreate.md)
- - [WebhooksGet200Response](docs/WebhooksGet200Response.md)
  - [WebhooksUpdate](docs/WebhooksUpdate.md)
 
 

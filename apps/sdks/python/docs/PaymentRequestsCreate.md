@@ -1,25 +1,20 @@
 # PaymentRequestsCreate
 
-Create payment_requests input
+Request body for creating a payment requests object. System-managed fields like `created_at`, `organization_id`, and IDs are automatically set.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**amount** | **float** |  | [optional] 
-**created_at** | **datetime** |  | [optional] 
-**created_by** | **str** |  | [optional] 
-**currency_code** | **str** |  | [optional] 
-**customer_id** | **str** |  | [optional] 
+**amount** | **float** | Amount in the smallest currency unit (e.g., cents for USD, same for XOF) | [optional] 
+**currency_code** | **str** | Three-letter ISO currency code (e.g., XOF, USD, EUR) | [optional] 
+**customer_id** | **str** | Unique identifier (UUID format) | [optional] 
 **description** | **str** |  | [optional] 
-**environment** | **str** |  | [optional] 
 **expiry_date** | **str** |  | [optional] 
-**organization_id** | **str** |  | [optional] 
 **payment_link** | **str** |  | [optional] 
 **payment_reference** | **str** |  | [optional] 
-**request_id** | **str** |  | [optional] 
 **spi_account_number** | **str** |  | [optional] 
-**spi_bulk_instruction_id** | **str** |  | [optional] 
+**spi_bulk_instruction_id** | **str** | Unique identifier (UUID format) | [optional] 
 **spi_confirmation** | **bool** |  | [optional] 
 **spi_date_envoi** | **str** |  | [optional] 
 **spi_date_irrevocabilite** | **str** |  | [optional] 
@@ -27,7 +22,7 @@ Name | Type | Description | Notes
 **spi_date_limite_reponse** | **str** |  | [optional] 
 **spi_date_rejet** | **str** |  | [optional] 
 **spi_debit_differe** | **bool** |  | [optional] 
-**spi_end2end_id** | **str** |  | [optional] 
+**spi_end2end_id** | **str** | Unique identifier (UUID format) | [optional] 
 **spi_payeur_alias** | **str** |  | [optional] 
 **spi_payeur_nom** | **str** |  | [optional] 
 **spi_payeur_pays** | **str** |  | [optional] 
@@ -38,9 +33,8 @@ Name | Type | Description | Notes
 **spi_rejection_reason** | **str** |  | [optional] 
 **spi_remise_amount** | **float** |  | [optional] 
 **spi_remise_rate** | **float** |  | [optional] 
-**spi_tx_id** | **str** |  | [optional] 
-**status** | **str** |  | [optional] 
-**updated_at** | **datetime** |  | [optional] 
+**spi_tx_id** | **str** | Unique identifier (UUID format) | [optional] 
+**status** | **str** | Current status of the resource | [optional] 
 
 ## Example
 

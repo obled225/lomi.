@@ -19,27 +19,35 @@ import (
 // checks if the Customers type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Customers{}
 
-// Customers customers object
+// Customers customers resource object
 type Customers struct {
 	Address *string `json:"address,omitempty"`
 	City *string `json:"city,omitempty"`
 	Country *string `json:"country,omitempty"`
+	// ISO 8601 datetime
 	CreatedAt *time.Time `json:"created_at,omitempty"`
 	CreatedBy *string `json:"created_by,omitempty"`
+	// Unique identifier (UUID format)
 	CustomerId *string `json:"customer_id,omitempty"`
+	// ISO 8601 datetime
 	DeletedAt *time.Time `json:"deleted_at,omitempty"`
+	// Email address
 	Email *string `json:"email,omitempty"`
 	Environment *string `json:"environment,omitempty"`
 	IsBusiness *bool `json:"is_business,omitempty"`
+	// Soft deletion flag
 	IsDeleted *bool `json:"is_deleted,omitempty"`
+	// Set of key-value pairs for storing additional information
 	Metadata map[string]interface{} `json:"metadata,omitempty"`
 	Name *string `json:"name,omitempty"`
+	// Unique identifier (UUID format)
 	OrganizationId *string `json:"organization_id,omitempty"`
 	PhoneNumber *string `json:"phone_number,omitempty"`
 	PostalCode *string `json:"postal_code,omitempty"`
 	SpiAliasMbno *string `json:"spi_alias_mbno,omitempty"`
 	SpiAliasShid *string `json:"spi_alias_shid,omitempty"`
 	SpiPrimaryAlias *string `json:"spi_primary_alias,omitempty"`
+	// ISO 8601 datetime
 	UpdatedAt *time.Time `json:"updated_at,omitempty"`
 	WhatsappNumber *string `json:"whatsapp_number,omitempty"`
 }

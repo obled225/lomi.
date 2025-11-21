@@ -19,24 +19,35 @@ import (
 // checks if the Prices type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Prices{}
 
-// Prices prices object
+// Prices prices resource object
 type Prices struct {
+	// Amount in the smallest currency unit (e.g., cents for USD, same for XOF)
 	Amount *float64 `json:"amount,omitempty"`
 	BillingInterval *string `json:"billing_interval,omitempty"`
+	// ISO 8601 datetime
 	CreatedAt *time.Time `json:"created_at,omitempty"`
+	// Three-letter ISO currency code (e.g., XOF, USD, EUR)
 	CurrencyCode *string `json:"currency_code,omitempty"`
 	Environment *string `json:"environment,omitempty"`
+	// Whether this resource is currently active
 	IsActive *bool `json:"is_active,omitempty"`
 	IsDefault *bool `json:"is_default,omitempty"`
 	MaximumAmount *float64 `json:"maximum_amount,omitempty"`
+	// Set of key-value pairs for storing additional information
 	Metadata map[string]interface{} `json:"metadata,omitempty"`
 	MinimumAmount *float64 `json:"minimum_amount,omitempty"`
+	// Unique identifier (UUID format)
 	OrganizationId *string `json:"organization_id,omitempty"`
+	// Unique identifier (UUID format)
 	PriceId *string `json:"price_id,omitempty"`
 	PricingModel *string `json:"pricing_model,omitempty"`
+	// Unique identifier (UUID format)
 	ProductId *string `json:"product_id,omitempty"`
+	// Unique identifier (UUID format)
 	ProviderPriceId *string `json:"provider_price_id,omitempty"`
+	// Unique identifier (UUID format)
 	ProviderProductId *string `json:"provider_product_id,omitempty"`
+	// ISO 8601 datetime
 	UpdatedAt *time.Time `json:"updated_at,omitempty"`
 }
 

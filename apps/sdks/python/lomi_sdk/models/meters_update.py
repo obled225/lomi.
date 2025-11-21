@@ -18,8 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from uuid import UUID
 from typing import Optional, Set
@@ -27,18 +26,15 @@ from typing_extensions import Self
 
 class MetersUpdate(BaseModel):
     """
-    Update meters input
+    Request body for updating a meters object. Only include fields you want to modify.
     """ # noqa: E501
     aggregation: Optional[Dict[str, Any]] = None
-    created_at: Optional[datetime] = None
     filter: Optional[Dict[str, Any]] = None
-    is_active: Optional[StrictBool] = None
-    meter_id: Optional[UUID] = None
+    is_active: Optional[StrictBool] = Field(default=None, description="Whether this resource is currently active")
+    meter_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
     name: Optional[StrictStr] = None
-    organization_id: Optional[UUID] = None
-    product_id: Optional[UUID] = None
-    updated_at: Optional[datetime] = None
-    __properties: ClassVar[List[str]] = ["aggregation", "created_at", "filter", "is_active", "meter_id", "name", "organization_id", "product_id", "updated_at"]
+    product_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
+    __properties: ClassVar[List[str]] = ["aggregation", "filter", "is_active", "meter_id", "name", "product_id"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -92,14 +88,11 @@ class MetersUpdate(BaseModel):
 
         _obj = cls.model_validate({
             "aggregation": obj.get("aggregation"),
-            "created_at": obj.get("created_at"),
             "filter": obj.get("filter"),
             "is_active": obj.get("is_active"),
             "meter_id": obj.get("meter_id"),
             "name": obj.get("name"),
-            "organization_id": obj.get("organization_id"),
-            "product_id": obj.get("product_id"),
-            "updated_at": obj.get("updated_at")
+            "product_id": obj.get("product_id")
         })
         return _obj
 

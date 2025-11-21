@@ -7,22 +7,20 @@ Name | Type | Description | Notes
 **AttemptNumber** | Pointer to **float64** |  | [optional] 
 **ComptePaye** | Pointer to **string** |  | [optional] 
 **ComptePayeur** | Pointer to **string** |  | [optional] 
-**CreatedAt** | Pointer to **time.Time** |  | [optional] 
 **EventType** | Pointer to **string** |  | [optional] 
 **Headers** | Pointer to **map[string]interface{}** |  | [optional] 
 **IpAddress** | Pointer to **string** |  | [optional] 
-**LogId** | Pointer to **string** |  | [optional] 
+**LogId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
 **Montant** | Pointer to **float64** |  | [optional] 
-**OrganizationId** | Pointer to **string** |  | [optional] 
 **Payload** | Pointer to **map[string]interface{}** |  | [optional] 
 **RequestDurationMs** | Pointer to **float64** |  | [optional] 
 **ResponseBody** | Pointer to **string** |  | [optional] 
 **ResponseStatus** | Pointer to **float64** |  | [optional] 
 **SpiEventCode** | Pointer to **string** |  | [optional] 
-**SpiTxId** | Pointer to **string** |  | [optional] 
+**SpiTxId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
 **Success** | Pointer to **bool** |  | [optional] 
 **UserAgent** | Pointer to **string** |  | [optional] 
-**WebhookId** | Pointer to **string** |  | [optional] 
+**WebhookId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
 
 ## Methods
 
@@ -117,31 +115,6 @@ SetComptePayeur sets ComptePayeur field to given value.
 `func (o *WebhookDeliveryLogsUpdate) HasComptePayeur() bool`
 
 HasComptePayeur returns a boolean if a field has been set.
-
-### GetCreatedAt
-
-`func (o *WebhookDeliveryLogsUpdate) GetCreatedAt() time.Time`
-
-GetCreatedAt returns the CreatedAt field if non-nil, zero value otherwise.
-
-### GetCreatedAtOk
-
-`func (o *WebhookDeliveryLogsUpdate) GetCreatedAtOk() (*time.Time, bool)`
-
-GetCreatedAtOk returns a tuple with the CreatedAt field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCreatedAt
-
-`func (o *WebhookDeliveryLogsUpdate) SetCreatedAt(v time.Time)`
-
-SetCreatedAt sets CreatedAt field to given value.
-
-### HasCreatedAt
-
-`func (o *WebhookDeliveryLogsUpdate) HasCreatedAt() bool`
-
-HasCreatedAt returns a boolean if a field has been set.
 
 ### GetEventType
 
@@ -267,31 +240,6 @@ SetMontant sets Montant field to given value.
 `func (o *WebhookDeliveryLogsUpdate) HasMontant() bool`
 
 HasMontant returns a boolean if a field has been set.
-
-### GetOrganizationId
-
-`func (o *WebhookDeliveryLogsUpdate) GetOrganizationId() string`
-
-GetOrganizationId returns the OrganizationId field if non-nil, zero value otherwise.
-
-### GetOrganizationIdOk
-
-`func (o *WebhookDeliveryLogsUpdate) GetOrganizationIdOk() (*string, bool)`
-
-GetOrganizationIdOk returns a tuple with the OrganizationId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetOrganizationId
-
-`func (o *WebhookDeliveryLogsUpdate) SetOrganizationId(v string)`
-
-SetOrganizationId sets OrganizationId field to given value.
-
-### HasOrganizationId
-
-`func (o *WebhookDeliveryLogsUpdate) HasOrganizationId() bool`
-
-HasOrganizationId returns a boolean if a field has been set.
 
 ### GetPayload
 

@@ -18,8 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictFloat, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from uuid import UUID
 from typing import Optional, Set
@@ -27,7 +26,7 @@ from typing_extensions import Self
 
 class PayoutMethodsCreate(BaseModel):
     """
-    Create payout_methods input
+    Request body for creating a payout methods object. System-managed fields like `created_at`, `organization_id`, and IDs are automatically set.
     """ # noqa: E501
     account_name: Optional[StrictStr] = None
     account_number: Optional[StrictStr] = None
@@ -40,20 +39,17 @@ class PayoutMethodsCreate(BaseModel):
     bank_name: Optional[StrictStr] = None
     branch_code: Optional[StrictStr] = None
     country: Optional[StrictStr] = None
-    created_at: Optional[datetime] = None
     is_default: Optional[StrictBool] = None
     is_spi_enabled: Optional[StrictBool] = None
     is_uemoa: Optional[StrictBool] = None
     is_valid: Optional[StrictBool] = None
-    organization_id: Optional[UUID] = None
-    payout_method_id: Optional[UUID] = None
+    payout_method_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
     payout_method_type: Optional[StrictStr] = None
     spi_account_number: Optional[StrictStr] = None
     spi_alias_mbno: Optional[StrictStr] = None
     spi_alias_shid: Optional[StrictStr] = None
     spi_alias_type: Optional[StrictStr] = None
-    updated_at: Optional[datetime] = None
-    __properties: ClassVar[List[str]] = ["account_name", "account_number", "auto_withdrawal_day", "auto_withdrawal_enabled", "auto_withdrawal_last_run", "auto_withdrawal_method", "auto_withdrawal_mobile_provider", "bank_code", "bank_name", "branch_code", "country", "created_at", "is_default", "is_spi_enabled", "is_uemoa", "is_valid", "organization_id", "payout_method_id", "payout_method_type", "spi_account_number", "spi_alias_mbno", "spi_alias_shid", "spi_alias_type", "updated_at"]
+    __properties: ClassVar[List[str]] = ["account_name", "account_number", "auto_withdrawal_day", "auto_withdrawal_enabled", "auto_withdrawal_last_run", "auto_withdrawal_method", "auto_withdrawal_mobile_provider", "bank_code", "bank_name", "branch_code", "country", "is_default", "is_spi_enabled", "is_uemoa", "is_valid", "payout_method_id", "payout_method_type", "spi_account_number", "spi_alias_mbno", "spi_alias_shid", "spi_alias_type"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -117,19 +113,16 @@ class PayoutMethodsCreate(BaseModel):
             "bank_name": obj.get("bank_name"),
             "branch_code": obj.get("branch_code"),
             "country": obj.get("country"),
-            "created_at": obj.get("created_at"),
             "is_default": obj.get("is_default"),
             "is_spi_enabled": obj.get("is_spi_enabled"),
             "is_uemoa": obj.get("is_uemoa"),
             "is_valid": obj.get("is_valid"),
-            "organization_id": obj.get("organization_id"),
             "payout_method_id": obj.get("payout_method_id"),
             "payout_method_type": obj.get("payout_method_type"),
             "spi_account_number": obj.get("spi_account_number"),
             "spi_alias_mbno": obj.get("spi_alias_mbno"),
             "spi_alias_shid": obj.get("spi_alias_shid"),
-            "spi_alias_type": obj.get("spi_alias_type"),
-            "updated_at": obj.get("updated_at")
+            "spi_alias_type": obj.get("spi_alias_type")
         })
         return _obj
 

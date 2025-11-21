@@ -36,7 +36,7 @@ use \LomiSDK\ObjectSerializer;
  * CheckoutSessions Class Doc Comment
  *
  * @category Class
- * @description checkout_sessions object
+ * @description checkout sessions resource object
  * @package  LomiSDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -623,7 +623,7 @@ class CheckoutSessions implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets amount
      *
-     * @param float|null $amount amount
+     * @param float|null $amount Amount in the smallest currency unit (e.g., cents for USD, same for XOF)
      *
      * @return self
      */
@@ -650,7 +650,7 @@ class CheckoutSessions implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets cancel_url
      *
-     * @param string|null $cancel_url cancel_url
+     * @param string|null $cancel_url URL/URI
      *
      * @return self
      */
@@ -677,7 +677,7 @@ class CheckoutSessions implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets checkout_session_id
      *
-     * @param string|null $checkout_session_id checkout_session_id
+     * @param string|null $checkout_session_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -704,7 +704,7 @@ class CheckoutSessions implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets created_at
      *
-     * @param \DateTime|null $created_at created_at
+     * @param \DateTime|null $created_at ISO 8601 datetime
      *
      * @return self
      */
@@ -758,7 +758,7 @@ class CheckoutSessions implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets currency_code
      *
-     * @param string|null $currency_code currency_code
+     * @param string|null $currency_code Three-letter ISO currency code (e.g., XOF, USD, EUR)
      *
      * @return self
      */
@@ -785,7 +785,7 @@ class CheckoutSessions implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets customer_email
      *
-     * @param string|null $customer_email customer_email
+     * @param string|null $customer_email Email address
      *
      * @return self
      */
@@ -812,7 +812,7 @@ class CheckoutSessions implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets customer_id
      *
-     * @param string|null $customer_id customer_id
+     * @param string|null $customer_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -920,7 +920,7 @@ class CheckoutSessions implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets expires_at
      *
-     * @param \DateTime|null $expires_at expires_at
+     * @param \DateTime|null $expires_at ISO 8601 datetime
      *
      * @return self
      */
@@ -947,7 +947,7 @@ class CheckoutSessions implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets installment_plan_id
      *
-     * @param string|null $installment_plan_id installment_plan_id
+     * @param string|null $installment_plan_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -1028,7 +1028,7 @@ class CheckoutSessions implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets metadata
      *
-     * @param object|null $metadata metadata
+     * @param object|null $metadata Set of key-value pairs for storing additional information
      *
      * @return self
      */
@@ -1055,7 +1055,7 @@ class CheckoutSessions implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets organization_id
      *
-     * @param string|null $organization_id organization_id
+     * @param string|null $organization_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -1082,7 +1082,7 @@ class CheckoutSessions implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets payment_link_id
      *
-     * @param string|null $payment_link_id payment_link_id
+     * @param string|null $payment_link_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -1109,7 +1109,7 @@ class CheckoutSessions implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets payment_request_id
      *
-     * @param string|null $payment_request_id payment_request_id
+     * @param string|null $payment_request_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -1136,7 +1136,7 @@ class CheckoutSessions implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets price_id
      *
-     * @param string|null $price_id price_id
+     * @param string|null $price_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -1163,7 +1163,7 @@ class CheckoutSessions implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets product_id
      *
-     * @param string|null $product_id product_id
+     * @param string|null $product_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -1325,7 +1325,7 @@ class CheckoutSessions implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets spi_qr_code_id
      *
-     * @param string|null $spi_qr_code_id spi_qr_code_id
+     * @param string|null $spi_qr_code_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -1352,7 +1352,7 @@ class CheckoutSessions implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets status
      *
-     * @param string|null $status status
+     * @param string|null $status Current status of the resource
      *
      * @return self
      */
@@ -1379,7 +1379,7 @@ class CheckoutSessions implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets subscription_id
      *
-     * @param string|null $subscription_id subscription_id
+     * @param string|null $subscription_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -1406,7 +1406,7 @@ class CheckoutSessions implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets success_url
      *
-     * @param string|null $success_url success_url
+     * @param string|null $success_url URL/URI
      *
      * @return self
      */
@@ -1460,7 +1460,7 @@ class CheckoutSessions implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets updated_at
      *
-     * @param \DateTime|null $updated_at updated_at
+     * @param \DateTime|null $updated_at ISO 8601 datetime
      *
      * @return self
      */

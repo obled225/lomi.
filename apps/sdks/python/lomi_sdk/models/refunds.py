@@ -19,7 +19,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, StrictFloat, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from uuid import UUID
 from typing import Optional, Set
@@ -27,27 +27,27 @@ from typing_extensions import Self
 
 class Refunds(BaseModel):
     """
-    refunds object
+    refunds resource object
     """ # noqa: E501
-    amount: Optional[Union[StrictFloat, StrictInt]] = None
-    created_at: Optional[datetime] = None
+    amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Amount in the smallest currency unit (e.g., cents for USD, same for XOF)")
+    created_at: Optional[datetime] = Field(default=None, description="ISO 8601 datetime")
     environment: Optional[StrictStr] = None
     fee_amount: Optional[Union[StrictFloat, StrictInt]] = None
-    metadata: Optional[Dict[str, Any]] = None
+    metadata: Optional[Dict[str, Any]] = Field(default=None, description="Set of key-value pairs for storing additional information")
     reason: Optional[StrictStr] = None
-    refund_id: Optional[UUID] = None
+    refund_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
     refunded_amount: Optional[Union[StrictFloat, StrictInt]] = None
     spi_account_number: Optional[StrictStr] = None
-    spi_end2end_id: Optional[UUID] = None
+    spi_end2end_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
     spi_fund_return_status: Optional[StrictStr] = None
     spi_motif_code: Optional[StrictStr] = None
     spi_rejection_reason: Optional[StrictStr] = None
     spi_retour_date_demande: Optional[StrictStr] = None
     spi_retour_date_irrevocabilite: Optional[StrictStr] = None
-    spi_tx_id: Optional[UUID] = None
-    status: Optional[StrictStr] = None
-    transaction_id: Optional[UUID] = None
-    updated_at: Optional[datetime] = None
+    spi_tx_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
+    status: Optional[StrictStr] = Field(default=None, description="Current status of the resource")
+    transaction_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
+    updated_at: Optional[datetime] = Field(default=None, description="ISO 8601 datetime")
     __properties: ClassVar[List[str]] = ["amount", "created_at", "environment", "fee_amount", "metadata", "reason", "refund_id", "refunded_amount", "spi_account_number", "spi_end2end_id", "spi_fund_return_status", "spi_motif_code", "spi_rejection_reason", "spi_retour_date_demande", "spi_retour_date_irrevocabilite", "spi_tx_id", "status", "transaction_id", "updated_at"]
 
     model_config = ConfigDict(
@@ -80,8 +80,12 @@ class Refunds(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set([
+            "created_at",
+            "updated_at",
         ])
 
         _dict = self.model_dump(

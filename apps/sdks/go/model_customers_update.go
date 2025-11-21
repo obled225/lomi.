@@ -13,34 +13,29 @@ package lomisdk
 
 import (
 	"encoding/json"
-	"time"
 )
 
 // checks if the CustomersUpdate type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CustomersUpdate{}
 
-// CustomersUpdate Update customers input
+// CustomersUpdate Request body for updating a customers object. Only include fields you want to modify.
 type CustomersUpdate struct {
 	Address *string `json:"address,omitempty"`
 	City *string `json:"city,omitempty"`
 	Country *string `json:"country,omitempty"`
-	CreatedAt *time.Time `json:"created_at,omitempty"`
-	CreatedBy *string `json:"created_by,omitempty"`
-	CustomerId *string `json:"customer_id,omitempty"`
-	DeletedAt *time.Time `json:"deleted_at,omitempty"`
+	// Email address
 	Email *string `json:"email,omitempty"`
-	Environment *string `json:"environment,omitempty"`
 	IsBusiness *bool `json:"is_business,omitempty"`
+	// Soft deletion flag
 	IsDeleted *bool `json:"is_deleted,omitempty"`
+	// Set of key-value pairs for storing additional information
 	Metadata map[string]interface{} `json:"metadata,omitempty"`
 	Name *string `json:"name,omitempty"`
-	OrganizationId *string `json:"organization_id,omitempty"`
 	PhoneNumber *string `json:"phone_number,omitempty"`
 	PostalCode *string `json:"postal_code,omitempty"`
 	SpiAliasMbno *string `json:"spi_alias_mbno,omitempty"`
 	SpiAliasShid *string `json:"spi_alias_shid,omitempty"`
 	SpiPrimaryAlias *string `json:"spi_primary_alias,omitempty"`
-	UpdatedAt *time.Time `json:"updated_at,omitempty"`
 	WhatsappNumber *string `json:"whatsapp_number,omitempty"`
 }
 
@@ -157,134 +152,6 @@ func (o *CustomersUpdate) SetCountry(v string) {
 	o.Country = &v
 }
 
-// GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
-func (o *CustomersUpdate) GetCreatedAt() time.Time {
-	if o == nil || IsNil(o.CreatedAt) {
-		var ret time.Time
-		return ret
-	}
-	return *o.CreatedAt
-}
-
-// GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CustomersUpdate) GetCreatedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.CreatedAt) {
-		return nil, false
-	}
-	return o.CreatedAt, true
-}
-
-// HasCreatedAt returns a boolean if a field has been set.
-func (o *CustomersUpdate) HasCreatedAt() bool {
-	if o != nil && !IsNil(o.CreatedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetCreatedAt gets a reference to the given time.Time and assigns it to the CreatedAt field.
-func (o *CustomersUpdate) SetCreatedAt(v time.Time) {
-	o.CreatedAt = &v
-}
-
-// GetCreatedBy returns the CreatedBy field value if set, zero value otherwise.
-func (o *CustomersUpdate) GetCreatedBy() string {
-	if o == nil || IsNil(o.CreatedBy) {
-		var ret string
-		return ret
-	}
-	return *o.CreatedBy
-}
-
-// GetCreatedByOk returns a tuple with the CreatedBy field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CustomersUpdate) GetCreatedByOk() (*string, bool) {
-	if o == nil || IsNil(o.CreatedBy) {
-		return nil, false
-	}
-	return o.CreatedBy, true
-}
-
-// HasCreatedBy returns a boolean if a field has been set.
-func (o *CustomersUpdate) HasCreatedBy() bool {
-	if o != nil && !IsNil(o.CreatedBy) {
-		return true
-	}
-
-	return false
-}
-
-// SetCreatedBy gets a reference to the given string and assigns it to the CreatedBy field.
-func (o *CustomersUpdate) SetCreatedBy(v string) {
-	o.CreatedBy = &v
-}
-
-// GetCustomerId returns the CustomerId field value if set, zero value otherwise.
-func (o *CustomersUpdate) GetCustomerId() string {
-	if o == nil || IsNil(o.CustomerId) {
-		var ret string
-		return ret
-	}
-	return *o.CustomerId
-}
-
-// GetCustomerIdOk returns a tuple with the CustomerId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CustomersUpdate) GetCustomerIdOk() (*string, bool) {
-	if o == nil || IsNil(o.CustomerId) {
-		return nil, false
-	}
-	return o.CustomerId, true
-}
-
-// HasCustomerId returns a boolean if a field has been set.
-func (o *CustomersUpdate) HasCustomerId() bool {
-	if o != nil && !IsNil(o.CustomerId) {
-		return true
-	}
-
-	return false
-}
-
-// SetCustomerId gets a reference to the given string and assigns it to the CustomerId field.
-func (o *CustomersUpdate) SetCustomerId(v string) {
-	o.CustomerId = &v
-}
-
-// GetDeletedAt returns the DeletedAt field value if set, zero value otherwise.
-func (o *CustomersUpdate) GetDeletedAt() time.Time {
-	if o == nil || IsNil(o.DeletedAt) {
-		var ret time.Time
-		return ret
-	}
-	return *o.DeletedAt
-}
-
-// GetDeletedAtOk returns a tuple with the DeletedAt field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CustomersUpdate) GetDeletedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.DeletedAt) {
-		return nil, false
-	}
-	return o.DeletedAt, true
-}
-
-// HasDeletedAt returns a boolean if a field has been set.
-func (o *CustomersUpdate) HasDeletedAt() bool {
-	if o != nil && !IsNil(o.DeletedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetDeletedAt gets a reference to the given time.Time and assigns it to the DeletedAt field.
-func (o *CustomersUpdate) SetDeletedAt(v time.Time) {
-	o.DeletedAt = &v
-}
-
 // GetEmail returns the Email field value if set, zero value otherwise.
 func (o *CustomersUpdate) GetEmail() string {
 	if o == nil || IsNil(o.Email) {
@@ -315,38 +182,6 @@ func (o *CustomersUpdate) HasEmail() bool {
 // SetEmail gets a reference to the given string and assigns it to the Email field.
 func (o *CustomersUpdate) SetEmail(v string) {
 	o.Email = &v
-}
-
-// GetEnvironment returns the Environment field value if set, zero value otherwise.
-func (o *CustomersUpdate) GetEnvironment() string {
-	if o == nil || IsNil(o.Environment) {
-		var ret string
-		return ret
-	}
-	return *o.Environment
-}
-
-// GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CustomersUpdate) GetEnvironmentOk() (*string, bool) {
-	if o == nil || IsNil(o.Environment) {
-		return nil, false
-	}
-	return o.Environment, true
-}
-
-// HasEnvironment returns a boolean if a field has been set.
-func (o *CustomersUpdate) HasEnvironment() bool {
-	if o != nil && !IsNil(o.Environment) {
-		return true
-	}
-
-	return false
-}
-
-// SetEnvironment gets a reference to the given string and assigns it to the Environment field.
-func (o *CustomersUpdate) SetEnvironment(v string) {
-	o.Environment = &v
 }
 
 // GetIsBusiness returns the IsBusiness field value if set, zero value otherwise.
@@ -475,38 +310,6 @@ func (o *CustomersUpdate) HasName() bool {
 // SetName gets a reference to the given string and assigns it to the Name field.
 func (o *CustomersUpdate) SetName(v string) {
 	o.Name = &v
-}
-
-// GetOrganizationId returns the OrganizationId field value if set, zero value otherwise.
-func (o *CustomersUpdate) GetOrganizationId() string {
-	if o == nil || IsNil(o.OrganizationId) {
-		var ret string
-		return ret
-	}
-	return *o.OrganizationId
-}
-
-// GetOrganizationIdOk returns a tuple with the OrganizationId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CustomersUpdate) GetOrganizationIdOk() (*string, bool) {
-	if o == nil || IsNil(o.OrganizationId) {
-		return nil, false
-	}
-	return o.OrganizationId, true
-}
-
-// HasOrganizationId returns a boolean if a field has been set.
-func (o *CustomersUpdate) HasOrganizationId() bool {
-	if o != nil && !IsNil(o.OrganizationId) {
-		return true
-	}
-
-	return false
-}
-
-// SetOrganizationId gets a reference to the given string and assigns it to the OrganizationId field.
-func (o *CustomersUpdate) SetOrganizationId(v string) {
-	o.OrganizationId = &v
 }
 
 // GetPhoneNumber returns the PhoneNumber field value if set, zero value otherwise.
@@ -669,38 +472,6 @@ func (o *CustomersUpdate) SetSpiPrimaryAlias(v string) {
 	o.SpiPrimaryAlias = &v
 }
 
-// GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.
-func (o *CustomersUpdate) GetUpdatedAt() time.Time {
-	if o == nil || IsNil(o.UpdatedAt) {
-		var ret time.Time
-		return ret
-	}
-	return *o.UpdatedAt
-}
-
-// GetUpdatedAtOk returns a tuple with the UpdatedAt field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CustomersUpdate) GetUpdatedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.UpdatedAt) {
-		return nil, false
-	}
-	return o.UpdatedAt, true
-}
-
-// HasUpdatedAt returns a boolean if a field has been set.
-func (o *CustomersUpdate) HasUpdatedAt() bool {
-	if o != nil && !IsNil(o.UpdatedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetUpdatedAt gets a reference to the given time.Time and assigns it to the UpdatedAt field.
-func (o *CustomersUpdate) SetUpdatedAt(v time.Time) {
-	o.UpdatedAt = &v
-}
-
 // GetWhatsappNumber returns the WhatsappNumber field value if set, zero value otherwise.
 func (o *CustomersUpdate) GetWhatsappNumber() string {
 	if o == nil || IsNil(o.WhatsappNumber) {
@@ -752,23 +523,8 @@ func (o CustomersUpdate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Country) {
 		toSerialize["country"] = o.Country
 	}
-	if !IsNil(o.CreatedAt) {
-		toSerialize["created_at"] = o.CreatedAt
-	}
-	if !IsNil(o.CreatedBy) {
-		toSerialize["created_by"] = o.CreatedBy
-	}
-	if !IsNil(o.CustomerId) {
-		toSerialize["customer_id"] = o.CustomerId
-	}
-	if !IsNil(o.DeletedAt) {
-		toSerialize["deleted_at"] = o.DeletedAt
-	}
 	if !IsNil(o.Email) {
 		toSerialize["email"] = o.Email
-	}
-	if !IsNil(o.Environment) {
-		toSerialize["environment"] = o.Environment
 	}
 	if !IsNil(o.IsBusiness) {
 		toSerialize["is_business"] = o.IsBusiness
@@ -781,9 +537,6 @@ func (o CustomersUpdate) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
-	}
-	if !IsNil(o.OrganizationId) {
-		toSerialize["organization_id"] = o.OrganizationId
 	}
 	if !IsNil(o.PhoneNumber) {
 		toSerialize["phone_number"] = o.PhoneNumber
@@ -799,9 +552,6 @@ func (o CustomersUpdate) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.SpiPrimaryAlias) {
 		toSerialize["spi_primary_alias"] = o.SpiPrimaryAlias
-	}
-	if !IsNil(o.UpdatedAt) {
-		toSerialize["updated_at"] = o.UpdatedAt
 	}
 	if !IsNil(o.WhatsappNumber) {
 		toSerialize["whatsapp_number"] = o.WhatsappNumber

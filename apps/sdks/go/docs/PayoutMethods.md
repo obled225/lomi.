@@ -15,19 +15,19 @@ Name | Type | Description | Notes
 **BankName** | Pointer to **string** |  | [optional] 
 **BranchCode** | Pointer to **string** |  | [optional] 
 **Country** | Pointer to **string** |  | [optional] 
-**CreatedAt** | Pointer to **time.Time** |  | [optional] 
+**CreatedAt** | Pointer to **time.Time** | ISO 8601 datetime | [optional] [readonly] 
 **IsDefault** | Pointer to **bool** |  | [optional] 
 **IsSpiEnabled** | Pointer to **bool** |  | [optional] 
 **IsUemoa** | Pointer to **bool** |  | [optional] 
 **IsValid** | Pointer to **bool** |  | [optional] 
-**OrganizationId** | Pointer to **string** |  | [optional] 
-**PayoutMethodId** | Pointer to **string** |  | [optional] 
+**OrganizationId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
+**PayoutMethodId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
 **PayoutMethodType** | Pointer to **string** |  | [optional] 
 **SpiAccountNumber** | Pointer to **string** |  | [optional] 
 **SpiAliasMbno** | Pointer to **string** |  | [optional] 
 **SpiAliasShid** | Pointer to **string** |  | [optional] 
 **SpiAliasType** | Pointer to **string** |  | [optional] 
-**UpdatedAt** | Pointer to **time.Time** |  | [optional] 
+**UpdatedAt** | Pointer to **time.Time** | ISO 8601 datetime | [optional] [readonly] 
 
 ## Methods
 

@@ -1,20 +1,20 @@
 # Meters
 
-meters object
+meters resource object
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **aggregation** | **object** |  | [optional] 
-**created_at** | **datetime** |  | [optional] 
+**created_at** | **datetime** | ISO 8601 datetime | [optional] [readonly] 
 **filter** | **object** |  | [optional] 
-**is_active** | **bool** |  | [optional] 
-**meter_id** | **str** |  | [optional] 
+**is_active** | **bool** | Whether this resource is currently active | [optional] 
+**meter_id** | **str** | Unique identifier (UUID format) | [optional] 
 **name** | **str** |  | [optional] 
-**organization_id** | **str** |  | [optional] 
-**product_id** | **str** |  | [optional] 
-**updated_at** | **datetime** |  | [optional] 
+**organization_id** | **str** | Unique identifier (UUID format) | [optional] 
+**product_id** | **str** | Unique identifier (UUID format) | [optional] 
+**updated_at** | **datetime** | ISO 8601 datetime | [optional] [readonly] 
 
 ## Example
 

@@ -1,6 +1,6 @@
 # CustomersUpdate
 
-Update customers input
+Request body for updating a customers object. Only include fields you want to modify.
 
 ## Properties
 
@@ -9,23 +9,16 @@ Name | Type | Description | Notes
 **address** | **str** |  | [optional] 
 **city** | **str** |  | [optional] 
 **country** | **str** |  | [optional] 
-**created_at** | **datetime** |  | [optional] 
-**created_by** | **str** |  | [optional] 
-**customer_id** | **str** |  | [optional] 
-**deleted_at** | **datetime** |  | [optional] 
-**email** | **str** |  | [optional] 
-**environment** | **str** |  | [optional] 
+**email** | **str** | Email address | [optional] 
 **is_business** | **bool** |  | [optional] 
-**is_deleted** | **bool** |  | [optional] 
-**metadata** | **object** |  | [optional] 
+**is_deleted** | **bool** | Soft deletion flag | [optional] 
+**metadata** | **object** | Set of key-value pairs for storing additional information | [optional] 
 **name** | **str** |  | [optional] 
-**organization_id** | **str** |  | [optional] 
 **phone_number** | **str** |  | [optional] 
 **postal_code** | **str** |  | [optional] 
 **spi_alias_mbno** | **str** |  | [optional] 
 **spi_alias_shid** | **str** |  | [optional] 
 **spi_primary_alias** | **str** |  | [optional] 
-**updated_at** | **datetime** |  | [optional] 
 **whatsapp_number** | **str** |  | [optional] 
 
 ## Example

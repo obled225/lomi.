@@ -36,7 +36,7 @@ use \LomiSDK\ObjectSerializer;
  * Events Class Doc Comment
  *
  * @category Class
- * @description events object
+ * @description events resource object
  * @package  LomiSDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -360,7 +360,7 @@ class Events implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets created_at
      *
-     * @param \DateTime|null $created_at created_at
+     * @param \DateTime|null $created_at ISO 8601 datetime
      *
      * @return self
      */
@@ -414,7 +414,7 @@ class Events implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets customer_id
      *
-     * @param string|null $customer_id customer_id
+     * @param string|null $customer_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -468,7 +468,7 @@ class Events implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets event_id
      *
-     * @param string|null $event_id event_id
+     * @param string|null $event_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -522,7 +522,7 @@ class Events implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets metadata
      *
-     * @param object|null $metadata metadata
+     * @param object|null $metadata Set of key-value pairs for storing additional information
      *
      * @return self
      */
@@ -549,7 +549,7 @@ class Events implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets organization_id
      *
-     * @param string|null $organization_id organization_id
+     * @param string|null $organization_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -576,7 +576,7 @@ class Events implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets product_id
      *
-     * @param string|null $product_id product_id
+     * @param string|null $product_id Unique identifier (UUID format)
      *
      * @return self
      */

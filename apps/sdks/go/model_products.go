@@ -19,10 +19,11 @@ import (
 // checks if the Products type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Products{}
 
-// Products products object
+// Products products resource object
 type Products struct {
 	BillingFrequency *string `json:"billing_frequency,omitempty"`
 	ChargeDay *float64 `json:"charge_day,omitempty"`
+	// ISO 8601 datetime
 	CreatedAt *time.Time `json:"created_at,omitempty"`
 	CreatedBy *string `json:"created_by,omitempty"`
 	Description *string `json:"description,omitempty"`
@@ -30,13 +31,19 @@ type Products struct {
 	Environment *string `json:"environment,omitempty"`
 	FailedPaymentAction *string `json:"failed_payment_action,omitempty"`
 	FirstPaymentType *string `json:"first_payment_type,omitempty"`
+	// URL/URI
 	ImageUrl *string `json:"image_url,omitempty"`
+	// Whether this resource is currently active
 	IsActive *bool `json:"is_active,omitempty"`
+	// Set of key-value pairs for storing additional information
 	Metadata map[string]interface{} `json:"metadata,omitempty"`
 	Name *string `json:"name,omitempty"`
+	// Unique identifier (UUID format)
 	OrganizationId *string `json:"organization_id,omitempty"`
+	// Unique identifier (UUID format)
 	ProductId *string `json:"product_id,omitempty"`
 	ProductType *string `json:"product_type,omitempty"`
+	// ISO 8601 datetime
 	UpdatedAt *time.Time `json:"updated_at,omitempty"`
 	UsageAggregation *string `json:"usage_aggregation,omitempty"`
 	UsageUnit *string `json:"usage_unit,omitempty"`

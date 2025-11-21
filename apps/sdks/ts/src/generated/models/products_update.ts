@@ -3,26 +3,29 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Update products input
+ * Request body for updating a products object. Only include fields you want to modify.
  */
 export type products_update = {
     billing_frequency?: string;
     charge_day?: number;
-    created_at?: string;
-    created_by?: string;
     description?: string;
     display_on_storefront?: boolean;
-    environment?: string;
     failed_payment_action?: string;
     first_payment_type?: string;
+    /**
+     * URL/URI
+     */
     image_url?: string;
+    /**
+     * Whether this resource is currently active
+     */
     is_active?: boolean;
+    /**
+     * Set of key-value pairs for storing additional information
+     */
     metadata?: Record<string, any>;
     name?: string;
-    organization_id?: string;
-    product_id?: string;
     product_type?: string;
-    updated_at?: string;
     usage_aggregation?: string;
     usage_unit?: string;
 };

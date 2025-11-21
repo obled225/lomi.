@@ -1,20 +1,17 @@
 # MetersUpdate
 
-Update meters input
+Request body for updating a meters object. Only include fields you want to modify.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **aggregation** | **object** |  | [optional] 
-**created_at** | **datetime** |  | [optional] 
 **filter** | **object** |  | [optional] 
-**is_active** | **bool** |  | [optional] 
-**meter_id** | **str** |  | [optional] 
+**is_active** | **bool** | Whether this resource is currently active | [optional] 
+**meter_id** | **str** | Unique identifier (UUID format) | [optional] 
 **name** | **str** |  | [optional] 
-**organization_id** | **str** |  | [optional] 
-**product_id** | **str** |  | [optional] 
-**updated_at** | **datetime** |  | [optional] 
+**product_id** | **str** | Unique identifier (UUID format) | [optional] 
 
 ## Example
 

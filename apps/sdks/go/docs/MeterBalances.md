@@ -5,15 +5,15 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Balance** | Pointer to **float64** |  | [optional] 
-**BalanceId** | Pointer to **string** |  | [optional] 
-**BillableOrganizationId** | Pointer to **string** |  | [optional] 
+**BalanceId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
+**BillableOrganizationId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
 **ConsumedUnits** | Pointer to **float64** |  | [optional] 
-**CreatedAt** | Pointer to **time.Time** |  | [optional] 
+**CreatedAt** | Pointer to **time.Time** | ISO 8601 datetime | [optional] [readonly] 
 **CreditedUnits** | Pointer to **float64** |  | [optional] 
-**CustomerId** | Pointer to **string** |  | [optional] 
-**LastEventId** | Pointer to **string** |  | [optional] 
-**MeterId** | Pointer to **string** |  | [optional] 
-**UpdatedAt** | Pointer to **time.Time** |  | [optional] 
+**CustomerId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
+**LastEventId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
+**MeterId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
+**UpdatedAt** | Pointer to **time.Time** | ISO 8601 datetime | [optional] [readonly] 
 
 ## Methods
 

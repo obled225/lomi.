@@ -1,25 +1,19 @@
 # SubscriptionsCreate
 
-Create subscriptions input
+Request body for creating a subscriptions object. System-managed fields like `created_at`, `organization_id`, and IDs are automatically set.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**created_at** | **datetime** |  | [optional] 
-**created_by** | **str** |  | [optional] 
-**customer_id** | **str** |  | [optional] 
+**customer_id** | **str** | Unique identifier (UUID format) | [optional] 
 **end_date** | **str** |  | [optional] 
-**environment** | **str** |  | [optional] 
-**metadata** | **object** |  | [optional] 
+**metadata** | **object** | Set of key-value pairs for storing additional information | [optional] 
 **next_billing_date** | **str** |  | [optional] 
-**organization_id** | **str** |  | [optional] 
-**price_id** | **str** |  | [optional] 
-**product_id** | **str** |  | [optional] 
+**price_id** | **str** | Unique identifier (UUID format) | [optional] 
+**product_id** | **str** | Unique identifier (UUID format) | [optional] 
 **start_date** | **str** |  | [optional] 
-**status** | **str** |  | [optional] 
-**subscription_id** | **str** |  | [optional] 
-**updated_at** | **datetime** |  | [optional] 
+**status** | **str** | Current status of the resource | [optional] 
 
 ## Example
 

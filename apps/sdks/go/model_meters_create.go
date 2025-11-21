@@ -13,23 +13,22 @@ package lomisdk
 
 import (
 	"encoding/json"
-	"time"
 )
 
 // checks if the MetersCreate type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &MetersCreate{}
 
-// MetersCreate Create meters input
+// MetersCreate Request body for creating a meters object. System-managed fields like `created_at`, `organization_id`, and IDs are automatically set.
 type MetersCreate struct {
 	Aggregation map[string]interface{} `json:"aggregation,omitempty"`
-	CreatedAt *time.Time `json:"created_at,omitempty"`
 	Filter map[string]interface{} `json:"filter,omitempty"`
+	// Whether this resource is currently active
 	IsActive *bool `json:"is_active,omitempty"`
+	// Unique identifier (UUID format)
 	MeterId *string `json:"meter_id,omitempty"`
 	Name *string `json:"name,omitempty"`
-	OrganizationId *string `json:"organization_id,omitempty"`
+	// Unique identifier (UUID format)
 	ProductId *string `json:"product_id,omitempty"`
-	UpdatedAt *time.Time `json:"updated_at,omitempty"`
 }
 
 // NewMetersCreate instantiates a new MetersCreate object
@@ -79,38 +78,6 @@ func (o *MetersCreate) HasAggregation() bool {
 // SetAggregation gets a reference to the given map[string]interface{} and assigns it to the Aggregation field.
 func (o *MetersCreate) SetAggregation(v map[string]interface{}) {
 	o.Aggregation = v
-}
-
-// GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
-func (o *MetersCreate) GetCreatedAt() time.Time {
-	if o == nil || IsNil(o.CreatedAt) {
-		var ret time.Time
-		return ret
-	}
-	return *o.CreatedAt
-}
-
-// GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *MetersCreate) GetCreatedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.CreatedAt) {
-		return nil, false
-	}
-	return o.CreatedAt, true
-}
-
-// HasCreatedAt returns a boolean if a field has been set.
-func (o *MetersCreate) HasCreatedAt() bool {
-	if o != nil && !IsNil(o.CreatedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetCreatedAt gets a reference to the given time.Time and assigns it to the CreatedAt field.
-func (o *MetersCreate) SetCreatedAt(v time.Time) {
-	o.CreatedAt = &v
 }
 
 // GetFilter returns the Filter field value if set, zero value otherwise.
@@ -241,38 +208,6 @@ func (o *MetersCreate) SetName(v string) {
 	o.Name = &v
 }
 
-// GetOrganizationId returns the OrganizationId field value if set, zero value otherwise.
-func (o *MetersCreate) GetOrganizationId() string {
-	if o == nil || IsNil(o.OrganizationId) {
-		var ret string
-		return ret
-	}
-	return *o.OrganizationId
-}
-
-// GetOrganizationIdOk returns a tuple with the OrganizationId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *MetersCreate) GetOrganizationIdOk() (*string, bool) {
-	if o == nil || IsNil(o.OrganizationId) {
-		return nil, false
-	}
-	return o.OrganizationId, true
-}
-
-// HasOrganizationId returns a boolean if a field has been set.
-func (o *MetersCreate) HasOrganizationId() bool {
-	if o != nil && !IsNil(o.OrganizationId) {
-		return true
-	}
-
-	return false
-}
-
-// SetOrganizationId gets a reference to the given string and assigns it to the OrganizationId field.
-func (o *MetersCreate) SetOrganizationId(v string) {
-	o.OrganizationId = &v
-}
-
 // GetProductId returns the ProductId field value if set, zero value otherwise.
 func (o *MetersCreate) GetProductId() string {
 	if o == nil || IsNil(o.ProductId) {
@@ -305,38 +240,6 @@ func (o *MetersCreate) SetProductId(v string) {
 	o.ProductId = &v
 }
 
-// GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.
-func (o *MetersCreate) GetUpdatedAt() time.Time {
-	if o == nil || IsNil(o.UpdatedAt) {
-		var ret time.Time
-		return ret
-	}
-	return *o.UpdatedAt
-}
-
-// GetUpdatedAtOk returns a tuple with the UpdatedAt field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *MetersCreate) GetUpdatedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.UpdatedAt) {
-		return nil, false
-	}
-	return o.UpdatedAt, true
-}
-
-// HasUpdatedAt returns a boolean if a field has been set.
-func (o *MetersCreate) HasUpdatedAt() bool {
-	if o != nil && !IsNil(o.UpdatedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetUpdatedAt gets a reference to the given time.Time and assigns it to the UpdatedAt field.
-func (o *MetersCreate) SetUpdatedAt(v time.Time) {
-	o.UpdatedAt = &v
-}
-
 func (o MetersCreate) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -350,9 +253,6 @@ func (o MetersCreate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Aggregation) {
 		toSerialize["aggregation"] = o.Aggregation
 	}
-	if !IsNil(o.CreatedAt) {
-		toSerialize["created_at"] = o.CreatedAt
-	}
 	if !IsNil(o.Filter) {
 		toSerialize["filter"] = o.Filter
 	}
@@ -365,14 +265,8 @@ func (o MetersCreate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
-	if !IsNil(o.OrganizationId) {
-		toSerialize["organization_id"] = o.OrganizationId
-	}
 	if !IsNil(o.ProductId) {
 		toSerialize["product_id"] = o.ProductId
-	}
-	if !IsNil(o.UpdatedAt) {
-		toSerialize["updated_at"] = o.UpdatedAt
 	}
 	return toSerialize, nil
 }

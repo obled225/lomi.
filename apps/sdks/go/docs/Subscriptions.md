@@ -4,20 +4,20 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**CreatedAt** | Pointer to **time.Time** |  | [optional] 
-**CreatedBy** | Pointer to **string** |  | [optional] 
-**CustomerId** | Pointer to **string** |  | [optional] 
+**CreatedAt** | Pointer to **time.Time** | ISO 8601 datetime | [optional] [readonly] 
+**CreatedBy** | Pointer to **string** |  | [optional] [readonly] 
+**CustomerId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
 **EndDate** | Pointer to **string** |  | [optional] 
 **Environment** | Pointer to **string** |  | [optional] 
-**Metadata** | Pointer to **map[string]interface{}** |  | [optional] 
+**Metadata** | Pointer to **map[string]interface{}** | Set of key-value pairs for storing additional information | [optional] 
 **NextBillingDate** | Pointer to **string** |  | [optional] 
-**OrganizationId** | Pointer to **string** |  | [optional] 
-**PriceId** | Pointer to **string** |  | [optional] 
-**ProductId** | Pointer to **string** |  | [optional] 
+**OrganizationId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
+**PriceId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
+**ProductId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
 **StartDate** | Pointer to **string** |  | [optional] 
-**Status** | Pointer to **string** |  | [optional] 
-**SubscriptionId** | Pointer to **string** |  | [optional] 
-**UpdatedAt** | Pointer to **time.Time** |  | [optional] 
+**Status** | Pointer to **string** | Current status of the resource | [optional] 
+**SubscriptionId** | Pointer to **string** | Unique identifier (UUID format) | [optional] [readonly] 
+**UpdatedAt** | Pointer to **time.Time** | ISO 8601 datetime | [optional] [readonly] 
 
 ## Methods
 

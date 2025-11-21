@@ -36,7 +36,7 @@ use \LomiSDK\ObjectSerializer;
  * BeneficiaryPayouts Class Doc Comment
  *
  * @category Class
- * @description beneficiary_payouts object
+ * @description beneficiary payouts resource object
  * @package  LomiSDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -395,7 +395,7 @@ class BeneficiaryPayouts implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets account_id
      *
-     * @param string|null $account_id account_id
+     * @param string|null $account_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -422,7 +422,7 @@ class BeneficiaryPayouts implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets amount
      *
-     * @param float|null $amount amount
+     * @param float|null $amount Amount in the smallest currency unit (e.g., cents for USD, same for XOF)
      *
      * @return self
      */
@@ -449,7 +449,7 @@ class BeneficiaryPayouts implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets created_at
      *
-     * @param \DateTime|null $created_at created_at
+     * @param \DateTime|null $created_at ISO 8601 datetime
      *
      * @return self
      */
@@ -503,7 +503,7 @@ class BeneficiaryPayouts implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets currency_code
      *
-     * @param string|null $currency_code currency_code
+     * @param string|null $currency_code Three-letter ISO currency code (e.g., XOF, USD, EUR)
      *
      * @return self
      */
@@ -530,7 +530,7 @@ class BeneficiaryPayouts implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets metadata
      *
-     * @param object|null $metadata metadata
+     * @param object|null $metadata Set of key-value pairs for storing additional information
      *
      * @return self
      */
@@ -557,7 +557,7 @@ class BeneficiaryPayouts implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets organization_id
      *
-     * @param string|null $organization_id organization_id
+     * @param string|null $organization_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -611,7 +611,7 @@ class BeneficiaryPayouts implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets payout_id
      *
-     * @param string|null $payout_id payout_id
+     * @param string|null $payout_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -638,7 +638,7 @@ class BeneficiaryPayouts implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets payout_method_id
      *
-     * @param string|null $payout_method_id payout_method_id
+     * @param string|null $payout_method_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -692,7 +692,7 @@ class BeneficiaryPayouts implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets spi_bulk_instruction_id
      *
-     * @param string|null $spi_bulk_instruction_id spi_bulk_instruction_id
+     * @param string|null $spi_bulk_instruction_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -719,7 +719,7 @@ class BeneficiaryPayouts implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets status
      *
-     * @param string|null $status status
+     * @param string|null $status Current status of the resource
      *
      * @return self
      */
@@ -746,7 +746,7 @@ class BeneficiaryPayouts implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets updated_at
      *
-     * @param \DateTime|null $updated_at updated_at
+     * @param \DateTime|null $updated_at ISO 8601 datetime
      *
      * @return self
      */

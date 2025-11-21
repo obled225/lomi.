@@ -4,20 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Amount** | Pointer to **float64** |  | [optional] 
-**CreatedAt** | Pointer to **time.Time** |  | [optional] 
-**CreatedBy** | Pointer to **string** |  | [optional] 
-**CurrencyCode** | Pointer to **string** |  | [optional] 
-**CustomerId** | Pointer to **string** |  | [optional] 
+**Amount** | Pointer to **float64** | Amount in the smallest currency unit (e.g., cents for USD, same for XOF) | [optional] 
+**CurrencyCode** | Pointer to **string** | Three-letter ISO currency code (e.g., XOF, USD, EUR) | [optional] 
+**CustomerId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
 **Description** | Pointer to **string** |  | [optional] 
-**Environment** | Pointer to **string** |  | [optional] 
 **ExpiryDate** | Pointer to **string** |  | [optional] 
-**OrganizationId** | Pointer to **string** |  | [optional] 
 **PaymentLink** | Pointer to **string** |  | [optional] 
 **PaymentReference** | Pointer to **string** |  | [optional] 
-**RequestId** | Pointer to **string** |  | [optional] 
 **SpiAccountNumber** | Pointer to **string** |  | [optional] 
-**SpiBulkInstructionId** | Pointer to **string** |  | [optional] 
+**SpiBulkInstructionId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
 **SpiConfirmation** | Pointer to **bool** |  | [optional] 
 **SpiDateEnvoi** | Pointer to **string** |  | [optional] 
 **SpiDateIrrevocabilite** | Pointer to **string** |  | [optional] 
@@ -25,7 +20,7 @@ Name | Type | Description | Notes
 **SpiDateLimiteReponse** | Pointer to **string** |  | [optional] 
 **SpiDateRejet** | Pointer to **string** |  | [optional] 
 **SpiDebitDiffere** | Pointer to **bool** |  | [optional] 
-**SpiEnd2endId** | Pointer to **string** |  | [optional] 
+**SpiEnd2endId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
 **SpiPayeurAlias** | Pointer to **string** |  | [optional] 
 **SpiPayeurNom** | Pointer to **string** |  | [optional] 
 **SpiPayeurPays** | Pointer to **string** |  | [optional] 
@@ -36,9 +31,8 @@ Name | Type | Description | Notes
 **SpiRejectionReason** | Pointer to **string** |  | [optional] 
 **SpiRemiseAmount** | Pointer to **float64** |  | [optional] 
 **SpiRemiseRate** | Pointer to **float64** |  | [optional] 
-**SpiTxId** | Pointer to **string** |  | [optional] 
-**Status** | Pointer to **string** |  | [optional] 
-**UpdatedAt** | Pointer to **time.Time** |  | [optional] 
+**SpiTxId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
+**Status** | Pointer to **string** | Current status of the resource | [optional] 
 
 ## Methods
 
@@ -83,56 +77,6 @@ SetAmount sets Amount field to given value.
 `func (o *PaymentRequestsUpdate) HasAmount() bool`
 
 HasAmount returns a boolean if a field has been set.
-
-### GetCreatedAt
-
-`func (o *PaymentRequestsUpdate) GetCreatedAt() time.Time`
-
-GetCreatedAt returns the CreatedAt field if non-nil, zero value otherwise.
-
-### GetCreatedAtOk
-
-`func (o *PaymentRequestsUpdate) GetCreatedAtOk() (*time.Time, bool)`
-
-GetCreatedAtOk returns a tuple with the CreatedAt field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCreatedAt
-
-`func (o *PaymentRequestsUpdate) SetCreatedAt(v time.Time)`
-
-SetCreatedAt sets CreatedAt field to given value.
-
-### HasCreatedAt
-
-`func (o *PaymentRequestsUpdate) HasCreatedAt() bool`
-
-HasCreatedAt returns a boolean if a field has been set.
-
-### GetCreatedBy
-
-`func (o *PaymentRequestsUpdate) GetCreatedBy() string`
-
-GetCreatedBy returns the CreatedBy field if non-nil, zero value otherwise.
-
-### GetCreatedByOk
-
-`func (o *PaymentRequestsUpdate) GetCreatedByOk() (*string, bool)`
-
-GetCreatedByOk returns a tuple with the CreatedBy field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCreatedBy
-
-`func (o *PaymentRequestsUpdate) SetCreatedBy(v string)`
-
-SetCreatedBy sets CreatedBy field to given value.
-
-### HasCreatedBy
-
-`func (o *PaymentRequestsUpdate) HasCreatedBy() bool`
-
-HasCreatedBy returns a boolean if a field has been set.
 
 ### GetCurrencyCode
 
@@ -209,31 +153,6 @@ SetDescription sets Description field to given value.
 
 HasDescription returns a boolean if a field has been set.
 
-### GetEnvironment
-
-`func (o *PaymentRequestsUpdate) GetEnvironment() string`
-
-GetEnvironment returns the Environment field if non-nil, zero value otherwise.
-
-### GetEnvironmentOk
-
-`func (o *PaymentRequestsUpdate) GetEnvironmentOk() (*string, bool)`
-
-GetEnvironmentOk returns a tuple with the Environment field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetEnvironment
-
-`func (o *PaymentRequestsUpdate) SetEnvironment(v string)`
-
-SetEnvironment sets Environment field to given value.
-
-### HasEnvironment
-
-`func (o *PaymentRequestsUpdate) HasEnvironment() bool`
-
-HasEnvironment returns a boolean if a field has been set.
-
 ### GetExpiryDate
 
 `func (o *PaymentRequestsUpdate) GetExpiryDate() string`
@@ -258,31 +177,6 @@ SetExpiryDate sets ExpiryDate field to given value.
 `func (o *PaymentRequestsUpdate) HasExpiryDate() bool`
 
 HasExpiryDate returns a boolean if a field has been set.
-
-### GetOrganizationId
-
-`func (o *PaymentRequestsUpdate) GetOrganizationId() string`
-
-GetOrganizationId returns the OrganizationId field if non-nil, zero value otherwise.
-
-### GetOrganizationIdOk
-
-`func (o *PaymentRequestsUpdate) GetOrganizationIdOk() (*string, bool)`
-
-GetOrganizationIdOk returns a tuple with the OrganizationId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetOrganizationId
-
-`func (o *PaymentRequestsUpdate) SetOrganizationId(v string)`
-
-SetOrganizationId sets OrganizationId field to given value.
-
-### HasOrganizationId
-
-`func (o *PaymentRequestsUpdate) HasOrganizationId() bool`
-
-HasOrganizationId returns a boolean if a field has been set.
 
 ### GetPaymentLink
 
@@ -333,31 +227,6 @@ SetPaymentReference sets PaymentReference field to given value.
 `func (o *PaymentRequestsUpdate) HasPaymentReference() bool`
 
 HasPaymentReference returns a boolean if a field has been set.
-
-### GetRequestId
-
-`func (o *PaymentRequestsUpdate) GetRequestId() string`
-
-GetRequestId returns the RequestId field if non-nil, zero value otherwise.
-
-### GetRequestIdOk
-
-`func (o *PaymentRequestsUpdate) GetRequestIdOk() (*string, bool)`
-
-GetRequestIdOk returns a tuple with the RequestId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetRequestId
-
-`func (o *PaymentRequestsUpdate) SetRequestId(v string)`
-
-SetRequestId sets RequestId field to given value.
-
-### HasRequestId
-
-`func (o *PaymentRequestsUpdate) HasRequestId() bool`
-
-HasRequestId returns a boolean if a field has been set.
 
 ### GetSpiAccountNumber
 
@@ -908,31 +777,6 @@ SetStatus sets Status field to given value.
 `func (o *PaymentRequestsUpdate) HasStatus() bool`
 
 HasStatus returns a boolean if a field has been set.
-
-### GetUpdatedAt
-
-`func (o *PaymentRequestsUpdate) GetUpdatedAt() time.Time`
-
-GetUpdatedAt returns the UpdatedAt field if non-nil, zero value otherwise.
-
-### GetUpdatedAtOk
-
-`func (o *PaymentRequestsUpdate) GetUpdatedAtOk() (*time.Time, bool)`
-
-GetUpdatedAtOk returns a tuple with the UpdatedAt field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetUpdatedAt
-
-`func (o *PaymentRequestsUpdate) SetUpdatedAt(v time.Time)`
-
-SetUpdatedAt sets UpdatedAt field to given value.
-
-### HasUpdatedAt
-
-`func (o *PaymentRequestsUpdate) HasUpdatedAt() bool`
-
-HasUpdatedAt returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

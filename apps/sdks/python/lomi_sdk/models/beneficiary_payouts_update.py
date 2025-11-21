@@ -18,8 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
-from pydantic import BaseModel, ConfigDict, StrictFloat, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from uuid import UUID
 from typing import Optional, Set
@@ -27,23 +26,19 @@ from typing_extensions import Self
 
 class BeneficiaryPayoutsUpdate(BaseModel):
     """
-    Update beneficiary_payouts input
+    Request body for updating a beneficiary payouts object. Only include fields you want to modify.
     """ # noqa: E501
-    account_id: Optional[UUID] = None
-    amount: Optional[Union[StrictFloat, StrictInt]] = None
-    created_at: Optional[datetime] = None
-    created_by: Optional[StrictStr] = None
-    currency_code: Optional[StrictStr] = None
-    metadata: Optional[Dict[str, Any]] = None
-    organization_id: Optional[UUID] = None
+    account_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
+    amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Amount in the smallest currency unit (e.g., cents for USD, same for XOF)")
+    currency_code: Optional[StrictStr] = Field(default=None, description="Three-letter ISO currency code (e.g., XOF, USD, EUR)")
+    metadata: Optional[Dict[str, Any]] = Field(default=None, description="Set of key-value pairs for storing additional information")
     payment_method_code: Optional[StrictStr] = None
-    payout_id: Optional[UUID] = None
-    payout_method_id: Optional[UUID] = None
+    payout_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
+    payout_method_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
     provider_code: Optional[StrictStr] = None
-    spi_bulk_instruction_id: Optional[UUID] = None
-    status: Optional[StrictStr] = None
-    updated_at: Optional[datetime] = None
-    __properties: ClassVar[List[str]] = ["account_id", "amount", "created_at", "created_by", "currency_code", "metadata", "organization_id", "payment_method_code", "payout_id", "payout_method_id", "provider_code", "spi_bulk_instruction_id", "status", "updated_at"]
+    spi_bulk_instruction_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
+    status: Optional[StrictStr] = Field(default=None, description="Current status of the resource")
+    __properties: ClassVar[List[str]] = ["account_id", "amount", "currency_code", "metadata", "payment_method_code", "payout_id", "payout_method_id", "provider_code", "spi_bulk_instruction_id", "status"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -98,18 +93,14 @@ class BeneficiaryPayoutsUpdate(BaseModel):
         _obj = cls.model_validate({
             "account_id": obj.get("account_id"),
             "amount": obj.get("amount"),
-            "created_at": obj.get("created_at"),
-            "created_by": obj.get("created_by"),
             "currency_code": obj.get("currency_code"),
             "metadata": obj.get("metadata"),
-            "organization_id": obj.get("organization_id"),
             "payment_method_code": obj.get("payment_method_code"),
             "payout_id": obj.get("payout_id"),
             "payout_method_id": obj.get("payout_method_id"),
             "provider_code": obj.get("provider_code"),
             "spi_bulk_instruction_id": obj.get("spi_bulk_instruction_id"),
-            "status": obj.get("status"),
-            "updated_at": obj.get("updated_at")
+            "status": obj.get("status")
         })
         return _obj
 

@@ -19,7 +19,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, StrictFloat, StrictInt
+from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from uuid import UUID
 from typing import Optional, Set
@@ -27,18 +27,18 @@ from typing_extensions import Self
 
 class MeterBalances(BaseModel):
     """
-    meter_balances object
+    meter balances resource object
     """ # noqa: E501
     balance: Optional[Union[StrictFloat, StrictInt]] = None
-    balance_id: Optional[UUID] = None
-    billable_organization_id: Optional[UUID] = None
+    balance_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
+    billable_organization_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
     consumed_units: Optional[Union[StrictFloat, StrictInt]] = None
-    created_at: Optional[datetime] = None
+    created_at: Optional[datetime] = Field(default=None, description="ISO 8601 datetime")
     credited_units: Optional[Union[StrictFloat, StrictInt]] = None
-    customer_id: Optional[UUID] = None
-    last_event_id: Optional[UUID] = None
-    meter_id: Optional[UUID] = None
-    updated_at: Optional[datetime] = None
+    customer_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
+    last_event_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
+    meter_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
+    updated_at: Optional[datetime] = Field(default=None, description="ISO 8601 datetime")
     __properties: ClassVar[List[str]] = ["balance", "balance_id", "billable_organization_id", "consumed_units", "created_at", "credited_units", "customer_id", "last_event_id", "meter_id", "updated_at"]
 
     model_config = ConfigDict(
@@ -71,8 +71,12 @@ class MeterBalances(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set([
+            "created_at",
+            "updated_at",
         ])
 
         _dict = self.model_dump(

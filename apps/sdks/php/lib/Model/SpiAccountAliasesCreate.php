@@ -36,7 +36,7 @@ use \LomiSDK\ObjectSerializer;
  * SpiAccountAliasesCreate Class Doc Comment
  *
  * @category Class
- * @description Create spi_account_aliases input
+ * @description Request body for creating a spi account aliases object. System-managed fields like &#x60;created_at&#x60;, &#x60;organization_id&#x60;, and IDs are automatically set.
  * @package  LomiSDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -63,12 +63,9 @@ class SpiAccountAliasesCreate implements ModelInterface, ArrayAccess, \JsonSeria
         'alias_id' => 'string',
         'alias_key' => 'string',
         'alias_type' => 'string',
-        'created_at' => '\DateTime',
         'is_active' => 'bool',
         'is_default' => 'bool',
-        'metadata' => 'object',
-        'organization_id' => 'string',
-        'updated_at' => '\DateTime'
+        'metadata' => 'object'
     ];
 
     /**
@@ -83,12 +80,9 @@ class SpiAccountAliasesCreate implements ModelInterface, ArrayAccess, \JsonSeria
         'alias_id' => 'uuid',
         'alias_key' => null,
         'alias_type' => null,
-        'created_at' => 'date-time',
         'is_active' => null,
         'is_default' => null,
-        'metadata' => null,
-        'organization_id' => 'uuid',
-        'updated_at' => 'date-time'
+        'metadata' => null
     ];
 
     /**
@@ -101,12 +95,9 @@ class SpiAccountAliasesCreate implements ModelInterface, ArrayAccess, \JsonSeria
         'alias_id' => false,
         'alias_key' => false,
         'alias_type' => false,
-        'created_at' => false,
         'is_active' => false,
         'is_default' => false,
-        'metadata' => false,
-        'organization_id' => false,
-        'updated_at' => false
+        'metadata' => false
     ];
 
     /**
@@ -199,12 +190,9 @@ class SpiAccountAliasesCreate implements ModelInterface, ArrayAccess, \JsonSeria
         'alias_id' => 'alias_id',
         'alias_key' => 'alias_key',
         'alias_type' => 'alias_type',
-        'created_at' => 'created_at',
         'is_active' => 'is_active',
         'is_default' => 'is_default',
-        'metadata' => 'metadata',
-        'organization_id' => 'organization_id',
-        'updated_at' => 'updated_at'
+        'metadata' => 'metadata'
     ];
 
     /**
@@ -217,12 +205,9 @@ class SpiAccountAliasesCreate implements ModelInterface, ArrayAccess, \JsonSeria
         'alias_id' => 'setAliasId',
         'alias_key' => 'setAliasKey',
         'alias_type' => 'setAliasType',
-        'created_at' => 'setCreatedAt',
         'is_active' => 'setIsActive',
         'is_default' => 'setIsDefault',
-        'metadata' => 'setMetadata',
-        'organization_id' => 'setOrganizationId',
-        'updated_at' => 'setUpdatedAt'
+        'metadata' => 'setMetadata'
     ];
 
     /**
@@ -235,12 +220,9 @@ class SpiAccountAliasesCreate implements ModelInterface, ArrayAccess, \JsonSeria
         'alias_id' => 'getAliasId',
         'alias_key' => 'getAliasKey',
         'alias_type' => 'getAliasType',
-        'created_at' => 'getCreatedAt',
         'is_active' => 'getIsActive',
         'is_default' => 'getIsDefault',
-        'metadata' => 'getMetadata',
-        'organization_id' => 'getOrganizationId',
-        'updated_at' => 'getUpdatedAt'
+        'metadata' => 'getMetadata'
     ];
 
     /**
@@ -304,12 +286,9 @@ class SpiAccountAliasesCreate implements ModelInterface, ArrayAccess, \JsonSeria
         $this->setIfExists('alias_id', $data ?? [], null);
         $this->setIfExists('alias_key', $data ?? [], null);
         $this->setIfExists('alias_type', $data ?? [], null);
-        $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('is_active', $data ?? [], null);
         $this->setIfExists('is_default', $data ?? [], null);
         $this->setIfExists('metadata', $data ?? [], null);
-        $this->setIfExists('organization_id', $data ?? [], null);
-        $this->setIfExists('updated_at', $data ?? [], null);
     }
 
     /**
@@ -394,7 +373,7 @@ class SpiAccountAliasesCreate implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Sets alias_id
      *
-     * @param string|null $alias_id alias_id
+     * @param string|null $alias_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -463,33 +442,6 @@ class SpiAccountAliasesCreate implements ModelInterface, ArrayAccess, \JsonSeria
     }
 
     /**
-     * Gets created_at
-     *
-     * @return \DateTime|null
-     */
-    public function getCreatedAt()
-    {
-        return $this->container['created_at'];
-    }
-
-    /**
-     * Sets created_at
-     *
-     * @param \DateTime|null $created_at created_at
-     *
-     * @return self
-     */
-    public function setCreatedAt($created_at)
-    {
-        if (is_null($created_at)) {
-            throw new \InvalidArgumentException('non-nullable created_at cannot be null');
-        }
-        $this->container['created_at'] = $created_at;
-
-        return $this;
-    }
-
-    /**
      * Gets is_active
      *
      * @return bool|null
@@ -502,7 +454,7 @@ class SpiAccountAliasesCreate implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Sets is_active
      *
-     * @param bool|null $is_active is_active
+     * @param bool|null $is_active Whether this resource is currently active
      *
      * @return self
      */
@@ -556,7 +508,7 @@ class SpiAccountAliasesCreate implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Sets metadata
      *
-     * @param object|null $metadata metadata
+     * @param object|null $metadata Set of key-value pairs for storing additional information
      *
      * @return self
      */
@@ -566,60 +518,6 @@ class SpiAccountAliasesCreate implements ModelInterface, ArrayAccess, \JsonSeria
             throw new \InvalidArgumentException('non-nullable metadata cannot be null');
         }
         $this->container['metadata'] = $metadata;
-
-        return $this;
-    }
-
-    /**
-     * Gets organization_id
-     *
-     * @return string|null
-     */
-    public function getOrganizationId()
-    {
-        return $this->container['organization_id'];
-    }
-
-    /**
-     * Sets organization_id
-     *
-     * @param string|null $organization_id organization_id
-     *
-     * @return self
-     */
-    public function setOrganizationId($organization_id)
-    {
-        if (is_null($organization_id)) {
-            throw new \InvalidArgumentException('non-nullable organization_id cannot be null');
-        }
-        $this->container['organization_id'] = $organization_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets updated_at
-     *
-     * @return \DateTime|null
-     */
-    public function getUpdatedAt()
-    {
-        return $this->container['updated_at'];
-    }
-
-    /**
-     * Sets updated_at
-     *
-     * @param \DateTime|null $updated_at updated_at
-     *
-     * @return self
-     */
-    public function setUpdatedAt($updated_at)
-    {
-        if (is_null($updated_at)) {
-            throw new \InvalidArgumentException('non-nullable updated_at cannot be null');
-        }
-        $this->container['updated_at'] = $updated_at;
 
         return $this;
     }

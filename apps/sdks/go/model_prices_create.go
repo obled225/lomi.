@@ -13,31 +13,34 @@ package lomisdk
 
 import (
 	"encoding/json"
-	"time"
 )
 
 // checks if the PricesCreate type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &PricesCreate{}
 
-// PricesCreate Create prices input
+// PricesCreate Request body for creating a prices object. System-managed fields like `created_at`, `organization_id`, and IDs are automatically set.
 type PricesCreate struct {
+	// Amount in the smallest currency unit (e.g., cents for USD, same for XOF)
 	Amount *float64 `json:"amount,omitempty"`
 	BillingInterval *string `json:"billing_interval,omitempty"`
-	CreatedAt *time.Time `json:"created_at,omitempty"`
+	// Three-letter ISO currency code (e.g., XOF, USD, EUR)
 	CurrencyCode *string `json:"currency_code,omitempty"`
-	Environment *string `json:"environment,omitempty"`
+	// Whether this resource is currently active
 	IsActive *bool `json:"is_active,omitempty"`
 	IsDefault *bool `json:"is_default,omitempty"`
 	MaximumAmount *float64 `json:"maximum_amount,omitempty"`
+	// Set of key-value pairs for storing additional information
 	Metadata map[string]interface{} `json:"metadata,omitempty"`
 	MinimumAmount *float64 `json:"minimum_amount,omitempty"`
-	OrganizationId *string `json:"organization_id,omitempty"`
+	// Unique identifier (UUID format)
 	PriceId *string `json:"price_id,omitempty"`
 	PricingModel *string `json:"pricing_model,omitempty"`
+	// Unique identifier (UUID format)
 	ProductId *string `json:"product_id,omitempty"`
+	// Unique identifier (UUID format)
 	ProviderPriceId *string `json:"provider_price_id,omitempty"`
+	// Unique identifier (UUID format)
 	ProviderProductId *string `json:"provider_product_id,omitempty"`
-	UpdatedAt *time.Time `json:"updated_at,omitempty"`
 }
 
 // NewPricesCreate instantiates a new PricesCreate object
@@ -121,38 +124,6 @@ func (o *PricesCreate) SetBillingInterval(v string) {
 	o.BillingInterval = &v
 }
 
-// GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
-func (o *PricesCreate) GetCreatedAt() time.Time {
-	if o == nil || IsNil(o.CreatedAt) {
-		var ret time.Time
-		return ret
-	}
-	return *o.CreatedAt
-}
-
-// GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PricesCreate) GetCreatedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.CreatedAt) {
-		return nil, false
-	}
-	return o.CreatedAt, true
-}
-
-// HasCreatedAt returns a boolean if a field has been set.
-func (o *PricesCreate) HasCreatedAt() bool {
-	if o != nil && !IsNil(o.CreatedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetCreatedAt gets a reference to the given time.Time and assigns it to the CreatedAt field.
-func (o *PricesCreate) SetCreatedAt(v time.Time) {
-	o.CreatedAt = &v
-}
-
 // GetCurrencyCode returns the CurrencyCode field value if set, zero value otherwise.
 func (o *PricesCreate) GetCurrencyCode() string {
 	if o == nil || IsNil(o.CurrencyCode) {
@@ -183,38 +154,6 @@ func (o *PricesCreate) HasCurrencyCode() bool {
 // SetCurrencyCode gets a reference to the given string and assigns it to the CurrencyCode field.
 func (o *PricesCreate) SetCurrencyCode(v string) {
 	o.CurrencyCode = &v
-}
-
-// GetEnvironment returns the Environment field value if set, zero value otherwise.
-func (o *PricesCreate) GetEnvironment() string {
-	if o == nil || IsNil(o.Environment) {
-		var ret string
-		return ret
-	}
-	return *o.Environment
-}
-
-// GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PricesCreate) GetEnvironmentOk() (*string, bool) {
-	if o == nil || IsNil(o.Environment) {
-		return nil, false
-	}
-	return o.Environment, true
-}
-
-// HasEnvironment returns a boolean if a field has been set.
-func (o *PricesCreate) HasEnvironment() bool {
-	if o != nil && !IsNil(o.Environment) {
-		return true
-	}
-
-	return false
-}
-
-// SetEnvironment gets a reference to the given string and assigns it to the Environment field.
-func (o *PricesCreate) SetEnvironment(v string) {
-	o.Environment = &v
 }
 
 // GetIsActive returns the IsActive field value if set, zero value otherwise.
@@ -377,38 +316,6 @@ func (o *PricesCreate) SetMinimumAmount(v float64) {
 	o.MinimumAmount = &v
 }
 
-// GetOrganizationId returns the OrganizationId field value if set, zero value otherwise.
-func (o *PricesCreate) GetOrganizationId() string {
-	if o == nil || IsNil(o.OrganizationId) {
-		var ret string
-		return ret
-	}
-	return *o.OrganizationId
-}
-
-// GetOrganizationIdOk returns a tuple with the OrganizationId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PricesCreate) GetOrganizationIdOk() (*string, bool) {
-	if o == nil || IsNil(o.OrganizationId) {
-		return nil, false
-	}
-	return o.OrganizationId, true
-}
-
-// HasOrganizationId returns a boolean if a field has been set.
-func (o *PricesCreate) HasOrganizationId() bool {
-	if o != nil && !IsNil(o.OrganizationId) {
-		return true
-	}
-
-	return false
-}
-
-// SetOrganizationId gets a reference to the given string and assigns it to the OrganizationId field.
-func (o *PricesCreate) SetOrganizationId(v string) {
-	o.OrganizationId = &v
-}
-
 // GetPriceId returns the PriceId field value if set, zero value otherwise.
 func (o *PricesCreate) GetPriceId() string {
 	if o == nil || IsNil(o.PriceId) {
@@ -569,38 +476,6 @@ func (o *PricesCreate) SetProviderProductId(v string) {
 	o.ProviderProductId = &v
 }
 
-// GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.
-func (o *PricesCreate) GetUpdatedAt() time.Time {
-	if o == nil || IsNil(o.UpdatedAt) {
-		var ret time.Time
-		return ret
-	}
-	return *o.UpdatedAt
-}
-
-// GetUpdatedAtOk returns a tuple with the UpdatedAt field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PricesCreate) GetUpdatedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.UpdatedAt) {
-		return nil, false
-	}
-	return o.UpdatedAt, true
-}
-
-// HasUpdatedAt returns a boolean if a field has been set.
-func (o *PricesCreate) HasUpdatedAt() bool {
-	if o != nil && !IsNil(o.UpdatedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetUpdatedAt gets a reference to the given time.Time and assigns it to the UpdatedAt field.
-func (o *PricesCreate) SetUpdatedAt(v time.Time) {
-	o.UpdatedAt = &v
-}
-
 func (o PricesCreate) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -617,14 +492,8 @@ func (o PricesCreate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.BillingInterval) {
 		toSerialize["billing_interval"] = o.BillingInterval
 	}
-	if !IsNil(o.CreatedAt) {
-		toSerialize["created_at"] = o.CreatedAt
-	}
 	if !IsNil(o.CurrencyCode) {
 		toSerialize["currency_code"] = o.CurrencyCode
-	}
-	if !IsNil(o.Environment) {
-		toSerialize["environment"] = o.Environment
 	}
 	if !IsNil(o.IsActive) {
 		toSerialize["is_active"] = o.IsActive
@@ -641,9 +510,6 @@ func (o PricesCreate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.MinimumAmount) {
 		toSerialize["minimum_amount"] = o.MinimumAmount
 	}
-	if !IsNil(o.OrganizationId) {
-		toSerialize["organization_id"] = o.OrganizationId
-	}
 	if !IsNil(o.PriceId) {
 		toSerialize["price_id"] = o.PriceId
 	}
@@ -658,9 +524,6 @@ func (o PricesCreate) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.ProviderProductId) {
 		toSerialize["provider_product_id"] = o.ProviderProductId
-	}
-	if !IsNil(o.UpdatedAt) {
-		toSerialize["updated_at"] = o.UpdatedAt
 	}
 	return toSerialize, nil
 }

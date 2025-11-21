@@ -36,7 +36,7 @@ use \LomiSDK\ObjectSerializer;
  * InstallmentPaymentsCreate Class Doc Comment
  *
  * @category Class
- * @description Create installment_payments input
+ * @description Request body for creating a installment payments object. System-managed fields like &#x60;created_at&#x60;, &#x60;organization_id&#x60;, and IDs are automatically set.
  * @package  LomiSDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -60,7 +60,6 @@ class InstallmentPaymentsCreate implements ModelInterface, ArrayAccess, \JsonSer
       */
     protected static $openAPITypes = [
         'amount' => 'float',
-        'created_at' => '\DateTime',
         'due_date' => 'string',
         'installment_id' => 'string',
         'interest_amount' => 'float',
@@ -75,8 +74,7 @@ class InstallmentPaymentsCreate implements ModelInterface, ArrayAccess, \JsonSer
         'spi_payment_request_id' => 'string',
         'spi_tx_id' => 'string',
         'status' => 'string',
-        'transaction_id' => 'string',
-        'updated_at' => '\DateTime'
+        'transaction_id' => 'string'
     ];
 
     /**
@@ -88,7 +86,6 @@ class InstallmentPaymentsCreate implements ModelInterface, ArrayAccess, \JsonSer
       */
     protected static $openAPIFormats = [
         'amount' => 'double',
-        'created_at' => 'date-time',
         'due_date' => null,
         'installment_id' => 'uuid',
         'interest_amount' => 'double',
@@ -103,8 +100,7 @@ class InstallmentPaymentsCreate implements ModelInterface, ArrayAccess, \JsonSer
         'spi_payment_request_id' => 'uuid',
         'spi_tx_id' => 'uuid',
         'status' => null,
-        'transaction_id' => 'uuid',
-        'updated_at' => 'date-time'
+        'transaction_id' => 'uuid'
     ];
 
     /**
@@ -114,7 +110,6 @@ class InstallmentPaymentsCreate implements ModelInterface, ArrayAccess, \JsonSer
       */
     protected static array $openAPINullables = [
         'amount' => false,
-        'created_at' => false,
         'due_date' => false,
         'installment_id' => false,
         'interest_amount' => false,
@@ -129,8 +124,7 @@ class InstallmentPaymentsCreate implements ModelInterface, ArrayAccess, \JsonSer
         'spi_payment_request_id' => false,
         'spi_tx_id' => false,
         'status' => false,
-        'transaction_id' => false,
-        'updated_at' => false
+        'transaction_id' => false
     ];
 
     /**
@@ -220,7 +214,6 @@ class InstallmentPaymentsCreate implements ModelInterface, ArrayAccess, \JsonSer
      */
     protected static $attributeMap = [
         'amount' => 'amount',
-        'created_at' => 'created_at',
         'due_date' => 'due_date',
         'installment_id' => 'installment_id',
         'interest_amount' => 'interest_amount',
@@ -235,8 +228,7 @@ class InstallmentPaymentsCreate implements ModelInterface, ArrayAccess, \JsonSer
         'spi_payment_request_id' => 'spi_payment_request_id',
         'spi_tx_id' => 'spi_tx_id',
         'status' => 'status',
-        'transaction_id' => 'transaction_id',
-        'updated_at' => 'updated_at'
+        'transaction_id' => 'transaction_id'
     ];
 
     /**
@@ -246,7 +238,6 @@ class InstallmentPaymentsCreate implements ModelInterface, ArrayAccess, \JsonSer
      */
     protected static $setters = [
         'amount' => 'setAmount',
-        'created_at' => 'setCreatedAt',
         'due_date' => 'setDueDate',
         'installment_id' => 'setInstallmentId',
         'interest_amount' => 'setInterestAmount',
@@ -261,8 +252,7 @@ class InstallmentPaymentsCreate implements ModelInterface, ArrayAccess, \JsonSer
         'spi_payment_request_id' => 'setSpiPaymentRequestId',
         'spi_tx_id' => 'setSpiTxId',
         'status' => 'setStatus',
-        'transaction_id' => 'setTransactionId',
-        'updated_at' => 'setUpdatedAt'
+        'transaction_id' => 'setTransactionId'
     ];
 
     /**
@@ -272,7 +262,6 @@ class InstallmentPaymentsCreate implements ModelInterface, ArrayAccess, \JsonSer
      */
     protected static $getters = [
         'amount' => 'getAmount',
-        'created_at' => 'getCreatedAt',
         'due_date' => 'getDueDate',
         'installment_id' => 'getInstallmentId',
         'interest_amount' => 'getInterestAmount',
@@ -287,8 +276,7 @@ class InstallmentPaymentsCreate implements ModelInterface, ArrayAccess, \JsonSer
         'spi_payment_request_id' => 'getSpiPaymentRequestId',
         'spi_tx_id' => 'getSpiTxId',
         'status' => 'getStatus',
-        'transaction_id' => 'getTransactionId',
-        'updated_at' => 'getUpdatedAt'
+        'transaction_id' => 'getTransactionId'
     ];
 
     /**
@@ -349,7 +337,6 @@ class InstallmentPaymentsCreate implements ModelInterface, ArrayAccess, \JsonSer
     public function __construct(?array $data = null)
     {
         $this->setIfExists('amount', $data ?? [], null);
-        $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('due_date', $data ?? [], null);
         $this->setIfExists('installment_id', $data ?? [], null);
         $this->setIfExists('interest_amount', $data ?? [], null);
@@ -365,7 +352,6 @@ class InstallmentPaymentsCreate implements ModelInterface, ArrayAccess, \JsonSer
         $this->setIfExists('spi_tx_id', $data ?? [], null);
         $this->setIfExists('status', $data ?? [], null);
         $this->setIfExists('transaction_id', $data ?? [], null);
-        $this->setIfExists('updated_at', $data ?? [], null);
     }
 
     /**
@@ -423,7 +409,7 @@ class InstallmentPaymentsCreate implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Sets amount
      *
-     * @param float|null $amount amount
+     * @param float|null $amount Amount in the smallest currency unit (e.g., cents for USD, same for XOF)
      *
      * @return self
      */
@@ -433,33 +419,6 @@ class InstallmentPaymentsCreate implements ModelInterface, ArrayAccess, \JsonSer
             throw new \InvalidArgumentException('non-nullable amount cannot be null');
         }
         $this->container['amount'] = $amount;
-
-        return $this;
-    }
-
-    /**
-     * Gets created_at
-     *
-     * @return \DateTime|null
-     */
-    public function getCreatedAt()
-    {
-        return $this->container['created_at'];
-    }
-
-    /**
-     * Sets created_at
-     *
-     * @param \DateTime|null $created_at created_at
-     *
-     * @return self
-     */
-    public function setCreatedAt($created_at)
-    {
-        if (is_null($created_at)) {
-            throw new \InvalidArgumentException('non-nullable created_at cannot be null');
-        }
-        $this->container['created_at'] = $created_at;
 
         return $this;
     }
@@ -504,7 +463,7 @@ class InstallmentPaymentsCreate implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Sets installment_id
      *
-     * @param string|null $installment_id installment_id
+     * @param string|null $installment_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -558,7 +517,7 @@ class InstallmentPaymentsCreate implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Sets paid_at
      *
-     * @param \DateTime|null $paid_at paid_at
+     * @param \DateTime|null $paid_at ISO 8601 datetime
      *
      * @return self
      */
@@ -639,7 +598,7 @@ class InstallmentPaymentsCreate implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Sets plan_id
      *
-     * @param string|null $plan_id plan_id
+     * @param string|null $plan_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -774,7 +733,7 @@ class InstallmentPaymentsCreate implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Sets spi_payment_request_id
      *
-     * @param string|null $spi_payment_request_id spi_payment_request_id
+     * @param string|null $spi_payment_request_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -801,7 +760,7 @@ class InstallmentPaymentsCreate implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Sets spi_tx_id
      *
-     * @param string|null $spi_tx_id spi_tx_id
+     * @param string|null $spi_tx_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -828,7 +787,7 @@ class InstallmentPaymentsCreate implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Sets status
      *
-     * @param string|null $status status
+     * @param string|null $status Current status of the resource
      *
      * @return self
      */
@@ -855,7 +814,7 @@ class InstallmentPaymentsCreate implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Sets transaction_id
      *
-     * @param string|null $transaction_id transaction_id
+     * @param string|null $transaction_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -865,33 +824,6 @@ class InstallmentPaymentsCreate implements ModelInterface, ArrayAccess, \JsonSer
             throw new \InvalidArgumentException('non-nullable transaction_id cannot be null');
         }
         $this->container['transaction_id'] = $transaction_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets updated_at
-     *
-     * @return \DateTime|null
-     */
-    public function getUpdatedAt()
-    {
-        return $this->container['updated_at'];
-    }
-
-    /**
-     * Sets updated_at
-     *
-     * @param \DateTime|null $updated_at updated_at
-     *
-     * @return self
-     */
-    public function setUpdatedAt($updated_at)
-    {
-        if (is_null($updated_at)) {
-            throw new \InvalidArgumentException('non-nullable updated_at cannot be null');
-        }
-        $this->container['updated_at'] = $updated_at;
 
         return $this;
     }

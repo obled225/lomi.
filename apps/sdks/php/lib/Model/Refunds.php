@@ -36,7 +36,7 @@ use \LomiSDK\ObjectSerializer;
  * Refunds Class Doc Comment
  *
  * @category Class
- * @description refunds object
+ * @description refunds resource object
  * @package  LomiSDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -430,7 +430,7 @@ class Refunds implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets amount
      *
-     * @param float|null $amount amount
+     * @param float|null $amount Amount in the smallest currency unit (e.g., cents for USD, same for XOF)
      *
      * @return self
      */
@@ -457,7 +457,7 @@ class Refunds implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets created_at
      *
-     * @param \DateTime|null $created_at created_at
+     * @param \DateTime|null $created_at ISO 8601 datetime
      *
      * @return self
      */
@@ -538,7 +538,7 @@ class Refunds implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets metadata
      *
-     * @param object|null $metadata metadata
+     * @param object|null $metadata Set of key-value pairs for storing additional information
      *
      * @return self
      */
@@ -592,7 +592,7 @@ class Refunds implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets refund_id
      *
-     * @param string|null $refund_id refund_id
+     * @param string|null $refund_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -673,7 +673,7 @@ class Refunds implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets spi_end2end_id
      *
-     * @param string|null $spi_end2end_id spi_end2end_id
+     * @param string|null $spi_end2end_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -835,7 +835,7 @@ class Refunds implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets spi_tx_id
      *
-     * @param string|null $spi_tx_id spi_tx_id
+     * @param string|null $spi_tx_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -862,7 +862,7 @@ class Refunds implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets status
      *
-     * @param string|null $status status
+     * @param string|null $status Current status of the resource
      *
      * @return self
      */
@@ -889,7 +889,7 @@ class Refunds implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets transaction_id
      *
-     * @param string|null $transaction_id transaction_id
+     * @param string|null $transaction_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -916,7 +916,7 @@ class Refunds implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets updated_at
      *
-     * @param \DateTime|null $updated_at updated_at
+     * @param \DateTime|null $updated_at ISO 8601 datetime
      *
      * @return self
      */

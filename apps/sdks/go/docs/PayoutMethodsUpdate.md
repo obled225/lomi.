@@ -15,19 +15,16 @@ Name | Type | Description | Notes
 **BankName** | Pointer to **string** |  | [optional] 
 **BranchCode** | Pointer to **string** |  | [optional] 
 **Country** | Pointer to **string** |  | [optional] 
-**CreatedAt** | Pointer to **time.Time** |  | [optional] 
 **IsDefault** | Pointer to **bool** |  | [optional] 
 **IsSpiEnabled** | Pointer to **bool** |  | [optional] 
 **IsUemoa** | Pointer to **bool** |  | [optional] 
 **IsValid** | Pointer to **bool** |  | [optional] 
-**OrganizationId** | Pointer to **string** |  | [optional] 
-**PayoutMethodId** | Pointer to **string** |  | [optional] 
+**PayoutMethodId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
 **PayoutMethodType** | Pointer to **string** |  | [optional] 
 **SpiAccountNumber** | Pointer to **string** |  | [optional] 
 **SpiAliasMbno** | Pointer to **string** |  | [optional] 
 **SpiAliasShid** | Pointer to **string** |  | [optional] 
 **SpiAliasType** | Pointer to **string** |  | [optional] 
-**UpdatedAt** | Pointer to **time.Time** |  | [optional] 
 
 ## Methods
 
@@ -323,31 +320,6 @@ SetCountry sets Country field to given value.
 
 HasCountry returns a boolean if a field has been set.
 
-### GetCreatedAt
-
-`func (o *PayoutMethodsUpdate) GetCreatedAt() time.Time`
-
-GetCreatedAt returns the CreatedAt field if non-nil, zero value otherwise.
-
-### GetCreatedAtOk
-
-`func (o *PayoutMethodsUpdate) GetCreatedAtOk() (*time.Time, bool)`
-
-GetCreatedAtOk returns a tuple with the CreatedAt field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCreatedAt
-
-`func (o *PayoutMethodsUpdate) SetCreatedAt(v time.Time)`
-
-SetCreatedAt sets CreatedAt field to given value.
-
-### HasCreatedAt
-
-`func (o *PayoutMethodsUpdate) HasCreatedAt() bool`
-
-HasCreatedAt returns a boolean if a field has been set.
-
 ### GetIsDefault
 
 `func (o *PayoutMethodsUpdate) GetIsDefault() bool`
@@ -447,31 +419,6 @@ SetIsValid sets IsValid field to given value.
 `func (o *PayoutMethodsUpdate) HasIsValid() bool`
 
 HasIsValid returns a boolean if a field has been set.
-
-### GetOrganizationId
-
-`func (o *PayoutMethodsUpdate) GetOrganizationId() string`
-
-GetOrganizationId returns the OrganizationId field if non-nil, zero value otherwise.
-
-### GetOrganizationIdOk
-
-`func (o *PayoutMethodsUpdate) GetOrganizationIdOk() (*string, bool)`
-
-GetOrganizationIdOk returns a tuple with the OrganizationId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetOrganizationId
-
-`func (o *PayoutMethodsUpdate) SetOrganizationId(v string)`
-
-SetOrganizationId sets OrganizationId field to given value.
-
-### HasOrganizationId
-
-`func (o *PayoutMethodsUpdate) HasOrganizationId() bool`
-
-HasOrganizationId returns a boolean if a field has been set.
 
 ### GetPayoutMethodId
 
@@ -622,31 +569,6 @@ SetSpiAliasType sets SpiAliasType field to given value.
 `func (o *PayoutMethodsUpdate) HasSpiAliasType() bool`
 
 HasSpiAliasType returns a boolean if a field has been set.
-
-### GetUpdatedAt
-
-`func (o *PayoutMethodsUpdate) GetUpdatedAt() time.Time`
-
-GetUpdatedAt returns the UpdatedAt field if non-nil, zero value otherwise.
-
-### GetUpdatedAtOk
-
-`func (o *PayoutMethodsUpdate) GetUpdatedAtOk() (*time.Time, bool)`
-
-GetUpdatedAtOk returns a tuple with the UpdatedAt field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetUpdatedAt
-
-`func (o *PayoutMethodsUpdate) SetUpdatedAt(v time.Time)`
-
-SetUpdatedAt sets UpdatedAt field to given value.
-
-### HasUpdatedAt
-
-`func (o *PayoutMethodsUpdate) HasUpdatedAt() bool`
-
-HasUpdatedAt returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

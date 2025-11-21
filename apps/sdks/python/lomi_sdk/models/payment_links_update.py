@@ -19,7 +19,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictFloat, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from uuid import UUID
 from typing import Optional, Set
@@ -27,33 +27,28 @@ from typing_extensions import Self
 
 class PaymentLinksUpdate(BaseModel):
     """
-    Update payment_links input
+    Request body for updating a payment links object. Only include fields you want to modify.
     """ # noqa: E501
     allow_coupon_code: Optional[StrictBool] = None
     allow_quantity: Optional[StrictBool] = None
     allowed_providers: Optional[StrictStr] = None
-    amount: Optional[Union[StrictFloat, StrictInt]] = None
-    cancel_url: Optional[StrictStr] = None
-    created_at: Optional[datetime] = None
-    created_by: Optional[StrictStr] = None
-    currency_code: Optional[StrictStr] = None
-    environment: Optional[StrictStr] = None
-    expires_at: Optional[datetime] = None
-    is_active: Optional[StrictBool] = None
-    link_id: Optional[UUID] = None
+    amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Amount in the smallest currency unit (e.g., cents for USD, same for XOF)")
+    cancel_url: Optional[StrictStr] = Field(default=None, description="URL/URI")
+    currency_code: Optional[StrictStr] = Field(default=None, description="Three-letter ISO currency code (e.g., XOF, USD, EUR)")
+    expires_at: Optional[datetime] = Field(default=None, description="ISO 8601 datetime")
+    is_active: Optional[StrictBool] = Field(default=None, description="Whether this resource is currently active")
+    link_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
     link_type: Optional[StrictStr] = None
-    metadata: Optional[Dict[str, Any]] = None
-    organization_id: Optional[UUID] = None
-    price_id: Optional[UUID] = None
+    metadata: Optional[Dict[str, Any]] = Field(default=None, description="Set of key-value pairs for storing additional information")
+    price_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
     private_description: Optional[StrictStr] = None
-    product_id: Optional[UUID] = None
+    product_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
     public_description: Optional[StrictStr] = None
     quantity: Optional[Union[StrictFloat, StrictInt]] = None
-    success_url: Optional[StrictStr] = None
+    success_url: Optional[StrictStr] = Field(default=None, description="URL/URI")
     title: Optional[StrictStr] = None
-    updated_at: Optional[datetime] = None
-    url: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["allow_coupon_code", "allow_quantity", "allowed_providers", "amount", "cancel_url", "created_at", "created_by", "currency_code", "environment", "expires_at", "is_active", "link_id", "link_type", "metadata", "organization_id", "price_id", "private_description", "product_id", "public_description", "quantity", "success_url", "title", "updated_at", "url"]
+    url: Optional[StrictStr] = Field(default=None, description="URL/URI")
+    __properties: ClassVar[List[str]] = ["allow_coupon_code", "allow_quantity", "allowed_providers", "amount", "cancel_url", "currency_code", "expires_at", "is_active", "link_id", "link_type", "metadata", "price_id", "private_description", "product_id", "public_description", "quantity", "success_url", "title", "url"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -111,16 +106,12 @@ class PaymentLinksUpdate(BaseModel):
             "allowed_providers": obj.get("allowed_providers"),
             "amount": obj.get("amount"),
             "cancel_url": obj.get("cancel_url"),
-            "created_at": obj.get("created_at"),
-            "created_by": obj.get("created_by"),
             "currency_code": obj.get("currency_code"),
-            "environment": obj.get("environment"),
             "expires_at": obj.get("expires_at"),
             "is_active": obj.get("is_active"),
             "link_id": obj.get("link_id"),
             "link_type": obj.get("link_type"),
             "metadata": obj.get("metadata"),
-            "organization_id": obj.get("organization_id"),
             "price_id": obj.get("price_id"),
             "private_description": obj.get("private_description"),
             "product_id": obj.get("product_id"),
@@ -128,7 +119,6 @@ class PaymentLinksUpdate(BaseModel):
             "quantity": obj.get("quantity"),
             "success_url": obj.get("success_url"),
             "title": obj.get("title"),
-            "updated_at": obj.get("updated_at"),
             "url": obj.get("url")
         })
         return _obj

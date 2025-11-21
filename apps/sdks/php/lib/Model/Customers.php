@@ -36,7 +36,7 @@ use \LomiSDK\ObjectSerializer;
  * Customers Class Doc Comment
  *
  * @category Class
- * @description customers object
+ * @description customers resource object
  * @package  LomiSDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -525,7 +525,7 @@ class Customers implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets created_at
      *
-     * @param \DateTime|null $created_at created_at
+     * @param \DateTime|null $created_at ISO 8601 datetime
      *
      * @return self
      */
@@ -579,7 +579,7 @@ class Customers implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets customer_id
      *
-     * @param string|null $customer_id customer_id
+     * @param string|null $customer_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -606,7 +606,7 @@ class Customers implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets deleted_at
      *
-     * @param \DateTime|null $deleted_at deleted_at
+     * @param \DateTime|null $deleted_at ISO 8601 datetime
      *
      * @return self
      */
@@ -633,7 +633,7 @@ class Customers implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets email
      *
-     * @param string|null $email email
+     * @param string|null $email Email address
      *
      * @return self
      */
@@ -714,7 +714,7 @@ class Customers implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets is_deleted
      *
-     * @param bool|null $is_deleted is_deleted
+     * @param bool|null $is_deleted Soft deletion flag
      *
      * @return self
      */
@@ -741,7 +741,7 @@ class Customers implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets metadata
      *
-     * @param object|null $metadata metadata
+     * @param object|null $metadata Set of key-value pairs for storing additional information
      *
      * @return self
      */
@@ -795,7 +795,7 @@ class Customers implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets organization_id
      *
-     * @param string|null $organization_id organization_id
+     * @param string|null $organization_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -957,7 +957,7 @@ class Customers implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets updated_at
      *
-     * @param \DateTime|null $updated_at updated_at
+     * @param \DateTime|null $updated_at ISO 8601 datetime
      *
      * @return self
      */

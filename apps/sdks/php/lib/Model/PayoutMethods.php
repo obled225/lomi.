@@ -36,7 +36,7 @@ use \LomiSDK\ObjectSerializer;
  * PayoutMethods Class Doc Comment
  *
  * @category Class
- * @description payout_methods object
+ * @description payout methods resource object
  * @package  LomiSDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -762,7 +762,7 @@ class PayoutMethods implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets created_at
      *
-     * @param \DateTime|null $created_at created_at
+     * @param \DateTime|null $created_at ISO 8601 datetime
      *
      * @return self
      */
@@ -897,7 +897,7 @@ class PayoutMethods implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets organization_id
      *
-     * @param string|null $organization_id organization_id
+     * @param string|null $organization_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -924,7 +924,7 @@ class PayoutMethods implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets payout_method_id
      *
-     * @param string|null $payout_method_id payout_method_id
+     * @param string|null $payout_method_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -1086,7 +1086,7 @@ class PayoutMethods implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets updated_at
      *
-     * @param \DateTime|null $updated_at updated_at
+     * @param \DateTime|null $updated_at ISO 8601 datetime
      *
      * @return self
      */

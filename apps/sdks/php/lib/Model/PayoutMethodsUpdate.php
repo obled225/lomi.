@@ -36,7 +36,7 @@ use \LomiSDK\ObjectSerializer;
  * PayoutMethodsUpdate Class Doc Comment
  *
  * @category Class
- * @description Update payout_methods input
+ * @description Request body for updating a payout methods object. Only include fields you want to modify.
  * @package  LomiSDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -70,19 +70,16 @@ class PayoutMethodsUpdate implements ModelInterface, ArrayAccess, \JsonSerializa
         'bank_name' => 'string',
         'branch_code' => 'string',
         'country' => 'string',
-        'created_at' => '\DateTime',
         'is_default' => 'bool',
         'is_spi_enabled' => 'bool',
         'is_uemoa' => 'bool',
         'is_valid' => 'bool',
-        'organization_id' => 'string',
         'payout_method_id' => 'string',
         'payout_method_type' => 'string',
         'spi_account_number' => 'string',
         'spi_alias_mbno' => 'string',
         'spi_alias_shid' => 'string',
-        'spi_alias_type' => 'string',
-        'updated_at' => '\DateTime'
+        'spi_alias_type' => 'string'
     ];
 
     /**
@@ -104,19 +101,16 @@ class PayoutMethodsUpdate implements ModelInterface, ArrayAccess, \JsonSerializa
         'bank_name' => null,
         'branch_code' => null,
         'country' => null,
-        'created_at' => 'date-time',
         'is_default' => null,
         'is_spi_enabled' => null,
         'is_uemoa' => null,
         'is_valid' => null,
-        'organization_id' => 'uuid',
         'payout_method_id' => 'uuid',
         'payout_method_type' => null,
         'spi_account_number' => null,
         'spi_alias_mbno' => null,
         'spi_alias_shid' => null,
-        'spi_alias_type' => null,
-        'updated_at' => 'date-time'
+        'spi_alias_type' => null
     ];
 
     /**
@@ -136,19 +130,16 @@ class PayoutMethodsUpdate implements ModelInterface, ArrayAccess, \JsonSerializa
         'bank_name' => false,
         'branch_code' => false,
         'country' => false,
-        'created_at' => false,
         'is_default' => false,
         'is_spi_enabled' => false,
         'is_uemoa' => false,
         'is_valid' => false,
-        'organization_id' => false,
         'payout_method_id' => false,
         'payout_method_type' => false,
         'spi_account_number' => false,
         'spi_alias_mbno' => false,
         'spi_alias_shid' => false,
-        'spi_alias_type' => false,
-        'updated_at' => false
+        'spi_alias_type' => false
     ];
 
     /**
@@ -248,19 +239,16 @@ class PayoutMethodsUpdate implements ModelInterface, ArrayAccess, \JsonSerializa
         'bank_name' => 'bank_name',
         'branch_code' => 'branch_code',
         'country' => 'country',
-        'created_at' => 'created_at',
         'is_default' => 'is_default',
         'is_spi_enabled' => 'is_spi_enabled',
         'is_uemoa' => 'is_uemoa',
         'is_valid' => 'is_valid',
-        'organization_id' => 'organization_id',
         'payout_method_id' => 'payout_method_id',
         'payout_method_type' => 'payout_method_type',
         'spi_account_number' => 'spi_account_number',
         'spi_alias_mbno' => 'spi_alias_mbno',
         'spi_alias_shid' => 'spi_alias_shid',
-        'spi_alias_type' => 'spi_alias_type',
-        'updated_at' => 'updated_at'
+        'spi_alias_type' => 'spi_alias_type'
     ];
 
     /**
@@ -280,19 +268,16 @@ class PayoutMethodsUpdate implements ModelInterface, ArrayAccess, \JsonSerializa
         'bank_name' => 'setBankName',
         'branch_code' => 'setBranchCode',
         'country' => 'setCountry',
-        'created_at' => 'setCreatedAt',
         'is_default' => 'setIsDefault',
         'is_spi_enabled' => 'setIsSpiEnabled',
         'is_uemoa' => 'setIsUemoa',
         'is_valid' => 'setIsValid',
-        'organization_id' => 'setOrganizationId',
         'payout_method_id' => 'setPayoutMethodId',
         'payout_method_type' => 'setPayoutMethodType',
         'spi_account_number' => 'setSpiAccountNumber',
         'spi_alias_mbno' => 'setSpiAliasMbno',
         'spi_alias_shid' => 'setSpiAliasShid',
-        'spi_alias_type' => 'setSpiAliasType',
-        'updated_at' => 'setUpdatedAt'
+        'spi_alias_type' => 'setSpiAliasType'
     ];
 
     /**
@@ -312,19 +297,16 @@ class PayoutMethodsUpdate implements ModelInterface, ArrayAccess, \JsonSerializa
         'bank_name' => 'getBankName',
         'branch_code' => 'getBranchCode',
         'country' => 'getCountry',
-        'created_at' => 'getCreatedAt',
         'is_default' => 'getIsDefault',
         'is_spi_enabled' => 'getIsSpiEnabled',
         'is_uemoa' => 'getIsUemoa',
         'is_valid' => 'getIsValid',
-        'organization_id' => 'getOrganizationId',
         'payout_method_id' => 'getPayoutMethodId',
         'payout_method_type' => 'getPayoutMethodType',
         'spi_account_number' => 'getSpiAccountNumber',
         'spi_alias_mbno' => 'getSpiAliasMbno',
         'spi_alias_shid' => 'getSpiAliasShid',
-        'spi_alias_type' => 'getSpiAliasType',
-        'updated_at' => 'getUpdatedAt'
+        'spi_alias_type' => 'getSpiAliasType'
     ];
 
     /**
@@ -395,19 +377,16 @@ class PayoutMethodsUpdate implements ModelInterface, ArrayAccess, \JsonSerializa
         $this->setIfExists('bank_name', $data ?? [], null);
         $this->setIfExists('branch_code', $data ?? [], null);
         $this->setIfExists('country', $data ?? [], null);
-        $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('is_default', $data ?? [], null);
         $this->setIfExists('is_spi_enabled', $data ?? [], null);
         $this->setIfExists('is_uemoa', $data ?? [], null);
         $this->setIfExists('is_valid', $data ?? [], null);
-        $this->setIfExists('organization_id', $data ?? [], null);
         $this->setIfExists('payout_method_id', $data ?? [], null);
         $this->setIfExists('payout_method_type', $data ?? [], null);
         $this->setIfExists('spi_account_number', $data ?? [], null);
         $this->setIfExists('spi_alias_mbno', $data ?? [], null);
         $this->setIfExists('spi_alias_shid', $data ?? [], null);
         $this->setIfExists('spi_alias_type', $data ?? [], null);
-        $this->setIfExists('updated_at', $data ?? [], null);
     }
 
     /**
@@ -750,33 +729,6 @@ class PayoutMethodsUpdate implements ModelInterface, ArrayAccess, \JsonSerializa
     }
 
     /**
-     * Gets created_at
-     *
-     * @return \DateTime|null
-     */
-    public function getCreatedAt()
-    {
-        return $this->container['created_at'];
-    }
-
-    /**
-     * Sets created_at
-     *
-     * @param \DateTime|null $created_at created_at
-     *
-     * @return self
-     */
-    public function setCreatedAt($created_at)
-    {
-        if (is_null($created_at)) {
-            throw new \InvalidArgumentException('non-nullable created_at cannot be null');
-        }
-        $this->container['created_at'] = $created_at;
-
-        return $this;
-    }
-
-    /**
      * Gets is_default
      *
      * @return bool|null
@@ -885,33 +837,6 @@ class PayoutMethodsUpdate implements ModelInterface, ArrayAccess, \JsonSerializa
     }
 
     /**
-     * Gets organization_id
-     *
-     * @return string|null
-     */
-    public function getOrganizationId()
-    {
-        return $this->container['organization_id'];
-    }
-
-    /**
-     * Sets organization_id
-     *
-     * @param string|null $organization_id organization_id
-     *
-     * @return self
-     */
-    public function setOrganizationId($organization_id)
-    {
-        if (is_null($organization_id)) {
-            throw new \InvalidArgumentException('non-nullable organization_id cannot be null');
-        }
-        $this->container['organization_id'] = $organization_id;
-
-        return $this;
-    }
-
-    /**
      * Gets payout_method_id
      *
      * @return string|null
@@ -924,7 +849,7 @@ class PayoutMethodsUpdate implements ModelInterface, ArrayAccess, \JsonSerializa
     /**
      * Sets payout_method_id
      *
-     * @param string|null $payout_method_id payout_method_id
+     * @param string|null $payout_method_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -1069,33 +994,6 @@ class PayoutMethodsUpdate implements ModelInterface, ArrayAccess, \JsonSerializa
             throw new \InvalidArgumentException('non-nullable spi_alias_type cannot be null');
         }
         $this->container['spi_alias_type'] = $spi_alias_type;
-
-        return $this;
-    }
-
-    /**
-     * Gets updated_at
-     *
-     * @return \DateTime|null
-     */
-    public function getUpdatedAt()
-    {
-        return $this->container['updated_at'];
-    }
-
-    /**
-     * Sets updated_at
-     *
-     * @param \DateTime|null $updated_at updated_at
-     *
-     * @return self
-     */
-    public function setUpdatedAt($updated_at)
-    {
-        if (is_null($updated_at)) {
-            throw new \InvalidArgumentException('non-nullable updated_at cannot be null');
-        }
-        $this->container['updated_at'] = $updated_at;
 
         return $this;
     }

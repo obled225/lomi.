@@ -4,20 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AccountId** | Pointer to **string** |  | [optional] 
-**Amount** | Pointer to **float64** |  | [optional] 
-**CreatedAt** | Pointer to **time.Time** |  | [optional] 
-**CreatedBy** | Pointer to **string** |  | [optional] 
-**CurrencyCode** | Pointer to **string** |  | [optional] 
-**Environment** | Pointer to **string** |  | [optional] 
-**Metadata** | Pointer to **map[string]interface{}** |  | [optional] 
-**OrganizationId** | Pointer to **string** |  | [optional] 
+**AccountId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
+**Amount** | Pointer to **float64** | Amount in the smallest currency unit (e.g., cents for USD, same for XOF) | [optional] 
+**CurrencyCode** | Pointer to **string** | Three-letter ISO currency code (e.g., XOF, USD, EUR) | [optional] 
+**Metadata** | Pointer to **map[string]interface{}** | Set of key-value pairs for storing additional information | [optional] 
 **PaymentMethodCode** | Pointer to **string** |  | [optional] 
-**PayoutId** | Pointer to **string** |  | [optional] 
-**PayoutMethodId** | Pointer to **string** |  | [optional] 
+**PayoutId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
+**PayoutMethodId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
 **ProviderCode** | Pointer to **string** |  | [optional] 
-**Status** | Pointer to **string** |  | [optional] 
-**UpdatedAt** | Pointer to **time.Time** |  | [optional] 
+**Status** | Pointer to **string** | Current status of the resource | [optional] 
 
 ## Methods
 
@@ -88,56 +83,6 @@ SetAmount sets Amount field to given value.
 
 HasAmount returns a boolean if a field has been set.
 
-### GetCreatedAt
-
-`func (o *PayoutsCreate) GetCreatedAt() time.Time`
-
-GetCreatedAt returns the CreatedAt field if non-nil, zero value otherwise.
-
-### GetCreatedAtOk
-
-`func (o *PayoutsCreate) GetCreatedAtOk() (*time.Time, bool)`
-
-GetCreatedAtOk returns a tuple with the CreatedAt field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCreatedAt
-
-`func (o *PayoutsCreate) SetCreatedAt(v time.Time)`
-
-SetCreatedAt sets CreatedAt field to given value.
-
-### HasCreatedAt
-
-`func (o *PayoutsCreate) HasCreatedAt() bool`
-
-HasCreatedAt returns a boolean if a field has been set.
-
-### GetCreatedBy
-
-`func (o *PayoutsCreate) GetCreatedBy() string`
-
-GetCreatedBy returns the CreatedBy field if non-nil, zero value otherwise.
-
-### GetCreatedByOk
-
-`func (o *PayoutsCreate) GetCreatedByOk() (*string, bool)`
-
-GetCreatedByOk returns a tuple with the CreatedBy field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCreatedBy
-
-`func (o *PayoutsCreate) SetCreatedBy(v string)`
-
-SetCreatedBy sets CreatedBy field to given value.
-
-### HasCreatedBy
-
-`func (o *PayoutsCreate) HasCreatedBy() bool`
-
-HasCreatedBy returns a boolean if a field has been set.
-
 ### GetCurrencyCode
 
 `func (o *PayoutsCreate) GetCurrencyCode() string`
@@ -163,31 +108,6 @@ SetCurrencyCode sets CurrencyCode field to given value.
 
 HasCurrencyCode returns a boolean if a field has been set.
 
-### GetEnvironment
-
-`func (o *PayoutsCreate) GetEnvironment() string`
-
-GetEnvironment returns the Environment field if non-nil, zero value otherwise.
-
-### GetEnvironmentOk
-
-`func (o *PayoutsCreate) GetEnvironmentOk() (*string, bool)`
-
-GetEnvironmentOk returns a tuple with the Environment field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetEnvironment
-
-`func (o *PayoutsCreate) SetEnvironment(v string)`
-
-SetEnvironment sets Environment field to given value.
-
-### HasEnvironment
-
-`func (o *PayoutsCreate) HasEnvironment() bool`
-
-HasEnvironment returns a boolean if a field has been set.
-
 ### GetMetadata
 
 `func (o *PayoutsCreate) GetMetadata() map[string]interface{}`
@@ -212,31 +132,6 @@ SetMetadata sets Metadata field to given value.
 `func (o *PayoutsCreate) HasMetadata() bool`
 
 HasMetadata returns a boolean if a field has been set.
-
-### GetOrganizationId
-
-`func (o *PayoutsCreate) GetOrganizationId() string`
-
-GetOrganizationId returns the OrganizationId field if non-nil, zero value otherwise.
-
-### GetOrganizationIdOk
-
-`func (o *PayoutsCreate) GetOrganizationIdOk() (*string, bool)`
-
-GetOrganizationIdOk returns a tuple with the OrganizationId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetOrganizationId
-
-`func (o *PayoutsCreate) SetOrganizationId(v string)`
-
-SetOrganizationId sets OrganizationId field to given value.
-
-### HasOrganizationId
-
-`func (o *PayoutsCreate) HasOrganizationId() bool`
-
-HasOrganizationId returns a boolean if a field has been set.
 
 ### GetPaymentMethodCode
 
@@ -362,31 +257,6 @@ SetStatus sets Status field to given value.
 `func (o *PayoutsCreate) HasStatus() bool`
 
 HasStatus returns a boolean if a field has been set.
-
-### GetUpdatedAt
-
-`func (o *PayoutsCreate) GetUpdatedAt() time.Time`
-
-GetUpdatedAt returns the UpdatedAt field if non-nil, zero value otherwise.
-
-### GetUpdatedAtOk
-
-`func (o *PayoutsCreate) GetUpdatedAtOk() (*time.Time, bool)`
-
-GetUpdatedAtOk returns a tuple with the UpdatedAt field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetUpdatedAt
-
-`func (o *PayoutsCreate) SetUpdatedAt(v time.Time)`
-
-SetUpdatedAt sets UpdatedAt field to given value.
-
-### HasUpdatedAt
-
-`func (o *PayoutsCreate) HasUpdatedAt() bool`
-
-HasUpdatedAt returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

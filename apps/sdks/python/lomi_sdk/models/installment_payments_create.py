@@ -19,7 +19,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, StrictFloat, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from uuid import UUID
 from typing import Optional, Set
@@ -27,27 +27,25 @@ from typing_extensions import Self
 
 class InstallmentPaymentsCreate(BaseModel):
     """
-    Create installment_payments input
+    Request body for creating a installment payments object. System-managed fields like `created_at`, `organization_id`, and IDs are automatically set.
     """ # noqa: E501
-    amount: Optional[Union[StrictFloat, StrictInt]] = None
-    created_at: Optional[datetime] = None
+    amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Amount in the smallest currency unit (e.g., cents for USD, same for XOF)")
     due_date: Optional[StrictStr] = None
-    installment_id: Optional[UUID] = None
+    installment_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
     interest_amount: Optional[Union[StrictFloat, StrictInt]] = None
-    paid_at: Optional[datetime] = None
+    paid_at: Optional[datetime] = Field(default=None, description="ISO 8601 datetime")
     payment_link: Optional[StrictStr] = None
     payment_method_code: Optional[StrictStr] = None
-    plan_id: Optional[UUID] = None
+    plan_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
     principal_amount: Optional[Union[StrictFloat, StrictInt]] = None
     processing_fee: Optional[Union[StrictFloat, StrictInt]] = None
     provider_code: Optional[StrictStr] = None
     sequence_number: Optional[Union[StrictFloat, StrictInt]] = None
-    spi_payment_request_id: Optional[UUID] = None
-    spi_tx_id: Optional[UUID] = None
-    status: Optional[StrictStr] = None
-    transaction_id: Optional[UUID] = None
-    updated_at: Optional[datetime] = None
-    __properties: ClassVar[List[str]] = ["amount", "created_at", "due_date", "installment_id", "interest_amount", "paid_at", "payment_link", "payment_method_code", "plan_id", "principal_amount", "processing_fee", "provider_code", "sequence_number", "spi_payment_request_id", "spi_tx_id", "status", "transaction_id", "updated_at"]
+    spi_payment_request_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
+    spi_tx_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
+    status: Optional[StrictStr] = Field(default=None, description="Current status of the resource")
+    transaction_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
+    __properties: ClassVar[List[str]] = ["amount", "due_date", "installment_id", "interest_amount", "paid_at", "payment_link", "payment_method_code", "plan_id", "principal_amount", "processing_fee", "provider_code", "sequence_number", "spi_payment_request_id", "spi_tx_id", "status", "transaction_id"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -101,7 +99,6 @@ class InstallmentPaymentsCreate(BaseModel):
 
         _obj = cls.model_validate({
             "amount": obj.get("amount"),
-            "created_at": obj.get("created_at"),
             "due_date": obj.get("due_date"),
             "installment_id": obj.get("installment_id"),
             "interest_amount": obj.get("interest_amount"),
@@ -116,8 +113,7 @@ class InstallmentPaymentsCreate(BaseModel):
             "spi_payment_request_id": obj.get("spi_payment_request_id"),
             "spi_tx_id": obj.get("spi_tx_id"),
             "status": obj.get("status"),
-            "transaction_id": obj.get("transaction_id"),
-            "updated_at": obj.get("updated_at")
+            "transaction_id": obj.get("transaction_id")
         })
         return _obj
 

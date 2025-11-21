@@ -36,7 +36,7 @@ use \LomiSDK\ObjectSerializer;
  * CustomersCreate Class Doc Comment
  *
  * @category Class
- * @description Create customers input
+ * @description Request body for creating a customers object. System-managed fields like &#x60;created_at&#x60;, &#x60;organization_id&#x60;, and IDs are automatically set.
  * @package  LomiSDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -62,23 +62,16 @@ class CustomersCreate implements ModelInterface, ArrayAccess, \JsonSerializable
         'address' => 'string',
         'city' => 'string',
         'country' => 'string',
-        'created_at' => '\DateTime',
-        'created_by' => 'string',
-        'customer_id' => 'string',
-        'deleted_at' => '\DateTime',
         'email' => 'string',
-        'environment' => 'string',
         'is_business' => 'bool',
         'is_deleted' => 'bool',
         'metadata' => 'object',
         'name' => 'string',
-        'organization_id' => 'string',
         'phone_number' => 'string',
         'postal_code' => 'string',
         'spi_alias_mbno' => 'string',
         'spi_alias_shid' => 'string',
         'spi_primary_alias' => 'string',
-        'updated_at' => '\DateTime',
         'whatsapp_number' => 'string'
     ];
 
@@ -93,23 +86,16 @@ class CustomersCreate implements ModelInterface, ArrayAccess, \JsonSerializable
         'address' => null,
         'city' => null,
         'country' => null,
-        'created_at' => 'date-time',
-        'created_by' => null,
-        'customer_id' => 'uuid',
-        'deleted_at' => 'date-time',
         'email' => 'email',
-        'environment' => null,
         'is_business' => null,
         'is_deleted' => null,
         'metadata' => null,
         'name' => null,
-        'organization_id' => 'uuid',
         'phone_number' => null,
         'postal_code' => null,
         'spi_alias_mbno' => null,
         'spi_alias_shid' => null,
         'spi_primary_alias' => null,
-        'updated_at' => 'date-time',
         'whatsapp_number' => null
     ];
 
@@ -122,23 +108,16 @@ class CustomersCreate implements ModelInterface, ArrayAccess, \JsonSerializable
         'address' => false,
         'city' => false,
         'country' => false,
-        'created_at' => false,
-        'created_by' => false,
-        'customer_id' => false,
-        'deleted_at' => false,
         'email' => false,
-        'environment' => false,
         'is_business' => false,
         'is_deleted' => false,
         'metadata' => false,
         'name' => false,
-        'organization_id' => false,
         'phone_number' => false,
         'postal_code' => false,
         'spi_alias_mbno' => false,
         'spi_alias_shid' => false,
         'spi_primary_alias' => false,
-        'updated_at' => false,
         'whatsapp_number' => false
     ];
 
@@ -231,23 +210,16 @@ class CustomersCreate implements ModelInterface, ArrayAccess, \JsonSerializable
         'address' => 'address',
         'city' => 'city',
         'country' => 'country',
-        'created_at' => 'created_at',
-        'created_by' => 'created_by',
-        'customer_id' => 'customer_id',
-        'deleted_at' => 'deleted_at',
         'email' => 'email',
-        'environment' => 'environment',
         'is_business' => 'is_business',
         'is_deleted' => 'is_deleted',
         'metadata' => 'metadata',
         'name' => 'name',
-        'organization_id' => 'organization_id',
         'phone_number' => 'phone_number',
         'postal_code' => 'postal_code',
         'spi_alias_mbno' => 'spi_alias_mbno',
         'spi_alias_shid' => 'spi_alias_shid',
         'spi_primary_alias' => 'spi_primary_alias',
-        'updated_at' => 'updated_at',
         'whatsapp_number' => 'whatsapp_number'
     ];
 
@@ -260,23 +232,16 @@ class CustomersCreate implements ModelInterface, ArrayAccess, \JsonSerializable
         'address' => 'setAddress',
         'city' => 'setCity',
         'country' => 'setCountry',
-        'created_at' => 'setCreatedAt',
-        'created_by' => 'setCreatedBy',
-        'customer_id' => 'setCustomerId',
-        'deleted_at' => 'setDeletedAt',
         'email' => 'setEmail',
-        'environment' => 'setEnvironment',
         'is_business' => 'setIsBusiness',
         'is_deleted' => 'setIsDeleted',
         'metadata' => 'setMetadata',
         'name' => 'setName',
-        'organization_id' => 'setOrganizationId',
         'phone_number' => 'setPhoneNumber',
         'postal_code' => 'setPostalCode',
         'spi_alias_mbno' => 'setSpiAliasMbno',
         'spi_alias_shid' => 'setSpiAliasShid',
         'spi_primary_alias' => 'setSpiPrimaryAlias',
-        'updated_at' => 'setUpdatedAt',
         'whatsapp_number' => 'setWhatsappNumber'
     ];
 
@@ -289,23 +254,16 @@ class CustomersCreate implements ModelInterface, ArrayAccess, \JsonSerializable
         'address' => 'getAddress',
         'city' => 'getCity',
         'country' => 'getCountry',
-        'created_at' => 'getCreatedAt',
-        'created_by' => 'getCreatedBy',
-        'customer_id' => 'getCustomerId',
-        'deleted_at' => 'getDeletedAt',
         'email' => 'getEmail',
-        'environment' => 'getEnvironment',
         'is_business' => 'getIsBusiness',
         'is_deleted' => 'getIsDeleted',
         'metadata' => 'getMetadata',
         'name' => 'getName',
-        'organization_id' => 'getOrganizationId',
         'phone_number' => 'getPhoneNumber',
         'postal_code' => 'getPostalCode',
         'spi_alias_mbno' => 'getSpiAliasMbno',
         'spi_alias_shid' => 'getSpiAliasShid',
         'spi_primary_alias' => 'getSpiPrimaryAlias',
-        'updated_at' => 'getUpdatedAt',
         'whatsapp_number' => 'getWhatsappNumber'
     ];
 
@@ -369,23 +327,16 @@ class CustomersCreate implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('address', $data ?? [], null);
         $this->setIfExists('city', $data ?? [], null);
         $this->setIfExists('country', $data ?? [], null);
-        $this->setIfExists('created_at', $data ?? [], null);
-        $this->setIfExists('created_by', $data ?? [], null);
-        $this->setIfExists('customer_id', $data ?? [], null);
-        $this->setIfExists('deleted_at', $data ?? [], null);
         $this->setIfExists('email', $data ?? [], null);
-        $this->setIfExists('environment', $data ?? [], null);
         $this->setIfExists('is_business', $data ?? [], null);
         $this->setIfExists('is_deleted', $data ?? [], null);
         $this->setIfExists('metadata', $data ?? [], null);
         $this->setIfExists('name', $data ?? [], null);
-        $this->setIfExists('organization_id', $data ?? [], null);
         $this->setIfExists('phone_number', $data ?? [], null);
         $this->setIfExists('postal_code', $data ?? [], null);
         $this->setIfExists('spi_alias_mbno', $data ?? [], null);
         $this->setIfExists('spi_alias_shid', $data ?? [], null);
         $this->setIfExists('spi_primary_alias', $data ?? [], null);
-        $this->setIfExists('updated_at', $data ?? [], null);
         $this->setIfExists('whatsapp_number', $data ?? [], null);
     }
 
@@ -513,114 +464,6 @@ class CustomersCreate implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets created_at
-     *
-     * @return \DateTime|null
-     */
-    public function getCreatedAt()
-    {
-        return $this->container['created_at'];
-    }
-
-    /**
-     * Sets created_at
-     *
-     * @param \DateTime|null $created_at created_at
-     *
-     * @return self
-     */
-    public function setCreatedAt($created_at)
-    {
-        if (is_null($created_at)) {
-            throw new \InvalidArgumentException('non-nullable created_at cannot be null');
-        }
-        $this->container['created_at'] = $created_at;
-
-        return $this;
-    }
-
-    /**
-     * Gets created_by
-     *
-     * @return string|null
-     */
-    public function getCreatedBy()
-    {
-        return $this->container['created_by'];
-    }
-
-    /**
-     * Sets created_by
-     *
-     * @param string|null $created_by created_by
-     *
-     * @return self
-     */
-    public function setCreatedBy($created_by)
-    {
-        if (is_null($created_by)) {
-            throw new \InvalidArgumentException('non-nullable created_by cannot be null');
-        }
-        $this->container['created_by'] = $created_by;
-
-        return $this;
-    }
-
-    /**
-     * Gets customer_id
-     *
-     * @return string|null
-     */
-    public function getCustomerId()
-    {
-        return $this->container['customer_id'];
-    }
-
-    /**
-     * Sets customer_id
-     *
-     * @param string|null $customer_id customer_id
-     *
-     * @return self
-     */
-    public function setCustomerId($customer_id)
-    {
-        if (is_null($customer_id)) {
-            throw new \InvalidArgumentException('non-nullable customer_id cannot be null');
-        }
-        $this->container['customer_id'] = $customer_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets deleted_at
-     *
-     * @return \DateTime|null
-     */
-    public function getDeletedAt()
-    {
-        return $this->container['deleted_at'];
-    }
-
-    /**
-     * Sets deleted_at
-     *
-     * @param \DateTime|null $deleted_at deleted_at
-     *
-     * @return self
-     */
-    public function setDeletedAt($deleted_at)
-    {
-        if (is_null($deleted_at)) {
-            throw new \InvalidArgumentException('non-nullable deleted_at cannot be null');
-        }
-        $this->container['deleted_at'] = $deleted_at;
-
-        return $this;
-    }
-
-    /**
      * Gets email
      *
      * @return string|null
@@ -633,7 +476,7 @@ class CustomersCreate implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets email
      *
-     * @param string|null $email email
+     * @param string|null $email Email address
      *
      * @return self
      */
@@ -643,33 +486,6 @@ class CustomersCreate implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable email cannot be null');
         }
         $this->container['email'] = $email;
-
-        return $this;
-    }
-
-    /**
-     * Gets environment
-     *
-     * @return string|null
-     */
-    public function getEnvironment()
-    {
-        return $this->container['environment'];
-    }
-
-    /**
-     * Sets environment
-     *
-     * @param string|null $environment environment
-     *
-     * @return self
-     */
-    public function setEnvironment($environment)
-    {
-        if (is_null($environment)) {
-            throw new \InvalidArgumentException('non-nullable environment cannot be null');
-        }
-        $this->container['environment'] = $environment;
 
         return $this;
     }
@@ -714,7 +530,7 @@ class CustomersCreate implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets is_deleted
      *
-     * @param bool|null $is_deleted is_deleted
+     * @param bool|null $is_deleted Soft deletion flag
      *
      * @return self
      */
@@ -741,7 +557,7 @@ class CustomersCreate implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets metadata
      *
-     * @param object|null $metadata metadata
+     * @param object|null $metadata Set of key-value pairs for storing additional information
      *
      * @return self
      */
@@ -778,33 +594,6 @@ class CustomersCreate implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable name cannot be null');
         }
         $this->container['name'] = $name;
-
-        return $this;
-    }
-
-    /**
-     * Gets organization_id
-     *
-     * @return string|null
-     */
-    public function getOrganizationId()
-    {
-        return $this->container['organization_id'];
-    }
-
-    /**
-     * Sets organization_id
-     *
-     * @param string|null $organization_id organization_id
-     *
-     * @return self
-     */
-    public function setOrganizationId($organization_id)
-    {
-        if (is_null($organization_id)) {
-            throw new \InvalidArgumentException('non-nullable organization_id cannot be null');
-        }
-        $this->container['organization_id'] = $organization_id;
 
         return $this;
     }
@@ -940,33 +729,6 @@ class CustomersCreate implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable spi_primary_alias cannot be null');
         }
         $this->container['spi_primary_alias'] = $spi_primary_alias;
-
-        return $this;
-    }
-
-    /**
-     * Gets updated_at
-     *
-     * @return \DateTime|null
-     */
-    public function getUpdatedAt()
-    {
-        return $this->container['updated_at'];
-    }
-
-    /**
-     * Sets updated_at
-     *
-     * @param \DateTime|null $updated_at updated_at
-     *
-     * @return self
-     */
-    public function setUpdatedAt($updated_at)
-    {
-        if (is_null($updated_at)) {
-            throw new \InvalidArgumentException('non-nullable updated_at cannot be null');
-        }
-        $this->container['updated_at'] = $updated_at;
 
         return $this;
     }

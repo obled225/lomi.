@@ -3,7 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Create payout_methods input
+ * Request body for creating a payout methods object. System-managed fields like `created_at`, `organization_id`, and IDs are automatically set.
  */
 export type payout_methods_create = {
     account_name?: string;
@@ -17,18 +17,18 @@ export type payout_methods_create = {
     bank_name?: string;
     branch_code?: string;
     country?: string;
-    created_at?: string;
     is_default?: boolean;
     is_spi_enabled?: boolean;
     is_uemoa?: boolean;
     is_valid?: boolean;
-    organization_id?: string;
+    /**
+     * Unique identifier (UUID format)
+     */
     payout_method_id?: string;
     payout_method_type?: string;
     spi_account_number?: string;
     spi_alias_mbno?: string;
     spi_alias_shid?: string;
     spi_alias_type?: string;
-    updated_at?: string;
 };
 

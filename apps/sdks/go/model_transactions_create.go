@@ -13,51 +13,57 @@ package lomisdk
 
 import (
 	"encoding/json"
-	"time"
 )
 
 // checks if the TransactionsCreate type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TransactionsCreate{}
 
-// TransactionsCreate Create transactions input
+// TransactionsCreate Request body for creating a transactions object. System-managed fields like `created_at`, `organization_id`, and IDs are automatically set.
 type TransactionsCreate struct {
+	// Unique identifier (UUID format)
 	CheckoutSessionId *string `json:"checkout_session_id,omitempty"`
-	CreatedAt *time.Time `json:"created_at,omitempty"`
+	// Three-letter ISO currency code (e.g., XOF, USD, EUR)
 	CurrencyCode *string `json:"currency_code,omitempty"`
+	// Unique identifier (UUID format)
 	CustomerId *string `json:"customer_id,omitempty"`
 	Description *string `json:"description,omitempty"`
 	DiscountAmount *float64 `json:"discount_amount,omitempty"`
-	Environment *string `json:"environment,omitempty"`
 	FeeAmount *float64 `json:"fee_amount,omitempty"`
+	// Unique identifier (UUID format)
 	FeeStructureId *string `json:"fee_structure_id,omitempty"`
 	GrossAmount *float64 `json:"gross_amount,omitempty"`
 	IsBnpl *bool `json:"is_bnpl,omitempty"`
 	IsPos *bool `json:"is_pos,omitempty"`
+	// Set of key-value pairs for storing additional information
 	Metadata map[string]interface{} `json:"metadata,omitempty"`
 	NetAmount *float64 `json:"net_amount,omitempty"`
-	OrganizationId *string `json:"organization_id,omitempty"`
 	PaymentMethodCode *string `json:"payment_method_code,omitempty"`
+	// Unique identifier (UUID format)
 	PriceId *string `json:"price_id,omitempty"`
+	// Unique identifier (UUID format)
 	ProductId *string `json:"product_id,omitempty"`
 	ProviderCode *string `json:"provider_code,omitempty"`
 	Quantity *float64 `json:"quantity,omitempty"`
 	SpiAccountNumber *string `json:"spi_account_number,omitempty"`
+	// Unique identifier (UUID format)
 	SpiBulkInstructionId *string `json:"spi_bulk_instruction_id,omitempty"`
 	SpiDateEnvoi *string `json:"spi_date_envoi,omitempty"`
 	SpiDateIrrevocabilite *string `json:"spi_date_irrevocabilite,omitempty"`
 	SpiDiscountAmount *float64 `json:"spi_discount_amount,omitempty"`
 	SpiDiscountRate *float64 `json:"spi_discount_rate,omitempty"`
+	// Unique identifier (UUID format)
 	SpiEnd2endId *string `json:"spi_end2end_id,omitempty"`
 	SpiPaymentCategory *string `json:"spi_payment_category,omitempty"`
 	SpiPaymentFlowType *string `json:"spi_payment_flow_type,omitempty"`
 	SpiPaymentStatus *string `json:"spi_payment_status,omitempty"`
 	SpiRejectionReason *string `json:"spi_rejection_reason,omitempty"`
+	// Unique identifier (UUID format)
 	SpiTxId *string `json:"spi_tx_id,omitempty"`
+	// Current status of the resource
 	Status *string `json:"status,omitempty"`
+	// Unique identifier (UUID format)
 	SubscriptionId *string `json:"subscription_id,omitempty"`
-	TransactionId *string `json:"transaction_id,omitempty"`
 	TransactionType *string `json:"transaction_type,omitempty"`
-	UpdatedAt *time.Time `json:"updated_at,omitempty"`
 }
 
 // NewTransactionsCreate instantiates a new TransactionsCreate object
@@ -107,38 +113,6 @@ func (o *TransactionsCreate) HasCheckoutSessionId() bool {
 // SetCheckoutSessionId gets a reference to the given string and assigns it to the CheckoutSessionId field.
 func (o *TransactionsCreate) SetCheckoutSessionId(v string) {
 	o.CheckoutSessionId = &v
-}
-
-// GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
-func (o *TransactionsCreate) GetCreatedAt() time.Time {
-	if o == nil || IsNil(o.CreatedAt) {
-		var ret time.Time
-		return ret
-	}
-	return *o.CreatedAt
-}
-
-// GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *TransactionsCreate) GetCreatedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.CreatedAt) {
-		return nil, false
-	}
-	return o.CreatedAt, true
-}
-
-// HasCreatedAt returns a boolean if a field has been set.
-func (o *TransactionsCreate) HasCreatedAt() bool {
-	if o != nil && !IsNil(o.CreatedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetCreatedAt gets a reference to the given time.Time and assigns it to the CreatedAt field.
-func (o *TransactionsCreate) SetCreatedAt(v time.Time) {
-	o.CreatedAt = &v
 }
 
 // GetCurrencyCode returns the CurrencyCode field value if set, zero value otherwise.
@@ -267,38 +241,6 @@ func (o *TransactionsCreate) HasDiscountAmount() bool {
 // SetDiscountAmount gets a reference to the given float64 and assigns it to the DiscountAmount field.
 func (o *TransactionsCreate) SetDiscountAmount(v float64) {
 	o.DiscountAmount = &v
-}
-
-// GetEnvironment returns the Environment field value if set, zero value otherwise.
-func (o *TransactionsCreate) GetEnvironment() string {
-	if o == nil || IsNil(o.Environment) {
-		var ret string
-		return ret
-	}
-	return *o.Environment
-}
-
-// GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *TransactionsCreate) GetEnvironmentOk() (*string, bool) {
-	if o == nil || IsNil(o.Environment) {
-		return nil, false
-	}
-	return o.Environment, true
-}
-
-// HasEnvironment returns a boolean if a field has been set.
-func (o *TransactionsCreate) HasEnvironment() bool {
-	if o != nil && !IsNil(o.Environment) {
-		return true
-	}
-
-	return false
-}
-
-// SetEnvironment gets a reference to the given string and assigns it to the Environment field.
-func (o *TransactionsCreate) SetEnvironment(v string) {
-	o.Environment = &v
 }
 
 // GetFeeAmount returns the FeeAmount field value if set, zero value otherwise.
@@ -523,38 +465,6 @@ func (o *TransactionsCreate) HasNetAmount() bool {
 // SetNetAmount gets a reference to the given float64 and assigns it to the NetAmount field.
 func (o *TransactionsCreate) SetNetAmount(v float64) {
 	o.NetAmount = &v
-}
-
-// GetOrganizationId returns the OrganizationId field value if set, zero value otherwise.
-func (o *TransactionsCreate) GetOrganizationId() string {
-	if o == nil || IsNil(o.OrganizationId) {
-		var ret string
-		return ret
-	}
-	return *o.OrganizationId
-}
-
-// GetOrganizationIdOk returns a tuple with the OrganizationId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *TransactionsCreate) GetOrganizationIdOk() (*string, bool) {
-	if o == nil || IsNil(o.OrganizationId) {
-		return nil, false
-	}
-	return o.OrganizationId, true
-}
-
-// HasOrganizationId returns a boolean if a field has been set.
-func (o *TransactionsCreate) HasOrganizationId() bool {
-	if o != nil && !IsNil(o.OrganizationId) {
-		return true
-	}
-
-	return false
-}
-
-// SetOrganizationId gets a reference to the given string and assigns it to the OrganizationId field.
-func (o *TransactionsCreate) SetOrganizationId(v string) {
-	o.OrganizationId = &v
 }
 
 // GetPaymentMethodCode returns the PaymentMethodCode field value if set, zero value otherwise.
@@ -1165,38 +1075,6 @@ func (o *TransactionsCreate) SetSubscriptionId(v string) {
 	o.SubscriptionId = &v
 }
 
-// GetTransactionId returns the TransactionId field value if set, zero value otherwise.
-func (o *TransactionsCreate) GetTransactionId() string {
-	if o == nil || IsNil(o.TransactionId) {
-		var ret string
-		return ret
-	}
-	return *o.TransactionId
-}
-
-// GetTransactionIdOk returns a tuple with the TransactionId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *TransactionsCreate) GetTransactionIdOk() (*string, bool) {
-	if o == nil || IsNil(o.TransactionId) {
-		return nil, false
-	}
-	return o.TransactionId, true
-}
-
-// HasTransactionId returns a boolean if a field has been set.
-func (o *TransactionsCreate) HasTransactionId() bool {
-	if o != nil && !IsNil(o.TransactionId) {
-		return true
-	}
-
-	return false
-}
-
-// SetTransactionId gets a reference to the given string and assigns it to the TransactionId field.
-func (o *TransactionsCreate) SetTransactionId(v string) {
-	o.TransactionId = &v
-}
-
 // GetTransactionType returns the TransactionType field value if set, zero value otherwise.
 func (o *TransactionsCreate) GetTransactionType() string {
 	if o == nil || IsNil(o.TransactionType) {
@@ -1229,38 +1107,6 @@ func (o *TransactionsCreate) SetTransactionType(v string) {
 	o.TransactionType = &v
 }
 
-// GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.
-func (o *TransactionsCreate) GetUpdatedAt() time.Time {
-	if o == nil || IsNil(o.UpdatedAt) {
-		var ret time.Time
-		return ret
-	}
-	return *o.UpdatedAt
-}
-
-// GetUpdatedAtOk returns a tuple with the UpdatedAt field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *TransactionsCreate) GetUpdatedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.UpdatedAt) {
-		return nil, false
-	}
-	return o.UpdatedAt, true
-}
-
-// HasUpdatedAt returns a boolean if a field has been set.
-func (o *TransactionsCreate) HasUpdatedAt() bool {
-	if o != nil && !IsNil(o.UpdatedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetUpdatedAt gets a reference to the given time.Time and assigns it to the UpdatedAt field.
-func (o *TransactionsCreate) SetUpdatedAt(v time.Time) {
-	o.UpdatedAt = &v
-}
-
 func (o TransactionsCreate) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -1274,9 +1120,6 @@ func (o TransactionsCreate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CheckoutSessionId) {
 		toSerialize["checkout_session_id"] = o.CheckoutSessionId
 	}
-	if !IsNil(o.CreatedAt) {
-		toSerialize["created_at"] = o.CreatedAt
-	}
 	if !IsNil(o.CurrencyCode) {
 		toSerialize["currency_code"] = o.CurrencyCode
 	}
@@ -1288,9 +1131,6 @@ func (o TransactionsCreate) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.DiscountAmount) {
 		toSerialize["discount_amount"] = o.DiscountAmount
-	}
-	if !IsNil(o.Environment) {
-		toSerialize["environment"] = o.Environment
 	}
 	if !IsNil(o.FeeAmount) {
 		toSerialize["fee_amount"] = o.FeeAmount
@@ -1312,9 +1152,6 @@ func (o TransactionsCreate) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.NetAmount) {
 		toSerialize["net_amount"] = o.NetAmount
-	}
-	if !IsNil(o.OrganizationId) {
-		toSerialize["organization_id"] = o.OrganizationId
 	}
 	if !IsNil(o.PaymentMethodCode) {
 		toSerialize["payment_method_code"] = o.PaymentMethodCode
@@ -1373,14 +1210,8 @@ func (o TransactionsCreate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SubscriptionId) {
 		toSerialize["subscription_id"] = o.SubscriptionId
 	}
-	if !IsNil(o.TransactionId) {
-		toSerialize["transaction_id"] = o.TransactionId
-	}
 	if !IsNil(o.TransactionType) {
 		toSerialize["transaction_type"] = o.TransactionType
-	}
-	if !IsNil(o.UpdatedAt) {
-		toSerialize["updated_at"] = o.UpdatedAt
 	}
 	return toSerialize, nil
 }

@@ -4,20 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AccountId** | Pointer to **string** |  | [optional] 
-**Amount** | Pointer to **float64** |  | [optional] 
-**CreatedAt** | Pointer to **time.Time** |  | [optional] 
-**CreatedBy** | Pointer to **string** |  | [optional] 
-**CurrencyCode** | Pointer to **string** |  | [optional] 
-**Metadata** | Pointer to **map[string]interface{}** |  | [optional] 
-**OrganizationId** | Pointer to **string** |  | [optional] 
+**AccountId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
+**Amount** | Pointer to **float64** | Amount in the smallest currency unit (e.g., cents for USD, same for XOF) | [optional] 
+**CurrencyCode** | Pointer to **string** | Three-letter ISO currency code (e.g., XOF, USD, EUR) | [optional] 
+**Metadata** | Pointer to **map[string]interface{}** | Set of key-value pairs for storing additional information | [optional] 
 **PaymentMethodCode** | Pointer to **string** |  | [optional] 
-**PayoutId** | Pointer to **string** |  | [optional] 
-**PayoutMethodId** | Pointer to **string** |  | [optional] 
+**PayoutId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
+**PayoutMethodId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
 **ProviderCode** | Pointer to **string** |  | [optional] 
-**SpiBulkInstructionId** | Pointer to **string** |  | [optional] 
-**Status** | Pointer to **string** |  | [optional] 
-**UpdatedAt** | Pointer to **time.Time** |  | [optional] 
+**SpiBulkInstructionId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
+**Status** | Pointer to **string** | Current status of the resource | [optional] 
 
 ## Methods
 
@@ -88,56 +84,6 @@ SetAmount sets Amount field to given value.
 
 HasAmount returns a boolean if a field has been set.
 
-### GetCreatedAt
-
-`func (o *BeneficiaryPayoutsUpdate) GetCreatedAt() time.Time`
-
-GetCreatedAt returns the CreatedAt field if non-nil, zero value otherwise.
-
-### GetCreatedAtOk
-
-`func (o *BeneficiaryPayoutsUpdate) GetCreatedAtOk() (*time.Time, bool)`
-
-GetCreatedAtOk returns a tuple with the CreatedAt field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCreatedAt
-
-`func (o *BeneficiaryPayoutsUpdate) SetCreatedAt(v time.Time)`
-
-SetCreatedAt sets CreatedAt field to given value.
-
-### HasCreatedAt
-
-`func (o *BeneficiaryPayoutsUpdate) HasCreatedAt() bool`
-
-HasCreatedAt returns a boolean if a field has been set.
-
-### GetCreatedBy
-
-`func (o *BeneficiaryPayoutsUpdate) GetCreatedBy() string`
-
-GetCreatedBy returns the CreatedBy field if non-nil, zero value otherwise.
-
-### GetCreatedByOk
-
-`func (o *BeneficiaryPayoutsUpdate) GetCreatedByOk() (*string, bool)`
-
-GetCreatedByOk returns a tuple with the CreatedBy field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCreatedBy
-
-`func (o *BeneficiaryPayoutsUpdate) SetCreatedBy(v string)`
-
-SetCreatedBy sets CreatedBy field to given value.
-
-### HasCreatedBy
-
-`func (o *BeneficiaryPayoutsUpdate) HasCreatedBy() bool`
-
-HasCreatedBy returns a boolean if a field has been set.
-
 ### GetCurrencyCode
 
 `func (o *BeneficiaryPayoutsUpdate) GetCurrencyCode() string`
@@ -187,31 +133,6 @@ SetMetadata sets Metadata field to given value.
 `func (o *BeneficiaryPayoutsUpdate) HasMetadata() bool`
 
 HasMetadata returns a boolean if a field has been set.
-
-### GetOrganizationId
-
-`func (o *BeneficiaryPayoutsUpdate) GetOrganizationId() string`
-
-GetOrganizationId returns the OrganizationId field if non-nil, zero value otherwise.
-
-### GetOrganizationIdOk
-
-`func (o *BeneficiaryPayoutsUpdate) GetOrganizationIdOk() (*string, bool)`
-
-GetOrganizationIdOk returns a tuple with the OrganizationId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetOrganizationId
-
-`func (o *BeneficiaryPayoutsUpdate) SetOrganizationId(v string)`
-
-SetOrganizationId sets OrganizationId field to given value.
-
-### HasOrganizationId
-
-`func (o *BeneficiaryPayoutsUpdate) HasOrganizationId() bool`
-
-HasOrganizationId returns a boolean if a field has been set.
 
 ### GetPaymentMethodCode
 
@@ -362,31 +283,6 @@ SetStatus sets Status field to given value.
 `func (o *BeneficiaryPayoutsUpdate) HasStatus() bool`
 
 HasStatus returns a boolean if a field has been set.
-
-### GetUpdatedAt
-
-`func (o *BeneficiaryPayoutsUpdate) GetUpdatedAt() time.Time`
-
-GetUpdatedAt returns the UpdatedAt field if non-nil, zero value otherwise.
-
-### GetUpdatedAtOk
-
-`func (o *BeneficiaryPayoutsUpdate) GetUpdatedAtOk() (*time.Time, bool)`
-
-GetUpdatedAtOk returns a tuple with the UpdatedAt field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetUpdatedAt
-
-`func (o *BeneficiaryPayoutsUpdate) SetUpdatedAt(v time.Time)`
-
-SetUpdatedAt sets UpdatedAt field to given value.
-
-### HasUpdatedAt
-
-`func (o *BeneficiaryPayoutsUpdate) HasUpdatedAt() bool`
-
-HasUpdatedAt returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

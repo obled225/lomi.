@@ -4,25 +4,22 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Amount** | Pointer to **float64** |  | [optional] 
-**CreatedAt** | Pointer to **time.Time** |  | [optional] 
-**Environment** | Pointer to **string** |  | [optional] 
+**Amount** | Pointer to **float64** | Amount in the smallest currency unit (e.g., cents for USD, same for XOF) | [optional] 
 **FeeAmount** | Pointer to **float64** |  | [optional] 
-**Metadata** | Pointer to **map[string]interface{}** |  | [optional] 
+**Metadata** | Pointer to **map[string]interface{}** | Set of key-value pairs for storing additional information | [optional] 
 **Reason** | Pointer to **string** |  | [optional] 
-**RefundId** | Pointer to **string** |  | [optional] 
+**RefundId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
 **RefundedAmount** | Pointer to **float64** |  | [optional] 
 **SpiAccountNumber** | Pointer to **string** |  | [optional] 
-**SpiEnd2endId** | Pointer to **string** |  | [optional] 
+**SpiEnd2endId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
 **SpiFundReturnStatus** | Pointer to **string** |  | [optional] 
 **SpiMotifCode** | Pointer to **string** |  | [optional] 
 **SpiRejectionReason** | Pointer to **string** |  | [optional] 
 **SpiRetourDateDemande** | Pointer to **string** |  | [optional] 
 **SpiRetourDateIrrevocabilite** | Pointer to **string** |  | [optional] 
-**SpiTxId** | Pointer to **string** |  | [optional] 
-**Status** | Pointer to **string** |  | [optional] 
-**TransactionId** | Pointer to **string** |  | [optional] 
-**UpdatedAt** | Pointer to **time.Time** |  | [optional] 
+**SpiTxId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
+**Status** | Pointer to **string** | Current status of the resource | [optional] 
+**TransactionId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
 
 ## Methods
 
@@ -67,56 +64,6 @@ SetAmount sets Amount field to given value.
 `func (o *RefundsUpdate) HasAmount() bool`
 
 HasAmount returns a boolean if a field has been set.
-
-### GetCreatedAt
-
-`func (o *RefundsUpdate) GetCreatedAt() time.Time`
-
-GetCreatedAt returns the CreatedAt field if non-nil, zero value otherwise.
-
-### GetCreatedAtOk
-
-`func (o *RefundsUpdate) GetCreatedAtOk() (*time.Time, bool)`
-
-GetCreatedAtOk returns a tuple with the CreatedAt field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCreatedAt
-
-`func (o *RefundsUpdate) SetCreatedAt(v time.Time)`
-
-SetCreatedAt sets CreatedAt field to given value.
-
-### HasCreatedAt
-
-`func (o *RefundsUpdate) HasCreatedAt() bool`
-
-HasCreatedAt returns a boolean if a field has been set.
-
-### GetEnvironment
-
-`func (o *RefundsUpdate) GetEnvironment() string`
-
-GetEnvironment returns the Environment field if non-nil, zero value otherwise.
-
-### GetEnvironmentOk
-
-`func (o *RefundsUpdate) GetEnvironmentOk() (*string, bool)`
-
-GetEnvironmentOk returns a tuple with the Environment field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetEnvironment
-
-`func (o *RefundsUpdate) SetEnvironment(v string)`
-
-SetEnvironment sets Environment field to given value.
-
-### HasEnvironment
-
-`func (o *RefundsUpdate) HasEnvironment() bool`
-
-HasEnvironment returns a boolean if a field has been set.
 
 ### GetFeeAmount
 
@@ -492,31 +439,6 @@ SetTransactionId sets TransactionId field to given value.
 `func (o *RefundsUpdate) HasTransactionId() bool`
 
 HasTransactionId returns a boolean if a field has been set.
-
-### GetUpdatedAt
-
-`func (o *RefundsUpdate) GetUpdatedAt() time.Time`
-
-GetUpdatedAt returns the UpdatedAt field if non-nil, zero value otherwise.
-
-### GetUpdatedAtOk
-
-`func (o *RefundsUpdate) GetUpdatedAtOk() (*time.Time, bool)`
-
-GetUpdatedAtOk returns a tuple with the UpdatedAt field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetUpdatedAt
-
-`func (o *RefundsUpdate) SetUpdatedAt(v time.Time)`
-
-SetUpdatedAt sets UpdatedAt field to given value.
-
-### HasUpdatedAt
-
-`func (o *RefundsUpdate) HasUpdatedAt() bool`
-
-HasUpdatedAt returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

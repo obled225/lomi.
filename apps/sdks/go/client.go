@@ -50,49 +50,25 @@ type APIClient struct {
 
 	// API Services
 
-	BeneficiaryPayoutAPI *BeneficiaryPayoutAPIService
+	BNPLAPI *BNPLAPIService
 
-	CheckoutSessionAPI *CheckoutSessionAPIService
+	CheckoutAPI *CheckoutAPIService
 
-	CustomerAPI *CustomerAPIService
+	CoreAPI *CoreAPIService
 
-	CustomerInvoiceAPI *CustomerInvoiceAPIService
+	EventsAPI *EventsAPIService
 
-	DiscountCouponAPI *DiscountCouponAPIService
+	PayoutsAPI *PayoutsAPIService
 
-	EventAPI *EventAPIService
+	ProductsAPI *ProductsAPIService
 
-	InstallmentPaymentAPI *InstallmentPaymentAPIService
+	SPIAPI *SPIAPIService
 
-	MeterAPI *MeterAPIService
+	SubscriptionsAPI *SubscriptionsAPIService
 
-	MeterBalanceAPI *MeterBalanceAPIService
+	UsageBillingAPI *UsageBillingAPIService
 
-	PaymentLinkAPI *PaymentLinkAPIService
-
-	PaymentRequestAPI *PaymentRequestAPIService
-
-	PayoutAPI *PayoutAPIService
-
-	PayoutMethodAPI *PayoutMethodAPIService
-
-	PriceAPI *PriceAPIService
-
-	ProductAPI *ProductAPIService
-
-	RefundAPI *RefundAPIService
-
-	SpiAccountAliaseAPI *SpiAccountAliaseAPIService
-
-	SpiQrCodeAPI *SpiQrCodeAPIService
-
-	SubscriptionAPI *SubscriptionAPIService
-
-	TransactionAPI *TransactionAPIService
-
-	WebhookAPI *WebhookAPIService
-
-	WebhookDeliveryLogAPI *WebhookDeliveryLogAPIService
+	WebhooksAPI *WebhooksAPIService
 }
 
 type service struct {
@@ -111,28 +87,16 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.common.client = c
 
 	// API Services
-	c.BeneficiaryPayoutAPI = (*BeneficiaryPayoutAPIService)(&c.common)
-	c.CheckoutSessionAPI = (*CheckoutSessionAPIService)(&c.common)
-	c.CustomerAPI = (*CustomerAPIService)(&c.common)
-	c.CustomerInvoiceAPI = (*CustomerInvoiceAPIService)(&c.common)
-	c.DiscountCouponAPI = (*DiscountCouponAPIService)(&c.common)
-	c.EventAPI = (*EventAPIService)(&c.common)
-	c.InstallmentPaymentAPI = (*InstallmentPaymentAPIService)(&c.common)
-	c.MeterAPI = (*MeterAPIService)(&c.common)
-	c.MeterBalanceAPI = (*MeterBalanceAPIService)(&c.common)
-	c.PaymentLinkAPI = (*PaymentLinkAPIService)(&c.common)
-	c.PaymentRequestAPI = (*PaymentRequestAPIService)(&c.common)
-	c.PayoutAPI = (*PayoutAPIService)(&c.common)
-	c.PayoutMethodAPI = (*PayoutMethodAPIService)(&c.common)
-	c.PriceAPI = (*PriceAPIService)(&c.common)
-	c.ProductAPI = (*ProductAPIService)(&c.common)
-	c.RefundAPI = (*RefundAPIService)(&c.common)
-	c.SpiAccountAliaseAPI = (*SpiAccountAliaseAPIService)(&c.common)
-	c.SpiQrCodeAPI = (*SpiQrCodeAPIService)(&c.common)
-	c.SubscriptionAPI = (*SubscriptionAPIService)(&c.common)
-	c.TransactionAPI = (*TransactionAPIService)(&c.common)
-	c.WebhookAPI = (*WebhookAPIService)(&c.common)
-	c.WebhookDeliveryLogAPI = (*WebhookDeliveryLogAPIService)(&c.common)
+	c.BNPLAPI = (*BNPLAPIService)(&c.common)
+	c.CheckoutAPI = (*CheckoutAPIService)(&c.common)
+	c.CoreAPI = (*CoreAPIService)(&c.common)
+	c.EventsAPI = (*EventsAPIService)(&c.common)
+	c.PayoutsAPI = (*PayoutsAPIService)(&c.common)
+	c.ProductsAPI = (*ProductsAPIService)(&c.common)
+	c.SPIAPI = (*SPIAPIService)(&c.common)
+	c.SubscriptionsAPI = (*SubscriptionsAPIService)(&c.common)
+	c.UsageBillingAPI = (*UsageBillingAPIService)(&c.common)
+	c.WebhooksAPI = (*WebhooksAPIService)(&c.common)
 
 	return c
 }

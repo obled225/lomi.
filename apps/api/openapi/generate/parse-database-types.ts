@@ -298,30 +298,68 @@ function extractEnums(
 }
 
 export function tableSchemaToOpenAPI(table: TableSchema) {
+  // Fields that should be marked as readOnly in the response schema
+  const readOnlyFields = new Set([
+    'created_at',
+    'updated_at',
+    'deleted_at',
+    'created_by',
+    'updated_by',
+    table.tableName === 'customers' ? 'customer_id' : null,
+    table.tableName === 'payment_requests' ? 'request_id' : null,
+    table.tableName === 'transactions' ? 'transaction_id' : null,
+    table.tableName === 'products' ? 'product_id' : null,
+    table.tableName === 'subscriptions' ? 'subscription_id' : null,
+  ].filter(Boolean) as string[]);
+
+  // Fields that should never appear in create/update schemas
+  const systemManagedFields = new Set([
+    'created_at',
+    'updated_at',
+    'deleted_at',
+    'created_by',
+    'updated_by',
+    'organization_id', // Set from auth context
+    'merchant_id',     // Set from auth context  
+    'environment',     // Set by SDK/API
+    ...Array.from(readOnlyFields),
+  ]);
+
+  // Clean insert properties (exclude system-managed fields)
+  const cleanInsertProps = Object.entries(table.insert)
+    .filter(([name]) => !systemManagedFields.has(name))
+    .reduce((acc, [name, prop]) => ({ ...acc, [name]: prop }), {} as Record<string, PropertyInfo>);
+
+  // Clean update properties (exclude system-managed fields)
+  const cleanUpdateProps = Object.entries(table.update)
+    .filter(([name]) => !systemManagedFields.has(name))
+    .reduce((acc, [name, prop]) => ({ ...acc, [name]: prop }), {} as Record<string, PropertyInfo>);
+
   return {
     [table.tableName]: {
       type: 'object',
-      description: `${table.tableName} object`,
-      properties: propertiesToOpenAPI(table.row),
+      description: `${table.tableName.replace(/_/g, ' ')} resource object`,
+      properties: propertiesToOpenAPI(table.row, readOnlyFields),
     },
     [`${table.tableName}_create`]: {
       type: 'object',
-      description: `Create ${table.tableName} input`,
-      required: Object.entries(table.insert)
+      description: `Request body for creating a ${table.tableName.replace(/_/g, ' ')} object. System-managed fields like \`created_at\`, \`organization_id\`, and IDs are automatically set.`,
+      required: Object.entries(cleanInsertProps)
         .filter(([_, prop]) => prop.required)
         .map(([name]) => name),
-      properties: propertiesToOpenAPI(table.insert),
+      properties: propertiesToOpenAPI(cleanInsertProps),
     },
     [`${table.tableName}_update`]: {
       type: 'object',
-      description: `Update ${table.tableName} input`,
-      properties: propertiesToOpenAPI(table.update),
+      description: `Request body for updating a ${table.tableName.replace(/_/g, ' ')} object. Only include fields you want to modify.`,
+      properties: propertiesToOpenAPI(cleanUpdateProps),
     },
   };
 }
 
 function propertiesToOpenAPI(
   properties: Record<string, PropertyInfo>,
+  readOnlyFields: Set<string> = new Set(),
 ): Record<string, any> {
   const result: Record<string, any> = {};
 
@@ -346,20 +384,63 @@ function propertiesToOpenAPI(
       schema.description = prop.description;
     }
 
+    // Mark as readOnly if in the readOnlyFields set
+    if (readOnlyFields.has(name)) {
+      schema.readOnly = true;
+    }
+
+    // Add format hints based on field name patterns
     if (name.includes('_id') || name === 'id') {
       schema.format = 'uuid';
+      if (!schema.description) {
+        schema.description = `Unique identifier (UUID format)`;
+      }
     }
 
     if (name.includes('email')) {
       schema.format = 'email';
+      if (!schema.description) {
+        schema.description = 'Email address';
+      }
     }
 
     if (name.includes('url') || name.includes('uri')) {
       schema.format = 'uri';
+      if (!schema.description) {
+        schema.description = 'URL/URI';
+      }
     }
 
     if (name.includes('_at') || name === 'timestamp') {
       schema.format = 'date-time';
+      if (!schema.description) {
+        schema.description = 'ISO 8601 datetime';
+      }
+    }
+
+    // Add helpful descriptions for common fields
+    if (name === 'metadata' && !schema.description) {
+      schema.description = 'Set of key-value pairs for storing additional information';
+    }
+
+    if (name === 'currency_code' && !schema.description) {
+      schema.description = 'Three-letter ISO currency code (e.g., XOF, USD, EUR)';
+    }
+
+    if (name === 'amount' && !schema.description) {
+      schema.description = 'Amount in the smallest currency unit (e.g., cents for USD, same for XOF)';
+    }
+
+    if (name === 'status' && !schema.description) {
+      schema.description = 'Current status of the resource';
+    }
+
+    if (name === 'is_active' && !schema.description) {
+      schema.description = 'Whether this resource is currently active';
+    }
+
+    if (name === 'is_deleted' && !schema.description) {
+      schema.description = 'Soft deletion flag';
     }
 
     result[name] = schema;

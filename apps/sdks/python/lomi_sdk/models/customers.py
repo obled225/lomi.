@@ -19,7 +19,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from uuid import UUID
 from typing import Optional, Set
@@ -27,28 +27,28 @@ from typing_extensions import Self
 
 class Customers(BaseModel):
     """
-    customers object
+    customers resource object
     """ # noqa: E501
     address: Optional[StrictStr] = None
     city: Optional[StrictStr] = None
     country: Optional[StrictStr] = None
-    created_at: Optional[datetime] = None
+    created_at: Optional[datetime] = Field(default=None, description="ISO 8601 datetime")
     created_by: Optional[StrictStr] = None
-    customer_id: Optional[UUID] = None
-    deleted_at: Optional[datetime] = None
-    email: Optional[StrictStr] = None
+    customer_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
+    deleted_at: Optional[datetime] = Field(default=None, description="ISO 8601 datetime")
+    email: Optional[StrictStr] = Field(default=None, description="Email address")
     environment: Optional[StrictStr] = None
     is_business: Optional[StrictBool] = None
-    is_deleted: Optional[StrictBool] = None
-    metadata: Optional[Dict[str, Any]] = None
+    is_deleted: Optional[StrictBool] = Field(default=None, description="Soft deletion flag")
+    metadata: Optional[Dict[str, Any]] = Field(default=None, description="Set of key-value pairs for storing additional information")
     name: Optional[StrictStr] = None
-    organization_id: Optional[UUID] = None
+    organization_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
     phone_number: Optional[StrictStr] = None
     postal_code: Optional[StrictStr] = None
     spi_alias_mbno: Optional[StrictStr] = None
     spi_alias_shid: Optional[StrictStr] = None
     spi_primary_alias: Optional[StrictStr] = None
-    updated_at: Optional[datetime] = None
+    updated_at: Optional[datetime] = Field(default=None, description="ISO 8601 datetime")
     whatsapp_number: Optional[StrictStr] = None
     __properties: ClassVar[List[str]] = ["address", "city", "country", "created_at", "created_by", "customer_id", "deleted_at", "email", "environment", "is_business", "is_deleted", "metadata", "name", "organization_id", "phone_number", "postal_code", "spi_alias_mbno", "spi_alias_shid", "spi_primary_alias", "updated_at", "whatsapp_number"]
 
@@ -82,8 +82,18 @@ class Customers(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set([
+            "created_at",
+            "created_by",
+            "customer_id",
+            "deleted_at",
+            "updated_at",
         ])
 
         _dict = self.model_dump(

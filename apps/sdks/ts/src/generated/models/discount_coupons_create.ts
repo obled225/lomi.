@@ -3,28 +3,33 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Create discount_coupons input
+ * Request body for creating a discount coupons object. System-managed fields like `created_at`, `organization_id`, and IDs are automatically set.
  */
 export type discount_coupons_create = {
     applies_to_product_types?: string;
     code?: string;
+    /**
+     * Unique identifier (UUID format)
+     */
     coupon_id?: string;
-    created_at?: string;
     current_uses?: number;
     customer_type?: string;
     description?: string;
     discount_fixed_amount?: number;
     discount_percentage?: number;
     discount_type?: string;
-    environment?: string;
+    /**
+     * ISO 8601 datetime
+     */
     expires_at?: string;
+    /**
+     * Whether this resource is currently active
+     */
     is_active?: boolean;
     is_organization_wide?: boolean;
     max_quantity_per_use?: number;
     max_uses?: number;
-    organization_id?: string;
     scope_type?: string;
-    updated_at?: string;
     usage_frequency_limit?: string;
     usage_limit_value?: number;
     valid_from?: string;

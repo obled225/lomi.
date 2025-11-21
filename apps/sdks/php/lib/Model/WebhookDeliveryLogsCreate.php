@@ -36,7 +36,7 @@ use \LomiSDK\ObjectSerializer;
  * WebhookDeliveryLogsCreate Class Doc Comment
  *
  * @category Class
- * @description Create webhook_delivery_logs input
+ * @description Request body for creating a webhook delivery logs object. System-managed fields like &#x60;created_at&#x60;, &#x60;organization_id&#x60;, and IDs are automatically set.
  * @package  LomiSDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -62,13 +62,11 @@ class WebhookDeliveryLogsCreate implements ModelInterface, ArrayAccess, \JsonSer
         'attempt_number' => 'float',
         'compte_paye' => 'string',
         'compte_payeur' => 'string',
-        'created_at' => '\DateTime',
         'event_type' => 'string',
         'headers' => 'object',
         'ip_address' => 'string',
         'log_id' => 'string',
         'montant' => 'float',
-        'organization_id' => 'string',
         'payload' => 'object',
         'request_duration_ms' => 'float',
         'response_body' => 'string',
@@ -91,13 +89,11 @@ class WebhookDeliveryLogsCreate implements ModelInterface, ArrayAccess, \JsonSer
         'attempt_number' => 'double',
         'compte_paye' => null,
         'compte_payeur' => null,
-        'created_at' => 'date-time',
         'event_type' => null,
         'headers' => null,
         'ip_address' => null,
         'log_id' => 'uuid',
         'montant' => 'double',
-        'organization_id' => 'uuid',
         'payload' => null,
         'request_duration_ms' => 'double',
         'response_body' => null,
@@ -118,13 +114,11 @@ class WebhookDeliveryLogsCreate implements ModelInterface, ArrayAccess, \JsonSer
         'attempt_number' => false,
         'compte_paye' => false,
         'compte_payeur' => false,
-        'created_at' => false,
         'event_type' => false,
         'headers' => false,
         'ip_address' => false,
         'log_id' => false,
         'montant' => false,
-        'organization_id' => false,
         'payload' => false,
         'request_duration_ms' => false,
         'response_body' => false,
@@ -225,13 +219,11 @@ class WebhookDeliveryLogsCreate implements ModelInterface, ArrayAccess, \JsonSer
         'attempt_number' => 'attempt_number',
         'compte_paye' => 'compte_paye',
         'compte_payeur' => 'compte_payeur',
-        'created_at' => 'created_at',
         'event_type' => 'event_type',
         'headers' => 'headers',
         'ip_address' => 'ip_address',
         'log_id' => 'log_id',
         'montant' => 'montant',
-        'organization_id' => 'organization_id',
         'payload' => 'payload',
         'request_duration_ms' => 'request_duration_ms',
         'response_body' => 'response_body',
@@ -252,13 +244,11 @@ class WebhookDeliveryLogsCreate implements ModelInterface, ArrayAccess, \JsonSer
         'attempt_number' => 'setAttemptNumber',
         'compte_paye' => 'setComptePaye',
         'compte_payeur' => 'setComptePayeur',
-        'created_at' => 'setCreatedAt',
         'event_type' => 'setEventType',
         'headers' => 'setHeaders',
         'ip_address' => 'setIpAddress',
         'log_id' => 'setLogId',
         'montant' => 'setMontant',
-        'organization_id' => 'setOrganizationId',
         'payload' => 'setPayload',
         'request_duration_ms' => 'setRequestDurationMs',
         'response_body' => 'setResponseBody',
@@ -279,13 +269,11 @@ class WebhookDeliveryLogsCreate implements ModelInterface, ArrayAccess, \JsonSer
         'attempt_number' => 'getAttemptNumber',
         'compte_paye' => 'getComptePaye',
         'compte_payeur' => 'getComptePayeur',
-        'created_at' => 'getCreatedAt',
         'event_type' => 'getEventType',
         'headers' => 'getHeaders',
         'ip_address' => 'getIpAddress',
         'log_id' => 'getLogId',
         'montant' => 'getMontant',
-        'organization_id' => 'getOrganizationId',
         'payload' => 'getPayload',
         'request_duration_ms' => 'getRequestDurationMs',
         'response_body' => 'getResponseBody',
@@ -357,13 +345,11 @@ class WebhookDeliveryLogsCreate implements ModelInterface, ArrayAccess, \JsonSer
         $this->setIfExists('attempt_number', $data ?? [], null);
         $this->setIfExists('compte_paye', $data ?? [], null);
         $this->setIfExists('compte_payeur', $data ?? [], null);
-        $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('event_type', $data ?? [], null);
         $this->setIfExists('headers', $data ?? [], null);
         $this->setIfExists('ip_address', $data ?? [], null);
         $this->setIfExists('log_id', $data ?? [], null);
         $this->setIfExists('montant', $data ?? [], null);
-        $this->setIfExists('organization_id', $data ?? [], null);
         $this->setIfExists('payload', $data ?? [], null);
         $this->setIfExists('request_duration_ms', $data ?? [], null);
         $this->setIfExists('response_body', $data ?? [], null);
@@ -499,33 +485,6 @@ class WebhookDeliveryLogsCreate implements ModelInterface, ArrayAccess, \JsonSer
     }
 
     /**
-     * Gets created_at
-     *
-     * @return \DateTime|null
-     */
-    public function getCreatedAt()
-    {
-        return $this->container['created_at'];
-    }
-
-    /**
-     * Sets created_at
-     *
-     * @param \DateTime|null $created_at created_at
-     *
-     * @return self
-     */
-    public function setCreatedAt($created_at)
-    {
-        if (is_null($created_at)) {
-            throw new \InvalidArgumentException('non-nullable created_at cannot be null');
-        }
-        $this->container['created_at'] = $created_at;
-
-        return $this;
-    }
-
-    /**
      * Gets event_type
      *
      * @return string|null
@@ -619,7 +578,7 @@ class WebhookDeliveryLogsCreate implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Sets log_id
      *
-     * @param string|null $log_id log_id
+     * @param string|null $log_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -656,33 +615,6 @@ class WebhookDeliveryLogsCreate implements ModelInterface, ArrayAccess, \JsonSer
             throw new \InvalidArgumentException('non-nullable montant cannot be null');
         }
         $this->container['montant'] = $montant;
-
-        return $this;
-    }
-
-    /**
-     * Gets organization_id
-     *
-     * @return string|null
-     */
-    public function getOrganizationId()
-    {
-        return $this->container['organization_id'];
-    }
-
-    /**
-     * Sets organization_id
-     *
-     * @param string|null $organization_id organization_id
-     *
-     * @return self
-     */
-    public function setOrganizationId($organization_id)
-    {
-        if (is_null($organization_id)) {
-            throw new \InvalidArgumentException('non-nullable organization_id cannot be null');
-        }
-        $this->container['organization_id'] = $organization_id;
 
         return $this;
     }
@@ -835,7 +767,7 @@ class WebhookDeliveryLogsCreate implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Sets spi_tx_id
      *
-     * @param string|null $spi_tx_id spi_tx_id
+     * @param string|null $spi_tx_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -916,7 +848,7 @@ class WebhookDeliveryLogsCreate implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Sets webhook_id
      *
-     * @param string|null $webhook_id webhook_id
+     * @param string|null $webhook_id Unique identifier (UUID format)
      *
      * @return self
      */

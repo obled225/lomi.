@@ -13,27 +13,25 @@ package lomisdk
 
 import (
 	"encoding/json"
-	"time"
 )
 
 // checks if the PaymentRequestsUpdate type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &PaymentRequestsUpdate{}
 
-// PaymentRequestsUpdate Update payment_requests input
+// PaymentRequestsUpdate Request body for updating a payment requests object. Only include fields you want to modify.
 type PaymentRequestsUpdate struct {
+	// Amount in the smallest currency unit (e.g., cents for USD, same for XOF)
 	Amount *float64 `json:"amount,omitempty"`
-	CreatedAt *time.Time `json:"created_at,omitempty"`
-	CreatedBy *string `json:"created_by,omitempty"`
+	// Three-letter ISO currency code (e.g., XOF, USD, EUR)
 	CurrencyCode *string `json:"currency_code,omitempty"`
+	// Unique identifier (UUID format)
 	CustomerId *string `json:"customer_id,omitempty"`
 	Description *string `json:"description,omitempty"`
-	Environment *string `json:"environment,omitempty"`
 	ExpiryDate *string `json:"expiry_date,omitempty"`
-	OrganizationId *string `json:"organization_id,omitempty"`
 	PaymentLink *string `json:"payment_link,omitempty"`
 	PaymentReference *string `json:"payment_reference,omitempty"`
-	RequestId *string `json:"request_id,omitempty"`
 	SpiAccountNumber *string `json:"spi_account_number,omitempty"`
+	// Unique identifier (UUID format)
 	SpiBulkInstructionId *string `json:"spi_bulk_instruction_id,omitempty"`
 	SpiConfirmation *bool `json:"spi_confirmation,omitempty"`
 	SpiDateEnvoi *string `json:"spi_date_envoi,omitempty"`
@@ -42,6 +40,7 @@ type PaymentRequestsUpdate struct {
 	SpiDateLimiteReponse *string `json:"spi_date_limite_reponse,omitempty"`
 	SpiDateRejet *string `json:"spi_date_rejet,omitempty"`
 	SpiDebitDiffere *bool `json:"spi_debit_differe,omitempty"`
+	// Unique identifier (UUID format)
 	SpiEnd2endId *string `json:"spi_end2end_id,omitempty"`
 	SpiPayeurAlias *string `json:"spi_payeur_alias,omitempty"`
 	SpiPayeurNom *string `json:"spi_payeur_nom,omitempty"`
@@ -53,9 +52,10 @@ type PaymentRequestsUpdate struct {
 	SpiRejectionReason *string `json:"spi_rejection_reason,omitempty"`
 	SpiRemiseAmount *float64 `json:"spi_remise_amount,omitempty"`
 	SpiRemiseRate *float64 `json:"spi_remise_rate,omitempty"`
+	// Unique identifier (UUID format)
 	SpiTxId *string `json:"spi_tx_id,omitempty"`
+	// Current status of the resource
 	Status *string `json:"status,omitempty"`
-	UpdatedAt *time.Time `json:"updated_at,omitempty"`
 }
 
 // NewPaymentRequestsUpdate instantiates a new PaymentRequestsUpdate object
@@ -105,70 +105,6 @@ func (o *PaymentRequestsUpdate) HasAmount() bool {
 // SetAmount gets a reference to the given float64 and assigns it to the Amount field.
 func (o *PaymentRequestsUpdate) SetAmount(v float64) {
 	o.Amount = &v
-}
-
-// GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
-func (o *PaymentRequestsUpdate) GetCreatedAt() time.Time {
-	if o == nil || IsNil(o.CreatedAt) {
-		var ret time.Time
-		return ret
-	}
-	return *o.CreatedAt
-}
-
-// GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PaymentRequestsUpdate) GetCreatedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.CreatedAt) {
-		return nil, false
-	}
-	return o.CreatedAt, true
-}
-
-// HasCreatedAt returns a boolean if a field has been set.
-func (o *PaymentRequestsUpdate) HasCreatedAt() bool {
-	if o != nil && !IsNil(o.CreatedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetCreatedAt gets a reference to the given time.Time and assigns it to the CreatedAt field.
-func (o *PaymentRequestsUpdate) SetCreatedAt(v time.Time) {
-	o.CreatedAt = &v
-}
-
-// GetCreatedBy returns the CreatedBy field value if set, zero value otherwise.
-func (o *PaymentRequestsUpdate) GetCreatedBy() string {
-	if o == nil || IsNil(o.CreatedBy) {
-		var ret string
-		return ret
-	}
-	return *o.CreatedBy
-}
-
-// GetCreatedByOk returns a tuple with the CreatedBy field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PaymentRequestsUpdate) GetCreatedByOk() (*string, bool) {
-	if o == nil || IsNil(o.CreatedBy) {
-		return nil, false
-	}
-	return o.CreatedBy, true
-}
-
-// HasCreatedBy returns a boolean if a field has been set.
-func (o *PaymentRequestsUpdate) HasCreatedBy() bool {
-	if o != nil && !IsNil(o.CreatedBy) {
-		return true
-	}
-
-	return false
-}
-
-// SetCreatedBy gets a reference to the given string and assigns it to the CreatedBy field.
-func (o *PaymentRequestsUpdate) SetCreatedBy(v string) {
-	o.CreatedBy = &v
 }
 
 // GetCurrencyCode returns the CurrencyCode field value if set, zero value otherwise.
@@ -267,38 +203,6 @@ func (o *PaymentRequestsUpdate) SetDescription(v string) {
 	o.Description = &v
 }
 
-// GetEnvironment returns the Environment field value if set, zero value otherwise.
-func (o *PaymentRequestsUpdate) GetEnvironment() string {
-	if o == nil || IsNil(o.Environment) {
-		var ret string
-		return ret
-	}
-	return *o.Environment
-}
-
-// GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PaymentRequestsUpdate) GetEnvironmentOk() (*string, bool) {
-	if o == nil || IsNil(o.Environment) {
-		return nil, false
-	}
-	return o.Environment, true
-}
-
-// HasEnvironment returns a boolean if a field has been set.
-func (o *PaymentRequestsUpdate) HasEnvironment() bool {
-	if o != nil && !IsNil(o.Environment) {
-		return true
-	}
-
-	return false
-}
-
-// SetEnvironment gets a reference to the given string and assigns it to the Environment field.
-func (o *PaymentRequestsUpdate) SetEnvironment(v string) {
-	o.Environment = &v
-}
-
 // GetExpiryDate returns the ExpiryDate field value if set, zero value otherwise.
 func (o *PaymentRequestsUpdate) GetExpiryDate() string {
 	if o == nil || IsNil(o.ExpiryDate) {
@@ -329,38 +233,6 @@ func (o *PaymentRequestsUpdate) HasExpiryDate() bool {
 // SetExpiryDate gets a reference to the given string and assigns it to the ExpiryDate field.
 func (o *PaymentRequestsUpdate) SetExpiryDate(v string) {
 	o.ExpiryDate = &v
-}
-
-// GetOrganizationId returns the OrganizationId field value if set, zero value otherwise.
-func (o *PaymentRequestsUpdate) GetOrganizationId() string {
-	if o == nil || IsNil(o.OrganizationId) {
-		var ret string
-		return ret
-	}
-	return *o.OrganizationId
-}
-
-// GetOrganizationIdOk returns a tuple with the OrganizationId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PaymentRequestsUpdate) GetOrganizationIdOk() (*string, bool) {
-	if o == nil || IsNil(o.OrganizationId) {
-		return nil, false
-	}
-	return o.OrganizationId, true
-}
-
-// HasOrganizationId returns a boolean if a field has been set.
-func (o *PaymentRequestsUpdate) HasOrganizationId() bool {
-	if o != nil && !IsNil(o.OrganizationId) {
-		return true
-	}
-
-	return false
-}
-
-// SetOrganizationId gets a reference to the given string and assigns it to the OrganizationId field.
-func (o *PaymentRequestsUpdate) SetOrganizationId(v string) {
-	o.OrganizationId = &v
 }
 
 // GetPaymentLink returns the PaymentLink field value if set, zero value otherwise.
@@ -425,38 +297,6 @@ func (o *PaymentRequestsUpdate) HasPaymentReference() bool {
 // SetPaymentReference gets a reference to the given string and assigns it to the PaymentReference field.
 func (o *PaymentRequestsUpdate) SetPaymentReference(v string) {
 	o.PaymentReference = &v
-}
-
-// GetRequestId returns the RequestId field value if set, zero value otherwise.
-func (o *PaymentRequestsUpdate) GetRequestId() string {
-	if o == nil || IsNil(o.RequestId) {
-		var ret string
-		return ret
-	}
-	return *o.RequestId
-}
-
-// GetRequestIdOk returns a tuple with the RequestId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PaymentRequestsUpdate) GetRequestIdOk() (*string, bool) {
-	if o == nil || IsNil(o.RequestId) {
-		return nil, false
-	}
-	return o.RequestId, true
-}
-
-// HasRequestId returns a boolean if a field has been set.
-func (o *PaymentRequestsUpdate) HasRequestId() bool {
-	if o != nil && !IsNil(o.RequestId) {
-		return true
-	}
-
-	return false
-}
-
-// SetRequestId gets a reference to the given string and assigns it to the RequestId field.
-func (o *PaymentRequestsUpdate) SetRequestId(v string) {
-	o.RequestId = &v
 }
 
 // GetSpiAccountNumber returns the SpiAccountNumber field value if set, zero value otherwise.
@@ -1163,38 +1003,6 @@ func (o *PaymentRequestsUpdate) SetStatus(v string) {
 	o.Status = &v
 }
 
-// GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.
-func (o *PaymentRequestsUpdate) GetUpdatedAt() time.Time {
-	if o == nil || IsNil(o.UpdatedAt) {
-		var ret time.Time
-		return ret
-	}
-	return *o.UpdatedAt
-}
-
-// GetUpdatedAtOk returns a tuple with the UpdatedAt field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PaymentRequestsUpdate) GetUpdatedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.UpdatedAt) {
-		return nil, false
-	}
-	return o.UpdatedAt, true
-}
-
-// HasUpdatedAt returns a boolean if a field has been set.
-func (o *PaymentRequestsUpdate) HasUpdatedAt() bool {
-	if o != nil && !IsNil(o.UpdatedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetUpdatedAt gets a reference to the given time.Time and assigns it to the UpdatedAt field.
-func (o *PaymentRequestsUpdate) SetUpdatedAt(v time.Time) {
-	o.UpdatedAt = &v
-}
-
 func (o PaymentRequestsUpdate) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -1208,12 +1016,6 @@ func (o PaymentRequestsUpdate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Amount) {
 		toSerialize["amount"] = o.Amount
 	}
-	if !IsNil(o.CreatedAt) {
-		toSerialize["created_at"] = o.CreatedAt
-	}
-	if !IsNil(o.CreatedBy) {
-		toSerialize["created_by"] = o.CreatedBy
-	}
 	if !IsNil(o.CurrencyCode) {
 		toSerialize["currency_code"] = o.CurrencyCode
 	}
@@ -1223,23 +1025,14 @@ func (o PaymentRequestsUpdate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
-	if !IsNil(o.Environment) {
-		toSerialize["environment"] = o.Environment
-	}
 	if !IsNil(o.ExpiryDate) {
 		toSerialize["expiry_date"] = o.ExpiryDate
-	}
-	if !IsNil(o.OrganizationId) {
-		toSerialize["organization_id"] = o.OrganizationId
 	}
 	if !IsNil(o.PaymentLink) {
 		toSerialize["payment_link"] = o.PaymentLink
 	}
 	if !IsNil(o.PaymentReference) {
 		toSerialize["payment_reference"] = o.PaymentReference
-	}
-	if !IsNil(o.RequestId) {
-		toSerialize["request_id"] = o.RequestId
 	}
 	if !IsNil(o.SpiAccountNumber) {
 		toSerialize["spi_account_number"] = o.SpiAccountNumber
@@ -1306,9 +1099,6 @@ func (o PaymentRequestsUpdate) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Status) {
 		toSerialize["status"] = o.Status
-	}
-	if !IsNil(o.UpdatedAt) {
-		toSerialize["updated_at"] = o.UpdatedAt
 	}
 	return toSerialize, nil
 }

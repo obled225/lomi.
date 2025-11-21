@@ -6,23 +6,19 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AppliesToProductTypes** | Pointer to **string** |  | [optional] 
 **Code** | Pointer to **string** |  | [optional] 
-**CouponId** | Pointer to **string** |  | [optional] 
-**CreatedAt** | Pointer to **time.Time** |  | [optional] 
+**CouponId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
 **CurrentUses** | Pointer to **float64** |  | [optional] 
 **CustomerType** | Pointer to **string** |  | [optional] 
 **Description** | Pointer to **string** |  | [optional] 
 **DiscountFixedAmount** | Pointer to **float64** |  | [optional] 
 **DiscountPercentage** | Pointer to **float64** |  | [optional] 
 **DiscountType** | Pointer to **string** |  | [optional] 
-**Environment** | Pointer to **string** |  | [optional] 
-**ExpiresAt** | Pointer to **time.Time** |  | [optional] 
-**IsActive** | Pointer to **bool** |  | [optional] 
+**ExpiresAt** | Pointer to **time.Time** | ISO 8601 datetime | [optional] 
+**IsActive** | Pointer to **bool** | Whether this resource is currently active | [optional] 
 **IsOrganizationWide** | Pointer to **bool** |  | [optional] 
 **MaxQuantityPerUse** | Pointer to **float64** |  | [optional] 
 **MaxUses** | Pointer to **float64** |  | [optional] 
-**OrganizationId** | Pointer to **string** |  | [optional] 
 **ScopeType** | Pointer to **string** |  | [optional] 
-**UpdatedAt** | Pointer to **time.Time** |  | [optional] 
 **UsageFrequencyLimit** | Pointer to **string** |  | [optional] 
 **UsageLimitValue** | Pointer to **float64** |  | [optional] 
 **ValidFrom** | Pointer to **string** |  | [optional] 
@@ -120,31 +116,6 @@ SetCouponId sets CouponId field to given value.
 `func (o *DiscountCouponsUpdate) HasCouponId() bool`
 
 HasCouponId returns a boolean if a field has been set.
-
-### GetCreatedAt
-
-`func (o *DiscountCouponsUpdate) GetCreatedAt() time.Time`
-
-GetCreatedAt returns the CreatedAt field if non-nil, zero value otherwise.
-
-### GetCreatedAtOk
-
-`func (o *DiscountCouponsUpdate) GetCreatedAtOk() (*time.Time, bool)`
-
-GetCreatedAtOk returns a tuple with the CreatedAt field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCreatedAt
-
-`func (o *DiscountCouponsUpdate) SetCreatedAt(v time.Time)`
-
-SetCreatedAt sets CreatedAt field to given value.
-
-### HasCreatedAt
-
-`func (o *DiscountCouponsUpdate) HasCreatedAt() bool`
-
-HasCreatedAt returns a boolean if a field has been set.
 
 ### GetCurrentUses
 
@@ -296,31 +267,6 @@ SetDiscountType sets DiscountType field to given value.
 
 HasDiscountType returns a boolean if a field has been set.
 
-### GetEnvironment
-
-`func (o *DiscountCouponsUpdate) GetEnvironment() string`
-
-GetEnvironment returns the Environment field if non-nil, zero value otherwise.
-
-### GetEnvironmentOk
-
-`func (o *DiscountCouponsUpdate) GetEnvironmentOk() (*string, bool)`
-
-GetEnvironmentOk returns a tuple with the Environment field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetEnvironment
-
-`func (o *DiscountCouponsUpdate) SetEnvironment(v string)`
-
-SetEnvironment sets Environment field to given value.
-
-### HasEnvironment
-
-`func (o *DiscountCouponsUpdate) HasEnvironment() bool`
-
-HasEnvironment returns a boolean if a field has been set.
-
 ### GetExpiresAt
 
 `func (o *DiscountCouponsUpdate) GetExpiresAt() time.Time`
@@ -446,31 +392,6 @@ SetMaxUses sets MaxUses field to given value.
 
 HasMaxUses returns a boolean if a field has been set.
 
-### GetOrganizationId
-
-`func (o *DiscountCouponsUpdate) GetOrganizationId() string`
-
-GetOrganizationId returns the OrganizationId field if non-nil, zero value otherwise.
-
-### GetOrganizationIdOk
-
-`func (o *DiscountCouponsUpdate) GetOrganizationIdOk() (*string, bool)`
-
-GetOrganizationIdOk returns a tuple with the OrganizationId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetOrganizationId
-
-`func (o *DiscountCouponsUpdate) SetOrganizationId(v string)`
-
-SetOrganizationId sets OrganizationId field to given value.
-
-### HasOrganizationId
-
-`func (o *DiscountCouponsUpdate) HasOrganizationId() bool`
-
-HasOrganizationId returns a boolean if a field has been set.
-
 ### GetScopeType
 
 `func (o *DiscountCouponsUpdate) GetScopeType() string`
@@ -495,31 +416,6 @@ SetScopeType sets ScopeType field to given value.
 `func (o *DiscountCouponsUpdate) HasScopeType() bool`
 
 HasScopeType returns a boolean if a field has been set.
-
-### GetUpdatedAt
-
-`func (o *DiscountCouponsUpdate) GetUpdatedAt() time.Time`
-
-GetUpdatedAt returns the UpdatedAt field if non-nil, zero value otherwise.
-
-### GetUpdatedAtOk
-
-`func (o *DiscountCouponsUpdate) GetUpdatedAtOk() (*time.Time, bool)`
-
-GetUpdatedAtOk returns a tuple with the UpdatedAt field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetUpdatedAt
-
-`func (o *DiscountCouponsUpdate) SetUpdatedAt(v time.Time)`
-
-SetUpdatedAt sets UpdatedAt field to given value.
-
-### HasUpdatedAt
-
-`func (o *DiscountCouponsUpdate) HasUpdatedAt() bool`
-
-HasUpdatedAt returns a boolean if a field has been set.
 
 ### GetUsageFrequencyLimit
 

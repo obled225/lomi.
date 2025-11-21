@@ -4,23 +4,23 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Amount** | Pointer to **float64** |  | [optional] 
+**Amount** | Pointer to **float64** | Amount in the smallest currency unit (e.g., cents for USD, same for XOF) | [optional] 
 **BillingInterval** | Pointer to **string** |  | [optional] 
-**CreatedAt** | Pointer to **time.Time** |  | [optional] 
-**CurrencyCode** | Pointer to **string** |  | [optional] 
+**CreatedAt** | Pointer to **time.Time** | ISO 8601 datetime | [optional] [readonly] 
+**CurrencyCode** | Pointer to **string** | Three-letter ISO currency code (e.g., XOF, USD, EUR) | [optional] 
 **Environment** | Pointer to **string** |  | [optional] 
-**IsActive** | Pointer to **bool** |  | [optional] 
+**IsActive** | Pointer to **bool** | Whether this resource is currently active | [optional] 
 **IsDefault** | Pointer to **bool** |  | [optional] 
 **MaximumAmount** | Pointer to **float64** |  | [optional] 
-**Metadata** | Pointer to **map[string]interface{}** |  | [optional] 
+**Metadata** | Pointer to **map[string]interface{}** | Set of key-value pairs for storing additional information | [optional] 
 **MinimumAmount** | Pointer to **float64** |  | [optional] 
-**OrganizationId** | Pointer to **string** |  | [optional] 
-**PriceId** | Pointer to **string** |  | [optional] 
+**OrganizationId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
+**PriceId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
 **PricingModel** | Pointer to **string** |  | [optional] 
-**ProductId** | Pointer to **string** |  | [optional] 
-**ProviderPriceId** | Pointer to **string** |  | [optional] 
-**ProviderProductId** | Pointer to **string** |  | [optional] 
-**UpdatedAt** | Pointer to **time.Time** |  | [optional] 
+**ProductId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
+**ProviderPriceId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
+**ProviderProductId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
+**UpdatedAt** | Pointer to **time.Time** | ISO 8601 datetime | [optional] [readonly] 
 
 ## Methods
 

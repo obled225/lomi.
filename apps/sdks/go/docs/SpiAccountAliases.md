@@ -5,15 +5,15 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AccountNumber** | Pointer to **string** |  | [optional] 
-**AliasId** | Pointer to **string** |  | [optional] 
+**AliasId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
 **AliasKey** | Pointer to **string** |  | [optional] 
 **AliasType** | Pointer to **string** |  | [optional] 
-**CreatedAt** | Pointer to **time.Time** |  | [optional] 
-**IsActive** | Pointer to **bool** |  | [optional] 
+**CreatedAt** | Pointer to **time.Time** | ISO 8601 datetime | [optional] [readonly] 
+**IsActive** | Pointer to **bool** | Whether this resource is currently active | [optional] 
 **IsDefault** | Pointer to **bool** |  | [optional] 
-**Metadata** | Pointer to **map[string]interface{}** |  | [optional] 
-**OrganizationId** | Pointer to **string** |  | [optional] 
-**UpdatedAt** | Pointer to **time.Time** |  | [optional] 
+**Metadata** | Pointer to **map[string]interface{}** | Set of key-value pairs for storing additional information | [optional] 
+**OrganizationId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
+**UpdatedAt** | Pointer to **time.Time** | ISO 8601 datetime | [optional] [readonly] 
 
 ## Methods
 

@@ -36,7 +36,7 @@ use \LomiSDK\ObjectSerializer;
  * Prices Class Doc Comment
  *
  * @category Class
- * @description prices object
+ * @description prices resource object
  * @package  LomiSDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -416,7 +416,7 @@ class Prices implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets amount
      *
-     * @param float|null $amount amount
+     * @param float|null $amount Amount in the smallest currency unit (e.g., cents for USD, same for XOF)
      *
      * @return self
      */
@@ -470,7 +470,7 @@ class Prices implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets created_at
      *
-     * @param \DateTime|null $created_at created_at
+     * @param \DateTime|null $created_at ISO 8601 datetime
      *
      * @return self
      */
@@ -497,7 +497,7 @@ class Prices implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets currency_code
      *
-     * @param string|null $currency_code currency_code
+     * @param string|null $currency_code Three-letter ISO currency code (e.g., XOF, USD, EUR)
      *
      * @return self
      */
@@ -551,7 +551,7 @@ class Prices implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets is_active
      *
-     * @param bool|null $is_active is_active
+     * @param bool|null $is_active Whether this resource is currently active
      *
      * @return self
      */
@@ -632,7 +632,7 @@ class Prices implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets metadata
      *
-     * @param object|null $metadata metadata
+     * @param object|null $metadata Set of key-value pairs for storing additional information
      *
      * @return self
      */
@@ -686,7 +686,7 @@ class Prices implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets organization_id
      *
-     * @param string|null $organization_id organization_id
+     * @param string|null $organization_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -713,7 +713,7 @@ class Prices implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets price_id
      *
-     * @param string|null $price_id price_id
+     * @param string|null $price_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -767,7 +767,7 @@ class Prices implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets product_id
      *
-     * @param string|null $product_id product_id
+     * @param string|null $product_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -794,7 +794,7 @@ class Prices implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets provider_price_id
      *
-     * @param string|null $provider_price_id provider_price_id
+     * @param string|null $provider_price_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -821,7 +821,7 @@ class Prices implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets provider_product_id
      *
-     * @param string|null $provider_product_id provider_product_id
+     * @param string|null $provider_product_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -848,7 +848,7 @@ class Prices implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets updated_at
      *
-     * @param \DateTime|null $updated_at updated_at
+     * @param \DateTime|null $updated_at ISO 8601 datetime
      *
      * @return self
      */

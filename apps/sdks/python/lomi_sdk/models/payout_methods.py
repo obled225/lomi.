@@ -19,7 +19,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictFloat, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from uuid import UUID
 from typing import Optional, Set
@@ -27,7 +27,7 @@ from typing_extensions import Self
 
 class PayoutMethods(BaseModel):
     """
-    payout_methods object
+    payout methods resource object
     """ # noqa: E501
     account_name: Optional[StrictStr] = None
     account_number: Optional[StrictStr] = None
@@ -40,19 +40,19 @@ class PayoutMethods(BaseModel):
     bank_name: Optional[StrictStr] = None
     branch_code: Optional[StrictStr] = None
     country: Optional[StrictStr] = None
-    created_at: Optional[datetime] = None
+    created_at: Optional[datetime] = Field(default=None, description="ISO 8601 datetime")
     is_default: Optional[StrictBool] = None
     is_spi_enabled: Optional[StrictBool] = None
     is_uemoa: Optional[StrictBool] = None
     is_valid: Optional[StrictBool] = None
-    organization_id: Optional[UUID] = None
-    payout_method_id: Optional[UUID] = None
+    organization_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
+    payout_method_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
     payout_method_type: Optional[StrictStr] = None
     spi_account_number: Optional[StrictStr] = None
     spi_alias_mbno: Optional[StrictStr] = None
     spi_alias_shid: Optional[StrictStr] = None
     spi_alias_type: Optional[StrictStr] = None
-    updated_at: Optional[datetime] = None
+    updated_at: Optional[datetime] = Field(default=None, description="ISO 8601 datetime")
     __properties: ClassVar[List[str]] = ["account_name", "account_number", "auto_withdrawal_day", "auto_withdrawal_enabled", "auto_withdrawal_last_run", "auto_withdrawal_method", "auto_withdrawal_mobile_provider", "bank_code", "bank_name", "branch_code", "country", "created_at", "is_default", "is_spi_enabled", "is_uemoa", "is_valid", "organization_id", "payout_method_id", "payout_method_type", "spi_account_number", "spi_alias_mbno", "spi_alias_shid", "spi_alias_type", "updated_at"]
 
     model_config = ConfigDict(
@@ -85,8 +85,12 @@ class PayoutMethods(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set([
+            "created_at",
+            "updated_at",
         ])
 
         _dict = self.model_dump(

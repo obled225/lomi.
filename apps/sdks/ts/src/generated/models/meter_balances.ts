@@ -3,18 +3,39 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * meter_balances object
+ * meter balances resource object
  */
 export type meter_balances = {
     balance?: number;
+    /**
+     * Unique identifier (UUID format)
+     */
     balance_id?: string;
+    /**
+     * Unique identifier (UUID format)
+     */
     billable_organization_id?: string;
     consumed_units?: number;
-    created_at?: string;
+    /**
+     * ISO 8601 datetime
+     */
+    readonly created_at?: string;
     credited_units?: number;
+    /**
+     * Unique identifier (UUID format)
+     */
     customer_id?: string;
+    /**
+     * Unique identifier (UUID format)
+     */
     last_event_id?: string;
+    /**
+     * Unique identifier (UUID format)
+     */
     meter_id?: string;
-    updated_at?: string;
+    /**
+     * ISO 8601 datetime
+     */
+    readonly updated_at?: string;
 };
 

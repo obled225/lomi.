@@ -36,7 +36,7 @@ use \LomiSDK\ObjectSerializer;
  * PaymentRequestsUpdate Class Doc Comment
  *
  * @category Class
- * @description Update payment_requests input
+ * @description Request body for updating a payment requests object. Only include fields you want to modify.
  * @package  LomiSDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -60,17 +60,12 @@ class PaymentRequestsUpdate implements ModelInterface, ArrayAccess, \JsonSeriali
       */
     protected static $openAPITypes = [
         'amount' => 'float',
-        'created_at' => '\DateTime',
-        'created_by' => 'string',
         'currency_code' => 'string',
         'customer_id' => 'string',
         'description' => 'string',
-        'environment' => 'string',
         'expiry_date' => 'string',
-        'organization_id' => 'string',
         'payment_link' => 'string',
         'payment_reference' => 'string',
-        'request_id' => 'string',
         'spi_account_number' => 'string',
         'spi_bulk_instruction_id' => 'string',
         'spi_confirmation' => 'bool',
@@ -92,8 +87,7 @@ class PaymentRequestsUpdate implements ModelInterface, ArrayAccess, \JsonSeriali
         'spi_remise_amount' => 'float',
         'spi_remise_rate' => 'float',
         'spi_tx_id' => 'string',
-        'status' => 'string',
-        'updated_at' => '\DateTime'
+        'status' => 'string'
     ];
 
     /**
@@ -105,17 +99,12 @@ class PaymentRequestsUpdate implements ModelInterface, ArrayAccess, \JsonSeriali
       */
     protected static $openAPIFormats = [
         'amount' => 'double',
-        'created_at' => 'date-time',
-        'created_by' => null,
         'currency_code' => null,
         'customer_id' => 'uuid',
         'description' => null,
-        'environment' => null,
         'expiry_date' => null,
-        'organization_id' => 'uuid',
         'payment_link' => null,
         'payment_reference' => null,
-        'request_id' => 'uuid',
         'spi_account_number' => null,
         'spi_bulk_instruction_id' => 'uuid',
         'spi_confirmation' => null,
@@ -137,8 +126,7 @@ class PaymentRequestsUpdate implements ModelInterface, ArrayAccess, \JsonSeriali
         'spi_remise_amount' => 'double',
         'spi_remise_rate' => 'double',
         'spi_tx_id' => 'uuid',
-        'status' => null,
-        'updated_at' => 'date-time'
+        'status' => null
     ];
 
     /**
@@ -148,17 +136,12 @@ class PaymentRequestsUpdate implements ModelInterface, ArrayAccess, \JsonSeriali
       */
     protected static array $openAPINullables = [
         'amount' => false,
-        'created_at' => false,
-        'created_by' => false,
         'currency_code' => false,
         'customer_id' => false,
         'description' => false,
-        'environment' => false,
         'expiry_date' => false,
-        'organization_id' => false,
         'payment_link' => false,
         'payment_reference' => false,
-        'request_id' => false,
         'spi_account_number' => false,
         'spi_bulk_instruction_id' => false,
         'spi_confirmation' => false,
@@ -180,8 +163,7 @@ class PaymentRequestsUpdate implements ModelInterface, ArrayAccess, \JsonSeriali
         'spi_remise_amount' => false,
         'spi_remise_rate' => false,
         'spi_tx_id' => false,
-        'status' => false,
-        'updated_at' => false
+        'status' => false
     ];
 
     /**
@@ -271,17 +253,12 @@ class PaymentRequestsUpdate implements ModelInterface, ArrayAccess, \JsonSeriali
      */
     protected static $attributeMap = [
         'amount' => 'amount',
-        'created_at' => 'created_at',
-        'created_by' => 'created_by',
         'currency_code' => 'currency_code',
         'customer_id' => 'customer_id',
         'description' => 'description',
-        'environment' => 'environment',
         'expiry_date' => 'expiry_date',
-        'organization_id' => 'organization_id',
         'payment_link' => 'payment_link',
         'payment_reference' => 'payment_reference',
-        'request_id' => 'request_id',
         'spi_account_number' => 'spi_account_number',
         'spi_bulk_instruction_id' => 'spi_bulk_instruction_id',
         'spi_confirmation' => 'spi_confirmation',
@@ -303,8 +280,7 @@ class PaymentRequestsUpdate implements ModelInterface, ArrayAccess, \JsonSeriali
         'spi_remise_amount' => 'spi_remise_amount',
         'spi_remise_rate' => 'spi_remise_rate',
         'spi_tx_id' => 'spi_tx_id',
-        'status' => 'status',
-        'updated_at' => 'updated_at'
+        'status' => 'status'
     ];
 
     /**
@@ -314,17 +290,12 @@ class PaymentRequestsUpdate implements ModelInterface, ArrayAccess, \JsonSeriali
      */
     protected static $setters = [
         'amount' => 'setAmount',
-        'created_at' => 'setCreatedAt',
-        'created_by' => 'setCreatedBy',
         'currency_code' => 'setCurrencyCode',
         'customer_id' => 'setCustomerId',
         'description' => 'setDescription',
-        'environment' => 'setEnvironment',
         'expiry_date' => 'setExpiryDate',
-        'organization_id' => 'setOrganizationId',
         'payment_link' => 'setPaymentLink',
         'payment_reference' => 'setPaymentReference',
-        'request_id' => 'setRequestId',
         'spi_account_number' => 'setSpiAccountNumber',
         'spi_bulk_instruction_id' => 'setSpiBulkInstructionId',
         'spi_confirmation' => 'setSpiConfirmation',
@@ -346,8 +317,7 @@ class PaymentRequestsUpdate implements ModelInterface, ArrayAccess, \JsonSeriali
         'spi_remise_amount' => 'setSpiRemiseAmount',
         'spi_remise_rate' => 'setSpiRemiseRate',
         'spi_tx_id' => 'setSpiTxId',
-        'status' => 'setStatus',
-        'updated_at' => 'setUpdatedAt'
+        'status' => 'setStatus'
     ];
 
     /**
@@ -357,17 +327,12 @@ class PaymentRequestsUpdate implements ModelInterface, ArrayAccess, \JsonSeriali
      */
     protected static $getters = [
         'amount' => 'getAmount',
-        'created_at' => 'getCreatedAt',
-        'created_by' => 'getCreatedBy',
         'currency_code' => 'getCurrencyCode',
         'customer_id' => 'getCustomerId',
         'description' => 'getDescription',
-        'environment' => 'getEnvironment',
         'expiry_date' => 'getExpiryDate',
-        'organization_id' => 'getOrganizationId',
         'payment_link' => 'getPaymentLink',
         'payment_reference' => 'getPaymentReference',
-        'request_id' => 'getRequestId',
         'spi_account_number' => 'getSpiAccountNumber',
         'spi_bulk_instruction_id' => 'getSpiBulkInstructionId',
         'spi_confirmation' => 'getSpiConfirmation',
@@ -389,8 +354,7 @@ class PaymentRequestsUpdate implements ModelInterface, ArrayAccess, \JsonSeriali
         'spi_remise_amount' => 'getSpiRemiseAmount',
         'spi_remise_rate' => 'getSpiRemiseRate',
         'spi_tx_id' => 'getSpiTxId',
-        'status' => 'getStatus',
-        'updated_at' => 'getUpdatedAt'
+        'status' => 'getStatus'
     ];
 
     /**
@@ -451,17 +415,12 @@ class PaymentRequestsUpdate implements ModelInterface, ArrayAccess, \JsonSeriali
     public function __construct(?array $data = null)
     {
         $this->setIfExists('amount', $data ?? [], null);
-        $this->setIfExists('created_at', $data ?? [], null);
-        $this->setIfExists('created_by', $data ?? [], null);
         $this->setIfExists('currency_code', $data ?? [], null);
         $this->setIfExists('customer_id', $data ?? [], null);
         $this->setIfExists('description', $data ?? [], null);
-        $this->setIfExists('environment', $data ?? [], null);
         $this->setIfExists('expiry_date', $data ?? [], null);
-        $this->setIfExists('organization_id', $data ?? [], null);
         $this->setIfExists('payment_link', $data ?? [], null);
         $this->setIfExists('payment_reference', $data ?? [], null);
-        $this->setIfExists('request_id', $data ?? [], null);
         $this->setIfExists('spi_account_number', $data ?? [], null);
         $this->setIfExists('spi_bulk_instruction_id', $data ?? [], null);
         $this->setIfExists('spi_confirmation', $data ?? [], null);
@@ -484,7 +443,6 @@ class PaymentRequestsUpdate implements ModelInterface, ArrayAccess, \JsonSeriali
         $this->setIfExists('spi_remise_rate', $data ?? [], null);
         $this->setIfExists('spi_tx_id', $data ?? [], null);
         $this->setIfExists('status', $data ?? [], null);
-        $this->setIfExists('updated_at', $data ?? [], null);
     }
 
     /**
@@ -542,7 +500,7 @@ class PaymentRequestsUpdate implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Sets amount
      *
-     * @param float|null $amount amount
+     * @param float|null $amount Amount in the smallest currency unit (e.g., cents for USD, same for XOF)
      *
      * @return self
      */
@@ -552,60 +510,6 @@ class PaymentRequestsUpdate implements ModelInterface, ArrayAccess, \JsonSeriali
             throw new \InvalidArgumentException('non-nullable amount cannot be null');
         }
         $this->container['amount'] = $amount;
-
-        return $this;
-    }
-
-    /**
-     * Gets created_at
-     *
-     * @return \DateTime|null
-     */
-    public function getCreatedAt()
-    {
-        return $this->container['created_at'];
-    }
-
-    /**
-     * Sets created_at
-     *
-     * @param \DateTime|null $created_at created_at
-     *
-     * @return self
-     */
-    public function setCreatedAt($created_at)
-    {
-        if (is_null($created_at)) {
-            throw new \InvalidArgumentException('non-nullable created_at cannot be null');
-        }
-        $this->container['created_at'] = $created_at;
-
-        return $this;
-    }
-
-    /**
-     * Gets created_by
-     *
-     * @return string|null
-     */
-    public function getCreatedBy()
-    {
-        return $this->container['created_by'];
-    }
-
-    /**
-     * Sets created_by
-     *
-     * @param string|null $created_by created_by
-     *
-     * @return self
-     */
-    public function setCreatedBy($created_by)
-    {
-        if (is_null($created_by)) {
-            throw new \InvalidArgumentException('non-nullable created_by cannot be null');
-        }
-        $this->container['created_by'] = $created_by;
 
         return $this;
     }
@@ -623,7 +527,7 @@ class PaymentRequestsUpdate implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Sets currency_code
      *
-     * @param string|null $currency_code currency_code
+     * @param string|null $currency_code Three-letter ISO currency code (e.g., XOF, USD, EUR)
      *
      * @return self
      */
@@ -650,7 +554,7 @@ class PaymentRequestsUpdate implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Sets customer_id
      *
-     * @param string|null $customer_id customer_id
+     * @param string|null $customer_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -692,33 +596,6 @@ class PaymentRequestsUpdate implements ModelInterface, ArrayAccess, \JsonSeriali
     }
 
     /**
-     * Gets environment
-     *
-     * @return string|null
-     */
-    public function getEnvironment()
-    {
-        return $this->container['environment'];
-    }
-
-    /**
-     * Sets environment
-     *
-     * @param string|null $environment environment
-     *
-     * @return self
-     */
-    public function setEnvironment($environment)
-    {
-        if (is_null($environment)) {
-            throw new \InvalidArgumentException('non-nullable environment cannot be null');
-        }
-        $this->container['environment'] = $environment;
-
-        return $this;
-    }
-
-    /**
      * Gets expiry_date
      *
      * @return string|null
@@ -741,33 +618,6 @@ class PaymentRequestsUpdate implements ModelInterface, ArrayAccess, \JsonSeriali
             throw new \InvalidArgumentException('non-nullable expiry_date cannot be null');
         }
         $this->container['expiry_date'] = $expiry_date;
-
-        return $this;
-    }
-
-    /**
-     * Gets organization_id
-     *
-     * @return string|null
-     */
-    public function getOrganizationId()
-    {
-        return $this->container['organization_id'];
-    }
-
-    /**
-     * Sets organization_id
-     *
-     * @param string|null $organization_id organization_id
-     *
-     * @return self
-     */
-    public function setOrganizationId($organization_id)
-    {
-        if (is_null($organization_id)) {
-            throw new \InvalidArgumentException('non-nullable organization_id cannot be null');
-        }
-        $this->container['organization_id'] = $organization_id;
 
         return $this;
     }
@@ -827,33 +677,6 @@ class PaymentRequestsUpdate implements ModelInterface, ArrayAccess, \JsonSeriali
     }
 
     /**
-     * Gets request_id
-     *
-     * @return string|null
-     */
-    public function getRequestId()
-    {
-        return $this->container['request_id'];
-    }
-
-    /**
-     * Sets request_id
-     *
-     * @param string|null $request_id request_id
-     *
-     * @return self
-     */
-    public function setRequestId($request_id)
-    {
-        if (is_null($request_id)) {
-            throw new \InvalidArgumentException('non-nullable request_id cannot be null');
-        }
-        $this->container['request_id'] = $request_id;
-
-        return $this;
-    }
-
-    /**
      * Gets spi_account_number
      *
      * @return string|null
@@ -893,7 +716,7 @@ class PaymentRequestsUpdate implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Sets spi_bulk_instruction_id
      *
-     * @param string|null $spi_bulk_instruction_id spi_bulk_instruction_id
+     * @param string|null $spi_bulk_instruction_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -1109,7 +932,7 @@ class PaymentRequestsUpdate implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Sets spi_end2end_id
      *
-     * @param string|null $spi_end2end_id spi_end2end_id
+     * @param string|null $spi_end2end_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -1406,7 +1229,7 @@ class PaymentRequestsUpdate implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Sets spi_tx_id
      *
-     * @param string|null $spi_tx_id spi_tx_id
+     * @param string|null $spi_tx_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -1433,7 +1256,7 @@ class PaymentRequestsUpdate implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Sets status
      *
-     * @param string|null $status status
+     * @param string|null $status Current status of the resource
      *
      * @return self
      */
@@ -1443,33 +1266,6 @@ class PaymentRequestsUpdate implements ModelInterface, ArrayAccess, \JsonSeriali
             throw new \InvalidArgumentException('non-nullable status cannot be null');
         }
         $this->container['status'] = $status;
-
-        return $this;
-    }
-
-    /**
-     * Gets updated_at
-     *
-     * @return \DateTime|null
-     */
-    public function getUpdatedAt()
-    {
-        return $this->container['updated_at'];
-    }
-
-    /**
-     * Sets updated_at
-     *
-     * @param \DateTime|null $updated_at updated_at
-     *
-     * @return self
-     */
-    public function setUpdatedAt($updated_at)
-    {
-        if (is_null($updated_at)) {
-            throw new \InvalidArgumentException('non-nullable updated_at cannot be null');
-        }
-        $this->container['updated_at'] = $updated_at;
 
         return $this;
     }

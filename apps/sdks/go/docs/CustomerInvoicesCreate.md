@@ -4,18 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Amount** | Pointer to **float64** |  | [optional] 
-**CreatedAt** | Pointer to **time.Time** |  | [optional] 
-**CreatedBy** | Pointer to **string** |  | [optional] 
-**CurrencyCode** | Pointer to **string** |  | [optional] 
-**CustomerId** | Pointer to **string** |  | [optional] 
-**CustomerInvoiceId** | Pointer to **string** |  | [optional] 
+**Amount** | Pointer to **float64** | Amount in the smallest currency unit (e.g., cents for USD, same for XOF) | [optional] 
+**CurrencyCode** | Pointer to **string** | Three-letter ISO currency code (e.g., XOF, USD, EUR) | [optional] 
+**CustomerId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
+**CustomerInvoiceId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
 **Description** | Pointer to **string** |  | [optional] 
 **DueDate** | Pointer to **string** |  | [optional] 
-**Metadata** | Pointer to **map[string]interface{}** |  | [optional] 
-**OrganizationId** | Pointer to **string** |  | [optional] 
-**Status** | Pointer to **string** |  | [optional] 
-**UpdatedAt** | Pointer to **time.Time** |  | [optional] 
+**Metadata** | Pointer to **map[string]interface{}** | Set of key-value pairs for storing additional information | [optional] 
+**Status** | Pointer to **string** | Current status of the resource | [optional] 
 
 ## Methods
 
@@ -60,56 +56,6 @@ SetAmount sets Amount field to given value.
 `func (o *CustomerInvoicesCreate) HasAmount() bool`
 
 HasAmount returns a boolean if a field has been set.
-
-### GetCreatedAt
-
-`func (o *CustomerInvoicesCreate) GetCreatedAt() time.Time`
-
-GetCreatedAt returns the CreatedAt field if non-nil, zero value otherwise.
-
-### GetCreatedAtOk
-
-`func (o *CustomerInvoicesCreate) GetCreatedAtOk() (*time.Time, bool)`
-
-GetCreatedAtOk returns a tuple with the CreatedAt field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCreatedAt
-
-`func (o *CustomerInvoicesCreate) SetCreatedAt(v time.Time)`
-
-SetCreatedAt sets CreatedAt field to given value.
-
-### HasCreatedAt
-
-`func (o *CustomerInvoicesCreate) HasCreatedAt() bool`
-
-HasCreatedAt returns a boolean if a field has been set.
-
-### GetCreatedBy
-
-`func (o *CustomerInvoicesCreate) GetCreatedBy() string`
-
-GetCreatedBy returns the CreatedBy field if non-nil, zero value otherwise.
-
-### GetCreatedByOk
-
-`func (o *CustomerInvoicesCreate) GetCreatedByOk() (*string, bool)`
-
-GetCreatedByOk returns a tuple with the CreatedBy field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCreatedBy
-
-`func (o *CustomerInvoicesCreate) SetCreatedBy(v string)`
-
-SetCreatedBy sets CreatedBy field to given value.
-
-### HasCreatedBy
-
-`func (o *CustomerInvoicesCreate) HasCreatedBy() bool`
-
-HasCreatedBy returns a boolean if a field has been set.
 
 ### GetCurrencyCode
 
@@ -261,31 +207,6 @@ SetMetadata sets Metadata field to given value.
 
 HasMetadata returns a boolean if a field has been set.
 
-### GetOrganizationId
-
-`func (o *CustomerInvoicesCreate) GetOrganizationId() string`
-
-GetOrganizationId returns the OrganizationId field if non-nil, zero value otherwise.
-
-### GetOrganizationIdOk
-
-`func (o *CustomerInvoicesCreate) GetOrganizationIdOk() (*string, bool)`
-
-GetOrganizationIdOk returns a tuple with the OrganizationId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetOrganizationId
-
-`func (o *CustomerInvoicesCreate) SetOrganizationId(v string)`
-
-SetOrganizationId sets OrganizationId field to given value.
-
-### HasOrganizationId
-
-`func (o *CustomerInvoicesCreate) HasOrganizationId() bool`
-
-HasOrganizationId returns a boolean if a field has been set.
-
 ### GetStatus
 
 `func (o *CustomerInvoicesCreate) GetStatus() string`
@@ -310,31 +231,6 @@ SetStatus sets Status field to given value.
 `func (o *CustomerInvoicesCreate) HasStatus() bool`
 
 HasStatus returns a boolean if a field has been set.
-
-### GetUpdatedAt
-
-`func (o *CustomerInvoicesCreate) GetUpdatedAt() time.Time`
-
-GetUpdatedAt returns the UpdatedAt field if non-nil, zero value otherwise.
-
-### GetUpdatedAtOk
-
-`func (o *CustomerInvoicesCreate) GetUpdatedAtOk() (*time.Time, bool)`
-
-GetUpdatedAtOk returns a tuple with the UpdatedAt field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetUpdatedAt
-
-`func (o *CustomerInvoicesCreate) SetUpdatedAt(v time.Time)`
-
-SetUpdatedAt sets UpdatedAt field to given value.
-
-### HasUpdatedAt
-
-`func (o *CustomerInvoicesCreate) HasUpdatedAt() bool`
-
-HasUpdatedAt returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

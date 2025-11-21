@@ -19,19 +19,28 @@ import (
 // checks if the CustomerInvoices type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CustomerInvoices{}
 
-// CustomerInvoices customer_invoices object
+// CustomerInvoices customer invoices resource object
 type CustomerInvoices struct {
+	// Amount in the smallest currency unit (e.g., cents for USD, same for XOF)
 	Amount *float64 `json:"amount,omitempty"`
+	// ISO 8601 datetime
 	CreatedAt *time.Time `json:"created_at,omitempty"`
 	CreatedBy *string `json:"created_by,omitempty"`
+	// Three-letter ISO currency code (e.g., XOF, USD, EUR)
 	CurrencyCode *string `json:"currency_code,omitempty"`
+	// Unique identifier (UUID format)
 	CustomerId *string `json:"customer_id,omitempty"`
+	// Unique identifier (UUID format)
 	CustomerInvoiceId *string `json:"customer_invoice_id,omitempty"`
 	Description *string `json:"description,omitempty"`
 	DueDate *string `json:"due_date,omitempty"`
+	// Set of key-value pairs for storing additional information
 	Metadata map[string]interface{} `json:"metadata,omitempty"`
+	// Unique identifier (UUID format)
 	OrganizationId *string `json:"organization_id,omitempty"`
+	// Current status of the resource
 	Status *string `json:"status,omitempty"`
+	// ISO 8601 datetime
 	UpdatedAt *time.Time `json:"updated_at,omitempty"`
 }
 

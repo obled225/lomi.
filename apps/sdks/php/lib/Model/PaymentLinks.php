@@ -36,7 +36,7 @@ use \LomiSDK\ObjectSerializer;
  * PaymentLinks Class Doc Comment
  *
  * @category Class
- * @description payment_links object
+ * @description payment links resource object
  * @package  LomiSDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -546,7 +546,7 @@ class PaymentLinks implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets amount
      *
-     * @param float|null $amount amount
+     * @param float|null $amount Amount in the smallest currency unit (e.g., cents for USD, same for XOF)
      *
      * @return self
      */
@@ -573,7 +573,7 @@ class PaymentLinks implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets cancel_url
      *
-     * @param string|null $cancel_url cancel_url
+     * @param string|null $cancel_url URL/URI
      *
      * @return self
      */
@@ -600,7 +600,7 @@ class PaymentLinks implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets created_at
      *
-     * @param \DateTime|null $created_at created_at
+     * @param \DateTime|null $created_at ISO 8601 datetime
      *
      * @return self
      */
@@ -654,7 +654,7 @@ class PaymentLinks implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets currency_code
      *
-     * @param string|null $currency_code currency_code
+     * @param string|null $currency_code Three-letter ISO currency code (e.g., XOF, USD, EUR)
      *
      * @return self
      */
@@ -708,7 +708,7 @@ class PaymentLinks implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets expires_at
      *
-     * @param \DateTime|null $expires_at expires_at
+     * @param \DateTime|null $expires_at ISO 8601 datetime
      *
      * @return self
      */
@@ -735,7 +735,7 @@ class PaymentLinks implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets is_active
      *
-     * @param bool|null $is_active is_active
+     * @param bool|null $is_active Whether this resource is currently active
      *
      * @return self
      */
@@ -762,7 +762,7 @@ class PaymentLinks implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets link_id
      *
-     * @param string|null $link_id link_id
+     * @param string|null $link_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -816,7 +816,7 @@ class PaymentLinks implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets metadata
      *
-     * @param object|null $metadata metadata
+     * @param object|null $metadata Set of key-value pairs for storing additional information
      *
      * @return self
      */
@@ -843,7 +843,7 @@ class PaymentLinks implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets organization_id
      *
-     * @param string|null $organization_id organization_id
+     * @param string|null $organization_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -870,7 +870,7 @@ class PaymentLinks implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets price_id
      *
-     * @param string|null $price_id price_id
+     * @param string|null $price_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -924,7 +924,7 @@ class PaymentLinks implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets product_id
      *
-     * @param string|null $product_id product_id
+     * @param string|null $product_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -1005,7 +1005,7 @@ class PaymentLinks implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets success_url
      *
-     * @param string|null $success_url success_url
+     * @param string|null $success_url URL/URI
      *
      * @return self
      */
@@ -1059,7 +1059,7 @@ class PaymentLinks implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets updated_at
      *
-     * @param \DateTime|null $updated_at updated_at
+     * @param \DateTime|null $updated_at ISO 8601 datetime
      *
      * @return self
      */
@@ -1086,7 +1086,7 @@ class PaymentLinks implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets url
      *
-     * @param string|null $url url
+     * @param string|null $url URL/URI
      *
      * @return self
      */

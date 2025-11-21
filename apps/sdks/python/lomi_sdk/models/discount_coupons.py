@@ -19,7 +19,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictFloat, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from uuid import UUID
 from typing import Optional, Set
@@ -27,12 +27,12 @@ from typing_extensions import Self
 
 class DiscountCoupons(BaseModel):
     """
-    discount_coupons object
+    discount coupons resource object
     """ # noqa: E501
     applies_to_product_types: Optional[StrictStr] = None
     code: Optional[StrictStr] = None
-    coupon_id: Optional[UUID] = None
-    created_at: Optional[datetime] = None
+    coupon_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
+    created_at: Optional[datetime] = Field(default=None, description="ISO 8601 datetime")
     current_uses: Optional[Union[StrictFloat, StrictInt]] = None
     customer_type: Optional[StrictStr] = None
     description: Optional[StrictStr] = None
@@ -40,14 +40,14 @@ class DiscountCoupons(BaseModel):
     discount_percentage: Optional[Union[StrictFloat, StrictInt]] = None
     discount_type: Optional[StrictStr] = None
     environment: Optional[StrictStr] = None
-    expires_at: Optional[datetime] = None
-    is_active: Optional[StrictBool] = None
+    expires_at: Optional[datetime] = Field(default=None, description="ISO 8601 datetime")
+    is_active: Optional[StrictBool] = Field(default=None, description="Whether this resource is currently active")
     is_organization_wide: Optional[StrictBool] = None
     max_quantity_per_use: Optional[Union[StrictFloat, StrictInt]] = None
     max_uses: Optional[Union[StrictFloat, StrictInt]] = None
-    organization_id: Optional[UUID] = None
+    organization_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
     scope_type: Optional[StrictStr] = None
-    updated_at: Optional[datetime] = None
+    updated_at: Optional[datetime] = Field(default=None, description="ISO 8601 datetime")
     usage_frequency_limit: Optional[StrictStr] = None
     usage_limit_value: Optional[Union[StrictFloat, StrictInt]] = None
     valid_from: Optional[StrictStr] = None
@@ -83,8 +83,12 @@ class DiscountCoupons(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set([
+            "created_at",
+            "updated_at",
         ])
 
         _dict = self.model_dump(

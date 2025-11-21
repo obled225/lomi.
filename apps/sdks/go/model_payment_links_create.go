@@ -19,31 +19,37 @@ import (
 // checks if the PaymentLinksCreate type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &PaymentLinksCreate{}
 
-// PaymentLinksCreate Create payment_links input
+// PaymentLinksCreate Request body for creating a payment links object. System-managed fields like `created_at`, `organization_id`, and IDs are automatically set.
 type PaymentLinksCreate struct {
 	AllowCouponCode *bool `json:"allow_coupon_code,omitempty"`
 	AllowQuantity *bool `json:"allow_quantity,omitempty"`
 	AllowedProviders *string `json:"allowed_providers,omitempty"`
+	// Amount in the smallest currency unit (e.g., cents for USD, same for XOF)
 	Amount *float64 `json:"amount,omitempty"`
+	// URL/URI
 	CancelUrl *string `json:"cancel_url,omitempty"`
-	CreatedAt *time.Time `json:"created_at,omitempty"`
-	CreatedBy *string `json:"created_by,omitempty"`
+	// Three-letter ISO currency code (e.g., XOF, USD, EUR)
 	CurrencyCode *string `json:"currency_code,omitempty"`
-	Environment *string `json:"environment,omitempty"`
+	// ISO 8601 datetime
 	ExpiresAt *time.Time `json:"expires_at,omitempty"`
+	// Whether this resource is currently active
 	IsActive *bool `json:"is_active,omitempty"`
+	// Unique identifier (UUID format)
 	LinkId *string `json:"link_id,omitempty"`
 	LinkType *string `json:"link_type,omitempty"`
+	// Set of key-value pairs for storing additional information
 	Metadata map[string]interface{} `json:"metadata,omitempty"`
-	OrganizationId *string `json:"organization_id,omitempty"`
+	// Unique identifier (UUID format)
 	PriceId *string `json:"price_id,omitempty"`
 	PrivateDescription *string `json:"private_description,omitempty"`
+	// Unique identifier (UUID format)
 	ProductId *string `json:"product_id,omitempty"`
 	PublicDescription *string `json:"public_description,omitempty"`
 	Quantity *float64 `json:"quantity,omitempty"`
+	// URL/URI
 	SuccessUrl *string `json:"success_url,omitempty"`
 	Title *string `json:"title,omitempty"`
-	UpdatedAt *time.Time `json:"updated_at,omitempty"`
+	// URL/URI
 	Url *string `json:"url,omitempty"`
 }
 
@@ -224,70 +230,6 @@ func (o *PaymentLinksCreate) SetCancelUrl(v string) {
 	o.CancelUrl = &v
 }
 
-// GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
-func (o *PaymentLinksCreate) GetCreatedAt() time.Time {
-	if o == nil || IsNil(o.CreatedAt) {
-		var ret time.Time
-		return ret
-	}
-	return *o.CreatedAt
-}
-
-// GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PaymentLinksCreate) GetCreatedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.CreatedAt) {
-		return nil, false
-	}
-	return o.CreatedAt, true
-}
-
-// HasCreatedAt returns a boolean if a field has been set.
-func (o *PaymentLinksCreate) HasCreatedAt() bool {
-	if o != nil && !IsNil(o.CreatedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetCreatedAt gets a reference to the given time.Time and assigns it to the CreatedAt field.
-func (o *PaymentLinksCreate) SetCreatedAt(v time.Time) {
-	o.CreatedAt = &v
-}
-
-// GetCreatedBy returns the CreatedBy field value if set, zero value otherwise.
-func (o *PaymentLinksCreate) GetCreatedBy() string {
-	if o == nil || IsNil(o.CreatedBy) {
-		var ret string
-		return ret
-	}
-	return *o.CreatedBy
-}
-
-// GetCreatedByOk returns a tuple with the CreatedBy field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PaymentLinksCreate) GetCreatedByOk() (*string, bool) {
-	if o == nil || IsNil(o.CreatedBy) {
-		return nil, false
-	}
-	return o.CreatedBy, true
-}
-
-// HasCreatedBy returns a boolean if a field has been set.
-func (o *PaymentLinksCreate) HasCreatedBy() bool {
-	if o != nil && !IsNil(o.CreatedBy) {
-		return true
-	}
-
-	return false
-}
-
-// SetCreatedBy gets a reference to the given string and assigns it to the CreatedBy field.
-func (o *PaymentLinksCreate) SetCreatedBy(v string) {
-	o.CreatedBy = &v
-}
-
 // GetCurrencyCode returns the CurrencyCode field value if set, zero value otherwise.
 func (o *PaymentLinksCreate) GetCurrencyCode() string {
 	if o == nil || IsNil(o.CurrencyCode) {
@@ -318,38 +260,6 @@ func (o *PaymentLinksCreate) HasCurrencyCode() bool {
 // SetCurrencyCode gets a reference to the given string and assigns it to the CurrencyCode field.
 func (o *PaymentLinksCreate) SetCurrencyCode(v string) {
 	o.CurrencyCode = &v
-}
-
-// GetEnvironment returns the Environment field value if set, zero value otherwise.
-func (o *PaymentLinksCreate) GetEnvironment() string {
-	if o == nil || IsNil(o.Environment) {
-		var ret string
-		return ret
-	}
-	return *o.Environment
-}
-
-// GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PaymentLinksCreate) GetEnvironmentOk() (*string, bool) {
-	if o == nil || IsNil(o.Environment) {
-		return nil, false
-	}
-	return o.Environment, true
-}
-
-// HasEnvironment returns a boolean if a field has been set.
-func (o *PaymentLinksCreate) HasEnvironment() bool {
-	if o != nil && !IsNil(o.Environment) {
-		return true
-	}
-
-	return false
-}
-
-// SetEnvironment gets a reference to the given string and assigns it to the Environment field.
-func (o *PaymentLinksCreate) SetEnvironment(v string) {
-	o.Environment = &v
 }
 
 // GetExpiresAt returns the ExpiresAt field value if set, zero value otherwise.
@@ -510,38 +420,6 @@ func (o *PaymentLinksCreate) HasMetadata() bool {
 // SetMetadata gets a reference to the given map[string]interface{} and assigns it to the Metadata field.
 func (o *PaymentLinksCreate) SetMetadata(v map[string]interface{}) {
 	o.Metadata = v
-}
-
-// GetOrganizationId returns the OrganizationId field value if set, zero value otherwise.
-func (o *PaymentLinksCreate) GetOrganizationId() string {
-	if o == nil || IsNil(o.OrganizationId) {
-		var ret string
-		return ret
-	}
-	return *o.OrganizationId
-}
-
-// GetOrganizationIdOk returns a tuple with the OrganizationId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PaymentLinksCreate) GetOrganizationIdOk() (*string, bool) {
-	if o == nil || IsNil(o.OrganizationId) {
-		return nil, false
-	}
-	return o.OrganizationId, true
-}
-
-// HasOrganizationId returns a boolean if a field has been set.
-func (o *PaymentLinksCreate) HasOrganizationId() bool {
-	if o != nil && !IsNil(o.OrganizationId) {
-		return true
-	}
-
-	return false
-}
-
-// SetOrganizationId gets a reference to the given string and assigns it to the OrganizationId field.
-func (o *PaymentLinksCreate) SetOrganizationId(v string) {
-	o.OrganizationId = &v
 }
 
 // GetPriceId returns the PriceId field value if set, zero value otherwise.
@@ -768,38 +646,6 @@ func (o *PaymentLinksCreate) SetTitle(v string) {
 	o.Title = &v
 }
 
-// GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.
-func (o *PaymentLinksCreate) GetUpdatedAt() time.Time {
-	if o == nil || IsNil(o.UpdatedAt) {
-		var ret time.Time
-		return ret
-	}
-	return *o.UpdatedAt
-}
-
-// GetUpdatedAtOk returns a tuple with the UpdatedAt field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PaymentLinksCreate) GetUpdatedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.UpdatedAt) {
-		return nil, false
-	}
-	return o.UpdatedAt, true
-}
-
-// HasUpdatedAt returns a boolean if a field has been set.
-func (o *PaymentLinksCreate) HasUpdatedAt() bool {
-	if o != nil && !IsNil(o.UpdatedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetUpdatedAt gets a reference to the given time.Time and assigns it to the UpdatedAt field.
-func (o *PaymentLinksCreate) SetUpdatedAt(v time.Time) {
-	o.UpdatedAt = &v
-}
-
 // GetUrl returns the Url field value if set, zero value otherwise.
 func (o *PaymentLinksCreate) GetUrl() string {
 	if o == nil || IsNil(o.Url) {
@@ -857,17 +703,8 @@ func (o PaymentLinksCreate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CancelUrl) {
 		toSerialize["cancel_url"] = o.CancelUrl
 	}
-	if !IsNil(o.CreatedAt) {
-		toSerialize["created_at"] = o.CreatedAt
-	}
-	if !IsNil(o.CreatedBy) {
-		toSerialize["created_by"] = o.CreatedBy
-	}
 	if !IsNil(o.CurrencyCode) {
 		toSerialize["currency_code"] = o.CurrencyCode
-	}
-	if !IsNil(o.Environment) {
-		toSerialize["environment"] = o.Environment
 	}
 	if !IsNil(o.ExpiresAt) {
 		toSerialize["expires_at"] = o.ExpiresAt
@@ -883,9 +720,6 @@ func (o PaymentLinksCreate) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Metadata) {
 		toSerialize["metadata"] = o.Metadata
-	}
-	if !IsNil(o.OrganizationId) {
-		toSerialize["organization_id"] = o.OrganizationId
 	}
 	if !IsNil(o.PriceId) {
 		toSerialize["price_id"] = o.PriceId
@@ -907,9 +741,6 @@ func (o PaymentLinksCreate) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Title) {
 		toSerialize["title"] = o.Title
-	}
-	if !IsNil(o.UpdatedAt) {
-		toSerialize["updated_at"] = o.UpdatedAt
 	}
 	if !IsNil(o.Url) {
 		toSerialize["url"] = o.Url

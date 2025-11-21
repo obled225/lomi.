@@ -19,25 +19,35 @@ import (
 // checks if the InstallmentPayments type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &InstallmentPayments{}
 
-// InstallmentPayments installment_payments object
+// InstallmentPayments installment payments resource object
 type InstallmentPayments struct {
+	// Amount in the smallest currency unit (e.g., cents for USD, same for XOF)
 	Amount *float64 `json:"amount,omitempty"`
+	// ISO 8601 datetime
 	CreatedAt *time.Time `json:"created_at,omitempty"`
 	DueDate *string `json:"due_date,omitempty"`
+	// Unique identifier (UUID format)
 	InstallmentId *string `json:"installment_id,omitempty"`
 	InterestAmount *float64 `json:"interest_amount,omitempty"`
+	// ISO 8601 datetime
 	PaidAt *time.Time `json:"paid_at,omitempty"`
 	PaymentLink *string `json:"payment_link,omitempty"`
 	PaymentMethodCode *string `json:"payment_method_code,omitempty"`
+	// Unique identifier (UUID format)
 	PlanId *string `json:"plan_id,omitempty"`
 	PrincipalAmount *float64 `json:"principal_amount,omitempty"`
 	ProcessingFee *float64 `json:"processing_fee,omitempty"`
 	ProviderCode *string `json:"provider_code,omitempty"`
 	SequenceNumber *float64 `json:"sequence_number,omitempty"`
+	// Unique identifier (UUID format)
 	SpiPaymentRequestId *string `json:"spi_payment_request_id,omitempty"`
+	// Unique identifier (UUID format)
 	SpiTxId *string `json:"spi_tx_id,omitempty"`
+	// Current status of the resource
 	Status *string `json:"status,omitempty"`
+	// Unique identifier (UUID format)
 	TransactionId *string `json:"transaction_id,omitempty"`
+	// ISO 8601 datetime
 	UpdatedAt *time.Time `json:"updated_at,omitempty"`
 }
 

@@ -19,26 +19,35 @@ import (
 // checks if the Webhooks type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Webhooks{}
 
-// Webhooks webhooks object
+// Webhooks webhooks resource object
 type Webhooks struct {
 	AuthorizedEvents *string `json:"authorized_events,omitempty"`
+	// ISO 8601 datetime
 	CreatedAt *time.Time `json:"created_at,omitempty"`
 	CreatedBy *string `json:"created_by,omitempty"`
+	// ISO 8601 datetime
 	DeletedAt *time.Time `json:"deleted_at,omitempty"`
 	Environment *string `json:"environment,omitempty"`
+	// Whether this resource is currently active
 	IsActive *bool `json:"is_active,omitempty"`
 	LastPayload map[string]interface{} `json:"last_payload,omitempty"`
 	LastResponseBody *string `json:"last_response_body,omitempty"`
 	LastResponseStatus *float64 `json:"last_response_status,omitempty"`
+	// ISO 8601 datetime
 	LastTriggeredAt *time.Time `json:"last_triggered_at,omitempty"`
+	// Set of key-value pairs for storing additional information
 	Metadata map[string]interface{} `json:"metadata,omitempty"`
+	// Unique identifier (UUID format)
 	OrganizationId *string `json:"organization_id,omitempty"`
 	RetryCount *float64 `json:"retry_count,omitempty"`
 	SpiEventTypes *string `json:"spi_event_types,omitempty"`
 	SupportsSpi *bool `json:"supports_spi,omitempty"`
+	// ISO 8601 datetime
 	UpdatedAt *time.Time `json:"updated_at,omitempty"`
+	// URL/URI
 	Url *string `json:"url,omitempty"`
 	VerificationToken *string `json:"verification_token,omitempty"`
+	// Unique identifier (UUID format)
 	WebhookId *string `json:"webhook_id,omitempty"`
 }
 

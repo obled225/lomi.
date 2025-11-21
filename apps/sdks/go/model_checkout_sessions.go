@@ -19,42 +19,62 @@ import (
 // checks if the CheckoutSessions type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CheckoutSessions{}
 
-// CheckoutSessions checkout_sessions object
+// CheckoutSessions checkout sessions resource object
 type CheckoutSessions struct {
 	AllowCouponCode *bool `json:"allow_coupon_code,omitempty"`
 	AllowQuantity *bool `json:"allow_quantity,omitempty"`
 	AllowedProviders *string `json:"allowed_providers,omitempty"`
+	// Amount in the smallest currency unit (e.g., cents for USD, same for XOF)
 	Amount *float64 `json:"amount,omitempty"`
+	// URL/URI
 	CancelUrl *string `json:"cancel_url,omitempty"`
+	// Unique identifier (UUID format)
 	CheckoutSessionId *string `json:"checkout_session_id,omitempty"`
+	// ISO 8601 datetime
 	CreatedAt *time.Time `json:"created_at,omitempty"`
 	CreatedBy *string `json:"created_by,omitempty"`
+	// Three-letter ISO currency code (e.g., XOF, USD, EUR)
 	CurrencyCode *string `json:"currency_code,omitempty"`
+	// Email address
 	CustomerEmail *string `json:"customer_email,omitempty"`
+	// Unique identifier (UUID format)
 	CustomerId *string `json:"customer_id,omitempty"`
 	CustomerName *string `json:"customer_name,omitempty"`
 	CustomerPhone *string `json:"customer_phone,omitempty"`
 	Environment *string `json:"environment,omitempty"`
+	// ISO 8601 datetime
 	ExpiresAt *time.Time `json:"expires_at,omitempty"`
+	// Unique identifier (UUID format)
 	InstallmentPlanId *string `json:"installment_plan_id,omitempty"`
 	IsPos *bool `json:"is_pos,omitempty"`
 	IsSpi *bool `json:"is_spi,omitempty"`
+	// Set of key-value pairs for storing additional information
 	Metadata map[string]interface{} `json:"metadata,omitempty"`
+	// Unique identifier (UUID format)
 	OrganizationId *string `json:"organization_id,omitempty"`
+	// Unique identifier (UUID format)
 	PaymentLinkId *string `json:"payment_link_id,omitempty"`
+	// Unique identifier (UUID format)
 	PaymentRequestId *string `json:"payment_request_id,omitempty"`
+	// Unique identifier (UUID format)
 	PriceId *string `json:"price_id,omitempty"`
+	// Unique identifier (UUID format)
 	ProductId *string `json:"product_id,omitempty"`
 	PublicDescription *string `json:"public_description,omitempty"`
 	QrCodeData map[string]interface{} `json:"qr_code_data,omitempty"`
 	QrCodeType *string `json:"qr_code_type,omitempty"`
 	Quantity *float64 `json:"quantity,omitempty"`
 	SpiAccountNumber *string `json:"spi_account_number,omitempty"`
+	// Unique identifier (UUID format)
 	SpiQrCodeId *string `json:"spi_qr_code_id,omitempty"`
+	// Current status of the resource
 	Status *string `json:"status,omitempty"`
+	// Unique identifier (UUID format)
 	SubscriptionId *string `json:"subscription_id,omitempty"`
+	// URL/URI
 	SuccessUrl *string `json:"success_url,omitempty"`
 	Title *string `json:"title,omitempty"`
+	// ISO 8601 datetime
 	UpdatedAt *time.Time `json:"updated_at,omitempty"`
 }
 

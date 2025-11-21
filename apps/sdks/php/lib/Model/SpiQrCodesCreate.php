@@ -36,7 +36,7 @@ use \LomiSDK\ObjectSerializer;
  * SpiQrCodesCreate Class Doc Comment
  *
  * @category Class
- * @description Create spi_qr_codes input
+ * @description Request body for creating a spi qr codes object. System-managed fields like &#x60;created_at&#x60;, &#x60;organization_id&#x60;, and IDs are automatically set.
  * @package  LomiSDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -62,16 +62,12 @@ class SpiQrCodesCreate implements ModelInterface, ArrayAccess, \JsonSerializable
         'categorie' => 'string',
         'checkout_session_id' => 'string',
         'compte_paye' => 'string',
-        'created_at' => '\DateTime',
-        'created_by' => 'string',
-        'environment' => 'string',
         'expires_at' => '\DateTime',
         'is_active' => 'bool',
         'is_used' => 'bool',
         'metadata' => 'object',
         'montant' => 'float',
         'name' => 'string',
-        'organization_id' => 'string',
         'payeur_alias' => 'string',
         'payment_request_id' => 'string',
         'plan_id' => 'string',
@@ -80,8 +76,7 @@ class SpiQrCodesCreate implements ModelInterface, ArrayAccess, \JsonSerializable
         'qr_code_id' => 'string',
         'qr_code_image_data' => 'string',
         'qr_code_image_url' => 'string',
-        'qr_code_type' => 'string',
-        'updated_at' => '\DateTime'
+        'qr_code_type' => 'string'
     ];
 
     /**
@@ -95,16 +90,12 @@ class SpiQrCodesCreate implements ModelInterface, ArrayAccess, \JsonSerializable
         'categorie' => null,
         'checkout_session_id' => 'uuid',
         'compte_paye' => null,
-        'created_at' => 'date-time',
-        'created_by' => null,
-        'environment' => null,
         'expires_at' => 'date-time',
         'is_active' => null,
         'is_used' => null,
         'metadata' => null,
         'montant' => 'double',
         'name' => null,
-        'organization_id' => 'uuid',
         'payeur_alias' => null,
         'payment_request_id' => 'uuid',
         'plan_id' => 'uuid',
@@ -113,8 +104,7 @@ class SpiQrCodesCreate implements ModelInterface, ArrayAccess, \JsonSerializable
         'qr_code_id' => 'uuid',
         'qr_code_image_data' => null,
         'qr_code_image_url' => 'uri',
-        'qr_code_type' => null,
-        'updated_at' => 'date-time'
+        'qr_code_type' => null
     ];
 
     /**
@@ -126,16 +116,12 @@ class SpiQrCodesCreate implements ModelInterface, ArrayAccess, \JsonSerializable
         'categorie' => false,
         'checkout_session_id' => false,
         'compte_paye' => false,
-        'created_at' => false,
-        'created_by' => false,
-        'environment' => false,
         'expires_at' => false,
         'is_active' => false,
         'is_used' => false,
         'metadata' => false,
         'montant' => false,
         'name' => false,
-        'organization_id' => false,
         'payeur_alias' => false,
         'payment_request_id' => false,
         'plan_id' => false,
@@ -144,8 +130,7 @@ class SpiQrCodesCreate implements ModelInterface, ArrayAccess, \JsonSerializable
         'qr_code_id' => false,
         'qr_code_image_data' => false,
         'qr_code_image_url' => false,
-        'qr_code_type' => false,
-        'updated_at' => false
+        'qr_code_type' => false
     ];
 
     /**
@@ -237,16 +222,12 @@ class SpiQrCodesCreate implements ModelInterface, ArrayAccess, \JsonSerializable
         'categorie' => 'categorie',
         'checkout_session_id' => 'checkout_session_id',
         'compte_paye' => 'compte_paye',
-        'created_at' => 'created_at',
-        'created_by' => 'created_by',
-        'environment' => 'environment',
         'expires_at' => 'expires_at',
         'is_active' => 'is_active',
         'is_used' => 'is_used',
         'metadata' => 'metadata',
         'montant' => 'montant',
         'name' => 'name',
-        'organization_id' => 'organization_id',
         'payeur_alias' => 'payeur_alias',
         'payment_request_id' => 'payment_request_id',
         'plan_id' => 'plan_id',
@@ -255,8 +236,7 @@ class SpiQrCodesCreate implements ModelInterface, ArrayAccess, \JsonSerializable
         'qr_code_id' => 'qr_code_id',
         'qr_code_image_data' => 'qr_code_image_data',
         'qr_code_image_url' => 'qr_code_image_url',
-        'qr_code_type' => 'qr_code_type',
-        'updated_at' => 'updated_at'
+        'qr_code_type' => 'qr_code_type'
     ];
 
     /**
@@ -268,16 +248,12 @@ class SpiQrCodesCreate implements ModelInterface, ArrayAccess, \JsonSerializable
         'categorie' => 'setCategorie',
         'checkout_session_id' => 'setCheckoutSessionId',
         'compte_paye' => 'setComptePaye',
-        'created_at' => 'setCreatedAt',
-        'created_by' => 'setCreatedBy',
-        'environment' => 'setEnvironment',
         'expires_at' => 'setExpiresAt',
         'is_active' => 'setIsActive',
         'is_used' => 'setIsUsed',
         'metadata' => 'setMetadata',
         'montant' => 'setMontant',
         'name' => 'setName',
-        'organization_id' => 'setOrganizationId',
         'payeur_alias' => 'setPayeurAlias',
         'payment_request_id' => 'setPaymentRequestId',
         'plan_id' => 'setPlanId',
@@ -286,8 +262,7 @@ class SpiQrCodesCreate implements ModelInterface, ArrayAccess, \JsonSerializable
         'qr_code_id' => 'setQrCodeId',
         'qr_code_image_data' => 'setQrCodeImageData',
         'qr_code_image_url' => 'setQrCodeImageUrl',
-        'qr_code_type' => 'setQrCodeType',
-        'updated_at' => 'setUpdatedAt'
+        'qr_code_type' => 'setQrCodeType'
     ];
 
     /**
@@ -299,16 +274,12 @@ class SpiQrCodesCreate implements ModelInterface, ArrayAccess, \JsonSerializable
         'categorie' => 'getCategorie',
         'checkout_session_id' => 'getCheckoutSessionId',
         'compte_paye' => 'getComptePaye',
-        'created_at' => 'getCreatedAt',
-        'created_by' => 'getCreatedBy',
-        'environment' => 'getEnvironment',
         'expires_at' => 'getExpiresAt',
         'is_active' => 'getIsActive',
         'is_used' => 'getIsUsed',
         'metadata' => 'getMetadata',
         'montant' => 'getMontant',
         'name' => 'getName',
-        'organization_id' => 'getOrganizationId',
         'payeur_alias' => 'getPayeurAlias',
         'payment_request_id' => 'getPaymentRequestId',
         'plan_id' => 'getPlanId',
@@ -317,8 +288,7 @@ class SpiQrCodesCreate implements ModelInterface, ArrayAccess, \JsonSerializable
         'qr_code_id' => 'getQrCodeId',
         'qr_code_image_data' => 'getQrCodeImageData',
         'qr_code_image_url' => 'getQrCodeImageUrl',
-        'qr_code_type' => 'getQrCodeType',
-        'updated_at' => 'getUpdatedAt'
+        'qr_code_type' => 'getQrCodeType'
     ];
 
     /**
@@ -381,16 +351,12 @@ class SpiQrCodesCreate implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('categorie', $data ?? [], null);
         $this->setIfExists('checkout_session_id', $data ?? [], null);
         $this->setIfExists('compte_paye', $data ?? [], null);
-        $this->setIfExists('created_at', $data ?? [], null);
-        $this->setIfExists('created_by', $data ?? [], null);
-        $this->setIfExists('environment', $data ?? [], null);
         $this->setIfExists('expires_at', $data ?? [], null);
         $this->setIfExists('is_active', $data ?? [], null);
         $this->setIfExists('is_used', $data ?? [], null);
         $this->setIfExists('metadata', $data ?? [], null);
         $this->setIfExists('montant', $data ?? [], null);
         $this->setIfExists('name', $data ?? [], null);
-        $this->setIfExists('organization_id', $data ?? [], null);
         $this->setIfExists('payeur_alias', $data ?? [], null);
         $this->setIfExists('payment_request_id', $data ?? [], null);
         $this->setIfExists('plan_id', $data ?? [], null);
@@ -400,7 +366,6 @@ class SpiQrCodesCreate implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('qr_code_image_data', $data ?? [], null);
         $this->setIfExists('qr_code_image_url', $data ?? [], null);
         $this->setIfExists('qr_code_type', $data ?? [], null);
-        $this->setIfExists('updated_at', $data ?? [], null);
     }
 
     /**
@@ -485,7 +450,7 @@ class SpiQrCodesCreate implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets checkout_session_id
      *
-     * @param string|null $checkout_session_id checkout_session_id
+     * @param string|null $checkout_session_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -527,87 +492,6 @@ class SpiQrCodesCreate implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets created_at
-     *
-     * @return \DateTime|null
-     */
-    public function getCreatedAt()
-    {
-        return $this->container['created_at'];
-    }
-
-    /**
-     * Sets created_at
-     *
-     * @param \DateTime|null $created_at created_at
-     *
-     * @return self
-     */
-    public function setCreatedAt($created_at)
-    {
-        if (is_null($created_at)) {
-            throw new \InvalidArgumentException('non-nullable created_at cannot be null');
-        }
-        $this->container['created_at'] = $created_at;
-
-        return $this;
-    }
-
-    /**
-     * Gets created_by
-     *
-     * @return string|null
-     */
-    public function getCreatedBy()
-    {
-        return $this->container['created_by'];
-    }
-
-    /**
-     * Sets created_by
-     *
-     * @param string|null $created_by created_by
-     *
-     * @return self
-     */
-    public function setCreatedBy($created_by)
-    {
-        if (is_null($created_by)) {
-            throw new \InvalidArgumentException('non-nullable created_by cannot be null');
-        }
-        $this->container['created_by'] = $created_by;
-
-        return $this;
-    }
-
-    /**
-     * Gets environment
-     *
-     * @return string|null
-     */
-    public function getEnvironment()
-    {
-        return $this->container['environment'];
-    }
-
-    /**
-     * Sets environment
-     *
-     * @param string|null $environment environment
-     *
-     * @return self
-     */
-    public function setEnvironment($environment)
-    {
-        if (is_null($environment)) {
-            throw new \InvalidArgumentException('non-nullable environment cannot be null');
-        }
-        $this->container['environment'] = $environment;
-
-        return $this;
-    }
-
-    /**
      * Gets expires_at
      *
      * @return \DateTime|null
@@ -620,7 +504,7 @@ class SpiQrCodesCreate implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets expires_at
      *
-     * @param \DateTime|null $expires_at expires_at
+     * @param \DateTime|null $expires_at ISO 8601 datetime
      *
      * @return self
      */
@@ -647,7 +531,7 @@ class SpiQrCodesCreate implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets is_active
      *
-     * @param bool|null $is_active is_active
+     * @param bool|null $is_active Whether this resource is currently active
      *
      * @return self
      */
@@ -701,7 +585,7 @@ class SpiQrCodesCreate implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets metadata
      *
-     * @param object|null $metadata metadata
+     * @param object|null $metadata Set of key-value pairs for storing additional information
      *
      * @return self
      */
@@ -770,33 +654,6 @@ class SpiQrCodesCreate implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets organization_id
-     *
-     * @return string|null
-     */
-    public function getOrganizationId()
-    {
-        return $this->container['organization_id'];
-    }
-
-    /**
-     * Sets organization_id
-     *
-     * @param string|null $organization_id organization_id
-     *
-     * @return self
-     */
-    public function setOrganizationId($organization_id)
-    {
-        if (is_null($organization_id)) {
-            throw new \InvalidArgumentException('non-nullable organization_id cannot be null');
-        }
-        $this->container['organization_id'] = $organization_id;
-
-        return $this;
-    }
-
-    /**
      * Gets payeur_alias
      *
      * @return string|null
@@ -836,7 +693,7 @@ class SpiQrCodesCreate implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets payment_request_id
      *
-     * @param string|null $payment_request_id payment_request_id
+     * @param string|null $payment_request_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -863,7 +720,7 @@ class SpiQrCodesCreate implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets plan_id
      *
-     * @param string|null $plan_id plan_id
+     * @param string|null $plan_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -890,7 +747,7 @@ class SpiQrCodesCreate implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets product_id
      *
-     * @param string|null $product_id product_id
+     * @param string|null $product_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -944,7 +801,7 @@ class SpiQrCodesCreate implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets qr_code_id
      *
-     * @param string|null $qr_code_id qr_code_id
+     * @param string|null $qr_code_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -998,7 +855,7 @@ class SpiQrCodesCreate implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets qr_code_image_url
      *
-     * @param string|null $qr_code_image_url qr_code_image_url
+     * @param string|null $qr_code_image_url URL/URI
      *
      * @return self
      */
@@ -1035,33 +892,6 @@ class SpiQrCodesCreate implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable qr_code_type cannot be null');
         }
         $this->container['qr_code_type'] = $qr_code_type;
-
-        return $this;
-    }
-
-    /**
-     * Gets updated_at
-     *
-     * @return \DateTime|null
-     */
-    public function getUpdatedAt()
-    {
-        return $this->container['updated_at'];
-    }
-
-    /**
-     * Sets updated_at
-     *
-     * @param \DateTime|null $updated_at updated_at
-     *
-     * @return self
-     */
-    public function setUpdatedAt($updated_at)
-    {
-        if (is_null($updated_at)) {
-            throw new \InvalidArgumentException('non-nullable updated_at cannot be null');
-        }
-        $this->container['updated_at'] = $updated_at;
 
         return $this;
     }

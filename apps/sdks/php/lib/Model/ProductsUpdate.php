@@ -36,7 +36,7 @@ use \LomiSDK\ObjectSerializer;
  * ProductsUpdate Class Doc Comment
  *
  * @category Class
- * @description Update products input
+ * @description Request body for updating a products object. Only include fields you want to modify.
  * @package  LomiSDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -61,21 +61,15 @@ class ProductsUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $openAPITypes = [
         'billing_frequency' => 'string',
         'charge_day' => 'float',
-        'created_at' => '\DateTime',
-        'created_by' => 'string',
         'description' => 'string',
         'display_on_storefront' => 'bool',
-        'environment' => 'string',
         'failed_payment_action' => 'string',
         'first_payment_type' => 'string',
         'image_url' => 'string',
         'is_active' => 'bool',
         'metadata' => 'object',
         'name' => 'string',
-        'organization_id' => 'string',
-        'product_id' => 'string',
         'product_type' => 'string',
-        'updated_at' => '\DateTime',
         'usage_aggregation' => 'string',
         'usage_unit' => 'string'
     ];
@@ -90,21 +84,15 @@ class ProductsUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $openAPIFormats = [
         'billing_frequency' => null,
         'charge_day' => 'double',
-        'created_at' => 'date-time',
-        'created_by' => null,
         'description' => null,
         'display_on_storefront' => null,
-        'environment' => null,
         'failed_payment_action' => null,
         'first_payment_type' => null,
         'image_url' => 'uri',
         'is_active' => null,
         'metadata' => null,
         'name' => null,
-        'organization_id' => 'uuid',
-        'product_id' => 'uuid',
         'product_type' => null,
-        'updated_at' => 'date-time',
         'usage_aggregation' => null,
         'usage_unit' => null
     ];
@@ -117,21 +105,15 @@ class ProductsUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static array $openAPINullables = [
         'billing_frequency' => false,
         'charge_day' => false,
-        'created_at' => false,
-        'created_by' => false,
         'description' => false,
         'display_on_storefront' => false,
-        'environment' => false,
         'failed_payment_action' => false,
         'first_payment_type' => false,
         'image_url' => false,
         'is_active' => false,
         'metadata' => false,
         'name' => false,
-        'organization_id' => false,
-        'product_id' => false,
         'product_type' => false,
-        'updated_at' => false,
         'usage_aggregation' => false,
         'usage_unit' => false
     ];
@@ -224,21 +206,15 @@ class ProductsUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $attributeMap = [
         'billing_frequency' => 'billing_frequency',
         'charge_day' => 'charge_day',
-        'created_at' => 'created_at',
-        'created_by' => 'created_by',
         'description' => 'description',
         'display_on_storefront' => 'display_on_storefront',
-        'environment' => 'environment',
         'failed_payment_action' => 'failed_payment_action',
         'first_payment_type' => 'first_payment_type',
         'image_url' => 'image_url',
         'is_active' => 'is_active',
         'metadata' => 'metadata',
         'name' => 'name',
-        'organization_id' => 'organization_id',
-        'product_id' => 'product_id',
         'product_type' => 'product_type',
-        'updated_at' => 'updated_at',
         'usage_aggregation' => 'usage_aggregation',
         'usage_unit' => 'usage_unit'
     ];
@@ -251,21 +227,15 @@ class ProductsUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $setters = [
         'billing_frequency' => 'setBillingFrequency',
         'charge_day' => 'setChargeDay',
-        'created_at' => 'setCreatedAt',
-        'created_by' => 'setCreatedBy',
         'description' => 'setDescription',
         'display_on_storefront' => 'setDisplayOnStorefront',
-        'environment' => 'setEnvironment',
         'failed_payment_action' => 'setFailedPaymentAction',
         'first_payment_type' => 'setFirstPaymentType',
         'image_url' => 'setImageUrl',
         'is_active' => 'setIsActive',
         'metadata' => 'setMetadata',
         'name' => 'setName',
-        'organization_id' => 'setOrganizationId',
-        'product_id' => 'setProductId',
         'product_type' => 'setProductType',
-        'updated_at' => 'setUpdatedAt',
         'usage_aggregation' => 'setUsageAggregation',
         'usage_unit' => 'setUsageUnit'
     ];
@@ -278,21 +248,15 @@ class ProductsUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $getters = [
         'billing_frequency' => 'getBillingFrequency',
         'charge_day' => 'getChargeDay',
-        'created_at' => 'getCreatedAt',
-        'created_by' => 'getCreatedBy',
         'description' => 'getDescription',
         'display_on_storefront' => 'getDisplayOnStorefront',
-        'environment' => 'getEnvironment',
         'failed_payment_action' => 'getFailedPaymentAction',
         'first_payment_type' => 'getFirstPaymentType',
         'image_url' => 'getImageUrl',
         'is_active' => 'getIsActive',
         'metadata' => 'getMetadata',
         'name' => 'getName',
-        'organization_id' => 'getOrganizationId',
-        'product_id' => 'getProductId',
         'product_type' => 'getProductType',
-        'updated_at' => 'getUpdatedAt',
         'usage_aggregation' => 'getUsageAggregation',
         'usage_unit' => 'getUsageUnit'
     ];
@@ -356,21 +320,15 @@ class ProductsUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $this->setIfExists('billing_frequency', $data ?? [], null);
         $this->setIfExists('charge_day', $data ?? [], null);
-        $this->setIfExists('created_at', $data ?? [], null);
-        $this->setIfExists('created_by', $data ?? [], null);
         $this->setIfExists('description', $data ?? [], null);
         $this->setIfExists('display_on_storefront', $data ?? [], null);
-        $this->setIfExists('environment', $data ?? [], null);
         $this->setIfExists('failed_payment_action', $data ?? [], null);
         $this->setIfExists('first_payment_type', $data ?? [], null);
         $this->setIfExists('image_url', $data ?? [], null);
         $this->setIfExists('is_active', $data ?? [], null);
         $this->setIfExists('metadata', $data ?? [], null);
         $this->setIfExists('name', $data ?? [], null);
-        $this->setIfExists('organization_id', $data ?? [], null);
-        $this->setIfExists('product_id', $data ?? [], null);
         $this->setIfExists('product_type', $data ?? [], null);
-        $this->setIfExists('updated_at', $data ?? [], null);
         $this->setIfExists('usage_aggregation', $data ?? [], null);
         $this->setIfExists('usage_unit', $data ?? [], null);
     }
@@ -472,60 +430,6 @@ class ProductsUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets created_at
-     *
-     * @return \DateTime|null
-     */
-    public function getCreatedAt()
-    {
-        return $this->container['created_at'];
-    }
-
-    /**
-     * Sets created_at
-     *
-     * @param \DateTime|null $created_at created_at
-     *
-     * @return self
-     */
-    public function setCreatedAt($created_at)
-    {
-        if (is_null($created_at)) {
-            throw new \InvalidArgumentException('non-nullable created_at cannot be null');
-        }
-        $this->container['created_at'] = $created_at;
-
-        return $this;
-    }
-
-    /**
-     * Gets created_by
-     *
-     * @return string|null
-     */
-    public function getCreatedBy()
-    {
-        return $this->container['created_by'];
-    }
-
-    /**
-     * Sets created_by
-     *
-     * @param string|null $created_by created_by
-     *
-     * @return self
-     */
-    public function setCreatedBy($created_by)
-    {
-        if (is_null($created_by)) {
-            throw new \InvalidArgumentException('non-nullable created_by cannot be null');
-        }
-        $this->container['created_by'] = $created_by;
-
-        return $this;
-    }
-
-    /**
      * Gets description
      *
      * @return string|null
@@ -575,33 +479,6 @@ class ProductsUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable display_on_storefront cannot be null');
         }
         $this->container['display_on_storefront'] = $display_on_storefront;
-
-        return $this;
-    }
-
-    /**
-     * Gets environment
-     *
-     * @return string|null
-     */
-    public function getEnvironment()
-    {
-        return $this->container['environment'];
-    }
-
-    /**
-     * Sets environment
-     *
-     * @param string|null $environment environment
-     *
-     * @return self
-     */
-    public function setEnvironment($environment)
-    {
-        if (is_null($environment)) {
-            throw new \InvalidArgumentException('non-nullable environment cannot be null');
-        }
-        $this->container['environment'] = $environment;
 
         return $this;
     }
@@ -673,7 +550,7 @@ class ProductsUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets image_url
      *
-     * @param string|null $image_url image_url
+     * @param string|null $image_url URL/URI
      *
      * @return self
      */
@@ -700,7 +577,7 @@ class ProductsUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets is_active
      *
-     * @param bool|null $is_active is_active
+     * @param bool|null $is_active Whether this resource is currently active
      *
      * @return self
      */
@@ -727,7 +604,7 @@ class ProductsUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets metadata
      *
-     * @param object|null $metadata metadata
+     * @param object|null $metadata Set of key-value pairs for storing additional information
      *
      * @return self
      */
@@ -769,60 +646,6 @@ class ProductsUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets organization_id
-     *
-     * @return string|null
-     */
-    public function getOrganizationId()
-    {
-        return $this->container['organization_id'];
-    }
-
-    /**
-     * Sets organization_id
-     *
-     * @param string|null $organization_id organization_id
-     *
-     * @return self
-     */
-    public function setOrganizationId($organization_id)
-    {
-        if (is_null($organization_id)) {
-            throw new \InvalidArgumentException('non-nullable organization_id cannot be null');
-        }
-        $this->container['organization_id'] = $organization_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets product_id
-     *
-     * @return string|null
-     */
-    public function getProductId()
-    {
-        return $this->container['product_id'];
-    }
-
-    /**
-     * Sets product_id
-     *
-     * @param string|null $product_id product_id
-     *
-     * @return self
-     */
-    public function setProductId($product_id)
-    {
-        if (is_null($product_id)) {
-            throw new \InvalidArgumentException('non-nullable product_id cannot be null');
-        }
-        $this->container['product_id'] = $product_id;
-
-        return $this;
-    }
-
-    /**
      * Gets product_type
      *
      * @return string|null
@@ -845,33 +668,6 @@ class ProductsUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable product_type cannot be null');
         }
         $this->container['product_type'] = $product_type;
-
-        return $this;
-    }
-
-    /**
-     * Gets updated_at
-     *
-     * @return \DateTime|null
-     */
-    public function getUpdatedAt()
-    {
-        return $this->container['updated_at'];
-    }
-
-    /**
-     * Sets updated_at
-     *
-     * @param \DateTime|null $updated_at updated_at
-     *
-     * @return self
-     */
-    public function setUpdatedAt($updated_at)
-    {
-        if (is_null($updated_at)) {
-            throw new \InvalidArgumentException('non-nullable updated_at cannot be null');
-        }
-        $this->container['updated_at'] = $updated_at;
 
         return $this;
     }

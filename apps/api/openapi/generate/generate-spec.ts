@@ -24,44 +24,200 @@ interface OpenAPISpec {
   tags: any[];
 }
 
+/**
+ * Generate realistic example payloads for create operations
+ */
+function getExampleForResource(tableName: string): any {
+  const examples: Record<string, any> = {
+    customers: {
+      name: 'Aminata Diallo',
+      email: 'aminata.diallo@example.com',
+      phone_number: '+221771234567',
+      metadata: {
+        customer_segment: 'premium',
+        referral_source: 'instagram',
+      },
+    },
+    payment_requests: {
+      amount: 25000,
+      currency_code: 'XOF',
+      customer_id: 'cus_1234567890abcdef',
+      description: 'Payment for premium subscription',
+      metadata: {
+        order_id: 'ORD-2024-001',
+      },
+    },
+    products: {
+      name: 'Premium Subscription',
+      description: 'Monthly premium access with all features',
+      product_type: 'recurring',
+      is_active: true,
+      metadata: {
+        features: ['analytics', 'api_access', 'priority_support'],
+      },
+    },
+    prices: {
+      product_id: 'prod_1234567890abcdef',
+      amount: 5000,
+      currency_code: 'XOF',
+      pricing_model: 'flat_rate',
+      billing_frequency: 'monthly',
+      is_active: true,
+    },
+    subscriptions: {
+      customer_id: 'cus_1234567890abcdef',
+      product_id: 'prod_1234567890abcdef',
+      price_id: 'price_1234567890abcdef',
+      billing_frequency: 'monthly',
+      metadata: {
+        plan: 'premium',
+      },
+    },
+    discount_coupons: {
+      code: 'WELCOME2024',
+      discount_type: 'percentage',
+      discount_percentage: 20,
+      max_uses: 100,
+      is_active: true,
+      expires_at: '2024-12-31T23:59:59Z',
+      description: 'Welcome discount for new customers',
+    },
+    checkout_sessions: {
+      amount: 15000,
+      currency_code: 'XOF',
+      product_id: 'prod_1234567890abcdef',
+      success_url: 'https://example.com/success',
+      cancel_url: 'https://example.com/cancel',
+      customer_email: 'customer@example.com',
+    },
+    payment_links: {
+      title: 'Premium Membership',
+      amount: 50000,
+      currency_code: 'XOF',
+      description: 'Annual premium membership',
+      product_id: 'prod_1234567890abcdef',
+    },
+    payouts: {
+      amount: 100000,
+      currency_code: 'XOF',
+      beneficiary_account_id: 'acc_1234567890abcdef',
+      description: 'Monthly payout to vendor',
+    },
+    webhooks: {
+      url: 'https://api.example.com/webhooks/lomi',
+      events: ['payment.succeeded', 'payment.failed'],
+      description: 'Production webhook endpoint',
+      is_active: true,
+    },
+    spi_qr_codes: {
+      amount: 5000,
+      currency_code: 'XOF',
+      description: 'QR code for in-store payment',
+      expires_at: '2024-12-31T23:59:59Z',
+    },
+  };
+
+  return examples[tableName] || {
+    name: `Sample ${tableName.slice(0, -1)}`,
+    description: `Example ${tableName.slice(0, -1)} object`,
+  };
+}
+
+/**
+ * Generate realistic example payloads for update operations
+ */
+function getUpdateExampleForResource(tableName: string): any {
+  const examples: Record<string, any> = {
+    customers: {
+      name: 'Aminata Diallo-Kane',
+      phone_number: '+221779876543',
+      metadata: {
+        customer_segment: 'vip',
+        notes: 'Upgraded to VIP tier',
+      },
+    },
+    payment_requests: {
+      metadata: {
+        order_id: 'ORD-2024-001-UPDATED',
+        notes: 'Customer requested invoice',
+      },
+    },
+    products: {
+      name: 'Premium Plus Subscription',
+      description: 'Enhanced premium access with exclusive features',
+      is_active: true,
+    },
+    prices: {
+      is_active: false,
+    },
+    subscriptions: {
+      metadata: {
+        plan: 'enterprise',
+        upgraded_at: new Date().toISOString(),
+      },
+    },
+    discount_coupons: {
+      is_active: false,
+      max_uses: 50,
+    },
+    webhooks: {
+      is_active: false,
+      description: 'Temporarily disabled for maintenance',
+    },
+  };
+
+  return examples[tableName] || {
+    metadata: {
+      updated_at: new Date().toISOString(),
+      updated_reason: 'Administrative update',
+    },
+  };
+}
+
 function generateCRUDPaths(
   tableName: string,
   idField: string = `${tableName.slice(0, -1)}_id`,
+  resourceConfig?: APIResourceConfig,
 ): Record<string, any> {
   const singularName = tableName.endsWith('s')
     ? tableName.slice(0, -1)
     : tableName;
 
+  // Convert to camelCase for operationId (e.g., payment_requests -> paymentRequests)
+  const camelCaseName = tableName.replace(/_([a-z])/g, (g) => g[1].toUpperCase());
+  const singularCamelCase = singularName.replace(/_([a-z])/g, (g) => g[1].toUpperCase());
+
   return {
     [`/${tableName}`]: {
       get: {
-        summary: `List ${tableName}`,
-        description: `Retrieve a paginated list of ${tableName}`,
-        tags: [singularName],
+        operationId: `list${camelCaseName.charAt(0).toUpperCase() + camelCaseName.slice(1)}`,
+        summary: `List ${tableName.replace(/_/g, ' ')}`,
+        description: resourceConfig?.description || `Retrieve a paginated list of ${tableName.replace(/_/g, ' ')}. Returns up to 100 items per request.`,
+        tags: [resourceConfig?.tag || singularName],
         security: [{ ApiKeyAuth: [] }],
         parameters: [
           {
             name: 'limit',
             in: 'query',
-            description: 'Maximum number of items to return',
-            schema: { type: 'integer', default: 20, maximum: 100 },
+            description: 'Maximum number of items to return (1-100)',
+            schema: { type: 'integer', default: 20, minimum: 1, maximum: 100 },
           },
           {
             name: 'offset',
             in: 'query',
-            description: 'Number of items to skip',
-            schema: { type: 'integer', default: 0 },
+            description: 'Number of items to skip for pagination',
+            schema: { type: 'integer', default: 0, minimum: 0 },
           },
           {
             name: 'sort',
             in: 'query',
-            description: 'Sort order (e.g., created_at:desc)',
-            schema: { type: 'string' },
+            description: 'Sort order. Format: `field:direction` (e.g., `created_at:desc`)',
+            schema: { type: 'string', example: 'created_at:desc' },
           },
         ],
         responses: {
           '200': {
-            description: 'Successful response',
+            description: 'Successful response with paginated data',
             content: {
               'application/json': {
                 schema: {
@@ -74,9 +230,9 @@ function generateCRUDPaths(
                     pagination: {
                       type: 'object',
                       properties: {
-                        limit: { type: 'integer' },
-                        offset: { type: 'integer' },
-                        total: { type: 'integer' },
+                        limit: { type: 'integer', description: 'Number of items per page' },
+                        offset: { type: 'integer', description: 'Number of items skipped' },
+                        total: { type: 'integer', description: 'Total number of items available' },
                       },
                     },
                   },
@@ -89,21 +245,28 @@ function generateCRUDPaths(
         },
       },
       post: {
-        summary: `Create ${singularName}`,
-        description: `Create a new ${singularName}`,
-        tags: [singularName],
+        operationId: `create${singularCamelCase.charAt(0).toUpperCase() + singularCamelCase.slice(1)}`,
+        summary: `Create ${singularName.replace(/_/g, ' ')}`,
+        description: resourceConfig?.description || `Create a new ${singularName.replace(/_/g, ' ')} object.`,
+        tags: [resourceConfig?.tag || singularName],
         security: [{ ApiKeyAuth: [] }],
         requestBody: {
           required: true,
           content: {
             'application/json': {
               schema: { $ref: `#/components/schemas/${tableName}_create` },
+              examples: {
+                default: {
+                  summary: `Sample ${singularName} creation`,
+                  value: getExampleForResource(tableName),
+                },
+              },
             },
           },
         },
         responses: {
           '201': {
-            description: 'Successfully created',
+            description: `${singularName.charAt(0).toUpperCase() + singularName.slice(1)} successfully created`,
             content: {
               'application/json': {
                 schema: { $ref: `#/components/schemas/${tableName}` },
@@ -118,22 +281,23 @@ function generateCRUDPaths(
     },
     [`/${tableName}/{${idField}}`]: {
       get: {
-        summary: `Get ${singularName}`,
-        description: `Retrieve a specific ${singularName} by ID`,
-        tags: [singularName],
+        operationId: `retrieve${singularCamelCase.charAt(0).toUpperCase() + singularCamelCase.slice(1)}`,
+        summary: `Retrieve ${singularName.replace(/_/g, ' ')}`,
+        description: `Retrieve a specific ${singularName.replace(/_/g, ' ')} by its unique identifier.`,
+        tags: [resourceConfig?.tag || singularName],
         security: [{ ApiKeyAuth: [] }],
         parameters: [
           {
             name: idField,
             in: 'path',
             required: true,
-            description: `The ${singularName} ID`,
+            description: `Unique identifier for the ${singularName.replace(/_/g, ' ')}`,
             schema: { type: 'string', format: 'uuid' },
           },
         ],
         responses: {
           '200': {
-            description: 'Successful response',
+            description: `${singularName.charAt(0).toUpperCase() + singularName.slice(1)} retrieved successfully`,
             content: {
               'application/json': {
                 schema: { $ref: `#/components/schemas/${tableName}` },
@@ -146,16 +310,17 @@ function generateCRUDPaths(
         },
       },
       patch: {
-        summary: `Update ${singularName}`,
-        description: `Update a specific ${singularName}`,
-        tags: [singularName],
+        operationId: `update${singularCamelCase.charAt(0).toUpperCase() + singularCamelCase.slice(1)}`,
+        summary: `Update ${singularName.replace(/_/g, ' ')}`,
+        description: `Update a specific ${singularName.replace(/_/g, ' ')}. Only provided fields will be updated.`,
+        tags: [resourceConfig?.tag || singularName],
         security: [{ ApiKeyAuth: [] }],
         parameters: [
           {
             name: idField,
             in: 'path',
             required: true,
-            description: `The ${singularName} ID`,
+            description: `Unique identifier for the ${singularName.replace(/_/g, ' ')}`,
             schema: { type: 'string', format: 'uuid' },
           },
         ],
@@ -164,12 +329,18 @@ function generateCRUDPaths(
           content: {
             'application/json': {
               schema: { $ref: `#/components/schemas/${tableName}_update` },
+              examples: {
+                default: {
+                  summary:  `Sample ${singularName} update`,
+                  value: getUpdateExampleForResource(tableName),
+                },
+              },
             },
           },
         },
         responses: {
           '200': {
-            description: 'Successfully updated',
+            description: `${singularName.charAt(0).toUpperCase() + singularName.slice(1)} successfully updated`,
             content: {
               'application/json': {
                 schema: { $ref: `#/components/schemas/${tableName}` },
@@ -183,22 +354,23 @@ function generateCRUDPaths(
         },
       },
       delete: {
-        summary: `Delete ${singularName}`,
-        description: `Delete a specific ${singularName}`,
-        tags: [singularName],
+        operationId: `delete${singularCamelCase.charAt(0).toUpperCase() + singularCamelCase.slice(1)}`,
+        summary: `Delete ${singularName.replace(/_/g, ' ')}`,
+        description: `Delete a specific ${singularName.replace(/_/g, ' ')}. This action cannot be undone.`,
+        tags: [resourceConfig?.tag || singularName],
         security: [{ ApiKeyAuth: [] }],
         parameters: [
           {
             name: idField,
             in: 'path',
             required: true,
-            description: `The ${singularName} ID`,
+            description: `Unique identifier for the ${singularName.replace(/_/g, ' ')}`,
             schema: { type: 'string', format: 'uuid' },
           },
         ],
         responses: {
           '204': {
-            description: 'Successfully deleted',
+            description: `${singularName.charAt(0).toUpperCase() + singularName.slice(1)} successfully deleted`,
           },
           '404': { $ref: '#/components/responses/NotFound' },
           '401': { $ref: '#/components/responses/Unauthorized' },
@@ -214,7 +386,7 @@ function generateCRUDPathsWithConfig(
   idField: string,
   config: APIResourceConfig,
 ): Record<string, any> {
-  const paths = generateCRUDPaths(tableName, idField);
+  const paths = generateCRUDPaths(tableName, idField, config);
 
   const operations = config.operations || {
     list: true,
@@ -287,7 +459,7 @@ function generateOpenAPISpec(): OpenAPISpec {
     openapi: '3.0.3',
     info: {
       title: 'lomi. API',
-      version: '1.0.0',
+      version: '1.1.0',
       description: `
 # lomi. API
 

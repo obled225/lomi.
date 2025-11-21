@@ -19,44 +19,60 @@ import (
 // checks if the Transactions type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Transactions{}
 
-// Transactions transactions object
+// Transactions transactions resource object
 type Transactions struct {
+	// Unique identifier (UUID format)
 	CheckoutSessionId *string `json:"checkout_session_id,omitempty"`
+	// ISO 8601 datetime
 	CreatedAt *time.Time `json:"created_at,omitempty"`
+	// Three-letter ISO currency code (e.g., XOF, USD, EUR)
 	CurrencyCode *string `json:"currency_code,omitempty"`
+	// Unique identifier (UUID format)
 	CustomerId *string `json:"customer_id,omitempty"`
 	Description *string `json:"description,omitempty"`
 	DiscountAmount *float64 `json:"discount_amount,omitempty"`
 	Environment *string `json:"environment,omitempty"`
 	FeeAmount *float64 `json:"fee_amount,omitempty"`
+	// Unique identifier (UUID format)
 	FeeStructureId *string `json:"fee_structure_id,omitempty"`
 	GrossAmount *float64 `json:"gross_amount,omitempty"`
 	IsBnpl *bool `json:"is_bnpl,omitempty"`
 	IsPos *bool `json:"is_pos,omitempty"`
+	// Set of key-value pairs for storing additional information
 	Metadata map[string]interface{} `json:"metadata,omitempty"`
 	NetAmount *float64 `json:"net_amount,omitempty"`
+	// Unique identifier (UUID format)
 	OrganizationId *string `json:"organization_id,omitempty"`
 	PaymentMethodCode *string `json:"payment_method_code,omitempty"`
+	// Unique identifier (UUID format)
 	PriceId *string `json:"price_id,omitempty"`
+	// Unique identifier (UUID format)
 	ProductId *string `json:"product_id,omitempty"`
 	ProviderCode *string `json:"provider_code,omitempty"`
 	Quantity *float64 `json:"quantity,omitempty"`
 	SpiAccountNumber *string `json:"spi_account_number,omitempty"`
+	// Unique identifier (UUID format)
 	SpiBulkInstructionId *string `json:"spi_bulk_instruction_id,omitempty"`
 	SpiDateEnvoi *string `json:"spi_date_envoi,omitempty"`
 	SpiDateIrrevocabilite *string `json:"spi_date_irrevocabilite,omitempty"`
 	SpiDiscountAmount *float64 `json:"spi_discount_amount,omitempty"`
 	SpiDiscountRate *float64 `json:"spi_discount_rate,omitempty"`
+	// Unique identifier (UUID format)
 	SpiEnd2endId *string `json:"spi_end2end_id,omitempty"`
 	SpiPaymentCategory *string `json:"spi_payment_category,omitempty"`
 	SpiPaymentFlowType *string `json:"spi_payment_flow_type,omitempty"`
 	SpiPaymentStatus *string `json:"spi_payment_status,omitempty"`
 	SpiRejectionReason *string `json:"spi_rejection_reason,omitempty"`
+	// Unique identifier (UUID format)
 	SpiTxId *string `json:"spi_tx_id,omitempty"`
+	// Current status of the resource
 	Status *string `json:"status,omitempty"`
+	// Unique identifier (UUID format)
 	SubscriptionId *string `json:"subscription_id,omitempty"`
+	// Unique identifier (UUID format)
 	TransactionId *string `json:"transaction_id,omitempty"`
 	TransactionType *string `json:"transaction_type,omitempty"`
+	// ISO 8601 datetime
 	UpdatedAt *time.Time `json:"updated_at,omitempty"`
 }
 

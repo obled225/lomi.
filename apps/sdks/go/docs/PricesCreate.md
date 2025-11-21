@@ -4,23 +4,19 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Amount** | Pointer to **float64** |  | [optional] 
+**Amount** | Pointer to **float64** | Amount in the smallest currency unit (e.g., cents for USD, same for XOF) | [optional] 
 **BillingInterval** | Pointer to **string** |  | [optional] 
-**CreatedAt** | Pointer to **time.Time** |  | [optional] 
-**CurrencyCode** | Pointer to **string** |  | [optional] 
-**Environment** | Pointer to **string** |  | [optional] 
-**IsActive** | Pointer to **bool** |  | [optional] 
+**CurrencyCode** | Pointer to **string** | Three-letter ISO currency code (e.g., XOF, USD, EUR) | [optional] 
+**IsActive** | Pointer to **bool** | Whether this resource is currently active | [optional] 
 **IsDefault** | Pointer to **bool** |  | [optional] 
 **MaximumAmount** | Pointer to **float64** |  | [optional] 
-**Metadata** | Pointer to **map[string]interface{}** |  | [optional] 
+**Metadata** | Pointer to **map[string]interface{}** | Set of key-value pairs for storing additional information | [optional] 
 **MinimumAmount** | Pointer to **float64** |  | [optional] 
-**OrganizationId** | Pointer to **string** |  | [optional] 
-**PriceId** | Pointer to **string** |  | [optional] 
+**PriceId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
 **PricingModel** | Pointer to **string** |  | [optional] 
-**ProductId** | Pointer to **string** |  | [optional] 
-**ProviderPriceId** | Pointer to **string** |  | [optional] 
-**ProviderProductId** | Pointer to **string** |  | [optional] 
-**UpdatedAt** | Pointer to **time.Time** |  | [optional] 
+**ProductId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
+**ProviderPriceId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
+**ProviderProductId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
 
 ## Methods
 
@@ -91,31 +87,6 @@ SetBillingInterval sets BillingInterval field to given value.
 
 HasBillingInterval returns a boolean if a field has been set.
 
-### GetCreatedAt
-
-`func (o *PricesCreate) GetCreatedAt() time.Time`
-
-GetCreatedAt returns the CreatedAt field if non-nil, zero value otherwise.
-
-### GetCreatedAtOk
-
-`func (o *PricesCreate) GetCreatedAtOk() (*time.Time, bool)`
-
-GetCreatedAtOk returns a tuple with the CreatedAt field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCreatedAt
-
-`func (o *PricesCreate) SetCreatedAt(v time.Time)`
-
-SetCreatedAt sets CreatedAt field to given value.
-
-### HasCreatedAt
-
-`func (o *PricesCreate) HasCreatedAt() bool`
-
-HasCreatedAt returns a boolean if a field has been set.
-
 ### GetCurrencyCode
 
 `func (o *PricesCreate) GetCurrencyCode() string`
@@ -140,31 +111,6 @@ SetCurrencyCode sets CurrencyCode field to given value.
 `func (o *PricesCreate) HasCurrencyCode() bool`
 
 HasCurrencyCode returns a boolean if a field has been set.
-
-### GetEnvironment
-
-`func (o *PricesCreate) GetEnvironment() string`
-
-GetEnvironment returns the Environment field if non-nil, zero value otherwise.
-
-### GetEnvironmentOk
-
-`func (o *PricesCreate) GetEnvironmentOk() (*string, bool)`
-
-GetEnvironmentOk returns a tuple with the Environment field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetEnvironment
-
-`func (o *PricesCreate) SetEnvironment(v string)`
-
-SetEnvironment sets Environment field to given value.
-
-### HasEnvironment
-
-`func (o *PricesCreate) HasEnvironment() bool`
-
-HasEnvironment returns a boolean if a field has been set.
 
 ### GetIsActive
 
@@ -291,31 +237,6 @@ SetMinimumAmount sets MinimumAmount field to given value.
 
 HasMinimumAmount returns a boolean if a field has been set.
 
-### GetOrganizationId
-
-`func (o *PricesCreate) GetOrganizationId() string`
-
-GetOrganizationId returns the OrganizationId field if non-nil, zero value otherwise.
-
-### GetOrganizationIdOk
-
-`func (o *PricesCreate) GetOrganizationIdOk() (*string, bool)`
-
-GetOrganizationIdOk returns a tuple with the OrganizationId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetOrganizationId
-
-`func (o *PricesCreate) SetOrganizationId(v string)`
-
-SetOrganizationId sets OrganizationId field to given value.
-
-### HasOrganizationId
-
-`func (o *PricesCreate) HasOrganizationId() bool`
-
-HasOrganizationId returns a boolean if a field has been set.
-
 ### GetPriceId
 
 `func (o *PricesCreate) GetPriceId() string`
@@ -440,31 +361,6 @@ SetProviderProductId sets ProviderProductId field to given value.
 `func (o *PricesCreate) HasProviderProductId() bool`
 
 HasProviderProductId returns a boolean if a field has been set.
-
-### GetUpdatedAt
-
-`func (o *PricesCreate) GetUpdatedAt() time.Time`
-
-GetUpdatedAt returns the UpdatedAt field if non-nil, zero value otherwise.
-
-### GetUpdatedAtOk
-
-`func (o *PricesCreate) GetUpdatedAtOk() (*time.Time, bool)`
-
-GetUpdatedAtOk returns a tuple with the UpdatedAt field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetUpdatedAt
-
-`func (o *PricesCreate) SetUpdatedAt(v time.Time)`
-
-SetUpdatedAt sets UpdatedAt field to given value.
-
-### HasUpdatedAt
-
-`func (o *PricesCreate) HasUpdatedAt() bool`
-
-HasUpdatedAt returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

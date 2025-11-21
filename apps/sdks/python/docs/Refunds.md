@@ -1,30 +1,30 @@
 # Refunds
 
-refunds object
+refunds resource object
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**amount** | **float** |  | [optional] 
-**created_at** | **datetime** |  | [optional] 
+**amount** | **float** | Amount in the smallest currency unit (e.g., cents for USD, same for XOF) | [optional] 
+**created_at** | **datetime** | ISO 8601 datetime | [optional] [readonly] 
 **environment** | **str** |  | [optional] 
 **fee_amount** | **float** |  | [optional] 
-**metadata** | **object** |  | [optional] 
+**metadata** | **object** | Set of key-value pairs for storing additional information | [optional] 
 **reason** | **str** |  | [optional] 
-**refund_id** | **str** |  | [optional] 
+**refund_id** | **str** | Unique identifier (UUID format) | [optional] 
 **refunded_amount** | **float** |  | [optional] 
 **spi_account_number** | **str** |  | [optional] 
-**spi_end2end_id** | **str** |  | [optional] 
+**spi_end2end_id** | **str** | Unique identifier (UUID format) | [optional] 
 **spi_fund_return_status** | **str** |  | [optional] 
 **spi_motif_code** | **str** |  | [optional] 
 **spi_rejection_reason** | **str** |  | [optional] 
 **spi_retour_date_demande** | **str** |  | [optional] 
 **spi_retour_date_irrevocabilite** | **str** |  | [optional] 
-**spi_tx_id** | **str** |  | [optional] 
-**status** | **str** |  | [optional] 
-**transaction_id** | **str** |  | [optional] 
-**updated_at** | **datetime** |  | [optional] 
+**spi_tx_id** | **str** | Unique identifier (UUID format) | [optional] 
+**status** | **str** | Current status of the resource | [optional] 
+**transaction_id** | **str** | Unique identifier (UUID format) | [optional] 
+**updated_at** | **datetime** | ISO 8601 datetime | [optional] [readonly] 
 
 ## Example
 

@@ -3,17 +3,35 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * events object
+ * events resource object
  */
 export type events = {
-    created_at?: string;
-    created_by?: string;
+    /**
+     * ISO 8601 datetime
+     */
+    readonly created_at?: string;
+    readonly created_by?: string;
+    /**
+     * Unique identifier (UUID format)
+     */
     customer_id?: string;
     event_data?: Record<string, any>;
+    /**
+     * Unique identifier (UUID format)
+     */
     event_id?: string;
     event_name?: string;
+    /**
+     * Set of key-value pairs for storing additional information
+     */
     metadata?: Record<string, any>;
+    /**
+     * Unique identifier (UUID format)
+     */
     organization_id?: string;
+    /**
+     * Unique identifier (UUID format)
+     */
     product_id?: string;
 };
 

@@ -36,7 +36,7 @@ use \LomiSDK\ObjectSerializer;
  * Payouts Class Doc Comment
  *
  * @category Class
- * @description payouts object
+ * @description payouts resource object
  * @package  LomiSDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -395,7 +395,7 @@ class Payouts implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets account_id
      *
-     * @param string|null $account_id account_id
+     * @param string|null $account_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -422,7 +422,7 @@ class Payouts implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets amount
      *
-     * @param float|null $amount amount
+     * @param float|null $amount Amount in the smallest currency unit (e.g., cents for USD, same for XOF)
      *
      * @return self
      */
@@ -449,7 +449,7 @@ class Payouts implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets created_at
      *
-     * @param \DateTime|null $created_at created_at
+     * @param \DateTime|null $created_at ISO 8601 datetime
      *
      * @return self
      */
@@ -503,7 +503,7 @@ class Payouts implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets currency_code
      *
-     * @param string|null $currency_code currency_code
+     * @param string|null $currency_code Three-letter ISO currency code (e.g., XOF, USD, EUR)
      *
      * @return self
      */
@@ -557,7 +557,7 @@ class Payouts implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets metadata
      *
-     * @param object|null $metadata metadata
+     * @param object|null $metadata Set of key-value pairs for storing additional information
      *
      * @return self
      */
@@ -584,7 +584,7 @@ class Payouts implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets organization_id
      *
-     * @param string|null $organization_id organization_id
+     * @param string|null $organization_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -638,7 +638,7 @@ class Payouts implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets payout_id
      *
-     * @param string|null $payout_id payout_id
+     * @param string|null $payout_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -665,7 +665,7 @@ class Payouts implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets payout_method_id
      *
-     * @param string|null $payout_method_id payout_method_id
+     * @param string|null $payout_method_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -719,7 +719,7 @@ class Payouts implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets status
      *
-     * @param string|null $status status
+     * @param string|null $status Current status of the resource
      *
      * @return self
      */
@@ -746,7 +746,7 @@ class Payouts implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets updated_at
      *
-     * @param \DateTime|null $updated_at updated_at
+     * @param \DateTime|null $updated_at ISO 8601 datetime
      *
      * @return self
      */

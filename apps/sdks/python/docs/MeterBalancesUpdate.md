@@ -1,21 +1,19 @@
 # MeterBalancesUpdate
 
-Update meter_balances input
+Request body for updating a meter balances object. Only include fields you want to modify.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **balance** | **float** |  | [optional] 
-**balance_id** | **str** |  | [optional] 
-**billable_organization_id** | **str** |  | [optional] 
+**balance_id** | **str** | Unique identifier (UUID format) | [optional] 
+**billable_organization_id** | **str** | Unique identifier (UUID format) | [optional] 
 **consumed_units** | **float** |  | [optional] 
-**created_at** | **datetime** |  | [optional] 
 **credited_units** | **float** |  | [optional] 
-**customer_id** | **str** |  | [optional] 
-**last_event_id** | **str** |  | [optional] 
-**meter_id** | **str** |  | [optional] 
-**updated_at** | **datetime** |  | [optional] 
+**customer_id** | **str** | Unique identifier (UUID format) | [optional] 
+**last_event_id** | **str** | Unique identifier (UUID format) | [optional] 
+**meter_id** | **str** | Unique identifier (UUID format) | [optional] 
 
 ## Example
 

@@ -36,7 +36,7 @@ use \LomiSDK\ObjectSerializer;
  * EventsUpdate Class Doc Comment
  *
  * @category Class
- * @description Update events input
+ * @description Request body for updating a events object. Only include fields you want to modify.
  * @package  LomiSDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -59,14 +59,11 @@ class EventsUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'created_at' => '\DateTime',
-        'created_by' => 'string',
         'customer_id' => 'string',
         'event_data' => 'object',
         'event_id' => 'string',
         'event_name' => 'string',
         'metadata' => 'object',
-        'organization_id' => 'string',
         'product_id' => 'string'
     ];
 
@@ -78,14 +75,11 @@ class EventsUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'created_at' => 'date-time',
-        'created_by' => null,
         'customer_id' => 'uuid',
         'event_data' => null,
         'event_id' => 'uuid',
         'event_name' => null,
         'metadata' => null,
-        'organization_id' => 'uuid',
         'product_id' => 'uuid'
     ];
 
@@ -95,14 +89,11 @@ class EventsUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'created_at' => false,
-        'created_by' => false,
         'customer_id' => false,
         'event_data' => false,
         'event_id' => false,
         'event_name' => false,
         'metadata' => false,
-        'organization_id' => false,
         'product_id' => false
     ];
 
@@ -192,14 +183,11 @@ class EventsUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'created_at' => 'created_at',
-        'created_by' => 'created_by',
         'customer_id' => 'customer_id',
         'event_data' => 'event_data',
         'event_id' => 'event_id',
         'event_name' => 'event_name',
         'metadata' => 'metadata',
-        'organization_id' => 'organization_id',
         'product_id' => 'product_id'
     ];
 
@@ -209,14 +197,11 @@ class EventsUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'created_at' => 'setCreatedAt',
-        'created_by' => 'setCreatedBy',
         'customer_id' => 'setCustomerId',
         'event_data' => 'setEventData',
         'event_id' => 'setEventId',
         'event_name' => 'setEventName',
         'metadata' => 'setMetadata',
-        'organization_id' => 'setOrganizationId',
         'product_id' => 'setProductId'
     ];
 
@@ -226,14 +211,11 @@ class EventsUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'created_at' => 'getCreatedAt',
-        'created_by' => 'getCreatedBy',
         'customer_id' => 'getCustomerId',
         'event_data' => 'getEventData',
         'event_id' => 'getEventId',
         'event_name' => 'getEventName',
         'metadata' => 'getMetadata',
-        'organization_id' => 'getOrganizationId',
         'product_id' => 'getProductId'
     ];
 
@@ -294,14 +276,11 @@ class EventsUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('created_at', $data ?? [], null);
-        $this->setIfExists('created_by', $data ?? [], null);
         $this->setIfExists('customer_id', $data ?? [], null);
         $this->setIfExists('event_data', $data ?? [], null);
         $this->setIfExists('event_id', $data ?? [], null);
         $this->setIfExists('event_name', $data ?? [], null);
         $this->setIfExists('metadata', $data ?? [], null);
-        $this->setIfExists('organization_id', $data ?? [], null);
         $this->setIfExists('product_id', $data ?? [], null);
     }
 
@@ -348,60 +327,6 @@ class EventsUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets created_at
-     *
-     * @return \DateTime|null
-     */
-    public function getCreatedAt()
-    {
-        return $this->container['created_at'];
-    }
-
-    /**
-     * Sets created_at
-     *
-     * @param \DateTime|null $created_at created_at
-     *
-     * @return self
-     */
-    public function setCreatedAt($created_at)
-    {
-        if (is_null($created_at)) {
-            throw new \InvalidArgumentException('non-nullable created_at cannot be null');
-        }
-        $this->container['created_at'] = $created_at;
-
-        return $this;
-    }
-
-    /**
-     * Gets created_by
-     *
-     * @return string|null
-     */
-    public function getCreatedBy()
-    {
-        return $this->container['created_by'];
-    }
-
-    /**
-     * Sets created_by
-     *
-     * @param string|null $created_by created_by
-     *
-     * @return self
-     */
-    public function setCreatedBy($created_by)
-    {
-        if (is_null($created_by)) {
-            throw new \InvalidArgumentException('non-nullable created_by cannot be null');
-        }
-        $this->container['created_by'] = $created_by;
-
-        return $this;
-    }
-
-    /**
      * Gets customer_id
      *
      * @return string|null
@@ -414,7 +339,7 @@ class EventsUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets customer_id
      *
-     * @param string|null $customer_id customer_id
+     * @param string|null $customer_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -468,7 +393,7 @@ class EventsUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets event_id
      *
-     * @param string|null $event_id event_id
+     * @param string|null $event_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -522,7 +447,7 @@ class EventsUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets metadata
      *
-     * @param object|null $metadata metadata
+     * @param object|null $metadata Set of key-value pairs for storing additional information
      *
      * @return self
      */
@@ -532,33 +457,6 @@ class EventsUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable metadata cannot be null');
         }
         $this->container['metadata'] = $metadata;
-
-        return $this;
-    }
-
-    /**
-     * Gets organization_id
-     *
-     * @return string|null
-     */
-    public function getOrganizationId()
-    {
-        return $this->container['organization_id'];
-    }
-
-    /**
-     * Sets organization_id
-     *
-     * @param string|null $organization_id organization_id
-     *
-     * @return self
-     */
-    public function setOrganizationId($organization_id)
-    {
-        if (is_null($organization_id)) {
-            throw new \InvalidArgumentException('non-nullable organization_id cannot be null');
-        }
-        $this->container['organization_id'] = $organization_id;
 
         return $this;
     }
@@ -576,7 +474,7 @@ class EventsUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets product_id
      *
-     * @param string|null $product_id product_id
+     * @param string|null $product_id Unique identifier (UUID format)
      *
      * @return self
      */

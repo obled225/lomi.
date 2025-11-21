@@ -36,7 +36,7 @@ use \LomiSDK\ObjectSerializer;
  * InstallmentPayments Class Doc Comment
  *
  * @category Class
- * @description installment_payments object
+ * @description installment payments resource object
  * @package  LomiSDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -423,7 +423,7 @@ class InstallmentPayments implements ModelInterface, ArrayAccess, \JsonSerializa
     /**
      * Sets amount
      *
-     * @param float|null $amount amount
+     * @param float|null $amount Amount in the smallest currency unit (e.g., cents for USD, same for XOF)
      *
      * @return self
      */
@@ -450,7 +450,7 @@ class InstallmentPayments implements ModelInterface, ArrayAccess, \JsonSerializa
     /**
      * Sets created_at
      *
-     * @param \DateTime|null $created_at created_at
+     * @param \DateTime|null $created_at ISO 8601 datetime
      *
      * @return self
      */
@@ -504,7 +504,7 @@ class InstallmentPayments implements ModelInterface, ArrayAccess, \JsonSerializa
     /**
      * Sets installment_id
      *
-     * @param string|null $installment_id installment_id
+     * @param string|null $installment_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -558,7 +558,7 @@ class InstallmentPayments implements ModelInterface, ArrayAccess, \JsonSerializa
     /**
      * Sets paid_at
      *
-     * @param \DateTime|null $paid_at paid_at
+     * @param \DateTime|null $paid_at ISO 8601 datetime
      *
      * @return self
      */
@@ -639,7 +639,7 @@ class InstallmentPayments implements ModelInterface, ArrayAccess, \JsonSerializa
     /**
      * Sets plan_id
      *
-     * @param string|null $plan_id plan_id
+     * @param string|null $plan_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -774,7 +774,7 @@ class InstallmentPayments implements ModelInterface, ArrayAccess, \JsonSerializa
     /**
      * Sets spi_payment_request_id
      *
-     * @param string|null $spi_payment_request_id spi_payment_request_id
+     * @param string|null $spi_payment_request_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -801,7 +801,7 @@ class InstallmentPayments implements ModelInterface, ArrayAccess, \JsonSerializa
     /**
      * Sets spi_tx_id
      *
-     * @param string|null $spi_tx_id spi_tx_id
+     * @param string|null $spi_tx_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -828,7 +828,7 @@ class InstallmentPayments implements ModelInterface, ArrayAccess, \JsonSerializa
     /**
      * Sets status
      *
-     * @param string|null $status status
+     * @param string|null $status Current status of the resource
      *
      * @return self
      */
@@ -855,7 +855,7 @@ class InstallmentPayments implements ModelInterface, ArrayAccess, \JsonSerializa
     /**
      * Sets transaction_id
      *
-     * @param string|null $transaction_id transaction_id
+     * @param string|null $transaction_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -882,7 +882,7 @@ class InstallmentPayments implements ModelInterface, ArrayAccess, \JsonSerializa
     /**
      * Sets updated_at
      *
-     * @param \DateTime|null $updated_at updated_at
+     * @param \DateTime|null $updated_at ISO 8601 datetime
      *
      * @return self
      */

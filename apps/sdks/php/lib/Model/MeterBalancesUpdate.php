@@ -36,7 +36,7 @@ use \LomiSDK\ObjectSerializer;
  * MeterBalancesUpdate Class Doc Comment
  *
  * @category Class
- * @description Update meter_balances input
+ * @description Request body for updating a meter balances object. Only include fields you want to modify.
  * @package  LomiSDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -63,12 +63,10 @@ class MeterBalancesUpdate implements ModelInterface, ArrayAccess, \JsonSerializa
         'balance_id' => 'string',
         'billable_organization_id' => 'string',
         'consumed_units' => 'float',
-        'created_at' => '\DateTime',
         'credited_units' => 'float',
         'customer_id' => 'string',
         'last_event_id' => 'string',
-        'meter_id' => 'string',
-        'updated_at' => '\DateTime'
+        'meter_id' => 'string'
     ];
 
     /**
@@ -83,12 +81,10 @@ class MeterBalancesUpdate implements ModelInterface, ArrayAccess, \JsonSerializa
         'balance_id' => 'uuid',
         'billable_organization_id' => 'uuid',
         'consumed_units' => 'double',
-        'created_at' => 'date-time',
         'credited_units' => 'double',
         'customer_id' => 'uuid',
         'last_event_id' => 'uuid',
-        'meter_id' => 'uuid',
-        'updated_at' => 'date-time'
+        'meter_id' => 'uuid'
     ];
 
     /**
@@ -101,12 +97,10 @@ class MeterBalancesUpdate implements ModelInterface, ArrayAccess, \JsonSerializa
         'balance_id' => false,
         'billable_organization_id' => false,
         'consumed_units' => false,
-        'created_at' => false,
         'credited_units' => false,
         'customer_id' => false,
         'last_event_id' => false,
-        'meter_id' => false,
-        'updated_at' => false
+        'meter_id' => false
     ];
 
     /**
@@ -199,12 +193,10 @@ class MeterBalancesUpdate implements ModelInterface, ArrayAccess, \JsonSerializa
         'balance_id' => 'balance_id',
         'billable_organization_id' => 'billable_organization_id',
         'consumed_units' => 'consumed_units',
-        'created_at' => 'created_at',
         'credited_units' => 'credited_units',
         'customer_id' => 'customer_id',
         'last_event_id' => 'last_event_id',
-        'meter_id' => 'meter_id',
-        'updated_at' => 'updated_at'
+        'meter_id' => 'meter_id'
     ];
 
     /**
@@ -217,12 +209,10 @@ class MeterBalancesUpdate implements ModelInterface, ArrayAccess, \JsonSerializa
         'balance_id' => 'setBalanceId',
         'billable_organization_id' => 'setBillableOrganizationId',
         'consumed_units' => 'setConsumedUnits',
-        'created_at' => 'setCreatedAt',
         'credited_units' => 'setCreditedUnits',
         'customer_id' => 'setCustomerId',
         'last_event_id' => 'setLastEventId',
-        'meter_id' => 'setMeterId',
-        'updated_at' => 'setUpdatedAt'
+        'meter_id' => 'setMeterId'
     ];
 
     /**
@@ -235,12 +225,10 @@ class MeterBalancesUpdate implements ModelInterface, ArrayAccess, \JsonSerializa
         'balance_id' => 'getBalanceId',
         'billable_organization_id' => 'getBillableOrganizationId',
         'consumed_units' => 'getConsumedUnits',
-        'created_at' => 'getCreatedAt',
         'credited_units' => 'getCreditedUnits',
         'customer_id' => 'getCustomerId',
         'last_event_id' => 'getLastEventId',
-        'meter_id' => 'getMeterId',
-        'updated_at' => 'getUpdatedAt'
+        'meter_id' => 'getMeterId'
     ];
 
     /**
@@ -304,12 +292,10 @@ class MeterBalancesUpdate implements ModelInterface, ArrayAccess, \JsonSerializa
         $this->setIfExists('balance_id', $data ?? [], null);
         $this->setIfExists('billable_organization_id', $data ?? [], null);
         $this->setIfExists('consumed_units', $data ?? [], null);
-        $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('credited_units', $data ?? [], null);
         $this->setIfExists('customer_id', $data ?? [], null);
         $this->setIfExists('last_event_id', $data ?? [], null);
         $this->setIfExists('meter_id', $data ?? [], null);
-        $this->setIfExists('updated_at', $data ?? [], null);
     }
 
     /**
@@ -394,7 +380,7 @@ class MeterBalancesUpdate implements ModelInterface, ArrayAccess, \JsonSerializa
     /**
      * Sets balance_id
      *
-     * @param string|null $balance_id balance_id
+     * @param string|null $balance_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -421,7 +407,7 @@ class MeterBalancesUpdate implements ModelInterface, ArrayAccess, \JsonSerializa
     /**
      * Sets billable_organization_id
      *
-     * @param string|null $billable_organization_id billable_organization_id
+     * @param string|null $billable_organization_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -458,33 +444,6 @@ class MeterBalancesUpdate implements ModelInterface, ArrayAccess, \JsonSerializa
             throw new \InvalidArgumentException('non-nullable consumed_units cannot be null');
         }
         $this->container['consumed_units'] = $consumed_units;
-
-        return $this;
-    }
-
-    /**
-     * Gets created_at
-     *
-     * @return \DateTime|null
-     */
-    public function getCreatedAt()
-    {
-        return $this->container['created_at'];
-    }
-
-    /**
-     * Sets created_at
-     *
-     * @param \DateTime|null $created_at created_at
-     *
-     * @return self
-     */
-    public function setCreatedAt($created_at)
-    {
-        if (is_null($created_at)) {
-            throw new \InvalidArgumentException('non-nullable created_at cannot be null');
-        }
-        $this->container['created_at'] = $created_at;
 
         return $this;
     }
@@ -529,7 +488,7 @@ class MeterBalancesUpdate implements ModelInterface, ArrayAccess, \JsonSerializa
     /**
      * Sets customer_id
      *
-     * @param string|null $customer_id customer_id
+     * @param string|null $customer_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -556,7 +515,7 @@ class MeterBalancesUpdate implements ModelInterface, ArrayAccess, \JsonSerializa
     /**
      * Sets last_event_id
      *
-     * @param string|null $last_event_id last_event_id
+     * @param string|null $last_event_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -583,7 +542,7 @@ class MeterBalancesUpdate implements ModelInterface, ArrayAccess, \JsonSerializa
     /**
      * Sets meter_id
      *
-     * @param string|null $meter_id meter_id
+     * @param string|null $meter_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -593,33 +552,6 @@ class MeterBalancesUpdate implements ModelInterface, ArrayAccess, \JsonSerializa
             throw new \InvalidArgumentException('non-nullable meter_id cannot be null');
         }
         $this->container['meter_id'] = $meter_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets updated_at
-     *
-     * @return \DateTime|null
-     */
-    public function getUpdatedAt()
-    {
-        return $this->container['updated_at'];
-    }
-
-    /**
-     * Sets updated_at
-     *
-     * @param \DateTime|null $updated_at updated_at
-     *
-     * @return self
-     */
-    public function setUpdatedAt($updated_at)
-    {
-        if (is_null($updated_at)) {
-            throw new \InvalidArgumentException('non-nullable updated_at cannot be null');
-        }
-        $this->container['updated_at'] = $updated_at;
 
         return $this;
     }

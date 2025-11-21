@@ -36,7 +36,7 @@ use \LomiSDK\ObjectSerializer;
  * PaymentLinksUpdate Class Doc Comment
  *
  * @category Class
- * @description Update payment_links input
+ * @description Request body for updating a payment links object. Only include fields you want to modify.
  * @package  LomiSDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -64,16 +64,12 @@ class PaymentLinksUpdate implements ModelInterface, ArrayAccess, \JsonSerializab
         'allowed_providers' => 'string',
         'amount' => 'float',
         'cancel_url' => 'string',
-        'created_at' => '\DateTime',
-        'created_by' => 'string',
         'currency_code' => 'string',
-        'environment' => 'string',
         'expires_at' => '\DateTime',
         'is_active' => 'bool',
         'link_id' => 'string',
         'link_type' => 'string',
         'metadata' => 'object',
-        'organization_id' => 'string',
         'price_id' => 'string',
         'private_description' => 'string',
         'product_id' => 'string',
@@ -81,7 +77,6 @@ class PaymentLinksUpdate implements ModelInterface, ArrayAccess, \JsonSerializab
         'quantity' => 'float',
         'success_url' => 'string',
         'title' => 'string',
-        'updated_at' => '\DateTime',
         'url' => 'string'
     ];
 
@@ -98,16 +93,12 @@ class PaymentLinksUpdate implements ModelInterface, ArrayAccess, \JsonSerializab
         'allowed_providers' => null,
         'amount' => 'double',
         'cancel_url' => 'uri',
-        'created_at' => 'date-time',
-        'created_by' => null,
         'currency_code' => null,
-        'environment' => null,
         'expires_at' => 'date-time',
         'is_active' => null,
         'link_id' => 'uuid',
         'link_type' => null,
         'metadata' => null,
-        'organization_id' => 'uuid',
         'price_id' => 'uuid',
         'private_description' => null,
         'product_id' => 'uuid',
@@ -115,7 +106,6 @@ class PaymentLinksUpdate implements ModelInterface, ArrayAccess, \JsonSerializab
         'quantity' => 'double',
         'success_url' => 'uri',
         'title' => null,
-        'updated_at' => 'date-time',
         'url' => 'uri'
     ];
 
@@ -130,16 +120,12 @@ class PaymentLinksUpdate implements ModelInterface, ArrayAccess, \JsonSerializab
         'allowed_providers' => false,
         'amount' => false,
         'cancel_url' => false,
-        'created_at' => false,
-        'created_by' => false,
         'currency_code' => false,
-        'environment' => false,
         'expires_at' => false,
         'is_active' => false,
         'link_id' => false,
         'link_type' => false,
         'metadata' => false,
-        'organization_id' => false,
         'price_id' => false,
         'private_description' => false,
         'product_id' => false,
@@ -147,7 +133,6 @@ class PaymentLinksUpdate implements ModelInterface, ArrayAccess, \JsonSerializab
         'quantity' => false,
         'success_url' => false,
         'title' => false,
-        'updated_at' => false,
         'url' => false
     ];
 
@@ -242,16 +227,12 @@ class PaymentLinksUpdate implements ModelInterface, ArrayAccess, \JsonSerializab
         'allowed_providers' => 'allowed_providers',
         'amount' => 'amount',
         'cancel_url' => 'cancel_url',
-        'created_at' => 'created_at',
-        'created_by' => 'created_by',
         'currency_code' => 'currency_code',
-        'environment' => 'environment',
         'expires_at' => 'expires_at',
         'is_active' => 'is_active',
         'link_id' => 'link_id',
         'link_type' => 'link_type',
         'metadata' => 'metadata',
-        'organization_id' => 'organization_id',
         'price_id' => 'price_id',
         'private_description' => 'private_description',
         'product_id' => 'product_id',
@@ -259,7 +240,6 @@ class PaymentLinksUpdate implements ModelInterface, ArrayAccess, \JsonSerializab
         'quantity' => 'quantity',
         'success_url' => 'success_url',
         'title' => 'title',
-        'updated_at' => 'updated_at',
         'url' => 'url'
     ];
 
@@ -274,16 +254,12 @@ class PaymentLinksUpdate implements ModelInterface, ArrayAccess, \JsonSerializab
         'allowed_providers' => 'setAllowedProviders',
         'amount' => 'setAmount',
         'cancel_url' => 'setCancelUrl',
-        'created_at' => 'setCreatedAt',
-        'created_by' => 'setCreatedBy',
         'currency_code' => 'setCurrencyCode',
-        'environment' => 'setEnvironment',
         'expires_at' => 'setExpiresAt',
         'is_active' => 'setIsActive',
         'link_id' => 'setLinkId',
         'link_type' => 'setLinkType',
         'metadata' => 'setMetadata',
-        'organization_id' => 'setOrganizationId',
         'price_id' => 'setPriceId',
         'private_description' => 'setPrivateDescription',
         'product_id' => 'setProductId',
@@ -291,7 +267,6 @@ class PaymentLinksUpdate implements ModelInterface, ArrayAccess, \JsonSerializab
         'quantity' => 'setQuantity',
         'success_url' => 'setSuccessUrl',
         'title' => 'setTitle',
-        'updated_at' => 'setUpdatedAt',
         'url' => 'setUrl'
     ];
 
@@ -306,16 +281,12 @@ class PaymentLinksUpdate implements ModelInterface, ArrayAccess, \JsonSerializab
         'allowed_providers' => 'getAllowedProviders',
         'amount' => 'getAmount',
         'cancel_url' => 'getCancelUrl',
-        'created_at' => 'getCreatedAt',
-        'created_by' => 'getCreatedBy',
         'currency_code' => 'getCurrencyCode',
-        'environment' => 'getEnvironment',
         'expires_at' => 'getExpiresAt',
         'is_active' => 'getIsActive',
         'link_id' => 'getLinkId',
         'link_type' => 'getLinkType',
         'metadata' => 'getMetadata',
-        'organization_id' => 'getOrganizationId',
         'price_id' => 'getPriceId',
         'private_description' => 'getPrivateDescription',
         'product_id' => 'getProductId',
@@ -323,7 +294,6 @@ class PaymentLinksUpdate implements ModelInterface, ArrayAccess, \JsonSerializab
         'quantity' => 'getQuantity',
         'success_url' => 'getSuccessUrl',
         'title' => 'getTitle',
-        'updated_at' => 'getUpdatedAt',
         'url' => 'getUrl'
     ];
 
@@ -389,16 +359,12 @@ class PaymentLinksUpdate implements ModelInterface, ArrayAccess, \JsonSerializab
         $this->setIfExists('allowed_providers', $data ?? [], null);
         $this->setIfExists('amount', $data ?? [], null);
         $this->setIfExists('cancel_url', $data ?? [], null);
-        $this->setIfExists('created_at', $data ?? [], null);
-        $this->setIfExists('created_by', $data ?? [], null);
         $this->setIfExists('currency_code', $data ?? [], null);
-        $this->setIfExists('environment', $data ?? [], null);
         $this->setIfExists('expires_at', $data ?? [], null);
         $this->setIfExists('is_active', $data ?? [], null);
         $this->setIfExists('link_id', $data ?? [], null);
         $this->setIfExists('link_type', $data ?? [], null);
         $this->setIfExists('metadata', $data ?? [], null);
-        $this->setIfExists('organization_id', $data ?? [], null);
         $this->setIfExists('price_id', $data ?? [], null);
         $this->setIfExists('private_description', $data ?? [], null);
         $this->setIfExists('product_id', $data ?? [], null);
@@ -406,7 +372,6 @@ class PaymentLinksUpdate implements ModelInterface, ArrayAccess, \JsonSerializab
         $this->setIfExists('quantity', $data ?? [], null);
         $this->setIfExists('success_url', $data ?? [], null);
         $this->setIfExists('title', $data ?? [], null);
-        $this->setIfExists('updated_at', $data ?? [], null);
         $this->setIfExists('url', $data ?? [], null);
     }
 
@@ -546,7 +511,7 @@ class PaymentLinksUpdate implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets amount
      *
-     * @param float|null $amount amount
+     * @param float|null $amount Amount in the smallest currency unit (e.g., cents for USD, same for XOF)
      *
      * @return self
      */
@@ -573,7 +538,7 @@ class PaymentLinksUpdate implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets cancel_url
      *
-     * @param string|null $cancel_url cancel_url
+     * @param string|null $cancel_url URL/URI
      *
      * @return self
      */
@@ -583,60 +548,6 @@ class PaymentLinksUpdate implements ModelInterface, ArrayAccess, \JsonSerializab
             throw new \InvalidArgumentException('non-nullable cancel_url cannot be null');
         }
         $this->container['cancel_url'] = $cancel_url;
-
-        return $this;
-    }
-
-    /**
-     * Gets created_at
-     *
-     * @return \DateTime|null
-     */
-    public function getCreatedAt()
-    {
-        return $this->container['created_at'];
-    }
-
-    /**
-     * Sets created_at
-     *
-     * @param \DateTime|null $created_at created_at
-     *
-     * @return self
-     */
-    public function setCreatedAt($created_at)
-    {
-        if (is_null($created_at)) {
-            throw new \InvalidArgumentException('non-nullable created_at cannot be null');
-        }
-        $this->container['created_at'] = $created_at;
-
-        return $this;
-    }
-
-    /**
-     * Gets created_by
-     *
-     * @return string|null
-     */
-    public function getCreatedBy()
-    {
-        return $this->container['created_by'];
-    }
-
-    /**
-     * Sets created_by
-     *
-     * @param string|null $created_by created_by
-     *
-     * @return self
-     */
-    public function setCreatedBy($created_by)
-    {
-        if (is_null($created_by)) {
-            throw new \InvalidArgumentException('non-nullable created_by cannot be null');
-        }
-        $this->container['created_by'] = $created_by;
 
         return $this;
     }
@@ -654,7 +565,7 @@ class PaymentLinksUpdate implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets currency_code
      *
-     * @param string|null $currency_code currency_code
+     * @param string|null $currency_code Three-letter ISO currency code (e.g., XOF, USD, EUR)
      *
      * @return self
      */
@@ -664,33 +575,6 @@ class PaymentLinksUpdate implements ModelInterface, ArrayAccess, \JsonSerializab
             throw new \InvalidArgumentException('non-nullable currency_code cannot be null');
         }
         $this->container['currency_code'] = $currency_code;
-
-        return $this;
-    }
-
-    /**
-     * Gets environment
-     *
-     * @return string|null
-     */
-    public function getEnvironment()
-    {
-        return $this->container['environment'];
-    }
-
-    /**
-     * Sets environment
-     *
-     * @param string|null $environment environment
-     *
-     * @return self
-     */
-    public function setEnvironment($environment)
-    {
-        if (is_null($environment)) {
-            throw new \InvalidArgumentException('non-nullable environment cannot be null');
-        }
-        $this->container['environment'] = $environment;
 
         return $this;
     }
@@ -708,7 +592,7 @@ class PaymentLinksUpdate implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets expires_at
      *
-     * @param \DateTime|null $expires_at expires_at
+     * @param \DateTime|null $expires_at ISO 8601 datetime
      *
      * @return self
      */
@@ -735,7 +619,7 @@ class PaymentLinksUpdate implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets is_active
      *
-     * @param bool|null $is_active is_active
+     * @param bool|null $is_active Whether this resource is currently active
      *
      * @return self
      */
@@ -762,7 +646,7 @@ class PaymentLinksUpdate implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets link_id
      *
-     * @param string|null $link_id link_id
+     * @param string|null $link_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -816,7 +700,7 @@ class PaymentLinksUpdate implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets metadata
      *
-     * @param object|null $metadata metadata
+     * @param object|null $metadata Set of key-value pairs for storing additional information
      *
      * @return self
      */
@@ -826,33 +710,6 @@ class PaymentLinksUpdate implements ModelInterface, ArrayAccess, \JsonSerializab
             throw new \InvalidArgumentException('non-nullable metadata cannot be null');
         }
         $this->container['metadata'] = $metadata;
-
-        return $this;
-    }
-
-    /**
-     * Gets organization_id
-     *
-     * @return string|null
-     */
-    public function getOrganizationId()
-    {
-        return $this->container['organization_id'];
-    }
-
-    /**
-     * Sets organization_id
-     *
-     * @param string|null $organization_id organization_id
-     *
-     * @return self
-     */
-    public function setOrganizationId($organization_id)
-    {
-        if (is_null($organization_id)) {
-            throw new \InvalidArgumentException('non-nullable organization_id cannot be null');
-        }
-        $this->container['organization_id'] = $organization_id;
 
         return $this;
     }
@@ -870,7 +727,7 @@ class PaymentLinksUpdate implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets price_id
      *
-     * @param string|null $price_id price_id
+     * @param string|null $price_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -924,7 +781,7 @@ class PaymentLinksUpdate implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets product_id
      *
-     * @param string|null $product_id product_id
+     * @param string|null $product_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -1005,7 +862,7 @@ class PaymentLinksUpdate implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets success_url
      *
-     * @param string|null $success_url success_url
+     * @param string|null $success_url URL/URI
      *
      * @return self
      */
@@ -1047,33 +904,6 @@ class PaymentLinksUpdate implements ModelInterface, ArrayAccess, \JsonSerializab
     }
 
     /**
-     * Gets updated_at
-     *
-     * @return \DateTime|null
-     */
-    public function getUpdatedAt()
-    {
-        return $this->container['updated_at'];
-    }
-
-    /**
-     * Sets updated_at
-     *
-     * @param \DateTime|null $updated_at updated_at
-     *
-     * @return self
-     */
-    public function setUpdatedAt($updated_at)
-    {
-        if (is_null($updated_at)) {
-            throw new \InvalidArgumentException('non-nullable updated_at cannot be null');
-        }
-        $this->container['updated_at'] = $updated_at;
-
-        return $this;
-    }
-
-    /**
      * Gets url
      *
      * @return string|null
@@ -1086,7 +916,7 @@ class PaymentLinksUpdate implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets url
      *
-     * @param string|null $url url
+     * @param string|null $url URL/URI
      *
      * @return self
      */

@@ -5,14 +5,11 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Aggregation** | Pointer to **map[string]interface{}** |  | [optional] 
-**CreatedAt** | Pointer to **time.Time** |  | [optional] 
 **Filter** | Pointer to **map[string]interface{}** |  | [optional] 
-**IsActive** | Pointer to **bool** |  | [optional] 
-**MeterId** | Pointer to **string** |  | [optional] 
+**IsActive** | Pointer to **bool** | Whether this resource is currently active | [optional] 
+**MeterId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
 **Name** | Pointer to **string** |  | [optional] 
-**OrganizationId** | Pointer to **string** |  | [optional] 
-**ProductId** | Pointer to **string** |  | [optional] 
-**UpdatedAt** | Pointer to **time.Time** |  | [optional] 
+**ProductId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
 
 ## Methods
 
@@ -57,31 +54,6 @@ SetAggregation sets Aggregation field to given value.
 `func (o *MetersUpdate) HasAggregation() bool`
 
 HasAggregation returns a boolean if a field has been set.
-
-### GetCreatedAt
-
-`func (o *MetersUpdate) GetCreatedAt() time.Time`
-
-GetCreatedAt returns the CreatedAt field if non-nil, zero value otherwise.
-
-### GetCreatedAtOk
-
-`func (o *MetersUpdate) GetCreatedAtOk() (*time.Time, bool)`
-
-GetCreatedAtOk returns a tuple with the CreatedAt field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCreatedAt
-
-`func (o *MetersUpdate) SetCreatedAt(v time.Time)`
-
-SetCreatedAt sets CreatedAt field to given value.
-
-### HasCreatedAt
-
-`func (o *MetersUpdate) HasCreatedAt() bool`
-
-HasCreatedAt returns a boolean if a field has been set.
 
 ### GetFilter
 
@@ -183,31 +155,6 @@ SetName sets Name field to given value.
 
 HasName returns a boolean if a field has been set.
 
-### GetOrganizationId
-
-`func (o *MetersUpdate) GetOrganizationId() string`
-
-GetOrganizationId returns the OrganizationId field if non-nil, zero value otherwise.
-
-### GetOrganizationIdOk
-
-`func (o *MetersUpdate) GetOrganizationIdOk() (*string, bool)`
-
-GetOrganizationIdOk returns a tuple with the OrganizationId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetOrganizationId
-
-`func (o *MetersUpdate) SetOrganizationId(v string)`
-
-SetOrganizationId sets OrganizationId field to given value.
-
-### HasOrganizationId
-
-`func (o *MetersUpdate) HasOrganizationId() bool`
-
-HasOrganizationId returns a boolean if a field has been set.
-
 ### GetProductId
 
 `func (o *MetersUpdate) GetProductId() string`
@@ -232,31 +179,6 @@ SetProductId sets ProductId field to given value.
 `func (o *MetersUpdate) HasProductId() bool`
 
 HasProductId returns a boolean if a field has been set.
-
-### GetUpdatedAt
-
-`func (o *MetersUpdate) GetUpdatedAt() time.Time`
-
-GetUpdatedAt returns the UpdatedAt field if non-nil, zero value otherwise.
-
-### GetUpdatedAtOk
-
-`func (o *MetersUpdate) GetUpdatedAtOk() (*time.Time, bool)`
-
-GetUpdatedAtOk returns a tuple with the UpdatedAt field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetUpdatedAt
-
-`func (o *MetersUpdate) SetUpdatedAt(v time.Time)`
-
-SetUpdatedAt sets UpdatedAt field to given value.
-
-### HasUpdatedAt
-
-`func (o *MetersUpdate) HasUpdatedAt() bool`
-
-HasUpdatedAt returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

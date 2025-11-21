@@ -19,17 +19,23 @@ import (
 // checks if the SpiAccountAliases type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SpiAccountAliases{}
 
-// SpiAccountAliases spi_account_aliases object
+// SpiAccountAliases spi account aliases resource object
 type SpiAccountAliases struct {
 	AccountNumber *string `json:"account_number,omitempty"`
+	// Unique identifier (UUID format)
 	AliasId *string `json:"alias_id,omitempty"`
 	AliasKey *string `json:"alias_key,omitempty"`
 	AliasType *string `json:"alias_type,omitempty"`
+	// ISO 8601 datetime
 	CreatedAt *time.Time `json:"created_at,omitempty"`
+	// Whether this resource is currently active
 	IsActive *bool `json:"is_active,omitempty"`
 	IsDefault *bool `json:"is_default,omitempty"`
+	// Set of key-value pairs for storing additional information
 	Metadata map[string]interface{} `json:"metadata,omitempty"`
+	// Unique identifier (UUID format)
 	OrganizationId *string `json:"organization_id,omitempty"`
+	// ISO 8601 datetime
 	UpdatedAt *time.Time `json:"updated_at,omitempty"`
 }
 

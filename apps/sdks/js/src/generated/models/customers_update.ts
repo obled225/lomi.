@@ -3,29 +3,31 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Update customers input
+ * Request body for updating a customers object. Only include fields you want to modify.
  */
 export type customers_update = {
     address?: string;
     city?: string;
     country?: string;
-    created_at?: string;
-    created_by?: string;
-    customer_id?: string;
-    deleted_at?: string;
+    /**
+     * Email address
+     */
     email?: string;
-    environment?: string;
     is_business?: boolean;
+    /**
+     * Soft deletion flag
+     */
     is_deleted?: boolean;
+    /**
+     * Set of key-value pairs for storing additional information
+     */
     metadata?: Record<string, any>;
     name?: string;
-    organization_id?: string;
     phone_number?: string;
     postal_code?: string;
     spi_alias_mbno?: string;
     spi_alias_shid?: string;
     spi_primary_alias?: string;
-    updated_at?: string;
     whatsapp_number?: string;
 };
 

@@ -19,7 +19,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from uuid import UUID
 from typing import Optional, Set
@@ -27,17 +27,17 @@ from typing_extensions import Self
 
 class Meters(BaseModel):
     """
-    meters object
+    meters resource object
     """ # noqa: E501
     aggregation: Optional[Dict[str, Any]] = None
-    created_at: Optional[datetime] = None
+    created_at: Optional[datetime] = Field(default=None, description="ISO 8601 datetime")
     filter: Optional[Dict[str, Any]] = None
-    is_active: Optional[StrictBool] = None
-    meter_id: Optional[UUID] = None
+    is_active: Optional[StrictBool] = Field(default=None, description="Whether this resource is currently active")
+    meter_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
     name: Optional[StrictStr] = None
-    organization_id: Optional[UUID] = None
-    product_id: Optional[UUID] = None
-    updated_at: Optional[datetime] = None
+    organization_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
+    product_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
+    updated_at: Optional[datetime] = Field(default=None, description="ISO 8601 datetime")
     __properties: ClassVar[List[str]] = ["aggregation", "created_at", "filter", "is_active", "meter_id", "name", "organization_id", "product_id", "updated_at"]
 
     model_config = ConfigDict(
@@ -70,8 +70,12 @@ class Meters(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set([
+            "created_at",
+            "updated_at",
         ])
 
         _dict = self.model_dump(

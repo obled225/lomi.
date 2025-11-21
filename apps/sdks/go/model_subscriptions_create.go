@@ -13,28 +13,26 @@ package lomisdk
 
 import (
 	"encoding/json"
-	"time"
 )
 
 // checks if the SubscriptionsCreate type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SubscriptionsCreate{}
 
-// SubscriptionsCreate Create subscriptions input
+// SubscriptionsCreate Request body for creating a subscriptions object. System-managed fields like `created_at`, `organization_id`, and IDs are automatically set.
 type SubscriptionsCreate struct {
-	CreatedAt *time.Time `json:"created_at,omitempty"`
-	CreatedBy *string `json:"created_by,omitempty"`
+	// Unique identifier (UUID format)
 	CustomerId *string `json:"customer_id,omitempty"`
 	EndDate *string `json:"end_date,omitempty"`
-	Environment *string `json:"environment,omitempty"`
+	// Set of key-value pairs for storing additional information
 	Metadata map[string]interface{} `json:"metadata,omitempty"`
 	NextBillingDate *string `json:"next_billing_date,omitempty"`
-	OrganizationId *string `json:"organization_id,omitempty"`
+	// Unique identifier (UUID format)
 	PriceId *string `json:"price_id,omitempty"`
+	// Unique identifier (UUID format)
 	ProductId *string `json:"product_id,omitempty"`
 	StartDate *string `json:"start_date,omitempty"`
+	// Current status of the resource
 	Status *string `json:"status,omitempty"`
-	SubscriptionId *string `json:"subscription_id,omitempty"`
-	UpdatedAt *time.Time `json:"updated_at,omitempty"`
 }
 
 // NewSubscriptionsCreate instantiates a new SubscriptionsCreate object
@@ -52,70 +50,6 @@ func NewSubscriptionsCreate() *SubscriptionsCreate {
 func NewSubscriptionsCreateWithDefaults() *SubscriptionsCreate {
 	this := SubscriptionsCreate{}
 	return &this
-}
-
-// GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
-func (o *SubscriptionsCreate) GetCreatedAt() time.Time {
-	if o == nil || IsNil(o.CreatedAt) {
-		var ret time.Time
-		return ret
-	}
-	return *o.CreatedAt
-}
-
-// GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *SubscriptionsCreate) GetCreatedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.CreatedAt) {
-		return nil, false
-	}
-	return o.CreatedAt, true
-}
-
-// HasCreatedAt returns a boolean if a field has been set.
-func (o *SubscriptionsCreate) HasCreatedAt() bool {
-	if o != nil && !IsNil(o.CreatedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetCreatedAt gets a reference to the given time.Time and assigns it to the CreatedAt field.
-func (o *SubscriptionsCreate) SetCreatedAt(v time.Time) {
-	o.CreatedAt = &v
-}
-
-// GetCreatedBy returns the CreatedBy field value if set, zero value otherwise.
-func (o *SubscriptionsCreate) GetCreatedBy() string {
-	if o == nil || IsNil(o.CreatedBy) {
-		var ret string
-		return ret
-	}
-	return *o.CreatedBy
-}
-
-// GetCreatedByOk returns a tuple with the CreatedBy field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *SubscriptionsCreate) GetCreatedByOk() (*string, bool) {
-	if o == nil || IsNil(o.CreatedBy) {
-		return nil, false
-	}
-	return o.CreatedBy, true
-}
-
-// HasCreatedBy returns a boolean if a field has been set.
-func (o *SubscriptionsCreate) HasCreatedBy() bool {
-	if o != nil && !IsNil(o.CreatedBy) {
-		return true
-	}
-
-	return false
-}
-
-// SetCreatedBy gets a reference to the given string and assigns it to the CreatedBy field.
-func (o *SubscriptionsCreate) SetCreatedBy(v string) {
-	o.CreatedBy = &v
 }
 
 // GetCustomerId returns the CustomerId field value if set, zero value otherwise.
@@ -182,38 +116,6 @@ func (o *SubscriptionsCreate) SetEndDate(v string) {
 	o.EndDate = &v
 }
 
-// GetEnvironment returns the Environment field value if set, zero value otherwise.
-func (o *SubscriptionsCreate) GetEnvironment() string {
-	if o == nil || IsNil(o.Environment) {
-		var ret string
-		return ret
-	}
-	return *o.Environment
-}
-
-// GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *SubscriptionsCreate) GetEnvironmentOk() (*string, bool) {
-	if o == nil || IsNil(o.Environment) {
-		return nil, false
-	}
-	return o.Environment, true
-}
-
-// HasEnvironment returns a boolean if a field has been set.
-func (o *SubscriptionsCreate) HasEnvironment() bool {
-	if o != nil && !IsNil(o.Environment) {
-		return true
-	}
-
-	return false
-}
-
-// SetEnvironment gets a reference to the given string and assigns it to the Environment field.
-func (o *SubscriptionsCreate) SetEnvironment(v string) {
-	o.Environment = &v
-}
-
 // GetMetadata returns the Metadata field value if set, zero value otherwise.
 func (o *SubscriptionsCreate) GetMetadata() map[string]interface{} {
 	if o == nil || IsNil(o.Metadata) {
@@ -276,38 +178,6 @@ func (o *SubscriptionsCreate) HasNextBillingDate() bool {
 // SetNextBillingDate gets a reference to the given string and assigns it to the NextBillingDate field.
 func (o *SubscriptionsCreate) SetNextBillingDate(v string) {
 	o.NextBillingDate = &v
-}
-
-// GetOrganizationId returns the OrganizationId field value if set, zero value otherwise.
-func (o *SubscriptionsCreate) GetOrganizationId() string {
-	if o == nil || IsNil(o.OrganizationId) {
-		var ret string
-		return ret
-	}
-	return *o.OrganizationId
-}
-
-// GetOrganizationIdOk returns a tuple with the OrganizationId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *SubscriptionsCreate) GetOrganizationIdOk() (*string, bool) {
-	if o == nil || IsNil(o.OrganizationId) {
-		return nil, false
-	}
-	return o.OrganizationId, true
-}
-
-// HasOrganizationId returns a boolean if a field has been set.
-func (o *SubscriptionsCreate) HasOrganizationId() bool {
-	if o != nil && !IsNil(o.OrganizationId) {
-		return true
-	}
-
-	return false
-}
-
-// SetOrganizationId gets a reference to the given string and assigns it to the OrganizationId field.
-func (o *SubscriptionsCreate) SetOrganizationId(v string) {
-	o.OrganizationId = &v
 }
 
 // GetPriceId returns the PriceId field value if set, zero value otherwise.
@@ -438,70 +308,6 @@ func (o *SubscriptionsCreate) SetStatus(v string) {
 	o.Status = &v
 }
 
-// GetSubscriptionId returns the SubscriptionId field value if set, zero value otherwise.
-func (o *SubscriptionsCreate) GetSubscriptionId() string {
-	if o == nil || IsNil(o.SubscriptionId) {
-		var ret string
-		return ret
-	}
-	return *o.SubscriptionId
-}
-
-// GetSubscriptionIdOk returns a tuple with the SubscriptionId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *SubscriptionsCreate) GetSubscriptionIdOk() (*string, bool) {
-	if o == nil || IsNil(o.SubscriptionId) {
-		return nil, false
-	}
-	return o.SubscriptionId, true
-}
-
-// HasSubscriptionId returns a boolean if a field has been set.
-func (o *SubscriptionsCreate) HasSubscriptionId() bool {
-	if o != nil && !IsNil(o.SubscriptionId) {
-		return true
-	}
-
-	return false
-}
-
-// SetSubscriptionId gets a reference to the given string and assigns it to the SubscriptionId field.
-func (o *SubscriptionsCreate) SetSubscriptionId(v string) {
-	o.SubscriptionId = &v
-}
-
-// GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.
-func (o *SubscriptionsCreate) GetUpdatedAt() time.Time {
-	if o == nil || IsNil(o.UpdatedAt) {
-		var ret time.Time
-		return ret
-	}
-	return *o.UpdatedAt
-}
-
-// GetUpdatedAtOk returns a tuple with the UpdatedAt field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *SubscriptionsCreate) GetUpdatedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.UpdatedAt) {
-		return nil, false
-	}
-	return o.UpdatedAt, true
-}
-
-// HasUpdatedAt returns a boolean if a field has been set.
-func (o *SubscriptionsCreate) HasUpdatedAt() bool {
-	if o != nil && !IsNil(o.UpdatedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetUpdatedAt gets a reference to the given time.Time and assigns it to the UpdatedAt field.
-func (o *SubscriptionsCreate) SetUpdatedAt(v time.Time) {
-	o.UpdatedAt = &v
-}
-
 func (o SubscriptionsCreate) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -512,29 +318,17 @@ func (o SubscriptionsCreate) MarshalJSON() ([]byte, error) {
 
 func (o SubscriptionsCreate) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.CreatedAt) {
-		toSerialize["created_at"] = o.CreatedAt
-	}
-	if !IsNil(o.CreatedBy) {
-		toSerialize["created_by"] = o.CreatedBy
-	}
 	if !IsNil(o.CustomerId) {
 		toSerialize["customer_id"] = o.CustomerId
 	}
 	if !IsNil(o.EndDate) {
 		toSerialize["end_date"] = o.EndDate
 	}
-	if !IsNil(o.Environment) {
-		toSerialize["environment"] = o.Environment
-	}
 	if !IsNil(o.Metadata) {
 		toSerialize["metadata"] = o.Metadata
 	}
 	if !IsNil(o.NextBillingDate) {
 		toSerialize["next_billing_date"] = o.NextBillingDate
-	}
-	if !IsNil(o.OrganizationId) {
-		toSerialize["organization_id"] = o.OrganizationId
 	}
 	if !IsNil(o.PriceId) {
 		toSerialize["price_id"] = o.PriceId
@@ -547,12 +341,6 @@ func (o SubscriptionsCreate) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Status) {
 		toSerialize["status"] = o.Status
-	}
-	if !IsNil(o.SubscriptionId) {
-		toSerialize["subscription_id"] = o.SubscriptionId
-	}
-	if !IsNil(o.UpdatedAt) {
-		toSerialize["updated_at"] = o.UpdatedAt
 	}
 	return toSerialize, nil
 }

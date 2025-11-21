@@ -18,8 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from uuid import UUID
 from typing import Optional, Set
@@ -27,19 +26,16 @@ from typing_extensions import Self
 
 class SpiAccountAliasesUpdate(BaseModel):
     """
-    Update spi_account_aliases input
+    Request body for updating a spi account aliases object. Only include fields you want to modify.
     """ # noqa: E501
     account_number: Optional[StrictStr] = None
-    alias_id: Optional[UUID] = None
+    alias_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
     alias_key: Optional[StrictStr] = None
     alias_type: Optional[StrictStr] = None
-    created_at: Optional[datetime] = None
-    is_active: Optional[StrictBool] = None
+    is_active: Optional[StrictBool] = Field(default=None, description="Whether this resource is currently active")
     is_default: Optional[StrictBool] = None
-    metadata: Optional[Dict[str, Any]] = None
-    organization_id: Optional[UUID] = None
-    updated_at: Optional[datetime] = None
-    __properties: ClassVar[List[str]] = ["account_number", "alias_id", "alias_key", "alias_type", "created_at", "is_active", "is_default", "metadata", "organization_id", "updated_at"]
+    metadata: Optional[Dict[str, Any]] = Field(default=None, description="Set of key-value pairs for storing additional information")
+    __properties: ClassVar[List[str]] = ["account_number", "alias_id", "alias_key", "alias_type", "is_active", "is_default", "metadata"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -96,12 +92,9 @@ class SpiAccountAliasesUpdate(BaseModel):
             "alias_id": obj.get("alias_id"),
             "alias_key": obj.get("alias_key"),
             "alias_type": obj.get("alias_type"),
-            "created_at": obj.get("created_at"),
             "is_active": obj.get("is_active"),
             "is_default": obj.get("is_default"),
-            "metadata": obj.get("metadata"),
-            "organization_id": obj.get("organization_id"),
-            "updated_at": obj.get("updated_at")
+            "metadata": obj.get("metadata")
         })
         return _obj
 

@@ -36,7 +36,7 @@ use \LomiSDK\ObjectSerializer;
  * PricesCreate Class Doc Comment
  *
  * @category Class
- * @description Create prices input
+ * @description Request body for creating a prices object. System-managed fields like &#x60;created_at&#x60;, &#x60;organization_id&#x60;, and IDs are automatically set.
  * @package  LomiSDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -61,21 +61,17 @@ class PricesCreate implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $openAPITypes = [
         'amount' => 'float',
         'billing_interval' => 'string',
-        'created_at' => '\DateTime',
         'currency_code' => 'string',
-        'environment' => 'string',
         'is_active' => 'bool',
         'is_default' => 'bool',
         'maximum_amount' => 'float',
         'metadata' => 'object',
         'minimum_amount' => 'float',
-        'organization_id' => 'string',
         'price_id' => 'string',
         'pricing_model' => 'string',
         'product_id' => 'string',
         'provider_price_id' => 'string',
-        'provider_product_id' => 'string',
-        'updated_at' => '\DateTime'
+        'provider_product_id' => 'string'
     ];
 
     /**
@@ -88,21 +84,17 @@ class PricesCreate implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $openAPIFormats = [
         'amount' => 'double',
         'billing_interval' => null,
-        'created_at' => 'date-time',
         'currency_code' => null,
-        'environment' => null,
         'is_active' => null,
         'is_default' => null,
         'maximum_amount' => 'double',
         'metadata' => null,
         'minimum_amount' => 'double',
-        'organization_id' => 'uuid',
         'price_id' => 'uuid',
         'pricing_model' => null,
         'product_id' => 'uuid',
         'provider_price_id' => 'uuid',
-        'provider_product_id' => 'uuid',
-        'updated_at' => 'date-time'
+        'provider_product_id' => 'uuid'
     ];
 
     /**
@@ -113,21 +105,17 @@ class PricesCreate implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static array $openAPINullables = [
         'amount' => false,
         'billing_interval' => false,
-        'created_at' => false,
         'currency_code' => false,
-        'environment' => false,
         'is_active' => false,
         'is_default' => false,
         'maximum_amount' => false,
         'metadata' => false,
         'minimum_amount' => false,
-        'organization_id' => false,
         'price_id' => false,
         'pricing_model' => false,
         'product_id' => false,
         'provider_price_id' => false,
-        'provider_product_id' => false,
-        'updated_at' => false
+        'provider_product_id' => false
     ];
 
     /**
@@ -218,21 +206,17 @@ class PricesCreate implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $attributeMap = [
         'amount' => 'amount',
         'billing_interval' => 'billing_interval',
-        'created_at' => 'created_at',
         'currency_code' => 'currency_code',
-        'environment' => 'environment',
         'is_active' => 'is_active',
         'is_default' => 'is_default',
         'maximum_amount' => 'maximum_amount',
         'metadata' => 'metadata',
         'minimum_amount' => 'minimum_amount',
-        'organization_id' => 'organization_id',
         'price_id' => 'price_id',
         'pricing_model' => 'pricing_model',
         'product_id' => 'product_id',
         'provider_price_id' => 'provider_price_id',
-        'provider_product_id' => 'provider_product_id',
-        'updated_at' => 'updated_at'
+        'provider_product_id' => 'provider_product_id'
     ];
 
     /**
@@ -243,21 +227,17 @@ class PricesCreate implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $setters = [
         'amount' => 'setAmount',
         'billing_interval' => 'setBillingInterval',
-        'created_at' => 'setCreatedAt',
         'currency_code' => 'setCurrencyCode',
-        'environment' => 'setEnvironment',
         'is_active' => 'setIsActive',
         'is_default' => 'setIsDefault',
         'maximum_amount' => 'setMaximumAmount',
         'metadata' => 'setMetadata',
         'minimum_amount' => 'setMinimumAmount',
-        'organization_id' => 'setOrganizationId',
         'price_id' => 'setPriceId',
         'pricing_model' => 'setPricingModel',
         'product_id' => 'setProductId',
         'provider_price_id' => 'setProviderPriceId',
-        'provider_product_id' => 'setProviderProductId',
-        'updated_at' => 'setUpdatedAt'
+        'provider_product_id' => 'setProviderProductId'
     ];
 
     /**
@@ -268,21 +248,17 @@ class PricesCreate implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $getters = [
         'amount' => 'getAmount',
         'billing_interval' => 'getBillingInterval',
-        'created_at' => 'getCreatedAt',
         'currency_code' => 'getCurrencyCode',
-        'environment' => 'getEnvironment',
         'is_active' => 'getIsActive',
         'is_default' => 'getIsDefault',
         'maximum_amount' => 'getMaximumAmount',
         'metadata' => 'getMetadata',
         'minimum_amount' => 'getMinimumAmount',
-        'organization_id' => 'getOrganizationId',
         'price_id' => 'getPriceId',
         'pricing_model' => 'getPricingModel',
         'product_id' => 'getProductId',
         'provider_price_id' => 'getProviderPriceId',
-        'provider_product_id' => 'getProviderProductId',
-        'updated_at' => 'getUpdatedAt'
+        'provider_product_id' => 'getProviderProductId'
     ];
 
     /**
@@ -344,21 +320,17 @@ class PricesCreate implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $this->setIfExists('amount', $data ?? [], null);
         $this->setIfExists('billing_interval', $data ?? [], null);
-        $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('currency_code', $data ?? [], null);
-        $this->setIfExists('environment', $data ?? [], null);
         $this->setIfExists('is_active', $data ?? [], null);
         $this->setIfExists('is_default', $data ?? [], null);
         $this->setIfExists('maximum_amount', $data ?? [], null);
         $this->setIfExists('metadata', $data ?? [], null);
         $this->setIfExists('minimum_amount', $data ?? [], null);
-        $this->setIfExists('organization_id', $data ?? [], null);
         $this->setIfExists('price_id', $data ?? [], null);
         $this->setIfExists('pricing_model', $data ?? [], null);
         $this->setIfExists('product_id', $data ?? [], null);
         $this->setIfExists('provider_price_id', $data ?? [], null);
         $this->setIfExists('provider_product_id', $data ?? [], null);
-        $this->setIfExists('updated_at', $data ?? [], null);
     }
 
     /**
@@ -416,7 +388,7 @@ class PricesCreate implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets amount
      *
-     * @param float|null $amount amount
+     * @param float|null $amount Amount in the smallest currency unit (e.g., cents for USD, same for XOF)
      *
      * @return self
      */
@@ -458,33 +430,6 @@ class PricesCreate implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets created_at
-     *
-     * @return \DateTime|null
-     */
-    public function getCreatedAt()
-    {
-        return $this->container['created_at'];
-    }
-
-    /**
-     * Sets created_at
-     *
-     * @param \DateTime|null $created_at created_at
-     *
-     * @return self
-     */
-    public function setCreatedAt($created_at)
-    {
-        if (is_null($created_at)) {
-            throw new \InvalidArgumentException('non-nullable created_at cannot be null');
-        }
-        $this->container['created_at'] = $created_at;
-
-        return $this;
-    }
-
-    /**
      * Gets currency_code
      *
      * @return string|null
@@ -497,7 +442,7 @@ class PricesCreate implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets currency_code
      *
-     * @param string|null $currency_code currency_code
+     * @param string|null $currency_code Three-letter ISO currency code (e.g., XOF, USD, EUR)
      *
      * @return self
      */
@@ -507,33 +452,6 @@ class PricesCreate implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable currency_code cannot be null');
         }
         $this->container['currency_code'] = $currency_code;
-
-        return $this;
-    }
-
-    /**
-     * Gets environment
-     *
-     * @return string|null
-     */
-    public function getEnvironment()
-    {
-        return $this->container['environment'];
-    }
-
-    /**
-     * Sets environment
-     *
-     * @param string|null $environment environment
-     *
-     * @return self
-     */
-    public function setEnvironment($environment)
-    {
-        if (is_null($environment)) {
-            throw new \InvalidArgumentException('non-nullable environment cannot be null');
-        }
-        $this->container['environment'] = $environment;
 
         return $this;
     }
@@ -551,7 +469,7 @@ class PricesCreate implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets is_active
      *
-     * @param bool|null $is_active is_active
+     * @param bool|null $is_active Whether this resource is currently active
      *
      * @return self
      */
@@ -632,7 +550,7 @@ class PricesCreate implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets metadata
      *
-     * @param object|null $metadata metadata
+     * @param object|null $metadata Set of key-value pairs for storing additional information
      *
      * @return self
      */
@@ -674,33 +592,6 @@ class PricesCreate implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets organization_id
-     *
-     * @return string|null
-     */
-    public function getOrganizationId()
-    {
-        return $this->container['organization_id'];
-    }
-
-    /**
-     * Sets organization_id
-     *
-     * @param string|null $organization_id organization_id
-     *
-     * @return self
-     */
-    public function setOrganizationId($organization_id)
-    {
-        if (is_null($organization_id)) {
-            throw new \InvalidArgumentException('non-nullable organization_id cannot be null');
-        }
-        $this->container['organization_id'] = $organization_id;
-
-        return $this;
-    }
-
-    /**
      * Gets price_id
      *
      * @return string|null
@@ -713,7 +604,7 @@ class PricesCreate implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets price_id
      *
-     * @param string|null $price_id price_id
+     * @param string|null $price_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -767,7 +658,7 @@ class PricesCreate implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets product_id
      *
-     * @param string|null $product_id product_id
+     * @param string|null $product_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -794,7 +685,7 @@ class PricesCreate implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets provider_price_id
      *
-     * @param string|null $provider_price_id provider_price_id
+     * @param string|null $provider_price_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -821,7 +712,7 @@ class PricesCreate implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets provider_product_id
      *
-     * @param string|null $provider_product_id provider_product_id
+     * @param string|null $provider_product_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -831,33 +722,6 @@ class PricesCreate implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable provider_product_id cannot be null');
         }
         $this->container['provider_product_id'] = $provider_product_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets updated_at
-     *
-     * @return \DateTime|null
-     */
-    public function getUpdatedAt()
-    {
-        return $this->container['updated_at'];
-    }
-
-    /**
-     * Sets updated_at
-     *
-     * @param \DateTime|null $updated_at updated_at
-     *
-     * @return self
-     */
-    public function setUpdatedAt($updated_at)
-    {
-        if (is_null($updated_at)) {
-            throw new \InvalidArgumentException('non-nullable updated_at cannot be null');
-        }
-        $this->container['updated_at'] = $updated_at;
 
         return $this;
     }

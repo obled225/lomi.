@@ -1,34 +1,29 @@
 # SpiQrCodesCreate
 
-Create spi_qr_codes input
+Request body for creating a spi qr codes object. System-managed fields like `created_at`, `organization_id`, and IDs are automatically set.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **categorie** | **str** |  | [optional] 
-**checkout_session_id** | **str** |  | [optional] 
+**checkout_session_id** | **str** | Unique identifier (UUID format) | [optional] 
 **compte_paye** | **str** |  | [optional] 
-**created_at** | **datetime** |  | [optional] 
-**created_by** | **str** |  | [optional] 
-**environment** | **str** |  | [optional] 
-**expires_at** | **datetime** |  | [optional] 
-**is_active** | **bool** |  | [optional] 
+**expires_at** | **datetime** | ISO 8601 datetime | [optional] 
+**is_active** | **bool** | Whether this resource is currently active | [optional] 
 **is_used** | **bool** |  | [optional] 
-**metadata** | **object** |  | [optional] 
+**metadata** | **object** | Set of key-value pairs for storing additional information | [optional] 
 **montant** | **float** |  | [optional] 
 **name** | **str** |  | [optional] 
-**organization_id** | **str** |  | [optional] 
 **payeur_alias** | **str** |  | [optional] 
-**payment_request_id** | **str** |  | [optional] 
-**plan_id** | **str** |  | [optional] 
-**product_id** | **str** |  | [optional] 
+**payment_request_id** | **str** | Unique identifier (UUID format) | [optional] 
+**plan_id** | **str** | Unique identifier (UUID format) | [optional] 
+**product_id** | **str** | Unique identifier (UUID format) | [optional] 
 **qr_code_data** | **str** |  | [optional] 
-**qr_code_id** | **str** |  | [optional] 
+**qr_code_id** | **str** | Unique identifier (UUID format) | [optional] 
 **qr_code_image_data** | **str** |  | [optional] 
-**qr_code_image_url** | **str** |  | [optional] 
+**qr_code_image_url** | **str** | URL/URI | [optional] 
 **qr_code_type** | **str** |  | [optional] 
-**updated_at** | **datetime** |  | [optional] 
 
 ## Example
 

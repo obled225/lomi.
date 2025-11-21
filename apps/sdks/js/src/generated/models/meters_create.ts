@@ -3,17 +3,23 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Create meters input
+ * Request body for creating a meters object. System-managed fields like `created_at`, `organization_id`, and IDs are automatically set.
  */
 export type meters_create = {
     aggregation?: Record<string, any>;
-    created_at?: string;
     filter?: Record<string, any>;
+    /**
+     * Whether this resource is currently active
+     */
     is_active?: boolean;
+    /**
+     * Unique identifier (UUID format)
+     */
     meter_id?: string;
     name?: string;
-    organization_id?: string;
+    /**
+     * Unique identifier (UUID format)
+     */
     product_id?: string;
-    updated_at?: string;
 };
 

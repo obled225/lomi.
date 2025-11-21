@@ -36,7 +36,7 @@ use \LomiSDK\ObjectSerializer;
  * DiscountCouponsCreate Class Doc Comment
  *
  * @category Class
- * @description Create discount_coupons input
+ * @description Request body for creating a discount coupons object. System-managed fields like &#x60;created_at&#x60;, &#x60;organization_id&#x60;, and IDs are automatically set.
  * @package  LomiSDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -62,22 +62,18 @@ class DiscountCouponsCreate implements ModelInterface, ArrayAccess, \JsonSeriali
         'applies_to_product_types' => 'string',
         'code' => 'string',
         'coupon_id' => 'string',
-        'created_at' => '\DateTime',
         'current_uses' => 'float',
         'customer_type' => 'string',
         'description' => 'string',
         'discount_fixed_amount' => 'float',
         'discount_percentage' => 'float',
         'discount_type' => 'string',
-        'environment' => 'string',
         'expires_at' => '\DateTime',
         'is_active' => 'bool',
         'is_organization_wide' => 'bool',
         'max_quantity_per_use' => 'float',
         'max_uses' => 'float',
-        'organization_id' => 'string',
         'scope_type' => 'string',
-        'updated_at' => '\DateTime',
         'usage_frequency_limit' => 'string',
         'usage_limit_value' => 'float',
         'valid_from' => 'string'
@@ -94,22 +90,18 @@ class DiscountCouponsCreate implements ModelInterface, ArrayAccess, \JsonSeriali
         'applies_to_product_types' => null,
         'code' => null,
         'coupon_id' => 'uuid',
-        'created_at' => 'date-time',
         'current_uses' => 'double',
         'customer_type' => null,
         'description' => null,
         'discount_fixed_amount' => 'double',
         'discount_percentage' => 'double',
         'discount_type' => null,
-        'environment' => null,
         'expires_at' => 'date-time',
         'is_active' => null,
         'is_organization_wide' => null,
         'max_quantity_per_use' => 'double',
         'max_uses' => 'double',
-        'organization_id' => 'uuid',
         'scope_type' => null,
-        'updated_at' => 'date-time',
         'usage_frequency_limit' => null,
         'usage_limit_value' => 'double',
         'valid_from' => null
@@ -124,22 +116,18 @@ class DiscountCouponsCreate implements ModelInterface, ArrayAccess, \JsonSeriali
         'applies_to_product_types' => false,
         'code' => false,
         'coupon_id' => false,
-        'created_at' => false,
         'current_uses' => false,
         'customer_type' => false,
         'description' => false,
         'discount_fixed_amount' => false,
         'discount_percentage' => false,
         'discount_type' => false,
-        'environment' => false,
         'expires_at' => false,
         'is_active' => false,
         'is_organization_wide' => false,
         'max_quantity_per_use' => false,
         'max_uses' => false,
-        'organization_id' => false,
         'scope_type' => false,
-        'updated_at' => false,
         'usage_frequency_limit' => false,
         'usage_limit_value' => false,
         'valid_from' => false
@@ -234,22 +222,18 @@ class DiscountCouponsCreate implements ModelInterface, ArrayAccess, \JsonSeriali
         'applies_to_product_types' => 'applies_to_product_types',
         'code' => 'code',
         'coupon_id' => 'coupon_id',
-        'created_at' => 'created_at',
         'current_uses' => 'current_uses',
         'customer_type' => 'customer_type',
         'description' => 'description',
         'discount_fixed_amount' => 'discount_fixed_amount',
         'discount_percentage' => 'discount_percentage',
         'discount_type' => 'discount_type',
-        'environment' => 'environment',
         'expires_at' => 'expires_at',
         'is_active' => 'is_active',
         'is_organization_wide' => 'is_organization_wide',
         'max_quantity_per_use' => 'max_quantity_per_use',
         'max_uses' => 'max_uses',
-        'organization_id' => 'organization_id',
         'scope_type' => 'scope_type',
-        'updated_at' => 'updated_at',
         'usage_frequency_limit' => 'usage_frequency_limit',
         'usage_limit_value' => 'usage_limit_value',
         'valid_from' => 'valid_from'
@@ -264,22 +248,18 @@ class DiscountCouponsCreate implements ModelInterface, ArrayAccess, \JsonSeriali
         'applies_to_product_types' => 'setAppliesToProductTypes',
         'code' => 'setCode',
         'coupon_id' => 'setCouponId',
-        'created_at' => 'setCreatedAt',
         'current_uses' => 'setCurrentUses',
         'customer_type' => 'setCustomerType',
         'description' => 'setDescription',
         'discount_fixed_amount' => 'setDiscountFixedAmount',
         'discount_percentage' => 'setDiscountPercentage',
         'discount_type' => 'setDiscountType',
-        'environment' => 'setEnvironment',
         'expires_at' => 'setExpiresAt',
         'is_active' => 'setIsActive',
         'is_organization_wide' => 'setIsOrganizationWide',
         'max_quantity_per_use' => 'setMaxQuantityPerUse',
         'max_uses' => 'setMaxUses',
-        'organization_id' => 'setOrganizationId',
         'scope_type' => 'setScopeType',
-        'updated_at' => 'setUpdatedAt',
         'usage_frequency_limit' => 'setUsageFrequencyLimit',
         'usage_limit_value' => 'setUsageLimitValue',
         'valid_from' => 'setValidFrom'
@@ -294,22 +274,18 @@ class DiscountCouponsCreate implements ModelInterface, ArrayAccess, \JsonSeriali
         'applies_to_product_types' => 'getAppliesToProductTypes',
         'code' => 'getCode',
         'coupon_id' => 'getCouponId',
-        'created_at' => 'getCreatedAt',
         'current_uses' => 'getCurrentUses',
         'customer_type' => 'getCustomerType',
         'description' => 'getDescription',
         'discount_fixed_amount' => 'getDiscountFixedAmount',
         'discount_percentage' => 'getDiscountPercentage',
         'discount_type' => 'getDiscountType',
-        'environment' => 'getEnvironment',
         'expires_at' => 'getExpiresAt',
         'is_active' => 'getIsActive',
         'is_organization_wide' => 'getIsOrganizationWide',
         'max_quantity_per_use' => 'getMaxQuantityPerUse',
         'max_uses' => 'getMaxUses',
-        'organization_id' => 'getOrganizationId',
         'scope_type' => 'getScopeType',
-        'updated_at' => 'getUpdatedAt',
         'usage_frequency_limit' => 'getUsageFrequencyLimit',
         'usage_limit_value' => 'getUsageLimitValue',
         'valid_from' => 'getValidFrom'
@@ -375,22 +351,18 @@ class DiscountCouponsCreate implements ModelInterface, ArrayAccess, \JsonSeriali
         $this->setIfExists('applies_to_product_types', $data ?? [], null);
         $this->setIfExists('code', $data ?? [], null);
         $this->setIfExists('coupon_id', $data ?? [], null);
-        $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('current_uses', $data ?? [], null);
         $this->setIfExists('customer_type', $data ?? [], null);
         $this->setIfExists('description', $data ?? [], null);
         $this->setIfExists('discount_fixed_amount', $data ?? [], null);
         $this->setIfExists('discount_percentage', $data ?? [], null);
         $this->setIfExists('discount_type', $data ?? [], null);
-        $this->setIfExists('environment', $data ?? [], null);
         $this->setIfExists('expires_at', $data ?? [], null);
         $this->setIfExists('is_active', $data ?? [], null);
         $this->setIfExists('is_organization_wide', $data ?? [], null);
         $this->setIfExists('max_quantity_per_use', $data ?? [], null);
         $this->setIfExists('max_uses', $data ?? [], null);
-        $this->setIfExists('organization_id', $data ?? [], null);
         $this->setIfExists('scope_type', $data ?? [], null);
-        $this->setIfExists('updated_at', $data ?? [], null);
         $this->setIfExists('usage_frequency_limit', $data ?? [], null);
         $this->setIfExists('usage_limit_value', $data ?? [], null);
         $this->setIfExists('valid_from', $data ?? [], null);
@@ -505,7 +477,7 @@ class DiscountCouponsCreate implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Sets coupon_id
      *
-     * @param string|null $coupon_id coupon_id
+     * @param string|null $coupon_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -515,33 +487,6 @@ class DiscountCouponsCreate implements ModelInterface, ArrayAccess, \JsonSeriali
             throw new \InvalidArgumentException('non-nullable coupon_id cannot be null');
         }
         $this->container['coupon_id'] = $coupon_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets created_at
-     *
-     * @return \DateTime|null
-     */
-    public function getCreatedAt()
-    {
-        return $this->container['created_at'];
-    }
-
-    /**
-     * Sets created_at
-     *
-     * @param \DateTime|null $created_at created_at
-     *
-     * @return self
-     */
-    public function setCreatedAt($created_at)
-    {
-        if (is_null($created_at)) {
-            throw new \InvalidArgumentException('non-nullable created_at cannot be null');
-        }
-        $this->container['created_at'] = $created_at;
 
         return $this;
     }
@@ -709,33 +654,6 @@ class DiscountCouponsCreate implements ModelInterface, ArrayAccess, \JsonSeriali
     }
 
     /**
-     * Gets environment
-     *
-     * @return string|null
-     */
-    public function getEnvironment()
-    {
-        return $this->container['environment'];
-    }
-
-    /**
-     * Sets environment
-     *
-     * @param string|null $environment environment
-     *
-     * @return self
-     */
-    public function setEnvironment($environment)
-    {
-        if (is_null($environment)) {
-            throw new \InvalidArgumentException('non-nullable environment cannot be null');
-        }
-        $this->container['environment'] = $environment;
-
-        return $this;
-    }
-
-    /**
      * Gets expires_at
      *
      * @return \DateTime|null
@@ -748,7 +666,7 @@ class DiscountCouponsCreate implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Sets expires_at
      *
-     * @param \DateTime|null $expires_at expires_at
+     * @param \DateTime|null $expires_at ISO 8601 datetime
      *
      * @return self
      */
@@ -775,7 +693,7 @@ class DiscountCouponsCreate implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Sets is_active
      *
-     * @param bool|null $is_active is_active
+     * @param bool|null $is_active Whether this resource is currently active
      *
      * @return self
      */
@@ -871,33 +789,6 @@ class DiscountCouponsCreate implements ModelInterface, ArrayAccess, \JsonSeriali
     }
 
     /**
-     * Gets organization_id
-     *
-     * @return string|null
-     */
-    public function getOrganizationId()
-    {
-        return $this->container['organization_id'];
-    }
-
-    /**
-     * Sets organization_id
-     *
-     * @param string|null $organization_id organization_id
-     *
-     * @return self
-     */
-    public function setOrganizationId($organization_id)
-    {
-        if (is_null($organization_id)) {
-            throw new \InvalidArgumentException('non-nullable organization_id cannot be null');
-        }
-        $this->container['organization_id'] = $organization_id;
-
-        return $this;
-    }
-
-    /**
      * Gets scope_type
      *
      * @return string|null
@@ -920,33 +811,6 @@ class DiscountCouponsCreate implements ModelInterface, ArrayAccess, \JsonSeriali
             throw new \InvalidArgumentException('non-nullable scope_type cannot be null');
         }
         $this->container['scope_type'] = $scope_type;
-
-        return $this;
-    }
-
-    /**
-     * Gets updated_at
-     *
-     * @return \DateTime|null
-     */
-    public function getUpdatedAt()
-    {
-        return $this->container['updated_at'];
-    }
-
-    /**
-     * Sets updated_at
-     *
-     * @param \DateTime|null $updated_at updated_at
-     *
-     * @return self
-     */
-    public function setUpdatedAt($updated_at)
-    {
-        if (is_null($updated_at)) {
-            throw new \InvalidArgumentException('non-nullable updated_at cannot be null');
-        }
-        $this->container['updated_at'] = $updated_at;
 
         return $this;
     }

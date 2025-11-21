@@ -1,6 +1,6 @@
 # PayoutMethodsUpdate
 
-Update payout_methods input
+Request body for updating a payout methods object. Only include fields you want to modify.
 
 ## Properties
 
@@ -17,19 +17,16 @@ Name | Type | Description | Notes
 **bank_name** | **str** |  | [optional] 
 **branch_code** | **str** |  | [optional] 
 **country** | **str** |  | [optional] 
-**created_at** | **datetime** |  | [optional] 
 **is_default** | **bool** |  | [optional] 
 **is_spi_enabled** | **bool** |  | [optional] 
 **is_uemoa** | **bool** |  | [optional] 
 **is_valid** | **bool** |  | [optional] 
-**organization_id** | **str** |  | [optional] 
-**payout_method_id** | **str** |  | [optional] 
+**payout_method_id** | **str** | Unique identifier (UUID format) | [optional] 
 **payout_method_type** | **str** |  | [optional] 
 **spi_account_number** | **str** |  | [optional] 
 **spi_alias_mbno** | **str** |  | [optional] 
 **spi_alias_shid** | **str** |  | [optional] 
 **spi_alias_type** | **str** |  | [optional] 
-**updated_at** | **datetime** |  | [optional] 
 
 ## Example
 

@@ -19,21 +19,30 @@ import (
 // checks if the Subscriptions type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Subscriptions{}
 
-// Subscriptions subscriptions object
+// Subscriptions subscriptions resource object
 type Subscriptions struct {
+	// ISO 8601 datetime
 	CreatedAt *time.Time `json:"created_at,omitempty"`
 	CreatedBy *string `json:"created_by,omitempty"`
+	// Unique identifier (UUID format)
 	CustomerId *string `json:"customer_id,omitempty"`
 	EndDate *string `json:"end_date,omitempty"`
 	Environment *string `json:"environment,omitempty"`
+	// Set of key-value pairs for storing additional information
 	Metadata map[string]interface{} `json:"metadata,omitempty"`
 	NextBillingDate *string `json:"next_billing_date,omitempty"`
+	// Unique identifier (UUID format)
 	OrganizationId *string `json:"organization_id,omitempty"`
+	// Unique identifier (UUID format)
 	PriceId *string `json:"price_id,omitempty"`
+	// Unique identifier (UUID format)
 	ProductId *string `json:"product_id,omitempty"`
 	StartDate *string `json:"start_date,omitempty"`
+	// Current status of the resource
 	Status *string `json:"status,omitempty"`
+	// Unique identifier (UUID format)
 	SubscriptionId *string `json:"subscription_id,omitempty"`
+	// ISO 8601 datetime
 	UpdatedAt *time.Time `json:"updated_at,omitempty"`
 }
 

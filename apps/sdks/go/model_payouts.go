@@ -19,21 +19,31 @@ import (
 // checks if the Payouts type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Payouts{}
 
-// Payouts payouts object
+// Payouts payouts resource object
 type Payouts struct {
+	// Unique identifier (UUID format)
 	AccountId *string `json:"account_id,omitempty"`
+	// Amount in the smallest currency unit (e.g., cents for USD, same for XOF)
 	Amount *float64 `json:"amount,omitempty"`
+	// ISO 8601 datetime
 	CreatedAt *time.Time `json:"created_at,omitempty"`
 	CreatedBy *string `json:"created_by,omitempty"`
+	// Three-letter ISO currency code (e.g., XOF, USD, EUR)
 	CurrencyCode *string `json:"currency_code,omitempty"`
 	Environment *string `json:"environment,omitempty"`
+	// Set of key-value pairs for storing additional information
 	Metadata map[string]interface{} `json:"metadata,omitempty"`
+	// Unique identifier (UUID format)
 	OrganizationId *string `json:"organization_id,omitempty"`
 	PaymentMethodCode *string `json:"payment_method_code,omitempty"`
+	// Unique identifier (UUID format)
 	PayoutId *string `json:"payout_id,omitempty"`
+	// Unique identifier (UUID format)
 	PayoutMethodId *string `json:"payout_method_id,omitempty"`
 	ProviderCode *string `json:"provider_code,omitempty"`
+	// Current status of the resource
 	Status *string `json:"status,omitempty"`
+	// ISO 8601 datetime
 	UpdatedAt *time.Time `json:"updated_at,omitempty"`
 }
 

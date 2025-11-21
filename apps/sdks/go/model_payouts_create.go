@@ -13,28 +13,29 @@ package lomisdk
 
 import (
 	"encoding/json"
-	"time"
 )
 
 // checks if the PayoutsCreate type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &PayoutsCreate{}
 
-// PayoutsCreate Create payouts input
+// PayoutsCreate Request body for creating a payouts object. System-managed fields like `created_at`, `organization_id`, and IDs are automatically set.
 type PayoutsCreate struct {
+	// Unique identifier (UUID format)
 	AccountId *string `json:"account_id,omitempty"`
+	// Amount in the smallest currency unit (e.g., cents for USD, same for XOF)
 	Amount *float64 `json:"amount,omitempty"`
-	CreatedAt *time.Time `json:"created_at,omitempty"`
-	CreatedBy *string `json:"created_by,omitempty"`
+	// Three-letter ISO currency code (e.g., XOF, USD, EUR)
 	CurrencyCode *string `json:"currency_code,omitempty"`
-	Environment *string `json:"environment,omitempty"`
+	// Set of key-value pairs for storing additional information
 	Metadata map[string]interface{} `json:"metadata,omitempty"`
-	OrganizationId *string `json:"organization_id,omitempty"`
 	PaymentMethodCode *string `json:"payment_method_code,omitempty"`
+	// Unique identifier (UUID format)
 	PayoutId *string `json:"payout_id,omitempty"`
+	// Unique identifier (UUID format)
 	PayoutMethodId *string `json:"payout_method_id,omitempty"`
 	ProviderCode *string `json:"provider_code,omitempty"`
+	// Current status of the resource
 	Status *string `json:"status,omitempty"`
-	UpdatedAt *time.Time `json:"updated_at,omitempty"`
 }
 
 // NewPayoutsCreate instantiates a new PayoutsCreate object
@@ -118,70 +119,6 @@ func (o *PayoutsCreate) SetAmount(v float64) {
 	o.Amount = &v
 }
 
-// GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
-func (o *PayoutsCreate) GetCreatedAt() time.Time {
-	if o == nil || IsNil(o.CreatedAt) {
-		var ret time.Time
-		return ret
-	}
-	return *o.CreatedAt
-}
-
-// GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PayoutsCreate) GetCreatedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.CreatedAt) {
-		return nil, false
-	}
-	return o.CreatedAt, true
-}
-
-// HasCreatedAt returns a boolean if a field has been set.
-func (o *PayoutsCreate) HasCreatedAt() bool {
-	if o != nil && !IsNil(o.CreatedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetCreatedAt gets a reference to the given time.Time and assigns it to the CreatedAt field.
-func (o *PayoutsCreate) SetCreatedAt(v time.Time) {
-	o.CreatedAt = &v
-}
-
-// GetCreatedBy returns the CreatedBy field value if set, zero value otherwise.
-func (o *PayoutsCreate) GetCreatedBy() string {
-	if o == nil || IsNil(o.CreatedBy) {
-		var ret string
-		return ret
-	}
-	return *o.CreatedBy
-}
-
-// GetCreatedByOk returns a tuple with the CreatedBy field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PayoutsCreate) GetCreatedByOk() (*string, bool) {
-	if o == nil || IsNil(o.CreatedBy) {
-		return nil, false
-	}
-	return o.CreatedBy, true
-}
-
-// HasCreatedBy returns a boolean if a field has been set.
-func (o *PayoutsCreate) HasCreatedBy() bool {
-	if o != nil && !IsNil(o.CreatedBy) {
-		return true
-	}
-
-	return false
-}
-
-// SetCreatedBy gets a reference to the given string and assigns it to the CreatedBy field.
-func (o *PayoutsCreate) SetCreatedBy(v string) {
-	o.CreatedBy = &v
-}
-
 // GetCurrencyCode returns the CurrencyCode field value if set, zero value otherwise.
 func (o *PayoutsCreate) GetCurrencyCode() string {
 	if o == nil || IsNil(o.CurrencyCode) {
@@ -214,38 +151,6 @@ func (o *PayoutsCreate) SetCurrencyCode(v string) {
 	o.CurrencyCode = &v
 }
 
-// GetEnvironment returns the Environment field value if set, zero value otherwise.
-func (o *PayoutsCreate) GetEnvironment() string {
-	if o == nil || IsNil(o.Environment) {
-		var ret string
-		return ret
-	}
-	return *o.Environment
-}
-
-// GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PayoutsCreate) GetEnvironmentOk() (*string, bool) {
-	if o == nil || IsNil(o.Environment) {
-		return nil, false
-	}
-	return o.Environment, true
-}
-
-// HasEnvironment returns a boolean if a field has been set.
-func (o *PayoutsCreate) HasEnvironment() bool {
-	if o != nil && !IsNil(o.Environment) {
-		return true
-	}
-
-	return false
-}
-
-// SetEnvironment gets a reference to the given string and assigns it to the Environment field.
-func (o *PayoutsCreate) SetEnvironment(v string) {
-	o.Environment = &v
-}
-
 // GetMetadata returns the Metadata field value if set, zero value otherwise.
 func (o *PayoutsCreate) GetMetadata() map[string]interface{} {
 	if o == nil || IsNil(o.Metadata) {
@@ -276,38 +181,6 @@ func (o *PayoutsCreate) HasMetadata() bool {
 // SetMetadata gets a reference to the given map[string]interface{} and assigns it to the Metadata field.
 func (o *PayoutsCreate) SetMetadata(v map[string]interface{}) {
 	o.Metadata = v
-}
-
-// GetOrganizationId returns the OrganizationId field value if set, zero value otherwise.
-func (o *PayoutsCreate) GetOrganizationId() string {
-	if o == nil || IsNil(o.OrganizationId) {
-		var ret string
-		return ret
-	}
-	return *o.OrganizationId
-}
-
-// GetOrganizationIdOk returns a tuple with the OrganizationId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PayoutsCreate) GetOrganizationIdOk() (*string, bool) {
-	if o == nil || IsNil(o.OrganizationId) {
-		return nil, false
-	}
-	return o.OrganizationId, true
-}
-
-// HasOrganizationId returns a boolean if a field has been set.
-func (o *PayoutsCreate) HasOrganizationId() bool {
-	if o != nil && !IsNil(o.OrganizationId) {
-		return true
-	}
-
-	return false
-}
-
-// SetOrganizationId gets a reference to the given string and assigns it to the OrganizationId field.
-func (o *PayoutsCreate) SetOrganizationId(v string) {
-	o.OrganizationId = &v
 }
 
 // GetPaymentMethodCode returns the PaymentMethodCode field value if set, zero value otherwise.
@@ -470,38 +343,6 @@ func (o *PayoutsCreate) SetStatus(v string) {
 	o.Status = &v
 }
 
-// GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.
-func (o *PayoutsCreate) GetUpdatedAt() time.Time {
-	if o == nil || IsNil(o.UpdatedAt) {
-		var ret time.Time
-		return ret
-	}
-	return *o.UpdatedAt
-}
-
-// GetUpdatedAtOk returns a tuple with the UpdatedAt field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PayoutsCreate) GetUpdatedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.UpdatedAt) {
-		return nil, false
-	}
-	return o.UpdatedAt, true
-}
-
-// HasUpdatedAt returns a boolean if a field has been set.
-func (o *PayoutsCreate) HasUpdatedAt() bool {
-	if o != nil && !IsNil(o.UpdatedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetUpdatedAt gets a reference to the given time.Time and assigns it to the UpdatedAt field.
-func (o *PayoutsCreate) SetUpdatedAt(v time.Time) {
-	o.UpdatedAt = &v
-}
-
 func (o PayoutsCreate) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -518,23 +359,11 @@ func (o PayoutsCreate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Amount) {
 		toSerialize["amount"] = o.Amount
 	}
-	if !IsNil(o.CreatedAt) {
-		toSerialize["created_at"] = o.CreatedAt
-	}
-	if !IsNil(o.CreatedBy) {
-		toSerialize["created_by"] = o.CreatedBy
-	}
 	if !IsNil(o.CurrencyCode) {
 		toSerialize["currency_code"] = o.CurrencyCode
 	}
-	if !IsNil(o.Environment) {
-		toSerialize["environment"] = o.Environment
-	}
 	if !IsNil(o.Metadata) {
 		toSerialize["metadata"] = o.Metadata
-	}
-	if !IsNil(o.OrganizationId) {
-		toSerialize["organization_id"] = o.OrganizationId
 	}
 	if !IsNil(o.PaymentMethodCode) {
 		toSerialize["payment_method_code"] = o.PaymentMethodCode
@@ -550,9 +379,6 @@ func (o PayoutsCreate) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Status) {
 		toSerialize["status"] = o.Status
-	}
-	if !IsNil(o.UpdatedAt) {
-		toSerialize["updated_at"] = o.UpdatedAt
 	}
 	return toSerialize, nil
 }

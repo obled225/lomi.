@@ -36,7 +36,7 @@ use \LomiSDK\ObjectSerializer;
  * Transactions Class Doc Comment
  *
  * @category Class
- * @description transactions object
+ * @description transactions resource object
  * @package  LomiSDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -556,7 +556,7 @@ class Transactions implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets checkout_session_id
      *
-     * @param string|null $checkout_session_id checkout_session_id
+     * @param string|null $checkout_session_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -583,7 +583,7 @@ class Transactions implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets created_at
      *
-     * @param \DateTime|null $created_at created_at
+     * @param \DateTime|null $created_at ISO 8601 datetime
      *
      * @return self
      */
@@ -610,7 +610,7 @@ class Transactions implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets currency_code
      *
-     * @param string|null $currency_code currency_code
+     * @param string|null $currency_code Three-letter ISO currency code (e.g., XOF, USD, EUR)
      *
      * @return self
      */
@@ -637,7 +637,7 @@ class Transactions implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets customer_id
      *
-     * @param string|null $customer_id customer_id
+     * @param string|null $customer_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -772,7 +772,7 @@ class Transactions implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets fee_structure_id
      *
-     * @param string|null $fee_structure_id fee_structure_id
+     * @param string|null $fee_structure_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -880,7 +880,7 @@ class Transactions implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets metadata
      *
-     * @param object|null $metadata metadata
+     * @param object|null $metadata Set of key-value pairs for storing additional information
      *
      * @return self
      */
@@ -934,7 +934,7 @@ class Transactions implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets organization_id
      *
-     * @param string|null $organization_id organization_id
+     * @param string|null $organization_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -988,7 +988,7 @@ class Transactions implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets price_id
      *
-     * @param string|null $price_id price_id
+     * @param string|null $price_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -1015,7 +1015,7 @@ class Transactions implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets product_id
      *
-     * @param string|null $product_id product_id
+     * @param string|null $product_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -1123,7 +1123,7 @@ class Transactions implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets spi_bulk_instruction_id
      *
-     * @param string|null $spi_bulk_instruction_id spi_bulk_instruction_id
+     * @param string|null $spi_bulk_instruction_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -1258,7 +1258,7 @@ class Transactions implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets spi_end2end_id
      *
-     * @param string|null $spi_end2end_id spi_end2end_id
+     * @param string|null $spi_end2end_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -1393,7 +1393,7 @@ class Transactions implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets spi_tx_id
      *
-     * @param string|null $spi_tx_id spi_tx_id
+     * @param string|null $spi_tx_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -1420,7 +1420,7 @@ class Transactions implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets status
      *
-     * @param string|null $status status
+     * @param string|null $status Current status of the resource
      *
      * @return self
      */
@@ -1447,7 +1447,7 @@ class Transactions implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets subscription_id
      *
-     * @param string|null $subscription_id subscription_id
+     * @param string|null $subscription_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -1474,7 +1474,7 @@ class Transactions implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets transaction_id
      *
-     * @param string|null $transaction_id transaction_id
+     * @param string|null $transaction_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -1528,7 +1528,7 @@ class Transactions implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets updated_at
      *
-     * @param \DateTime|null $updated_at updated_at
+     * @param \DateTime|null $updated_at ISO 8601 datetime
      *
      * @return self
      */

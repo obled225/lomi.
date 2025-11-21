@@ -19,21 +19,28 @@ import (
 // checks if the PaymentRequests type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &PaymentRequests{}
 
-// PaymentRequests payment_requests object
+// PaymentRequests payment requests resource object
 type PaymentRequests struct {
+	// Amount in the smallest currency unit (e.g., cents for USD, same for XOF)
 	Amount *float64 `json:"amount,omitempty"`
+	// ISO 8601 datetime
 	CreatedAt *time.Time `json:"created_at,omitempty"`
 	CreatedBy *string `json:"created_by,omitempty"`
+	// Three-letter ISO currency code (e.g., XOF, USD, EUR)
 	CurrencyCode *string `json:"currency_code,omitempty"`
+	// Unique identifier (UUID format)
 	CustomerId *string `json:"customer_id,omitempty"`
 	Description *string `json:"description,omitempty"`
 	Environment *string `json:"environment,omitempty"`
 	ExpiryDate *string `json:"expiry_date,omitempty"`
+	// Unique identifier (UUID format)
 	OrganizationId *string `json:"organization_id,omitempty"`
 	PaymentLink *string `json:"payment_link,omitempty"`
 	PaymentReference *string `json:"payment_reference,omitempty"`
+	// Unique identifier (UUID format)
 	RequestId *string `json:"request_id,omitempty"`
 	SpiAccountNumber *string `json:"spi_account_number,omitempty"`
+	// Unique identifier (UUID format)
 	SpiBulkInstructionId *string `json:"spi_bulk_instruction_id,omitempty"`
 	SpiConfirmation *bool `json:"spi_confirmation,omitempty"`
 	SpiDateEnvoi *string `json:"spi_date_envoi,omitempty"`
@@ -42,6 +49,7 @@ type PaymentRequests struct {
 	SpiDateLimiteReponse *string `json:"spi_date_limite_reponse,omitempty"`
 	SpiDateRejet *string `json:"spi_date_rejet,omitempty"`
 	SpiDebitDiffere *bool `json:"spi_debit_differe,omitempty"`
+	// Unique identifier (UUID format)
 	SpiEnd2endId *string `json:"spi_end2end_id,omitempty"`
 	SpiPayeurAlias *string `json:"spi_payeur_alias,omitempty"`
 	SpiPayeurNom *string `json:"spi_payeur_nom,omitempty"`
@@ -53,8 +61,11 @@ type PaymentRequests struct {
 	SpiRejectionReason *string `json:"spi_rejection_reason,omitempty"`
 	SpiRemiseAmount *float64 `json:"spi_remise_amount,omitempty"`
 	SpiRemiseRate *float64 `json:"spi_remise_rate,omitempty"`
+	// Unique identifier (UUID format)
 	SpiTxId *string `json:"spi_tx_id,omitempty"`
+	// Current status of the resource
 	Status *string `json:"status,omitempty"`
+	// ISO 8601 datetime
 	UpdatedAt *time.Time `json:"updated_at,omitempty"`
 }
 

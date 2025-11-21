@@ -19,7 +19,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from uuid import UUID
 from typing import Optional, Set
@@ -27,18 +27,18 @@ from typing_extensions import Self
 
 class SpiAccountAliases(BaseModel):
     """
-    spi_account_aliases object
+    spi account aliases resource object
     """ # noqa: E501
     account_number: Optional[StrictStr] = None
-    alias_id: Optional[UUID] = None
+    alias_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
     alias_key: Optional[StrictStr] = None
     alias_type: Optional[StrictStr] = None
-    created_at: Optional[datetime] = None
-    is_active: Optional[StrictBool] = None
+    created_at: Optional[datetime] = Field(default=None, description="ISO 8601 datetime")
+    is_active: Optional[StrictBool] = Field(default=None, description="Whether this resource is currently active")
     is_default: Optional[StrictBool] = None
-    metadata: Optional[Dict[str, Any]] = None
-    organization_id: Optional[UUID] = None
-    updated_at: Optional[datetime] = None
+    metadata: Optional[Dict[str, Any]] = Field(default=None, description="Set of key-value pairs for storing additional information")
+    organization_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
+    updated_at: Optional[datetime] = Field(default=None, description="ISO 8601 datetime")
     __properties: ClassVar[List[str]] = ["account_number", "alias_id", "alias_key", "alias_type", "created_at", "is_active", "is_default", "metadata", "organization_id", "updated_at"]
 
     model_config = ConfigDict(
@@ -71,8 +71,12 @@ class SpiAccountAliases(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set([
+            "created_at",
+            "updated_at",
         ])
 
         _dict = self.model_dump(

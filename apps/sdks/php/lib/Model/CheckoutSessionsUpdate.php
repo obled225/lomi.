@@ -36,7 +36,7 @@ use \LomiSDK\ObjectSerializer;
  * CheckoutSessionsUpdate Class Doc Comment
  *
  * @category Class
- * @description Update checkout_sessions input
+ * @description Request body for updating a checkout sessions object. Only include fields you want to modify.
  * @package  LomiSDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -65,20 +65,16 @@ class CheckoutSessionsUpdate implements ModelInterface, ArrayAccess, \JsonSerial
         'amount' => 'float',
         'cancel_url' => 'string',
         'checkout_session_id' => 'string',
-        'created_at' => '\DateTime',
-        'created_by' => 'string',
         'currency_code' => 'string',
         'customer_email' => 'string',
         'customer_id' => 'string',
         'customer_name' => 'string',
         'customer_phone' => 'string',
-        'environment' => 'string',
         'expires_at' => '\DateTime',
         'installment_plan_id' => 'string',
         'is_pos' => 'bool',
         'is_spi' => 'bool',
         'metadata' => 'object',
-        'organization_id' => 'string',
         'payment_link_id' => 'string',
         'payment_request_id' => 'string',
         'price_id' => 'string',
@@ -92,8 +88,7 @@ class CheckoutSessionsUpdate implements ModelInterface, ArrayAccess, \JsonSerial
         'status' => 'string',
         'subscription_id' => 'string',
         'success_url' => 'string',
-        'title' => 'string',
-        'updated_at' => '\DateTime'
+        'title' => 'string'
     ];
 
     /**
@@ -110,20 +105,16 @@ class CheckoutSessionsUpdate implements ModelInterface, ArrayAccess, \JsonSerial
         'amount' => 'double',
         'cancel_url' => 'uri',
         'checkout_session_id' => 'uuid',
-        'created_at' => 'date-time',
-        'created_by' => null,
         'currency_code' => null,
         'customer_email' => 'email',
         'customer_id' => 'uuid',
         'customer_name' => null,
         'customer_phone' => null,
-        'environment' => null,
         'expires_at' => 'date-time',
         'installment_plan_id' => 'uuid',
         'is_pos' => null,
         'is_spi' => null,
         'metadata' => null,
-        'organization_id' => 'uuid',
         'payment_link_id' => 'uuid',
         'payment_request_id' => 'uuid',
         'price_id' => 'uuid',
@@ -137,8 +128,7 @@ class CheckoutSessionsUpdate implements ModelInterface, ArrayAccess, \JsonSerial
         'status' => null,
         'subscription_id' => 'uuid',
         'success_url' => 'uri',
-        'title' => null,
-        'updated_at' => 'date-time'
+        'title' => null
     ];
 
     /**
@@ -153,20 +143,16 @@ class CheckoutSessionsUpdate implements ModelInterface, ArrayAccess, \JsonSerial
         'amount' => false,
         'cancel_url' => false,
         'checkout_session_id' => false,
-        'created_at' => false,
-        'created_by' => false,
         'currency_code' => false,
         'customer_email' => false,
         'customer_id' => false,
         'customer_name' => false,
         'customer_phone' => false,
-        'environment' => false,
         'expires_at' => false,
         'installment_plan_id' => false,
         'is_pos' => false,
         'is_spi' => false,
         'metadata' => false,
-        'organization_id' => false,
         'payment_link_id' => false,
         'payment_request_id' => false,
         'price_id' => false,
@@ -180,8 +166,7 @@ class CheckoutSessionsUpdate implements ModelInterface, ArrayAccess, \JsonSerial
         'status' => false,
         'subscription_id' => false,
         'success_url' => false,
-        'title' => false,
-        'updated_at' => false
+        'title' => false
     ];
 
     /**
@@ -276,20 +261,16 @@ class CheckoutSessionsUpdate implements ModelInterface, ArrayAccess, \JsonSerial
         'amount' => 'amount',
         'cancel_url' => 'cancel_url',
         'checkout_session_id' => 'checkout_session_id',
-        'created_at' => 'created_at',
-        'created_by' => 'created_by',
         'currency_code' => 'currency_code',
         'customer_email' => 'customer_email',
         'customer_id' => 'customer_id',
         'customer_name' => 'customer_name',
         'customer_phone' => 'customer_phone',
-        'environment' => 'environment',
         'expires_at' => 'expires_at',
         'installment_plan_id' => 'installment_plan_id',
         'is_pos' => 'is_pos',
         'is_spi' => 'is_spi',
         'metadata' => 'metadata',
-        'organization_id' => 'organization_id',
         'payment_link_id' => 'payment_link_id',
         'payment_request_id' => 'payment_request_id',
         'price_id' => 'price_id',
@@ -303,8 +284,7 @@ class CheckoutSessionsUpdate implements ModelInterface, ArrayAccess, \JsonSerial
         'status' => 'status',
         'subscription_id' => 'subscription_id',
         'success_url' => 'success_url',
-        'title' => 'title',
-        'updated_at' => 'updated_at'
+        'title' => 'title'
     ];
 
     /**
@@ -319,20 +299,16 @@ class CheckoutSessionsUpdate implements ModelInterface, ArrayAccess, \JsonSerial
         'amount' => 'setAmount',
         'cancel_url' => 'setCancelUrl',
         'checkout_session_id' => 'setCheckoutSessionId',
-        'created_at' => 'setCreatedAt',
-        'created_by' => 'setCreatedBy',
         'currency_code' => 'setCurrencyCode',
         'customer_email' => 'setCustomerEmail',
         'customer_id' => 'setCustomerId',
         'customer_name' => 'setCustomerName',
         'customer_phone' => 'setCustomerPhone',
-        'environment' => 'setEnvironment',
         'expires_at' => 'setExpiresAt',
         'installment_plan_id' => 'setInstallmentPlanId',
         'is_pos' => 'setIsPos',
         'is_spi' => 'setIsSpi',
         'metadata' => 'setMetadata',
-        'organization_id' => 'setOrganizationId',
         'payment_link_id' => 'setPaymentLinkId',
         'payment_request_id' => 'setPaymentRequestId',
         'price_id' => 'setPriceId',
@@ -346,8 +322,7 @@ class CheckoutSessionsUpdate implements ModelInterface, ArrayAccess, \JsonSerial
         'status' => 'setStatus',
         'subscription_id' => 'setSubscriptionId',
         'success_url' => 'setSuccessUrl',
-        'title' => 'setTitle',
-        'updated_at' => 'setUpdatedAt'
+        'title' => 'setTitle'
     ];
 
     /**
@@ -362,20 +337,16 @@ class CheckoutSessionsUpdate implements ModelInterface, ArrayAccess, \JsonSerial
         'amount' => 'getAmount',
         'cancel_url' => 'getCancelUrl',
         'checkout_session_id' => 'getCheckoutSessionId',
-        'created_at' => 'getCreatedAt',
-        'created_by' => 'getCreatedBy',
         'currency_code' => 'getCurrencyCode',
         'customer_email' => 'getCustomerEmail',
         'customer_id' => 'getCustomerId',
         'customer_name' => 'getCustomerName',
         'customer_phone' => 'getCustomerPhone',
-        'environment' => 'getEnvironment',
         'expires_at' => 'getExpiresAt',
         'installment_plan_id' => 'getInstallmentPlanId',
         'is_pos' => 'getIsPos',
         'is_spi' => 'getIsSpi',
         'metadata' => 'getMetadata',
-        'organization_id' => 'getOrganizationId',
         'payment_link_id' => 'getPaymentLinkId',
         'payment_request_id' => 'getPaymentRequestId',
         'price_id' => 'getPriceId',
@@ -389,8 +360,7 @@ class CheckoutSessionsUpdate implements ModelInterface, ArrayAccess, \JsonSerial
         'status' => 'getStatus',
         'subscription_id' => 'getSubscriptionId',
         'success_url' => 'getSuccessUrl',
-        'title' => 'getTitle',
-        'updated_at' => 'getUpdatedAt'
+        'title' => 'getTitle'
     ];
 
     /**
@@ -456,20 +426,16 @@ class CheckoutSessionsUpdate implements ModelInterface, ArrayAccess, \JsonSerial
         $this->setIfExists('amount', $data ?? [], null);
         $this->setIfExists('cancel_url', $data ?? [], null);
         $this->setIfExists('checkout_session_id', $data ?? [], null);
-        $this->setIfExists('created_at', $data ?? [], null);
-        $this->setIfExists('created_by', $data ?? [], null);
         $this->setIfExists('currency_code', $data ?? [], null);
         $this->setIfExists('customer_email', $data ?? [], null);
         $this->setIfExists('customer_id', $data ?? [], null);
         $this->setIfExists('customer_name', $data ?? [], null);
         $this->setIfExists('customer_phone', $data ?? [], null);
-        $this->setIfExists('environment', $data ?? [], null);
         $this->setIfExists('expires_at', $data ?? [], null);
         $this->setIfExists('installment_plan_id', $data ?? [], null);
         $this->setIfExists('is_pos', $data ?? [], null);
         $this->setIfExists('is_spi', $data ?? [], null);
         $this->setIfExists('metadata', $data ?? [], null);
-        $this->setIfExists('organization_id', $data ?? [], null);
         $this->setIfExists('payment_link_id', $data ?? [], null);
         $this->setIfExists('payment_request_id', $data ?? [], null);
         $this->setIfExists('price_id', $data ?? [], null);
@@ -484,7 +450,6 @@ class CheckoutSessionsUpdate implements ModelInterface, ArrayAccess, \JsonSerial
         $this->setIfExists('subscription_id', $data ?? [], null);
         $this->setIfExists('success_url', $data ?? [], null);
         $this->setIfExists('title', $data ?? [], null);
-        $this->setIfExists('updated_at', $data ?? [], null);
     }
 
     /**
@@ -623,7 +588,7 @@ class CheckoutSessionsUpdate implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets amount
      *
-     * @param float|null $amount amount
+     * @param float|null $amount Amount in the smallest currency unit (e.g., cents for USD, same for XOF)
      *
      * @return self
      */
@@ -650,7 +615,7 @@ class CheckoutSessionsUpdate implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets cancel_url
      *
-     * @param string|null $cancel_url cancel_url
+     * @param string|null $cancel_url URL/URI
      *
      * @return self
      */
@@ -677,7 +642,7 @@ class CheckoutSessionsUpdate implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets checkout_session_id
      *
-     * @param string|null $checkout_session_id checkout_session_id
+     * @param string|null $checkout_session_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -687,60 +652,6 @@ class CheckoutSessionsUpdate implements ModelInterface, ArrayAccess, \JsonSerial
             throw new \InvalidArgumentException('non-nullable checkout_session_id cannot be null');
         }
         $this->container['checkout_session_id'] = $checkout_session_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets created_at
-     *
-     * @return \DateTime|null
-     */
-    public function getCreatedAt()
-    {
-        return $this->container['created_at'];
-    }
-
-    /**
-     * Sets created_at
-     *
-     * @param \DateTime|null $created_at created_at
-     *
-     * @return self
-     */
-    public function setCreatedAt($created_at)
-    {
-        if (is_null($created_at)) {
-            throw new \InvalidArgumentException('non-nullable created_at cannot be null');
-        }
-        $this->container['created_at'] = $created_at;
-
-        return $this;
-    }
-
-    /**
-     * Gets created_by
-     *
-     * @return string|null
-     */
-    public function getCreatedBy()
-    {
-        return $this->container['created_by'];
-    }
-
-    /**
-     * Sets created_by
-     *
-     * @param string|null $created_by created_by
-     *
-     * @return self
-     */
-    public function setCreatedBy($created_by)
-    {
-        if (is_null($created_by)) {
-            throw new \InvalidArgumentException('non-nullable created_by cannot be null');
-        }
-        $this->container['created_by'] = $created_by;
 
         return $this;
     }
@@ -758,7 +669,7 @@ class CheckoutSessionsUpdate implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets currency_code
      *
-     * @param string|null $currency_code currency_code
+     * @param string|null $currency_code Three-letter ISO currency code (e.g., XOF, USD, EUR)
      *
      * @return self
      */
@@ -785,7 +696,7 @@ class CheckoutSessionsUpdate implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets customer_email
      *
-     * @param string|null $customer_email customer_email
+     * @param string|null $customer_email Email address
      *
      * @return self
      */
@@ -812,7 +723,7 @@ class CheckoutSessionsUpdate implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets customer_id
      *
-     * @param string|null $customer_id customer_id
+     * @param string|null $customer_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -881,33 +792,6 @@ class CheckoutSessionsUpdate implements ModelInterface, ArrayAccess, \JsonSerial
     }
 
     /**
-     * Gets environment
-     *
-     * @return string|null
-     */
-    public function getEnvironment()
-    {
-        return $this->container['environment'];
-    }
-
-    /**
-     * Sets environment
-     *
-     * @param string|null $environment environment
-     *
-     * @return self
-     */
-    public function setEnvironment($environment)
-    {
-        if (is_null($environment)) {
-            throw new \InvalidArgumentException('non-nullable environment cannot be null');
-        }
-        $this->container['environment'] = $environment;
-
-        return $this;
-    }
-
-    /**
      * Gets expires_at
      *
      * @return \DateTime|null
@@ -920,7 +804,7 @@ class CheckoutSessionsUpdate implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets expires_at
      *
-     * @param \DateTime|null $expires_at expires_at
+     * @param \DateTime|null $expires_at ISO 8601 datetime
      *
      * @return self
      */
@@ -947,7 +831,7 @@ class CheckoutSessionsUpdate implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets installment_plan_id
      *
-     * @param string|null $installment_plan_id installment_plan_id
+     * @param string|null $installment_plan_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -1028,7 +912,7 @@ class CheckoutSessionsUpdate implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets metadata
      *
-     * @param object|null $metadata metadata
+     * @param object|null $metadata Set of key-value pairs for storing additional information
      *
      * @return self
      */
@@ -1038,33 +922,6 @@ class CheckoutSessionsUpdate implements ModelInterface, ArrayAccess, \JsonSerial
             throw new \InvalidArgumentException('non-nullable metadata cannot be null');
         }
         $this->container['metadata'] = $metadata;
-
-        return $this;
-    }
-
-    /**
-     * Gets organization_id
-     *
-     * @return string|null
-     */
-    public function getOrganizationId()
-    {
-        return $this->container['organization_id'];
-    }
-
-    /**
-     * Sets organization_id
-     *
-     * @param string|null $organization_id organization_id
-     *
-     * @return self
-     */
-    public function setOrganizationId($organization_id)
-    {
-        if (is_null($organization_id)) {
-            throw new \InvalidArgumentException('non-nullable organization_id cannot be null');
-        }
-        $this->container['organization_id'] = $organization_id;
 
         return $this;
     }
@@ -1082,7 +939,7 @@ class CheckoutSessionsUpdate implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets payment_link_id
      *
-     * @param string|null $payment_link_id payment_link_id
+     * @param string|null $payment_link_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -1109,7 +966,7 @@ class CheckoutSessionsUpdate implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets payment_request_id
      *
-     * @param string|null $payment_request_id payment_request_id
+     * @param string|null $payment_request_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -1136,7 +993,7 @@ class CheckoutSessionsUpdate implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets price_id
      *
-     * @param string|null $price_id price_id
+     * @param string|null $price_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -1163,7 +1020,7 @@ class CheckoutSessionsUpdate implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets product_id
      *
-     * @param string|null $product_id product_id
+     * @param string|null $product_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -1325,7 +1182,7 @@ class CheckoutSessionsUpdate implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets spi_qr_code_id
      *
-     * @param string|null $spi_qr_code_id spi_qr_code_id
+     * @param string|null $spi_qr_code_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -1352,7 +1209,7 @@ class CheckoutSessionsUpdate implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets status
      *
-     * @param string|null $status status
+     * @param string|null $status Current status of the resource
      *
      * @return self
      */
@@ -1379,7 +1236,7 @@ class CheckoutSessionsUpdate implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets subscription_id
      *
-     * @param string|null $subscription_id subscription_id
+     * @param string|null $subscription_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -1406,7 +1263,7 @@ class CheckoutSessionsUpdate implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets success_url
      *
-     * @param string|null $success_url success_url
+     * @param string|null $success_url URL/URI
      *
      * @return self
      */
@@ -1443,33 +1300,6 @@ class CheckoutSessionsUpdate implements ModelInterface, ArrayAccess, \JsonSerial
             throw new \InvalidArgumentException('non-nullable title cannot be null');
         }
         $this->container['title'] = $title;
-
-        return $this;
-    }
-
-    /**
-     * Gets updated_at
-     *
-     * @return \DateTime|null
-     */
-    public function getUpdatedAt()
-    {
-        return $this->container['updated_at'];
-    }
-
-    /**
-     * Sets updated_at
-     *
-     * @param \DateTime|null $updated_at updated_at
-     *
-     * @return self
-     */
-    public function setUpdatedAt($updated_at)
-    {
-        if (is_null($updated_at)) {
-            throw new \InvalidArgumentException('non-nullable updated_at cannot be null');
-        }
-        $this->container['updated_at'] = $updated_at;
 
         return $this;
     }

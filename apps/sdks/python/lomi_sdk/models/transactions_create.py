@@ -18,8 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictFloat, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from uuid import UUID
 from typing import Optional, Set
@@ -27,46 +26,41 @@ from typing_extensions import Self
 
 class TransactionsCreate(BaseModel):
     """
-    Create transactions input
+    Request body for creating a transactions object. System-managed fields like `created_at`, `organization_id`, and IDs are automatically set.
     """ # noqa: E501
-    checkout_session_id: Optional[UUID] = None
-    created_at: Optional[datetime] = None
-    currency_code: Optional[StrictStr] = None
-    customer_id: Optional[UUID] = None
+    checkout_session_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
+    currency_code: Optional[StrictStr] = Field(default=None, description="Three-letter ISO currency code (e.g., XOF, USD, EUR)")
+    customer_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
     description: Optional[StrictStr] = None
     discount_amount: Optional[Union[StrictFloat, StrictInt]] = None
-    environment: Optional[StrictStr] = None
     fee_amount: Optional[Union[StrictFloat, StrictInt]] = None
-    fee_structure_id: Optional[UUID] = None
+    fee_structure_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
     gross_amount: Optional[Union[StrictFloat, StrictInt]] = None
     is_bnpl: Optional[StrictBool] = None
     is_pos: Optional[StrictBool] = None
-    metadata: Optional[Dict[str, Any]] = None
+    metadata: Optional[Dict[str, Any]] = Field(default=None, description="Set of key-value pairs for storing additional information")
     net_amount: Optional[Union[StrictFloat, StrictInt]] = None
-    organization_id: Optional[UUID] = None
     payment_method_code: Optional[StrictStr] = None
-    price_id: Optional[UUID] = None
-    product_id: Optional[UUID] = None
+    price_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
+    product_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
     provider_code: Optional[StrictStr] = None
     quantity: Optional[Union[StrictFloat, StrictInt]] = None
     spi_account_number: Optional[StrictStr] = None
-    spi_bulk_instruction_id: Optional[UUID] = None
+    spi_bulk_instruction_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
     spi_date_envoi: Optional[StrictStr] = None
     spi_date_irrevocabilite: Optional[StrictStr] = None
     spi_discount_amount: Optional[Union[StrictFloat, StrictInt]] = None
     spi_discount_rate: Optional[Union[StrictFloat, StrictInt]] = None
-    spi_end2end_id: Optional[UUID] = None
+    spi_end2end_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
     spi_payment_category: Optional[StrictStr] = None
     spi_payment_flow_type: Optional[StrictStr] = None
     spi_payment_status: Optional[StrictStr] = None
     spi_rejection_reason: Optional[StrictStr] = None
-    spi_tx_id: Optional[UUID] = None
-    status: Optional[StrictStr] = None
-    subscription_id: Optional[UUID] = None
-    transaction_id: Optional[UUID] = None
+    spi_tx_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
+    status: Optional[StrictStr] = Field(default=None, description="Current status of the resource")
+    subscription_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
     transaction_type: Optional[StrictStr] = None
-    updated_at: Optional[datetime] = None
-    __properties: ClassVar[List[str]] = ["checkout_session_id", "created_at", "currency_code", "customer_id", "description", "discount_amount", "environment", "fee_amount", "fee_structure_id", "gross_amount", "is_bnpl", "is_pos", "metadata", "net_amount", "organization_id", "payment_method_code", "price_id", "product_id", "provider_code", "quantity", "spi_account_number", "spi_bulk_instruction_id", "spi_date_envoi", "spi_date_irrevocabilite", "spi_discount_amount", "spi_discount_rate", "spi_end2end_id", "spi_payment_category", "spi_payment_flow_type", "spi_payment_status", "spi_rejection_reason", "spi_tx_id", "status", "subscription_id", "transaction_id", "transaction_type", "updated_at"]
+    __properties: ClassVar[List[str]] = ["checkout_session_id", "currency_code", "customer_id", "description", "discount_amount", "fee_amount", "fee_structure_id", "gross_amount", "is_bnpl", "is_pos", "metadata", "net_amount", "payment_method_code", "price_id", "product_id", "provider_code", "quantity", "spi_account_number", "spi_bulk_instruction_id", "spi_date_envoi", "spi_date_irrevocabilite", "spi_discount_amount", "spi_discount_rate", "spi_end2end_id", "spi_payment_category", "spi_payment_flow_type", "spi_payment_status", "spi_rejection_reason", "spi_tx_id", "status", "subscription_id", "transaction_type"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -120,12 +114,10 @@ class TransactionsCreate(BaseModel):
 
         _obj = cls.model_validate({
             "checkout_session_id": obj.get("checkout_session_id"),
-            "created_at": obj.get("created_at"),
             "currency_code": obj.get("currency_code"),
             "customer_id": obj.get("customer_id"),
             "description": obj.get("description"),
             "discount_amount": obj.get("discount_amount"),
-            "environment": obj.get("environment"),
             "fee_amount": obj.get("fee_amount"),
             "fee_structure_id": obj.get("fee_structure_id"),
             "gross_amount": obj.get("gross_amount"),
@@ -133,7 +125,6 @@ class TransactionsCreate(BaseModel):
             "is_pos": obj.get("is_pos"),
             "metadata": obj.get("metadata"),
             "net_amount": obj.get("net_amount"),
-            "organization_id": obj.get("organization_id"),
             "payment_method_code": obj.get("payment_method_code"),
             "price_id": obj.get("price_id"),
             "product_id": obj.get("product_id"),
@@ -153,9 +144,7 @@ class TransactionsCreate(BaseModel):
             "spi_tx_id": obj.get("spi_tx_id"),
             "status": obj.get("status"),
             "subscription_id": obj.get("subscription_id"),
-            "transaction_id": obj.get("transaction_id"),
-            "transaction_type": obj.get("transaction_type"),
-            "updated_at": obj.get("updated_at")
+            "transaction_type": obj.get("transaction_type")
         })
         return _obj
 

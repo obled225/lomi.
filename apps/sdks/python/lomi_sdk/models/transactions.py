@@ -19,7 +19,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictFloat, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from uuid import UUID
 from typing import Optional, Set
@@ -27,45 +27,45 @@ from typing_extensions import Self
 
 class Transactions(BaseModel):
     """
-    transactions object
+    transactions resource object
     """ # noqa: E501
-    checkout_session_id: Optional[UUID] = None
-    created_at: Optional[datetime] = None
-    currency_code: Optional[StrictStr] = None
-    customer_id: Optional[UUID] = None
+    checkout_session_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
+    created_at: Optional[datetime] = Field(default=None, description="ISO 8601 datetime")
+    currency_code: Optional[StrictStr] = Field(default=None, description="Three-letter ISO currency code (e.g., XOF, USD, EUR)")
+    customer_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
     description: Optional[StrictStr] = None
     discount_amount: Optional[Union[StrictFloat, StrictInt]] = None
     environment: Optional[StrictStr] = None
     fee_amount: Optional[Union[StrictFloat, StrictInt]] = None
-    fee_structure_id: Optional[UUID] = None
+    fee_structure_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
     gross_amount: Optional[Union[StrictFloat, StrictInt]] = None
     is_bnpl: Optional[StrictBool] = None
     is_pos: Optional[StrictBool] = None
-    metadata: Optional[Dict[str, Any]] = None
+    metadata: Optional[Dict[str, Any]] = Field(default=None, description="Set of key-value pairs for storing additional information")
     net_amount: Optional[Union[StrictFloat, StrictInt]] = None
-    organization_id: Optional[UUID] = None
+    organization_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
     payment_method_code: Optional[StrictStr] = None
-    price_id: Optional[UUID] = None
-    product_id: Optional[UUID] = None
+    price_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
+    product_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
     provider_code: Optional[StrictStr] = None
     quantity: Optional[Union[StrictFloat, StrictInt]] = None
     spi_account_number: Optional[StrictStr] = None
-    spi_bulk_instruction_id: Optional[UUID] = None
+    spi_bulk_instruction_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
     spi_date_envoi: Optional[StrictStr] = None
     spi_date_irrevocabilite: Optional[StrictStr] = None
     spi_discount_amount: Optional[Union[StrictFloat, StrictInt]] = None
     spi_discount_rate: Optional[Union[StrictFloat, StrictInt]] = None
-    spi_end2end_id: Optional[UUID] = None
+    spi_end2end_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
     spi_payment_category: Optional[StrictStr] = None
     spi_payment_flow_type: Optional[StrictStr] = None
     spi_payment_status: Optional[StrictStr] = None
     spi_rejection_reason: Optional[StrictStr] = None
-    spi_tx_id: Optional[UUID] = None
-    status: Optional[StrictStr] = None
-    subscription_id: Optional[UUID] = None
-    transaction_id: Optional[UUID] = None
+    spi_tx_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
+    status: Optional[StrictStr] = Field(default=None, description="Current status of the resource")
+    subscription_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
+    transaction_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
     transaction_type: Optional[StrictStr] = None
-    updated_at: Optional[datetime] = None
+    updated_at: Optional[datetime] = Field(default=None, description="ISO 8601 datetime")
     __properties: ClassVar[List[str]] = ["checkout_session_id", "created_at", "currency_code", "customer_id", "description", "discount_amount", "environment", "fee_amount", "fee_structure_id", "gross_amount", "is_bnpl", "is_pos", "metadata", "net_amount", "organization_id", "payment_method_code", "price_id", "product_id", "provider_code", "quantity", "spi_account_number", "spi_bulk_instruction_id", "spi_date_envoi", "spi_date_irrevocabilite", "spi_discount_amount", "spi_discount_rate", "spi_end2end_id", "spi_payment_category", "spi_payment_flow_type", "spi_payment_status", "spi_rejection_reason", "spi_tx_id", "status", "subscription_id", "transaction_id", "transaction_type", "updated_at"]
 
     model_config = ConfigDict(
@@ -98,8 +98,14 @@ class Transactions(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set([
+            "created_at",
+            "transaction_id",
+            "updated_at",
         ])
 
         _dict = self.model_dump(

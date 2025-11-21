@@ -19,7 +19,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, StrictFloat, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from uuid import UUID
 from typing import Optional, Set
@@ -27,26 +27,26 @@ from typing_extensions import Self
 
 class InstallmentPayments(BaseModel):
     """
-    installment_payments object
+    installment payments resource object
     """ # noqa: E501
-    amount: Optional[Union[StrictFloat, StrictInt]] = None
-    created_at: Optional[datetime] = None
+    amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Amount in the smallest currency unit (e.g., cents for USD, same for XOF)")
+    created_at: Optional[datetime] = Field(default=None, description="ISO 8601 datetime")
     due_date: Optional[StrictStr] = None
-    installment_id: Optional[UUID] = None
+    installment_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
     interest_amount: Optional[Union[StrictFloat, StrictInt]] = None
-    paid_at: Optional[datetime] = None
+    paid_at: Optional[datetime] = Field(default=None, description="ISO 8601 datetime")
     payment_link: Optional[StrictStr] = None
     payment_method_code: Optional[StrictStr] = None
-    plan_id: Optional[UUID] = None
+    plan_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
     principal_amount: Optional[Union[StrictFloat, StrictInt]] = None
     processing_fee: Optional[Union[StrictFloat, StrictInt]] = None
     provider_code: Optional[StrictStr] = None
     sequence_number: Optional[Union[StrictFloat, StrictInt]] = None
-    spi_payment_request_id: Optional[UUID] = None
-    spi_tx_id: Optional[UUID] = None
-    status: Optional[StrictStr] = None
-    transaction_id: Optional[UUID] = None
-    updated_at: Optional[datetime] = None
+    spi_payment_request_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
+    spi_tx_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
+    status: Optional[StrictStr] = Field(default=None, description="Current status of the resource")
+    transaction_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
+    updated_at: Optional[datetime] = Field(default=None, description="ISO 8601 datetime")
     __properties: ClassVar[List[str]] = ["amount", "created_at", "due_date", "installment_id", "interest_amount", "paid_at", "payment_link", "payment_method_code", "plan_id", "principal_amount", "processing_fee", "provider_code", "sequence_number", "spi_payment_request_id", "spi_tx_id", "status", "transaction_id", "updated_at"]
 
     model_config = ConfigDict(
@@ -79,8 +79,12 @@ class InstallmentPayments(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set([
+            "created_at",
+            "updated_at",
         ])
 
         _dict = self.model_dump(

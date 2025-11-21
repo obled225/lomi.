@@ -13,26 +13,27 @@ package lomisdk
 
 import (
 	"encoding/json"
-	"time"
 )
 
 // checks if the CustomerInvoicesUpdate type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CustomerInvoicesUpdate{}
 
-// CustomerInvoicesUpdate Update customer_invoices input
+// CustomerInvoicesUpdate Request body for updating a customer invoices object. Only include fields you want to modify.
 type CustomerInvoicesUpdate struct {
+	// Amount in the smallest currency unit (e.g., cents for USD, same for XOF)
 	Amount *float64 `json:"amount,omitempty"`
-	CreatedAt *time.Time `json:"created_at,omitempty"`
-	CreatedBy *string `json:"created_by,omitempty"`
+	// Three-letter ISO currency code (e.g., XOF, USD, EUR)
 	CurrencyCode *string `json:"currency_code,omitempty"`
+	// Unique identifier (UUID format)
 	CustomerId *string `json:"customer_id,omitempty"`
+	// Unique identifier (UUID format)
 	CustomerInvoiceId *string `json:"customer_invoice_id,omitempty"`
 	Description *string `json:"description,omitempty"`
 	DueDate *string `json:"due_date,omitempty"`
+	// Set of key-value pairs for storing additional information
 	Metadata map[string]interface{} `json:"metadata,omitempty"`
-	OrganizationId *string `json:"organization_id,omitempty"`
+	// Current status of the resource
 	Status *string `json:"status,omitempty"`
-	UpdatedAt *time.Time `json:"updated_at,omitempty"`
 }
 
 // NewCustomerInvoicesUpdate instantiates a new CustomerInvoicesUpdate object
@@ -82,70 +83,6 @@ func (o *CustomerInvoicesUpdate) HasAmount() bool {
 // SetAmount gets a reference to the given float64 and assigns it to the Amount field.
 func (o *CustomerInvoicesUpdate) SetAmount(v float64) {
 	o.Amount = &v
-}
-
-// GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
-func (o *CustomerInvoicesUpdate) GetCreatedAt() time.Time {
-	if o == nil || IsNil(o.CreatedAt) {
-		var ret time.Time
-		return ret
-	}
-	return *o.CreatedAt
-}
-
-// GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CustomerInvoicesUpdate) GetCreatedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.CreatedAt) {
-		return nil, false
-	}
-	return o.CreatedAt, true
-}
-
-// HasCreatedAt returns a boolean if a field has been set.
-func (o *CustomerInvoicesUpdate) HasCreatedAt() bool {
-	if o != nil && !IsNil(o.CreatedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetCreatedAt gets a reference to the given time.Time and assigns it to the CreatedAt field.
-func (o *CustomerInvoicesUpdate) SetCreatedAt(v time.Time) {
-	o.CreatedAt = &v
-}
-
-// GetCreatedBy returns the CreatedBy field value if set, zero value otherwise.
-func (o *CustomerInvoicesUpdate) GetCreatedBy() string {
-	if o == nil || IsNil(o.CreatedBy) {
-		var ret string
-		return ret
-	}
-	return *o.CreatedBy
-}
-
-// GetCreatedByOk returns a tuple with the CreatedBy field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CustomerInvoicesUpdate) GetCreatedByOk() (*string, bool) {
-	if o == nil || IsNil(o.CreatedBy) {
-		return nil, false
-	}
-	return o.CreatedBy, true
-}
-
-// HasCreatedBy returns a boolean if a field has been set.
-func (o *CustomerInvoicesUpdate) HasCreatedBy() bool {
-	if o != nil && !IsNil(o.CreatedBy) {
-		return true
-	}
-
-	return false
-}
-
-// SetCreatedBy gets a reference to the given string and assigns it to the CreatedBy field.
-func (o *CustomerInvoicesUpdate) SetCreatedBy(v string) {
-	o.CreatedBy = &v
 }
 
 // GetCurrencyCode returns the CurrencyCode field value if set, zero value otherwise.
@@ -340,38 +277,6 @@ func (o *CustomerInvoicesUpdate) SetMetadata(v map[string]interface{}) {
 	o.Metadata = v
 }
 
-// GetOrganizationId returns the OrganizationId field value if set, zero value otherwise.
-func (o *CustomerInvoicesUpdate) GetOrganizationId() string {
-	if o == nil || IsNil(o.OrganizationId) {
-		var ret string
-		return ret
-	}
-	return *o.OrganizationId
-}
-
-// GetOrganizationIdOk returns a tuple with the OrganizationId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CustomerInvoicesUpdate) GetOrganizationIdOk() (*string, bool) {
-	if o == nil || IsNil(o.OrganizationId) {
-		return nil, false
-	}
-	return o.OrganizationId, true
-}
-
-// HasOrganizationId returns a boolean if a field has been set.
-func (o *CustomerInvoicesUpdate) HasOrganizationId() bool {
-	if o != nil && !IsNil(o.OrganizationId) {
-		return true
-	}
-
-	return false
-}
-
-// SetOrganizationId gets a reference to the given string and assigns it to the OrganizationId field.
-func (o *CustomerInvoicesUpdate) SetOrganizationId(v string) {
-	o.OrganizationId = &v
-}
-
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *CustomerInvoicesUpdate) GetStatus() string {
 	if o == nil || IsNil(o.Status) {
@@ -404,38 +309,6 @@ func (o *CustomerInvoicesUpdate) SetStatus(v string) {
 	o.Status = &v
 }
 
-// GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.
-func (o *CustomerInvoicesUpdate) GetUpdatedAt() time.Time {
-	if o == nil || IsNil(o.UpdatedAt) {
-		var ret time.Time
-		return ret
-	}
-	return *o.UpdatedAt
-}
-
-// GetUpdatedAtOk returns a tuple with the UpdatedAt field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CustomerInvoicesUpdate) GetUpdatedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.UpdatedAt) {
-		return nil, false
-	}
-	return o.UpdatedAt, true
-}
-
-// HasUpdatedAt returns a boolean if a field has been set.
-func (o *CustomerInvoicesUpdate) HasUpdatedAt() bool {
-	if o != nil && !IsNil(o.UpdatedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetUpdatedAt gets a reference to the given time.Time and assigns it to the UpdatedAt field.
-func (o *CustomerInvoicesUpdate) SetUpdatedAt(v time.Time) {
-	o.UpdatedAt = &v
-}
-
 func (o CustomerInvoicesUpdate) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -448,12 +321,6 @@ func (o CustomerInvoicesUpdate) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Amount) {
 		toSerialize["amount"] = o.Amount
-	}
-	if !IsNil(o.CreatedAt) {
-		toSerialize["created_at"] = o.CreatedAt
-	}
-	if !IsNil(o.CreatedBy) {
-		toSerialize["created_by"] = o.CreatedBy
 	}
 	if !IsNil(o.CurrencyCode) {
 		toSerialize["currency_code"] = o.CurrencyCode
@@ -473,14 +340,8 @@ func (o CustomerInvoicesUpdate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Metadata) {
 		toSerialize["metadata"] = o.Metadata
 	}
-	if !IsNil(o.OrganizationId) {
-		toSerialize["organization_id"] = o.OrganizationId
-	}
 	if !IsNil(o.Status) {
 		toSerialize["status"] = o.Status
-	}
-	if !IsNil(o.UpdatedAt) {
-		toSerialize["updated_at"] = o.UpdatedAt
 	}
 	return toSerialize, nil
 }

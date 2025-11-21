@@ -19,7 +19,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictFloat, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from uuid import UUID
 from typing import Optional, Set
@@ -27,25 +27,25 @@ from typing_extensions import Self
 
 class Products(BaseModel):
     """
-    products object
+    products resource object
     """ # noqa: E501
     billing_frequency: Optional[StrictStr] = None
     charge_day: Optional[Union[StrictFloat, StrictInt]] = None
-    created_at: Optional[datetime] = None
+    created_at: Optional[datetime] = Field(default=None, description="ISO 8601 datetime")
     created_by: Optional[StrictStr] = None
     description: Optional[StrictStr] = None
     display_on_storefront: Optional[StrictBool] = None
     environment: Optional[StrictStr] = None
     failed_payment_action: Optional[StrictStr] = None
     first_payment_type: Optional[StrictStr] = None
-    image_url: Optional[StrictStr] = None
-    is_active: Optional[StrictBool] = None
-    metadata: Optional[Dict[str, Any]] = None
+    image_url: Optional[StrictStr] = Field(default=None, description="URL/URI")
+    is_active: Optional[StrictBool] = Field(default=None, description="Whether this resource is currently active")
+    metadata: Optional[Dict[str, Any]] = Field(default=None, description="Set of key-value pairs for storing additional information")
     name: Optional[StrictStr] = None
-    organization_id: Optional[UUID] = None
-    product_id: Optional[UUID] = None
+    organization_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
+    product_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
     product_type: Optional[StrictStr] = None
-    updated_at: Optional[datetime] = None
+    updated_at: Optional[datetime] = Field(default=None, description="ISO 8601 datetime")
     usage_aggregation: Optional[StrictStr] = None
     usage_unit: Optional[StrictStr] = None
     __properties: ClassVar[List[str]] = ["billing_frequency", "charge_day", "created_at", "created_by", "description", "display_on_storefront", "environment", "failed_payment_action", "first_payment_type", "image_url", "is_active", "metadata", "name", "organization_id", "product_id", "product_type", "updated_at", "usage_aggregation", "usage_unit"]
@@ -80,8 +80,16 @@ class Products(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set([
+            "created_at",
+            "created_by",
+            "product_id",
+            "updated_at",
         ])
 
         _dict = self.model_dump(

@@ -19,31 +19,35 @@ import (
 // checks if the SpiQrCodesCreate type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SpiQrCodesCreate{}
 
-// SpiQrCodesCreate Create spi_qr_codes input
+// SpiQrCodesCreate Request body for creating a spi qr codes object. System-managed fields like `created_at`, `organization_id`, and IDs are automatically set.
 type SpiQrCodesCreate struct {
 	Categorie *string `json:"categorie,omitempty"`
+	// Unique identifier (UUID format)
 	CheckoutSessionId *string `json:"checkout_session_id,omitempty"`
 	ComptePaye *string `json:"compte_paye,omitempty"`
-	CreatedAt *time.Time `json:"created_at,omitempty"`
-	CreatedBy *string `json:"created_by,omitempty"`
-	Environment *string `json:"environment,omitempty"`
+	// ISO 8601 datetime
 	ExpiresAt *time.Time `json:"expires_at,omitempty"`
+	// Whether this resource is currently active
 	IsActive *bool `json:"is_active,omitempty"`
 	IsUsed *bool `json:"is_used,omitempty"`
+	// Set of key-value pairs for storing additional information
 	Metadata map[string]interface{} `json:"metadata,omitempty"`
 	Montant *float64 `json:"montant,omitempty"`
 	Name *string `json:"name,omitempty"`
-	OrganizationId *string `json:"organization_id,omitempty"`
 	PayeurAlias *string `json:"payeur_alias,omitempty"`
+	// Unique identifier (UUID format)
 	PaymentRequestId *string `json:"payment_request_id,omitempty"`
+	// Unique identifier (UUID format)
 	PlanId *string `json:"plan_id,omitempty"`
+	// Unique identifier (UUID format)
 	ProductId *string `json:"product_id,omitempty"`
 	QrCodeData *string `json:"qr_code_data,omitempty"`
+	// Unique identifier (UUID format)
 	QrCodeId *string `json:"qr_code_id,omitempty"`
 	QrCodeImageData *string `json:"qr_code_image_data,omitempty"`
+	// URL/URI
 	QrCodeImageUrl *string `json:"qr_code_image_url,omitempty"`
 	QrCodeType *string `json:"qr_code_type,omitempty"`
-	UpdatedAt *time.Time `json:"updated_at,omitempty"`
 }
 
 // NewSpiQrCodesCreate instantiates a new SpiQrCodesCreate object
@@ -157,102 +161,6 @@ func (o *SpiQrCodesCreate) HasComptePaye() bool {
 // SetComptePaye gets a reference to the given string and assigns it to the ComptePaye field.
 func (o *SpiQrCodesCreate) SetComptePaye(v string) {
 	o.ComptePaye = &v
-}
-
-// GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
-func (o *SpiQrCodesCreate) GetCreatedAt() time.Time {
-	if o == nil || IsNil(o.CreatedAt) {
-		var ret time.Time
-		return ret
-	}
-	return *o.CreatedAt
-}
-
-// GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *SpiQrCodesCreate) GetCreatedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.CreatedAt) {
-		return nil, false
-	}
-	return o.CreatedAt, true
-}
-
-// HasCreatedAt returns a boolean if a field has been set.
-func (o *SpiQrCodesCreate) HasCreatedAt() bool {
-	if o != nil && !IsNil(o.CreatedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetCreatedAt gets a reference to the given time.Time and assigns it to the CreatedAt field.
-func (o *SpiQrCodesCreate) SetCreatedAt(v time.Time) {
-	o.CreatedAt = &v
-}
-
-// GetCreatedBy returns the CreatedBy field value if set, zero value otherwise.
-func (o *SpiQrCodesCreate) GetCreatedBy() string {
-	if o == nil || IsNil(o.CreatedBy) {
-		var ret string
-		return ret
-	}
-	return *o.CreatedBy
-}
-
-// GetCreatedByOk returns a tuple with the CreatedBy field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *SpiQrCodesCreate) GetCreatedByOk() (*string, bool) {
-	if o == nil || IsNil(o.CreatedBy) {
-		return nil, false
-	}
-	return o.CreatedBy, true
-}
-
-// HasCreatedBy returns a boolean if a field has been set.
-func (o *SpiQrCodesCreate) HasCreatedBy() bool {
-	if o != nil && !IsNil(o.CreatedBy) {
-		return true
-	}
-
-	return false
-}
-
-// SetCreatedBy gets a reference to the given string and assigns it to the CreatedBy field.
-func (o *SpiQrCodesCreate) SetCreatedBy(v string) {
-	o.CreatedBy = &v
-}
-
-// GetEnvironment returns the Environment field value if set, zero value otherwise.
-func (o *SpiQrCodesCreate) GetEnvironment() string {
-	if o == nil || IsNil(o.Environment) {
-		var ret string
-		return ret
-	}
-	return *o.Environment
-}
-
-// GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *SpiQrCodesCreate) GetEnvironmentOk() (*string, bool) {
-	if o == nil || IsNil(o.Environment) {
-		return nil, false
-	}
-	return o.Environment, true
-}
-
-// HasEnvironment returns a boolean if a field has been set.
-func (o *SpiQrCodesCreate) HasEnvironment() bool {
-	if o != nil && !IsNil(o.Environment) {
-		return true
-	}
-
-	return false
-}
-
-// SetEnvironment gets a reference to the given string and assigns it to the Environment field.
-func (o *SpiQrCodesCreate) SetEnvironment(v string) {
-	o.Environment = &v
 }
 
 // GetExpiresAt returns the ExpiresAt field value if set, zero value otherwise.
@@ -445,38 +353,6 @@ func (o *SpiQrCodesCreate) HasName() bool {
 // SetName gets a reference to the given string and assigns it to the Name field.
 func (o *SpiQrCodesCreate) SetName(v string) {
 	o.Name = &v
-}
-
-// GetOrganizationId returns the OrganizationId field value if set, zero value otherwise.
-func (o *SpiQrCodesCreate) GetOrganizationId() string {
-	if o == nil || IsNil(o.OrganizationId) {
-		var ret string
-		return ret
-	}
-	return *o.OrganizationId
-}
-
-// GetOrganizationIdOk returns a tuple with the OrganizationId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *SpiQrCodesCreate) GetOrganizationIdOk() (*string, bool) {
-	if o == nil || IsNil(o.OrganizationId) {
-		return nil, false
-	}
-	return o.OrganizationId, true
-}
-
-// HasOrganizationId returns a boolean if a field has been set.
-func (o *SpiQrCodesCreate) HasOrganizationId() bool {
-	if o != nil && !IsNil(o.OrganizationId) {
-		return true
-	}
-
-	return false
-}
-
-// SetOrganizationId gets a reference to the given string and assigns it to the OrganizationId field.
-func (o *SpiQrCodesCreate) SetOrganizationId(v string) {
-	o.OrganizationId = &v
 }
 
 // GetPayeurAlias returns the PayeurAlias field value if set, zero value otherwise.
@@ -767,38 +643,6 @@ func (o *SpiQrCodesCreate) SetQrCodeType(v string) {
 	o.QrCodeType = &v
 }
 
-// GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.
-func (o *SpiQrCodesCreate) GetUpdatedAt() time.Time {
-	if o == nil || IsNil(o.UpdatedAt) {
-		var ret time.Time
-		return ret
-	}
-	return *o.UpdatedAt
-}
-
-// GetUpdatedAtOk returns a tuple with the UpdatedAt field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *SpiQrCodesCreate) GetUpdatedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.UpdatedAt) {
-		return nil, false
-	}
-	return o.UpdatedAt, true
-}
-
-// HasUpdatedAt returns a boolean if a field has been set.
-func (o *SpiQrCodesCreate) HasUpdatedAt() bool {
-	if o != nil && !IsNil(o.UpdatedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetUpdatedAt gets a reference to the given time.Time and assigns it to the UpdatedAt field.
-func (o *SpiQrCodesCreate) SetUpdatedAt(v time.Time) {
-	o.UpdatedAt = &v
-}
-
 func (o SpiQrCodesCreate) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -818,15 +662,6 @@ func (o SpiQrCodesCreate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ComptePaye) {
 		toSerialize["compte_paye"] = o.ComptePaye
 	}
-	if !IsNil(o.CreatedAt) {
-		toSerialize["created_at"] = o.CreatedAt
-	}
-	if !IsNil(o.CreatedBy) {
-		toSerialize["created_by"] = o.CreatedBy
-	}
-	if !IsNil(o.Environment) {
-		toSerialize["environment"] = o.Environment
-	}
 	if !IsNil(o.ExpiresAt) {
 		toSerialize["expires_at"] = o.ExpiresAt
 	}
@@ -844,9 +679,6 @@ func (o SpiQrCodesCreate) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
-	}
-	if !IsNil(o.OrganizationId) {
-		toSerialize["organization_id"] = o.OrganizationId
 	}
 	if !IsNil(o.PayeurAlias) {
 		toSerialize["payeur_alias"] = o.PayeurAlias
@@ -874,9 +706,6 @@ func (o SpiQrCodesCreate) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.QrCodeType) {
 		toSerialize["qr_code_type"] = o.QrCodeType
-	}
-	if !IsNil(o.UpdatedAt) {
-		toSerialize["updated_at"] = o.UpdatedAt
 	}
 	return toSerialize, nil
 }

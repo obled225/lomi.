@@ -19,7 +19,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictFloat, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from uuid import UUID
 from typing import Optional, Set
@@ -27,27 +27,27 @@ from typing_extensions import Self
 
 class WebhookDeliveryLogs(BaseModel):
     """
-    webhook_delivery_logs object
+    webhook delivery logs resource object
     """ # noqa: E501
     attempt_number: Optional[Union[StrictFloat, StrictInt]] = None
     compte_paye: Optional[StrictStr] = None
     compte_payeur: Optional[StrictStr] = None
-    created_at: Optional[datetime] = None
+    created_at: Optional[datetime] = Field(default=None, description="ISO 8601 datetime")
     event_type: Optional[StrictStr] = None
     headers: Optional[Dict[str, Any]] = None
     ip_address: Optional[StrictStr] = None
-    log_id: Optional[UUID] = None
+    log_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
     montant: Optional[Union[StrictFloat, StrictInt]] = None
-    organization_id: Optional[UUID] = None
+    organization_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
     payload: Optional[Dict[str, Any]] = None
     request_duration_ms: Optional[Union[StrictFloat, StrictInt]] = None
     response_body: Optional[StrictStr] = None
     response_status: Optional[Union[StrictFloat, StrictInt]] = None
     spi_event_code: Optional[StrictStr] = None
-    spi_tx_id: Optional[UUID] = None
+    spi_tx_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
     success: Optional[StrictBool] = None
     user_agent: Optional[StrictStr] = None
-    webhook_id: Optional[UUID] = None
+    webhook_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
     __properties: ClassVar[List[str]] = ["attempt_number", "compte_paye", "compte_payeur", "created_at", "event_type", "headers", "ip_address", "log_id", "montant", "organization_id", "payload", "request_duration_ms", "response_body", "response_status", "spi_event_code", "spi_tx_id", "success", "user_agent", "webhook_id"]
 
     model_config = ConfigDict(
@@ -80,8 +80,10 @@ class WebhookDeliveryLogs(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set([
+            "created_at",
         ])
 
         _dict = self.model_dump(

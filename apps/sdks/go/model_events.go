@@ -19,16 +19,22 @@ import (
 // checks if the Events type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Events{}
 
-// Events events object
+// Events events resource object
 type Events struct {
+	// ISO 8601 datetime
 	CreatedAt *time.Time `json:"created_at,omitempty"`
 	CreatedBy *string `json:"created_by,omitempty"`
+	// Unique identifier (UUID format)
 	CustomerId *string `json:"customer_id,omitempty"`
 	EventData map[string]interface{} `json:"event_data,omitempty"`
+	// Unique identifier (UUID format)
 	EventId *string `json:"event_id,omitempty"`
 	EventName *string `json:"event_name,omitempty"`
+	// Set of key-value pairs for storing additional information
 	Metadata map[string]interface{} `json:"metadata,omitempty"`
+	// Unique identifier (UUID format)
 	OrganizationId *string `json:"organization_id,omitempty"`
+	// Unique identifier (UUID format)
 	ProductId *string `json:"product_id,omitempty"`
 }
 

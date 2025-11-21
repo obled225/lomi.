@@ -19,27 +19,26 @@ import (
 // checks if the DiscountCouponsUpdate type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DiscountCouponsUpdate{}
 
-// DiscountCouponsUpdate Update discount_coupons input
+// DiscountCouponsUpdate Request body for updating a discount coupons object. Only include fields you want to modify.
 type DiscountCouponsUpdate struct {
 	AppliesToProductTypes *string `json:"applies_to_product_types,omitempty"`
 	Code *string `json:"code,omitempty"`
+	// Unique identifier (UUID format)
 	CouponId *string `json:"coupon_id,omitempty"`
-	CreatedAt *time.Time `json:"created_at,omitempty"`
 	CurrentUses *float64 `json:"current_uses,omitempty"`
 	CustomerType *string `json:"customer_type,omitempty"`
 	Description *string `json:"description,omitempty"`
 	DiscountFixedAmount *float64 `json:"discount_fixed_amount,omitempty"`
 	DiscountPercentage *float64 `json:"discount_percentage,omitempty"`
 	DiscountType *string `json:"discount_type,omitempty"`
-	Environment *string `json:"environment,omitempty"`
+	// ISO 8601 datetime
 	ExpiresAt *time.Time `json:"expires_at,omitempty"`
+	// Whether this resource is currently active
 	IsActive *bool `json:"is_active,omitempty"`
 	IsOrganizationWide *bool `json:"is_organization_wide,omitempty"`
 	MaxQuantityPerUse *float64 `json:"max_quantity_per_use,omitempty"`
 	MaxUses *float64 `json:"max_uses,omitempty"`
-	OrganizationId *string `json:"organization_id,omitempty"`
 	ScopeType *string `json:"scope_type,omitempty"`
-	UpdatedAt *time.Time `json:"updated_at,omitempty"`
 	UsageFrequencyLimit *string `json:"usage_frequency_limit,omitempty"`
 	UsageLimitValue *float64 `json:"usage_limit_value,omitempty"`
 	ValidFrom *string `json:"valid_from,omitempty"`
@@ -156,38 +155,6 @@ func (o *DiscountCouponsUpdate) HasCouponId() bool {
 // SetCouponId gets a reference to the given string and assigns it to the CouponId field.
 func (o *DiscountCouponsUpdate) SetCouponId(v string) {
 	o.CouponId = &v
-}
-
-// GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
-func (o *DiscountCouponsUpdate) GetCreatedAt() time.Time {
-	if o == nil || IsNil(o.CreatedAt) {
-		var ret time.Time
-		return ret
-	}
-	return *o.CreatedAt
-}
-
-// GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *DiscountCouponsUpdate) GetCreatedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.CreatedAt) {
-		return nil, false
-	}
-	return o.CreatedAt, true
-}
-
-// HasCreatedAt returns a boolean if a field has been set.
-func (o *DiscountCouponsUpdate) HasCreatedAt() bool {
-	if o != nil && !IsNil(o.CreatedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetCreatedAt gets a reference to the given time.Time and assigns it to the CreatedAt field.
-func (o *DiscountCouponsUpdate) SetCreatedAt(v time.Time) {
-	o.CreatedAt = &v
 }
 
 // GetCurrentUses returns the CurrentUses field value if set, zero value otherwise.
@@ -382,38 +349,6 @@ func (o *DiscountCouponsUpdate) SetDiscountType(v string) {
 	o.DiscountType = &v
 }
 
-// GetEnvironment returns the Environment field value if set, zero value otherwise.
-func (o *DiscountCouponsUpdate) GetEnvironment() string {
-	if o == nil || IsNil(o.Environment) {
-		var ret string
-		return ret
-	}
-	return *o.Environment
-}
-
-// GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *DiscountCouponsUpdate) GetEnvironmentOk() (*string, bool) {
-	if o == nil || IsNil(o.Environment) {
-		return nil, false
-	}
-	return o.Environment, true
-}
-
-// HasEnvironment returns a boolean if a field has been set.
-func (o *DiscountCouponsUpdate) HasEnvironment() bool {
-	if o != nil && !IsNil(o.Environment) {
-		return true
-	}
-
-	return false
-}
-
-// SetEnvironment gets a reference to the given string and assigns it to the Environment field.
-func (o *DiscountCouponsUpdate) SetEnvironment(v string) {
-	o.Environment = &v
-}
-
 // GetExpiresAt returns the ExpiresAt field value if set, zero value otherwise.
 func (o *DiscountCouponsUpdate) GetExpiresAt() time.Time {
 	if o == nil || IsNil(o.ExpiresAt) {
@@ -574,38 +509,6 @@ func (o *DiscountCouponsUpdate) SetMaxUses(v float64) {
 	o.MaxUses = &v
 }
 
-// GetOrganizationId returns the OrganizationId field value if set, zero value otherwise.
-func (o *DiscountCouponsUpdate) GetOrganizationId() string {
-	if o == nil || IsNil(o.OrganizationId) {
-		var ret string
-		return ret
-	}
-	return *o.OrganizationId
-}
-
-// GetOrganizationIdOk returns a tuple with the OrganizationId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *DiscountCouponsUpdate) GetOrganizationIdOk() (*string, bool) {
-	if o == nil || IsNil(o.OrganizationId) {
-		return nil, false
-	}
-	return o.OrganizationId, true
-}
-
-// HasOrganizationId returns a boolean if a field has been set.
-func (o *DiscountCouponsUpdate) HasOrganizationId() bool {
-	if o != nil && !IsNil(o.OrganizationId) {
-		return true
-	}
-
-	return false
-}
-
-// SetOrganizationId gets a reference to the given string and assigns it to the OrganizationId field.
-func (o *DiscountCouponsUpdate) SetOrganizationId(v string) {
-	o.OrganizationId = &v
-}
-
 // GetScopeType returns the ScopeType field value if set, zero value otherwise.
 func (o *DiscountCouponsUpdate) GetScopeType() string {
 	if o == nil || IsNil(o.ScopeType) {
@@ -636,38 +539,6 @@ func (o *DiscountCouponsUpdate) HasScopeType() bool {
 // SetScopeType gets a reference to the given string and assigns it to the ScopeType field.
 func (o *DiscountCouponsUpdate) SetScopeType(v string) {
 	o.ScopeType = &v
-}
-
-// GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.
-func (o *DiscountCouponsUpdate) GetUpdatedAt() time.Time {
-	if o == nil || IsNil(o.UpdatedAt) {
-		var ret time.Time
-		return ret
-	}
-	return *o.UpdatedAt
-}
-
-// GetUpdatedAtOk returns a tuple with the UpdatedAt field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *DiscountCouponsUpdate) GetUpdatedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.UpdatedAt) {
-		return nil, false
-	}
-	return o.UpdatedAt, true
-}
-
-// HasUpdatedAt returns a boolean if a field has been set.
-func (o *DiscountCouponsUpdate) HasUpdatedAt() bool {
-	if o != nil && !IsNil(o.UpdatedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetUpdatedAt gets a reference to the given time.Time and assigns it to the UpdatedAt field.
-func (o *DiscountCouponsUpdate) SetUpdatedAt(v time.Time) {
-	o.UpdatedAt = &v
 }
 
 // GetUsageFrequencyLimit returns the UsageFrequencyLimit field value if set, zero value otherwise.
@@ -785,9 +656,6 @@ func (o DiscountCouponsUpdate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CouponId) {
 		toSerialize["coupon_id"] = o.CouponId
 	}
-	if !IsNil(o.CreatedAt) {
-		toSerialize["created_at"] = o.CreatedAt
-	}
 	if !IsNil(o.CurrentUses) {
 		toSerialize["current_uses"] = o.CurrentUses
 	}
@@ -806,9 +674,6 @@ func (o DiscountCouponsUpdate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.DiscountType) {
 		toSerialize["discount_type"] = o.DiscountType
 	}
-	if !IsNil(o.Environment) {
-		toSerialize["environment"] = o.Environment
-	}
 	if !IsNil(o.ExpiresAt) {
 		toSerialize["expires_at"] = o.ExpiresAt
 	}
@@ -824,14 +689,8 @@ func (o DiscountCouponsUpdate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.MaxUses) {
 		toSerialize["max_uses"] = o.MaxUses
 	}
-	if !IsNil(o.OrganizationId) {
-		toSerialize["organization_id"] = o.OrganizationId
-	}
 	if !IsNil(o.ScopeType) {
 		toSerialize["scope_type"] = o.ScopeType
-	}
-	if !IsNil(o.UpdatedAt) {
-		toSerialize["updated_at"] = o.UpdatedAt
 	}
 	if !IsNil(o.UsageFrequencyLimit) {
 		toSerialize["usage_frequency_limit"] = o.UsageFrequencyLimit

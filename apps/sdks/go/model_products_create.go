@@ -13,31 +13,27 @@ package lomisdk
 
 import (
 	"encoding/json"
-	"time"
 )
 
 // checks if the ProductsCreate type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ProductsCreate{}
 
-// ProductsCreate Create products input
+// ProductsCreate Request body for creating a products object. System-managed fields like `created_at`, `organization_id`, and IDs are automatically set.
 type ProductsCreate struct {
 	BillingFrequency *string `json:"billing_frequency,omitempty"`
 	ChargeDay *float64 `json:"charge_day,omitempty"`
-	CreatedAt *time.Time `json:"created_at,omitempty"`
-	CreatedBy *string `json:"created_by,omitempty"`
 	Description *string `json:"description,omitempty"`
 	DisplayOnStorefront *bool `json:"display_on_storefront,omitempty"`
-	Environment *string `json:"environment,omitempty"`
 	FailedPaymentAction *string `json:"failed_payment_action,omitempty"`
 	FirstPaymentType *string `json:"first_payment_type,omitempty"`
+	// URL/URI
 	ImageUrl *string `json:"image_url,omitempty"`
+	// Whether this resource is currently active
 	IsActive *bool `json:"is_active,omitempty"`
+	// Set of key-value pairs for storing additional information
 	Metadata map[string]interface{} `json:"metadata,omitempty"`
 	Name *string `json:"name,omitempty"`
-	OrganizationId *string `json:"organization_id,omitempty"`
-	ProductId *string `json:"product_id,omitempty"`
 	ProductType *string `json:"product_type,omitempty"`
-	UpdatedAt *time.Time `json:"updated_at,omitempty"`
 	UsageAggregation *string `json:"usage_aggregation,omitempty"`
 	UsageUnit *string `json:"usage_unit,omitempty"`
 }
@@ -123,70 +119,6 @@ func (o *ProductsCreate) SetChargeDay(v float64) {
 	o.ChargeDay = &v
 }
 
-// GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
-func (o *ProductsCreate) GetCreatedAt() time.Time {
-	if o == nil || IsNil(o.CreatedAt) {
-		var ret time.Time
-		return ret
-	}
-	return *o.CreatedAt
-}
-
-// GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ProductsCreate) GetCreatedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.CreatedAt) {
-		return nil, false
-	}
-	return o.CreatedAt, true
-}
-
-// HasCreatedAt returns a boolean if a field has been set.
-func (o *ProductsCreate) HasCreatedAt() bool {
-	if o != nil && !IsNil(o.CreatedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetCreatedAt gets a reference to the given time.Time and assigns it to the CreatedAt field.
-func (o *ProductsCreate) SetCreatedAt(v time.Time) {
-	o.CreatedAt = &v
-}
-
-// GetCreatedBy returns the CreatedBy field value if set, zero value otherwise.
-func (o *ProductsCreate) GetCreatedBy() string {
-	if o == nil || IsNil(o.CreatedBy) {
-		var ret string
-		return ret
-	}
-	return *o.CreatedBy
-}
-
-// GetCreatedByOk returns a tuple with the CreatedBy field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ProductsCreate) GetCreatedByOk() (*string, bool) {
-	if o == nil || IsNil(o.CreatedBy) {
-		return nil, false
-	}
-	return o.CreatedBy, true
-}
-
-// HasCreatedBy returns a boolean if a field has been set.
-func (o *ProductsCreate) HasCreatedBy() bool {
-	if o != nil && !IsNil(o.CreatedBy) {
-		return true
-	}
-
-	return false
-}
-
-// SetCreatedBy gets a reference to the given string and assigns it to the CreatedBy field.
-func (o *ProductsCreate) SetCreatedBy(v string) {
-	o.CreatedBy = &v
-}
-
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *ProductsCreate) GetDescription() string {
 	if o == nil || IsNil(o.Description) {
@@ -249,38 +181,6 @@ func (o *ProductsCreate) HasDisplayOnStorefront() bool {
 // SetDisplayOnStorefront gets a reference to the given bool and assigns it to the DisplayOnStorefront field.
 func (o *ProductsCreate) SetDisplayOnStorefront(v bool) {
 	o.DisplayOnStorefront = &v
-}
-
-// GetEnvironment returns the Environment field value if set, zero value otherwise.
-func (o *ProductsCreate) GetEnvironment() string {
-	if o == nil || IsNil(o.Environment) {
-		var ret string
-		return ret
-	}
-	return *o.Environment
-}
-
-// GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ProductsCreate) GetEnvironmentOk() (*string, bool) {
-	if o == nil || IsNil(o.Environment) {
-		return nil, false
-	}
-	return o.Environment, true
-}
-
-// HasEnvironment returns a boolean if a field has been set.
-func (o *ProductsCreate) HasEnvironment() bool {
-	if o != nil && !IsNil(o.Environment) {
-		return true
-	}
-
-	return false
-}
-
-// SetEnvironment gets a reference to the given string and assigns it to the Environment field.
-func (o *ProductsCreate) SetEnvironment(v string) {
-	o.Environment = &v
 }
 
 // GetFailedPaymentAction returns the FailedPaymentAction field value if set, zero value otherwise.
@@ -475,70 +375,6 @@ func (o *ProductsCreate) SetName(v string) {
 	o.Name = &v
 }
 
-// GetOrganizationId returns the OrganizationId field value if set, zero value otherwise.
-func (o *ProductsCreate) GetOrganizationId() string {
-	if o == nil || IsNil(o.OrganizationId) {
-		var ret string
-		return ret
-	}
-	return *o.OrganizationId
-}
-
-// GetOrganizationIdOk returns a tuple with the OrganizationId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ProductsCreate) GetOrganizationIdOk() (*string, bool) {
-	if o == nil || IsNil(o.OrganizationId) {
-		return nil, false
-	}
-	return o.OrganizationId, true
-}
-
-// HasOrganizationId returns a boolean if a field has been set.
-func (o *ProductsCreate) HasOrganizationId() bool {
-	if o != nil && !IsNil(o.OrganizationId) {
-		return true
-	}
-
-	return false
-}
-
-// SetOrganizationId gets a reference to the given string and assigns it to the OrganizationId field.
-func (o *ProductsCreate) SetOrganizationId(v string) {
-	o.OrganizationId = &v
-}
-
-// GetProductId returns the ProductId field value if set, zero value otherwise.
-func (o *ProductsCreate) GetProductId() string {
-	if o == nil || IsNil(o.ProductId) {
-		var ret string
-		return ret
-	}
-	return *o.ProductId
-}
-
-// GetProductIdOk returns a tuple with the ProductId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ProductsCreate) GetProductIdOk() (*string, bool) {
-	if o == nil || IsNil(o.ProductId) {
-		return nil, false
-	}
-	return o.ProductId, true
-}
-
-// HasProductId returns a boolean if a field has been set.
-func (o *ProductsCreate) HasProductId() bool {
-	if o != nil && !IsNil(o.ProductId) {
-		return true
-	}
-
-	return false
-}
-
-// SetProductId gets a reference to the given string and assigns it to the ProductId field.
-func (o *ProductsCreate) SetProductId(v string) {
-	o.ProductId = &v
-}
-
 // GetProductType returns the ProductType field value if set, zero value otherwise.
 func (o *ProductsCreate) GetProductType() string {
 	if o == nil || IsNil(o.ProductType) {
@@ -569,38 +405,6 @@ func (o *ProductsCreate) HasProductType() bool {
 // SetProductType gets a reference to the given string and assigns it to the ProductType field.
 func (o *ProductsCreate) SetProductType(v string) {
 	o.ProductType = &v
-}
-
-// GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.
-func (o *ProductsCreate) GetUpdatedAt() time.Time {
-	if o == nil || IsNil(o.UpdatedAt) {
-		var ret time.Time
-		return ret
-	}
-	return *o.UpdatedAt
-}
-
-// GetUpdatedAtOk returns a tuple with the UpdatedAt field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ProductsCreate) GetUpdatedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.UpdatedAt) {
-		return nil, false
-	}
-	return o.UpdatedAt, true
-}
-
-// HasUpdatedAt returns a boolean if a field has been set.
-func (o *ProductsCreate) HasUpdatedAt() bool {
-	if o != nil && !IsNil(o.UpdatedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetUpdatedAt gets a reference to the given time.Time and assigns it to the UpdatedAt field.
-func (o *ProductsCreate) SetUpdatedAt(v time.Time) {
-	o.UpdatedAt = &v
 }
 
 // GetUsageAggregation returns the UsageAggregation field value if set, zero value otherwise.
@@ -683,20 +487,11 @@ func (o ProductsCreate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ChargeDay) {
 		toSerialize["charge_day"] = o.ChargeDay
 	}
-	if !IsNil(o.CreatedAt) {
-		toSerialize["created_at"] = o.CreatedAt
-	}
-	if !IsNil(o.CreatedBy) {
-		toSerialize["created_by"] = o.CreatedBy
-	}
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
 	if !IsNil(o.DisplayOnStorefront) {
 		toSerialize["display_on_storefront"] = o.DisplayOnStorefront
-	}
-	if !IsNil(o.Environment) {
-		toSerialize["environment"] = o.Environment
 	}
 	if !IsNil(o.FailedPaymentAction) {
 		toSerialize["failed_payment_action"] = o.FailedPaymentAction
@@ -716,17 +511,8 @@ func (o ProductsCreate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
-	if !IsNil(o.OrganizationId) {
-		toSerialize["organization_id"] = o.OrganizationId
-	}
-	if !IsNil(o.ProductId) {
-		toSerialize["product_id"] = o.ProductId
-	}
 	if !IsNil(o.ProductType) {
 		toSerialize["product_type"] = o.ProductType
-	}
-	if !IsNil(o.UpdatedAt) {
-		toSerialize["updated_at"] = o.UpdatedAt
 	}
 	if !IsNil(o.UsageAggregation) {
 		toSerialize["usage_aggregation"] = o.UsageAggregation

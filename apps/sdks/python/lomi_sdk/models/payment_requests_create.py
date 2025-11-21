@@ -18,8 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictFloat, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from uuid import UUID
 from typing import Optional, Set
@@ -27,22 +26,17 @@ from typing_extensions import Self
 
 class PaymentRequestsCreate(BaseModel):
     """
-    Create payment_requests input
+    Request body for creating a payment requests object. System-managed fields like `created_at`, `organization_id`, and IDs are automatically set.
     """ # noqa: E501
-    amount: Optional[Union[StrictFloat, StrictInt]] = None
-    created_at: Optional[datetime] = None
-    created_by: Optional[StrictStr] = None
-    currency_code: Optional[StrictStr] = None
-    customer_id: Optional[UUID] = None
+    amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Amount in the smallest currency unit (e.g., cents for USD, same for XOF)")
+    currency_code: Optional[StrictStr] = Field(default=None, description="Three-letter ISO currency code (e.g., XOF, USD, EUR)")
+    customer_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
     description: Optional[StrictStr] = None
-    environment: Optional[StrictStr] = None
     expiry_date: Optional[StrictStr] = None
-    organization_id: Optional[UUID] = None
     payment_link: Optional[StrictStr] = None
     payment_reference: Optional[StrictStr] = None
-    request_id: Optional[UUID] = None
     spi_account_number: Optional[StrictStr] = None
-    spi_bulk_instruction_id: Optional[UUID] = None
+    spi_bulk_instruction_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
     spi_confirmation: Optional[StrictBool] = None
     spi_date_envoi: Optional[StrictStr] = None
     spi_date_irrevocabilite: Optional[StrictStr] = None
@@ -50,7 +44,7 @@ class PaymentRequestsCreate(BaseModel):
     spi_date_limite_reponse: Optional[StrictStr] = None
     spi_date_rejet: Optional[StrictStr] = None
     spi_debit_differe: Optional[StrictBool] = None
-    spi_end2end_id: Optional[UUID] = None
+    spi_end2end_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
     spi_payeur_alias: Optional[StrictStr] = None
     spi_payeur_nom: Optional[StrictStr] = None
     spi_payeur_pays: Optional[StrictStr] = None
@@ -61,10 +55,9 @@ class PaymentRequestsCreate(BaseModel):
     spi_rejection_reason: Optional[StrictStr] = None
     spi_remise_amount: Optional[Union[StrictFloat, StrictInt]] = None
     spi_remise_rate: Optional[Union[StrictFloat, StrictInt]] = None
-    spi_tx_id: Optional[UUID] = None
-    status: Optional[StrictStr] = None
-    updated_at: Optional[datetime] = None
-    __properties: ClassVar[List[str]] = ["amount", "created_at", "created_by", "currency_code", "customer_id", "description", "environment", "expiry_date", "organization_id", "payment_link", "payment_reference", "request_id", "spi_account_number", "spi_bulk_instruction_id", "spi_confirmation", "spi_date_envoi", "spi_date_irrevocabilite", "spi_date_limite_paiement", "spi_date_limite_reponse", "spi_date_rejet", "spi_debit_differe", "spi_end2end_id", "spi_payeur_alias", "spi_payeur_nom", "spi_payeur_pays", "spi_payment_request_category", "spi_payment_status", "spi_ref_doc_numero", "spi_ref_doc_type", "spi_rejection_reason", "spi_remise_amount", "spi_remise_rate", "spi_tx_id", "status", "updated_at"]
+    spi_tx_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
+    status: Optional[StrictStr] = Field(default=None, description="Current status of the resource")
+    __properties: ClassVar[List[str]] = ["amount", "currency_code", "customer_id", "description", "expiry_date", "payment_link", "payment_reference", "spi_account_number", "spi_bulk_instruction_id", "spi_confirmation", "spi_date_envoi", "spi_date_irrevocabilite", "spi_date_limite_paiement", "spi_date_limite_reponse", "spi_date_rejet", "spi_debit_differe", "spi_end2end_id", "spi_payeur_alias", "spi_payeur_nom", "spi_payeur_pays", "spi_payment_request_category", "spi_payment_status", "spi_ref_doc_numero", "spi_ref_doc_type", "spi_rejection_reason", "spi_remise_amount", "spi_remise_rate", "spi_tx_id", "status"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -118,17 +111,12 @@ class PaymentRequestsCreate(BaseModel):
 
         _obj = cls.model_validate({
             "amount": obj.get("amount"),
-            "created_at": obj.get("created_at"),
-            "created_by": obj.get("created_by"),
             "currency_code": obj.get("currency_code"),
             "customer_id": obj.get("customer_id"),
             "description": obj.get("description"),
-            "environment": obj.get("environment"),
             "expiry_date": obj.get("expiry_date"),
-            "organization_id": obj.get("organization_id"),
             "payment_link": obj.get("payment_link"),
             "payment_reference": obj.get("payment_reference"),
-            "request_id": obj.get("request_id"),
             "spi_account_number": obj.get("spi_account_number"),
             "spi_bulk_instruction_id": obj.get("spi_bulk_instruction_id"),
             "spi_confirmation": obj.get("spi_confirmation"),
@@ -150,8 +138,7 @@ class PaymentRequestsCreate(BaseModel):
             "spi_remise_amount": obj.get("spi_remise_amount"),
             "spi_remise_rate": obj.get("spi_remise_rate"),
             "spi_tx_id": obj.get("spi_tx_id"),
-            "status": obj.get("status"),
-            "updated_at": obj.get("updated_at")
+            "status": obj.get("status")
         })
         return _obj
 

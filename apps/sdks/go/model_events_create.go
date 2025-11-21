@@ -13,22 +13,22 @@ package lomisdk
 
 import (
 	"encoding/json"
-	"time"
 )
 
 // checks if the EventsCreate type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &EventsCreate{}
 
-// EventsCreate Create events input
+// EventsCreate Request body for creating a events object. System-managed fields like `created_at`, `organization_id`, and IDs are automatically set.
 type EventsCreate struct {
-	CreatedAt *time.Time `json:"created_at,omitempty"`
-	CreatedBy *string `json:"created_by,omitempty"`
+	// Unique identifier (UUID format)
 	CustomerId *string `json:"customer_id,omitempty"`
 	EventData map[string]interface{} `json:"event_data,omitempty"`
+	// Unique identifier (UUID format)
 	EventId *string `json:"event_id,omitempty"`
 	EventName *string `json:"event_name,omitempty"`
+	// Set of key-value pairs for storing additional information
 	Metadata map[string]interface{} `json:"metadata,omitempty"`
-	OrganizationId *string `json:"organization_id,omitempty"`
+	// Unique identifier (UUID format)
 	ProductId *string `json:"product_id,omitempty"`
 }
 
@@ -47,70 +47,6 @@ func NewEventsCreate() *EventsCreate {
 func NewEventsCreateWithDefaults() *EventsCreate {
 	this := EventsCreate{}
 	return &this
-}
-
-// GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
-func (o *EventsCreate) GetCreatedAt() time.Time {
-	if o == nil || IsNil(o.CreatedAt) {
-		var ret time.Time
-		return ret
-	}
-	return *o.CreatedAt
-}
-
-// GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *EventsCreate) GetCreatedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.CreatedAt) {
-		return nil, false
-	}
-	return o.CreatedAt, true
-}
-
-// HasCreatedAt returns a boolean if a field has been set.
-func (o *EventsCreate) HasCreatedAt() bool {
-	if o != nil && !IsNil(o.CreatedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetCreatedAt gets a reference to the given time.Time and assigns it to the CreatedAt field.
-func (o *EventsCreate) SetCreatedAt(v time.Time) {
-	o.CreatedAt = &v
-}
-
-// GetCreatedBy returns the CreatedBy field value if set, zero value otherwise.
-func (o *EventsCreate) GetCreatedBy() string {
-	if o == nil || IsNil(o.CreatedBy) {
-		var ret string
-		return ret
-	}
-	return *o.CreatedBy
-}
-
-// GetCreatedByOk returns a tuple with the CreatedBy field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *EventsCreate) GetCreatedByOk() (*string, bool) {
-	if o == nil || IsNil(o.CreatedBy) {
-		return nil, false
-	}
-	return o.CreatedBy, true
-}
-
-// HasCreatedBy returns a boolean if a field has been set.
-func (o *EventsCreate) HasCreatedBy() bool {
-	if o != nil && !IsNil(o.CreatedBy) {
-		return true
-	}
-
-	return false
-}
-
-// SetCreatedBy gets a reference to the given string and assigns it to the CreatedBy field.
-func (o *EventsCreate) SetCreatedBy(v string) {
-	o.CreatedBy = &v
 }
 
 // GetCustomerId returns the CustomerId field value if set, zero value otherwise.
@@ -273,38 +209,6 @@ func (o *EventsCreate) SetMetadata(v map[string]interface{}) {
 	o.Metadata = v
 }
 
-// GetOrganizationId returns the OrganizationId field value if set, zero value otherwise.
-func (o *EventsCreate) GetOrganizationId() string {
-	if o == nil || IsNil(o.OrganizationId) {
-		var ret string
-		return ret
-	}
-	return *o.OrganizationId
-}
-
-// GetOrganizationIdOk returns a tuple with the OrganizationId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *EventsCreate) GetOrganizationIdOk() (*string, bool) {
-	if o == nil || IsNil(o.OrganizationId) {
-		return nil, false
-	}
-	return o.OrganizationId, true
-}
-
-// HasOrganizationId returns a boolean if a field has been set.
-func (o *EventsCreate) HasOrganizationId() bool {
-	if o != nil && !IsNil(o.OrganizationId) {
-		return true
-	}
-
-	return false
-}
-
-// SetOrganizationId gets a reference to the given string and assigns it to the OrganizationId field.
-func (o *EventsCreate) SetOrganizationId(v string) {
-	o.OrganizationId = &v
-}
-
 // GetProductId returns the ProductId field value if set, zero value otherwise.
 func (o *EventsCreate) GetProductId() string {
 	if o == nil || IsNil(o.ProductId) {
@@ -347,12 +251,6 @@ func (o EventsCreate) MarshalJSON() ([]byte, error) {
 
 func (o EventsCreate) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.CreatedAt) {
-		toSerialize["created_at"] = o.CreatedAt
-	}
-	if !IsNil(o.CreatedBy) {
-		toSerialize["created_by"] = o.CreatedBy
-	}
 	if !IsNil(o.CustomerId) {
 		toSerialize["customer_id"] = o.CustomerId
 	}
@@ -367,9 +265,6 @@ func (o EventsCreate) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Metadata) {
 		toSerialize["metadata"] = o.Metadata
-	}
-	if !IsNil(o.OrganizationId) {
-		toSerialize["organization_id"] = o.OrganizationId
 	}
 	if !IsNil(o.ProductId) {
 		toSerialize["product_id"] = o.ProductId

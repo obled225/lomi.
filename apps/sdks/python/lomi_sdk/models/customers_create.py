@@ -18,39 +18,30 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from uuid import UUID
 from typing import Optional, Set
 from typing_extensions import Self
 
 class CustomersCreate(BaseModel):
     """
-    Create customers input
+    Request body for creating a customers object. System-managed fields like `created_at`, `organization_id`, and IDs are automatically set.
     """ # noqa: E501
     address: Optional[StrictStr] = None
     city: Optional[StrictStr] = None
     country: Optional[StrictStr] = None
-    created_at: Optional[datetime] = None
-    created_by: Optional[StrictStr] = None
-    customer_id: Optional[UUID] = None
-    deleted_at: Optional[datetime] = None
-    email: Optional[StrictStr] = None
-    environment: Optional[StrictStr] = None
+    email: Optional[StrictStr] = Field(default=None, description="Email address")
     is_business: Optional[StrictBool] = None
-    is_deleted: Optional[StrictBool] = None
-    metadata: Optional[Dict[str, Any]] = None
+    is_deleted: Optional[StrictBool] = Field(default=None, description="Soft deletion flag")
+    metadata: Optional[Dict[str, Any]] = Field(default=None, description="Set of key-value pairs for storing additional information")
     name: Optional[StrictStr] = None
-    organization_id: Optional[UUID] = None
     phone_number: Optional[StrictStr] = None
     postal_code: Optional[StrictStr] = None
     spi_alias_mbno: Optional[StrictStr] = None
     spi_alias_shid: Optional[StrictStr] = None
     spi_primary_alias: Optional[StrictStr] = None
-    updated_at: Optional[datetime] = None
     whatsapp_number: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["address", "city", "country", "created_at", "created_by", "customer_id", "deleted_at", "email", "environment", "is_business", "is_deleted", "metadata", "name", "organization_id", "phone_number", "postal_code", "spi_alias_mbno", "spi_alias_shid", "spi_primary_alias", "updated_at", "whatsapp_number"]
+    __properties: ClassVar[List[str]] = ["address", "city", "country", "email", "is_business", "is_deleted", "metadata", "name", "phone_number", "postal_code", "spi_alias_mbno", "spi_alias_shid", "spi_primary_alias", "whatsapp_number"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -106,23 +97,16 @@ class CustomersCreate(BaseModel):
             "address": obj.get("address"),
             "city": obj.get("city"),
             "country": obj.get("country"),
-            "created_at": obj.get("created_at"),
-            "created_by": obj.get("created_by"),
-            "customer_id": obj.get("customer_id"),
-            "deleted_at": obj.get("deleted_at"),
             "email": obj.get("email"),
-            "environment": obj.get("environment"),
             "is_business": obj.get("is_business"),
             "is_deleted": obj.get("is_deleted"),
             "metadata": obj.get("metadata"),
             "name": obj.get("name"),
-            "organization_id": obj.get("organization_id"),
             "phone_number": obj.get("phone_number"),
             "postal_code": obj.get("postal_code"),
             "spi_alias_mbno": obj.get("spi_alias_mbno"),
             "spi_alias_shid": obj.get("spi_alias_shid"),
             "spi_primary_alias": obj.get("spi_primary_alias"),
-            "updated_at": obj.get("updated_at"),
             "whatsapp_number": obj.get("whatsapp_number")
         })
         return _obj

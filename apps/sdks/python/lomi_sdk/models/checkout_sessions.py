@@ -19,7 +19,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictFloat, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from uuid import UUID
 from typing import Optional, Set
@@ -27,43 +27,43 @@ from typing_extensions import Self
 
 class CheckoutSessions(BaseModel):
     """
-    checkout_sessions object
+    checkout sessions resource object
     """ # noqa: E501
     allow_coupon_code: Optional[StrictBool] = None
     allow_quantity: Optional[StrictBool] = None
     allowed_providers: Optional[StrictStr] = None
-    amount: Optional[Union[StrictFloat, StrictInt]] = None
-    cancel_url: Optional[StrictStr] = None
-    checkout_session_id: Optional[UUID] = None
-    created_at: Optional[datetime] = None
+    amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Amount in the smallest currency unit (e.g., cents for USD, same for XOF)")
+    cancel_url: Optional[StrictStr] = Field(default=None, description="URL/URI")
+    checkout_session_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
+    created_at: Optional[datetime] = Field(default=None, description="ISO 8601 datetime")
     created_by: Optional[StrictStr] = None
-    currency_code: Optional[StrictStr] = None
-    customer_email: Optional[StrictStr] = None
-    customer_id: Optional[UUID] = None
+    currency_code: Optional[StrictStr] = Field(default=None, description="Three-letter ISO currency code (e.g., XOF, USD, EUR)")
+    customer_email: Optional[StrictStr] = Field(default=None, description="Email address")
+    customer_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
     customer_name: Optional[StrictStr] = None
     customer_phone: Optional[StrictStr] = None
     environment: Optional[StrictStr] = None
-    expires_at: Optional[datetime] = None
-    installment_plan_id: Optional[UUID] = None
+    expires_at: Optional[datetime] = Field(default=None, description="ISO 8601 datetime")
+    installment_plan_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
     is_pos: Optional[StrictBool] = None
     is_spi: Optional[StrictBool] = None
-    metadata: Optional[Dict[str, Any]] = None
-    organization_id: Optional[UUID] = None
-    payment_link_id: Optional[UUID] = None
-    payment_request_id: Optional[UUID] = None
-    price_id: Optional[UUID] = None
-    product_id: Optional[UUID] = None
+    metadata: Optional[Dict[str, Any]] = Field(default=None, description="Set of key-value pairs for storing additional information")
+    organization_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
+    payment_link_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
+    payment_request_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
+    price_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
+    product_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
     public_description: Optional[StrictStr] = None
     qr_code_data: Optional[Dict[str, Any]] = None
     qr_code_type: Optional[StrictStr] = None
     quantity: Optional[Union[StrictFloat, StrictInt]] = None
     spi_account_number: Optional[StrictStr] = None
-    spi_qr_code_id: Optional[UUID] = None
-    status: Optional[StrictStr] = None
-    subscription_id: Optional[UUID] = None
-    success_url: Optional[StrictStr] = None
+    spi_qr_code_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
+    status: Optional[StrictStr] = Field(default=None, description="Current status of the resource")
+    subscription_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
+    success_url: Optional[StrictStr] = Field(default=None, description="URL/URI")
     title: Optional[StrictStr] = None
-    updated_at: Optional[datetime] = None
+    updated_at: Optional[datetime] = Field(default=None, description="ISO 8601 datetime")
     __properties: ClassVar[List[str]] = ["allow_coupon_code", "allow_quantity", "allowed_providers", "amount", "cancel_url", "checkout_session_id", "created_at", "created_by", "currency_code", "customer_email", "customer_id", "customer_name", "customer_phone", "environment", "expires_at", "installment_plan_id", "is_pos", "is_spi", "metadata", "organization_id", "payment_link_id", "payment_request_id", "price_id", "product_id", "public_description", "qr_code_data", "qr_code_type", "quantity", "spi_account_number", "spi_qr_code_id", "status", "subscription_id", "success_url", "title", "updated_at"]
 
     model_config = ConfigDict(
@@ -96,8 +96,14 @@ class CheckoutSessions(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set([
+            "created_at",
+            "created_by",
+            "updated_at",
         ])
 
         _dict = self.model_dump(

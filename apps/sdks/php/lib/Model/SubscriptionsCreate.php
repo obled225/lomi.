@@ -36,7 +36,7 @@ use \LomiSDK\ObjectSerializer;
  * SubscriptionsCreate Class Doc Comment
  *
  * @category Class
- * @description Create subscriptions input
+ * @description Request body for creating a subscriptions object. System-managed fields like &#x60;created_at&#x60;, &#x60;organization_id&#x60;, and IDs are automatically set.
  * @package  LomiSDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -59,20 +59,14 @@ class SubscriptionsCreate implements ModelInterface, ArrayAccess, \JsonSerializa
       * @var string[]
       */
     protected static $openAPITypes = [
-        'created_at' => '\DateTime',
-        'created_by' => 'string',
         'customer_id' => 'string',
         'end_date' => 'string',
-        'environment' => 'string',
         'metadata' => 'object',
         'next_billing_date' => 'string',
-        'organization_id' => 'string',
         'price_id' => 'string',
         'product_id' => 'string',
         'start_date' => 'string',
-        'status' => 'string',
-        'subscription_id' => 'string',
-        'updated_at' => '\DateTime'
+        'status' => 'string'
     ];
 
     /**
@@ -83,20 +77,14 @@ class SubscriptionsCreate implements ModelInterface, ArrayAccess, \JsonSerializa
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'created_at' => 'date-time',
-        'created_by' => null,
         'customer_id' => 'uuid',
         'end_date' => null,
-        'environment' => null,
         'metadata' => null,
         'next_billing_date' => null,
-        'organization_id' => 'uuid',
         'price_id' => 'uuid',
         'product_id' => 'uuid',
         'start_date' => null,
-        'status' => null,
-        'subscription_id' => 'uuid',
-        'updated_at' => 'date-time'
+        'status' => null
     ];
 
     /**
@@ -105,20 +93,14 @@ class SubscriptionsCreate implements ModelInterface, ArrayAccess, \JsonSerializa
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'created_at' => false,
-        'created_by' => false,
         'customer_id' => false,
         'end_date' => false,
-        'environment' => false,
         'metadata' => false,
         'next_billing_date' => false,
-        'organization_id' => false,
         'price_id' => false,
         'product_id' => false,
         'start_date' => false,
-        'status' => false,
-        'subscription_id' => false,
-        'updated_at' => false
+        'status' => false
     ];
 
     /**
@@ -207,20 +189,14 @@ class SubscriptionsCreate implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $attributeMap = [
-        'created_at' => 'created_at',
-        'created_by' => 'created_by',
         'customer_id' => 'customer_id',
         'end_date' => 'end_date',
-        'environment' => 'environment',
         'metadata' => 'metadata',
         'next_billing_date' => 'next_billing_date',
-        'organization_id' => 'organization_id',
         'price_id' => 'price_id',
         'product_id' => 'product_id',
         'start_date' => 'start_date',
-        'status' => 'status',
-        'subscription_id' => 'subscription_id',
-        'updated_at' => 'updated_at'
+        'status' => 'status'
     ];
 
     /**
@@ -229,20 +205,14 @@ class SubscriptionsCreate implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $setters = [
-        'created_at' => 'setCreatedAt',
-        'created_by' => 'setCreatedBy',
         'customer_id' => 'setCustomerId',
         'end_date' => 'setEndDate',
-        'environment' => 'setEnvironment',
         'metadata' => 'setMetadata',
         'next_billing_date' => 'setNextBillingDate',
-        'organization_id' => 'setOrganizationId',
         'price_id' => 'setPriceId',
         'product_id' => 'setProductId',
         'start_date' => 'setStartDate',
-        'status' => 'setStatus',
-        'subscription_id' => 'setSubscriptionId',
-        'updated_at' => 'setUpdatedAt'
+        'status' => 'setStatus'
     ];
 
     /**
@@ -251,20 +221,14 @@ class SubscriptionsCreate implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $getters = [
-        'created_at' => 'getCreatedAt',
-        'created_by' => 'getCreatedBy',
         'customer_id' => 'getCustomerId',
         'end_date' => 'getEndDate',
-        'environment' => 'getEnvironment',
         'metadata' => 'getMetadata',
         'next_billing_date' => 'getNextBillingDate',
-        'organization_id' => 'getOrganizationId',
         'price_id' => 'getPriceId',
         'product_id' => 'getProductId',
         'start_date' => 'getStartDate',
-        'status' => 'getStatus',
-        'subscription_id' => 'getSubscriptionId',
-        'updated_at' => 'getUpdatedAt'
+        'status' => 'getStatus'
     ];
 
     /**
@@ -324,20 +288,14 @@ class SubscriptionsCreate implements ModelInterface, ArrayAccess, \JsonSerializa
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('created_at', $data ?? [], null);
-        $this->setIfExists('created_by', $data ?? [], null);
         $this->setIfExists('customer_id', $data ?? [], null);
         $this->setIfExists('end_date', $data ?? [], null);
-        $this->setIfExists('environment', $data ?? [], null);
         $this->setIfExists('metadata', $data ?? [], null);
         $this->setIfExists('next_billing_date', $data ?? [], null);
-        $this->setIfExists('organization_id', $data ?? [], null);
         $this->setIfExists('price_id', $data ?? [], null);
         $this->setIfExists('product_id', $data ?? [], null);
         $this->setIfExists('start_date', $data ?? [], null);
         $this->setIfExists('status', $data ?? [], null);
-        $this->setIfExists('subscription_id', $data ?? [], null);
-        $this->setIfExists('updated_at', $data ?? [], null);
     }
 
     /**
@@ -383,60 +341,6 @@ class SubscriptionsCreate implements ModelInterface, ArrayAccess, \JsonSerializa
 
 
     /**
-     * Gets created_at
-     *
-     * @return \DateTime|null
-     */
-    public function getCreatedAt()
-    {
-        return $this->container['created_at'];
-    }
-
-    /**
-     * Sets created_at
-     *
-     * @param \DateTime|null $created_at created_at
-     *
-     * @return self
-     */
-    public function setCreatedAt($created_at)
-    {
-        if (is_null($created_at)) {
-            throw new \InvalidArgumentException('non-nullable created_at cannot be null');
-        }
-        $this->container['created_at'] = $created_at;
-
-        return $this;
-    }
-
-    /**
-     * Gets created_by
-     *
-     * @return string|null
-     */
-    public function getCreatedBy()
-    {
-        return $this->container['created_by'];
-    }
-
-    /**
-     * Sets created_by
-     *
-     * @param string|null $created_by created_by
-     *
-     * @return self
-     */
-    public function setCreatedBy($created_by)
-    {
-        if (is_null($created_by)) {
-            throw new \InvalidArgumentException('non-nullable created_by cannot be null');
-        }
-        $this->container['created_by'] = $created_by;
-
-        return $this;
-    }
-
-    /**
      * Gets customer_id
      *
      * @return string|null
@@ -449,7 +353,7 @@ class SubscriptionsCreate implements ModelInterface, ArrayAccess, \JsonSerializa
     /**
      * Sets customer_id
      *
-     * @param string|null $customer_id customer_id
+     * @param string|null $customer_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -491,33 +395,6 @@ class SubscriptionsCreate implements ModelInterface, ArrayAccess, \JsonSerializa
     }
 
     /**
-     * Gets environment
-     *
-     * @return string|null
-     */
-    public function getEnvironment()
-    {
-        return $this->container['environment'];
-    }
-
-    /**
-     * Sets environment
-     *
-     * @param string|null $environment environment
-     *
-     * @return self
-     */
-    public function setEnvironment($environment)
-    {
-        if (is_null($environment)) {
-            throw new \InvalidArgumentException('non-nullable environment cannot be null');
-        }
-        $this->container['environment'] = $environment;
-
-        return $this;
-    }
-
-    /**
      * Gets metadata
      *
      * @return object|null
@@ -530,7 +407,7 @@ class SubscriptionsCreate implements ModelInterface, ArrayAccess, \JsonSerializa
     /**
      * Sets metadata
      *
-     * @param object|null $metadata metadata
+     * @param object|null $metadata Set of key-value pairs for storing additional information
      *
      * @return self
      */
@@ -572,33 +449,6 @@ class SubscriptionsCreate implements ModelInterface, ArrayAccess, \JsonSerializa
     }
 
     /**
-     * Gets organization_id
-     *
-     * @return string|null
-     */
-    public function getOrganizationId()
-    {
-        return $this->container['organization_id'];
-    }
-
-    /**
-     * Sets organization_id
-     *
-     * @param string|null $organization_id organization_id
-     *
-     * @return self
-     */
-    public function setOrganizationId($organization_id)
-    {
-        if (is_null($organization_id)) {
-            throw new \InvalidArgumentException('non-nullable organization_id cannot be null');
-        }
-        $this->container['organization_id'] = $organization_id;
-
-        return $this;
-    }
-
-    /**
      * Gets price_id
      *
      * @return string|null
@@ -611,7 +461,7 @@ class SubscriptionsCreate implements ModelInterface, ArrayAccess, \JsonSerializa
     /**
      * Sets price_id
      *
-     * @param string|null $price_id price_id
+     * @param string|null $price_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -638,7 +488,7 @@ class SubscriptionsCreate implements ModelInterface, ArrayAccess, \JsonSerializa
     /**
      * Sets product_id
      *
-     * @param string|null $product_id product_id
+     * @param string|null $product_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -692,7 +542,7 @@ class SubscriptionsCreate implements ModelInterface, ArrayAccess, \JsonSerializa
     /**
      * Sets status
      *
-     * @param string|null $status status
+     * @param string|null $status Current status of the resource
      *
      * @return self
      */
@@ -702,60 +552,6 @@ class SubscriptionsCreate implements ModelInterface, ArrayAccess, \JsonSerializa
             throw new \InvalidArgumentException('non-nullable status cannot be null');
         }
         $this->container['status'] = $status;
-
-        return $this;
-    }
-
-    /**
-     * Gets subscription_id
-     *
-     * @return string|null
-     */
-    public function getSubscriptionId()
-    {
-        return $this->container['subscription_id'];
-    }
-
-    /**
-     * Sets subscription_id
-     *
-     * @param string|null $subscription_id subscription_id
-     *
-     * @return self
-     */
-    public function setSubscriptionId($subscription_id)
-    {
-        if (is_null($subscription_id)) {
-            throw new \InvalidArgumentException('non-nullable subscription_id cannot be null');
-        }
-        $this->container['subscription_id'] = $subscription_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets updated_at
-     *
-     * @return \DateTime|null
-     */
-    public function getUpdatedAt()
-    {
-        return $this->container['updated_at'];
-    }
-
-    /**
-     * Sets updated_at
-     *
-     * @param \DateTime|null $updated_at updated_at
-     *
-     * @return self
-     */
-    public function setUpdatedAt($updated_at)
-    {
-        if (is_null($updated_at)) {
-            throw new \InvalidArgumentException('non-nullable updated_at cannot be null');
-        }
-        $this->container['updated_at'] = $updated_at;
 
         return $this;
     }

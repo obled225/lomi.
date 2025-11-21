@@ -18,8 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictFloat, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from uuid import UUID
 from typing import Optional, Set
@@ -27,28 +26,26 @@ from typing_extensions import Self
 
 class WebhookDeliveryLogsUpdate(BaseModel):
     """
-    Update webhook_delivery_logs input
+    Request body for updating a webhook delivery logs object. Only include fields you want to modify.
     """ # noqa: E501
     attempt_number: Optional[Union[StrictFloat, StrictInt]] = None
     compte_paye: Optional[StrictStr] = None
     compte_payeur: Optional[StrictStr] = None
-    created_at: Optional[datetime] = None
     event_type: Optional[StrictStr] = None
     headers: Optional[Dict[str, Any]] = None
     ip_address: Optional[StrictStr] = None
-    log_id: Optional[UUID] = None
+    log_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
     montant: Optional[Union[StrictFloat, StrictInt]] = None
-    organization_id: Optional[UUID] = None
     payload: Optional[Dict[str, Any]] = None
     request_duration_ms: Optional[Union[StrictFloat, StrictInt]] = None
     response_body: Optional[StrictStr] = None
     response_status: Optional[Union[StrictFloat, StrictInt]] = None
     spi_event_code: Optional[StrictStr] = None
-    spi_tx_id: Optional[UUID] = None
+    spi_tx_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
     success: Optional[StrictBool] = None
     user_agent: Optional[StrictStr] = None
-    webhook_id: Optional[UUID] = None
-    __properties: ClassVar[List[str]] = ["attempt_number", "compte_paye", "compte_payeur", "created_at", "event_type", "headers", "ip_address", "log_id", "montant", "organization_id", "payload", "request_duration_ms", "response_body", "response_status", "spi_event_code", "spi_tx_id", "success", "user_agent", "webhook_id"]
+    webhook_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
+    __properties: ClassVar[List[str]] = ["attempt_number", "compte_paye", "compte_payeur", "event_type", "headers", "ip_address", "log_id", "montant", "payload", "request_duration_ms", "response_body", "response_status", "spi_event_code", "spi_tx_id", "success", "user_agent", "webhook_id"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -104,13 +101,11 @@ class WebhookDeliveryLogsUpdate(BaseModel):
             "attempt_number": obj.get("attempt_number"),
             "compte_paye": obj.get("compte_paye"),
             "compte_payeur": obj.get("compte_payeur"),
-            "created_at": obj.get("created_at"),
             "event_type": obj.get("event_type"),
             "headers": obj.get("headers"),
             "ip_address": obj.get("ip_address"),
             "log_id": obj.get("log_id"),
             "montant": obj.get("montant"),
-            "organization_id": obj.get("organization_id"),
             "payload": obj.get("payload"),
             "request_duration_ms": obj.get("request_duration_ms"),
             "response_body": obj.get("response_body"),

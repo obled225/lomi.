@@ -36,7 +36,7 @@ use \LomiSDK\ObjectSerializer;
  * PaymentRequests Class Doc Comment
  *
  * @category Class
- * @description payment_requests object
+ * @description payment requests resource object
  * @package  LomiSDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -542,7 +542,7 @@ class PaymentRequests implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets amount
      *
-     * @param float|null $amount amount
+     * @param float|null $amount Amount in the smallest currency unit (e.g., cents for USD, same for XOF)
      *
      * @return self
      */
@@ -569,7 +569,7 @@ class PaymentRequests implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets created_at
      *
-     * @param \DateTime|null $created_at created_at
+     * @param \DateTime|null $created_at ISO 8601 datetime
      *
      * @return self
      */
@@ -623,7 +623,7 @@ class PaymentRequests implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets currency_code
      *
-     * @param string|null $currency_code currency_code
+     * @param string|null $currency_code Three-letter ISO currency code (e.g., XOF, USD, EUR)
      *
      * @return self
      */
@@ -650,7 +650,7 @@ class PaymentRequests implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets customer_id
      *
-     * @param string|null $customer_id customer_id
+     * @param string|null $customer_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -758,7 +758,7 @@ class PaymentRequests implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets organization_id
      *
-     * @param string|null $organization_id organization_id
+     * @param string|null $organization_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -839,7 +839,7 @@ class PaymentRequests implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets request_id
      *
-     * @param string|null $request_id request_id
+     * @param string|null $request_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -893,7 +893,7 @@ class PaymentRequests implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets spi_bulk_instruction_id
      *
-     * @param string|null $spi_bulk_instruction_id spi_bulk_instruction_id
+     * @param string|null $spi_bulk_instruction_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -1109,7 +1109,7 @@ class PaymentRequests implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets spi_end2end_id
      *
-     * @param string|null $spi_end2end_id spi_end2end_id
+     * @param string|null $spi_end2end_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -1406,7 +1406,7 @@ class PaymentRequests implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets spi_tx_id
      *
-     * @param string|null $spi_tx_id spi_tx_id
+     * @param string|null $spi_tx_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -1433,7 +1433,7 @@ class PaymentRequests implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets status
      *
-     * @param string|null $status status
+     * @param string|null $status Current status of the resource
      *
      * @return self
      */
@@ -1460,7 +1460,7 @@ class PaymentRequests implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets updated_at
      *
-     * @param \DateTime|null $updated_at updated_at
+     * @param \DateTime|null $updated_at ISO 8601 datetime
      *
      * @return self
      */

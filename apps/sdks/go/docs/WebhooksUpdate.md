@@ -5,24 +5,18 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AuthorizedEvents** | Pointer to **string** |  | [optional] 
-**CreatedAt** | Pointer to **time.Time** |  | [optional] 
-**CreatedBy** | Pointer to **string** |  | [optional] 
-**DeletedAt** | Pointer to **time.Time** |  | [optional] 
-**Environment** | Pointer to **string** |  | [optional] 
-**IsActive** | Pointer to **bool** |  | [optional] 
+**IsActive** | Pointer to **bool** | Whether this resource is currently active | [optional] 
 **LastPayload** | Pointer to **map[string]interface{}** |  | [optional] 
 **LastResponseBody** | Pointer to **string** |  | [optional] 
 **LastResponseStatus** | Pointer to **float64** |  | [optional] 
-**LastTriggeredAt** | Pointer to **time.Time** |  | [optional] 
-**Metadata** | Pointer to **map[string]interface{}** |  | [optional] 
-**OrganizationId** | Pointer to **string** |  | [optional] 
+**LastTriggeredAt** | Pointer to **time.Time** | ISO 8601 datetime | [optional] 
+**Metadata** | Pointer to **map[string]interface{}** | Set of key-value pairs for storing additional information | [optional] 
 **RetryCount** | Pointer to **float64** |  | [optional] 
 **SpiEventTypes** | Pointer to **string** |  | [optional] 
 **SupportsSpi** | Pointer to **bool** |  | [optional] 
-**UpdatedAt** | Pointer to **time.Time** |  | [optional] 
-**Url** | Pointer to **string** |  | [optional] 
+**Url** | Pointer to **string** | URL/URI | [optional] 
 **VerificationToken** | Pointer to **string** |  | [optional] 
-**WebhookId** | Pointer to **string** |  | [optional] 
+**WebhookId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
 
 ## Methods
 
@@ -67,106 +61,6 @@ SetAuthorizedEvents sets AuthorizedEvents field to given value.
 `func (o *WebhooksUpdate) HasAuthorizedEvents() bool`
 
 HasAuthorizedEvents returns a boolean if a field has been set.
-
-### GetCreatedAt
-
-`func (o *WebhooksUpdate) GetCreatedAt() time.Time`
-
-GetCreatedAt returns the CreatedAt field if non-nil, zero value otherwise.
-
-### GetCreatedAtOk
-
-`func (o *WebhooksUpdate) GetCreatedAtOk() (*time.Time, bool)`
-
-GetCreatedAtOk returns a tuple with the CreatedAt field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCreatedAt
-
-`func (o *WebhooksUpdate) SetCreatedAt(v time.Time)`
-
-SetCreatedAt sets CreatedAt field to given value.
-
-### HasCreatedAt
-
-`func (o *WebhooksUpdate) HasCreatedAt() bool`
-
-HasCreatedAt returns a boolean if a field has been set.
-
-### GetCreatedBy
-
-`func (o *WebhooksUpdate) GetCreatedBy() string`
-
-GetCreatedBy returns the CreatedBy field if non-nil, zero value otherwise.
-
-### GetCreatedByOk
-
-`func (o *WebhooksUpdate) GetCreatedByOk() (*string, bool)`
-
-GetCreatedByOk returns a tuple with the CreatedBy field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCreatedBy
-
-`func (o *WebhooksUpdate) SetCreatedBy(v string)`
-
-SetCreatedBy sets CreatedBy field to given value.
-
-### HasCreatedBy
-
-`func (o *WebhooksUpdate) HasCreatedBy() bool`
-
-HasCreatedBy returns a boolean if a field has been set.
-
-### GetDeletedAt
-
-`func (o *WebhooksUpdate) GetDeletedAt() time.Time`
-
-GetDeletedAt returns the DeletedAt field if non-nil, zero value otherwise.
-
-### GetDeletedAtOk
-
-`func (o *WebhooksUpdate) GetDeletedAtOk() (*time.Time, bool)`
-
-GetDeletedAtOk returns a tuple with the DeletedAt field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetDeletedAt
-
-`func (o *WebhooksUpdate) SetDeletedAt(v time.Time)`
-
-SetDeletedAt sets DeletedAt field to given value.
-
-### HasDeletedAt
-
-`func (o *WebhooksUpdate) HasDeletedAt() bool`
-
-HasDeletedAt returns a boolean if a field has been set.
-
-### GetEnvironment
-
-`func (o *WebhooksUpdate) GetEnvironment() string`
-
-GetEnvironment returns the Environment field if non-nil, zero value otherwise.
-
-### GetEnvironmentOk
-
-`func (o *WebhooksUpdate) GetEnvironmentOk() (*string, bool)`
-
-GetEnvironmentOk returns a tuple with the Environment field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetEnvironment
-
-`func (o *WebhooksUpdate) SetEnvironment(v string)`
-
-SetEnvironment sets Environment field to given value.
-
-### HasEnvironment
-
-`func (o *WebhooksUpdate) HasEnvironment() bool`
-
-HasEnvironment returns a boolean if a field has been set.
 
 ### GetIsActive
 
@@ -318,31 +212,6 @@ SetMetadata sets Metadata field to given value.
 
 HasMetadata returns a boolean if a field has been set.
 
-### GetOrganizationId
-
-`func (o *WebhooksUpdate) GetOrganizationId() string`
-
-GetOrganizationId returns the OrganizationId field if non-nil, zero value otherwise.
-
-### GetOrganizationIdOk
-
-`func (o *WebhooksUpdate) GetOrganizationIdOk() (*string, bool)`
-
-GetOrganizationIdOk returns a tuple with the OrganizationId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetOrganizationId
-
-`func (o *WebhooksUpdate) SetOrganizationId(v string)`
-
-SetOrganizationId sets OrganizationId field to given value.
-
-### HasOrganizationId
-
-`func (o *WebhooksUpdate) HasOrganizationId() bool`
-
-HasOrganizationId returns a boolean if a field has been set.
-
 ### GetRetryCount
 
 `func (o *WebhooksUpdate) GetRetryCount() float64`
@@ -417,31 +286,6 @@ SetSupportsSpi sets SupportsSpi field to given value.
 `func (o *WebhooksUpdate) HasSupportsSpi() bool`
 
 HasSupportsSpi returns a boolean if a field has been set.
-
-### GetUpdatedAt
-
-`func (o *WebhooksUpdate) GetUpdatedAt() time.Time`
-
-GetUpdatedAt returns the UpdatedAt field if non-nil, zero value otherwise.
-
-### GetUpdatedAtOk
-
-`func (o *WebhooksUpdate) GetUpdatedAtOk() (*time.Time, bool)`
-
-GetUpdatedAtOk returns a tuple with the UpdatedAt field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetUpdatedAt
-
-`func (o *WebhooksUpdate) SetUpdatedAt(v time.Time)`
-
-SetUpdatedAt sets UpdatedAt field to given value.
-
-### HasUpdatedAt
-
-`func (o *WebhooksUpdate) HasUpdatedAt() bool`
-
-HasUpdatedAt returns a boolean if a field has been set.
 
 ### GetUrl
 

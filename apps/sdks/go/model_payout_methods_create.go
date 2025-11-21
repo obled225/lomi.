@@ -13,13 +13,12 @@ package lomisdk
 
 import (
 	"encoding/json"
-	"time"
 )
 
 // checks if the PayoutMethodsCreate type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &PayoutMethodsCreate{}
 
-// PayoutMethodsCreate Create payout_methods input
+// PayoutMethodsCreate Request body for creating a payout methods object. System-managed fields like `created_at`, `organization_id`, and IDs are automatically set.
 type PayoutMethodsCreate struct {
 	AccountName *string `json:"account_name,omitempty"`
 	AccountNumber *string `json:"account_number,omitempty"`
@@ -32,19 +31,17 @@ type PayoutMethodsCreate struct {
 	BankName *string `json:"bank_name,omitempty"`
 	BranchCode *string `json:"branch_code,omitempty"`
 	Country *string `json:"country,omitempty"`
-	CreatedAt *time.Time `json:"created_at,omitempty"`
 	IsDefault *bool `json:"is_default,omitempty"`
 	IsSpiEnabled *bool `json:"is_spi_enabled,omitempty"`
 	IsUemoa *bool `json:"is_uemoa,omitempty"`
 	IsValid *bool `json:"is_valid,omitempty"`
-	OrganizationId *string `json:"organization_id,omitempty"`
+	// Unique identifier (UUID format)
 	PayoutMethodId *string `json:"payout_method_id,omitempty"`
 	PayoutMethodType *string `json:"payout_method_type,omitempty"`
 	SpiAccountNumber *string `json:"spi_account_number,omitempty"`
 	SpiAliasMbno *string `json:"spi_alias_mbno,omitempty"`
 	SpiAliasShid *string `json:"spi_alias_shid,omitempty"`
 	SpiAliasType *string `json:"spi_alias_type,omitempty"`
-	UpdatedAt *time.Time `json:"updated_at,omitempty"`
 }
 
 // NewPayoutMethodsCreate instantiates a new PayoutMethodsCreate object
@@ -416,38 +413,6 @@ func (o *PayoutMethodsCreate) SetCountry(v string) {
 	o.Country = &v
 }
 
-// GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
-func (o *PayoutMethodsCreate) GetCreatedAt() time.Time {
-	if o == nil || IsNil(o.CreatedAt) {
-		var ret time.Time
-		return ret
-	}
-	return *o.CreatedAt
-}
-
-// GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PayoutMethodsCreate) GetCreatedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.CreatedAt) {
-		return nil, false
-	}
-	return o.CreatedAt, true
-}
-
-// HasCreatedAt returns a boolean if a field has been set.
-func (o *PayoutMethodsCreate) HasCreatedAt() bool {
-	if o != nil && !IsNil(o.CreatedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetCreatedAt gets a reference to the given time.Time and assigns it to the CreatedAt field.
-func (o *PayoutMethodsCreate) SetCreatedAt(v time.Time) {
-	o.CreatedAt = &v
-}
-
 // GetIsDefault returns the IsDefault field value if set, zero value otherwise.
 func (o *PayoutMethodsCreate) GetIsDefault() bool {
 	if o == nil || IsNil(o.IsDefault) {
@@ -574,38 +539,6 @@ func (o *PayoutMethodsCreate) HasIsValid() bool {
 // SetIsValid gets a reference to the given bool and assigns it to the IsValid field.
 func (o *PayoutMethodsCreate) SetIsValid(v bool) {
 	o.IsValid = &v
-}
-
-// GetOrganizationId returns the OrganizationId field value if set, zero value otherwise.
-func (o *PayoutMethodsCreate) GetOrganizationId() string {
-	if o == nil || IsNil(o.OrganizationId) {
-		var ret string
-		return ret
-	}
-	return *o.OrganizationId
-}
-
-// GetOrganizationIdOk returns a tuple with the OrganizationId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PayoutMethodsCreate) GetOrganizationIdOk() (*string, bool) {
-	if o == nil || IsNil(o.OrganizationId) {
-		return nil, false
-	}
-	return o.OrganizationId, true
-}
-
-// HasOrganizationId returns a boolean if a field has been set.
-func (o *PayoutMethodsCreate) HasOrganizationId() bool {
-	if o != nil && !IsNil(o.OrganizationId) {
-		return true
-	}
-
-	return false
-}
-
-// SetOrganizationId gets a reference to the given string and assigns it to the OrganizationId field.
-func (o *PayoutMethodsCreate) SetOrganizationId(v string) {
-	o.OrganizationId = &v
 }
 
 // GetPayoutMethodId returns the PayoutMethodId field value if set, zero value otherwise.
@@ -800,38 +733,6 @@ func (o *PayoutMethodsCreate) SetSpiAliasType(v string) {
 	o.SpiAliasType = &v
 }
 
-// GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.
-func (o *PayoutMethodsCreate) GetUpdatedAt() time.Time {
-	if o == nil || IsNil(o.UpdatedAt) {
-		var ret time.Time
-		return ret
-	}
-	return *o.UpdatedAt
-}
-
-// GetUpdatedAtOk returns a tuple with the UpdatedAt field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PayoutMethodsCreate) GetUpdatedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.UpdatedAt) {
-		return nil, false
-	}
-	return o.UpdatedAt, true
-}
-
-// HasUpdatedAt returns a boolean if a field has been set.
-func (o *PayoutMethodsCreate) HasUpdatedAt() bool {
-	if o != nil && !IsNil(o.UpdatedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetUpdatedAt gets a reference to the given time.Time and assigns it to the UpdatedAt field.
-func (o *PayoutMethodsCreate) SetUpdatedAt(v time.Time) {
-	o.UpdatedAt = &v
-}
-
 func (o PayoutMethodsCreate) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -875,9 +776,6 @@ func (o PayoutMethodsCreate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Country) {
 		toSerialize["country"] = o.Country
 	}
-	if !IsNil(o.CreatedAt) {
-		toSerialize["created_at"] = o.CreatedAt
-	}
 	if !IsNil(o.IsDefault) {
 		toSerialize["is_default"] = o.IsDefault
 	}
@@ -889,9 +787,6 @@ func (o PayoutMethodsCreate) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.IsValid) {
 		toSerialize["is_valid"] = o.IsValid
-	}
-	if !IsNil(o.OrganizationId) {
-		toSerialize["organization_id"] = o.OrganizationId
 	}
 	if !IsNil(o.PayoutMethodId) {
 		toSerialize["payout_method_id"] = o.PayoutMethodId
@@ -910,9 +805,6 @@ func (o PayoutMethodsCreate) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.SpiAliasType) {
 		toSerialize["spi_alias_type"] = o.SpiAliasType
-	}
-	if !IsNil(o.UpdatedAt) {
-		toSerialize["updated_at"] = o.UpdatedAt
 	}
 	return toSerialize, nil
 }

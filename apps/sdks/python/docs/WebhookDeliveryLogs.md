@@ -1,6 +1,6 @@
 # WebhookDeliveryLogs
 
-webhook_delivery_logs object
+webhook delivery logs resource object
 
 ## Properties
 
@@ -9,22 +9,22 @@ Name | Type | Description | Notes
 **attempt_number** | **float** |  | [optional] 
 **compte_paye** | **str** |  | [optional] 
 **compte_payeur** | **str** |  | [optional] 
-**created_at** | **datetime** |  | [optional] 
+**created_at** | **datetime** | ISO 8601 datetime | [optional] [readonly] 
 **event_type** | **str** |  | [optional] 
 **headers** | **object** |  | [optional] 
 **ip_address** | **str** |  | [optional] 
-**log_id** | **str** |  | [optional] 
+**log_id** | **str** | Unique identifier (UUID format) | [optional] 
 **montant** | **float** |  | [optional] 
-**organization_id** | **str** |  | [optional] 
+**organization_id** | **str** | Unique identifier (UUID format) | [optional] 
 **payload** | **object** |  | [optional] 
 **request_duration_ms** | **float** |  | [optional] 
 **response_body** | **str** |  | [optional] 
 **response_status** | **float** |  | [optional] 
 **spi_event_code** | **str** |  | [optional] 
-**spi_tx_id** | **str** |  | [optional] 
+**spi_tx_id** | **str** | Unique identifier (UUID format) | [optional] 
 **success** | **bool** |  | [optional] 
 **user_agent** | **str** |  | [optional] 
-**webhook_id** | **str** |  | [optional] 
+**webhook_id** | **str** | Unique identifier (UUID format) | [optional] 
 
 ## Example
 

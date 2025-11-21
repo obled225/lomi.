@@ -4,43 +4,38 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**CheckoutSessionId** | Pointer to **string** |  | [optional] 
-**CreatedAt** | Pointer to **time.Time** |  | [optional] 
-**CurrencyCode** | Pointer to **string** |  | [optional] 
-**CustomerId** | Pointer to **string** |  | [optional] 
+**CheckoutSessionId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
+**CurrencyCode** | Pointer to **string** | Three-letter ISO currency code (e.g., XOF, USD, EUR) | [optional] 
+**CustomerId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
 **Description** | Pointer to **string** |  | [optional] 
 **DiscountAmount** | Pointer to **float64** |  | [optional] 
-**Environment** | Pointer to **string** |  | [optional] 
 **FeeAmount** | Pointer to **float64** |  | [optional] 
-**FeeStructureId** | Pointer to **string** |  | [optional] 
+**FeeStructureId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
 **GrossAmount** | Pointer to **float64** |  | [optional] 
 **IsBnpl** | Pointer to **bool** |  | [optional] 
 **IsPos** | Pointer to **bool** |  | [optional] 
-**Metadata** | Pointer to **map[string]interface{}** |  | [optional] 
+**Metadata** | Pointer to **map[string]interface{}** | Set of key-value pairs for storing additional information | [optional] 
 **NetAmount** | Pointer to **float64** |  | [optional] 
-**OrganizationId** | Pointer to **string** |  | [optional] 
 **PaymentMethodCode** | Pointer to **string** |  | [optional] 
-**PriceId** | Pointer to **string** |  | [optional] 
-**ProductId** | Pointer to **string** |  | [optional] 
+**PriceId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
+**ProductId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
 **ProviderCode** | Pointer to **string** |  | [optional] 
 **Quantity** | Pointer to **float64** |  | [optional] 
 **SpiAccountNumber** | Pointer to **string** |  | [optional] 
-**SpiBulkInstructionId** | Pointer to **string** |  | [optional] 
+**SpiBulkInstructionId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
 **SpiDateEnvoi** | Pointer to **string** |  | [optional] 
 **SpiDateIrrevocabilite** | Pointer to **string** |  | [optional] 
 **SpiDiscountAmount** | Pointer to **float64** |  | [optional] 
 **SpiDiscountRate** | Pointer to **float64** |  | [optional] 
-**SpiEnd2endId** | Pointer to **string** |  | [optional] 
+**SpiEnd2endId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
 **SpiPaymentCategory** | Pointer to **string** |  | [optional] 
 **SpiPaymentFlowType** | Pointer to **string** |  | [optional] 
 **SpiPaymentStatus** | Pointer to **string** |  | [optional] 
 **SpiRejectionReason** | Pointer to **string** |  | [optional] 
-**SpiTxId** | Pointer to **string** |  | [optional] 
-**Status** | Pointer to **string** |  | [optional] 
-**SubscriptionId** | Pointer to **string** |  | [optional] 
-**TransactionId** | Pointer to **string** |  | [optional] 
+**SpiTxId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
+**Status** | Pointer to **string** | Current status of the resource | [optional] 
+**SubscriptionId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
 **TransactionType** | Pointer to **string** |  | [optional] 
-**UpdatedAt** | Pointer to **time.Time** |  | [optional] 
 
 ## Methods
 
@@ -85,31 +80,6 @@ SetCheckoutSessionId sets CheckoutSessionId field to given value.
 `func (o *TransactionsCreate) HasCheckoutSessionId() bool`
 
 HasCheckoutSessionId returns a boolean if a field has been set.
-
-### GetCreatedAt
-
-`func (o *TransactionsCreate) GetCreatedAt() time.Time`
-
-GetCreatedAt returns the CreatedAt field if non-nil, zero value otherwise.
-
-### GetCreatedAtOk
-
-`func (o *TransactionsCreate) GetCreatedAtOk() (*time.Time, bool)`
-
-GetCreatedAtOk returns a tuple with the CreatedAt field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCreatedAt
-
-`func (o *TransactionsCreate) SetCreatedAt(v time.Time)`
-
-SetCreatedAt sets CreatedAt field to given value.
-
-### HasCreatedAt
-
-`func (o *TransactionsCreate) HasCreatedAt() bool`
-
-HasCreatedAt returns a boolean if a field has been set.
 
 ### GetCurrencyCode
 
@@ -210,31 +180,6 @@ SetDiscountAmount sets DiscountAmount field to given value.
 `func (o *TransactionsCreate) HasDiscountAmount() bool`
 
 HasDiscountAmount returns a boolean if a field has been set.
-
-### GetEnvironment
-
-`func (o *TransactionsCreate) GetEnvironment() string`
-
-GetEnvironment returns the Environment field if non-nil, zero value otherwise.
-
-### GetEnvironmentOk
-
-`func (o *TransactionsCreate) GetEnvironmentOk() (*string, bool)`
-
-GetEnvironmentOk returns a tuple with the Environment field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetEnvironment
-
-`func (o *TransactionsCreate) SetEnvironment(v string)`
-
-SetEnvironment sets Environment field to given value.
-
-### HasEnvironment
-
-`func (o *TransactionsCreate) HasEnvironment() bool`
-
-HasEnvironment returns a boolean if a field has been set.
 
 ### GetFeeAmount
 
@@ -410,31 +355,6 @@ SetNetAmount sets NetAmount field to given value.
 `func (o *TransactionsCreate) HasNetAmount() bool`
 
 HasNetAmount returns a boolean if a field has been set.
-
-### GetOrganizationId
-
-`func (o *TransactionsCreate) GetOrganizationId() string`
-
-GetOrganizationId returns the OrganizationId field if non-nil, zero value otherwise.
-
-### GetOrganizationIdOk
-
-`func (o *TransactionsCreate) GetOrganizationIdOk() (*string, bool)`
-
-GetOrganizationIdOk returns a tuple with the OrganizationId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetOrganizationId
-
-`func (o *TransactionsCreate) SetOrganizationId(v string)`
-
-SetOrganizationId sets OrganizationId field to given value.
-
-### HasOrganizationId
-
-`func (o *TransactionsCreate) HasOrganizationId() bool`
-
-HasOrganizationId returns a boolean if a field has been set.
 
 ### GetPaymentMethodCode
 
@@ -911,31 +831,6 @@ SetSubscriptionId sets SubscriptionId field to given value.
 
 HasSubscriptionId returns a boolean if a field has been set.
 
-### GetTransactionId
-
-`func (o *TransactionsCreate) GetTransactionId() string`
-
-GetTransactionId returns the TransactionId field if non-nil, zero value otherwise.
-
-### GetTransactionIdOk
-
-`func (o *TransactionsCreate) GetTransactionIdOk() (*string, bool)`
-
-GetTransactionIdOk returns a tuple with the TransactionId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetTransactionId
-
-`func (o *TransactionsCreate) SetTransactionId(v string)`
-
-SetTransactionId sets TransactionId field to given value.
-
-### HasTransactionId
-
-`func (o *TransactionsCreate) HasTransactionId() bool`
-
-HasTransactionId returns a boolean if a field has been set.
-
 ### GetTransactionType
 
 `func (o *TransactionsCreate) GetTransactionType() string`
@@ -960,31 +855,6 @@ SetTransactionType sets TransactionType field to given value.
 `func (o *TransactionsCreate) HasTransactionType() bool`
 
 HasTransactionType returns a boolean if a field has been set.
-
-### GetUpdatedAt
-
-`func (o *TransactionsCreate) GetUpdatedAt() time.Time`
-
-GetUpdatedAt returns the UpdatedAt field if non-nil, zero value otherwise.
-
-### GetUpdatedAtOk
-
-`func (o *TransactionsCreate) GetUpdatedAtOk() (*time.Time, bool)`
-
-GetUpdatedAtOk returns a tuple with the UpdatedAt field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetUpdatedAt
-
-`func (o *TransactionsCreate) SetUpdatedAt(v time.Time)`
-
-SetUpdatedAt sets UpdatedAt field to given value.
-
-### HasUpdatedAt
-
-`func (o *TransactionsCreate) HasUpdatedAt() bool`
-
-HasUpdatedAt returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -36,7 +36,7 @@ use \LomiSDK\ObjectSerializer;
  * MetersUpdate Class Doc Comment
  *
  * @category Class
- * @description Update meters input
+ * @description Request body for updating a meters object. Only include fields you want to modify.
  * @package  LomiSDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -60,14 +60,11 @@ class MetersUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPITypes = [
         'aggregation' => 'object',
-        'created_at' => '\DateTime',
         'filter' => 'object',
         'is_active' => 'bool',
         'meter_id' => 'string',
         'name' => 'string',
-        'organization_id' => 'string',
-        'product_id' => 'string',
-        'updated_at' => '\DateTime'
+        'product_id' => 'string'
     ];
 
     /**
@@ -79,14 +76,11 @@ class MetersUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPIFormats = [
         'aggregation' => null,
-        'created_at' => 'date-time',
         'filter' => null,
         'is_active' => null,
         'meter_id' => 'uuid',
         'name' => null,
-        'organization_id' => 'uuid',
-        'product_id' => 'uuid',
-        'updated_at' => 'date-time'
+        'product_id' => 'uuid'
     ];
 
     /**
@@ -96,14 +90,11 @@ class MetersUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static array $openAPINullables = [
         'aggregation' => false,
-        'created_at' => false,
         'filter' => false,
         'is_active' => false,
         'meter_id' => false,
         'name' => false,
-        'organization_id' => false,
-        'product_id' => false,
-        'updated_at' => false
+        'product_id' => false
     ];
 
     /**
@@ -193,14 +184,11 @@ class MetersUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $attributeMap = [
         'aggregation' => 'aggregation',
-        'created_at' => 'created_at',
         'filter' => 'filter',
         'is_active' => 'is_active',
         'meter_id' => 'meter_id',
         'name' => 'name',
-        'organization_id' => 'organization_id',
-        'product_id' => 'product_id',
-        'updated_at' => 'updated_at'
+        'product_id' => 'product_id'
     ];
 
     /**
@@ -210,14 +198,11 @@ class MetersUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $setters = [
         'aggregation' => 'setAggregation',
-        'created_at' => 'setCreatedAt',
         'filter' => 'setFilter',
         'is_active' => 'setIsActive',
         'meter_id' => 'setMeterId',
         'name' => 'setName',
-        'organization_id' => 'setOrganizationId',
-        'product_id' => 'setProductId',
-        'updated_at' => 'setUpdatedAt'
+        'product_id' => 'setProductId'
     ];
 
     /**
@@ -227,14 +212,11 @@ class MetersUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $getters = [
         'aggregation' => 'getAggregation',
-        'created_at' => 'getCreatedAt',
         'filter' => 'getFilter',
         'is_active' => 'getIsActive',
         'meter_id' => 'getMeterId',
         'name' => 'getName',
-        'organization_id' => 'getOrganizationId',
-        'product_id' => 'getProductId',
-        'updated_at' => 'getUpdatedAt'
+        'product_id' => 'getProductId'
     ];
 
     /**
@@ -295,14 +277,11 @@ class MetersUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
     public function __construct(?array $data = null)
     {
         $this->setIfExists('aggregation', $data ?? [], null);
-        $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('filter', $data ?? [], null);
         $this->setIfExists('is_active', $data ?? [], null);
         $this->setIfExists('meter_id', $data ?? [], null);
         $this->setIfExists('name', $data ?? [], null);
-        $this->setIfExists('organization_id', $data ?? [], null);
         $this->setIfExists('product_id', $data ?? [], null);
-        $this->setIfExists('updated_at', $data ?? [], null);
     }
 
     /**
@@ -375,33 +354,6 @@ class MetersUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets created_at
-     *
-     * @return \DateTime|null
-     */
-    public function getCreatedAt()
-    {
-        return $this->container['created_at'];
-    }
-
-    /**
-     * Sets created_at
-     *
-     * @param \DateTime|null $created_at created_at
-     *
-     * @return self
-     */
-    public function setCreatedAt($created_at)
-    {
-        if (is_null($created_at)) {
-            throw new \InvalidArgumentException('non-nullable created_at cannot be null');
-        }
-        $this->container['created_at'] = $created_at;
-
-        return $this;
-    }
-
-    /**
      * Gets filter
      *
      * @return object|null
@@ -441,7 +393,7 @@ class MetersUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets is_active
      *
-     * @param bool|null $is_active is_active
+     * @param bool|null $is_active Whether this resource is currently active
      *
      * @return self
      */
@@ -468,7 +420,7 @@ class MetersUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets meter_id
      *
-     * @param string|null $meter_id meter_id
+     * @param string|null $meter_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -510,33 +462,6 @@ class MetersUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets organization_id
-     *
-     * @return string|null
-     */
-    public function getOrganizationId()
-    {
-        return $this->container['organization_id'];
-    }
-
-    /**
-     * Sets organization_id
-     *
-     * @param string|null $organization_id organization_id
-     *
-     * @return self
-     */
-    public function setOrganizationId($organization_id)
-    {
-        if (is_null($organization_id)) {
-            throw new \InvalidArgumentException('non-nullable organization_id cannot be null');
-        }
-        $this->container['organization_id'] = $organization_id;
-
-        return $this;
-    }
-
-    /**
      * Gets product_id
      *
      * @return string|null
@@ -549,7 +474,7 @@ class MetersUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets product_id
      *
-     * @param string|null $product_id product_id
+     * @param string|null $product_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -559,33 +484,6 @@ class MetersUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable product_id cannot be null');
         }
         $this->container['product_id'] = $product_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets updated_at
-     *
-     * @return \DateTime|null
-     */
-    public function getUpdatedAt()
-    {
-        return $this->container['updated_at'];
-    }
-
-    /**
-     * Sets updated_at
-     *
-     * @param \DateTime|null $updated_at updated_at
-     *
-     * @return self
-     */
-    public function setUpdatedAt($updated_at)
-    {
-        if (is_null($updated_at)) {
-            throw new \InvalidArgumentException('non-nullable updated_at cannot be null');
-        }
-        $this->container['updated_at'] = $updated_at;
 
         return $this;
     }

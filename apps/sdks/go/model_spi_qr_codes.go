@@ -19,30 +19,42 @@ import (
 // checks if the SpiQrCodes type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SpiQrCodes{}
 
-// SpiQrCodes spi_qr_codes object
+// SpiQrCodes spi qr codes resource object
 type SpiQrCodes struct {
 	Categorie *string `json:"categorie,omitempty"`
+	// Unique identifier (UUID format)
 	CheckoutSessionId *string `json:"checkout_session_id,omitempty"`
 	ComptePaye *string `json:"compte_paye,omitempty"`
+	// ISO 8601 datetime
 	CreatedAt *time.Time `json:"created_at,omitempty"`
 	CreatedBy *string `json:"created_by,omitempty"`
 	Environment *string `json:"environment,omitempty"`
+	// ISO 8601 datetime
 	ExpiresAt *time.Time `json:"expires_at,omitempty"`
+	// Whether this resource is currently active
 	IsActive *bool `json:"is_active,omitempty"`
 	IsUsed *bool `json:"is_used,omitempty"`
+	// Set of key-value pairs for storing additional information
 	Metadata map[string]interface{} `json:"metadata,omitempty"`
 	Montant *float64 `json:"montant,omitempty"`
 	Name *string `json:"name,omitempty"`
+	// Unique identifier (UUID format)
 	OrganizationId *string `json:"organization_id,omitempty"`
 	PayeurAlias *string `json:"payeur_alias,omitempty"`
+	// Unique identifier (UUID format)
 	PaymentRequestId *string `json:"payment_request_id,omitempty"`
+	// Unique identifier (UUID format)
 	PlanId *string `json:"plan_id,omitempty"`
+	// Unique identifier (UUID format)
 	ProductId *string `json:"product_id,omitempty"`
 	QrCodeData *string `json:"qr_code_data,omitempty"`
+	// Unique identifier (UUID format)
 	QrCodeId *string `json:"qr_code_id,omitempty"`
 	QrCodeImageData *string `json:"qr_code_image_data,omitempty"`
+	// URL/URI
 	QrCodeImageUrl *string `json:"qr_code_image_url,omitempty"`
 	QrCodeType *string `json:"qr_code_type,omitempty"`
+	// ISO 8601 datetime
 	UpdatedAt *time.Time `json:"updated_at,omitempty"`
 }
 

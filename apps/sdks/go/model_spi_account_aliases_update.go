@@ -13,24 +13,23 @@ package lomisdk
 
 import (
 	"encoding/json"
-	"time"
 )
 
 // checks if the SpiAccountAliasesUpdate type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SpiAccountAliasesUpdate{}
 
-// SpiAccountAliasesUpdate Update spi_account_aliases input
+// SpiAccountAliasesUpdate Request body for updating a spi account aliases object. Only include fields you want to modify.
 type SpiAccountAliasesUpdate struct {
 	AccountNumber *string `json:"account_number,omitempty"`
+	// Unique identifier (UUID format)
 	AliasId *string `json:"alias_id,omitempty"`
 	AliasKey *string `json:"alias_key,omitempty"`
 	AliasType *string `json:"alias_type,omitempty"`
-	CreatedAt *time.Time `json:"created_at,omitempty"`
+	// Whether this resource is currently active
 	IsActive *bool `json:"is_active,omitempty"`
 	IsDefault *bool `json:"is_default,omitempty"`
+	// Set of key-value pairs for storing additional information
 	Metadata map[string]interface{} `json:"metadata,omitempty"`
-	OrganizationId *string `json:"organization_id,omitempty"`
-	UpdatedAt *time.Time `json:"updated_at,omitempty"`
 }
 
 // NewSpiAccountAliasesUpdate instantiates a new SpiAccountAliasesUpdate object
@@ -178,38 +177,6 @@ func (o *SpiAccountAliasesUpdate) SetAliasType(v string) {
 	o.AliasType = &v
 }
 
-// GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
-func (o *SpiAccountAliasesUpdate) GetCreatedAt() time.Time {
-	if o == nil || IsNil(o.CreatedAt) {
-		var ret time.Time
-		return ret
-	}
-	return *o.CreatedAt
-}
-
-// GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *SpiAccountAliasesUpdate) GetCreatedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.CreatedAt) {
-		return nil, false
-	}
-	return o.CreatedAt, true
-}
-
-// HasCreatedAt returns a boolean if a field has been set.
-func (o *SpiAccountAliasesUpdate) HasCreatedAt() bool {
-	if o != nil && !IsNil(o.CreatedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetCreatedAt gets a reference to the given time.Time and assigns it to the CreatedAt field.
-func (o *SpiAccountAliasesUpdate) SetCreatedAt(v time.Time) {
-	o.CreatedAt = &v
-}
-
 // GetIsActive returns the IsActive field value if set, zero value otherwise.
 func (o *SpiAccountAliasesUpdate) GetIsActive() bool {
 	if o == nil || IsNil(o.IsActive) {
@@ -306,70 +273,6 @@ func (o *SpiAccountAliasesUpdate) SetMetadata(v map[string]interface{}) {
 	o.Metadata = v
 }
 
-// GetOrganizationId returns the OrganizationId field value if set, zero value otherwise.
-func (o *SpiAccountAliasesUpdate) GetOrganizationId() string {
-	if o == nil || IsNil(o.OrganizationId) {
-		var ret string
-		return ret
-	}
-	return *o.OrganizationId
-}
-
-// GetOrganizationIdOk returns a tuple with the OrganizationId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *SpiAccountAliasesUpdate) GetOrganizationIdOk() (*string, bool) {
-	if o == nil || IsNil(o.OrganizationId) {
-		return nil, false
-	}
-	return o.OrganizationId, true
-}
-
-// HasOrganizationId returns a boolean if a field has been set.
-func (o *SpiAccountAliasesUpdate) HasOrganizationId() bool {
-	if o != nil && !IsNil(o.OrganizationId) {
-		return true
-	}
-
-	return false
-}
-
-// SetOrganizationId gets a reference to the given string and assigns it to the OrganizationId field.
-func (o *SpiAccountAliasesUpdate) SetOrganizationId(v string) {
-	o.OrganizationId = &v
-}
-
-// GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.
-func (o *SpiAccountAliasesUpdate) GetUpdatedAt() time.Time {
-	if o == nil || IsNil(o.UpdatedAt) {
-		var ret time.Time
-		return ret
-	}
-	return *o.UpdatedAt
-}
-
-// GetUpdatedAtOk returns a tuple with the UpdatedAt field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *SpiAccountAliasesUpdate) GetUpdatedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.UpdatedAt) {
-		return nil, false
-	}
-	return o.UpdatedAt, true
-}
-
-// HasUpdatedAt returns a boolean if a field has been set.
-func (o *SpiAccountAliasesUpdate) HasUpdatedAt() bool {
-	if o != nil && !IsNil(o.UpdatedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetUpdatedAt gets a reference to the given time.Time and assigns it to the UpdatedAt field.
-func (o *SpiAccountAliasesUpdate) SetUpdatedAt(v time.Time) {
-	o.UpdatedAt = &v
-}
-
 func (o SpiAccountAliasesUpdate) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -392,9 +295,6 @@ func (o SpiAccountAliasesUpdate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.AliasType) {
 		toSerialize["alias_type"] = o.AliasType
 	}
-	if !IsNil(o.CreatedAt) {
-		toSerialize["created_at"] = o.CreatedAt
-	}
 	if !IsNil(o.IsActive) {
 		toSerialize["is_active"] = o.IsActive
 	}
@@ -403,12 +303,6 @@ func (o SpiAccountAliasesUpdate) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Metadata) {
 		toSerialize["metadata"] = o.Metadata
-	}
-	if !IsNil(o.OrganizationId) {
-		toSerialize["organization_id"] = o.OrganizationId
-	}
-	if !IsNil(o.UpdatedAt) {
-		toSerialize["updated_at"] = o.UpdatedAt
 	}
 	return toSerialize, nil
 }

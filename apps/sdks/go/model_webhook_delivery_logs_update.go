@@ -13,32 +13,32 @@ package lomisdk
 
 import (
 	"encoding/json"
-	"time"
 )
 
 // checks if the WebhookDeliveryLogsUpdate type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WebhookDeliveryLogsUpdate{}
 
-// WebhookDeliveryLogsUpdate Update webhook_delivery_logs input
+// WebhookDeliveryLogsUpdate Request body for updating a webhook delivery logs object. Only include fields you want to modify.
 type WebhookDeliveryLogsUpdate struct {
 	AttemptNumber *float64 `json:"attempt_number,omitempty"`
 	ComptePaye *string `json:"compte_paye,omitempty"`
 	ComptePayeur *string `json:"compte_payeur,omitempty"`
-	CreatedAt *time.Time `json:"created_at,omitempty"`
 	EventType *string `json:"event_type,omitempty"`
 	Headers map[string]interface{} `json:"headers,omitempty"`
 	IpAddress *string `json:"ip_address,omitempty"`
+	// Unique identifier (UUID format)
 	LogId *string `json:"log_id,omitempty"`
 	Montant *float64 `json:"montant,omitempty"`
-	OrganizationId *string `json:"organization_id,omitempty"`
 	Payload map[string]interface{} `json:"payload,omitempty"`
 	RequestDurationMs *float64 `json:"request_duration_ms,omitempty"`
 	ResponseBody *string `json:"response_body,omitempty"`
 	ResponseStatus *float64 `json:"response_status,omitempty"`
 	SpiEventCode *string `json:"spi_event_code,omitempty"`
+	// Unique identifier (UUID format)
 	SpiTxId *string `json:"spi_tx_id,omitempty"`
 	Success *bool `json:"success,omitempty"`
 	UserAgent *string `json:"user_agent,omitempty"`
+	// Unique identifier (UUID format)
 	WebhookId *string `json:"webhook_id,omitempty"`
 }
 
@@ -153,38 +153,6 @@ func (o *WebhookDeliveryLogsUpdate) HasComptePayeur() bool {
 // SetComptePayeur gets a reference to the given string and assigns it to the ComptePayeur field.
 func (o *WebhookDeliveryLogsUpdate) SetComptePayeur(v string) {
 	o.ComptePayeur = &v
-}
-
-// GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
-func (o *WebhookDeliveryLogsUpdate) GetCreatedAt() time.Time {
-	if o == nil || IsNil(o.CreatedAt) {
-		var ret time.Time
-		return ret
-	}
-	return *o.CreatedAt
-}
-
-// GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *WebhookDeliveryLogsUpdate) GetCreatedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.CreatedAt) {
-		return nil, false
-	}
-	return o.CreatedAt, true
-}
-
-// HasCreatedAt returns a boolean if a field has been set.
-func (o *WebhookDeliveryLogsUpdate) HasCreatedAt() bool {
-	if o != nil && !IsNil(o.CreatedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetCreatedAt gets a reference to the given time.Time and assigns it to the CreatedAt field.
-func (o *WebhookDeliveryLogsUpdate) SetCreatedAt(v time.Time) {
-	o.CreatedAt = &v
 }
 
 // GetEventType returns the EventType field value if set, zero value otherwise.
@@ -345,38 +313,6 @@ func (o *WebhookDeliveryLogsUpdate) HasMontant() bool {
 // SetMontant gets a reference to the given float64 and assigns it to the Montant field.
 func (o *WebhookDeliveryLogsUpdate) SetMontant(v float64) {
 	o.Montant = &v
-}
-
-// GetOrganizationId returns the OrganizationId field value if set, zero value otherwise.
-func (o *WebhookDeliveryLogsUpdate) GetOrganizationId() string {
-	if o == nil || IsNil(o.OrganizationId) {
-		var ret string
-		return ret
-	}
-	return *o.OrganizationId
-}
-
-// GetOrganizationIdOk returns a tuple with the OrganizationId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *WebhookDeliveryLogsUpdate) GetOrganizationIdOk() (*string, bool) {
-	if o == nil || IsNil(o.OrganizationId) {
-		return nil, false
-	}
-	return o.OrganizationId, true
-}
-
-// HasOrganizationId returns a boolean if a field has been set.
-func (o *WebhookDeliveryLogsUpdate) HasOrganizationId() bool {
-	if o != nil && !IsNil(o.OrganizationId) {
-		return true
-	}
-
-	return false
-}
-
-// SetOrganizationId gets a reference to the given string and assigns it to the OrganizationId field.
-func (o *WebhookDeliveryLogsUpdate) SetOrganizationId(v string) {
-	o.OrganizationId = &v
 }
 
 // GetPayload returns the Payload field value if set, zero value otherwise.
@@ -686,9 +622,6 @@ func (o WebhookDeliveryLogsUpdate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ComptePayeur) {
 		toSerialize["compte_payeur"] = o.ComptePayeur
 	}
-	if !IsNil(o.CreatedAt) {
-		toSerialize["created_at"] = o.CreatedAt
-	}
 	if !IsNil(o.EventType) {
 		toSerialize["event_type"] = o.EventType
 	}
@@ -703,9 +636,6 @@ func (o WebhookDeliveryLogsUpdate) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Montant) {
 		toSerialize["montant"] = o.Montant
-	}
-	if !IsNil(o.OrganizationId) {
-		toSerialize["organization_id"] = o.OrganizationId
 	}
 	if !IsNil(o.Payload) {
 		toSerialize["payload"] = o.Payload

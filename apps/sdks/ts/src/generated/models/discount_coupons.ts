@@ -3,13 +3,19 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * discount_coupons object
+ * discount coupons resource object
  */
 export type discount_coupons = {
     applies_to_product_types?: string;
     code?: string;
+    /**
+     * Unique identifier (UUID format)
+     */
     coupon_id?: string;
-    created_at?: string;
+    /**
+     * ISO 8601 datetime
+     */
+    readonly created_at?: string;
     current_uses?: number;
     customer_type?: string;
     description?: string;
@@ -17,14 +23,26 @@ export type discount_coupons = {
     discount_percentage?: number;
     discount_type?: string;
     environment?: string;
+    /**
+     * ISO 8601 datetime
+     */
     expires_at?: string;
+    /**
+     * Whether this resource is currently active
+     */
     is_active?: boolean;
     is_organization_wide?: boolean;
     max_quantity_per_use?: number;
     max_uses?: number;
+    /**
+     * Unique identifier (UUID format)
+     */
     organization_id?: string;
     scope_type?: string;
-    updated_at?: string;
+    /**
+     * ISO 8601 datetime
+     */
+    readonly updated_at?: string;
     usage_frequency_limit?: string;
     usage_limit_value?: number;
     valid_from?: string;

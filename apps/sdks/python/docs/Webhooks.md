@@ -1,30 +1,30 @@
 # Webhooks
 
-webhooks object
+webhooks resource object
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **authorized_events** | **str** |  | [optional] 
-**created_at** | **datetime** |  | [optional] 
-**created_by** | **str** |  | [optional] 
-**deleted_at** | **datetime** |  | [optional] 
+**created_at** | **datetime** | ISO 8601 datetime | [optional] [readonly] 
+**created_by** | **str** |  | [optional] [readonly] 
+**deleted_at** | **datetime** | ISO 8601 datetime | [optional] [readonly] 
 **environment** | **str** |  | [optional] 
-**is_active** | **bool** |  | [optional] 
+**is_active** | **bool** | Whether this resource is currently active | [optional] 
 **last_payload** | **object** |  | [optional] 
 **last_response_body** | **str** |  | [optional] 
 **last_response_status** | **float** |  | [optional] 
-**last_triggered_at** | **datetime** |  | [optional] 
-**metadata** | **object** |  | [optional] 
-**organization_id** | **str** |  | [optional] 
+**last_triggered_at** | **datetime** | ISO 8601 datetime | [optional] 
+**metadata** | **object** | Set of key-value pairs for storing additional information | [optional] 
+**organization_id** | **str** | Unique identifier (UUID format) | [optional] 
 **retry_count** | **float** |  | [optional] 
 **spi_event_types** | **str** |  | [optional] 
 **supports_spi** | **bool** |  | [optional] 
-**updated_at** | **datetime** |  | [optional] 
-**url** | **str** |  | [optional] 
+**updated_at** | **datetime** | ISO 8601 datetime | [optional] [readonly] 
+**url** | **str** | URL/URI | [optional] 
 **verification_token** | **str** |  | [optional] 
-**webhook_id** | **str** |  | [optional] 
+**webhook_id** | **str** | Unique identifier (UUID format) | [optional] 
 
 ## Example
 

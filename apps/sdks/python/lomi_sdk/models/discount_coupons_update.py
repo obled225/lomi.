@@ -19,7 +19,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictFloat, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from uuid import UUID
 from typing import Optional, Set
@@ -27,31 +27,27 @@ from typing_extensions import Self
 
 class DiscountCouponsUpdate(BaseModel):
     """
-    Update discount_coupons input
+    Request body for updating a discount coupons object. Only include fields you want to modify.
     """ # noqa: E501
     applies_to_product_types: Optional[StrictStr] = None
     code: Optional[StrictStr] = None
-    coupon_id: Optional[UUID] = None
-    created_at: Optional[datetime] = None
+    coupon_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
     current_uses: Optional[Union[StrictFloat, StrictInt]] = None
     customer_type: Optional[StrictStr] = None
     description: Optional[StrictStr] = None
     discount_fixed_amount: Optional[Union[StrictFloat, StrictInt]] = None
     discount_percentage: Optional[Union[StrictFloat, StrictInt]] = None
     discount_type: Optional[StrictStr] = None
-    environment: Optional[StrictStr] = None
-    expires_at: Optional[datetime] = None
-    is_active: Optional[StrictBool] = None
+    expires_at: Optional[datetime] = Field(default=None, description="ISO 8601 datetime")
+    is_active: Optional[StrictBool] = Field(default=None, description="Whether this resource is currently active")
     is_organization_wide: Optional[StrictBool] = None
     max_quantity_per_use: Optional[Union[StrictFloat, StrictInt]] = None
     max_uses: Optional[Union[StrictFloat, StrictInt]] = None
-    organization_id: Optional[UUID] = None
     scope_type: Optional[StrictStr] = None
-    updated_at: Optional[datetime] = None
     usage_frequency_limit: Optional[StrictStr] = None
     usage_limit_value: Optional[Union[StrictFloat, StrictInt]] = None
     valid_from: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["applies_to_product_types", "code", "coupon_id", "created_at", "current_uses", "customer_type", "description", "discount_fixed_amount", "discount_percentage", "discount_type", "environment", "expires_at", "is_active", "is_organization_wide", "max_quantity_per_use", "max_uses", "organization_id", "scope_type", "updated_at", "usage_frequency_limit", "usage_limit_value", "valid_from"]
+    __properties: ClassVar[List[str]] = ["applies_to_product_types", "code", "coupon_id", "current_uses", "customer_type", "description", "discount_fixed_amount", "discount_percentage", "discount_type", "expires_at", "is_active", "is_organization_wide", "max_quantity_per_use", "max_uses", "scope_type", "usage_frequency_limit", "usage_limit_value", "valid_from"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -107,22 +103,18 @@ class DiscountCouponsUpdate(BaseModel):
             "applies_to_product_types": obj.get("applies_to_product_types"),
             "code": obj.get("code"),
             "coupon_id": obj.get("coupon_id"),
-            "created_at": obj.get("created_at"),
             "current_uses": obj.get("current_uses"),
             "customer_type": obj.get("customer_type"),
             "description": obj.get("description"),
             "discount_fixed_amount": obj.get("discount_fixed_amount"),
             "discount_percentage": obj.get("discount_percentage"),
             "discount_type": obj.get("discount_type"),
-            "environment": obj.get("environment"),
             "expires_at": obj.get("expires_at"),
             "is_active": obj.get("is_active"),
             "is_organization_wide": obj.get("is_organization_wide"),
             "max_quantity_per_use": obj.get("max_quantity_per_use"),
             "max_uses": obj.get("max_uses"),
-            "organization_id": obj.get("organization_id"),
             "scope_type": obj.get("scope_type"),
-            "updated_at": obj.get("updated_at"),
             "usage_frequency_limit": obj.get("usage_frequency_limit"),
             "usage_limit_value": obj.get("usage_limit_value"),
             "valid_from": obj.get("valid_from")

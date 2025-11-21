@@ -19,16 +19,22 @@ import (
 // checks if the Meters type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Meters{}
 
-// Meters meters object
+// Meters meters resource object
 type Meters struct {
 	Aggregation map[string]interface{} `json:"aggregation,omitempty"`
+	// ISO 8601 datetime
 	CreatedAt *time.Time `json:"created_at,omitempty"`
 	Filter map[string]interface{} `json:"filter,omitempty"`
+	// Whether this resource is currently active
 	IsActive *bool `json:"is_active,omitempty"`
+	// Unique identifier (UUID format)
 	MeterId *string `json:"meter_id,omitempty"`
 	Name *string `json:"name,omitempty"`
+	// Unique identifier (UUID format)
 	OrganizationId *string `json:"organization_id,omitempty"`
+	// Unique identifier (UUID format)
 	ProductId *string `json:"product_id,omitempty"`
+	// ISO 8601 datetime
 	UpdatedAt *time.Time `json:"updated_at,omitempty"`
 }
 

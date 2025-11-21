@@ -1,23 +1,19 @@
 # CustomerInvoicesUpdate
 
-Update customer_invoices input
+Request body for updating a customer invoices object. Only include fields you want to modify.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**amount** | **float** |  | [optional] 
-**created_at** | **datetime** |  | [optional] 
-**created_by** | **str** |  | [optional] 
-**currency_code** | **str** |  | [optional] 
-**customer_id** | **str** |  | [optional] 
-**customer_invoice_id** | **str** |  | [optional] 
+**amount** | **float** | Amount in the smallest currency unit (e.g., cents for USD, same for XOF) | [optional] 
+**currency_code** | **str** | Three-letter ISO currency code (e.g., XOF, USD, EUR) | [optional] 
+**customer_id** | **str** | Unique identifier (UUID format) | [optional] 
+**customer_invoice_id** | **str** | Unique identifier (UUID format) | [optional] 
 **description** | **str** |  | [optional] 
 **due_date** | **str** |  | [optional] 
-**metadata** | **object** |  | [optional] 
-**organization_id** | **str** |  | [optional] 
-**status** | **str** |  | [optional] 
-**updated_at** | **datetime** |  | [optional] 
+**metadata** | **object** | Set of key-value pairs for storing additional information | [optional] 
+**status** | **str** | Current status of the resource | [optional] 
 
 ## Example
 

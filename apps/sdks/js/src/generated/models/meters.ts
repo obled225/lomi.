@@ -3,17 +3,35 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * meters object
+ * meters resource object
  */
 export type meters = {
     aggregation?: Record<string, any>;
-    created_at?: string;
+    /**
+     * ISO 8601 datetime
+     */
+    readonly created_at?: string;
     filter?: Record<string, any>;
+    /**
+     * Whether this resource is currently active
+     */
     is_active?: boolean;
+    /**
+     * Unique identifier (UUID format)
+     */
     meter_id?: string;
     name?: string;
+    /**
+     * Unique identifier (UUID format)
+     */
     organization_id?: string;
+    /**
+     * Unique identifier (UUID format)
+     */
     product_id?: string;
-    updated_at?: string;
+    /**
+     * ISO 8601 datetime
+     */
+    readonly updated_at?: string;
 };
 

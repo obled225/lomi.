@@ -19,17 +19,24 @@ import (
 // checks if the MeterBalances type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &MeterBalances{}
 
-// MeterBalances meter_balances object
+// MeterBalances meter balances resource object
 type MeterBalances struct {
 	Balance *float64 `json:"balance,omitempty"`
+	// Unique identifier (UUID format)
 	BalanceId *string `json:"balance_id,omitempty"`
+	// Unique identifier (UUID format)
 	BillableOrganizationId *string `json:"billable_organization_id,omitempty"`
 	ConsumedUnits *float64 `json:"consumed_units,omitempty"`
+	// ISO 8601 datetime
 	CreatedAt *time.Time `json:"created_at,omitempty"`
 	CreditedUnits *float64 `json:"credited_units,omitempty"`
+	// Unique identifier (UUID format)
 	CustomerId *string `json:"customer_id,omitempty"`
+	// Unique identifier (UUID format)
 	LastEventId *string `json:"last_event_id,omitempty"`
+	// Unique identifier (UUID format)
 	MeterId *string `json:"meter_id,omitempty"`
+	// ISO 8601 datetime
 	UpdatedAt *time.Time `json:"updated_at,omitempty"`
 }
 

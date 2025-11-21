@@ -1,6 +1,6 @@
 # DiscountCoupons
 
-discount_coupons object
+discount coupons resource object
 
 ## Properties
 
@@ -8,8 +8,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **applies_to_product_types** | **str** |  | [optional] 
 **code** | **str** |  | [optional] 
-**coupon_id** | **str** |  | [optional] 
-**created_at** | **datetime** |  | [optional] 
+**coupon_id** | **str** | Unique identifier (UUID format) | [optional] 
+**created_at** | **datetime** | ISO 8601 datetime | [optional] [readonly] 
 **current_uses** | **float** |  | [optional] 
 **customer_type** | **str** |  | [optional] 
 **description** | **str** |  | [optional] 
@@ -17,14 +17,14 @@ Name | Type | Description | Notes
 **discount_percentage** | **float** |  | [optional] 
 **discount_type** | **str** |  | [optional] 
 **environment** | **str** |  | [optional] 
-**expires_at** | **datetime** |  | [optional] 
-**is_active** | **bool** |  | [optional] 
+**expires_at** | **datetime** | ISO 8601 datetime | [optional] 
+**is_active** | **bool** | Whether this resource is currently active | [optional] 
 **is_organization_wide** | **bool** |  | [optional] 
 **max_quantity_per_use** | **float** |  | [optional] 
 **max_uses** | **float** |  | [optional] 
-**organization_id** | **str** |  | [optional] 
+**organization_id** | **str** | Unique identifier (UUID format) | [optional] 
 **scope_type** | **str** |  | [optional] 
-**updated_at** | **datetime** |  | [optional] 
+**updated_at** | **datetime** | ISO 8601 datetime | [optional] [readonly] 
 **usage_frequency_limit** | **str** |  | [optional] 
 **usage_limit_value** | **float** |  | [optional] 
 **valid_from** | **str** |  | [optional] 

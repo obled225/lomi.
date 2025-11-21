@@ -13,33 +13,36 @@ package lomisdk
 
 import (
 	"encoding/json"
-	"time"
 )
 
 // checks if the RefundsCreate type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RefundsCreate{}
 
-// RefundsCreate Create refunds input
+// RefundsCreate Request body for creating a refunds object. System-managed fields like `created_at`, `organization_id`, and IDs are automatically set.
 type RefundsCreate struct {
+	// Amount in the smallest currency unit (e.g., cents for USD, same for XOF)
 	Amount *float64 `json:"amount,omitempty"`
-	CreatedAt *time.Time `json:"created_at,omitempty"`
-	Environment *string `json:"environment,omitempty"`
 	FeeAmount *float64 `json:"fee_amount,omitempty"`
+	// Set of key-value pairs for storing additional information
 	Metadata map[string]interface{} `json:"metadata,omitempty"`
 	Reason *string `json:"reason,omitempty"`
+	// Unique identifier (UUID format)
 	RefundId *string `json:"refund_id,omitempty"`
 	RefundedAmount *float64 `json:"refunded_amount,omitempty"`
 	SpiAccountNumber *string `json:"spi_account_number,omitempty"`
+	// Unique identifier (UUID format)
 	SpiEnd2endId *string `json:"spi_end2end_id,omitempty"`
 	SpiFundReturnStatus *string `json:"spi_fund_return_status,omitempty"`
 	SpiMotifCode *string `json:"spi_motif_code,omitempty"`
 	SpiRejectionReason *string `json:"spi_rejection_reason,omitempty"`
 	SpiRetourDateDemande *string `json:"spi_retour_date_demande,omitempty"`
 	SpiRetourDateIrrevocabilite *string `json:"spi_retour_date_irrevocabilite,omitempty"`
+	// Unique identifier (UUID format)
 	SpiTxId *string `json:"spi_tx_id,omitempty"`
+	// Current status of the resource
 	Status *string `json:"status,omitempty"`
+	// Unique identifier (UUID format)
 	TransactionId *string `json:"transaction_id,omitempty"`
-	UpdatedAt *time.Time `json:"updated_at,omitempty"`
 }
 
 // NewRefundsCreate instantiates a new RefundsCreate object
@@ -89,70 +92,6 @@ func (o *RefundsCreate) HasAmount() bool {
 // SetAmount gets a reference to the given float64 and assigns it to the Amount field.
 func (o *RefundsCreate) SetAmount(v float64) {
 	o.Amount = &v
-}
-
-// GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
-func (o *RefundsCreate) GetCreatedAt() time.Time {
-	if o == nil || IsNil(o.CreatedAt) {
-		var ret time.Time
-		return ret
-	}
-	return *o.CreatedAt
-}
-
-// GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *RefundsCreate) GetCreatedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.CreatedAt) {
-		return nil, false
-	}
-	return o.CreatedAt, true
-}
-
-// HasCreatedAt returns a boolean if a field has been set.
-func (o *RefundsCreate) HasCreatedAt() bool {
-	if o != nil && !IsNil(o.CreatedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetCreatedAt gets a reference to the given time.Time and assigns it to the CreatedAt field.
-func (o *RefundsCreate) SetCreatedAt(v time.Time) {
-	o.CreatedAt = &v
-}
-
-// GetEnvironment returns the Environment field value if set, zero value otherwise.
-func (o *RefundsCreate) GetEnvironment() string {
-	if o == nil || IsNil(o.Environment) {
-		var ret string
-		return ret
-	}
-	return *o.Environment
-}
-
-// GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *RefundsCreate) GetEnvironmentOk() (*string, bool) {
-	if o == nil || IsNil(o.Environment) {
-		return nil, false
-	}
-	return o.Environment, true
-}
-
-// HasEnvironment returns a boolean if a field has been set.
-func (o *RefundsCreate) HasEnvironment() bool {
-	if o != nil && !IsNil(o.Environment) {
-		return true
-	}
-
-	return false
-}
-
-// SetEnvironment gets a reference to the given string and assigns it to the Environment field.
-func (o *RefundsCreate) SetEnvironment(v string) {
-	o.Environment = &v
 }
 
 // GetFeeAmount returns the FeeAmount field value if set, zero value otherwise.
@@ -635,38 +574,6 @@ func (o *RefundsCreate) SetTransactionId(v string) {
 	o.TransactionId = &v
 }
 
-// GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.
-func (o *RefundsCreate) GetUpdatedAt() time.Time {
-	if o == nil || IsNil(o.UpdatedAt) {
-		var ret time.Time
-		return ret
-	}
-	return *o.UpdatedAt
-}
-
-// GetUpdatedAtOk returns a tuple with the UpdatedAt field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *RefundsCreate) GetUpdatedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.UpdatedAt) {
-		return nil, false
-	}
-	return o.UpdatedAt, true
-}
-
-// HasUpdatedAt returns a boolean if a field has been set.
-func (o *RefundsCreate) HasUpdatedAt() bool {
-	if o != nil && !IsNil(o.UpdatedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetUpdatedAt gets a reference to the given time.Time and assigns it to the UpdatedAt field.
-func (o *RefundsCreate) SetUpdatedAt(v time.Time) {
-	o.UpdatedAt = &v
-}
-
 func (o RefundsCreate) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -679,12 +586,6 @@ func (o RefundsCreate) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Amount) {
 		toSerialize["amount"] = o.Amount
-	}
-	if !IsNil(o.CreatedAt) {
-		toSerialize["created_at"] = o.CreatedAt
-	}
-	if !IsNil(o.Environment) {
-		toSerialize["environment"] = o.Environment
 	}
 	if !IsNil(o.FeeAmount) {
 		toSerialize["fee_amount"] = o.FeeAmount
@@ -730,9 +631,6 @@ func (o RefundsCreate) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.TransactionId) {
 		toSerialize["transaction_id"] = o.TransactionId
-	}
-	if !IsNil(o.UpdatedAt) {
-		toSerialize["updated_at"] = o.UpdatedAt
 	}
 	return toSerialize, nil
 }

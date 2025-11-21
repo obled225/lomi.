@@ -19,26 +19,35 @@ import (
 // checks if the Refunds type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Refunds{}
 
-// Refunds refunds object
+// Refunds refunds resource object
 type Refunds struct {
+	// Amount in the smallest currency unit (e.g., cents for USD, same for XOF)
 	Amount *float64 `json:"amount,omitempty"`
+	// ISO 8601 datetime
 	CreatedAt *time.Time `json:"created_at,omitempty"`
 	Environment *string `json:"environment,omitempty"`
 	FeeAmount *float64 `json:"fee_amount,omitempty"`
+	// Set of key-value pairs for storing additional information
 	Metadata map[string]interface{} `json:"metadata,omitempty"`
 	Reason *string `json:"reason,omitempty"`
+	// Unique identifier (UUID format)
 	RefundId *string `json:"refund_id,omitempty"`
 	RefundedAmount *float64 `json:"refunded_amount,omitempty"`
 	SpiAccountNumber *string `json:"spi_account_number,omitempty"`
+	// Unique identifier (UUID format)
 	SpiEnd2endId *string `json:"spi_end2end_id,omitempty"`
 	SpiFundReturnStatus *string `json:"spi_fund_return_status,omitempty"`
 	SpiMotifCode *string `json:"spi_motif_code,omitempty"`
 	SpiRejectionReason *string `json:"spi_rejection_reason,omitempty"`
 	SpiRetourDateDemande *string `json:"spi_retour_date_demande,omitempty"`
 	SpiRetourDateIrrevocabilite *string `json:"spi_retour_date_irrevocabilite,omitempty"`
+	// Unique identifier (UUID format)
 	SpiTxId *string `json:"spi_tx_id,omitempty"`
+	// Current status of the resource
 	Status *string `json:"status,omitempty"`
+	// Unique identifier (UUID format)
 	TransactionId *string `json:"transaction_id,omitempty"`
+	// ISO 8601 datetime
 	UpdatedAt *time.Time `json:"updated_at,omitempty"`
 }
 

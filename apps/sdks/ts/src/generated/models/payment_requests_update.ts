@@ -3,22 +3,29 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Update payment_requests input
+ * Request body for updating a payment requests object. Only include fields you want to modify.
  */
 export type payment_requests_update = {
+    /**
+     * Amount in the smallest currency unit (e.g., cents for USD, same for XOF)
+     */
     amount?: number;
-    created_at?: string;
-    created_by?: string;
+    /**
+     * Three-letter ISO currency code (e.g., XOF, USD, EUR)
+     */
     currency_code?: string;
+    /**
+     * Unique identifier (UUID format)
+     */
     customer_id?: string;
     description?: string;
-    environment?: string;
     expiry_date?: string;
-    organization_id?: string;
     payment_link?: string;
     payment_reference?: string;
-    request_id?: string;
     spi_account_number?: string;
+    /**
+     * Unique identifier (UUID format)
+     */
     spi_bulk_instruction_id?: string;
     spi_confirmation?: boolean;
     spi_date_envoi?: string;
@@ -27,6 +34,9 @@ export type payment_requests_update = {
     spi_date_limite_reponse?: string;
     spi_date_rejet?: string;
     spi_debit_differe?: boolean;
+    /**
+     * Unique identifier (UUID format)
+     */
     spi_end2end_id?: string;
     spi_payeur_alias?: string;
     spi_payeur_nom?: string;
@@ -38,8 +48,13 @@ export type payment_requests_update = {
     spi_rejection_reason?: string;
     spi_remise_amount?: number;
     spi_remise_rate?: number;
+    /**
+     * Unique identifier (UUID format)
+     */
     spi_tx_id?: string;
+    /**
+     * Current status of the resource
+     */
     status?: string;
-    updated_at?: string;
 };
 

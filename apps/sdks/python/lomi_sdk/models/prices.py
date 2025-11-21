@@ -19,7 +19,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictFloat, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from uuid import UUID
 from typing import Optional, Set
@@ -27,25 +27,25 @@ from typing_extensions import Self
 
 class Prices(BaseModel):
     """
-    prices object
+    prices resource object
     """ # noqa: E501
-    amount: Optional[Union[StrictFloat, StrictInt]] = None
+    amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Amount in the smallest currency unit (e.g., cents for USD, same for XOF)")
     billing_interval: Optional[StrictStr] = None
-    created_at: Optional[datetime] = None
-    currency_code: Optional[StrictStr] = None
+    created_at: Optional[datetime] = Field(default=None, description="ISO 8601 datetime")
+    currency_code: Optional[StrictStr] = Field(default=None, description="Three-letter ISO currency code (e.g., XOF, USD, EUR)")
     environment: Optional[StrictStr] = None
-    is_active: Optional[StrictBool] = None
+    is_active: Optional[StrictBool] = Field(default=None, description="Whether this resource is currently active")
     is_default: Optional[StrictBool] = None
     maximum_amount: Optional[Union[StrictFloat, StrictInt]] = None
-    metadata: Optional[Dict[str, Any]] = None
+    metadata: Optional[Dict[str, Any]] = Field(default=None, description="Set of key-value pairs for storing additional information")
     minimum_amount: Optional[Union[StrictFloat, StrictInt]] = None
-    organization_id: Optional[UUID] = None
-    price_id: Optional[UUID] = None
+    organization_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
+    price_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
     pricing_model: Optional[StrictStr] = None
-    product_id: Optional[UUID] = None
-    provider_price_id: Optional[UUID] = None
-    provider_product_id: Optional[UUID] = None
-    updated_at: Optional[datetime] = None
+    product_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
+    provider_price_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
+    provider_product_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
+    updated_at: Optional[datetime] = Field(default=None, description="ISO 8601 datetime")
     __properties: ClassVar[List[str]] = ["amount", "billing_interval", "created_at", "currency_code", "environment", "is_active", "is_default", "maximum_amount", "metadata", "minimum_amount", "organization_id", "price_id", "pricing_model", "product_id", "provider_price_id", "provider_product_id", "updated_at"]
 
     model_config = ConfigDict(
@@ -78,8 +78,12 @@ class Prices(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set([
+            "created_at",
+            "updated_at",
         ])
 
         _dict = self.model_dump(

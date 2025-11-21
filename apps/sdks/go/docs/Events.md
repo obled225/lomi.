@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**CreatedAt** | Pointer to **time.Time** |  | [optional] 
-**CreatedBy** | Pointer to **string** |  | [optional] 
-**CustomerId** | Pointer to **string** |  | [optional] 
+**CreatedAt** | Pointer to **time.Time** | ISO 8601 datetime | [optional] [readonly] 
+**CreatedBy** | Pointer to **string** |  | [optional] [readonly] 
+**CustomerId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
 **EventData** | Pointer to **map[string]interface{}** |  | [optional] 
-**EventId** | Pointer to **string** |  | [optional] 
+**EventId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
 **EventName** | Pointer to **string** |  | [optional] 
-**Metadata** | Pointer to **map[string]interface{}** |  | [optional] 
-**OrganizationId** | Pointer to **string** |  | [optional] 
-**ProductId** | Pointer to **string** |  | [optional] 
+**Metadata** | Pointer to **map[string]interface{}** | Set of key-value pairs for storing additional information | [optional] 
+**OrganizationId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
+**ProductId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
 
 ## Methods
 

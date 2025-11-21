@@ -1,25 +1,25 @@
 # Subscriptions
 
-subscriptions object
+subscriptions resource object
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**created_at** | **datetime** |  | [optional] 
-**created_by** | **str** |  | [optional] 
-**customer_id** | **str** |  | [optional] 
+**created_at** | **datetime** | ISO 8601 datetime | [optional] [readonly] 
+**created_by** | **str** |  | [optional] [readonly] 
+**customer_id** | **str** | Unique identifier (UUID format) | [optional] 
 **end_date** | **str** |  | [optional] 
 **environment** | **str** |  | [optional] 
-**metadata** | **object** |  | [optional] 
+**metadata** | **object** | Set of key-value pairs for storing additional information | [optional] 
 **next_billing_date** | **str** |  | [optional] 
-**organization_id** | **str** |  | [optional] 
-**price_id** | **str** |  | [optional] 
-**product_id** | **str** |  | [optional] 
+**organization_id** | **str** | Unique identifier (UUID format) | [optional] 
+**price_id** | **str** | Unique identifier (UUID format) | [optional] 
+**product_id** | **str** | Unique identifier (UUID format) | [optional] 
 **start_date** | **str** |  | [optional] 
-**status** | **str** |  | [optional] 
-**subscription_id** | **str** |  | [optional] 
-**updated_at** | **datetime** |  | [optional] 
+**status** | **str** | Current status of the resource | [optional] 
+**subscription_id** | **str** | Unique identifier (UUID format) | [optional] [readonly] 
+**updated_at** | **datetime** | ISO 8601 datetime | [optional] [readonly] 
 
 ## Example
 

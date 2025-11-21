@@ -36,7 +36,7 @@ use \LomiSDK\ObjectSerializer;
  * Webhooks Class Doc Comment
  *
  * @category Class
- * @description webhooks object
+ * @description webhooks resource object
  * @package  LomiSDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -457,7 +457,7 @@ class Webhooks implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets created_at
      *
-     * @param \DateTime|null $created_at created_at
+     * @param \DateTime|null $created_at ISO 8601 datetime
      *
      * @return self
      */
@@ -511,7 +511,7 @@ class Webhooks implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets deleted_at
      *
-     * @param \DateTime|null $deleted_at deleted_at
+     * @param \DateTime|null $deleted_at ISO 8601 datetime
      *
      * @return self
      */
@@ -565,7 +565,7 @@ class Webhooks implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets is_active
      *
-     * @param bool|null $is_active is_active
+     * @param bool|null $is_active Whether this resource is currently active
      *
      * @return self
      */
@@ -673,7 +673,7 @@ class Webhooks implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets last_triggered_at
      *
-     * @param \DateTime|null $last_triggered_at last_triggered_at
+     * @param \DateTime|null $last_triggered_at ISO 8601 datetime
      *
      * @return self
      */
@@ -700,7 +700,7 @@ class Webhooks implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets metadata
      *
-     * @param object|null $metadata metadata
+     * @param object|null $metadata Set of key-value pairs for storing additional information
      *
      * @return self
      */
@@ -727,7 +727,7 @@ class Webhooks implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets organization_id
      *
-     * @param string|null $organization_id organization_id
+     * @param string|null $organization_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -835,7 +835,7 @@ class Webhooks implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets updated_at
      *
-     * @param \DateTime|null $updated_at updated_at
+     * @param \DateTime|null $updated_at ISO 8601 datetime
      *
      * @return self
      */
@@ -862,7 +862,7 @@ class Webhooks implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets url
      *
-     * @param string|null $url url
+     * @param string|null $url URL/URI
      *
      * @return self
      */
@@ -916,7 +916,7 @@ class Webhooks implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets webhook_id
      *
-     * @param string|null $webhook_id webhook_id
+     * @param string|null $webhook_id Unique identifier (UUID format)
      *
      * @return self
      */

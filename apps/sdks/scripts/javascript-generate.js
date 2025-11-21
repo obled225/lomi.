@@ -4,23 +4,21 @@
  */
 
 import { execSync } from 'child_process';
-import { copyFileSync, writeFileSync, readFileSync, readdirSync, statSync } from 'fs';
+import { writeFileSync, readFileSync, readdirSync, statSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const sourceSpecPath = join(__dirname, '../../api/openapi/spec.yaml');
-const targetSpecPath = join(__dirname, '../js/spec.yaml');
+const specPath = join(__dirname, '../spec.yaml');
 const generatedDir = join(__dirname, '../js/src/generated');
 
-console.log('📋 Copying OpenAPI spec...');
-copyFileSync(sourceSpecPath, targetSpecPath);
+console.log('📋 Using OpenAPI spec from sdks root...');
 
 console.log('🔨 Generating JavaScript SDK...');
 execSync(
-    'npx openapi-typescript-codegen --input ./spec.yaml --output ./src/generated --client axios --useOptions',
+    'npx openapi-typescript-codegen --input ../spec.yaml --output ./src/generated --client axios --useOptions',
     { cwd: join(__dirname, '../js'), stdio: 'inherit' }
 );
 

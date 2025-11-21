@@ -19,7 +19,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from uuid import UUID
 from typing import Optional, Set
@@ -27,22 +27,22 @@ from typing_extensions import Self
 
 class Subscriptions(BaseModel):
     """
-    subscriptions object
+    subscriptions resource object
     """ # noqa: E501
-    created_at: Optional[datetime] = None
+    created_at: Optional[datetime] = Field(default=None, description="ISO 8601 datetime")
     created_by: Optional[StrictStr] = None
-    customer_id: Optional[UUID] = None
+    customer_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
     end_date: Optional[StrictStr] = None
     environment: Optional[StrictStr] = None
-    metadata: Optional[Dict[str, Any]] = None
+    metadata: Optional[Dict[str, Any]] = Field(default=None, description="Set of key-value pairs for storing additional information")
     next_billing_date: Optional[StrictStr] = None
-    organization_id: Optional[UUID] = None
-    price_id: Optional[UUID] = None
-    product_id: Optional[UUID] = None
+    organization_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
+    price_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
+    product_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
     start_date: Optional[StrictStr] = None
-    status: Optional[StrictStr] = None
-    subscription_id: Optional[UUID] = None
-    updated_at: Optional[datetime] = None
+    status: Optional[StrictStr] = Field(default=None, description="Current status of the resource")
+    subscription_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
+    updated_at: Optional[datetime] = Field(default=None, description="ISO 8601 datetime")
     __properties: ClassVar[List[str]] = ["created_at", "created_by", "customer_id", "end_date", "environment", "metadata", "next_billing_date", "organization_id", "price_id", "product_id", "start_date", "status", "subscription_id", "updated_at"]
 
     model_config = ConfigDict(
@@ -75,8 +75,16 @@ class Subscriptions(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set([
+            "created_at",
+            "created_by",
+            "subscription_id",
+            "updated_at",
         ])
 
         _dict = self.model_dump(

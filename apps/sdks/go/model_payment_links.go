@@ -19,31 +19,45 @@ import (
 // checks if the PaymentLinks type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &PaymentLinks{}
 
-// PaymentLinks payment_links object
+// PaymentLinks payment links resource object
 type PaymentLinks struct {
 	AllowCouponCode *bool `json:"allow_coupon_code,omitempty"`
 	AllowQuantity *bool `json:"allow_quantity,omitempty"`
 	AllowedProviders *string `json:"allowed_providers,omitempty"`
+	// Amount in the smallest currency unit (e.g., cents for USD, same for XOF)
 	Amount *float64 `json:"amount,omitempty"`
+	// URL/URI
 	CancelUrl *string `json:"cancel_url,omitempty"`
+	// ISO 8601 datetime
 	CreatedAt *time.Time `json:"created_at,omitempty"`
 	CreatedBy *string `json:"created_by,omitempty"`
+	// Three-letter ISO currency code (e.g., XOF, USD, EUR)
 	CurrencyCode *string `json:"currency_code,omitempty"`
 	Environment *string `json:"environment,omitempty"`
+	// ISO 8601 datetime
 	ExpiresAt *time.Time `json:"expires_at,omitempty"`
+	// Whether this resource is currently active
 	IsActive *bool `json:"is_active,omitempty"`
+	// Unique identifier (UUID format)
 	LinkId *string `json:"link_id,omitempty"`
 	LinkType *string `json:"link_type,omitempty"`
+	// Set of key-value pairs for storing additional information
 	Metadata map[string]interface{} `json:"metadata,omitempty"`
+	// Unique identifier (UUID format)
 	OrganizationId *string `json:"organization_id,omitempty"`
+	// Unique identifier (UUID format)
 	PriceId *string `json:"price_id,omitempty"`
 	PrivateDescription *string `json:"private_description,omitempty"`
+	// Unique identifier (UUID format)
 	ProductId *string `json:"product_id,omitempty"`
 	PublicDescription *string `json:"public_description,omitempty"`
 	Quantity *float64 `json:"quantity,omitempty"`
+	// URL/URI
 	SuccessUrl *string `json:"success_url,omitempty"`
 	Title *string `json:"title,omitempty"`
+	// ISO 8601 datetime
 	UpdatedAt *time.Time `json:"updated_at,omitempty"`
+	// URL/URI
 	Url *string `json:"url,omitempty"`
 }
 

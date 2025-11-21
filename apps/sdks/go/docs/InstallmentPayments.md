@@ -4,24 +4,24 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Amount** | Pointer to **float64** |  | [optional] 
-**CreatedAt** | Pointer to **time.Time** |  | [optional] 
+**Amount** | Pointer to **float64** | Amount in the smallest currency unit (e.g., cents for USD, same for XOF) | [optional] 
+**CreatedAt** | Pointer to **time.Time** | ISO 8601 datetime | [optional] [readonly] 
 **DueDate** | Pointer to **string** |  | [optional] 
-**InstallmentId** | Pointer to **string** |  | [optional] 
+**InstallmentId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
 **InterestAmount** | Pointer to **float64** |  | [optional] 
-**PaidAt** | Pointer to **time.Time** |  | [optional] 
+**PaidAt** | Pointer to **time.Time** | ISO 8601 datetime | [optional] 
 **PaymentLink** | Pointer to **string** |  | [optional] 
 **PaymentMethodCode** | Pointer to **string** |  | [optional] 
-**PlanId** | Pointer to **string** |  | [optional] 
+**PlanId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
 **PrincipalAmount** | Pointer to **float64** |  | [optional] 
 **ProcessingFee** | Pointer to **float64** |  | [optional] 
 **ProviderCode** | Pointer to **string** |  | [optional] 
 **SequenceNumber** | Pointer to **float64** |  | [optional] 
-**SpiPaymentRequestId** | Pointer to **string** |  | [optional] 
-**SpiTxId** | Pointer to **string** |  | [optional] 
-**Status** | Pointer to **string** |  | [optional] 
-**TransactionId** | Pointer to **string** |  | [optional] 
-**UpdatedAt** | Pointer to **time.Time** |  | [optional] 
+**SpiPaymentRequestId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
+**SpiTxId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
+**Status** | Pointer to **string** | Current status of the resource | [optional] 
+**TransactionId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
+**UpdatedAt** | Pointer to **time.Time** | ISO 8601 datetime | [optional] [readonly] 
 
 ## Methods
 

@@ -19,7 +19,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictFloat, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from uuid import UUID
 from typing import Optional, Set
@@ -27,22 +27,22 @@ from typing_extensions import Self
 
 class PaymentRequests(BaseModel):
     """
-    payment_requests object
+    payment requests resource object
     """ # noqa: E501
-    amount: Optional[Union[StrictFloat, StrictInt]] = None
-    created_at: Optional[datetime] = None
+    amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Amount in the smallest currency unit (e.g., cents for USD, same for XOF)")
+    created_at: Optional[datetime] = Field(default=None, description="ISO 8601 datetime")
     created_by: Optional[StrictStr] = None
-    currency_code: Optional[StrictStr] = None
-    customer_id: Optional[UUID] = None
+    currency_code: Optional[StrictStr] = Field(default=None, description="Three-letter ISO currency code (e.g., XOF, USD, EUR)")
+    customer_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
     description: Optional[StrictStr] = None
     environment: Optional[StrictStr] = None
     expiry_date: Optional[StrictStr] = None
-    organization_id: Optional[UUID] = None
+    organization_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
     payment_link: Optional[StrictStr] = None
     payment_reference: Optional[StrictStr] = None
-    request_id: Optional[UUID] = None
+    request_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
     spi_account_number: Optional[StrictStr] = None
-    spi_bulk_instruction_id: Optional[UUID] = None
+    spi_bulk_instruction_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
     spi_confirmation: Optional[StrictBool] = None
     spi_date_envoi: Optional[StrictStr] = None
     spi_date_irrevocabilite: Optional[StrictStr] = None
@@ -50,7 +50,7 @@ class PaymentRequests(BaseModel):
     spi_date_limite_reponse: Optional[StrictStr] = None
     spi_date_rejet: Optional[StrictStr] = None
     spi_debit_differe: Optional[StrictBool] = None
-    spi_end2end_id: Optional[UUID] = None
+    spi_end2end_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
     spi_payeur_alias: Optional[StrictStr] = None
     spi_payeur_nom: Optional[StrictStr] = None
     spi_payeur_pays: Optional[StrictStr] = None
@@ -61,9 +61,9 @@ class PaymentRequests(BaseModel):
     spi_rejection_reason: Optional[StrictStr] = None
     spi_remise_amount: Optional[Union[StrictFloat, StrictInt]] = None
     spi_remise_rate: Optional[Union[StrictFloat, StrictInt]] = None
-    spi_tx_id: Optional[UUID] = None
-    status: Optional[StrictStr] = None
-    updated_at: Optional[datetime] = None
+    spi_tx_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
+    status: Optional[StrictStr] = Field(default=None, description="Current status of the resource")
+    updated_at: Optional[datetime] = Field(default=None, description="ISO 8601 datetime")
     __properties: ClassVar[List[str]] = ["amount", "created_at", "created_by", "currency_code", "customer_id", "description", "environment", "expiry_date", "organization_id", "payment_link", "payment_reference", "request_id", "spi_account_number", "spi_bulk_instruction_id", "spi_confirmation", "spi_date_envoi", "spi_date_irrevocabilite", "spi_date_limite_paiement", "spi_date_limite_reponse", "spi_date_rejet", "spi_debit_differe", "spi_end2end_id", "spi_payeur_alias", "spi_payeur_nom", "spi_payeur_pays", "spi_payment_request_category", "spi_payment_status", "spi_ref_doc_numero", "spi_ref_doc_type", "spi_rejection_reason", "spi_remise_amount", "spi_remise_rate", "spi_tx_id", "status", "updated_at"]
 
     model_config = ConfigDict(
@@ -96,8 +96,16 @@ class PaymentRequests(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set([
+            "created_at",
+            "created_by",
+            "request_id",
+            "updated_at",
         ])
 
         _dict = self.model_dump(

@@ -36,7 +36,7 @@ use \LomiSDK\ObjectSerializer;
  * WebhookDeliveryLogs Class Doc Comment
  *
  * @category Class
- * @description webhook_delivery_logs object
+ * @description webhook delivery logs resource object
  * @package  LomiSDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -511,7 +511,7 @@ class WebhookDeliveryLogs implements ModelInterface, ArrayAccess, \JsonSerializa
     /**
      * Sets created_at
      *
-     * @param \DateTime|null $created_at created_at
+     * @param \DateTime|null $created_at ISO 8601 datetime
      *
      * @return self
      */
@@ -619,7 +619,7 @@ class WebhookDeliveryLogs implements ModelInterface, ArrayAccess, \JsonSerializa
     /**
      * Sets log_id
      *
-     * @param string|null $log_id log_id
+     * @param string|null $log_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -673,7 +673,7 @@ class WebhookDeliveryLogs implements ModelInterface, ArrayAccess, \JsonSerializa
     /**
      * Sets organization_id
      *
-     * @param string|null $organization_id organization_id
+     * @param string|null $organization_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -835,7 +835,7 @@ class WebhookDeliveryLogs implements ModelInterface, ArrayAccess, \JsonSerializa
     /**
      * Sets spi_tx_id
      *
-     * @param string|null $spi_tx_id spi_tx_id
+     * @param string|null $spi_tx_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -916,7 +916,7 @@ class WebhookDeliveryLogs implements ModelInterface, ArrayAccess, \JsonSerializa
     /**
      * Sets webhook_id
      *
-     * @param string|null $webhook_id webhook_id
+     * @param string|null $webhook_id Unique identifier (UUID format)
      *
      * @return self
      */

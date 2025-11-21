@@ -13,24 +13,26 @@ package lomisdk
 
 import (
 	"encoding/json"
-	"time"
 )
 
 // checks if the MeterBalancesCreate type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &MeterBalancesCreate{}
 
-// MeterBalancesCreate Create meter_balances input
+// MeterBalancesCreate Request body for creating a meter balances object. System-managed fields like `created_at`, `organization_id`, and IDs are automatically set.
 type MeterBalancesCreate struct {
 	Balance *float64 `json:"balance,omitempty"`
+	// Unique identifier (UUID format)
 	BalanceId *string `json:"balance_id,omitempty"`
+	// Unique identifier (UUID format)
 	BillableOrganizationId *string `json:"billable_organization_id,omitempty"`
 	ConsumedUnits *float64 `json:"consumed_units,omitempty"`
-	CreatedAt *time.Time `json:"created_at,omitempty"`
 	CreditedUnits *float64 `json:"credited_units,omitempty"`
+	// Unique identifier (UUID format)
 	CustomerId *string `json:"customer_id,omitempty"`
+	// Unique identifier (UUID format)
 	LastEventId *string `json:"last_event_id,omitempty"`
+	// Unique identifier (UUID format)
 	MeterId *string `json:"meter_id,omitempty"`
-	UpdatedAt *time.Time `json:"updated_at,omitempty"`
 }
 
 // NewMeterBalancesCreate instantiates a new MeterBalancesCreate object
@@ -178,38 +180,6 @@ func (o *MeterBalancesCreate) SetConsumedUnits(v float64) {
 	o.ConsumedUnits = &v
 }
 
-// GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
-func (o *MeterBalancesCreate) GetCreatedAt() time.Time {
-	if o == nil || IsNil(o.CreatedAt) {
-		var ret time.Time
-		return ret
-	}
-	return *o.CreatedAt
-}
-
-// GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *MeterBalancesCreate) GetCreatedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.CreatedAt) {
-		return nil, false
-	}
-	return o.CreatedAt, true
-}
-
-// HasCreatedAt returns a boolean if a field has been set.
-func (o *MeterBalancesCreate) HasCreatedAt() bool {
-	if o != nil && !IsNil(o.CreatedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetCreatedAt gets a reference to the given time.Time and assigns it to the CreatedAt field.
-func (o *MeterBalancesCreate) SetCreatedAt(v time.Time) {
-	o.CreatedAt = &v
-}
-
 // GetCreditedUnits returns the CreditedUnits field value if set, zero value otherwise.
 func (o *MeterBalancesCreate) GetCreditedUnits() float64 {
 	if o == nil || IsNil(o.CreditedUnits) {
@@ -338,38 +308,6 @@ func (o *MeterBalancesCreate) SetMeterId(v string) {
 	o.MeterId = &v
 }
 
-// GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.
-func (o *MeterBalancesCreate) GetUpdatedAt() time.Time {
-	if o == nil || IsNil(o.UpdatedAt) {
-		var ret time.Time
-		return ret
-	}
-	return *o.UpdatedAt
-}
-
-// GetUpdatedAtOk returns a tuple with the UpdatedAt field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *MeterBalancesCreate) GetUpdatedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.UpdatedAt) {
-		return nil, false
-	}
-	return o.UpdatedAt, true
-}
-
-// HasUpdatedAt returns a boolean if a field has been set.
-func (o *MeterBalancesCreate) HasUpdatedAt() bool {
-	if o != nil && !IsNil(o.UpdatedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetUpdatedAt gets a reference to the given time.Time and assigns it to the UpdatedAt field.
-func (o *MeterBalancesCreate) SetUpdatedAt(v time.Time) {
-	o.UpdatedAt = &v
-}
-
 func (o MeterBalancesCreate) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -392,9 +330,6 @@ func (o MeterBalancesCreate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ConsumedUnits) {
 		toSerialize["consumed_units"] = o.ConsumedUnits
 	}
-	if !IsNil(o.CreatedAt) {
-		toSerialize["created_at"] = o.CreatedAt
-	}
 	if !IsNil(o.CreditedUnits) {
 		toSerialize["credited_units"] = o.CreditedUnits
 	}
@@ -406,9 +341,6 @@ func (o MeterBalancesCreate) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.MeterId) {
 		toSerialize["meter_id"] = o.MeterId
-	}
-	if !IsNil(o.UpdatedAt) {
-		toSerialize["updated_at"] = o.UpdatedAt
 	}
 	return toSerialize, nil
 }

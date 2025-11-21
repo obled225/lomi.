@@ -36,7 +36,7 @@ use \LomiSDK\ObjectSerializer;
  * TransactionsCreate Class Doc Comment
  *
  * @category Class
- * @description Create transactions input
+ * @description Request body for creating a transactions object. System-managed fields like &#x60;created_at&#x60;, &#x60;organization_id&#x60;, and IDs are automatically set.
  * @package  LomiSDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -60,12 +60,10 @@ class TransactionsCreate implements ModelInterface, ArrayAccess, \JsonSerializab
       */
     protected static $openAPITypes = [
         'checkout_session_id' => 'string',
-        'created_at' => '\DateTime',
         'currency_code' => 'string',
         'customer_id' => 'string',
         'description' => 'string',
         'discount_amount' => 'float',
-        'environment' => 'string',
         'fee_amount' => 'float',
         'fee_structure_id' => 'string',
         'gross_amount' => 'float',
@@ -73,7 +71,6 @@ class TransactionsCreate implements ModelInterface, ArrayAccess, \JsonSerializab
         'is_pos' => 'bool',
         'metadata' => 'object',
         'net_amount' => 'float',
-        'organization_id' => 'string',
         'payment_method_code' => 'string',
         'price_id' => 'string',
         'product_id' => 'string',
@@ -93,9 +90,7 @@ class TransactionsCreate implements ModelInterface, ArrayAccess, \JsonSerializab
         'spi_tx_id' => 'string',
         'status' => 'string',
         'subscription_id' => 'string',
-        'transaction_id' => 'string',
-        'transaction_type' => 'string',
-        'updated_at' => '\DateTime'
+        'transaction_type' => 'string'
     ];
 
     /**
@@ -107,12 +102,10 @@ class TransactionsCreate implements ModelInterface, ArrayAccess, \JsonSerializab
       */
     protected static $openAPIFormats = [
         'checkout_session_id' => 'uuid',
-        'created_at' => 'date-time',
         'currency_code' => null,
         'customer_id' => 'uuid',
         'description' => null,
         'discount_amount' => 'double',
-        'environment' => null,
         'fee_amount' => 'double',
         'fee_structure_id' => 'uuid',
         'gross_amount' => 'double',
@@ -120,7 +113,6 @@ class TransactionsCreate implements ModelInterface, ArrayAccess, \JsonSerializab
         'is_pos' => null,
         'metadata' => null,
         'net_amount' => 'double',
-        'organization_id' => 'uuid',
         'payment_method_code' => null,
         'price_id' => 'uuid',
         'product_id' => 'uuid',
@@ -140,9 +132,7 @@ class TransactionsCreate implements ModelInterface, ArrayAccess, \JsonSerializab
         'spi_tx_id' => 'uuid',
         'status' => null,
         'subscription_id' => 'uuid',
-        'transaction_id' => 'uuid',
-        'transaction_type' => null,
-        'updated_at' => 'date-time'
+        'transaction_type' => null
     ];
 
     /**
@@ -152,12 +142,10 @@ class TransactionsCreate implements ModelInterface, ArrayAccess, \JsonSerializab
       */
     protected static array $openAPINullables = [
         'checkout_session_id' => false,
-        'created_at' => false,
         'currency_code' => false,
         'customer_id' => false,
         'description' => false,
         'discount_amount' => false,
-        'environment' => false,
         'fee_amount' => false,
         'fee_structure_id' => false,
         'gross_amount' => false,
@@ -165,7 +153,6 @@ class TransactionsCreate implements ModelInterface, ArrayAccess, \JsonSerializab
         'is_pos' => false,
         'metadata' => false,
         'net_amount' => false,
-        'organization_id' => false,
         'payment_method_code' => false,
         'price_id' => false,
         'product_id' => false,
@@ -185,9 +172,7 @@ class TransactionsCreate implements ModelInterface, ArrayAccess, \JsonSerializab
         'spi_tx_id' => false,
         'status' => false,
         'subscription_id' => false,
-        'transaction_id' => false,
-        'transaction_type' => false,
-        'updated_at' => false
+        'transaction_type' => false
     ];
 
     /**
@@ -277,12 +262,10 @@ class TransactionsCreate implements ModelInterface, ArrayAccess, \JsonSerializab
      */
     protected static $attributeMap = [
         'checkout_session_id' => 'checkout_session_id',
-        'created_at' => 'created_at',
         'currency_code' => 'currency_code',
         'customer_id' => 'customer_id',
         'description' => 'description',
         'discount_amount' => 'discount_amount',
-        'environment' => 'environment',
         'fee_amount' => 'fee_amount',
         'fee_structure_id' => 'fee_structure_id',
         'gross_amount' => 'gross_amount',
@@ -290,7 +273,6 @@ class TransactionsCreate implements ModelInterface, ArrayAccess, \JsonSerializab
         'is_pos' => 'is_pos',
         'metadata' => 'metadata',
         'net_amount' => 'net_amount',
-        'organization_id' => 'organization_id',
         'payment_method_code' => 'payment_method_code',
         'price_id' => 'price_id',
         'product_id' => 'product_id',
@@ -310,9 +292,7 @@ class TransactionsCreate implements ModelInterface, ArrayAccess, \JsonSerializab
         'spi_tx_id' => 'spi_tx_id',
         'status' => 'status',
         'subscription_id' => 'subscription_id',
-        'transaction_id' => 'transaction_id',
-        'transaction_type' => 'transaction_type',
-        'updated_at' => 'updated_at'
+        'transaction_type' => 'transaction_type'
     ];
 
     /**
@@ -322,12 +302,10 @@ class TransactionsCreate implements ModelInterface, ArrayAccess, \JsonSerializab
      */
     protected static $setters = [
         'checkout_session_id' => 'setCheckoutSessionId',
-        'created_at' => 'setCreatedAt',
         'currency_code' => 'setCurrencyCode',
         'customer_id' => 'setCustomerId',
         'description' => 'setDescription',
         'discount_amount' => 'setDiscountAmount',
-        'environment' => 'setEnvironment',
         'fee_amount' => 'setFeeAmount',
         'fee_structure_id' => 'setFeeStructureId',
         'gross_amount' => 'setGrossAmount',
@@ -335,7 +313,6 @@ class TransactionsCreate implements ModelInterface, ArrayAccess, \JsonSerializab
         'is_pos' => 'setIsPos',
         'metadata' => 'setMetadata',
         'net_amount' => 'setNetAmount',
-        'organization_id' => 'setOrganizationId',
         'payment_method_code' => 'setPaymentMethodCode',
         'price_id' => 'setPriceId',
         'product_id' => 'setProductId',
@@ -355,9 +332,7 @@ class TransactionsCreate implements ModelInterface, ArrayAccess, \JsonSerializab
         'spi_tx_id' => 'setSpiTxId',
         'status' => 'setStatus',
         'subscription_id' => 'setSubscriptionId',
-        'transaction_id' => 'setTransactionId',
-        'transaction_type' => 'setTransactionType',
-        'updated_at' => 'setUpdatedAt'
+        'transaction_type' => 'setTransactionType'
     ];
 
     /**
@@ -367,12 +342,10 @@ class TransactionsCreate implements ModelInterface, ArrayAccess, \JsonSerializab
      */
     protected static $getters = [
         'checkout_session_id' => 'getCheckoutSessionId',
-        'created_at' => 'getCreatedAt',
         'currency_code' => 'getCurrencyCode',
         'customer_id' => 'getCustomerId',
         'description' => 'getDescription',
         'discount_amount' => 'getDiscountAmount',
-        'environment' => 'getEnvironment',
         'fee_amount' => 'getFeeAmount',
         'fee_structure_id' => 'getFeeStructureId',
         'gross_amount' => 'getGrossAmount',
@@ -380,7 +353,6 @@ class TransactionsCreate implements ModelInterface, ArrayAccess, \JsonSerializab
         'is_pos' => 'getIsPos',
         'metadata' => 'getMetadata',
         'net_amount' => 'getNetAmount',
-        'organization_id' => 'getOrganizationId',
         'payment_method_code' => 'getPaymentMethodCode',
         'price_id' => 'getPriceId',
         'product_id' => 'getProductId',
@@ -400,9 +372,7 @@ class TransactionsCreate implements ModelInterface, ArrayAccess, \JsonSerializab
         'spi_tx_id' => 'getSpiTxId',
         'status' => 'getStatus',
         'subscription_id' => 'getSubscriptionId',
-        'transaction_id' => 'getTransactionId',
-        'transaction_type' => 'getTransactionType',
-        'updated_at' => 'getUpdatedAt'
+        'transaction_type' => 'getTransactionType'
     ];
 
     /**
@@ -463,12 +433,10 @@ class TransactionsCreate implements ModelInterface, ArrayAccess, \JsonSerializab
     public function __construct(?array $data = null)
     {
         $this->setIfExists('checkout_session_id', $data ?? [], null);
-        $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('currency_code', $data ?? [], null);
         $this->setIfExists('customer_id', $data ?? [], null);
         $this->setIfExists('description', $data ?? [], null);
         $this->setIfExists('discount_amount', $data ?? [], null);
-        $this->setIfExists('environment', $data ?? [], null);
         $this->setIfExists('fee_amount', $data ?? [], null);
         $this->setIfExists('fee_structure_id', $data ?? [], null);
         $this->setIfExists('gross_amount', $data ?? [], null);
@@ -476,7 +444,6 @@ class TransactionsCreate implements ModelInterface, ArrayAccess, \JsonSerializab
         $this->setIfExists('is_pos', $data ?? [], null);
         $this->setIfExists('metadata', $data ?? [], null);
         $this->setIfExists('net_amount', $data ?? [], null);
-        $this->setIfExists('organization_id', $data ?? [], null);
         $this->setIfExists('payment_method_code', $data ?? [], null);
         $this->setIfExists('price_id', $data ?? [], null);
         $this->setIfExists('product_id', $data ?? [], null);
@@ -496,9 +463,7 @@ class TransactionsCreate implements ModelInterface, ArrayAccess, \JsonSerializab
         $this->setIfExists('spi_tx_id', $data ?? [], null);
         $this->setIfExists('status', $data ?? [], null);
         $this->setIfExists('subscription_id', $data ?? [], null);
-        $this->setIfExists('transaction_id', $data ?? [], null);
         $this->setIfExists('transaction_type', $data ?? [], null);
-        $this->setIfExists('updated_at', $data ?? [], null);
     }
 
     /**
@@ -556,7 +521,7 @@ class TransactionsCreate implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets checkout_session_id
      *
-     * @param string|null $checkout_session_id checkout_session_id
+     * @param string|null $checkout_session_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -566,33 +531,6 @@ class TransactionsCreate implements ModelInterface, ArrayAccess, \JsonSerializab
             throw new \InvalidArgumentException('non-nullable checkout_session_id cannot be null');
         }
         $this->container['checkout_session_id'] = $checkout_session_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets created_at
-     *
-     * @return \DateTime|null
-     */
-    public function getCreatedAt()
-    {
-        return $this->container['created_at'];
-    }
-
-    /**
-     * Sets created_at
-     *
-     * @param \DateTime|null $created_at created_at
-     *
-     * @return self
-     */
-    public function setCreatedAt($created_at)
-    {
-        if (is_null($created_at)) {
-            throw new \InvalidArgumentException('non-nullable created_at cannot be null');
-        }
-        $this->container['created_at'] = $created_at;
 
         return $this;
     }
@@ -610,7 +548,7 @@ class TransactionsCreate implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets currency_code
      *
-     * @param string|null $currency_code currency_code
+     * @param string|null $currency_code Three-letter ISO currency code (e.g., XOF, USD, EUR)
      *
      * @return self
      */
@@ -637,7 +575,7 @@ class TransactionsCreate implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets customer_id
      *
-     * @param string|null $customer_id customer_id
+     * @param string|null $customer_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -706,33 +644,6 @@ class TransactionsCreate implements ModelInterface, ArrayAccess, \JsonSerializab
     }
 
     /**
-     * Gets environment
-     *
-     * @return string|null
-     */
-    public function getEnvironment()
-    {
-        return $this->container['environment'];
-    }
-
-    /**
-     * Sets environment
-     *
-     * @param string|null $environment environment
-     *
-     * @return self
-     */
-    public function setEnvironment($environment)
-    {
-        if (is_null($environment)) {
-            throw new \InvalidArgumentException('non-nullable environment cannot be null');
-        }
-        $this->container['environment'] = $environment;
-
-        return $this;
-    }
-
-    /**
      * Gets fee_amount
      *
      * @return float|null
@@ -772,7 +683,7 @@ class TransactionsCreate implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets fee_structure_id
      *
-     * @param string|null $fee_structure_id fee_structure_id
+     * @param string|null $fee_structure_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -880,7 +791,7 @@ class TransactionsCreate implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets metadata
      *
-     * @param object|null $metadata metadata
+     * @param object|null $metadata Set of key-value pairs for storing additional information
      *
      * @return self
      */
@@ -917,33 +828,6 @@ class TransactionsCreate implements ModelInterface, ArrayAccess, \JsonSerializab
             throw new \InvalidArgumentException('non-nullable net_amount cannot be null');
         }
         $this->container['net_amount'] = $net_amount;
-
-        return $this;
-    }
-
-    /**
-     * Gets organization_id
-     *
-     * @return string|null
-     */
-    public function getOrganizationId()
-    {
-        return $this->container['organization_id'];
-    }
-
-    /**
-     * Sets organization_id
-     *
-     * @param string|null $organization_id organization_id
-     *
-     * @return self
-     */
-    public function setOrganizationId($organization_id)
-    {
-        if (is_null($organization_id)) {
-            throw new \InvalidArgumentException('non-nullable organization_id cannot be null');
-        }
-        $this->container['organization_id'] = $organization_id;
 
         return $this;
     }
@@ -988,7 +872,7 @@ class TransactionsCreate implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets price_id
      *
-     * @param string|null $price_id price_id
+     * @param string|null $price_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -1015,7 +899,7 @@ class TransactionsCreate implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets product_id
      *
-     * @param string|null $product_id product_id
+     * @param string|null $product_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -1123,7 +1007,7 @@ class TransactionsCreate implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets spi_bulk_instruction_id
      *
-     * @param string|null $spi_bulk_instruction_id spi_bulk_instruction_id
+     * @param string|null $spi_bulk_instruction_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -1258,7 +1142,7 @@ class TransactionsCreate implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets spi_end2end_id
      *
-     * @param string|null $spi_end2end_id spi_end2end_id
+     * @param string|null $spi_end2end_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -1393,7 +1277,7 @@ class TransactionsCreate implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets spi_tx_id
      *
-     * @param string|null $spi_tx_id spi_tx_id
+     * @param string|null $spi_tx_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -1420,7 +1304,7 @@ class TransactionsCreate implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets status
      *
-     * @param string|null $status status
+     * @param string|null $status Current status of the resource
      *
      * @return self
      */
@@ -1447,7 +1331,7 @@ class TransactionsCreate implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets subscription_id
      *
-     * @param string|null $subscription_id subscription_id
+     * @param string|null $subscription_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -1457,33 +1341,6 @@ class TransactionsCreate implements ModelInterface, ArrayAccess, \JsonSerializab
             throw new \InvalidArgumentException('non-nullable subscription_id cannot be null');
         }
         $this->container['subscription_id'] = $subscription_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets transaction_id
-     *
-     * @return string|null
-     */
-    public function getTransactionId()
-    {
-        return $this->container['transaction_id'];
-    }
-
-    /**
-     * Sets transaction_id
-     *
-     * @param string|null $transaction_id transaction_id
-     *
-     * @return self
-     */
-    public function setTransactionId($transaction_id)
-    {
-        if (is_null($transaction_id)) {
-            throw new \InvalidArgumentException('non-nullable transaction_id cannot be null');
-        }
-        $this->container['transaction_id'] = $transaction_id;
 
         return $this;
     }
@@ -1511,33 +1368,6 @@ class TransactionsCreate implements ModelInterface, ArrayAccess, \JsonSerializab
             throw new \InvalidArgumentException('non-nullable transaction_type cannot be null');
         }
         $this->container['transaction_type'] = $transaction_type;
-
-        return $this;
-    }
-
-    /**
-     * Gets updated_at
-     *
-     * @return \DateTime|null
-     */
-    public function getUpdatedAt()
-    {
-        return $this->container['updated_at'];
-    }
-
-    /**
-     * Sets updated_at
-     *
-     * @param \DateTime|null $updated_at updated_at
-     *
-     * @return self
-     */
-    public function setUpdatedAt($updated_at)
-    {
-        if (is_null($updated_at)) {
-            throw new \InvalidArgumentException('non-nullable updated_at cannot be null');
-        }
-        $this->container['updated_at'] = $updated_at;
 
         return $this;
     }

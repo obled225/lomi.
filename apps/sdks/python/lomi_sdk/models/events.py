@@ -19,7 +19,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from uuid import UUID
 from typing import Optional, Set
@@ -27,17 +27,17 @@ from typing_extensions import Self
 
 class Events(BaseModel):
     """
-    events object
+    events resource object
     """ # noqa: E501
-    created_at: Optional[datetime] = None
+    created_at: Optional[datetime] = Field(default=None, description="ISO 8601 datetime")
     created_by: Optional[StrictStr] = None
-    customer_id: Optional[UUID] = None
+    customer_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
     event_data: Optional[Dict[str, Any]] = None
-    event_id: Optional[UUID] = None
+    event_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
     event_name: Optional[StrictStr] = None
-    metadata: Optional[Dict[str, Any]] = None
-    organization_id: Optional[UUID] = None
-    product_id: Optional[UUID] = None
+    metadata: Optional[Dict[str, Any]] = Field(default=None, description="Set of key-value pairs for storing additional information")
+    organization_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
+    product_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
     __properties: ClassVar[List[str]] = ["created_at", "created_by", "customer_id", "event_data", "event_id", "event_name", "metadata", "organization_id", "product_id"]
 
     model_config = ConfigDict(
@@ -70,8 +70,12 @@ class Events(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set([
+            "created_at",
+            "created_by",
         ])
 
         _dict = self.model_dump(

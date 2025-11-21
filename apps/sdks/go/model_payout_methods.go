@@ -19,7 +19,7 @@ import (
 // checks if the PayoutMethods type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &PayoutMethods{}
 
-// PayoutMethods payout_methods object
+// PayoutMethods payout methods resource object
 type PayoutMethods struct {
 	AccountName *string `json:"account_name,omitempty"`
 	AccountNumber *string `json:"account_number,omitempty"`
@@ -32,18 +32,22 @@ type PayoutMethods struct {
 	BankName *string `json:"bank_name,omitempty"`
 	BranchCode *string `json:"branch_code,omitempty"`
 	Country *string `json:"country,omitempty"`
+	// ISO 8601 datetime
 	CreatedAt *time.Time `json:"created_at,omitempty"`
 	IsDefault *bool `json:"is_default,omitempty"`
 	IsSpiEnabled *bool `json:"is_spi_enabled,omitempty"`
 	IsUemoa *bool `json:"is_uemoa,omitempty"`
 	IsValid *bool `json:"is_valid,omitempty"`
+	// Unique identifier (UUID format)
 	OrganizationId *string `json:"organization_id,omitempty"`
+	// Unique identifier (UUID format)
 	PayoutMethodId *string `json:"payout_method_id,omitempty"`
 	PayoutMethodType *string `json:"payout_method_type,omitempty"`
 	SpiAccountNumber *string `json:"spi_account_number,omitempty"`
 	SpiAliasMbno *string `json:"spi_alias_mbno,omitempty"`
 	SpiAliasShid *string `json:"spi_alias_shid,omitempty"`
 	SpiAliasType *string `json:"spi_alias_type,omitempty"`
+	// ISO 8601 datetime
 	UpdatedAt *time.Time `json:"updated_at,omitempty"`
 }
 

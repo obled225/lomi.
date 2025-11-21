@@ -5,14 +5,14 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Aggregation** | Pointer to **map[string]interface{}** |  | [optional] 
-**CreatedAt** | Pointer to **time.Time** |  | [optional] 
+**CreatedAt** | Pointer to **time.Time** | ISO 8601 datetime | [optional] [readonly] 
 **Filter** | Pointer to **map[string]interface{}** |  | [optional] 
-**IsActive** | Pointer to **bool** |  | [optional] 
-**MeterId** | Pointer to **string** |  | [optional] 
+**IsActive** | Pointer to **bool** | Whether this resource is currently active | [optional] 
+**MeterId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
 **Name** | Pointer to **string** |  | [optional] 
-**OrganizationId** | Pointer to **string** |  | [optional] 
-**ProductId** | Pointer to **string** |  | [optional] 
-**UpdatedAt** | Pointer to **time.Time** |  | [optional] 
+**OrganizationId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
+**ProductId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
+**UpdatedAt** | Pointer to **time.Time** | ISO 8601 datetime | [optional] [readonly] 
 
 ## Methods
 

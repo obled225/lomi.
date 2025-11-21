@@ -18,8 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
-from pydantic import BaseModel, ConfigDict, StrictFloat, StrictInt
+from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from uuid import UUID
 from typing import Optional, Set
@@ -27,19 +26,17 @@ from typing_extensions import Self
 
 class MeterBalancesCreate(BaseModel):
     """
-    Create meter_balances input
+    Request body for creating a meter balances object. System-managed fields like `created_at`, `organization_id`, and IDs are automatically set.
     """ # noqa: E501
     balance: Optional[Union[StrictFloat, StrictInt]] = None
-    balance_id: Optional[UUID] = None
-    billable_organization_id: Optional[UUID] = None
+    balance_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
+    billable_organization_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
     consumed_units: Optional[Union[StrictFloat, StrictInt]] = None
-    created_at: Optional[datetime] = None
     credited_units: Optional[Union[StrictFloat, StrictInt]] = None
-    customer_id: Optional[UUID] = None
-    last_event_id: Optional[UUID] = None
-    meter_id: Optional[UUID] = None
-    updated_at: Optional[datetime] = None
-    __properties: ClassVar[List[str]] = ["balance", "balance_id", "billable_organization_id", "consumed_units", "created_at", "credited_units", "customer_id", "last_event_id", "meter_id", "updated_at"]
+    customer_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
+    last_event_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
+    meter_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
+    __properties: ClassVar[List[str]] = ["balance", "balance_id", "billable_organization_id", "consumed_units", "credited_units", "customer_id", "last_event_id", "meter_id"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -96,12 +93,10 @@ class MeterBalancesCreate(BaseModel):
             "balance_id": obj.get("balance_id"),
             "billable_organization_id": obj.get("billable_organization_id"),
             "consumed_units": obj.get("consumed_units"),
-            "created_at": obj.get("created_at"),
             "credited_units": obj.get("credited_units"),
             "customer_id": obj.get("customer_id"),
             "last_event_id": obj.get("last_event_id"),
-            "meter_id": obj.get("meter_id"),
-            "updated_at": obj.get("updated_at")
+            "meter_id": obj.get("meter_id")
         })
         return _obj
 

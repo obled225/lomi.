@@ -36,7 +36,7 @@ use \LomiSDK\ObjectSerializer;
  * RefundsUpdate Class Doc Comment
  *
  * @category Class
- * @description Update refunds input
+ * @description Request body for updating a refunds object. Only include fields you want to modify.
  * @package  LomiSDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -60,8 +60,6 @@ class RefundsUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPITypes = [
         'amount' => 'float',
-        'created_at' => '\DateTime',
-        'environment' => 'string',
         'fee_amount' => 'float',
         'metadata' => 'object',
         'reason' => 'string',
@@ -76,8 +74,7 @@ class RefundsUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
         'spi_retour_date_irrevocabilite' => 'string',
         'spi_tx_id' => 'string',
         'status' => 'string',
-        'transaction_id' => 'string',
-        'updated_at' => '\DateTime'
+        'transaction_id' => 'string'
     ];
 
     /**
@@ -89,8 +86,6 @@ class RefundsUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPIFormats = [
         'amount' => 'double',
-        'created_at' => 'date-time',
-        'environment' => null,
         'fee_amount' => 'double',
         'metadata' => null,
         'reason' => null,
@@ -105,8 +100,7 @@ class RefundsUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
         'spi_retour_date_irrevocabilite' => null,
         'spi_tx_id' => 'uuid',
         'status' => null,
-        'transaction_id' => 'uuid',
-        'updated_at' => 'date-time'
+        'transaction_id' => 'uuid'
     ];
 
     /**
@@ -116,8 +110,6 @@ class RefundsUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static array $openAPINullables = [
         'amount' => false,
-        'created_at' => false,
-        'environment' => false,
         'fee_amount' => false,
         'metadata' => false,
         'reason' => false,
@@ -132,8 +124,7 @@ class RefundsUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
         'spi_retour_date_irrevocabilite' => false,
         'spi_tx_id' => false,
         'status' => false,
-        'transaction_id' => false,
-        'updated_at' => false
+        'transaction_id' => false
     ];
 
     /**
@@ -223,8 +214,6 @@ class RefundsUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $attributeMap = [
         'amount' => 'amount',
-        'created_at' => 'created_at',
-        'environment' => 'environment',
         'fee_amount' => 'fee_amount',
         'metadata' => 'metadata',
         'reason' => 'reason',
@@ -239,8 +228,7 @@ class RefundsUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
         'spi_retour_date_irrevocabilite' => 'spi_retour_date_irrevocabilite',
         'spi_tx_id' => 'spi_tx_id',
         'status' => 'status',
-        'transaction_id' => 'transaction_id',
-        'updated_at' => 'updated_at'
+        'transaction_id' => 'transaction_id'
     ];
 
     /**
@@ -250,8 +238,6 @@ class RefundsUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $setters = [
         'amount' => 'setAmount',
-        'created_at' => 'setCreatedAt',
-        'environment' => 'setEnvironment',
         'fee_amount' => 'setFeeAmount',
         'metadata' => 'setMetadata',
         'reason' => 'setReason',
@@ -266,8 +252,7 @@ class RefundsUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
         'spi_retour_date_irrevocabilite' => 'setSpiRetourDateIrrevocabilite',
         'spi_tx_id' => 'setSpiTxId',
         'status' => 'setStatus',
-        'transaction_id' => 'setTransactionId',
-        'updated_at' => 'setUpdatedAt'
+        'transaction_id' => 'setTransactionId'
     ];
 
     /**
@@ -277,8 +262,6 @@ class RefundsUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $getters = [
         'amount' => 'getAmount',
-        'created_at' => 'getCreatedAt',
-        'environment' => 'getEnvironment',
         'fee_amount' => 'getFeeAmount',
         'metadata' => 'getMetadata',
         'reason' => 'getReason',
@@ -293,8 +276,7 @@ class RefundsUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
         'spi_retour_date_irrevocabilite' => 'getSpiRetourDateIrrevocabilite',
         'spi_tx_id' => 'getSpiTxId',
         'status' => 'getStatus',
-        'transaction_id' => 'getTransactionId',
-        'updated_at' => 'getUpdatedAt'
+        'transaction_id' => 'getTransactionId'
     ];
 
     /**
@@ -355,8 +337,6 @@ class RefundsUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
     public function __construct(?array $data = null)
     {
         $this->setIfExists('amount', $data ?? [], null);
-        $this->setIfExists('created_at', $data ?? [], null);
-        $this->setIfExists('environment', $data ?? [], null);
         $this->setIfExists('fee_amount', $data ?? [], null);
         $this->setIfExists('metadata', $data ?? [], null);
         $this->setIfExists('reason', $data ?? [], null);
@@ -372,7 +352,6 @@ class RefundsUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('spi_tx_id', $data ?? [], null);
         $this->setIfExists('status', $data ?? [], null);
         $this->setIfExists('transaction_id', $data ?? [], null);
-        $this->setIfExists('updated_at', $data ?? [], null);
     }
 
     /**
@@ -430,7 +409,7 @@ class RefundsUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets amount
      *
-     * @param float|null $amount amount
+     * @param float|null $amount Amount in the smallest currency unit (e.g., cents for USD, same for XOF)
      *
      * @return self
      */
@@ -440,60 +419,6 @@ class RefundsUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable amount cannot be null');
         }
         $this->container['amount'] = $amount;
-
-        return $this;
-    }
-
-    /**
-     * Gets created_at
-     *
-     * @return \DateTime|null
-     */
-    public function getCreatedAt()
-    {
-        return $this->container['created_at'];
-    }
-
-    /**
-     * Sets created_at
-     *
-     * @param \DateTime|null $created_at created_at
-     *
-     * @return self
-     */
-    public function setCreatedAt($created_at)
-    {
-        if (is_null($created_at)) {
-            throw new \InvalidArgumentException('non-nullable created_at cannot be null');
-        }
-        $this->container['created_at'] = $created_at;
-
-        return $this;
-    }
-
-    /**
-     * Gets environment
-     *
-     * @return string|null
-     */
-    public function getEnvironment()
-    {
-        return $this->container['environment'];
-    }
-
-    /**
-     * Sets environment
-     *
-     * @param string|null $environment environment
-     *
-     * @return self
-     */
-    public function setEnvironment($environment)
-    {
-        if (is_null($environment)) {
-            throw new \InvalidArgumentException('non-nullable environment cannot be null');
-        }
-        $this->container['environment'] = $environment;
 
         return $this;
     }
@@ -538,7 +463,7 @@ class RefundsUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets metadata
      *
-     * @param object|null $metadata metadata
+     * @param object|null $metadata Set of key-value pairs for storing additional information
      *
      * @return self
      */
@@ -592,7 +517,7 @@ class RefundsUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets refund_id
      *
-     * @param string|null $refund_id refund_id
+     * @param string|null $refund_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -673,7 +598,7 @@ class RefundsUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets spi_end2end_id
      *
-     * @param string|null $spi_end2end_id spi_end2end_id
+     * @param string|null $spi_end2end_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -835,7 +760,7 @@ class RefundsUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets spi_tx_id
      *
-     * @param string|null $spi_tx_id spi_tx_id
+     * @param string|null $spi_tx_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -862,7 +787,7 @@ class RefundsUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets status
      *
-     * @param string|null $status status
+     * @param string|null $status Current status of the resource
      *
      * @return self
      */
@@ -889,7 +814,7 @@ class RefundsUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets transaction_id
      *
-     * @param string|null $transaction_id transaction_id
+     * @param string|null $transaction_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -899,33 +824,6 @@ class RefundsUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable transaction_id cannot be null');
         }
         $this->container['transaction_id'] = $transaction_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets updated_at
-     *
-     * @return \DateTime|null
-     */
-    public function getUpdatedAt()
-    {
-        return $this->container['updated_at'];
-    }
-
-    /**
-     * Sets updated_at
-     *
-     * @param \DateTime|null $updated_at updated_at
-     *
-     * @return self
-     */
-    public function setUpdatedAt($updated_at)
-    {
-        if (is_null($updated_at)) {
-            throw new \InvalidArgumentException('non-nullable updated_at cannot be null');
-        }
-        $this->container['updated_at'] = $updated_at;
 
         return $this;
     }

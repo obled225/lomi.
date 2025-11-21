@@ -19,26 +19,32 @@ import (
 // checks if the InstallmentPaymentsCreate type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &InstallmentPaymentsCreate{}
 
-// InstallmentPaymentsCreate Create installment_payments input
+// InstallmentPaymentsCreate Request body for creating a installment payments object. System-managed fields like `created_at`, `organization_id`, and IDs are automatically set.
 type InstallmentPaymentsCreate struct {
+	// Amount in the smallest currency unit (e.g., cents for USD, same for XOF)
 	Amount *float64 `json:"amount,omitempty"`
-	CreatedAt *time.Time `json:"created_at,omitempty"`
 	DueDate *string `json:"due_date,omitempty"`
+	// Unique identifier (UUID format)
 	InstallmentId *string `json:"installment_id,omitempty"`
 	InterestAmount *float64 `json:"interest_amount,omitempty"`
+	// ISO 8601 datetime
 	PaidAt *time.Time `json:"paid_at,omitempty"`
 	PaymentLink *string `json:"payment_link,omitempty"`
 	PaymentMethodCode *string `json:"payment_method_code,omitempty"`
+	// Unique identifier (UUID format)
 	PlanId *string `json:"plan_id,omitempty"`
 	PrincipalAmount *float64 `json:"principal_amount,omitempty"`
 	ProcessingFee *float64 `json:"processing_fee,omitempty"`
 	ProviderCode *string `json:"provider_code,omitempty"`
 	SequenceNumber *float64 `json:"sequence_number,omitempty"`
+	// Unique identifier (UUID format)
 	SpiPaymentRequestId *string `json:"spi_payment_request_id,omitempty"`
+	// Unique identifier (UUID format)
 	SpiTxId *string `json:"spi_tx_id,omitempty"`
+	// Current status of the resource
 	Status *string `json:"status,omitempty"`
+	// Unique identifier (UUID format)
 	TransactionId *string `json:"transaction_id,omitempty"`
-	UpdatedAt *time.Time `json:"updated_at,omitempty"`
 }
 
 // NewInstallmentPaymentsCreate instantiates a new InstallmentPaymentsCreate object
@@ -88,38 +94,6 @@ func (o *InstallmentPaymentsCreate) HasAmount() bool {
 // SetAmount gets a reference to the given float64 and assigns it to the Amount field.
 func (o *InstallmentPaymentsCreate) SetAmount(v float64) {
 	o.Amount = &v
-}
-
-// GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
-func (o *InstallmentPaymentsCreate) GetCreatedAt() time.Time {
-	if o == nil || IsNil(o.CreatedAt) {
-		var ret time.Time
-		return ret
-	}
-	return *o.CreatedAt
-}
-
-// GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *InstallmentPaymentsCreate) GetCreatedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.CreatedAt) {
-		return nil, false
-	}
-	return o.CreatedAt, true
-}
-
-// HasCreatedAt returns a boolean if a field has been set.
-func (o *InstallmentPaymentsCreate) HasCreatedAt() bool {
-	if o != nil && !IsNil(o.CreatedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetCreatedAt gets a reference to the given time.Time and assigns it to the CreatedAt field.
-func (o *InstallmentPaymentsCreate) SetCreatedAt(v time.Time) {
-	o.CreatedAt = &v
 }
 
 // GetDueDate returns the DueDate field value if set, zero value otherwise.
@@ -602,38 +576,6 @@ func (o *InstallmentPaymentsCreate) SetTransactionId(v string) {
 	o.TransactionId = &v
 }
 
-// GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.
-func (o *InstallmentPaymentsCreate) GetUpdatedAt() time.Time {
-	if o == nil || IsNil(o.UpdatedAt) {
-		var ret time.Time
-		return ret
-	}
-	return *o.UpdatedAt
-}
-
-// GetUpdatedAtOk returns a tuple with the UpdatedAt field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *InstallmentPaymentsCreate) GetUpdatedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.UpdatedAt) {
-		return nil, false
-	}
-	return o.UpdatedAt, true
-}
-
-// HasUpdatedAt returns a boolean if a field has been set.
-func (o *InstallmentPaymentsCreate) HasUpdatedAt() bool {
-	if o != nil && !IsNil(o.UpdatedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetUpdatedAt gets a reference to the given time.Time and assigns it to the UpdatedAt field.
-func (o *InstallmentPaymentsCreate) SetUpdatedAt(v time.Time) {
-	o.UpdatedAt = &v
-}
-
 func (o InstallmentPaymentsCreate) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -646,9 +588,6 @@ func (o InstallmentPaymentsCreate) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Amount) {
 		toSerialize["amount"] = o.Amount
-	}
-	if !IsNil(o.CreatedAt) {
-		toSerialize["created_at"] = o.CreatedAt
 	}
 	if !IsNil(o.DueDate) {
 		toSerialize["due_date"] = o.DueDate
@@ -694,9 +633,6 @@ func (o InstallmentPaymentsCreate) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.TransactionId) {
 		toSerialize["transaction_id"] = o.TransactionId
-	}
-	if !IsNil(o.UpdatedAt) {
-		toSerialize["updated_at"] = o.UpdatedAt
 	}
 	return toSerialize, nil
 }

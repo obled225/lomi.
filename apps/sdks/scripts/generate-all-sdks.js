@@ -2,7 +2,11 @@
 /**
  * Master SDK Generator
  * 
- * Generates SDKs for all languages from the OpenAPI spec
+ * This script:
+ * 1. Syncs the OpenAPI spec from apps/api/openapi/spec.yaml to apps/sdks/spec.yaml
+ * 2. Validates the spec
+ * 3. Generates SDKs for all languages (TypeScript, JavaScript, Python, Go, PHP)
+ * 
  * Run: npm run generate:all
  */
 
@@ -66,6 +70,18 @@ const SDKS = [
 async function generateAll() {
     console.log('🚀 lomi. Multi-Language SDK Generation\n');
     console.log('='.repeat(60));
+
+    // Step 1: Pre-generation - Copy and validate spec
+    log.step('Running pre-generation setup...');
+    const preGenSuccess = exec('node scripts/pre-generate.js', {
+        cwd: path.join(__dirname, '..'),
+    });
+
+    if (!preGenSuccess) {
+        log.error('Pre-generation failed. Cannot proceed with SDK generation.');
+        return false;
+    }
+    log.success('Pre-generation completed successfully!');
 
     const results = {};
     let successCount = 0;

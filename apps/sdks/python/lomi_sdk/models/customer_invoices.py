@@ -19,7 +19,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, StrictFloat, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from uuid import UUID
 from typing import Optional, Set
@@ -27,20 +27,20 @@ from typing_extensions import Self
 
 class CustomerInvoices(BaseModel):
     """
-    customer_invoices object
+    customer invoices resource object
     """ # noqa: E501
-    amount: Optional[Union[StrictFloat, StrictInt]] = None
-    created_at: Optional[datetime] = None
+    amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Amount in the smallest currency unit (e.g., cents for USD, same for XOF)")
+    created_at: Optional[datetime] = Field(default=None, description="ISO 8601 datetime")
     created_by: Optional[StrictStr] = None
-    currency_code: Optional[StrictStr] = None
-    customer_id: Optional[UUID] = None
-    customer_invoice_id: Optional[UUID] = None
+    currency_code: Optional[StrictStr] = Field(default=None, description="Three-letter ISO currency code (e.g., XOF, USD, EUR)")
+    customer_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
+    customer_invoice_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
     description: Optional[StrictStr] = None
     due_date: Optional[StrictStr] = None
-    metadata: Optional[Dict[str, Any]] = None
-    organization_id: Optional[UUID] = None
-    status: Optional[StrictStr] = None
-    updated_at: Optional[datetime] = None
+    metadata: Optional[Dict[str, Any]] = Field(default=None, description="Set of key-value pairs for storing additional information")
+    organization_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
+    status: Optional[StrictStr] = Field(default=None, description="Current status of the resource")
+    updated_at: Optional[datetime] = Field(default=None, description="ISO 8601 datetime")
     __properties: ClassVar[List[str]] = ["amount", "created_at", "created_by", "currency_code", "customer_id", "customer_invoice_id", "description", "due_date", "metadata", "organization_id", "status", "updated_at"]
 
     model_config = ConfigDict(
@@ -73,8 +73,14 @@ class CustomerInvoices(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set([
+            "created_at",
+            "created_by",
+            "updated_at",
         ])
 
         _dict = self.model_dump(

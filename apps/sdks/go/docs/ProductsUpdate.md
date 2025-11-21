@@ -6,21 +6,15 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **BillingFrequency** | Pointer to **string** |  | [optional] 
 **ChargeDay** | Pointer to **float64** |  | [optional] 
-**CreatedAt** | Pointer to **time.Time** |  | [optional] 
-**CreatedBy** | Pointer to **string** |  | [optional] 
 **Description** | Pointer to **string** |  | [optional] 
 **DisplayOnStorefront** | Pointer to **bool** |  | [optional] 
-**Environment** | Pointer to **string** |  | [optional] 
 **FailedPaymentAction** | Pointer to **string** |  | [optional] 
 **FirstPaymentType** | Pointer to **string** |  | [optional] 
-**ImageUrl** | Pointer to **string** |  | [optional] 
-**IsActive** | Pointer to **bool** |  | [optional] 
-**Metadata** | Pointer to **map[string]interface{}** |  | [optional] 
+**ImageUrl** | Pointer to **string** | URL/URI | [optional] 
+**IsActive** | Pointer to **bool** | Whether this resource is currently active | [optional] 
+**Metadata** | Pointer to **map[string]interface{}** | Set of key-value pairs for storing additional information | [optional] 
 **Name** | Pointer to **string** |  | [optional] 
-**OrganizationId** | Pointer to **string** |  | [optional] 
-**ProductId** | Pointer to **string** |  | [optional] 
 **ProductType** | Pointer to **string** |  | [optional] 
-**UpdatedAt** | Pointer to **time.Time** |  | [optional] 
 **UsageAggregation** | Pointer to **string** |  | [optional] 
 **UsageUnit** | Pointer to **string** |  | [optional] 
 
@@ -93,56 +87,6 @@ SetChargeDay sets ChargeDay field to given value.
 
 HasChargeDay returns a boolean if a field has been set.
 
-### GetCreatedAt
-
-`func (o *ProductsUpdate) GetCreatedAt() time.Time`
-
-GetCreatedAt returns the CreatedAt field if non-nil, zero value otherwise.
-
-### GetCreatedAtOk
-
-`func (o *ProductsUpdate) GetCreatedAtOk() (*time.Time, bool)`
-
-GetCreatedAtOk returns a tuple with the CreatedAt field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCreatedAt
-
-`func (o *ProductsUpdate) SetCreatedAt(v time.Time)`
-
-SetCreatedAt sets CreatedAt field to given value.
-
-### HasCreatedAt
-
-`func (o *ProductsUpdate) HasCreatedAt() bool`
-
-HasCreatedAt returns a boolean if a field has been set.
-
-### GetCreatedBy
-
-`func (o *ProductsUpdate) GetCreatedBy() string`
-
-GetCreatedBy returns the CreatedBy field if non-nil, zero value otherwise.
-
-### GetCreatedByOk
-
-`func (o *ProductsUpdate) GetCreatedByOk() (*string, bool)`
-
-GetCreatedByOk returns a tuple with the CreatedBy field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCreatedBy
-
-`func (o *ProductsUpdate) SetCreatedBy(v string)`
-
-SetCreatedBy sets CreatedBy field to given value.
-
-### HasCreatedBy
-
-`func (o *ProductsUpdate) HasCreatedBy() bool`
-
-HasCreatedBy returns a boolean if a field has been set.
-
 ### GetDescription
 
 `func (o *ProductsUpdate) GetDescription() string`
@@ -192,31 +136,6 @@ SetDisplayOnStorefront sets DisplayOnStorefront field to given value.
 `func (o *ProductsUpdate) HasDisplayOnStorefront() bool`
 
 HasDisplayOnStorefront returns a boolean if a field has been set.
-
-### GetEnvironment
-
-`func (o *ProductsUpdate) GetEnvironment() string`
-
-GetEnvironment returns the Environment field if non-nil, zero value otherwise.
-
-### GetEnvironmentOk
-
-`func (o *ProductsUpdate) GetEnvironmentOk() (*string, bool)`
-
-GetEnvironmentOk returns a tuple with the Environment field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetEnvironment
-
-`func (o *ProductsUpdate) SetEnvironment(v string)`
-
-SetEnvironment sets Environment field to given value.
-
-### HasEnvironment
-
-`func (o *ProductsUpdate) HasEnvironment() bool`
-
-HasEnvironment returns a boolean if a field has been set.
 
 ### GetFailedPaymentAction
 
@@ -368,56 +287,6 @@ SetName sets Name field to given value.
 
 HasName returns a boolean if a field has been set.
 
-### GetOrganizationId
-
-`func (o *ProductsUpdate) GetOrganizationId() string`
-
-GetOrganizationId returns the OrganizationId field if non-nil, zero value otherwise.
-
-### GetOrganizationIdOk
-
-`func (o *ProductsUpdate) GetOrganizationIdOk() (*string, bool)`
-
-GetOrganizationIdOk returns a tuple with the OrganizationId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetOrganizationId
-
-`func (o *ProductsUpdate) SetOrganizationId(v string)`
-
-SetOrganizationId sets OrganizationId field to given value.
-
-### HasOrganizationId
-
-`func (o *ProductsUpdate) HasOrganizationId() bool`
-
-HasOrganizationId returns a boolean if a field has been set.
-
-### GetProductId
-
-`func (o *ProductsUpdate) GetProductId() string`
-
-GetProductId returns the ProductId field if non-nil, zero value otherwise.
-
-### GetProductIdOk
-
-`func (o *ProductsUpdate) GetProductIdOk() (*string, bool)`
-
-GetProductIdOk returns a tuple with the ProductId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetProductId
-
-`func (o *ProductsUpdate) SetProductId(v string)`
-
-SetProductId sets ProductId field to given value.
-
-### HasProductId
-
-`func (o *ProductsUpdate) HasProductId() bool`
-
-HasProductId returns a boolean if a field has been set.
-
 ### GetProductType
 
 `func (o *ProductsUpdate) GetProductType() string`
@@ -442,31 +311,6 @@ SetProductType sets ProductType field to given value.
 `func (o *ProductsUpdate) HasProductType() bool`
 
 HasProductType returns a boolean if a field has been set.
-
-### GetUpdatedAt
-
-`func (o *ProductsUpdate) GetUpdatedAt() time.Time`
-
-GetUpdatedAt returns the UpdatedAt field if non-nil, zero value otherwise.
-
-### GetUpdatedAtOk
-
-`func (o *ProductsUpdate) GetUpdatedAtOk() (*time.Time, bool)`
-
-GetUpdatedAtOk returns a tuple with the UpdatedAt field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetUpdatedAt
-
-`func (o *ProductsUpdate) SetUpdatedAt(v time.Time)`
-
-SetUpdatedAt sets UpdatedAt field to given value.
-
-### HasUpdatedAt
-
-`func (o *ProductsUpdate) HasUpdatedAt() bool`
-
-HasUpdatedAt returns a boolean if a field has been set.
 
 ### GetUsageAggregation
 

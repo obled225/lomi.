@@ -36,7 +36,7 @@ use \LomiSDK\ObjectSerializer;
  * SpiQrCodes Class Doc Comment
  *
  * @category Class
- * @description spi_qr_codes object
+ * @description spi qr codes resource object
  * @package  LomiSDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -485,7 +485,7 @@ class SpiQrCodes implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets checkout_session_id
      *
-     * @param string|null $checkout_session_id checkout_session_id
+     * @param string|null $checkout_session_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -539,7 +539,7 @@ class SpiQrCodes implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets created_at
      *
-     * @param \DateTime|null $created_at created_at
+     * @param \DateTime|null $created_at ISO 8601 datetime
      *
      * @return self
      */
@@ -620,7 +620,7 @@ class SpiQrCodes implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets expires_at
      *
-     * @param \DateTime|null $expires_at expires_at
+     * @param \DateTime|null $expires_at ISO 8601 datetime
      *
      * @return self
      */
@@ -647,7 +647,7 @@ class SpiQrCodes implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets is_active
      *
-     * @param bool|null $is_active is_active
+     * @param bool|null $is_active Whether this resource is currently active
      *
      * @return self
      */
@@ -701,7 +701,7 @@ class SpiQrCodes implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets metadata
      *
-     * @param object|null $metadata metadata
+     * @param object|null $metadata Set of key-value pairs for storing additional information
      *
      * @return self
      */
@@ -782,7 +782,7 @@ class SpiQrCodes implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets organization_id
      *
-     * @param string|null $organization_id organization_id
+     * @param string|null $organization_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -836,7 +836,7 @@ class SpiQrCodes implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets payment_request_id
      *
-     * @param string|null $payment_request_id payment_request_id
+     * @param string|null $payment_request_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -863,7 +863,7 @@ class SpiQrCodes implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets plan_id
      *
-     * @param string|null $plan_id plan_id
+     * @param string|null $plan_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -890,7 +890,7 @@ class SpiQrCodes implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets product_id
      *
-     * @param string|null $product_id product_id
+     * @param string|null $product_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -944,7 +944,7 @@ class SpiQrCodes implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets qr_code_id
      *
-     * @param string|null $qr_code_id qr_code_id
+     * @param string|null $qr_code_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -998,7 +998,7 @@ class SpiQrCodes implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets qr_code_image_url
      *
-     * @param string|null $qr_code_image_url qr_code_image_url
+     * @param string|null $qr_code_image_url URL/URI
      *
      * @return self
      */
@@ -1052,7 +1052,7 @@ class SpiQrCodes implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets updated_at
      *
-     * @param \DateTime|null $updated_at updated_at
+     * @param \DateTime|null $updated_at ISO 8601 datetime
      *
      * @return self
      */

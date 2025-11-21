@@ -7,23 +7,16 @@ Name | Type | Description | Notes
 **Address** | Pointer to **string** |  | [optional] 
 **City** | Pointer to **string** |  | [optional] 
 **Country** | Pointer to **string** |  | [optional] 
-**CreatedAt** | Pointer to **time.Time** |  | [optional] 
-**CreatedBy** | Pointer to **string** |  | [optional] 
-**CustomerId** | Pointer to **string** |  | [optional] 
-**DeletedAt** | Pointer to **time.Time** |  | [optional] 
-**Email** | Pointer to **string** |  | [optional] 
-**Environment** | Pointer to **string** |  | [optional] 
+**Email** | Pointer to **string** | Email address | [optional] 
 **IsBusiness** | Pointer to **bool** |  | [optional] 
-**IsDeleted** | Pointer to **bool** |  | [optional] 
-**Metadata** | Pointer to **map[string]interface{}** |  | [optional] 
+**IsDeleted** | Pointer to **bool** | Soft deletion flag | [optional] 
+**Metadata** | Pointer to **map[string]interface{}** | Set of key-value pairs for storing additional information | [optional] 
 **Name** | Pointer to **string** |  | [optional] 
-**OrganizationId** | Pointer to **string** |  | [optional] 
 **PhoneNumber** | Pointer to **string** |  | [optional] 
 **PostalCode** | Pointer to **string** |  | [optional] 
 **SpiAliasMbno** | Pointer to **string** |  | [optional] 
 **SpiAliasShid** | Pointer to **string** |  | [optional] 
 **SpiPrimaryAlias** | Pointer to **string** |  | [optional] 
-**UpdatedAt** | Pointer to **time.Time** |  | [optional] 
 **WhatsappNumber** | Pointer to **string** |  | [optional] 
 
 ## Methods
@@ -120,106 +113,6 @@ SetCountry sets Country field to given value.
 
 HasCountry returns a boolean if a field has been set.
 
-### GetCreatedAt
-
-`func (o *CustomersUpdate) GetCreatedAt() time.Time`
-
-GetCreatedAt returns the CreatedAt field if non-nil, zero value otherwise.
-
-### GetCreatedAtOk
-
-`func (o *CustomersUpdate) GetCreatedAtOk() (*time.Time, bool)`
-
-GetCreatedAtOk returns a tuple with the CreatedAt field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCreatedAt
-
-`func (o *CustomersUpdate) SetCreatedAt(v time.Time)`
-
-SetCreatedAt sets CreatedAt field to given value.
-
-### HasCreatedAt
-
-`func (o *CustomersUpdate) HasCreatedAt() bool`
-
-HasCreatedAt returns a boolean if a field has been set.
-
-### GetCreatedBy
-
-`func (o *CustomersUpdate) GetCreatedBy() string`
-
-GetCreatedBy returns the CreatedBy field if non-nil, zero value otherwise.
-
-### GetCreatedByOk
-
-`func (o *CustomersUpdate) GetCreatedByOk() (*string, bool)`
-
-GetCreatedByOk returns a tuple with the CreatedBy field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCreatedBy
-
-`func (o *CustomersUpdate) SetCreatedBy(v string)`
-
-SetCreatedBy sets CreatedBy field to given value.
-
-### HasCreatedBy
-
-`func (o *CustomersUpdate) HasCreatedBy() bool`
-
-HasCreatedBy returns a boolean if a field has been set.
-
-### GetCustomerId
-
-`func (o *CustomersUpdate) GetCustomerId() string`
-
-GetCustomerId returns the CustomerId field if non-nil, zero value otherwise.
-
-### GetCustomerIdOk
-
-`func (o *CustomersUpdate) GetCustomerIdOk() (*string, bool)`
-
-GetCustomerIdOk returns a tuple with the CustomerId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCustomerId
-
-`func (o *CustomersUpdate) SetCustomerId(v string)`
-
-SetCustomerId sets CustomerId field to given value.
-
-### HasCustomerId
-
-`func (o *CustomersUpdate) HasCustomerId() bool`
-
-HasCustomerId returns a boolean if a field has been set.
-
-### GetDeletedAt
-
-`func (o *CustomersUpdate) GetDeletedAt() time.Time`
-
-GetDeletedAt returns the DeletedAt field if non-nil, zero value otherwise.
-
-### GetDeletedAtOk
-
-`func (o *CustomersUpdate) GetDeletedAtOk() (*time.Time, bool)`
-
-GetDeletedAtOk returns a tuple with the DeletedAt field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetDeletedAt
-
-`func (o *CustomersUpdate) SetDeletedAt(v time.Time)`
-
-SetDeletedAt sets DeletedAt field to given value.
-
-### HasDeletedAt
-
-`func (o *CustomersUpdate) HasDeletedAt() bool`
-
-HasDeletedAt returns a boolean if a field has been set.
-
 ### GetEmail
 
 `func (o *CustomersUpdate) GetEmail() string`
@@ -244,31 +137,6 @@ SetEmail sets Email field to given value.
 `func (o *CustomersUpdate) HasEmail() bool`
 
 HasEmail returns a boolean if a field has been set.
-
-### GetEnvironment
-
-`func (o *CustomersUpdate) GetEnvironment() string`
-
-GetEnvironment returns the Environment field if non-nil, zero value otherwise.
-
-### GetEnvironmentOk
-
-`func (o *CustomersUpdate) GetEnvironmentOk() (*string, bool)`
-
-GetEnvironmentOk returns a tuple with the Environment field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetEnvironment
-
-`func (o *CustomersUpdate) SetEnvironment(v string)`
-
-SetEnvironment sets Environment field to given value.
-
-### HasEnvironment
-
-`func (o *CustomersUpdate) HasEnvironment() bool`
-
-HasEnvironment returns a boolean if a field has been set.
 
 ### GetIsBusiness
 
@@ -369,31 +237,6 @@ SetName sets Name field to given value.
 `func (o *CustomersUpdate) HasName() bool`
 
 HasName returns a boolean if a field has been set.
-
-### GetOrganizationId
-
-`func (o *CustomersUpdate) GetOrganizationId() string`
-
-GetOrganizationId returns the OrganizationId field if non-nil, zero value otherwise.
-
-### GetOrganizationIdOk
-
-`func (o *CustomersUpdate) GetOrganizationIdOk() (*string, bool)`
-
-GetOrganizationIdOk returns a tuple with the OrganizationId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetOrganizationId
-
-`func (o *CustomersUpdate) SetOrganizationId(v string)`
-
-SetOrganizationId sets OrganizationId field to given value.
-
-### HasOrganizationId
-
-`func (o *CustomersUpdate) HasOrganizationId() bool`
-
-HasOrganizationId returns a boolean if a field has been set.
 
 ### GetPhoneNumber
 
@@ -519,31 +362,6 @@ SetSpiPrimaryAlias sets SpiPrimaryAlias field to given value.
 `func (o *CustomersUpdate) HasSpiPrimaryAlias() bool`
 
 HasSpiPrimaryAlias returns a boolean if a field has been set.
-
-### GetUpdatedAt
-
-`func (o *CustomersUpdate) GetUpdatedAt() time.Time`
-
-GetUpdatedAt returns the UpdatedAt field if non-nil, zero value otherwise.
-
-### GetUpdatedAtOk
-
-`func (o *CustomersUpdate) GetUpdatedAtOk() (*time.Time, bool)`
-
-GetUpdatedAtOk returns a tuple with the UpdatedAt field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetUpdatedAt
-
-`func (o *CustomersUpdate) SetUpdatedAt(v time.Time)`
-
-SetUpdatedAt sets UpdatedAt field to given value.
-
-### HasUpdatedAt
-
-`func (o *CustomersUpdate) HasUpdatedAt() bool`
-
-HasUpdatedAt returns a boolean if a field has been set.
 
 ### GetWhatsappNumber
 

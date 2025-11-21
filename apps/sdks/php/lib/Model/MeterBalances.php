@@ -36,7 +36,7 @@ use \LomiSDK\ObjectSerializer;
  * MeterBalances Class Doc Comment
  *
  * @category Class
- * @description meter_balances object
+ * @description meter balances resource object
  * @package  LomiSDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -394,7 +394,7 @@ class MeterBalances implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets balance_id
      *
-     * @param string|null $balance_id balance_id
+     * @param string|null $balance_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -421,7 +421,7 @@ class MeterBalances implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets billable_organization_id
      *
-     * @param string|null $billable_organization_id billable_organization_id
+     * @param string|null $billable_organization_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -475,7 +475,7 @@ class MeterBalances implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets created_at
      *
-     * @param \DateTime|null $created_at created_at
+     * @param \DateTime|null $created_at ISO 8601 datetime
      *
      * @return self
      */
@@ -529,7 +529,7 @@ class MeterBalances implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets customer_id
      *
-     * @param string|null $customer_id customer_id
+     * @param string|null $customer_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -556,7 +556,7 @@ class MeterBalances implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets last_event_id
      *
-     * @param string|null $last_event_id last_event_id
+     * @param string|null $last_event_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -583,7 +583,7 @@ class MeterBalances implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets meter_id
      *
-     * @param string|null $meter_id meter_id
+     * @param string|null $meter_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -610,7 +610,7 @@ class MeterBalances implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets updated_at
      *
-     * @param \DateTime|null $updated_at updated_at
+     * @param \DateTime|null $updated_at ISO 8601 datetime
      *
      * @return self
      */

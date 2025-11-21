@@ -5,28 +5,23 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Categorie** | Pointer to **string** |  | [optional] 
-**CheckoutSessionId** | Pointer to **string** |  | [optional] 
+**CheckoutSessionId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
 **ComptePaye** | Pointer to **string** |  | [optional] 
-**CreatedAt** | Pointer to **time.Time** |  | [optional] 
-**CreatedBy** | Pointer to **string** |  | [optional] 
-**Environment** | Pointer to **string** |  | [optional] 
-**ExpiresAt** | Pointer to **time.Time** |  | [optional] 
-**IsActive** | Pointer to **bool** |  | [optional] 
+**ExpiresAt** | Pointer to **time.Time** | ISO 8601 datetime | [optional] 
+**IsActive** | Pointer to **bool** | Whether this resource is currently active | [optional] 
 **IsUsed** | Pointer to **bool** |  | [optional] 
-**Metadata** | Pointer to **map[string]interface{}** |  | [optional] 
+**Metadata** | Pointer to **map[string]interface{}** | Set of key-value pairs for storing additional information | [optional] 
 **Montant** | Pointer to **float64** |  | [optional] 
 **Name** | Pointer to **string** |  | [optional] 
-**OrganizationId** | Pointer to **string** |  | [optional] 
 **PayeurAlias** | Pointer to **string** |  | [optional] 
-**PaymentRequestId** | Pointer to **string** |  | [optional] 
-**PlanId** | Pointer to **string** |  | [optional] 
-**ProductId** | Pointer to **string** |  | [optional] 
+**PaymentRequestId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
+**PlanId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
+**ProductId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
 **QrCodeData** | Pointer to **string** |  | [optional] 
-**QrCodeId** | Pointer to **string** |  | [optional] 
+**QrCodeId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
 **QrCodeImageData** | Pointer to **string** |  | [optional] 
-**QrCodeImageUrl** | Pointer to **string** |  | [optional] 
+**QrCodeImageUrl** | Pointer to **string** | URL/URI | [optional] 
 **QrCodeType** | Pointer to **string** |  | [optional] 
-**UpdatedAt** | Pointer to **time.Time** |  | [optional] 
 
 ## Methods
 
@@ -121,81 +116,6 @@ SetComptePaye sets ComptePaye field to given value.
 `func (o *SpiQrCodesCreate) HasComptePaye() bool`
 
 HasComptePaye returns a boolean if a field has been set.
-
-### GetCreatedAt
-
-`func (o *SpiQrCodesCreate) GetCreatedAt() time.Time`
-
-GetCreatedAt returns the CreatedAt field if non-nil, zero value otherwise.
-
-### GetCreatedAtOk
-
-`func (o *SpiQrCodesCreate) GetCreatedAtOk() (*time.Time, bool)`
-
-GetCreatedAtOk returns a tuple with the CreatedAt field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCreatedAt
-
-`func (o *SpiQrCodesCreate) SetCreatedAt(v time.Time)`
-
-SetCreatedAt sets CreatedAt field to given value.
-
-### HasCreatedAt
-
-`func (o *SpiQrCodesCreate) HasCreatedAt() bool`
-
-HasCreatedAt returns a boolean if a field has been set.
-
-### GetCreatedBy
-
-`func (o *SpiQrCodesCreate) GetCreatedBy() string`
-
-GetCreatedBy returns the CreatedBy field if non-nil, zero value otherwise.
-
-### GetCreatedByOk
-
-`func (o *SpiQrCodesCreate) GetCreatedByOk() (*string, bool)`
-
-GetCreatedByOk returns a tuple with the CreatedBy field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCreatedBy
-
-`func (o *SpiQrCodesCreate) SetCreatedBy(v string)`
-
-SetCreatedBy sets CreatedBy field to given value.
-
-### HasCreatedBy
-
-`func (o *SpiQrCodesCreate) HasCreatedBy() bool`
-
-HasCreatedBy returns a boolean if a field has been set.
-
-### GetEnvironment
-
-`func (o *SpiQrCodesCreate) GetEnvironment() string`
-
-GetEnvironment returns the Environment field if non-nil, zero value otherwise.
-
-### GetEnvironmentOk
-
-`func (o *SpiQrCodesCreate) GetEnvironmentOk() (*string, bool)`
-
-GetEnvironmentOk returns a tuple with the Environment field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetEnvironment
-
-`func (o *SpiQrCodesCreate) SetEnvironment(v string)`
-
-SetEnvironment sets Environment field to given value.
-
-### HasEnvironment
-
-`func (o *SpiQrCodesCreate) HasEnvironment() bool`
-
-HasEnvironment returns a boolean if a field has been set.
 
 ### GetExpiresAt
 
@@ -346,31 +266,6 @@ SetName sets Name field to given value.
 `func (o *SpiQrCodesCreate) HasName() bool`
 
 HasName returns a boolean if a field has been set.
-
-### GetOrganizationId
-
-`func (o *SpiQrCodesCreate) GetOrganizationId() string`
-
-GetOrganizationId returns the OrganizationId field if non-nil, zero value otherwise.
-
-### GetOrganizationIdOk
-
-`func (o *SpiQrCodesCreate) GetOrganizationIdOk() (*string, bool)`
-
-GetOrganizationIdOk returns a tuple with the OrganizationId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetOrganizationId
-
-`func (o *SpiQrCodesCreate) SetOrganizationId(v string)`
-
-SetOrganizationId sets OrganizationId field to given value.
-
-### HasOrganizationId
-
-`func (o *SpiQrCodesCreate) HasOrganizationId() bool`
-
-HasOrganizationId returns a boolean if a field has been set.
 
 ### GetPayeurAlias
 
@@ -596,31 +491,6 @@ SetQrCodeType sets QrCodeType field to given value.
 `func (o *SpiQrCodesCreate) HasQrCodeType() bool`
 
 HasQrCodeType returns a boolean if a field has been set.
-
-### GetUpdatedAt
-
-`func (o *SpiQrCodesCreate) GetUpdatedAt() time.Time`
-
-GetUpdatedAt returns the UpdatedAt field if non-nil, zero value otherwise.
-
-### GetUpdatedAtOk
-
-`func (o *SpiQrCodesCreate) GetUpdatedAtOk() (*time.Time, bool)`
-
-GetUpdatedAtOk returns a tuple with the UpdatedAt field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetUpdatedAt
-
-`func (o *SpiQrCodesCreate) SetUpdatedAt(v time.Time)`
-
-SetUpdatedAt sets UpdatedAt field to given value.
-
-### HasUpdatedAt
-
-`func (o *SpiQrCodesCreate) HasUpdatedAt() bool`
-
-HasUpdatedAt returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

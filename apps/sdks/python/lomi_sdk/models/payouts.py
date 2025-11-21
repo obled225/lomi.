@@ -19,7 +19,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, StrictFloat, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from uuid import UUID
 from typing import Optional, Set
@@ -27,22 +27,22 @@ from typing_extensions import Self
 
 class Payouts(BaseModel):
     """
-    payouts object
+    payouts resource object
     """ # noqa: E501
-    account_id: Optional[UUID] = None
-    amount: Optional[Union[StrictFloat, StrictInt]] = None
-    created_at: Optional[datetime] = None
+    account_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
+    amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Amount in the smallest currency unit (e.g., cents for USD, same for XOF)")
+    created_at: Optional[datetime] = Field(default=None, description="ISO 8601 datetime")
     created_by: Optional[StrictStr] = None
-    currency_code: Optional[StrictStr] = None
+    currency_code: Optional[StrictStr] = Field(default=None, description="Three-letter ISO currency code (e.g., XOF, USD, EUR)")
     environment: Optional[StrictStr] = None
-    metadata: Optional[Dict[str, Any]] = None
-    organization_id: Optional[UUID] = None
+    metadata: Optional[Dict[str, Any]] = Field(default=None, description="Set of key-value pairs for storing additional information")
+    organization_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
     payment_method_code: Optional[StrictStr] = None
-    payout_id: Optional[UUID] = None
-    payout_method_id: Optional[UUID] = None
+    payout_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
+    payout_method_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
     provider_code: Optional[StrictStr] = None
-    status: Optional[StrictStr] = None
-    updated_at: Optional[datetime] = None
+    status: Optional[StrictStr] = Field(default=None, description="Current status of the resource")
+    updated_at: Optional[datetime] = Field(default=None, description="ISO 8601 datetime")
     __properties: ClassVar[List[str]] = ["account_id", "amount", "created_at", "created_by", "currency_code", "environment", "metadata", "organization_id", "payment_method_code", "payout_id", "payout_method_id", "provider_code", "status", "updated_at"]
 
     model_config = ConfigDict(
@@ -75,8 +75,14 @@ class Payouts(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set([
+            "created_at",
+            "created_by",
+            "updated_at",
         ])
 
         _dict = self.model_dump(

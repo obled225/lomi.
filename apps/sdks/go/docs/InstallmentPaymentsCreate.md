@@ -4,24 +4,22 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Amount** | Pointer to **float64** |  | [optional] 
-**CreatedAt** | Pointer to **time.Time** |  | [optional] 
+**Amount** | Pointer to **float64** | Amount in the smallest currency unit (e.g., cents for USD, same for XOF) | [optional] 
 **DueDate** | Pointer to **string** |  | [optional] 
-**InstallmentId** | Pointer to **string** |  | [optional] 
+**InstallmentId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
 **InterestAmount** | Pointer to **float64** |  | [optional] 
-**PaidAt** | Pointer to **time.Time** |  | [optional] 
+**PaidAt** | Pointer to **time.Time** | ISO 8601 datetime | [optional] 
 **PaymentLink** | Pointer to **string** |  | [optional] 
 **PaymentMethodCode** | Pointer to **string** |  | [optional] 
-**PlanId** | Pointer to **string** |  | [optional] 
+**PlanId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
 **PrincipalAmount** | Pointer to **float64** |  | [optional] 
 **ProcessingFee** | Pointer to **float64** |  | [optional] 
 **ProviderCode** | Pointer to **string** |  | [optional] 
 **SequenceNumber** | Pointer to **float64** |  | [optional] 
-**SpiPaymentRequestId** | Pointer to **string** |  | [optional] 
-**SpiTxId** | Pointer to **string** |  | [optional] 
-**Status** | Pointer to **string** |  | [optional] 
-**TransactionId** | Pointer to **string** |  | [optional] 
-**UpdatedAt** | Pointer to **time.Time** |  | [optional] 
+**SpiPaymentRequestId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
+**SpiTxId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
+**Status** | Pointer to **string** | Current status of the resource | [optional] 
+**TransactionId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
 
 ## Methods
 
@@ -66,31 +64,6 @@ SetAmount sets Amount field to given value.
 `func (o *InstallmentPaymentsCreate) HasAmount() bool`
 
 HasAmount returns a boolean if a field has been set.
-
-### GetCreatedAt
-
-`func (o *InstallmentPaymentsCreate) GetCreatedAt() time.Time`
-
-GetCreatedAt returns the CreatedAt field if non-nil, zero value otherwise.
-
-### GetCreatedAtOk
-
-`func (o *InstallmentPaymentsCreate) GetCreatedAtOk() (*time.Time, bool)`
-
-GetCreatedAtOk returns a tuple with the CreatedAt field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCreatedAt
-
-`func (o *InstallmentPaymentsCreate) SetCreatedAt(v time.Time)`
-
-SetCreatedAt sets CreatedAt field to given value.
-
-### HasCreatedAt
-
-`func (o *InstallmentPaymentsCreate) HasCreatedAt() bool`
-
-HasCreatedAt returns a boolean if a field has been set.
 
 ### GetDueDate
 
@@ -466,31 +439,6 @@ SetTransactionId sets TransactionId field to given value.
 `func (o *InstallmentPaymentsCreate) HasTransactionId() bool`
 
 HasTransactionId returns a boolean if a field has been set.
-
-### GetUpdatedAt
-
-`func (o *InstallmentPaymentsCreate) GetUpdatedAt() time.Time`
-
-GetUpdatedAt returns the UpdatedAt field if non-nil, zero value otherwise.
-
-### GetUpdatedAtOk
-
-`func (o *InstallmentPaymentsCreate) GetUpdatedAtOk() (*time.Time, bool)`
-
-GetUpdatedAtOk returns a tuple with the UpdatedAt field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetUpdatedAt
-
-`func (o *InstallmentPaymentsCreate) SetUpdatedAt(v time.Time)`
-
-SetUpdatedAt sets UpdatedAt field to given value.
-
-### HasUpdatedAt
-
-`func (o *InstallmentPaymentsCreate) HasUpdatedAt() bool`
-
-HasUpdatedAt returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

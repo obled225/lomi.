@@ -19,7 +19,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictFloat, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from uuid import UUID
 from typing import Optional, Set
@@ -27,27 +27,27 @@ from typing_extensions import Self
 
 class Webhooks(BaseModel):
     """
-    webhooks object
+    webhooks resource object
     """ # noqa: E501
     authorized_events: Optional[StrictStr] = None
-    created_at: Optional[datetime] = None
+    created_at: Optional[datetime] = Field(default=None, description="ISO 8601 datetime")
     created_by: Optional[StrictStr] = None
-    deleted_at: Optional[datetime] = None
+    deleted_at: Optional[datetime] = Field(default=None, description="ISO 8601 datetime")
     environment: Optional[StrictStr] = None
-    is_active: Optional[StrictBool] = None
+    is_active: Optional[StrictBool] = Field(default=None, description="Whether this resource is currently active")
     last_payload: Optional[Dict[str, Any]] = None
     last_response_body: Optional[StrictStr] = None
     last_response_status: Optional[Union[StrictFloat, StrictInt]] = None
-    last_triggered_at: Optional[datetime] = None
-    metadata: Optional[Dict[str, Any]] = None
-    organization_id: Optional[UUID] = None
+    last_triggered_at: Optional[datetime] = Field(default=None, description="ISO 8601 datetime")
+    metadata: Optional[Dict[str, Any]] = Field(default=None, description="Set of key-value pairs for storing additional information")
+    organization_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
     retry_count: Optional[Union[StrictFloat, StrictInt]] = None
     spi_event_types: Optional[StrictStr] = None
     supports_spi: Optional[StrictBool] = None
-    updated_at: Optional[datetime] = None
-    url: Optional[StrictStr] = None
+    updated_at: Optional[datetime] = Field(default=None, description="ISO 8601 datetime")
+    url: Optional[StrictStr] = Field(default=None, description="URL/URI")
     verification_token: Optional[StrictStr] = None
-    webhook_id: Optional[UUID] = None
+    webhook_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
     __properties: ClassVar[List[str]] = ["authorized_events", "created_at", "created_by", "deleted_at", "environment", "is_active", "last_payload", "last_response_body", "last_response_status", "last_triggered_at", "metadata", "organization_id", "retry_count", "spi_event_types", "supports_spi", "updated_at", "url", "verification_token", "webhook_id"]
 
     model_config = ConfigDict(
@@ -80,8 +80,16 @@ class Webhooks(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set([
+            "created_at",
+            "created_by",
+            "deleted_at",
+            "updated_at",
         ])
 
         _dict = self.model_dump(

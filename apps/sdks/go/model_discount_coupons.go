@@ -19,11 +19,13 @@ import (
 // checks if the DiscountCoupons type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DiscountCoupons{}
 
-// DiscountCoupons discount_coupons object
+// DiscountCoupons discount coupons resource object
 type DiscountCoupons struct {
 	AppliesToProductTypes *string `json:"applies_to_product_types,omitempty"`
 	Code *string `json:"code,omitempty"`
+	// Unique identifier (UUID format)
 	CouponId *string `json:"coupon_id,omitempty"`
+	// ISO 8601 datetime
 	CreatedAt *time.Time `json:"created_at,omitempty"`
 	CurrentUses *float64 `json:"current_uses,omitempty"`
 	CustomerType *string `json:"customer_type,omitempty"`
@@ -32,13 +34,17 @@ type DiscountCoupons struct {
 	DiscountPercentage *float64 `json:"discount_percentage,omitempty"`
 	DiscountType *string `json:"discount_type,omitempty"`
 	Environment *string `json:"environment,omitempty"`
+	// ISO 8601 datetime
 	ExpiresAt *time.Time `json:"expires_at,omitempty"`
+	// Whether this resource is currently active
 	IsActive *bool `json:"is_active,omitempty"`
 	IsOrganizationWide *bool `json:"is_organization_wide,omitempty"`
 	MaxQuantityPerUse *float64 `json:"max_quantity_per_use,omitempty"`
 	MaxUses *float64 `json:"max_uses,omitempty"`
+	// Unique identifier (UUID format)
 	OrganizationId *string `json:"organization_id,omitempty"`
 	ScopeType *string `json:"scope_type,omitempty"`
+	// ISO 8601 datetime
 	UpdatedAt *time.Time `json:"updated_at,omitempty"`
 	UsageFrequencyLimit *string `json:"usage_frequency_limit,omitempty"`
 	UsageLimitValue *float64 `json:"usage_limit_value,omitempty"`

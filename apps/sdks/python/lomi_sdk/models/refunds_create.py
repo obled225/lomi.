@@ -18,8 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
-from pydantic import BaseModel, ConfigDict, StrictFloat, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from uuid import UUID
 from typing import Optional, Set
@@ -27,28 +26,25 @@ from typing_extensions import Self
 
 class RefundsCreate(BaseModel):
     """
-    Create refunds input
+    Request body for creating a refunds object. System-managed fields like `created_at`, `organization_id`, and IDs are automatically set.
     """ # noqa: E501
-    amount: Optional[Union[StrictFloat, StrictInt]] = None
-    created_at: Optional[datetime] = None
-    environment: Optional[StrictStr] = None
+    amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Amount in the smallest currency unit (e.g., cents for USD, same for XOF)")
     fee_amount: Optional[Union[StrictFloat, StrictInt]] = None
-    metadata: Optional[Dict[str, Any]] = None
+    metadata: Optional[Dict[str, Any]] = Field(default=None, description="Set of key-value pairs for storing additional information")
     reason: Optional[StrictStr] = None
-    refund_id: Optional[UUID] = None
+    refund_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
     refunded_amount: Optional[Union[StrictFloat, StrictInt]] = None
     spi_account_number: Optional[StrictStr] = None
-    spi_end2end_id: Optional[UUID] = None
+    spi_end2end_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
     spi_fund_return_status: Optional[StrictStr] = None
     spi_motif_code: Optional[StrictStr] = None
     spi_rejection_reason: Optional[StrictStr] = None
     spi_retour_date_demande: Optional[StrictStr] = None
     spi_retour_date_irrevocabilite: Optional[StrictStr] = None
-    spi_tx_id: Optional[UUID] = None
-    status: Optional[StrictStr] = None
-    transaction_id: Optional[UUID] = None
-    updated_at: Optional[datetime] = None
-    __properties: ClassVar[List[str]] = ["amount", "created_at", "environment", "fee_amount", "metadata", "reason", "refund_id", "refunded_amount", "spi_account_number", "spi_end2end_id", "spi_fund_return_status", "spi_motif_code", "spi_rejection_reason", "spi_retour_date_demande", "spi_retour_date_irrevocabilite", "spi_tx_id", "status", "transaction_id", "updated_at"]
+    spi_tx_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
+    status: Optional[StrictStr] = Field(default=None, description="Current status of the resource")
+    transaction_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
+    __properties: ClassVar[List[str]] = ["amount", "fee_amount", "metadata", "reason", "refund_id", "refunded_amount", "spi_account_number", "spi_end2end_id", "spi_fund_return_status", "spi_motif_code", "spi_rejection_reason", "spi_retour_date_demande", "spi_retour_date_irrevocabilite", "spi_tx_id", "status", "transaction_id"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -102,8 +98,6 @@ class RefundsCreate(BaseModel):
 
         _obj = cls.model_validate({
             "amount": obj.get("amount"),
-            "created_at": obj.get("created_at"),
-            "environment": obj.get("environment"),
             "fee_amount": obj.get("fee_amount"),
             "metadata": obj.get("metadata"),
             "reason": obj.get("reason"),
@@ -118,8 +112,7 @@ class RefundsCreate(BaseModel):
             "spi_retour_date_irrevocabilite": obj.get("spi_retour_date_irrevocabilite"),
             "spi_tx_id": obj.get("spi_tx_id"),
             "status": obj.get("status"),
-            "transaction_id": obj.get("transaction_id"),
-            "updated_at": obj.get("updated_at")
+            "transaction_id": obj.get("transaction_id")
         })
         return _obj
 

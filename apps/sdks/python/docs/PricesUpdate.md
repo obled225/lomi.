@@ -1,28 +1,24 @@
 # PricesUpdate
 
-Update prices input
+Request body for updating a prices object. Only include fields you want to modify.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**amount** | **float** |  | [optional] 
+**amount** | **float** | Amount in the smallest currency unit (e.g., cents for USD, same for XOF) | [optional] 
 **billing_interval** | **str** |  | [optional] 
-**created_at** | **datetime** |  | [optional] 
-**currency_code** | **str** |  | [optional] 
-**environment** | **str** |  | [optional] 
-**is_active** | **bool** |  | [optional] 
+**currency_code** | **str** | Three-letter ISO currency code (e.g., XOF, USD, EUR) | [optional] 
+**is_active** | **bool** | Whether this resource is currently active | [optional] 
 **is_default** | **bool** |  | [optional] 
 **maximum_amount** | **float** |  | [optional] 
-**metadata** | **object** |  | [optional] 
+**metadata** | **object** | Set of key-value pairs for storing additional information | [optional] 
 **minimum_amount** | **float** |  | [optional] 
-**organization_id** | **str** |  | [optional] 
-**price_id** | **str** |  | [optional] 
+**price_id** | **str** | Unique identifier (UUID format) | [optional] 
 **pricing_model** | **str** |  | [optional] 
-**product_id** | **str** |  | [optional] 
-**provider_price_id** | **str** |  | [optional] 
-**provider_product_id** | **str** |  | [optional] 
-**updated_at** | **datetime** |  | [optional] 
+**product_id** | **str** | Unique identifier (UUID format) | [optional] 
+**provider_price_id** | **str** | Unique identifier (UUID format) | [optional] 
+**provider_product_id** | **str** | Unique identifier (UUID format) | [optional] 
 
 ## Example
 

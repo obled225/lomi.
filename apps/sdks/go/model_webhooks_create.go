@@ -19,26 +19,25 @@ import (
 // checks if the WebhooksCreate type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WebhooksCreate{}
 
-// WebhooksCreate Create webhooks input
+// WebhooksCreate Request body for creating a webhooks object. System-managed fields like `created_at`, `organization_id`, and IDs are automatically set.
 type WebhooksCreate struct {
 	AuthorizedEvents *string `json:"authorized_events,omitempty"`
-	CreatedAt *time.Time `json:"created_at,omitempty"`
-	CreatedBy *string `json:"created_by,omitempty"`
-	DeletedAt *time.Time `json:"deleted_at,omitempty"`
-	Environment *string `json:"environment,omitempty"`
+	// Whether this resource is currently active
 	IsActive *bool `json:"is_active,omitempty"`
 	LastPayload map[string]interface{} `json:"last_payload,omitempty"`
 	LastResponseBody *string `json:"last_response_body,omitempty"`
 	LastResponseStatus *float64 `json:"last_response_status,omitempty"`
+	// ISO 8601 datetime
 	LastTriggeredAt *time.Time `json:"last_triggered_at,omitempty"`
+	// Set of key-value pairs for storing additional information
 	Metadata map[string]interface{} `json:"metadata,omitempty"`
-	OrganizationId *string `json:"organization_id,omitempty"`
 	RetryCount *float64 `json:"retry_count,omitempty"`
 	SpiEventTypes *string `json:"spi_event_types,omitempty"`
 	SupportsSpi *bool `json:"supports_spi,omitempty"`
-	UpdatedAt *time.Time `json:"updated_at,omitempty"`
+	// URL/URI
 	Url *string `json:"url,omitempty"`
 	VerificationToken *string `json:"verification_token,omitempty"`
+	// Unique identifier (UUID format)
 	WebhookId *string `json:"webhook_id,omitempty"`
 }
 
@@ -89,134 +88,6 @@ func (o *WebhooksCreate) HasAuthorizedEvents() bool {
 // SetAuthorizedEvents gets a reference to the given string and assigns it to the AuthorizedEvents field.
 func (o *WebhooksCreate) SetAuthorizedEvents(v string) {
 	o.AuthorizedEvents = &v
-}
-
-// GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
-func (o *WebhooksCreate) GetCreatedAt() time.Time {
-	if o == nil || IsNil(o.CreatedAt) {
-		var ret time.Time
-		return ret
-	}
-	return *o.CreatedAt
-}
-
-// GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *WebhooksCreate) GetCreatedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.CreatedAt) {
-		return nil, false
-	}
-	return o.CreatedAt, true
-}
-
-// HasCreatedAt returns a boolean if a field has been set.
-func (o *WebhooksCreate) HasCreatedAt() bool {
-	if o != nil && !IsNil(o.CreatedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetCreatedAt gets a reference to the given time.Time and assigns it to the CreatedAt field.
-func (o *WebhooksCreate) SetCreatedAt(v time.Time) {
-	o.CreatedAt = &v
-}
-
-// GetCreatedBy returns the CreatedBy field value if set, zero value otherwise.
-func (o *WebhooksCreate) GetCreatedBy() string {
-	if o == nil || IsNil(o.CreatedBy) {
-		var ret string
-		return ret
-	}
-	return *o.CreatedBy
-}
-
-// GetCreatedByOk returns a tuple with the CreatedBy field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *WebhooksCreate) GetCreatedByOk() (*string, bool) {
-	if o == nil || IsNil(o.CreatedBy) {
-		return nil, false
-	}
-	return o.CreatedBy, true
-}
-
-// HasCreatedBy returns a boolean if a field has been set.
-func (o *WebhooksCreate) HasCreatedBy() bool {
-	if o != nil && !IsNil(o.CreatedBy) {
-		return true
-	}
-
-	return false
-}
-
-// SetCreatedBy gets a reference to the given string and assigns it to the CreatedBy field.
-func (o *WebhooksCreate) SetCreatedBy(v string) {
-	o.CreatedBy = &v
-}
-
-// GetDeletedAt returns the DeletedAt field value if set, zero value otherwise.
-func (o *WebhooksCreate) GetDeletedAt() time.Time {
-	if o == nil || IsNil(o.DeletedAt) {
-		var ret time.Time
-		return ret
-	}
-	return *o.DeletedAt
-}
-
-// GetDeletedAtOk returns a tuple with the DeletedAt field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *WebhooksCreate) GetDeletedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.DeletedAt) {
-		return nil, false
-	}
-	return o.DeletedAt, true
-}
-
-// HasDeletedAt returns a boolean if a field has been set.
-func (o *WebhooksCreate) HasDeletedAt() bool {
-	if o != nil && !IsNil(o.DeletedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetDeletedAt gets a reference to the given time.Time and assigns it to the DeletedAt field.
-func (o *WebhooksCreate) SetDeletedAt(v time.Time) {
-	o.DeletedAt = &v
-}
-
-// GetEnvironment returns the Environment field value if set, zero value otherwise.
-func (o *WebhooksCreate) GetEnvironment() string {
-	if o == nil || IsNil(o.Environment) {
-		var ret string
-		return ret
-	}
-	return *o.Environment
-}
-
-// GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *WebhooksCreate) GetEnvironmentOk() (*string, bool) {
-	if o == nil || IsNil(o.Environment) {
-		return nil, false
-	}
-	return o.Environment, true
-}
-
-// HasEnvironment returns a boolean if a field has been set.
-func (o *WebhooksCreate) HasEnvironment() bool {
-	if o != nil && !IsNil(o.Environment) {
-		return true
-	}
-
-	return false
-}
-
-// SetEnvironment gets a reference to the given string and assigns it to the Environment field.
-func (o *WebhooksCreate) SetEnvironment(v string) {
-	o.Environment = &v
 }
 
 // GetIsActive returns the IsActive field value if set, zero value otherwise.
@@ -411,38 +282,6 @@ func (o *WebhooksCreate) SetMetadata(v map[string]interface{}) {
 	o.Metadata = v
 }
 
-// GetOrganizationId returns the OrganizationId field value if set, zero value otherwise.
-func (o *WebhooksCreate) GetOrganizationId() string {
-	if o == nil || IsNil(o.OrganizationId) {
-		var ret string
-		return ret
-	}
-	return *o.OrganizationId
-}
-
-// GetOrganizationIdOk returns a tuple with the OrganizationId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *WebhooksCreate) GetOrganizationIdOk() (*string, bool) {
-	if o == nil || IsNil(o.OrganizationId) {
-		return nil, false
-	}
-	return o.OrganizationId, true
-}
-
-// HasOrganizationId returns a boolean if a field has been set.
-func (o *WebhooksCreate) HasOrganizationId() bool {
-	if o != nil && !IsNil(o.OrganizationId) {
-		return true
-	}
-
-	return false
-}
-
-// SetOrganizationId gets a reference to the given string and assigns it to the OrganizationId field.
-func (o *WebhooksCreate) SetOrganizationId(v string) {
-	o.OrganizationId = &v
-}
-
 // GetRetryCount returns the RetryCount field value if set, zero value otherwise.
 func (o *WebhooksCreate) GetRetryCount() float64 {
 	if o == nil || IsNil(o.RetryCount) {
@@ -537,38 +376,6 @@ func (o *WebhooksCreate) HasSupportsSpi() bool {
 // SetSupportsSpi gets a reference to the given bool and assigns it to the SupportsSpi field.
 func (o *WebhooksCreate) SetSupportsSpi(v bool) {
 	o.SupportsSpi = &v
-}
-
-// GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.
-func (o *WebhooksCreate) GetUpdatedAt() time.Time {
-	if o == nil || IsNil(o.UpdatedAt) {
-		var ret time.Time
-		return ret
-	}
-	return *o.UpdatedAt
-}
-
-// GetUpdatedAtOk returns a tuple with the UpdatedAt field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *WebhooksCreate) GetUpdatedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.UpdatedAt) {
-		return nil, false
-	}
-	return o.UpdatedAt, true
-}
-
-// HasUpdatedAt returns a boolean if a field has been set.
-func (o *WebhooksCreate) HasUpdatedAt() bool {
-	if o != nil && !IsNil(o.UpdatedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetUpdatedAt gets a reference to the given time.Time and assigns it to the UpdatedAt field.
-func (o *WebhooksCreate) SetUpdatedAt(v time.Time) {
-	o.UpdatedAt = &v
 }
 
 // GetUrl returns the Url field value if set, zero value otherwise.
@@ -680,18 +487,6 @@ func (o WebhooksCreate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.AuthorizedEvents) {
 		toSerialize["authorized_events"] = o.AuthorizedEvents
 	}
-	if !IsNil(o.CreatedAt) {
-		toSerialize["created_at"] = o.CreatedAt
-	}
-	if !IsNil(o.CreatedBy) {
-		toSerialize["created_by"] = o.CreatedBy
-	}
-	if !IsNil(o.DeletedAt) {
-		toSerialize["deleted_at"] = o.DeletedAt
-	}
-	if !IsNil(o.Environment) {
-		toSerialize["environment"] = o.Environment
-	}
 	if !IsNil(o.IsActive) {
 		toSerialize["is_active"] = o.IsActive
 	}
@@ -710,9 +505,6 @@ func (o WebhooksCreate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Metadata) {
 		toSerialize["metadata"] = o.Metadata
 	}
-	if !IsNil(o.OrganizationId) {
-		toSerialize["organization_id"] = o.OrganizationId
-	}
 	if !IsNil(o.RetryCount) {
 		toSerialize["retry_count"] = o.RetryCount
 	}
@@ -721,9 +513,6 @@ func (o WebhooksCreate) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.SupportsSpi) {
 		toSerialize["supports_spi"] = o.SupportsSpi
-	}
-	if !IsNil(o.UpdatedAt) {
-		toSerialize["updated_at"] = o.UpdatedAt
 	}
 	if !IsNil(o.Url) {
 		toSerialize["url"] = o.Url

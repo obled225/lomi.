@@ -5,15 +5,13 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Balance** | Pointer to **float64** |  | [optional] 
-**BalanceId** | Pointer to **string** |  | [optional] 
-**BillableOrganizationId** | Pointer to **string** |  | [optional] 
+**BalanceId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
+**BillableOrganizationId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
 **ConsumedUnits** | Pointer to **float64** |  | [optional] 
-**CreatedAt** | Pointer to **time.Time** |  | [optional] 
 **CreditedUnits** | Pointer to **float64** |  | [optional] 
-**CustomerId** | Pointer to **string** |  | [optional] 
-**LastEventId** | Pointer to **string** |  | [optional] 
-**MeterId** | Pointer to **string** |  | [optional] 
-**UpdatedAt** | Pointer to **time.Time** |  | [optional] 
+**CustomerId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
+**LastEventId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
+**MeterId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
 
 ## Methods
 
@@ -134,31 +132,6 @@ SetConsumedUnits sets ConsumedUnits field to given value.
 
 HasConsumedUnits returns a boolean if a field has been set.
 
-### GetCreatedAt
-
-`func (o *MeterBalancesCreate) GetCreatedAt() time.Time`
-
-GetCreatedAt returns the CreatedAt field if non-nil, zero value otherwise.
-
-### GetCreatedAtOk
-
-`func (o *MeterBalancesCreate) GetCreatedAtOk() (*time.Time, bool)`
-
-GetCreatedAtOk returns a tuple with the CreatedAt field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCreatedAt
-
-`func (o *MeterBalancesCreate) SetCreatedAt(v time.Time)`
-
-SetCreatedAt sets CreatedAt field to given value.
-
-### HasCreatedAt
-
-`func (o *MeterBalancesCreate) HasCreatedAt() bool`
-
-HasCreatedAt returns a boolean if a field has been set.
-
 ### GetCreditedUnits
 
 `func (o *MeterBalancesCreate) GetCreditedUnits() float64`
@@ -258,31 +231,6 @@ SetMeterId sets MeterId field to given value.
 `func (o *MeterBalancesCreate) HasMeterId() bool`
 
 HasMeterId returns a boolean if a field has been set.
-
-### GetUpdatedAt
-
-`func (o *MeterBalancesCreate) GetUpdatedAt() time.Time`
-
-GetUpdatedAt returns the UpdatedAt field if non-nil, zero value otherwise.
-
-### GetUpdatedAtOk
-
-`func (o *MeterBalancesCreate) GetUpdatedAtOk() (*time.Time, bool)`
-
-GetUpdatedAtOk returns a tuple with the UpdatedAt field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetUpdatedAt
-
-`func (o *MeterBalancesCreate) SetUpdatedAt(v time.Time)`
-
-SetUpdatedAt sets UpdatedAt field to given value.
-
-### HasUpdatedAt
-
-`func (o *MeterBalancesCreate) HasUpdatedAt() bool`
-
-HasUpdatedAt returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

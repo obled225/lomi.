@@ -19,7 +19,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictFloat, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from uuid import UUID
 from typing import Optional, Set
@@ -27,32 +27,27 @@ from typing_extensions import Self
 
 class SpiQrCodesUpdate(BaseModel):
     """
-    Update spi_qr_codes input
+    Request body for updating a spi qr codes object. Only include fields you want to modify.
     """ # noqa: E501
     categorie: Optional[StrictStr] = None
-    checkout_session_id: Optional[UUID] = None
+    checkout_session_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
     compte_paye: Optional[StrictStr] = None
-    created_at: Optional[datetime] = None
-    created_by: Optional[StrictStr] = None
-    environment: Optional[StrictStr] = None
-    expires_at: Optional[datetime] = None
-    is_active: Optional[StrictBool] = None
+    expires_at: Optional[datetime] = Field(default=None, description="ISO 8601 datetime")
+    is_active: Optional[StrictBool] = Field(default=None, description="Whether this resource is currently active")
     is_used: Optional[StrictBool] = None
-    metadata: Optional[Dict[str, Any]] = None
+    metadata: Optional[Dict[str, Any]] = Field(default=None, description="Set of key-value pairs for storing additional information")
     montant: Optional[Union[StrictFloat, StrictInt]] = None
     name: Optional[StrictStr] = None
-    organization_id: Optional[UUID] = None
     payeur_alias: Optional[StrictStr] = None
-    payment_request_id: Optional[UUID] = None
-    plan_id: Optional[UUID] = None
-    product_id: Optional[UUID] = None
+    payment_request_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
+    plan_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
+    product_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
     qr_code_data: Optional[StrictStr] = None
-    qr_code_id: Optional[UUID] = None
+    qr_code_id: Optional[UUID] = Field(default=None, description="Unique identifier (UUID format)")
     qr_code_image_data: Optional[StrictStr] = None
-    qr_code_image_url: Optional[StrictStr] = None
+    qr_code_image_url: Optional[StrictStr] = Field(default=None, description="URL/URI")
     qr_code_type: Optional[StrictStr] = None
-    updated_at: Optional[datetime] = None
-    __properties: ClassVar[List[str]] = ["categorie", "checkout_session_id", "compte_paye", "created_at", "created_by", "environment", "expires_at", "is_active", "is_used", "metadata", "montant", "name", "organization_id", "payeur_alias", "payment_request_id", "plan_id", "product_id", "qr_code_data", "qr_code_id", "qr_code_image_data", "qr_code_image_url", "qr_code_type", "updated_at"]
+    __properties: ClassVar[List[str]] = ["categorie", "checkout_session_id", "compte_paye", "expires_at", "is_active", "is_used", "metadata", "montant", "name", "payeur_alias", "payment_request_id", "plan_id", "product_id", "qr_code_data", "qr_code_id", "qr_code_image_data", "qr_code_image_url", "qr_code_type"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -108,16 +103,12 @@ class SpiQrCodesUpdate(BaseModel):
             "categorie": obj.get("categorie"),
             "checkout_session_id": obj.get("checkout_session_id"),
             "compte_paye": obj.get("compte_paye"),
-            "created_at": obj.get("created_at"),
-            "created_by": obj.get("created_by"),
-            "environment": obj.get("environment"),
             "expires_at": obj.get("expires_at"),
             "is_active": obj.get("is_active"),
             "is_used": obj.get("is_used"),
             "metadata": obj.get("metadata"),
             "montant": obj.get("montant"),
             "name": obj.get("name"),
-            "organization_id": obj.get("organization_id"),
             "payeur_alias": obj.get("payeur_alias"),
             "payment_request_id": obj.get("payment_request_id"),
             "plan_id": obj.get("plan_id"),
@@ -126,8 +117,7 @@ class SpiQrCodesUpdate(BaseModel):
             "qr_code_id": obj.get("qr_code_id"),
             "qr_code_image_data": obj.get("qr_code_image_data"),
             "qr_code_image_url": obj.get("qr_code_image_url"),
-            "qr_code_type": obj.get("qr_code_type"),
-            "updated_at": obj.get("updated_at")
+            "qr_code_type": obj.get("qr_code_type")
         })
         return _obj
 

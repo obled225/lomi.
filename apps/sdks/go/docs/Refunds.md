@@ -4,25 +4,25 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Amount** | Pointer to **float64** |  | [optional] 
-**CreatedAt** | Pointer to **time.Time** |  | [optional] 
+**Amount** | Pointer to **float64** | Amount in the smallest currency unit (e.g., cents for USD, same for XOF) | [optional] 
+**CreatedAt** | Pointer to **time.Time** | ISO 8601 datetime | [optional] [readonly] 
 **Environment** | Pointer to **string** |  | [optional] 
 **FeeAmount** | Pointer to **float64** |  | [optional] 
-**Metadata** | Pointer to **map[string]interface{}** |  | [optional] 
+**Metadata** | Pointer to **map[string]interface{}** | Set of key-value pairs for storing additional information | [optional] 
 **Reason** | Pointer to **string** |  | [optional] 
-**RefundId** | Pointer to **string** |  | [optional] 
+**RefundId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
 **RefundedAmount** | Pointer to **float64** |  | [optional] 
 **SpiAccountNumber** | Pointer to **string** |  | [optional] 
-**SpiEnd2endId** | Pointer to **string** |  | [optional] 
+**SpiEnd2endId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
 **SpiFundReturnStatus** | Pointer to **string** |  | [optional] 
 **SpiMotifCode** | Pointer to **string** |  | [optional] 
 **SpiRejectionReason** | Pointer to **string** |  | [optional] 
 **SpiRetourDateDemande** | Pointer to **string** |  | [optional] 
 **SpiRetourDateIrrevocabilite** | Pointer to **string** |  | [optional] 
-**SpiTxId** | Pointer to **string** |  | [optional] 
-**Status** | Pointer to **string** |  | [optional] 
-**TransactionId** | Pointer to **string** |  | [optional] 
-**UpdatedAt** | Pointer to **time.Time** |  | [optional] 
+**SpiTxId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
+**Status** | Pointer to **string** | Current status of the resource | [optional] 
+**TransactionId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
+**UpdatedAt** | Pointer to **time.Time** | ISO 8601 datetime | [optional] [readonly] 
 
 ## Methods
 

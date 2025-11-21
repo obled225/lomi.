@@ -36,7 +36,7 @@ use \LomiSDK\ObjectSerializer;
  * WebhooksUpdate Class Doc Comment
  *
  * @category Class
- * @description Update webhooks input
+ * @description Request body for updating a webhooks object. Only include fields you want to modify.
  * @package  LomiSDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -60,21 +60,15 @@ class WebhooksUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPITypes = [
         'authorized_events' => 'string',
-        'created_at' => '\DateTime',
-        'created_by' => 'string',
-        'deleted_at' => '\DateTime',
-        'environment' => 'string',
         'is_active' => 'bool',
         'last_payload' => 'object',
         'last_response_body' => 'string',
         'last_response_status' => 'float',
         'last_triggered_at' => '\DateTime',
         'metadata' => 'object',
-        'organization_id' => 'string',
         'retry_count' => 'float',
         'spi_event_types' => 'string',
         'supports_spi' => 'bool',
-        'updated_at' => '\DateTime',
         'url' => 'string',
         'verification_token' => 'string',
         'webhook_id' => 'string'
@@ -89,21 +83,15 @@ class WebhooksUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPIFormats = [
         'authorized_events' => null,
-        'created_at' => 'date-time',
-        'created_by' => null,
-        'deleted_at' => 'date-time',
-        'environment' => null,
         'is_active' => null,
         'last_payload' => null,
         'last_response_body' => null,
         'last_response_status' => 'double',
         'last_triggered_at' => 'date-time',
         'metadata' => null,
-        'organization_id' => 'uuid',
         'retry_count' => 'double',
         'spi_event_types' => null,
         'supports_spi' => null,
-        'updated_at' => 'date-time',
         'url' => 'uri',
         'verification_token' => null,
         'webhook_id' => 'uuid'
@@ -116,21 +104,15 @@ class WebhooksUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static array $openAPINullables = [
         'authorized_events' => false,
-        'created_at' => false,
-        'created_by' => false,
-        'deleted_at' => false,
-        'environment' => false,
         'is_active' => false,
         'last_payload' => false,
         'last_response_body' => false,
         'last_response_status' => false,
         'last_triggered_at' => false,
         'metadata' => false,
-        'organization_id' => false,
         'retry_count' => false,
         'spi_event_types' => false,
         'supports_spi' => false,
-        'updated_at' => false,
         'url' => false,
         'verification_token' => false,
         'webhook_id' => false
@@ -223,21 +205,15 @@ class WebhooksUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $attributeMap = [
         'authorized_events' => 'authorized_events',
-        'created_at' => 'created_at',
-        'created_by' => 'created_by',
-        'deleted_at' => 'deleted_at',
-        'environment' => 'environment',
         'is_active' => 'is_active',
         'last_payload' => 'last_payload',
         'last_response_body' => 'last_response_body',
         'last_response_status' => 'last_response_status',
         'last_triggered_at' => 'last_triggered_at',
         'metadata' => 'metadata',
-        'organization_id' => 'organization_id',
         'retry_count' => 'retry_count',
         'spi_event_types' => 'spi_event_types',
         'supports_spi' => 'supports_spi',
-        'updated_at' => 'updated_at',
         'url' => 'url',
         'verification_token' => 'verification_token',
         'webhook_id' => 'webhook_id'
@@ -250,21 +226,15 @@ class WebhooksUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $setters = [
         'authorized_events' => 'setAuthorizedEvents',
-        'created_at' => 'setCreatedAt',
-        'created_by' => 'setCreatedBy',
-        'deleted_at' => 'setDeletedAt',
-        'environment' => 'setEnvironment',
         'is_active' => 'setIsActive',
         'last_payload' => 'setLastPayload',
         'last_response_body' => 'setLastResponseBody',
         'last_response_status' => 'setLastResponseStatus',
         'last_triggered_at' => 'setLastTriggeredAt',
         'metadata' => 'setMetadata',
-        'organization_id' => 'setOrganizationId',
         'retry_count' => 'setRetryCount',
         'spi_event_types' => 'setSpiEventTypes',
         'supports_spi' => 'setSupportsSpi',
-        'updated_at' => 'setUpdatedAt',
         'url' => 'setUrl',
         'verification_token' => 'setVerificationToken',
         'webhook_id' => 'setWebhookId'
@@ -277,21 +247,15 @@ class WebhooksUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $getters = [
         'authorized_events' => 'getAuthorizedEvents',
-        'created_at' => 'getCreatedAt',
-        'created_by' => 'getCreatedBy',
-        'deleted_at' => 'getDeletedAt',
-        'environment' => 'getEnvironment',
         'is_active' => 'getIsActive',
         'last_payload' => 'getLastPayload',
         'last_response_body' => 'getLastResponseBody',
         'last_response_status' => 'getLastResponseStatus',
         'last_triggered_at' => 'getLastTriggeredAt',
         'metadata' => 'getMetadata',
-        'organization_id' => 'getOrganizationId',
         'retry_count' => 'getRetryCount',
         'spi_event_types' => 'getSpiEventTypes',
         'supports_spi' => 'getSupportsSpi',
-        'updated_at' => 'getUpdatedAt',
         'url' => 'getUrl',
         'verification_token' => 'getVerificationToken',
         'webhook_id' => 'getWebhookId'
@@ -355,21 +319,15 @@ class WebhooksUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
     public function __construct(?array $data = null)
     {
         $this->setIfExists('authorized_events', $data ?? [], null);
-        $this->setIfExists('created_at', $data ?? [], null);
-        $this->setIfExists('created_by', $data ?? [], null);
-        $this->setIfExists('deleted_at', $data ?? [], null);
-        $this->setIfExists('environment', $data ?? [], null);
         $this->setIfExists('is_active', $data ?? [], null);
         $this->setIfExists('last_payload', $data ?? [], null);
         $this->setIfExists('last_response_body', $data ?? [], null);
         $this->setIfExists('last_response_status', $data ?? [], null);
         $this->setIfExists('last_triggered_at', $data ?? [], null);
         $this->setIfExists('metadata', $data ?? [], null);
-        $this->setIfExists('organization_id', $data ?? [], null);
         $this->setIfExists('retry_count', $data ?? [], null);
         $this->setIfExists('spi_event_types', $data ?? [], null);
         $this->setIfExists('supports_spi', $data ?? [], null);
-        $this->setIfExists('updated_at', $data ?? [], null);
         $this->setIfExists('url', $data ?? [], null);
         $this->setIfExists('verification_token', $data ?? [], null);
         $this->setIfExists('webhook_id', $data ?? [], null);
@@ -445,114 +403,6 @@ class WebhooksUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets created_at
-     *
-     * @return \DateTime|null
-     */
-    public function getCreatedAt()
-    {
-        return $this->container['created_at'];
-    }
-
-    /**
-     * Sets created_at
-     *
-     * @param \DateTime|null $created_at created_at
-     *
-     * @return self
-     */
-    public function setCreatedAt($created_at)
-    {
-        if (is_null($created_at)) {
-            throw new \InvalidArgumentException('non-nullable created_at cannot be null');
-        }
-        $this->container['created_at'] = $created_at;
-
-        return $this;
-    }
-
-    /**
-     * Gets created_by
-     *
-     * @return string|null
-     */
-    public function getCreatedBy()
-    {
-        return $this->container['created_by'];
-    }
-
-    /**
-     * Sets created_by
-     *
-     * @param string|null $created_by created_by
-     *
-     * @return self
-     */
-    public function setCreatedBy($created_by)
-    {
-        if (is_null($created_by)) {
-            throw new \InvalidArgumentException('non-nullable created_by cannot be null');
-        }
-        $this->container['created_by'] = $created_by;
-
-        return $this;
-    }
-
-    /**
-     * Gets deleted_at
-     *
-     * @return \DateTime|null
-     */
-    public function getDeletedAt()
-    {
-        return $this->container['deleted_at'];
-    }
-
-    /**
-     * Sets deleted_at
-     *
-     * @param \DateTime|null $deleted_at deleted_at
-     *
-     * @return self
-     */
-    public function setDeletedAt($deleted_at)
-    {
-        if (is_null($deleted_at)) {
-            throw new \InvalidArgumentException('non-nullable deleted_at cannot be null');
-        }
-        $this->container['deleted_at'] = $deleted_at;
-
-        return $this;
-    }
-
-    /**
-     * Gets environment
-     *
-     * @return string|null
-     */
-    public function getEnvironment()
-    {
-        return $this->container['environment'];
-    }
-
-    /**
-     * Sets environment
-     *
-     * @param string|null $environment environment
-     *
-     * @return self
-     */
-    public function setEnvironment($environment)
-    {
-        if (is_null($environment)) {
-            throw new \InvalidArgumentException('non-nullable environment cannot be null');
-        }
-        $this->container['environment'] = $environment;
-
-        return $this;
-    }
-
-    /**
      * Gets is_active
      *
      * @return bool|null
@@ -565,7 +415,7 @@ class WebhooksUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets is_active
      *
-     * @param bool|null $is_active is_active
+     * @param bool|null $is_active Whether this resource is currently active
      *
      * @return self
      */
@@ -673,7 +523,7 @@ class WebhooksUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets last_triggered_at
      *
-     * @param \DateTime|null $last_triggered_at last_triggered_at
+     * @param \DateTime|null $last_triggered_at ISO 8601 datetime
      *
      * @return self
      */
@@ -700,7 +550,7 @@ class WebhooksUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets metadata
      *
-     * @param object|null $metadata metadata
+     * @param object|null $metadata Set of key-value pairs for storing additional information
      *
      * @return self
      */
@@ -710,33 +560,6 @@ class WebhooksUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable metadata cannot be null');
         }
         $this->container['metadata'] = $metadata;
-
-        return $this;
-    }
-
-    /**
-     * Gets organization_id
-     *
-     * @return string|null
-     */
-    public function getOrganizationId()
-    {
-        return $this->container['organization_id'];
-    }
-
-    /**
-     * Sets organization_id
-     *
-     * @param string|null $organization_id organization_id
-     *
-     * @return self
-     */
-    public function setOrganizationId($organization_id)
-    {
-        if (is_null($organization_id)) {
-            throw new \InvalidArgumentException('non-nullable organization_id cannot be null');
-        }
-        $this->container['organization_id'] = $organization_id;
 
         return $this;
     }
@@ -823,33 +646,6 @@ class WebhooksUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets updated_at
-     *
-     * @return \DateTime|null
-     */
-    public function getUpdatedAt()
-    {
-        return $this->container['updated_at'];
-    }
-
-    /**
-     * Sets updated_at
-     *
-     * @param \DateTime|null $updated_at updated_at
-     *
-     * @return self
-     */
-    public function setUpdatedAt($updated_at)
-    {
-        if (is_null($updated_at)) {
-            throw new \InvalidArgumentException('non-nullable updated_at cannot be null');
-        }
-        $this->container['updated_at'] = $updated_at;
-
-        return $this;
-    }
-
-    /**
      * Gets url
      *
      * @return string|null
@@ -862,7 +658,7 @@ class WebhooksUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets url
      *
-     * @param string|null $url url
+     * @param string|null $url URL/URI
      *
      * @return self
      */
@@ -916,7 +712,7 @@ class WebhooksUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets webhook_id
      *
-     * @param string|null $webhook_id webhook_id
+     * @param string|null $webhook_id Unique identifier (UUID format)
      *
      * @return self
      */

@@ -36,7 +36,7 @@ use \LomiSDK\ObjectSerializer;
  * CustomerInvoicesCreate Class Doc Comment
  *
  * @category Class
- * @description Create customer_invoices input
+ * @description Request body for creating a customer invoices object. System-managed fields like &#x60;created_at&#x60;, &#x60;organization_id&#x60;, and IDs are automatically set.
  * @package  LomiSDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -60,17 +60,13 @@ class CustomerInvoicesCreate implements ModelInterface, ArrayAccess, \JsonSerial
       */
     protected static $openAPITypes = [
         'amount' => 'float',
-        'created_at' => '\DateTime',
-        'created_by' => 'string',
         'currency_code' => 'string',
         'customer_id' => 'string',
         'customer_invoice_id' => 'string',
         'description' => 'string',
         'due_date' => 'string',
         'metadata' => 'object',
-        'organization_id' => 'string',
-        'status' => 'string',
-        'updated_at' => '\DateTime'
+        'status' => 'string'
     ];
 
     /**
@@ -82,17 +78,13 @@ class CustomerInvoicesCreate implements ModelInterface, ArrayAccess, \JsonSerial
       */
     protected static $openAPIFormats = [
         'amount' => 'double',
-        'created_at' => 'date-time',
-        'created_by' => null,
         'currency_code' => null,
         'customer_id' => 'uuid',
         'customer_invoice_id' => 'uuid',
         'description' => null,
         'due_date' => null,
         'metadata' => null,
-        'organization_id' => 'uuid',
-        'status' => null,
-        'updated_at' => 'date-time'
+        'status' => null
     ];
 
     /**
@@ -102,17 +94,13 @@ class CustomerInvoicesCreate implements ModelInterface, ArrayAccess, \JsonSerial
       */
     protected static array $openAPINullables = [
         'amount' => false,
-        'created_at' => false,
-        'created_by' => false,
         'currency_code' => false,
         'customer_id' => false,
         'customer_invoice_id' => false,
         'description' => false,
         'due_date' => false,
         'metadata' => false,
-        'organization_id' => false,
-        'status' => false,
-        'updated_at' => false
+        'status' => false
     ];
 
     /**
@@ -202,17 +190,13 @@ class CustomerInvoicesCreate implements ModelInterface, ArrayAccess, \JsonSerial
      */
     protected static $attributeMap = [
         'amount' => 'amount',
-        'created_at' => 'created_at',
-        'created_by' => 'created_by',
         'currency_code' => 'currency_code',
         'customer_id' => 'customer_id',
         'customer_invoice_id' => 'customer_invoice_id',
         'description' => 'description',
         'due_date' => 'due_date',
         'metadata' => 'metadata',
-        'organization_id' => 'organization_id',
-        'status' => 'status',
-        'updated_at' => 'updated_at'
+        'status' => 'status'
     ];
 
     /**
@@ -222,17 +206,13 @@ class CustomerInvoicesCreate implements ModelInterface, ArrayAccess, \JsonSerial
      */
     protected static $setters = [
         'amount' => 'setAmount',
-        'created_at' => 'setCreatedAt',
-        'created_by' => 'setCreatedBy',
         'currency_code' => 'setCurrencyCode',
         'customer_id' => 'setCustomerId',
         'customer_invoice_id' => 'setCustomerInvoiceId',
         'description' => 'setDescription',
         'due_date' => 'setDueDate',
         'metadata' => 'setMetadata',
-        'organization_id' => 'setOrganizationId',
-        'status' => 'setStatus',
-        'updated_at' => 'setUpdatedAt'
+        'status' => 'setStatus'
     ];
 
     /**
@@ -242,17 +222,13 @@ class CustomerInvoicesCreate implements ModelInterface, ArrayAccess, \JsonSerial
      */
     protected static $getters = [
         'amount' => 'getAmount',
-        'created_at' => 'getCreatedAt',
-        'created_by' => 'getCreatedBy',
         'currency_code' => 'getCurrencyCode',
         'customer_id' => 'getCustomerId',
         'customer_invoice_id' => 'getCustomerInvoiceId',
         'description' => 'getDescription',
         'due_date' => 'getDueDate',
         'metadata' => 'getMetadata',
-        'organization_id' => 'getOrganizationId',
-        'status' => 'getStatus',
-        'updated_at' => 'getUpdatedAt'
+        'status' => 'getStatus'
     ];
 
     /**
@@ -313,17 +289,13 @@ class CustomerInvoicesCreate implements ModelInterface, ArrayAccess, \JsonSerial
     public function __construct(?array $data = null)
     {
         $this->setIfExists('amount', $data ?? [], null);
-        $this->setIfExists('created_at', $data ?? [], null);
-        $this->setIfExists('created_by', $data ?? [], null);
         $this->setIfExists('currency_code', $data ?? [], null);
         $this->setIfExists('customer_id', $data ?? [], null);
         $this->setIfExists('customer_invoice_id', $data ?? [], null);
         $this->setIfExists('description', $data ?? [], null);
         $this->setIfExists('due_date', $data ?? [], null);
         $this->setIfExists('metadata', $data ?? [], null);
-        $this->setIfExists('organization_id', $data ?? [], null);
         $this->setIfExists('status', $data ?? [], null);
-        $this->setIfExists('updated_at', $data ?? [], null);
     }
 
     /**
@@ -381,7 +353,7 @@ class CustomerInvoicesCreate implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets amount
      *
-     * @param float|null $amount amount
+     * @param float|null $amount Amount in the smallest currency unit (e.g., cents for USD, same for XOF)
      *
      * @return self
      */
@@ -391,60 +363,6 @@ class CustomerInvoicesCreate implements ModelInterface, ArrayAccess, \JsonSerial
             throw new \InvalidArgumentException('non-nullable amount cannot be null');
         }
         $this->container['amount'] = $amount;
-
-        return $this;
-    }
-
-    /**
-     * Gets created_at
-     *
-     * @return \DateTime|null
-     */
-    public function getCreatedAt()
-    {
-        return $this->container['created_at'];
-    }
-
-    /**
-     * Sets created_at
-     *
-     * @param \DateTime|null $created_at created_at
-     *
-     * @return self
-     */
-    public function setCreatedAt($created_at)
-    {
-        if (is_null($created_at)) {
-            throw new \InvalidArgumentException('non-nullable created_at cannot be null');
-        }
-        $this->container['created_at'] = $created_at;
-
-        return $this;
-    }
-
-    /**
-     * Gets created_by
-     *
-     * @return string|null
-     */
-    public function getCreatedBy()
-    {
-        return $this->container['created_by'];
-    }
-
-    /**
-     * Sets created_by
-     *
-     * @param string|null $created_by created_by
-     *
-     * @return self
-     */
-    public function setCreatedBy($created_by)
-    {
-        if (is_null($created_by)) {
-            throw new \InvalidArgumentException('non-nullable created_by cannot be null');
-        }
-        $this->container['created_by'] = $created_by;
 
         return $this;
     }
@@ -462,7 +380,7 @@ class CustomerInvoicesCreate implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets currency_code
      *
-     * @param string|null $currency_code currency_code
+     * @param string|null $currency_code Three-letter ISO currency code (e.g., XOF, USD, EUR)
      *
      * @return self
      */
@@ -489,7 +407,7 @@ class CustomerInvoicesCreate implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets customer_id
      *
-     * @param string|null $customer_id customer_id
+     * @param string|null $customer_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -516,7 +434,7 @@ class CustomerInvoicesCreate implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets customer_invoice_id
      *
-     * @param string|null $customer_invoice_id customer_invoice_id
+     * @param string|null $customer_invoice_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -597,7 +515,7 @@ class CustomerInvoicesCreate implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets metadata
      *
-     * @param object|null $metadata metadata
+     * @param object|null $metadata Set of key-value pairs for storing additional information
      *
      * @return self
      */
@@ -607,33 +525,6 @@ class CustomerInvoicesCreate implements ModelInterface, ArrayAccess, \JsonSerial
             throw new \InvalidArgumentException('non-nullable metadata cannot be null');
         }
         $this->container['metadata'] = $metadata;
-
-        return $this;
-    }
-
-    /**
-     * Gets organization_id
-     *
-     * @return string|null
-     */
-    public function getOrganizationId()
-    {
-        return $this->container['organization_id'];
-    }
-
-    /**
-     * Sets organization_id
-     *
-     * @param string|null $organization_id organization_id
-     *
-     * @return self
-     */
-    public function setOrganizationId($organization_id)
-    {
-        if (is_null($organization_id)) {
-            throw new \InvalidArgumentException('non-nullable organization_id cannot be null');
-        }
-        $this->container['organization_id'] = $organization_id;
 
         return $this;
     }
@@ -651,7 +542,7 @@ class CustomerInvoicesCreate implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets status
      *
-     * @param string|null $status status
+     * @param string|null $status Current status of the resource
      *
      * @return self
      */
@@ -661,33 +552,6 @@ class CustomerInvoicesCreate implements ModelInterface, ArrayAccess, \JsonSerial
             throw new \InvalidArgumentException('non-nullable status cannot be null');
         }
         $this->container['status'] = $status;
-
-        return $this;
-    }
-
-    /**
-     * Gets updated_at
-     *
-     * @return \DateTime|null
-     */
-    public function getUpdatedAt()
-    {
-        return $this->container['updated_at'];
-    }
-
-    /**
-     * Sets updated_at
-     *
-     * @param \DateTime|null $updated_at updated_at
-     *
-     * @return self
-     */
-    public function setUpdatedAt($updated_at)
-    {
-        if (is_null($updated_at)) {
-            throw new \InvalidArgumentException('non-nullable updated_at cannot be null');
-        }
-        $this->container['updated_at'] = $updated_at;
 
         return $this;
     }

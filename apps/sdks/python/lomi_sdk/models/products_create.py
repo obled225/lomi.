@@ -18,37 +18,29 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictFloat, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
-from uuid import UUID
 from typing import Optional, Set
 from typing_extensions import Self
 
 class ProductsCreate(BaseModel):
     """
-    Create products input
+    Request body for creating a products object. System-managed fields like `created_at`, `organization_id`, and IDs are automatically set.
     """ # noqa: E501
     billing_frequency: Optional[StrictStr] = None
     charge_day: Optional[Union[StrictFloat, StrictInt]] = None
-    created_at: Optional[datetime] = None
-    created_by: Optional[StrictStr] = None
     description: Optional[StrictStr] = None
     display_on_storefront: Optional[StrictBool] = None
-    environment: Optional[StrictStr] = None
     failed_payment_action: Optional[StrictStr] = None
     first_payment_type: Optional[StrictStr] = None
-    image_url: Optional[StrictStr] = None
-    is_active: Optional[StrictBool] = None
-    metadata: Optional[Dict[str, Any]] = None
+    image_url: Optional[StrictStr] = Field(default=None, description="URL/URI")
+    is_active: Optional[StrictBool] = Field(default=None, description="Whether this resource is currently active")
+    metadata: Optional[Dict[str, Any]] = Field(default=None, description="Set of key-value pairs for storing additional information")
     name: Optional[StrictStr] = None
-    organization_id: Optional[UUID] = None
-    product_id: Optional[UUID] = None
     product_type: Optional[StrictStr] = None
-    updated_at: Optional[datetime] = None
     usage_aggregation: Optional[StrictStr] = None
     usage_unit: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["billing_frequency", "charge_day", "created_at", "created_by", "description", "display_on_storefront", "environment", "failed_payment_action", "first_payment_type", "image_url", "is_active", "metadata", "name", "organization_id", "product_id", "product_type", "updated_at", "usage_aggregation", "usage_unit"]
+    __properties: ClassVar[List[str]] = ["billing_frequency", "charge_day", "description", "display_on_storefront", "failed_payment_action", "first_payment_type", "image_url", "is_active", "metadata", "name", "product_type", "usage_aggregation", "usage_unit"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -103,21 +95,15 @@ class ProductsCreate(BaseModel):
         _obj = cls.model_validate({
             "billing_frequency": obj.get("billing_frequency"),
             "charge_day": obj.get("charge_day"),
-            "created_at": obj.get("created_at"),
-            "created_by": obj.get("created_by"),
             "description": obj.get("description"),
             "display_on_storefront": obj.get("display_on_storefront"),
-            "environment": obj.get("environment"),
             "failed_payment_action": obj.get("failed_payment_action"),
             "first_payment_type": obj.get("first_payment_type"),
             "image_url": obj.get("image_url"),
             "is_active": obj.get("is_active"),
             "metadata": obj.get("metadata"),
             "name": obj.get("name"),
-            "organization_id": obj.get("organization_id"),
-            "product_id": obj.get("product_id"),
             "product_type": obj.get("product_type"),
-            "updated_at": obj.get("updated_at"),
             "usage_aggregation": obj.get("usage_aggregation"),
             "usage_unit": obj.get("usage_unit")
         })

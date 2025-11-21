@@ -4,20 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**CreatedAt** | Pointer to **time.Time** |  | [optional] 
-**CreatedBy** | Pointer to **string** |  | [optional] 
-**CustomerId** | Pointer to **string** |  | [optional] 
+**CustomerId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
 **EndDate** | Pointer to **string** |  | [optional] 
-**Environment** | Pointer to **string** |  | [optional] 
-**Metadata** | Pointer to **map[string]interface{}** |  | [optional] 
+**Metadata** | Pointer to **map[string]interface{}** | Set of key-value pairs for storing additional information | [optional] 
 **NextBillingDate** | Pointer to **string** |  | [optional] 
-**OrganizationId** | Pointer to **string** |  | [optional] 
-**PriceId** | Pointer to **string** |  | [optional] 
-**ProductId** | Pointer to **string** |  | [optional] 
+**PriceId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
+**ProductId** | Pointer to **string** | Unique identifier (UUID format) | [optional] 
 **StartDate** | Pointer to **string** |  | [optional] 
-**Status** | Pointer to **string** |  | [optional] 
-**SubscriptionId** | Pointer to **string** |  | [optional] 
-**UpdatedAt** | Pointer to **time.Time** |  | [optional] 
+**Status** | Pointer to **string** | Current status of the resource | [optional] 
 
 ## Methods
 
@@ -37,56 +31,6 @@ will change when the set of required properties is changed
 NewSubscriptionsCreateWithDefaults instantiates a new SubscriptionsCreate object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetCreatedAt
-
-`func (o *SubscriptionsCreate) GetCreatedAt() time.Time`
-
-GetCreatedAt returns the CreatedAt field if non-nil, zero value otherwise.
-
-### GetCreatedAtOk
-
-`func (o *SubscriptionsCreate) GetCreatedAtOk() (*time.Time, bool)`
-
-GetCreatedAtOk returns a tuple with the CreatedAt field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCreatedAt
-
-`func (o *SubscriptionsCreate) SetCreatedAt(v time.Time)`
-
-SetCreatedAt sets CreatedAt field to given value.
-
-### HasCreatedAt
-
-`func (o *SubscriptionsCreate) HasCreatedAt() bool`
-
-HasCreatedAt returns a boolean if a field has been set.
-
-### GetCreatedBy
-
-`func (o *SubscriptionsCreate) GetCreatedBy() string`
-
-GetCreatedBy returns the CreatedBy field if non-nil, zero value otherwise.
-
-### GetCreatedByOk
-
-`func (o *SubscriptionsCreate) GetCreatedByOk() (*string, bool)`
-
-GetCreatedByOk returns a tuple with the CreatedBy field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCreatedBy
-
-`func (o *SubscriptionsCreate) SetCreatedBy(v string)`
-
-SetCreatedBy sets CreatedBy field to given value.
-
-### HasCreatedBy
-
-`func (o *SubscriptionsCreate) HasCreatedBy() bool`
-
-HasCreatedBy returns a boolean if a field has been set.
 
 ### GetCustomerId
 
@@ -138,31 +82,6 @@ SetEndDate sets EndDate field to given value.
 
 HasEndDate returns a boolean if a field has been set.
 
-### GetEnvironment
-
-`func (o *SubscriptionsCreate) GetEnvironment() string`
-
-GetEnvironment returns the Environment field if non-nil, zero value otherwise.
-
-### GetEnvironmentOk
-
-`func (o *SubscriptionsCreate) GetEnvironmentOk() (*string, bool)`
-
-GetEnvironmentOk returns a tuple with the Environment field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetEnvironment
-
-`func (o *SubscriptionsCreate) SetEnvironment(v string)`
-
-SetEnvironment sets Environment field to given value.
-
-### HasEnvironment
-
-`func (o *SubscriptionsCreate) HasEnvironment() bool`
-
-HasEnvironment returns a boolean if a field has been set.
-
 ### GetMetadata
 
 `func (o *SubscriptionsCreate) GetMetadata() map[string]interface{}`
@@ -212,31 +131,6 @@ SetNextBillingDate sets NextBillingDate field to given value.
 `func (o *SubscriptionsCreate) HasNextBillingDate() bool`
 
 HasNextBillingDate returns a boolean if a field has been set.
-
-### GetOrganizationId
-
-`func (o *SubscriptionsCreate) GetOrganizationId() string`
-
-GetOrganizationId returns the OrganizationId field if non-nil, zero value otherwise.
-
-### GetOrganizationIdOk
-
-`func (o *SubscriptionsCreate) GetOrganizationIdOk() (*string, bool)`
-
-GetOrganizationIdOk returns a tuple with the OrganizationId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetOrganizationId
-
-`func (o *SubscriptionsCreate) SetOrganizationId(v string)`
-
-SetOrganizationId sets OrganizationId field to given value.
-
-### HasOrganizationId
-
-`func (o *SubscriptionsCreate) HasOrganizationId() bool`
-
-HasOrganizationId returns a boolean if a field has been set.
 
 ### GetPriceId
 
@@ -337,56 +231,6 @@ SetStatus sets Status field to given value.
 `func (o *SubscriptionsCreate) HasStatus() bool`
 
 HasStatus returns a boolean if a field has been set.
-
-### GetSubscriptionId
-
-`func (o *SubscriptionsCreate) GetSubscriptionId() string`
-
-GetSubscriptionId returns the SubscriptionId field if non-nil, zero value otherwise.
-
-### GetSubscriptionIdOk
-
-`func (o *SubscriptionsCreate) GetSubscriptionIdOk() (*string, bool)`
-
-GetSubscriptionIdOk returns a tuple with the SubscriptionId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSubscriptionId
-
-`func (o *SubscriptionsCreate) SetSubscriptionId(v string)`
-
-SetSubscriptionId sets SubscriptionId field to given value.
-
-### HasSubscriptionId
-
-`func (o *SubscriptionsCreate) HasSubscriptionId() bool`
-
-HasSubscriptionId returns a boolean if a field has been set.
-
-### GetUpdatedAt
-
-`func (o *SubscriptionsCreate) GetUpdatedAt() time.Time`
-
-GetUpdatedAt returns the UpdatedAt field if non-nil, zero value otherwise.
-
-### GetUpdatedAtOk
-
-`func (o *SubscriptionsCreate) GetUpdatedAtOk() (*time.Time, bool)`
-
-GetUpdatedAtOk returns a tuple with the UpdatedAt field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetUpdatedAt
-
-`func (o *SubscriptionsCreate) SetUpdatedAt(v time.Time)`
-
-SetUpdatedAt sets UpdatedAt field to given value.
-
-### HasUpdatedAt
-
-`func (o *SubscriptionsCreate) HasUpdatedAt() bool`
-
-HasUpdatedAt returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

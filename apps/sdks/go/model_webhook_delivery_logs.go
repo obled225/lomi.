@@ -19,26 +19,31 @@ import (
 // checks if the WebhookDeliveryLogs type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WebhookDeliveryLogs{}
 
-// WebhookDeliveryLogs webhook_delivery_logs object
+// WebhookDeliveryLogs webhook delivery logs resource object
 type WebhookDeliveryLogs struct {
 	AttemptNumber *float64 `json:"attempt_number,omitempty"`
 	ComptePaye *string `json:"compte_paye,omitempty"`
 	ComptePayeur *string `json:"compte_payeur,omitempty"`
+	// ISO 8601 datetime
 	CreatedAt *time.Time `json:"created_at,omitempty"`
 	EventType *string `json:"event_type,omitempty"`
 	Headers map[string]interface{} `json:"headers,omitempty"`
 	IpAddress *string `json:"ip_address,omitempty"`
+	// Unique identifier (UUID format)
 	LogId *string `json:"log_id,omitempty"`
 	Montant *float64 `json:"montant,omitempty"`
+	// Unique identifier (UUID format)
 	OrganizationId *string `json:"organization_id,omitempty"`
 	Payload map[string]interface{} `json:"payload,omitempty"`
 	RequestDurationMs *float64 `json:"request_duration_ms,omitempty"`
 	ResponseBody *string `json:"response_body,omitempty"`
 	ResponseStatus *float64 `json:"response_status,omitempty"`
 	SpiEventCode *string `json:"spi_event_code,omitempty"`
+	// Unique identifier (UUID format)
 	SpiTxId *string `json:"spi_tx_id,omitempty"`
 	Success *bool `json:"success,omitempty"`
 	UserAgent *string `json:"user_agent,omitempty"`
+	// Unique identifier (UUID format)
 	WebhookId *string `json:"webhook_id,omitempty"`
 }
 

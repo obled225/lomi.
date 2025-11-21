@@ -36,7 +36,7 @@ use \LomiSDK\ObjectSerializer;
  * BeneficiaryPayoutsCreate Class Doc Comment
  *
  * @category Class
- * @description Create beneficiary_payouts input
+ * @description Request body for creating a beneficiary payouts object. System-managed fields like &#x60;created_at&#x60;, &#x60;organization_id&#x60;, and IDs are automatically set.
  * @package  LomiSDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -61,18 +61,14 @@ class BeneficiaryPayoutsCreate implements ModelInterface, ArrayAccess, \JsonSeri
     protected static $openAPITypes = [
         'account_id' => 'string',
         'amount' => 'float',
-        'created_at' => '\DateTime',
-        'created_by' => 'string',
         'currency_code' => 'string',
         'metadata' => 'object',
-        'organization_id' => 'string',
         'payment_method_code' => 'string',
         'payout_id' => 'string',
         'payout_method_id' => 'string',
         'provider_code' => 'string',
         'spi_bulk_instruction_id' => 'string',
-        'status' => 'string',
-        'updated_at' => '\DateTime'
+        'status' => 'string'
     ];
 
     /**
@@ -85,18 +81,14 @@ class BeneficiaryPayoutsCreate implements ModelInterface, ArrayAccess, \JsonSeri
     protected static $openAPIFormats = [
         'account_id' => 'uuid',
         'amount' => 'double',
-        'created_at' => 'date-time',
-        'created_by' => null,
         'currency_code' => null,
         'metadata' => null,
-        'organization_id' => 'uuid',
         'payment_method_code' => null,
         'payout_id' => 'uuid',
         'payout_method_id' => 'uuid',
         'provider_code' => null,
         'spi_bulk_instruction_id' => 'uuid',
-        'status' => null,
-        'updated_at' => 'date-time'
+        'status' => null
     ];
 
     /**
@@ -107,18 +99,14 @@ class BeneficiaryPayoutsCreate implements ModelInterface, ArrayAccess, \JsonSeri
     protected static array $openAPINullables = [
         'account_id' => false,
         'amount' => false,
-        'created_at' => false,
-        'created_by' => false,
         'currency_code' => false,
         'metadata' => false,
-        'organization_id' => false,
         'payment_method_code' => false,
         'payout_id' => false,
         'payout_method_id' => false,
         'provider_code' => false,
         'spi_bulk_instruction_id' => false,
-        'status' => false,
-        'updated_at' => false
+        'status' => false
     ];
 
     /**
@@ -209,18 +197,14 @@ class BeneficiaryPayoutsCreate implements ModelInterface, ArrayAccess, \JsonSeri
     protected static $attributeMap = [
         'account_id' => 'account_id',
         'amount' => 'amount',
-        'created_at' => 'created_at',
-        'created_by' => 'created_by',
         'currency_code' => 'currency_code',
         'metadata' => 'metadata',
-        'organization_id' => 'organization_id',
         'payment_method_code' => 'payment_method_code',
         'payout_id' => 'payout_id',
         'payout_method_id' => 'payout_method_id',
         'provider_code' => 'provider_code',
         'spi_bulk_instruction_id' => 'spi_bulk_instruction_id',
-        'status' => 'status',
-        'updated_at' => 'updated_at'
+        'status' => 'status'
     ];
 
     /**
@@ -231,18 +215,14 @@ class BeneficiaryPayoutsCreate implements ModelInterface, ArrayAccess, \JsonSeri
     protected static $setters = [
         'account_id' => 'setAccountId',
         'amount' => 'setAmount',
-        'created_at' => 'setCreatedAt',
-        'created_by' => 'setCreatedBy',
         'currency_code' => 'setCurrencyCode',
         'metadata' => 'setMetadata',
-        'organization_id' => 'setOrganizationId',
         'payment_method_code' => 'setPaymentMethodCode',
         'payout_id' => 'setPayoutId',
         'payout_method_id' => 'setPayoutMethodId',
         'provider_code' => 'setProviderCode',
         'spi_bulk_instruction_id' => 'setSpiBulkInstructionId',
-        'status' => 'setStatus',
-        'updated_at' => 'setUpdatedAt'
+        'status' => 'setStatus'
     ];
 
     /**
@@ -253,18 +233,14 @@ class BeneficiaryPayoutsCreate implements ModelInterface, ArrayAccess, \JsonSeri
     protected static $getters = [
         'account_id' => 'getAccountId',
         'amount' => 'getAmount',
-        'created_at' => 'getCreatedAt',
-        'created_by' => 'getCreatedBy',
         'currency_code' => 'getCurrencyCode',
         'metadata' => 'getMetadata',
-        'organization_id' => 'getOrganizationId',
         'payment_method_code' => 'getPaymentMethodCode',
         'payout_id' => 'getPayoutId',
         'payout_method_id' => 'getPayoutMethodId',
         'provider_code' => 'getProviderCode',
         'spi_bulk_instruction_id' => 'getSpiBulkInstructionId',
-        'status' => 'getStatus',
-        'updated_at' => 'getUpdatedAt'
+        'status' => 'getStatus'
     ];
 
     /**
@@ -326,18 +302,14 @@ class BeneficiaryPayoutsCreate implements ModelInterface, ArrayAccess, \JsonSeri
     {
         $this->setIfExists('account_id', $data ?? [], null);
         $this->setIfExists('amount', $data ?? [], null);
-        $this->setIfExists('created_at', $data ?? [], null);
-        $this->setIfExists('created_by', $data ?? [], null);
         $this->setIfExists('currency_code', $data ?? [], null);
         $this->setIfExists('metadata', $data ?? [], null);
-        $this->setIfExists('organization_id', $data ?? [], null);
         $this->setIfExists('payment_method_code', $data ?? [], null);
         $this->setIfExists('payout_id', $data ?? [], null);
         $this->setIfExists('payout_method_id', $data ?? [], null);
         $this->setIfExists('provider_code', $data ?? [], null);
         $this->setIfExists('spi_bulk_instruction_id', $data ?? [], null);
         $this->setIfExists('status', $data ?? [], null);
-        $this->setIfExists('updated_at', $data ?? [], null);
     }
 
     /**
@@ -395,7 +367,7 @@ class BeneficiaryPayoutsCreate implements ModelInterface, ArrayAccess, \JsonSeri
     /**
      * Sets account_id
      *
-     * @param string|null $account_id account_id
+     * @param string|null $account_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -422,7 +394,7 @@ class BeneficiaryPayoutsCreate implements ModelInterface, ArrayAccess, \JsonSeri
     /**
      * Sets amount
      *
-     * @param float|null $amount amount
+     * @param float|null $amount Amount in the smallest currency unit (e.g., cents for USD, same for XOF)
      *
      * @return self
      */
@@ -432,60 +404,6 @@ class BeneficiaryPayoutsCreate implements ModelInterface, ArrayAccess, \JsonSeri
             throw new \InvalidArgumentException('non-nullable amount cannot be null');
         }
         $this->container['amount'] = $amount;
-
-        return $this;
-    }
-
-    /**
-     * Gets created_at
-     *
-     * @return \DateTime|null
-     */
-    public function getCreatedAt()
-    {
-        return $this->container['created_at'];
-    }
-
-    /**
-     * Sets created_at
-     *
-     * @param \DateTime|null $created_at created_at
-     *
-     * @return self
-     */
-    public function setCreatedAt($created_at)
-    {
-        if (is_null($created_at)) {
-            throw new \InvalidArgumentException('non-nullable created_at cannot be null');
-        }
-        $this->container['created_at'] = $created_at;
-
-        return $this;
-    }
-
-    /**
-     * Gets created_by
-     *
-     * @return string|null
-     */
-    public function getCreatedBy()
-    {
-        return $this->container['created_by'];
-    }
-
-    /**
-     * Sets created_by
-     *
-     * @param string|null $created_by created_by
-     *
-     * @return self
-     */
-    public function setCreatedBy($created_by)
-    {
-        if (is_null($created_by)) {
-            throw new \InvalidArgumentException('non-nullable created_by cannot be null');
-        }
-        $this->container['created_by'] = $created_by;
 
         return $this;
     }
@@ -503,7 +421,7 @@ class BeneficiaryPayoutsCreate implements ModelInterface, ArrayAccess, \JsonSeri
     /**
      * Sets currency_code
      *
-     * @param string|null $currency_code currency_code
+     * @param string|null $currency_code Three-letter ISO currency code (e.g., XOF, USD, EUR)
      *
      * @return self
      */
@@ -530,7 +448,7 @@ class BeneficiaryPayoutsCreate implements ModelInterface, ArrayAccess, \JsonSeri
     /**
      * Sets metadata
      *
-     * @param object|null $metadata metadata
+     * @param object|null $metadata Set of key-value pairs for storing additional information
      *
      * @return self
      */
@@ -540,33 +458,6 @@ class BeneficiaryPayoutsCreate implements ModelInterface, ArrayAccess, \JsonSeri
             throw new \InvalidArgumentException('non-nullable metadata cannot be null');
         }
         $this->container['metadata'] = $metadata;
-
-        return $this;
-    }
-
-    /**
-     * Gets organization_id
-     *
-     * @return string|null
-     */
-    public function getOrganizationId()
-    {
-        return $this->container['organization_id'];
-    }
-
-    /**
-     * Sets organization_id
-     *
-     * @param string|null $organization_id organization_id
-     *
-     * @return self
-     */
-    public function setOrganizationId($organization_id)
-    {
-        if (is_null($organization_id)) {
-            throw new \InvalidArgumentException('non-nullable organization_id cannot be null');
-        }
-        $this->container['organization_id'] = $organization_id;
 
         return $this;
     }
@@ -611,7 +502,7 @@ class BeneficiaryPayoutsCreate implements ModelInterface, ArrayAccess, \JsonSeri
     /**
      * Sets payout_id
      *
-     * @param string|null $payout_id payout_id
+     * @param string|null $payout_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -638,7 +529,7 @@ class BeneficiaryPayoutsCreate implements ModelInterface, ArrayAccess, \JsonSeri
     /**
      * Sets payout_method_id
      *
-     * @param string|null $payout_method_id payout_method_id
+     * @param string|null $payout_method_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -692,7 +583,7 @@ class BeneficiaryPayoutsCreate implements ModelInterface, ArrayAccess, \JsonSeri
     /**
      * Sets spi_bulk_instruction_id
      *
-     * @param string|null $spi_bulk_instruction_id spi_bulk_instruction_id
+     * @param string|null $spi_bulk_instruction_id Unique identifier (UUID format)
      *
      * @return self
      */
@@ -719,7 +610,7 @@ class BeneficiaryPayoutsCreate implements ModelInterface, ArrayAccess, \JsonSeri
     /**
      * Sets status
      *
-     * @param string|null $status status
+     * @param string|null $status Current status of the resource
      *
      * @return self
      */
@@ -729,33 +620,6 @@ class BeneficiaryPayoutsCreate implements ModelInterface, ArrayAccess, \JsonSeri
             throw new \InvalidArgumentException('non-nullable status cannot be null');
         }
         $this->container['status'] = $status;
-
-        return $this;
-    }
-
-    /**
-     * Gets updated_at
-     *
-     * @return \DateTime|null
-     */
-    public function getUpdatedAt()
-    {
-        return $this->container['updated_at'];
-    }
-
-    /**
-     * Sets updated_at
-     *
-     * @param \DateTime|null $updated_at updated_at
-     *
-     * @return self
-     */
-    public function setUpdatedAt($updated_at)
-    {
-        if (is_null($updated_at)) {
-            throw new \InvalidArgumentException('non-nullable updated_at cannot be null');
-        }
-        $this->container['updated_at'] = $updated_at;
 
         return $this;
     }
