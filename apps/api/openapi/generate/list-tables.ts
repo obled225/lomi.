@@ -1,7 +1,3 @@
-/**
- * List all database tables
- */
-
 import { parseDatabaseTypes } from './parse-database-types';
 import * as path from 'path';
 

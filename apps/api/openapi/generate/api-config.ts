@@ -1,51 +1,22 @@
-/**
- * API Resource Configuration
- *
- * Define which database tables to expose as REST API endpoints
- * and how they should be configured
- */
-
 export interface APIResourceConfig {
-  /** Database table name */
   tableName: string;
-
-  /** API endpoint path (defaults to tableName if not specified) */
   path?: string;
-
-  /** Display name for documentation (defaults to tableName without 's') */
   displayName?: string;
-
-  /** ID field name (defaults to {singularName}_id) */
   idField?: string;
-
-  /** Whether to expose this resource in the API */
   enabled: boolean;
-
-  /** Operations to enable for this resource */
   operations?: {
-    list?: boolean; // GET /resources
-    get?: boolean; // GET /resources/:id
-    create?: boolean; // POST /resources
-    update?: boolean; // PATCH /resources/:id
-    delete?: boolean; // DELETE /resources/:id
+    list?: boolean;
+    get?: boolean;
+    create?: boolean;
+    update?: boolean;
+    delete?: boolean;
   };
 
-  /** Tag for grouping in documentation */
   tag?: string;
-
-  /** Custom description for the resource */
   description?: string;
 }
 
-/**
- * All available API resources
- *
- * CUSTOMIZE THIS ARRAY to control which tables are exposed in your API
- */
 export const API_RESOURCES: APIResourceConfig[] = [
-  // ============================================
-  // CORE PAYMENT RESOURCES
-  // ============================================
   {
     tableName: 'customers',
     enabled: true,
@@ -69,7 +40,7 @@ export const API_RESOURCES: APIResourceConfig[] = [
     operations: {
       list: true,
       get: true,
-      create: false, // Transactions are created via payment_requests
+      create: false,
       update: false,
       delete: false,
     },
@@ -81,10 +52,6 @@ export const API_RESOURCES: APIResourceConfig[] = [
     idField: 'refund_id',
     description: 'Refund management - process and track refunds',
   },
-
-  // ============================================
-  // SUBSCRIPTION & PRODUCTS
-  // ============================================
   {
     tableName: 'products',
     enabled: true,
@@ -128,10 +95,6 @@ export const API_RESOURCES: APIResourceConfig[] = [
       delete: false,
     },
   },
-
-  // ============================================
-  // CHECKOUT & PAYMENT LINKS
-  // ============================================
   {
     tableName: 'checkout_sessions',
     enabled: true,
@@ -146,10 +109,6 @@ export const API_RESOURCES: APIResourceConfig[] = [
     idField: 'link_id',
     description: 'Payment links - shareable payment URLs',
   },
-
-  // ============================================
-  // PAYOUTS
-  // ============================================
   {
     tableName: 'payouts',
     enabled: true,
@@ -185,10 +144,6 @@ export const API_RESOURCES: APIResourceConfig[] = [
       delete: false,
     },
   },
-
-  // ============================================
-  // BNPL (Buy Now Pay Later)
-  // ============================================
   {
     tableName: 'installment_payments',
     enabled: true,
@@ -203,10 +158,6 @@ export const API_RESOURCES: APIResourceConfig[] = [
       delete: false,
     },
   },
-
-  // ============================================
-  // SPI (SENEGAL INTERBANK PAYMENT SYSTEM)
-  // ============================================
   {
     tableName: 'spi_qr_codes',
     enabled: true,
@@ -228,10 +179,6 @@ export const API_RESOURCES: APIResourceConfig[] = [
       delete: false,
     },
   },
-
-  // ============================================
-  // WEBHOOKS & EVENTS
-  // ============================================
   {
     tableName: 'webhooks',
     enabled: true,
@@ -268,10 +215,6 @@ export const API_RESOURCES: APIResourceConfig[] = [
       delete: false,
     },
   },
-
-  // ============================================
-  // USAGE-BASED BILLING
-  // ============================================
   {
     tableName: 'meters',
     enabled: true,
@@ -295,25 +238,16 @@ export const API_RESOURCES: APIResourceConfig[] = [
   },
 ];
 
-/**
- * Get all enabled API resources
- */
 export function getEnabledResources(): APIResourceConfig[] {
   return API_RESOURCES.filter((r) => r.enabled);
 }
 
-/**
- * Get resource configuration by table name
- */
 export function getResourceConfig(
   tableName: string,
 ): APIResourceConfig | undefined {
   return API_RESOURCES.find((r) => r.tableName === tableName);
 }
 
-/**
- * Get all unique tags
- */
 export function getAllTags(): string[] {
   const tags = new Set<string>();
   API_RESOURCES.filter((r) => r.enabled).forEach((r) => {
@@ -322,48 +256,26 @@ export function getAllTags(): string[] {
   return Array.from(tags);
 }
 
-/**
- * Enums to expose in the public API
- *
- * CUSTOMIZE THIS ARRAY to control which database enums are exposed
- * Only include enums that API consumers actually need
- */
 export const EXPOSED_ENUMS = [
-  // Currency & Payment
-  'currency_code', // XOF, USD, EUR
-  'payment_method_code', // CARDS, MOBILE_MONEY, BANK_TRANSFER, BNPL, FREE
-  'provider_code', // WAVE, JUMBO, MTN, STRIPE, SPI, etc.
-
-  // Transaction Statuses
-  'transaction_status', // pending, completed, failed, refunded, expired
-  'refund_status', // pending, completed, failed
-  'payout_status', // pending, processing, completed, failed
-
-  // Subscription & Products
-  'subscription_status', // pending, active, paused, cancelled, expired, past_due, trial
-  'product_type_enum', // one_time, recurring, usage_based
-  'pricing_model_enum', // standard, pay_what_you_want, tiered, volume
-  'frequency', // weekly, monthly, yearly, etc.
-
-  // Checkout & Sessions
-  'checkout_session_status', // open, completed, expired
-  'invoice_status', // sent, paid, overdue, cancelled
-
-  // Webhooks
-  'webhook_event', // PAYMENT_CREATED, PAYMENT_SUCCEEDED, etc.
-
-  // SPI (Senegal Interbank Payment)
-  'spi_payment_status', // INITIE, ENVOYE, IRREVOCABLE, REJETE
-  'spi_account_status', // OUVERT, BLOQUE, CLOTURE
-  'spi_account_type', // CACC, CARD, CASH, etc.
-
-  // BNPL
-  'bnpl_status', // pending, collected, waived, refunded
+  'currency_code',
+  'payment_method_code',
+  'provider_code',
+  'transaction_status',
+  'refund_status',
+  'payout_status',
+  'subscription_status',
+  'product_type_enum',
+  'pricing_model_enum',
+  'frequency',
+  'checkout_session_status',
+  'invoice_status',
+  'webhook_event',
+  'spi_payment_status',
+  'spi_account_status',
+  'spi_account_type',
+  'bnpl_status',
 ];
 
-/**
- * Check if an enum should be exposed in the API
- */
 export function isEnumExposed(enumName: string): boolean {
   return EXPOSED_ENUMS.includes(enumName);
 }

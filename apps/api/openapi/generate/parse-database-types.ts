@@ -1,10 +1,3 @@
-/**
- * Database Types Parser
- *
- * Parses database.types.ts and extracts table schemas automatically
- * This ensures the OpenAPI spec is always in sync with the actual database
- */
-
 import * as ts from 'typescript';
 import * as fs from 'fs';
 
@@ -29,9 +22,6 @@ export interface EnumDefinition {
   values: string[];
 }
 
-/**
- * Parse the database.types.ts file
- */
 export function parseDatabaseTypes(filePath: string): {
   tables: Map<string, TableSchema>;
   enums: Map<string, EnumDefinition>;
@@ -47,13 +37,10 @@ export function parseDatabaseTypes(filePath: string): {
   const tables = new Map<string, TableSchema>();
   const enums = new Map<string, EnumDefinition>();
 
-  // Find the Database type export
   function visit(node: ts.Node) {
-    // Look for: export type Database = { ... }
     if (ts.isTypeAliasDeclaration(node) && node.name.text === 'Database') {
       const type = node.type;
       if (ts.isTypeLiteralNode(type)) {
-        // Navigate to public.Tables
         extractTables(type, tables);
         extractEnums(type, enums);
       }
@@ -67,14 +54,10 @@ export function parseDatabaseTypes(filePath: string): {
   return { tables, enums };
 }
 
-/**
- * Extract table definitions from Database type
- */
 function extractTables(
   databaseType: ts.TypeLiteralNode,
   tables: Map<string, TableSchema>,
 ) {
-  // Find public property
   const publicProp = databaseType.members.find(
     (member): member is ts.PropertySignature =>
       ts.isPropertySignature(member) &&
@@ -90,7 +73,6 @@ function extractTables(
     return;
   }
 
-  // Find Tables property
   const tablesProp = publicProp.type.members.find(
     (member): member is ts.PropertySignature =>
       ts.isPropertySignature(member) &&
@@ -106,7 +88,6 @@ function extractTables(
     return;
   }
 
-  // Iterate through each table
   tablesProp.type.members.forEach((member) => {
     if (ts.isPropertySignature(member) && ts.isIdentifier(member.name)) {
       const tableName = member.name.text;
@@ -122,10 +103,7 @@ function extractTables(
   });
 }
 
-/**
- * Extract Row, Insert, Update types from a table
- */
-function extractTableSchema(
+  function extractTableSchema(
   tableName: string,
   tableNode: ts.TypeLiteralNode,
 ): TableSchema | null {
@@ -165,9 +143,6 @@ function extractTableSchema(
   return schema;
 }
 
-/**
- * Extract properties from a type literal (Row, Insert, or Update)
- */
 function extractProperties(
   typeNode: ts.TypeLiteralNode,
   isOptional: boolean,
@@ -193,9 +168,6 @@ function extractProperties(
   return properties;
 }
 
-/**
- * Extract type information from a TypeScript type node
- */
 function extractTypeInfo(
   typeNode: ts.TypeNode,
 ): Omit<PropertyInfo, 'required'> {
@@ -204,7 +176,6 @@ function extractTypeInfo(
     nullable: false,
   };
 
-  // Handle union types (e.g., string | null)
   if (ts.isUnionTypeNode(typeNode)) {
     const types = typeNode.types;
     const nonNullTypes = types.filter((t) => !isNullType(t));
@@ -221,20 +192,13 @@ function extractTypeInfo(
     return info;
   }
 
-  // Handle simple types
   return { ...info, ...extractSimpleType(typeNode) };
 }
 
-/**
- * Extract simple type (string, number, boolean, etc.)
- */
 function extractSimpleType(typeNode: ts.TypeNode): Partial<PropertyInfo> {
-  // Handle type references (e.g., Database["public"]["Enums"]["currency_code"])
   if (ts.isIndexedAccessTypeNode(typeNode)) {
     return { type: 'string' }; // Enums are strings
   }
-
-  // Handle literal types
   if (ts.isLiteralTypeNode(typeNode)) {
     if (ts.isStringLiteral(typeNode.literal)) {
       return {
@@ -253,7 +217,6 @@ function extractSimpleType(typeNode: ts.TypeNode): Partial<PropertyInfo> {
     }
   }
 
-  // Handle keywords
   if (typeNode.kind === ts.SyntaxKind.StringKeyword) {
     return { type: 'string' };
   }
@@ -264,12 +227,9 @@ function extractSimpleType(typeNode: ts.TypeNode): Partial<PropertyInfo> {
     return { type: 'boolean' };
   }
 
-  // Handle unknown (from Supabase)
   if (typeNode.kind === ts.SyntaxKind.UnknownKeyword) {
     return { type: 'object' };
   }
-
-  // Handle Json type
   if (ts.isTypeReferenceNode(typeNode) && ts.isIdentifier(typeNode.typeName)) {
     if (typeNode.typeName.text === 'Json') {
       return { type: 'object' };
@@ -279,16 +239,10 @@ function extractSimpleType(typeNode: ts.TypeNode): Partial<PropertyInfo> {
   return { type: 'string' };
 }
 
-/**
- * Check if a type node represents null
- */
 function isNullType(typeNode: ts.TypeNode): boolean {
   return typeNode.kind === ts.SyntaxKind.NullKeyword;
 }
 
-/**
- * Extract enum definitions
- */
 function extractEnums(
   databaseType: ts.TypeLiteralNode,
   enums: Map<string, EnumDefinition>,
@@ -343,18 +297,13 @@ function extractEnums(
   });
 }
 
-/**
- * Convert table schema to OpenAPI schema
- */
 export function tableSchemaToOpenAPI(table: TableSchema) {
   return {
-    // Main resource schema (from Row)
     [table.tableName]: {
       type: 'object',
       description: `${table.tableName} object`,
       properties: propertiesToOpenAPI(table.row),
     },
-    // Create schema (from Insert)
     [`${table.tableName}_create`]: {
       type: 'object',
       description: `Create ${table.tableName} input`,
@@ -363,7 +312,6 @@ export function tableSchemaToOpenAPI(table: TableSchema) {
         .map(([name]) => name),
       properties: propertiesToOpenAPI(table.insert),
     },
-    // Update schema (from Update)
     [`${table.tableName}_update`]: {
       type: 'object',
       description: `Update ${table.tableName} input`,
@@ -372,9 +320,6 @@ export function tableSchemaToOpenAPI(table: TableSchema) {
   };
 }
 
-/**
- * Convert properties to OpenAPI format
- */
 function propertiesToOpenAPI(
   properties: Record<string, PropertyInfo>,
 ): Record<string, any> {
@@ -401,7 +346,6 @@ function propertiesToOpenAPI(
       schema.description = prop.description;
     }
 
-    // Special handling for common patterns
     if (name.includes('_id') || name === 'id') {
       schema.format = 'uuid';
     }

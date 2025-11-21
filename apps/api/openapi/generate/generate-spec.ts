@@ -10,13 +10,6 @@ import {
   type APIResourceConfig,
 } from './api-config';
 
-/**
- * OpenAPI Spec Generator
- *
- * Automatically generates OpenAPI 3.0 specification from database.types.ts
- * This ensures the API spec is ALWAYS in sync with the actual database schema
- */
-
 interface OpenAPISpec {
   openapi: string;
   info: any;
@@ -31,9 +24,6 @@ interface OpenAPISpec {
   tags: any[];
 }
 
-/**
- * Generate CRUD paths for a resource
- */
 function generateCRUDPaths(
   tableName: string,
   idField: string = `${tableName.slice(0, -1)}_id`,
@@ -219,9 +209,6 @@ function generateCRUDPaths(
   };
 }
 
-/**
- * Generate CRUD paths with configuration support
- */
 function generateCRUDPathsWithConfig(
   tableName: string,
   idField: string,
@@ -229,7 +216,6 @@ function generateCRUDPathsWithConfig(
 ): Record<string, any> {
   const paths = generateCRUDPaths(tableName, idField);
 
-  // Filter operations based on configuration
   const operations = config.operations || {
     list: true,
     get: true,
@@ -240,7 +226,6 @@ function generateCRUDPathsWithConfig(
 
   const filteredPaths: Record<string, any> = {};
 
-  // Handle collection endpoints (list, create)
   if (paths[`/${tableName}`]) {
     const collectionPath: any = {};
 
@@ -257,7 +242,6 @@ function generateCRUDPathsWithConfig(
     }
   }
 
-  // Handle item endpoints (get, update, delete)
   if (paths[`/${tableName}/{${idField}}`]) {
     const itemPath: any = {};
 
@@ -287,23 +271,18 @@ function generateCRUDPathsWithConfig(
   return filteredPaths;
 }
 
-/**
- * Main function to generate the OpenAPI spec from database types
- */
 function generateOpenAPISpec(): OpenAPISpec {
   console.log('📖 Parsing database.types.ts...\n');
 
-  // Parse the actual database types file (shared source of truth)
   const dbTypesPath = path.join(
     __dirname,
-    '../../../../apps/docs/lib/types/database.types.ts',
+    '@/apps/docs/lib/types/database.types.ts',
   );
   const { tables, enums } = parseDatabaseTypes(dbTypesPath);
 
   console.log(`✅ Found ${tables.size} tables`);
   console.log(`✅ Found ${enums.size} enums\n`);
 
-  // Base OpenAPI spec
   const spec: OpenAPISpec = {
     openapi: '3.0.3',
     info: {
@@ -441,18 +420,14 @@ Configure webhooks to receive real-time notifications about events in your accou
 
   spec.components.schemas = allSchemas;
 
-  // Get enabled API resources from configuration
   const enabledResources = getEnabledResources();
 
   console.log(`📡 Exposing ${enabledResources.length} resources via API\n`);
 
-  // Filter schemas to only include enabled resources
   const enabledTableNames = new Set(enabledResources.map((r) => r.tableName));
   const filteredSchemas: Record<string, any> = {};
 
-  // First pass: Include schemas for enabled resources
   Object.entries(allSchemas).forEach(([schemaName, schema]) => {
-    // Check if this schema belongs to an enabled resource
     const isEnabledResource =
       enabledTableNames.has(schemaName) ||
       Array.from(enabledTableNames).some(
@@ -461,7 +436,6 @@ Configure webhooks to receive real-time notifications about events in your accou
           schemaName === `${tableName}_update`,
       );
 
-    // Always include common schemas (Error, etc.)
     const isCommonSchema = schemaName === 'Error';
 
     if (isEnabledResource || isCommonSchema) {
@@ -469,19 +443,14 @@ Configure webhooks to receive real-time notifications about events in your accou
     }
   });
 
-  // Second pass: Find and include referenced enums
   const referencedEnums = new Set<string>();
 
   function findEnumReferences(obj: any) {
     if (!obj || typeof obj !== 'object') return;
 
-    // Check if this is an enum reference
     if (obj.type === 'string' && obj.enum && Array.isArray(obj.enum)) {
-      // This might be an inline enum, but we'll also check schema names
       return;
     }
-
-    // Recursively search properties
     Object.values(obj).forEach((value) => {
       if (typeof value === 'object') {
         findEnumReferences(value);
@@ -489,12 +458,9 @@ Configure webhooks to receive real-time notifications about events in your accou
     });
   }
 
-  // Scan filtered schemas for enum usage
   Object.values(filteredSchemas).forEach((schema) => {
     findEnumReferences(schema);
   });
-
-  // Add enums to filtered schemas (using configuration)
   enums.forEach((enumDef, enumName) => {
     if (isEnumExposed(enumName) || referencedEnums.has(enumName)) {
       if (!filteredSchemas[enumName]) {
@@ -507,14 +473,12 @@ Configure webhooks to receive real-time notifications about events in your accou
     }
   });
 
-  // Replace all schemas with filtered ones
   spec.components.schemas = filteredSchemas;
 
   console.log(
     `📋 Filtered schemas: ${Object.keys(filteredSchemas).length} (from ${Object.keys(allSchemas).length} total)`,
   );
 
-  // Generate paths and tags for each enabled resource
   enabledResources.forEach((resource) => {
     if (tables.has(resource.tableName)) {
       const singularName =
@@ -523,14 +487,12 @@ Configure webhooks to receive real-time notifications about events in your accou
           ? resource.tableName.slice(0, -1)
           : resource.tableName);
 
-      // Add tag
       spec.tags.push({
         name: resource.tag || singularName,
         description:
           resource.description || `Operations related to ${resource.tableName}`,
       });
 
-      // Generate CRUD paths with custom configuration
       const idField = resource.idField || `${singularName}_id`;
       const paths = generateCRUDPathsWithConfig(
         resource.tableName,
@@ -544,16 +506,12 @@ Configure webhooks to receive real-time notifications about events in your accou
   return spec;
 }
 
-/**
- * Main execution
- */
 function main() {
   console.log('🚀 Generating OpenAPI specification from database schema...\n');
 
   try {
     const spec = generateOpenAPISpec();
 
-    // Write to YAML file
     const outputPath = path.join(__dirname, '../spec.yaml');
     const yaml = require('js-yaml');
     const yamlContent = yaml.dump(spec, {
