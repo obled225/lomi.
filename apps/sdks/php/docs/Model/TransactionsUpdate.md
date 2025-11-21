@@ -1,0 +1,45 @@
+# # TransactionsUpdate
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**checkout_session_id** | **string** |  | [optional]
+**created_at** | **\DateTime** |  | [optional]
+**currency_code** | **string** |  | [optional]
+**customer_id** | **string** |  | [optional]
+**description** | **string** |  | [optional]
+**discount_amount** | **float** |  | [optional]
+**environment** | **string** |  | [optional]
+**fee_amount** | **float** |  | [optional]
+**fee_structure_id** | **string** |  | [optional]
+**gross_amount** | **float** |  | [optional]
+**is_bnpl** | **bool** |  | [optional]
+**is_pos** | **bool** |  | [optional]
+**metadata** | **object** |  | [optional]
+**net_amount** | **float** |  | [optional]
+**organization_id** | **string** |  | [optional]
+**payment_method_code** | **string** |  | [optional]
+**price_id** | **string** |  | [optional]
+**product_id** | **string** |  | [optional]
+**provider_code** | **string** |  | [optional]
+**quantity** | **float** |  | [optional]
+**spi_account_number** | **string** |  | [optional]
+**spi_bulk_instruction_id** | **string** |  | [optional]
+**spi_date_envoi** | **string** |  | [optional]
+**spi_date_irrevocabilite** | **string** |  | [optional]
+**spi_discount_amount** | **float** |  | [optional]
+**spi_discount_rate** | **float** |  | [optional]
+**spi_end2end_id** | **string** |  | [optional]
+**spi_payment_category** | **string** |  | [optional]
+**spi_payment_flow_type** | **string** |  | [optional]
+**spi_payment_status** | **string** |  | [optional]
+**spi_rejection_reason** | **string** |  | [optional]
+**spi_tx_id** | **string** |  | [optional]
+**status** | **string** |  | [optional]
+**subscription_id** | **string** |  | [optional]
+**transaction_id** | **string** |  | [optional]
+**transaction_type** | **string** |  | [optional]
+**updated_at** | **\DateTime** |  | [optional]
+
+[[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

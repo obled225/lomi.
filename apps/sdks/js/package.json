@@ -9,7 +9,7 @@
     "README.md"
   ],
   "scripts": {
-    "generate": "node ../scripts/typescript-generate.js && tsc",
+    "generate": "node ../scripts/javascript-generate.js",
     "build": "tsc"
   },
   "keywords": [

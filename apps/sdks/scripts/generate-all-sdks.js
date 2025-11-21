@@ -38,28 +38,28 @@ function exec(command, options = {}) {
 const SDKS = [
     {
         name: 'TypeScript',
-        dir: 'typescript',
-        command: 'cd typescript && npm run generate && npm run build',
+        dir: 'ts',
+        command: 'node scripts/typescript-generate.js',
     },
     {
         name: 'JavaScript',
-        dir: 'javascript',
-        command: 'cd javascript && npm run generate && npm run build',
+        dir: 'js',
+        command: 'node scripts/javascript-generate.js',
     },
     {
         name: 'Python',
         dir: 'python',
-        command: 'cd python && pip install -e .',
+        command: 'node scripts/python-generate.js',
     },
     {
         name: 'Go',
         dir: 'go',
-        command: 'cd go && go mod tidy',
+        command: 'node scripts/go-generate.js',
     },
     {
         name: 'PHP',
         dir: 'php',
-        command: 'cd php && composer install',
+        command: 'node scripts/php-generate.js',
     },
 ];
 

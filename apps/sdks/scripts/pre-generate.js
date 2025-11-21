@@ -12,7 +12,7 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const sourceSpecPath = join(__dirname, '@/spec.yaml');
+const sourceSpecPath = join(__dirname, '../../api/openapi/spec.yaml');
 const targetSpecPath = join(__dirname, '../spec.yaml');
 
 try {

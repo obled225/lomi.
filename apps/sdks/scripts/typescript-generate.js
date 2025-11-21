@@ -11,9 +11,9 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const sourceSpecPath = join(__dirname, '@/spec.yaml');
-const targetSpecPath = join(__dirname, '../typescript/spec.yaml');
-const generatedDir = join(__dirname, '../typescript/src/generated');
+const sourceSpecPath = join(__dirname, '../../api/openapi/spec.yaml');
+const targetSpecPath = join(__dirname, '../ts/spec.yaml');
+const generatedDir = join(__dirname, '../ts/src/generated');
 
 console.log('📋 Copying OpenAPI spec...');
 copyFileSync(sourceSpecPath, targetSpecPath);
@@ -21,7 +21,7 @@ copyFileSync(sourceSpecPath, targetSpecPath);
 console.log('🔨 Generating TypeScript SDK...');
 execSync(
     'npx openapi-typescript-codegen --input ./spec.yaml --output ./src/generated --client axios --useOptions',
-    { cwd: join(__dirname, '../typescript'), stdio: 'inherit' }
+    { cwd: join(__dirname, '../ts'), stdio: 'inherit' }
 );
 
 console.log('🔧 Fixing ES module imports...');

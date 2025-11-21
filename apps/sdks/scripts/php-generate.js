@@ -10,7 +10,7 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const specPath = join(__dirname, '@/spec.yaml');
+const specPath = join(__dirname, '../../api/openapi/spec.yaml');
 const outputDir = join(__dirname, '../php');
 
 console.log('🔨 Generating PHP SDK...');
@@ -24,7 +24,8 @@ try {
       --invoker-package Lomi\\\\SDK \\
       --git-repo-id lomi-php-sdk \\
       --git-user-id lomiafrica \\
-      --additional-properties=packageVersion=1.0.0`,
+      --additional-properties=packageVersion=1.0.0 \\
+      --skip-validate-spec`,
         { stdio: 'inherit' }
     );
 

@@ -24,7 +24,8 @@ try {
       --package-name lomisdk \\
       --git-repo-id lomi-go-sdk \\
       --git-user-id lomiafrica \\
-      --additional-properties=packageVersion=1.0.0`,
+      --additional-properties=packageVersion=1.0.0 \\
+      --skip-validate-spec`,
         { stdio: 'inherit' }
     );
 
