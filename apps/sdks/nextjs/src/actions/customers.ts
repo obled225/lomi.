@@ -12,7 +12,7 @@ export async function createCustomerAction(data: customers_create) {
   
   try {
     // Calls auto-generated createCustomer method
-    const customer = await lomi.customers.create({ requestBody: data });
+    const customer = await lomi.customers.createCustomer({ requestBody: data });
     return { success: true, data: customer };
   } catch (error) {
     console.error('Failed to create customer:', error);
@@ -28,7 +28,7 @@ export async function createPaymentAction(data: payment_requests_create) {
   const lomi = getLomiClient();
   
   try {
-    const payment = await lomi.payments.create({ requestBody: data });
+    const payment = await lomi.paymentRequests.createPaymentRequest({ requestBody: data });
     return { success: true, data: payment };
   } catch (error) {
     console.error('Failed to create payment:', error);
@@ -47,7 +47,7 @@ export async function listCustomersAction(options?: {
   const lomi = getLomiClient();
   
   try {
-    const response = await lomi.customers.list(options);
+    const response = await lomi.customers.listCustomers(options || {});
     return { success: true, data: response };
   } catch (error) {
     console.error('Failed to list customers:', error);

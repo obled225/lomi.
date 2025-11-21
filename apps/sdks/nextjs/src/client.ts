@@ -9,7 +9,7 @@ let clientInstance: LomiSDK | null = null;
 export function getLomiClient(): LomiSDK {
   if (!clientInstance) {
     const apiKey = process.env.LOMI_API_KEY || process.env.NEXT_PUBLIC_LOMI_API_KEY;
-    const environment = process.env.LOMI_ENVIRONMENT || process.env.NEXT_PUBLIC_LOMI_ENVIRONMENT || 'live';
+    const environment = (process.env.LOMI_ENVIRONMENT || process.env.NEXT_PUBLIC_LOMI_ENVIRONMENT || 'live') as 'live' | 'test';
     
     if (!apiKey) {
       throw new Error('LOMI_API_KEY is required. Set it in your .env file.');
@@ -17,7 +17,7 @@ export function getLomiClient(): LomiSDK {
 
     clientInstance = new LomiSDK({
       apiKey,
-      environment: environment as 'live' | 'sandbox',
+      environment,
     });
   }
 
@@ -29,7 +29,7 @@ export function getLomiClient(): LomiSDK {
  */
 export function createLomiClient(config: {
   apiKey: string;
-  environment?: 'live' | 'sandbox';
+  environment?: 'live' | 'test';
 }): LomiSDK {
   return new LomiSDK(config);
 }
