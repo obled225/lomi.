@@ -1,13 +1,12 @@
 import { createClient } from '@/lib/supabase/client';
-import type { Database } from '@/lib/types/database.types';
+import type {
+  Job,
+  JobApplication,
+  JobApplicationInsert,
+  JobApplicationUpdate,
+} from '@/lib/types/types';
 
-export type Job = Database['public']['Tables']['jobs']['Row'];
-export type JobApplication =
-  Database['public']['Tables']['job_applications']['Row'];
-export type JobApplicationInsert =
-  Database['public']['Tables']['job_applications']['Insert'];
-export type JobApplicationUpdate =
-  Database['public']['Tables']['job_applications']['Update'];
+export type { Job, JobApplication, JobApplicationInsert, JobApplicationUpdate };
 
 // Fetch a single job by slug
 export async function getJobBySlug(slug: string): Promise<Job | null> {

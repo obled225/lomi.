@@ -1,7 +1,5 @@
 import { createAnonymousClient } from '@/lib/supabase/server';
-import type { Database } from '@/lib/types/database.types';
-
-export type Job = Database['public']['Tables']['jobs']['Row'];
+import type { Job } from '@/lib/types/types';
 
 // Server-side function to fetch all active jobs
 export async function getActiveJobsServer(): Promise<Job[]> {
