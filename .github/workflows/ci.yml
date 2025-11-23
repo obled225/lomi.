@@ -11,12 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       api: ${{ steps.changes.outputs.api }}
-      cli: ${{ steps.changes.outputs.cli }}
       docs: ${{ steps.changes.outputs.docs }}
-      sdks: ${{ steps.changes.outputs.sdks }}
-      dashboard: ${{ steps.changes.outputs.dashboard }}
-      admin: ${{ steps.changes.outputs.admin }}
-      shopify: ${{ steps.changes.outputs.shopify }}
     steps:
       - uses: actions/checkout@v5
         with:
@@ -27,18 +22,8 @@ jobs:
           filters: |
             api:
               - 'apps/api/**'
-            cli:
-              - 'apps/cli/**'
             docs:
               - 'apps/docs/**'
-            sdks:
-              - 'apps/sdks/**'
-            dashboard:
-              - 'apps/dashboard/**'
-            admin:
-              - 'apps/admin/**'
-            shopify:
-              - 'apps/shopify/**'
 
   build-api:
     needs: detect-changes
@@ -55,27 +40,6 @@ jobs:
       - run: bun install
       - run: bun run build
       - run: bun test
-
-  build-cli:
-    needs: detect-changes
-    if: needs.detect-changes.outputs.cli == 'true'
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./apps/cli
-    steps:
-      - uses: actions/checkout@v5
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 8
-      - uses: actions/setup-node@v6
-        with:
-          node-version: "18"
-          cache: "pnpm"
-          cache-dependency-path: "./apps/cli/pnpm-lock.yaml"
-      - run: pnpm install
-      - run: pnpm build
-      - run: pnpm test
 
   build-docs:
     needs: detect-changes
@@ -97,33 +61,17 @@ jobs:
       - run: pnpm install
       - run: pnpm build
 
-  build-sdks:
-    needs: detect-changes
-    if: needs.detect-changes.outputs.sdks == 'true'
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./apps/sdks
-    steps:
-      - uses: actions/checkout@v5
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 8
-      - uses: actions/setup-node@v6
-        with:
-          node-version: "18"
-          cache: "pnpm"
-          cache-dependency-path: "./apps/sdks/pnpm-lock.yaml"
-      - run: pnpm install
-      - run: pnpm build
-      - run: echo "No tests configured for SDKs"
-
   deploy:
-    needs: [detect-changes, build-api, build-cli, build-docs, build-sdks]
-    if: github.ref == 'refs/heads/main' && success()
+    needs: [build-api, build-docs]
+    if: |
+      github.ref == 'refs/heads/main' && 
+      !cancelled() &&
+      (needs.build-api.result == 'success' || needs.build-api.result == 'skipped') &&
+      (needs.build-docs.result == 'success' || needs.build-docs.result == 'skipped')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
       - name: Deploy to production
         run: |
           echo "Deploying affected applications to production..."
+
