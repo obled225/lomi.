@@ -34,12 +34,6 @@ const frameworks: Framework[] = [
     slug: 'python',
   },
   {
-    name: 'Laravel',
-    logoSrc: '/sdks/laravel.webp',
-    descriptionKey: 'sdks.frameworks.laravel',
-    slug: 'laravel',
-  },
-  {
     name: 'PHP',
     logoSrc: '/sdks/php.webp',
     descriptionKey: 'sdks.frameworks.php',

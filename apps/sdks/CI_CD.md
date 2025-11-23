@@ -15,7 +15,7 @@ You can manually trigger SDK regeneration anytime:
 1. Go to **Actions** tab in GitHub
 2. Select **SDK Regeneration** workflow
 3. Click **Run workflow**
-4. Choose which SDKs to regenerate (all/ts/js/python/go/php/laravel)
+4. Choose which SDKs to regenerate (all/ts/js/python/go/php)
 5. Click **Run workflow** button
 
 ### Automatic Trigger (Toggle)

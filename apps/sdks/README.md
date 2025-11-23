@@ -12,11 +12,9 @@ We provide SDKs for multiple languages and frameworks to help you integrate with
 | **Python** | `lomi-sdk` | `pip install lomi-sdk` | [`python/`](./python) |
 | **Go** | `github.com/lomiafrica/lomi-go-sdk` | `go get github.com/lomiafrica/lomi-go-sdk` | [`go/`](./go) |
 
-### PHP & Laravel SDKs (GitHub Installation)
+### PHP SDK
 
-Due to our monorepo structure, the PHP and Laravel SDKs are **not available on Packagist**. You can install them directly from this GitHub repository.
-
-#### PHP SDK
+Due to our monorepo structure, the PHP SDK are **not available on Packagist**. You can install them directly from this GitHub repository.
 
 Add the following to your project's `composer.json`:
 
@@ -25,7 +23,7 @@ Add the following to your project's `composer.json`:
   "repositories": [
     {
       "type": "vcs",
-      "url": "https://github.com/lomiafrica/lomi."
+      "url": "https://github.com/lomiafrica/lomi./"
     }
   ],
   "require": {
@@ -40,31 +38,6 @@ composer install
 ```
 
 **Directory:** [`php/`](./php)
-
-#### Laravel SDK
-
-Add the following to your project's `composer.json`:
-
-```json
-{
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "https://github.com/lomiafrica/lomi."
-    }
-  ],
-  "require": {
-    "lomi/sdk-laravel": "dev-main#apps/sdks/laravel"
-  }
-}
-```
-
-Then run:
-```bash
-composer install
-```
-
-**Directory:** [`laravel/`](./laravel)
 
 ## Quick Start
 
@@ -114,13 +87,6 @@ client := lomi.NewClient("your-api-key")
 ### PHP
 ```php
 use LomiSDK\Client;
-
-$client = new Client('your-api-key');
-```
-
-### Laravel
-```php
-use LomiLaravel\Client;
 
 $client = new Client('your-api-key');
 ```
