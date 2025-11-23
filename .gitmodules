@@ -16,3 +16,6 @@
 [submodule "apps/sdks/php"]
 	path = apps/sdks/php
 	url = https://github.com/lomiafrica/lomi-php-sdk.git
+[submodule "apps/sdks/python"]
+	path = apps/sdks/python
+	url = https://github.com/lomiafrica/lomi-python-sdk.git
