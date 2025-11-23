@@ -1,7 +1,3 @@
-/**
- * NOTE: This is not the full database.types to avoid
- * exposing the database schema for security reasons.
- */
 export interface Database {
   public: {
     Tables: {
