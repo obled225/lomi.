@@ -351,11 +351,10 @@ export default function PricingDetails() {
                                   ) => (
                                     <div
                                       key={rowIdx}
-                                      className={`flex justify-between items-center px-6 py-4 text-sm ${
-                                        rowIdx !== sub.table.length - 1
+                                      className={`flex justify-between items-center px-6 py-4 text-sm ${rowIdx !== sub.table.length - 1
                                           ? 'border-b border-border'
                                           : ''
-                                      }`}
+                                        }`}
                                     >
                                       <span className="text-muted-foreground">
                                         {row.label}

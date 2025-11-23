@@ -264,7 +264,7 @@
                 "text": "lomi. est actuellement construit sur SPI pour le traitement des paiements d'argent mobile, et notre structure tarifaire est conçue pour couvrir les frais d'infrastructure de 1% à 1.5% avec les nôtres."
               },
               {
-                "text": "Pour le traitement des paiements par carte de crédit, nous utilisons actuellement Stripe et nous couvrons leurs frais de 3.2% + 30 $ en facturant 4% + 0.40 $ par transaction. Cependant, ils imposent certains frais supplémentaires pour certaines transactions que nous devons transmettre."
+                "text": "Pour le traitement des paiements par carte de crédit, nous couvrons les frais de traitement sous-jacents en facturant 3.5% + 0.40 $ par transaction. Cependant, des frais supplémentaires peuvent s'appliquer pour certaines transactions que nous devons transmettre."
               }
             ]
           }
@@ -316,7 +316,7 @@
               { "label": "Valeur totale de la transaction", "value": "30 $" },
               { "label": "Frais d'abonnement (0.5%)", "value": "0.15 $" },
               {
-                "label": "Frais de transaction (4% + 0.40 $)",
+                "label": "Frais de transaction (3.5% + 0.40 $)",
                 "value": "1.60 $"
               },
               { "label": "Montant que vous recevez", "value": "28.25 $" }
@@ -524,7 +524,14 @@
     }
   },
   "sdks": {
-    "title": "Gardez une longueur d'avance."
+    "title": "Gardez une longueur d'avance.",
+    "frameworkAgnostic": "Agnostique de framework",
+    "sdksDescription": "Support officiel et SDKs pour Next.js, Sanity, Medusa, TypeScript, JavaScript, Go, Python et PHP - faites-le vôtre."
+  },
+  "contributors": {
+    "loading": "Chargement des contributeurs...",
+    "error": "Impossible de charger les contributeurs",
+    "subtitle": "Open source, disponible sur Github."
   },
   "search": {
     "all": "Tous",

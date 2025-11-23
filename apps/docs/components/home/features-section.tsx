@@ -215,8 +215,8 @@ const DemoRevenueChart = () => {
         </div>
         <span
           className={`inline-flex items-center gap-1 px-2 py-1 rounded-sm text-xs font-medium w-fit ${growthRate >= 0
-              ? 'bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-300'
-              : 'bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300'
+            ? 'bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-300'
+            : 'bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300'
             }`}
         >
           {growthRate >= 0 ? '+' : ''}
@@ -459,7 +459,7 @@ export function FeaturesSection() {
                       <div className="flex items-center gap-3">
                         <div className="w-8 h-8 bg-background border border-zinc-200 dark:border-zinc-800 rounded-sm flex items-center justify-center shadow-sm overflow-hidden">
                           <Image
-                            src={`/payment_channels/${name === 'SPI' ? `${spiImages[spiImageIndex]}` : name === 'Bitcoin' ? 'btc' : name === 'Visa' ? `${visaImages[visaImageIndex]}` : name.toLowerCase().replace(' ', '_')}.webp`}
+                            src={`/payment_channels/${name === 'SPI' ? `${spiImages[spiImageIndex]}` : name === 'Visa' ? `${visaImages[visaImageIndex]}` : name.toLowerCase().replace(' ', '_')}.webp`}
                             alt={`${name} logo`}
                             width={
                               name === 'SPI' &&
@@ -484,7 +484,7 @@ export function FeaturesSection() {
                         <div>
                           <span className="text-sm font-medium text-foreground">
                             {name === 'SPI'
-                              ? 'π-SPI'
+                              ? 'Mobile Money'
                               : name === 'Visa'
                                 ? 'Cards'
                                 : name}
@@ -515,13 +515,6 @@ export function FeaturesSection() {
                               String(
                                 t(
                                   'features.card1.google_pay_description',
-                                  currentLanguage,
-                                ),
-                              )}
-                            {name === 'Bitcoin' &&
-                              String(
-                                t(
-                                  'features.card1.crypto_description',
                                   currentLanguage,
                                 ),
                               )}
@@ -756,8 +749,8 @@ export function FeaturesSection() {
                         setActiveTab('product');
                       }}
                       className={`flex-1 px-3 pt-1.5 pb-2.5 text-sm font-normal rounded-sm transition-all duration-200 h-7.5 focus:outline-none focus:ring-0 focus:border-none ${activeTab === 'product'
-                          ? 'bg-[#E9EAEF] dark:bg-[#2A2B30] text-foreground shadow-sm border border-border/50'
-                          : 'text-muted-foreground hover:text-foreground'
+                        ? 'bg-[#E9EAEF] dark:bg-[#2A2B30] text-foreground shadow-sm border border-border/50'
+                        : 'text-muted-foreground hover:text-foreground'
                         }`}
                     >
                       {String(
@@ -771,8 +764,8 @@ export function FeaturesSection() {
                         setActiveTab('subscription');
                       }}
                       className={`flex-1 px-3 pt-1.5 pb-2.5 text-sm font-normal rounded-sm transition-all duration-200 h-7.5 focus:outline-none focus:ring-0 focus:border-none ${activeTab === 'subscription'
-                          ? 'bg-[#E9EAEF] dark:bg-[#2A2B30] text-foreground shadow-sm border border-border/50'
-                          : 'text-muted-foreground hover:text-foreground'
+                        ? 'bg-[#E9EAEF] dark:bg-[#2A2B30] text-foreground shadow-sm border border-border/50'
+                        : 'text-muted-foreground hover:text-foreground'
                         }`}
                     >
                       {String(
@@ -786,8 +779,8 @@ export function FeaturesSection() {
                         setActiveTab('checkout');
                       }}
                       className={`flex-1 px-3 pt-1.5 pb-2.5 text-sm font-normal rounded-sm transition-all duration-200 h-7.5 focus:outline-none focus:ring-0 focus:border-none ${activeTab === 'checkout'
-                          ? 'bg-[#E9EAEF] dark:bg-[#2A2B30] text-foreground shadow-sm border border-border/50'
-                          : 'text-muted-foreground hover:text-foreground'
+                        ? 'bg-[#E9EAEF] dark:bg-[#2A2B30] text-foreground shadow-sm border border-border/50'
+                        : 'text-muted-foreground hover:text-foreground'
                         }`}
                     >
                       {String(
@@ -997,7 +990,6 @@ export function FeaturesSection() {
     'Visa',
     'PayPal',
     'Google Pay',
-    'Bitcoin',
   ] as const;
 
   // Payment method toggle states

@@ -126,12 +126,27 @@ export function GoogleOneTap() {
     if (hasInitialized.current) return;
     hasInitialized.current = true;
 
+    // Add global error handler for FedCM errors
+    const handleFedCMError = (event: ErrorEvent) => {
+      if (event.message && event.message.includes('FedCM')) {
+        console.warn('FedCM error caught globally:', event.message);
+        // Optionally disable One Tap for this session
+        // You could set a flag to prevent future One Tap attempts
+      }
+    };
+
+    window.addEventListener('error', handleFedCMError);
+
     // Load Google Identity Services script
     const script = document.createElement('script');
     script.src = 'https://accounts.google.com/gsi/client';
     script.async = true;
     script.defer = true;
     document.head.appendChild(script);
+
+    script.onerror = () => {
+      console.error('Failed to load Google Identity Services script');
+    };
 
     script.onload = () => {
       // Initialize Google Identity Services
@@ -145,27 +160,47 @@ export function GoogleOneTap() {
           return;
         }
 
-        window.google.accounts.id.initialize({
-          client_id: clientId,
-          callback: handleCredentialResponse,
-          context: 'signin',
-          ux_mode: 'popup',
-          auto_select: true,
-          cancel_on_tap_outside: true,
-        });
+        // Add error handling for Google Identity Services
+        try {
 
-        // Display One Tap with moment callback for better UX
-        window.google.accounts.id.prompt(
-          (notification: GooglePromptNotification) => {
-            if (
-              notification.isNotDisplayed() ||
-              notification.isSkippedMoment()
-            ) {
-              // One Tap not shown or skipped - user can still use regular OAuth buttons
-              console.log('Google One Tap not displayed or skipped');
-            }
-          },
-        );
+          window.google.accounts.id.initialize({
+            client_id: clientId,
+            callback: handleCredentialResponse,
+            context: 'signin',
+            ux_mode: 'popup',
+            auto_select: false,
+            cancel_on_tap_outside: true,
+          });
+
+          // Display One Tap with moment callback for better UX
+          window.google.accounts.id.prompt(
+            (notification: GooglePromptNotification) => {
+              if (
+                notification.isNotDisplayed() ||
+                notification.isSkippedMoment()
+              ) {
+                // One Tap not shown or skipped - user can still use regular OAuth buttons
+                console.log('Google One Tap not displayed or skipped');
+              }
+
+              // Log more detailed information about why One Tap failed
+              if (notification.isNotDisplayed()) {
+                const reason = notification.getNotDisplayedReason?.() || 'unknown';
+                console.log('One Tap not displayed reason:', reason);
+              }
+              if (notification.isSkippedMoment()) {
+                const reason = notification.getSkippedReason?.() || 'unknown';
+                console.log('One Tap skipped reason:', reason);
+              }
+              if (notification.isDismissedMoment()) {
+                const reason = notification.getDismissedReason?.() || 'unknown';
+                console.log('One Tap dismissed reason:', reason);
+              }
+            },
+          );
+        } catch (initError) {
+          console.error('Error initializing Google Identity Services:', initError);
+        }
       }
     };
 
@@ -177,6 +212,7 @@ export function GoogleOneTap() {
       if (existingScript) {
         existingScript.remove();
       }
+      window.removeEventListener('error', handleFedCMError);
     };
   }, [handleCredentialResponse]);
 

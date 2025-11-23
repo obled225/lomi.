@@ -157,7 +157,7 @@
       "title": "See what sticks with powerful analytics"
     },
     "card6": {
-      "description": "Open-source, 100% powered by passion and the open-source community.",
+      "description": "lomi. is 100% powered by passion and an open-source community.",
       "documentation_button": "Documentation",
       "open_source_note": "Battery guaranteed. Actively maintained and open for contributions.",
       "title": "Made possible by YOU"
@@ -264,7 +264,7 @@
                 "text": "lomi. is currently built on top of SPI for mobile money payment processing, and our pricing structure is made to cover the infrastructure 1% to 1.5% fee with ours."
               },
               {
-                "text": "For credit card payment processing, we currently use Stripe and we cover their 3.2% + 30 ¢ fee by charging 4% + 0.40 $ per transaction. However, they impose a few additional fees for certain transactions that we need to pass on."
+                "text": "For credit card payment processing, we cover the underlying processing fees by charging 3.5% + 0.40 $ per transaction. However, additional fees may apply for certain transactions that we need to pass on."
               }
             ]
           }
@@ -312,7 +312,7 @@
               { "label": "Product Price", "value": "30 $" },
               { "label": "Total Transaction Value", "value": "30 $" },
               { "label": "Subscription Fee (0.5%)", "value": "0.15 $" },
-              { "label": "Transaction Fee (4% + 0.40 $)", "value": "1.60 $" },
+              { "label": "Transaction Fee (3.5% + 0.40 $)", "value": "1.60 $" },
               { "label": "Amount you receive", "value": "28.25 $" }
             ]
           }
@@ -518,7 +518,14 @@
     }
   },
   "sdks": {
-    "title": "Lead the charge."
+    "title": "Lead the charge.",
+    "frameworkAgnostic": "Framework agnostic",
+    "sdksDescription": "Official support and SDKs for Next.js, Sanity, Medusa, TypeScript, JavaScript, Go, Python, and PHP - make it yours."
+  },
+  "contributors": {
+    "loading": "Loading contributors...",
+    "error": "Unable to load contributors",
+    "subtitle": "Open source, available on Github."
   },
   "search": {
     "all": "All",

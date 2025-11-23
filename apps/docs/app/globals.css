@@ -629,6 +629,20 @@ button:active:focus {
   background-color: #374151;
 }
 
+/* Hero Shader Animations */
+@keyframes fd-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fd-fade-in {
+  animation: fd-fade-in 0.5s ease-out forwards;
+}
+
 /* Hide scrollbar for Chrome, Safari and Opera */
 ::-webkit-scrollbar {
   display: none;
