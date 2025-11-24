@@ -310,10 +310,11 @@
             ],
             "table": [
               { "label": "Product Price", "value": "30 $" },
-              { "label": "Total Transaction Value", "value": "30 $" },
-              { "label": "Subscription Fee (0.5%)", "value": "0.15 $" },
-              { "label": "Transaction Fee (3.5% + 0.40 $)", "value": "1.60 $" },
-              { "label": "Amount you receive", "value": "28.25 $" }
+              { "label": "VAT (20%)", "value": "6 $" },
+              { "label": "Total Transaction Value", "value": "36 $" },
+              { "label": "Transaction Fee (3.5% + 0.40 $)", "value": "1.66 $" },
+              { "label": "Subscription Fee (0.5%)", "value": "0.18 $" },
+              { "label": "Total Fees", "value": "1.84 $" }
             ]
           }
         ]
@@ -362,21 +363,6 @@
             "items": [
               {
                 "text": "lomi. does not profit from merchant withdrawals at all, we strive to make them entirely free. We also offer instant withdrawals for both mobile money and international bank transfers, keeping you in total control of when to issue payouts."
-              }
-            ],
-            "providers": [
-              {
-                "name": "SPI",
-                "fees": [
-                  "1% at your country's national level, 2% when sending to another UEMOA country (Côte d'Ivoire, Burkina Faso, Niger, Senegal, Guinea, Mali, Benin, Togo)"
-                ]
-              },
-              {
-                "name": "Stripe",
-                "fees": [
-                  "$2 per month of active payout(s)",
-                  "0.25% + $0.25 per payout"
-                ]
               }
             ]
           }

@@ -173,6 +173,14 @@ export default function PricingDetails() {
                 'pricingDetails.content.example.sections.1.table.4.value',
               ),
             },
+            {
+              label: t(
+                'pricingDetails.content.example.sections.1.table.5.label',
+              ),
+              value: t(
+                'pricingDetails.content.example.sections.1.table.5.value',
+              ),
+            },
           ],
         },
       ],
@@ -225,31 +233,6 @@ export default function PricingDetails() {
           items: [
             {
               text: t('pricingDetails.content.payout.sections.0.items.0.text'),
-            },
-          ],
-          providers: [
-            {
-              name: t(
-                'pricingDetails.content.payout.sections.0.providers.0.name',
-              ),
-              fees: [
-                t(
-                  'pricingDetails.content.payout.sections.0.providers.0.fees.0',
-                ),
-              ],
-            },
-            {
-              name: t(
-                'pricingDetails.content.payout.sections.0.providers.1.name',
-              ),
-              fees: [
-                t(
-                  'pricingDetails.content.payout.sections.0.providers.1.fees.0',
-                ),
-                t(
-                  'pricingDetails.content.payout.sections.0.providers.1.fees.1',
-                ),
-              ],
             },
           ],
         },
@@ -352,8 +335,8 @@ export default function PricingDetails() {
                                     <div
                                       key={rowIdx}
                                       className={`flex justify-between items-center px-6 py-4 text-sm ${rowIdx !== sub.table.length - 1
-                                          ? 'border-b border-border'
-                                          : ''
+                                        ? 'border-b border-border'
+                                        : ''
                                         }`}
                                     >
                                       <span className="text-muted-foreground">
@@ -368,38 +351,6 @@ export default function PricingDetails() {
                               </div>
                             )}
 
-                            {/* Provider Comparison */}
-                            {sub.providers && (
-                              <div className="grid grid-cols-2 gap-6 mt-8">
-                                {sub.providers.map(
-                                  (
-                                    provider: { name: string; fees: string[] },
-                                    provIdx: number,
-                                  ) => (
-                                    <div
-                                      key={provIdx}
-                                      className="border border-border rounded p-6"
-                                    >
-                                      <h4 className="text-foreground font-medium mb-4 text-sm">
-                                        {provider.name}
-                                      </h4>
-                                      <ul className="space-y-3">
-                                        {provider.fees.map(
-                                          (fee: string, feeIdx: number) => (
-                                            <li
-                                              key={feeIdx}
-                                              className="text-muted-foreground text-sm"
-                                            >
-                                              {fee}
-                                            </li>
-                                          ),
-                                        )}
-                                      </ul>
-                                    </div>
-                                  ),
-                                )}
-                              </div>
-                            )}
                           </div>
                         );
                       })}

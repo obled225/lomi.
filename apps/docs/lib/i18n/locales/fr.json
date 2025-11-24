@@ -313,13 +313,14 @@
             ],
             "table": [
               { "label": "Prix du produit", "value": "30 $" },
-              { "label": "Valeur totale de la transaction", "value": "30 $" },
-              { "label": "Frais d'abonnement (0.5%)", "value": "0.15 $" },
+              { "label": "TVA (20%)", "value": "6 $" },
+              { "label": "Valeur totale de la transaction", "value": "36 $" },
               {
                 "label": "Frais de transaction (3.5% + 0.40 $)",
-                "value": "1.60 $"
+                "value": "1.66 $"
               },
-              { "label": "Montant que vous recevez", "value": "28.25 $" }
+              { "label": "Frais d'abonnement (0.5%)", "value": "0.18 $" },
+              { "label": "Total des frais", "value": "1.84 $" }
             ]
           }
         ]
@@ -368,21 +369,6 @@
             "items": [
               {
                 "text": "lomi. ne gagne rien sur les retraits de marchands, nous nous efforçons de les rendre entièrement gratuits. Nous offrons également des retraits instantanés pour l'argent mobile et les transferts bancaires internationaux, vous gardant en total contrôle du moment où émettre des paiements."
-              }
-            ],
-            "providers": [
-              {
-                "name": "SPI",
-                "fees": [
-                  "1% au niveau national de votre pays, 2% lors de l'envoi vers un autre pays UEMOA (Côte d'Ivoire, Burkina Faso, Niger, Senegal, Guinée, Mali, Bénin, Togo)"
-                ]
-              },
-              {
-                "name": "Stripe",
-                "fees": [
-                  "2 $ par mois de paiement(s) actif(s)",
-                  "0.25% + 0.25 $ par paiement"
-                ]
               }
             ]
           }

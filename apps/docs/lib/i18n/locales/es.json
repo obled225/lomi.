@@ -313,13 +313,14 @@
             ],
             "table": [
               { "label": "Precio del producto", "value": "30 $" },
-              { "label": "Valor total de la transacción", "value": "30 $" },
-              { "label": "Tarifa de suscripción (0.5%)", "value": "0.15 $" },
+              { "label": "IVA (20%)", "value": "6 $" },
+              { "label": "Valor total de la transacción", "value": "36 $" },
               {
                 "label": "Tarifa de transacción (3.5% + 0.40 $)",
-                "value": "1.60 $"
+                "value": "1.66 $"
               },
-              { "label": "Monto que recibes", "value": "28.25 $" }
+              { "label": "Tarifa de suscripción (0.5%)", "value": "0.18 $" },
+              { "label": "Total de tarifas", "value": "1.84 $" }
             ]
           }
         ]
@@ -368,21 +369,6 @@
             "items": [
               {
                 "text": "lomi. no gana nada con los retiros de comerciantes, nos esforzamos por hacerlos completamente gratuitos. También ofrecemos retiros instantáneos tanto para dinero móvil como para transferencias bancarias internacionales, manteniéndote en total control de cuándo emitir pagos."
-              }
-            ],
-            "providers": [
-              {
-                "name": "SPI",
-                "fees": [
-                  "1% a nivel nacional de tu país, 2% al enviar a otro país UEMOA (Côte d'Ivoire, Burkina Faso, Niger, Senegal, Guinea, Mali, Benin, Togo)"
-                ]
-              },
-              {
-                "name": "Stripe",
-                "fees": [
-                  "$2 por mes de pago(s) activo(s)",
-                  "0.25% + $0.25 por pago"
-                ]
               }
             ]
           }
