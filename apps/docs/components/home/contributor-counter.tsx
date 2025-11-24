@@ -104,8 +104,10 @@ export default function ContributorCounter({
                 ) : null}
             </div>
 
-            <div className="text-center text-sm text-muted-foreground">
-                {String(t('contributors.subtitle', 'en'))}
+            <div className="flex justify-center">
+                <div className="bg-slate-50 border border-gray-200 dark:bg-zinc-800 dark:border-[0.15px] dark:border-gray-700/20 rounded-sm px-3 py-1 text-center text-sm text-muted-foreground">
+                    {String(t('contributors.subtitle', 'en'))}
+                </div>
             </div>
         </div>
     );

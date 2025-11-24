@@ -257,7 +257,7 @@ export default function PricingDetails() {
     <div className="max-w-7xl mx-auto pl-2 pr-4 py-2">
       {/* Menu */}
       <div className="border-b border-border mb-8">
-        <div className="flex flex-col gap-2 py-8 px-6">
+        <div className="flex flex-col gap-2 py-4 md:py-8 px-4 md:px-6">
           {SECTIONS.map((section) => (
             <button
               key={section.id}
@@ -265,7 +265,7 @@ export default function PricingDetails() {
                 playClickSound();
                 scrollToSection(section.id);
               }}
-              className="flex items-center gap-2 text-base font-normal text-foreground hover:text-foreground/80 transition-colors py-2 w-fit"
+              className="flex items-center gap-2 text-sm md:text-base font-normal text-foreground hover:text-foreground/80 transition-colors py-2 w-fit"
             >
               <ChevronDown size={16} className="opacity-70" />
               <span>{section.label}</span>
@@ -275,29 +275,29 @@ export default function PricingDetails() {
       </div>
 
       {/* Content */}
-      <div className="px-6 pb-6">
+      <div className="px-4 md:px-6 pb-6">
         <div className="space-y-0">
           {SECTIONS.map((section) => {
             const sectionData = CONTENT[section.id as keyof typeof CONTENT];
             return (
               <div key={section.id} id={section.id} className="scroll-mt-32">
-                <div className="flex">
-                  <div className="w-[30%] pt-8 pb-8">
-                    <h2 className="text-lg font-normal text-foreground sticky top-20">
+                <div className="flex flex-col md:flex-row">
+                  <div className="w-full md:w-[30%] pt-4 md:pt-8 pb-4 md:pb-8">
+                    <h2 className="text-base md:text-lg font-normal text-foreground md:sticky md:top-20">
                       {sectionData.title}
                     </h2>
                   </div>
-                  <div className="w-[5%]" />
-                  <div className="w-[55%] py-8">
+                  <div className="hidden md:block w-[5%]" />
+                  <div className="w-full md:w-[55%] py-4 md:py-8">
                     {/* Content sections */}
-                    <div className="space-y-8">
+                    <div className="space-y-6 md:space-y-8">
                       {sectionData.sections.map((subsection, idx) => {
                         // eslint-disable-next-line @typescript-eslint/no-explicit-any
                         const sub = subsection as any;
                         return (
                           <div key={idx} className="space-y-3">
                             {/* Subtitle */}
-                            <h3 className="text-foreground font-normal text-lg">
+                            <h3 className="text-foreground font-normal text-base md:text-lg">
                               {sub.subtitle}
                             </h3>
 
@@ -309,12 +309,12 @@ export default function PricingDetails() {
                                     itemIdx: number,
                                   ) => (
                                     <div key={itemIdx}>
-                                      <p className="text-zinc-600 dark:text-zinc-400 text-base leading-relaxed tracking-tight">
+                                      <p className="text-zinc-600 dark:text-zinc-400 text-sm md:text-base leading-relaxed tracking-tight">
                                         {item.text}
                                       </p>
                                       {item.bubble && (
-                                        <div className="mt-4 bg-muted border border-border rounded p-4">
-                                          <p className="text-muted-foreground text-sm leading-relaxed">
+                                        <div className="mt-4 bg-muted border border-border rounded p-3 md:p-4">
+                                          <p className="text-muted-foreground text-xs md:text-sm leading-relaxed">
                                             {item.bubble}
                                           </p>
                                         </div>
@@ -326,7 +326,7 @@ export default function PricingDetails() {
 
                             {/* Pricing Table */}
                             {sub.table && (
-                              <div className="mt-8 space-y-0 border border-border rounded">
+                              <div className="mt-6 md:mt-8 space-y-0 border border-border rounded overflow-hidden">
                                 {sub.table.map(
                                   (
                                     row: { label: string; value: string },
@@ -334,7 +334,7 @@ export default function PricingDetails() {
                                   ) => (
                                     <div
                                       key={rowIdx}
-                                      className={`flex justify-between items-center px-6 py-4 text-sm ${rowIdx !== sub.table.length - 1
+                                      className={`flex flex-col sm:flex-row sm:justify-between sm:items-center px-4 md:px-6 py-3 md:py-4 text-xs md:text-sm gap-1 sm:gap-0 ${rowIdx !== sub.table.length - 1
                                         ? 'border-b border-border'
                                         : ''
                                         }`}
@@ -356,7 +356,7 @@ export default function PricingDetails() {
                       })}
                     </div>
                   </div>
-                  <div className="w-[5%]" />
+                  <div className="hidden md:block w-[5%]" />
                 </div>
               </div>
             );
