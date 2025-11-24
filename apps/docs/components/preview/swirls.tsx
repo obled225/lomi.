@@ -1,3 +1,5 @@
+/* @proprietary license */
+
 import { cn } from '@/lib/utils/cn';
 import Image from 'next/image';
 import type React from 'react';

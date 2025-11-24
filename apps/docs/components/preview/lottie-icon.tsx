@@ -1,3 +1,5 @@
+/* @proprietary license */
+
 import React, { useState, useRef, useEffect, memo, useMemo } from 'react';
 import Lottie, { LottieRefCurrentProps } from 'lottie-react';
 import { useTheme } from '@/lib/hooks/use-theme';

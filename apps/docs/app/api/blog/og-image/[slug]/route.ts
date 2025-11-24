@@ -1,3 +1,5 @@
+/* @proprietary license */
+
 import { getPostBySlug } from '@/lib/sanity/queries';
 import { urlFor } from '@/lib/sanity/client';
 import type { NextRequest } from 'next/server';

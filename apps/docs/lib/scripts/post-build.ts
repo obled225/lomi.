@@ -1,3 +1,5 @@
+/* @proprietary license */
+
 import env from '@next/env';
 import { updateSearchIndexes } from './update-orama-index';
 

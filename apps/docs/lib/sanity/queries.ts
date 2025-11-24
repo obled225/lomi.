@@ -1,3 +1,5 @@
+/* @proprietary license */
+
 import { client } from './client';
 import type { Post } from './types';
 

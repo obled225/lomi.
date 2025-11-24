@@ -1,3 +1,5 @@
+/* @proprietary license */
+
 import { Suspense } from 'react';
 import SimpleImage from '@/components/home/hero-image';
 import { AgnosticBackground } from '@/components/home/agnostic-background';

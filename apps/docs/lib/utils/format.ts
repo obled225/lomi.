@@ -1,3 +1,5 @@
+/* @proprietary license */
+
 // Formatting utilities for currency and numbers
 
 export type Currency = 'USD' | 'XOF' | 'EUR';

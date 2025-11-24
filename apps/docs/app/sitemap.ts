@@ -1,3 +1,5 @@
+/* @proprietary license */
+
 import type { MetadataRoute } from 'next';
 import { source } from '@/lib/utils/source';
 

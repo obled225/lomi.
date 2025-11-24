@@ -1,3 +1,5 @@
+/* @proprietary license */
+
 import type { PortableTextBlock } from '@portabletext/types';
 import type { SanityImageAssetDocument } from '@sanity/client';
 

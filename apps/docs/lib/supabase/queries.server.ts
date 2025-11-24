@@ -1,3 +1,5 @@
+/* @proprietary license */
+
 import { createAnonymousClient } from '@/lib/supabase/server';
 import type { Job } from '@/lib/types/types';
 

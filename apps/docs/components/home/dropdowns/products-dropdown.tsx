@@ -1,3 +1,5 @@
+/* @proprietary license */
+
 import { ChevronDown } from 'lucide-react';
 import { useState } from 'react';
 import { LottieIcon } from '@/components/preview/lottie-icon';

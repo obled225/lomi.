@@ -1,3 +1,5 @@
+/* @proprietary license */
+
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from '@/lib/contexts/translation-context';

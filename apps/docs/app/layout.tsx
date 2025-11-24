@@ -1,3 +1,5 @@
+/* @proprietary license */
+
 import './globals.css';
 import type { Metadata, Viewport } from 'next';
 import { Body } from '@/app/layout.client';

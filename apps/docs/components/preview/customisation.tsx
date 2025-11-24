@@ -1,3 +1,5 @@
+/* @proprietary license */
+
 import { CodeBlock } from '@/components/ui/code-block';
 
 export function Customisation() {

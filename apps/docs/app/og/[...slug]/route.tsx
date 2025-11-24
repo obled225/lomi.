@@ -1,3 +1,5 @@
+/* @proprietary license */
+
 import { source } from '@/lib/utils/source';
 import { notFound } from 'next/navigation';
 import { generateOGImage } from '@/lib/og/mono';

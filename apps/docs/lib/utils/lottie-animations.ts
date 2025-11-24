@@ -1,3 +1,5 @@
+/* @proprietary license */
+
 import autorenewAnimation from '@/app/assets/lottie/autorenew.json';
 import blogAnimation from '@/app/assets/lottie/blog.json';
 import boltAnimation from '@/app/assets/lottie/bolt.json';

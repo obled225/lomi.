@@ -1,3 +1,5 @@
+/* @proprietary license */
+
 export function FacebookIcon({ className }: { className?: string }) {
   return (
     <svg

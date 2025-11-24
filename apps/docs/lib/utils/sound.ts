@@ -1,3 +1,5 @@
+/* @proprietary license */
+
 // Sound utilities to globally enable/disable UI sounds with minimal code changes.
 // This installs a single runtime gate on HTMLMediaElement.play so existing
 // `new Audio(...).play()` calls are respected without per-call changes.

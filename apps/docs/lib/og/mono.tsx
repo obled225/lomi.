@@ -1,3 +1,5 @@
+/* @proprietary license */
+
 import { ImageResponse } from 'next/og';
 import type { ReactNode } from 'react';
 import fs from 'node:fs/promises';

@@ -1,3 +1,5 @@
+/* @proprietary license */
+
 import {
   build,
   writeFumadocsRegistry,

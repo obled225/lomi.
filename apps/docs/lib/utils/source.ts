@@ -1,3 +1,5 @@
+/* @proprietary license */
+
 import { createMDXSource } from 'fumadocs-mdx';
 import type { InferMetaType, InferPageType } from 'fumadocs-core/source';
 import { loader } from 'fumadocs-core/source';

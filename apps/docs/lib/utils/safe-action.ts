@@ -1,3 +1,5 @@
+/* @proprietary license */
+
 // import { createClient } from "@/lib/supabase/server";
 // import { createSafeActionClient } from "next-safe-action";
 // import type { Database } from "@/lib/types/database";

@@ -1,3 +1,5 @@
+/* @proprietary license */
+
 import type { Metadata } from 'next';
 import JobDetailClient from '@/components/home/job-detail-client';
 import { getJobBySlugServer } from '@/lib/supabase/queries.server';

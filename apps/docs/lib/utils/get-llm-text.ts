@@ -1,3 +1,5 @@
+/* @proprietary license */
+
 import { remark } from 'remark';
 import remarkGfm from 'remark-gfm';
 import remarkMdx from 'remark-mdx';

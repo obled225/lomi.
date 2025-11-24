@@ -1,3 +1,5 @@
+/* @proprietary license */
+
 import type { Metadata } from 'next';
 import BlogPostClient from '@/components/blog/blog-post-client';
 import { client } from '@/lib/sanity/client';

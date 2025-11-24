@@ -1,3 +1,5 @@
+/* @proprietary license */
+
 import { defineType } from 'sanity';
 
 // Code Block

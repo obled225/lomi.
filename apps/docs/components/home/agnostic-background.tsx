@@ -1,3 +1,5 @@
+/* @proprietary license */
+
 import React, { useRef, useEffect, useState, ComponentProps } from 'react';
 import { useTheme } from '@/lib/hooks/use-theme';
 import dynamic from 'next/dynamic';

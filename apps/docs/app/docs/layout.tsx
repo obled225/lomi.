@@ -1,3 +1,5 @@
+/* @proprietary license */
+
 import { DocsLayout } from 'fumadocs-ui/layouts/docs';
 import { baseOptions, linkItems, logo } from '@/lib/utils/layout.shared';
 import { source } from '@/lib/utils/source';

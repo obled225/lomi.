@@ -1,3 +1,5 @@
+/* @proprietary license */
+
 import { OramaClient } from '@oramacloud/client';
 
 const apiKey = process.env.NEXT_PUBLIC_ORAMA_API_KEY;

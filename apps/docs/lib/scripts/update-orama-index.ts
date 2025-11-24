@@ -1,3 +1,5 @@
+/* @proprietary license */
+
 import { sync, type OramaDocument } from 'fumadocs-core/search/orama-cloud';
 import * as fs from 'node:fs/promises';
 import { CloudManager } from '@oramacloud/client';

@@ -1,3 +1,5 @@
+/* @proprietary license */
+
 import { source } from '@/lib/utils/source';
 import { createFromSource } from 'fumadocs-core/search/server';
 

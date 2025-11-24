@@ -1,3 +1,5 @@
+/* @proprietary license */
+
 import { useRef, useCallback } from 'react';
 import { flushSync } from 'react-dom';
 import { useTheme } from './use-theme';

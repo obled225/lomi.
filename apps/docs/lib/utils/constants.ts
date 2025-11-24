@@ -1,3 +1,5 @@
+/* @proprietary license */
+
 export const Cookies = {
   PreferredSignInProvider: 'preferred-signin-provider',
   SoundEnabled: 'sound-enabled',

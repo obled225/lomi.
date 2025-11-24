@@ -1,3 +1,5 @@
+/* @proprietary license */
+
 import Image from 'next/image';
 
 interface LogoProps {

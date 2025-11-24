@@ -1,3 +1,5 @@
+/* @proprietary license */
+
 import type { Language } from './config';
 import enTranslations from './locales/en.json';
 import frTranslations from './locales/fr.json';

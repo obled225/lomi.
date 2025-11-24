@@ -1,3 +1,5 @@
+/* @proprietary license */
+
 import { z } from 'zod';
 
 const InkeepRecordTypes = z.enum([

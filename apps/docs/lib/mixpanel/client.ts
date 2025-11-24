@@ -1,3 +1,5 @@
+/* @proprietary license */
+
 import mixpanel from 'mixpanel-browser';
 
 // Replace YOUR_TOKEN with your actual Mixpanel token

@@ -1,3 +1,5 @@
+/* @proprietary license */
+
 'use client';
 
 import React from 'react';

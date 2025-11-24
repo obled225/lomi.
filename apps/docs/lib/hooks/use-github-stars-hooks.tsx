@@ -1,3 +1,5 @@
+/* @proprietary license */
+
 import { useContext } from 'react';
 import { GithubStarsContext } from './use-github-stars';
 

@@ -1,3 +1,5 @@
+/* @proprietary license */
+
 import { NextResponse } from 'next/server';
 import { getAllPosts } from '@/lib/sanity/queries';
 

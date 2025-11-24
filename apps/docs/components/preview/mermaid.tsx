@@ -1,3 +1,5 @@
+/* @proprietary license */
+
 'use client';
 
 import { use, useEffect, useId, useState } from 'react';

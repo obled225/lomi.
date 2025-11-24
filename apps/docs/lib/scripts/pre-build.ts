@@ -1,3 +1,5 @@
+/* @proprietary license */
+
 import { buildRegistry } from '@/lib/scripts/build-registry';
 import * as OpenAPI from 'fumadocs-openapi';
 import { rimraf } from 'rimraf';

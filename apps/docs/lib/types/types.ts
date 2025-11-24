@@ -1,3 +1,5 @@
+/* @proprietary license */
+
 export interface Database {
   public: {
     Tables: {

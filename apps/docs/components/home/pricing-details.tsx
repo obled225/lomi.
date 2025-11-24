@@ -1,3 +1,5 @@
+/* @proprietary license */
+
 'use client';
 
 import { ChevronDown } from 'lucide-react';

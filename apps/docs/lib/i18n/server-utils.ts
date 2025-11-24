@@ -1,3 +1,5 @@
+/* @proprietary license */
+
 import { cookies } from 'next/headers';
 import type { Language } from './config';
 

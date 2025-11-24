@@ -1,3 +1,5 @@
+/* @proprietary license */
+
 import { defineField, defineType } from 'sanity';
 
 export const authorType = defineType({

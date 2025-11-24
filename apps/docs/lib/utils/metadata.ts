@@ -1,3 +1,5 @@
+/* @proprietary license */
+
 import type { Metadata } from 'next/types';
 
 export function createMetadata(override: Metadata): Metadata {

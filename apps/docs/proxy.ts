@@ -1,3 +1,5 @@
+/* @proprietary license */
+
 import { createClient } from '@/lib/supabase/request';
 import { NextResponse, type NextRequest } from 'next/server';
 

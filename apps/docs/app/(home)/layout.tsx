@@ -1,3 +1,5 @@
+/* @proprietary license */
+
 import type { ReactNode } from 'react';
 import { Header } from '@/components/home/header';
 import { Footer } from '@/components/home/footer';

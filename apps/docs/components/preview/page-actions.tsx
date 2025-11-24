@@ -1,3 +1,5 @@
+/* @proprietary license */
+
 'use client';
 import { useMemo, useState } from 'react';
 import { Check, ChevronDown, Copy, ExternalLinkIcon } from 'lucide-react';

@@ -1,3 +1,5 @@
+/* @proprietary license */
+
 'use client';
 import { DynamicCodeBlock } from 'fumadocs-ui/components/dynamic-codeblock';
 import { useState } from 'react';

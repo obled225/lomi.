@@ -1,3 +1,5 @@
+/* @proprietary license */
+
 import * as React from 'react';
 
 type ToasterToast = {

@@ -1,3 +1,5 @@
+/* @proprietary license */
+
 /* eslint-disable @typescript-eslint/no-explicit-any -- rehype plugins */
 import { glob } from 'tinyglobby';
 import { printErrors, scanURLs, validateFiles } from 'next-validate-link';

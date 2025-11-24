@@ -1,3 +1,5 @@
+/* @proprietary license */
+
 import React from 'react';
 import defaultMdxComponents from 'fumadocs-ui/mdx';
 import * as FilesComponents from 'fumadocs-ui/components/files';

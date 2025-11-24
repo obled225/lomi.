@@ -1,3 +1,5 @@
+/* @proprietary license */
+
 'use client';
 
 import { useTheme as useNextTheme } from 'next-themes';

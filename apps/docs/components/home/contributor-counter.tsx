@@ -1,3 +1,5 @@
+/* @proprietary license */
+
 'use client';
 
 import React, { type HTMLAttributes, useEffect, useState } from 'react';

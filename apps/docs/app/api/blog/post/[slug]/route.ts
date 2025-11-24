@@ -1,3 +1,5 @@
+/* @proprietary license */
+
 import { NextRequest, NextResponse } from 'next/server';
 import { getPostBySlug } from '@/lib/sanity/queries';
 

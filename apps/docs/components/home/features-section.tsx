@@ -1,3 +1,5 @@
+/* @proprietary license */
+
 import React from 'react';
 import { useTranslation } from '@/lib/contexts/translation-context';
 import { t } from '@/lib/i18n/translations';

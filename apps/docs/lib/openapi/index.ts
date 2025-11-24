@@ -1,3 +1,5 @@
+/* @proprietary license */
+
 import { createOpenAPI } from 'fumadocs-openapi/server';
 import path from 'node:path';
 

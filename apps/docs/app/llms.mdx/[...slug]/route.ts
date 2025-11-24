@@ -1,3 +1,5 @@
+/* @proprietary license */
+
 import { type NextRequest, NextResponse } from 'next/server';
 import { getLLMText } from '@/lib/utils/get-llm-text';
 import { source } from '@/lib/utils/source';

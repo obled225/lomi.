@@ -1,3 +1,5 @@
+/* @proprietary license */
+
 import { FuzzyText } from '@/components/preview/fuzzy-text';
 
 export default function NotFound() {

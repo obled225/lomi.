@@ -1,3 +1,5 @@
+/* @proprietary license */
+
 'use client';
 
 import { Logo } from '@/lib/utils/logo';

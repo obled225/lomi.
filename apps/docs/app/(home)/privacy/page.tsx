@@ -1,3 +1,5 @@
+/* @proprietary license */
+
 import { detectLanguage } from '@/lib/i18n/server-utils';
 import { t } from '@/lib/i18n/translations';
 import type { Metadata } from 'next';

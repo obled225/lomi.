@@ -1,3 +1,5 @@
+/* @proprietary license */
+
 import type { BaseLayoutProps } from 'fumadocs-ui/layouts/shared';
 import { Logo } from './logo';
 

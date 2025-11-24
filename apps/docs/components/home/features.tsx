@@ -1,3 +1,5 @@
+/* @proprietary license */
+
 import { Section, SectionHeader } from '@/components/ui/section';
 import { Card, CardContent } from '@/components/ui/card';
 import { motion } from 'framer-motion';

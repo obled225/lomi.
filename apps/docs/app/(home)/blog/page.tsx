@@ -1,3 +1,5 @@
+/* @proprietary license */
+
 import type { Metadata } from 'next';
 import BlogClient from '@/components/blog/blog-client';
 import { detectLanguage } from '@/lib/i18n/server-utils';

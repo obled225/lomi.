@@ -1,3 +1,5 @@
+/* @proprietary license */
+
 'use client';
 
 import { useState, useMemo } from 'react';

@@ -1,3 +1,5 @@
+/* @proprietary license */
+
 import type { Metadata } from 'next';
 import { notFound, redirect } from 'next/navigation';
 import { type ComponentProps, type FC, type ReactNode, type JSX } from 'react';

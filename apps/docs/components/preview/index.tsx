@@ -1,3 +1,5 @@
+/* @proprietary license */
+
 import { Home } from 'lucide-react';
 import { Heading } from 'fumadocs-ui/components/heading';
 import { Card } from 'fumadocs-ui/components/card';

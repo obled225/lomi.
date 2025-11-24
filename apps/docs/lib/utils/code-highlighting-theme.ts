@@ -1,3 +1,5 @@
+/* @proprietary license */
+
 import { vs } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 // Custom blue-themed syntax highlighting for light mode
