@@ -162,7 +162,6 @@ export function GoogleOneTap() {
 
         // Add error handling for Google Identity Services
         try {
-
           window.google.accounts.id.initialize({
             client_id: clientId,
             callback: handleCredentialResponse,
@@ -185,7 +184,8 @@ export function GoogleOneTap() {
 
               // Log more detailed information about why One Tap failed
               if (notification.isNotDisplayed()) {
-                const reason = notification.getNotDisplayedReason?.() || 'unknown';
+                const reason =
+                  notification.getNotDisplayedReason?.() || 'unknown';
                 console.log('One Tap not displayed reason:', reason);
               }
               if (notification.isSkippedMoment()) {
@@ -199,7 +199,10 @@ export function GoogleOneTap() {
             },
           );
         } catch (initError) {
-          console.error('Error initializing Google Identity Services:', initError);
+          console.error(
+            'Error initializing Google Identity Services:',
+            initError,
+          );
         }
       }
     };

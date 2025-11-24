@@ -3,7 +3,10 @@ import { Card, CardContent } from '@/components/ui/card';
 import { motion } from 'framer-motion';
 import { useTranslation } from '@/lib/contexts/translation-context';
 import { t } from '@/lib/i18n/translations';
-import { AgnosticBackground, ContentAdoptionBackground } from './agnostic-background';
+import {
+  AgnosticBackground,
+  ContentAdoptionBackground,
+} from './agnostic-background';
 import ContributorCounter from './contributor-counter';
 
 export function Features() {
@@ -29,8 +32,9 @@ export function Features() {
                   Framework agnostic
                 </h3>
                 <p className="text-muted-foreground">
-                  Official support and SDKs for Next.js, Sanity, Medusa, Typescript, Javascript, Go, Python and PHP —
-                  portable for all your needs.
+                  Official support and SDKs for Next.js, Sanity, Medusa,
+                  Typescript, Javascript, Go, Python and PHP — portable for all
+                  your needs.
                 </p>
                 <div className="absolute bottom-6 left-6 flex flex-row gap-2 bg-primary text-primary-foreground rounded-xl p-2 w-fit">
                   <svg
@@ -58,9 +62,7 @@ export function Features() {
           >
             <Card className="relative flex flex-col overflow-hidden z-2 rounded-sm h-[400px]">
               <CardContent className="p-6 flex flex-col h-full">
-                <h3 className="text-xl font-semibold mb-6">
-                  Community driven
-                </h3>
+                <h3 className="text-xl font-semibold mb-6">Community driven</h3>
                 <div className="flex-1 flex items-center justify-center">
                   <ContributorCounter
                     repoOwner="lomiafrica"
@@ -86,4 +88,3 @@ export function Features() {
     </Section>
   );
 }
-

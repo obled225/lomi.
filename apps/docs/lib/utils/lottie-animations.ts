@@ -64,5 +64,5 @@ export {
   luggageAnimation,
   globeAnimation,
   highpriorityAnimation,
-  takeoffAnimation
+  takeoffAnimation,
 };

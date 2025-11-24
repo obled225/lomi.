@@ -29,7 +29,9 @@ export default function ContributorCounter({
                 const data = await fetchContributors(repoOwner, repoName);
                 setContributors(data);
             } catch (err) {
-                setError(err instanceof Error ? err.message : 'Failed to fetch contributors');
+                setError(
+                    err instanceof Error ? err.message : 'Failed to fetch contributors',
+                );
             } finally {
                 setLoading(false);
             }
@@ -44,7 +46,10 @@ export default function ContributorCounter({
 
     if (loading) {
         return (
-            <div {...props} className={cn('flex flex-col items-center gap-4', props.className)}>
+            <div
+                {...props}
+                className={cn('flex flex-col items-center gap-4', props.className)}
+            >
                 <div className="flex flex-row flex-wrap items-center justify-center md:pe-4">
                     {Array.from({ length: displayCount }).map((_, i) => (
                         <div
@@ -62,7 +67,10 @@ export default function ContributorCounter({
 
     if (error) {
         return (
-            <div {...props} className={cn('flex flex-col items-center gap-4', props.className)}>
+            <div
+                {...props}
+                className={cn('flex flex-col items-center gap-4', props.className)}
+            >
                 <div className="text-center text-sm text-muted-foreground">
                     {String(t('contributors.error', 'en'))}
                 </div>

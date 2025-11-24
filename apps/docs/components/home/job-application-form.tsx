@@ -202,10 +202,11 @@ export function JobApplicationForm({
               <label
                 htmlFor="resume"
                 onClick={playClickSound}
-                className={`flex items-center justify-center rounded-sm px-3 py-2 text-sm cursor-pointer transition-colors h-8 ${resume
-                  ? 'bg-[#56A5F9] text-white border-[#56A5F9] dark:bg-sky-900 dark:text-sky-300'
-                  : 'border border-gray-200 bg-slate-50 text-muted-foreground hover:bg-slate-100 dark:bg-zinc-800 dark:hover:bg-zinc-700 dark:border-[0.15px] dark:border-gray-700/20'
-                  }`}
+                className={`flex items-center justify-center rounded-sm px-3 py-2 text-sm cursor-pointer transition-colors h-8 ${
+                  resume
+                    ? 'bg-[#56A5F9] text-white border-[#56A5F9] dark:bg-sky-900 dark:text-sky-300'
+                    : 'border border-gray-200 bg-slate-50 text-muted-foreground hover:bg-slate-100 dark:bg-zinc-800 dark:hover:bg-zinc-700 dark:border-[0.15px] dark:border-gray-700/20'
+                }`}
               >
                 <Upload className="w-4 h-4 mr-2" />
                 {resume ? resume.name : 'Upload file'}

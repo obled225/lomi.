@@ -6,11 +6,11 @@ import { t as translate } from '@/lib/i18n/translations';
 
 interface HeroProps {
   dashboardImage?:
-  | string
-  | {
-    light: string;
-    dark: string;
-  };
+    | string
+    | {
+        light: string;
+        dark: string;
+      };
   mobileDashboardImage?: {
     light: string;
     dark: string;
@@ -39,7 +39,10 @@ function Hero({ dashboardImage, mobileDashboardImage }: HeroProps) {
 
         {/* Portal Image Section */}
         {dashboardImage && (
-          <div className="w-full mt-20 relative overflow-hidden" style={{ height: 'calc(100vh - 120px)', maxHeight: '417.5px' }}>
+          <div
+            className="w-full mt-20 relative overflow-hidden"
+            style={{ height: 'calc(100vh - 120px)', maxHeight: '417.5px' }}
+          >
             <Suspense
               fallback={
                 <div className="w-full h-full bg-gray-100 dark:bg-gray-800 animate-pulse rounded-sm" />
