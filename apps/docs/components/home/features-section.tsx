@@ -520,6 +520,13 @@ export function FeaturesSection() {
                                   currentLanguage,
                                 ),
                               )}
+                            {name === 'Apple Pay' &&
+                              String(
+                                t(
+                                  'features.card1.apple_pay_description',
+                                  currentLanguage,
+                                ),
+                              )}
                           </p>
                         </div>
                       </div>
@@ -648,7 +655,7 @@ export function FeaturesSection() {
                       <span className="text-xs text-muted-foreground">
                         {String(t('features.card4.balance', currentLanguage))}
                       </span>
-                      <div className="flex items-center gap-2 rounded-sm p-1.5 bg-green-50 dark:bg-green-900/30 border w-48 h-8 justify-center">
+                      <div className="flex items-center gap-2 rounded-sm p-1.5 bg-green-50 dark:bg-green-900/30 border-none w-48 h-8 justify-center">
                         <span className="font-mono text-[11px] font-bold text-green-700 dark:text-green-300">
                           {(49847392)
                             .toLocaleString('fr-FR')
@@ -987,7 +994,7 @@ export function FeaturesSection() {
     }
   };
 
-  const providerNames = ['SPI', 'Visa', 'PayPal', 'Google Pay'] as const;
+  const providerNames = ['SPI', 'Visa', 'Apple Pay', 'Google Pay', 'PayPal'] as const;
 
   // Payment method toggle states
   const [paymentToggles, setPaymentToggles] = React.useState<
@@ -995,8 +1002,9 @@ export function FeaturesSection() {
   >({
     SPI: true,
     Visa: true,
-    PayPal: false,
-    'Google Pay': true,
+    PayPal: true,
+    'Google Pay': false,
+    'Apple Pay': true,
   });
 
   // Phone numbers hover state - separate for each field
@@ -1055,22 +1063,45 @@ export function FeaturesSection() {
     }));
   };
 
-  // Visa image rotation effect
-  React.useEffect(() => {
-    const interval = setInterval(() => {
-      setVisaImageIndex((prev) => (prev + 1) % visaImages.length);
-    }, 4000); // Change every 4 seconds
+  // Helper function to get random interval
+  const getRandomInterval = (min: number, max: number) => {
+    return Math.random() * (max - min) + min;
+  };
 
-    return () => clearInterval(interval);
+  // Visa image rotation effect - randomize between 3-6 seconds
+  React.useEffect(() => {
+    let timeoutId: ReturnType<typeof setTimeout>;
+
+    const scheduleNextRotation = () => {
+      timeoutId = setTimeout(() => {
+        setVisaImageIndex((prev) => (prev + 1) % visaImages.length);
+        scheduleNextRotation(); // Schedule the next rotation
+      }, getRandomInterval(3000, 6000));
+    };
+
+    scheduleNextRotation(); // Start the first rotation
+
+    return () => {
+      if (timeoutId) clearTimeout(timeoutId);
+    };
   }, [visaImages.length]);
 
-  // SPI image rotation effect
+  // SPI image rotation effect - randomize between 6-10 seconds
   React.useEffect(() => {
-    const interval = setInterval(() => {
-      setSpiImageIndex((prev) => (prev + 1) % spiImages.length);
-    }, 8000); // Change every 8 seconds
+    let timeoutId: ReturnType<typeof setTimeout>;
 
-    return () => clearInterval(interval);
+    const scheduleNextRotation = () => {
+      timeoutId = setTimeout(() => {
+        setSpiImageIndex((prev) => (prev + 1) % spiImages.length);
+        scheduleNextRotation(); // Schedule the next rotation
+      }, getRandomInterval(6000, 10000));
+    };
+
+    scheduleNextRotation(); // Start the first rotation
+
+    return () => {
+      if (timeoutId) clearTimeout(timeoutId);
+    };
   }, [spiImages.length]);
 
   const productCode = `{

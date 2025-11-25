@@ -1,6 +1,6 @@
 /* @proprietary license */
 
-import { Suspense, useState } from 'react';
+import { Suspense, useState, useEffect } from 'react';
 import SimpleImage from '@/components/home/hero-image';
 import { AgnosticBackground } from '@/components/home/agnostic-background';
 import { useTranslation } from '@/lib/utils/translation-context';
@@ -21,7 +21,7 @@ interface HeroProps {
 
 // Function to get a random title index from session storage or generate new one
 const getSessionTitleIndex = (): number => {
-  // Check if we're in a browser environment
+  // Always return 0 on server to avoid hydration mismatch
   if (typeof window === 'undefined') {
     return 0;
   }
@@ -49,8 +49,16 @@ const getSessionTitleIndex = (): number => {
 
 function Hero({ dashboardImage, mobileDashboardImage }: HeroProps) {
   const { currentLanguage } = useTranslation();
-  // Use useState with function initializer - only runs once on mount
-  const [titleIndex] = useState<number>(() => getSessionTitleIndex());
+  // Start with index 0 to ensure server/client consistency, then randomize on client
+  const [titleIndex, setTitleIndex] = useState<number>(0);
+
+  // Randomize title on client side after hydration to avoid hydration mismatch
+  useEffect(() => {
+    const randomIndex = getSessionTitleIndex();
+    if (randomIndex !== 0) {
+      setTitleIndex(randomIndex);
+    }
+  }, []);
 
   // Create t function that uses currentLanguage (same pattern as header.tsx)
   const t = (key: string) => String(translate(key, currentLanguage));
@@ -67,8 +75,8 @@ function Hero({ dashboardImage, mobileDashboardImage }: HeroProps) {
         <AgnosticBackground variant="hero" />
 
         {/* Content overlay */}
-        <div className="flex flex-col z-10 px-4 size-full md:p-12 max-md:items-center max-md:text-center">
-          <div className="mt-20 md:mt-12 lg:mt-0">
+        <div className="flex flex-col z-10 pl-2 pr-4 size-full md:pl-5 md:pr-12 md:py-12 max-md:items-center max-md:text-center">
+          <div className="mt-28 md:mt-20 lg:mt-8">
             <h1 className="text-4xl font-normal tracking-tighter text-left text-zinc-800 dark:text-white md:text-5xl max-w-7xl whitespace-pre-line">
               {title as string}
             </h1>

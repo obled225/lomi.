@@ -328,7 +328,7 @@ export default function PricingDetails() {
 
                             {/* Pricing Table */}
                             {sub.table && (
-                              <div className="mt-6 md:mt-8 space-y-0 border border-border rounded overflow-hidden">
+                              <div className="mt-6 md:mt-8 border border-border rounded overflow-hidden">
                                 {sub.table.map(
                                   (
                                     row: { label: string; value: string },
@@ -336,15 +336,12 @@ export default function PricingDetails() {
                                   ) => (
                                     <div
                                       key={rowIdx}
-                                      className={`flex flex-col sm:flex-row sm:justify-between sm:items-center px-4 md:px-6 py-3 md:py-4 text-xs md:text-sm gap-1 sm:gap-0 ${rowIdx !== sub.table.length - 1
-                                        ? 'border-b border-border'
-                                        : ''
-                                        }`}
+                                      className="grid grid-cols-2 border-collapse"
                                     >
-                                      <span className="text-muted-foreground">
+                                      <span className="text-muted-foreground px-4 py-3 md:py-4 text-xs md:text-sm border border-border">
                                         {row.label}
                                       </span>
-                                      <span className="text-foreground font-medium">
+                                      <span className="text-foreground font-medium text-right px-4 py-3 md:py-4 text-xs md:text-sm border border-border border-l-0">
                                         {row.value}
                                       </span>
                                     </div>

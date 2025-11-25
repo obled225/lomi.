@@ -127,9 +127,10 @@
       "crypto_description": "Decentralized payment network",
       "description": "Accept local and international payment methods, seamlessly.",
       "google_pay_description": "Contactless payment system",
+      "apple_pay_description": "Apple payment wallet",
       "paypal_description": "Digital payment platform",
       "spi_description": "Interoperable payment infrastructure",
-      "title": "All your preferred payment methods",
+      "title": "Payment methods your customers love",
       "visa_description": "Global electronic payment network"
     },
     "card2": {

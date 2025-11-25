@@ -127,6 +127,7 @@
       "crypto_description": "Paiements en cryptomonnaie",
       "description": "Acceptez les paiements locaux et internationaux, sans efforts.",
       "google_pay_description": "Système de paiement sans contact",
+      "apple_pay_description": "Wallet de paiement Apple",
       "paypal_description": "Plateforme de paiement numérique",
       "spi_description": "Système interopérable de paiement",
       "title": "Tous les moyens de paiement préférés de vos clients",

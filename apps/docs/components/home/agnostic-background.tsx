@@ -42,7 +42,7 @@ function useIsVisible(ref: React.RefObject<HTMLDivElement | null>) {
     return isVisible;
 }
 
-type BackgroundVariant = 'hero' | 'masked' | 'gradient-only' | 'dithering-only';
+type BackgroundVariant = 'hero' | 'masked';
 
 interface AgnosticBackgroundProps {
     variant?: BackgroundVariant;
@@ -61,9 +61,13 @@ export function ContentAdoptionBackground(
                     ? ['#0C4A6E', '#1E5A8A', '#2B77E6', '#4A9EF8', '#7DD3FC', '#E0F2FE00']
                     : ['#56A5F9', '#4A9EF8', '#3B82F6', '#60A5FA', '#7DD3FC', '#93C5FD', '#DBEAFE00']
             }
-            speed={0}
+            speed={1}
             colorBack="#00000000"
             shape="sphere"
+            softness={0.8}
+            intensity={0.9}
+            noise={0.4}
+            minPixelRatio={0.8}
             {...props}
         />
     );
@@ -79,9 +83,9 @@ export function AgnosticBackground({ variant = 'masked', className }: AgnosticBa
             case 'hero':
                 return (
                     <>
-                        {/* Hero GrainGradient */}
+                        {/* Hero GrainGradient - fills entire container like Fumadocs */}
                         <GrainGradient
-                            className="hidden md:block absolute max-w-[1255px] w-full translate-x-2 mx-auto top-[100px] h-[85vh] max-h-[850px] animate-fd-fade-in duration-800 border border-border/50 rounded-sm"
+                            className="absolute inset-0 animate-fd-fade-in duration-800"
                             colors={
                                 resolvedTheme === 'dark'
                                     ? ['#0C4A6E', '#1E5A8A', '#2B77E6', '#4A9EF8', '#7DD3FC', '#E0F2FE00']
@@ -91,13 +95,13 @@ export function AgnosticBackground({ variant = 'masked', className }: AgnosticBa
                             softness={1}
                             intensity={0.9}
                             noise={0.5}
-                            speed={1}
+                            speed={visible ? 1 : 0}
                             shape="corners"
                             minPixelRatio={1}
                             maxPixelCount={1920 * 1080}
                         />
 
-                        {/* Hero Dithering */}
+                        {/* Hero Dithering - positioned like Fumadocs */}
                         <Dithering
                             width={720}
                             height={720}
@@ -109,7 +113,7 @@ export function AgnosticBackground({ variant = 'masked', className }: AgnosticBa
                             size={3}
                             speed={0}
                             frame={5000 * 120}
-                            className="hidden md:block absolute animate-fd-fade-in duration-400 max-lg:bottom-[-30%] max-lg:left-[-200px] lg:top-[-5%] lg:right-0"
+                            className="absolute animate-fd-fade-in duration-400 max-lg:bottom-[-50%] max-lg:left-[-200px] lg:top-[-5%] lg:right-0"
                             minPixelRatio={1}
                         />
                     </>
@@ -121,47 +125,13 @@ export function AgnosticBackground({ variant = 'masked', className }: AgnosticBa
                         colorBack="#00000000"
                         colorFront="#56A5F9"
                         shape="warp"
-                        type="4x4"
+                        type="8x8"
                         speed={visible ? 0.4 : 0}
                         className="size-full"
-                        minPixelRatio={1}
+                        minPixelRatio={0.8}
                     />
                 );
 
-            case 'gradient-only':
-                return (
-                    <GrainGradient
-                        className="absolute inset-0"
-                        colors={
-                            resolvedTheme === 'dark'
-                                ? ['#0C4A6E', '#1E5A8A', '#2B77E6', '#4A9EF8', '#7DD3FC', '#E0F2FE00']
-                                : ['#56A5F9', '#4A9EF8', '#3B82F6', '#60A5FA', '#7DD3FC', '#93C5FD', '#DBEAFE00']
-                        }
-                        colorBack="#00000000"
-                        softness={1}
-                        intensity={0.9}
-                        noise={0.5}
-                        speed={1}
-                        shape="corners"
-                        minPixelRatio={1}
-                        maxPixelCount={1920 * 1080}
-                    />
-                );
-
-            case 'dithering-only':
-                return (
-                    <Dithering
-                        colorBack="#00000000"
-                        colorFront="#60A5FA"
-                        shape="sphere"
-                        type="4x4"
-                        scale={0.5}
-                        size={3}
-                        speed={0}
-                        className="size-full"
-                        minPixelRatio={1}
-                    />
-                );
 
             default:
                 return null;
