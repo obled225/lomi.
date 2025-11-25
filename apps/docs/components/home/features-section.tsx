@@ -28,7 +28,7 @@ import { useTheme } from '@/lib/hooks/use-theme';
 import { playClickSound } from '@/lib/utils/sound';
 
 // Demo Revenue Chart Component with Interactive Features
-const DemoRevenueChart = () => {
+const DemoRevenueChart = ({ resolvedTheme }: { resolvedTheme: string }) => {
   // Fixed total revenue that doesn't change
   const totalRevenue = 49847392;
 
@@ -238,8 +238,8 @@ const DemoRevenueChart = () => {
         >
           <defs>
             <linearGradient id="demoGradient" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.15} />
-              <stop offset="95%" stopColor="#3b82f6" stopOpacity={0.05} />
+              <stop offset="5%" stopColor={resolvedTheme === 'dark' ? '#0284c7' : '#56A5F9'} stopOpacity={0.15} />
+              <stop offset="95%" stopColor={resolvedTheme === 'dark' ? '#0284c7' : '#56A5F9'} stopOpacity={0.05} />
             </linearGradient>
           </defs>
 
@@ -248,7 +248,7 @@ const DemoRevenueChart = () => {
             <path d={generateAreaPath()} fill="url(#demoGradient)" />
 
             {/* Line */}
-            <path d={pathD} stroke="#3b82f6" strokeWidth="2" fill="none" />
+            <path d={pathD} stroke={resolvedTheme === 'dark' ? '#0284c7' : '#56A5F9'} strokeWidth="2" fill="none" />
 
             {/* Data points */}
             {chartData.map((point, index) => (
@@ -257,7 +257,7 @@ const DemoRevenueChart = () => {
                 cx={xScale(index)}
                 cy={yScale(point?.value || 0)}
                 r="2"
-                fill="#3b82f6"
+                fill={resolvedTheme === 'dark' ? '#0284c7' : '#56A5F9'}
                 opacity={hoveredPoint ? 0.5 : 0.8}
               />
             ))}
@@ -269,7 +269,7 @@ const DemoRevenueChart = () => {
               cx={hoveredPoint.x}
               cy={hoveredPoint.y}
               r="4"
-              fill="#3b82f6"
+              fill={resolvedTheme === 'dark' ? '#0284c7' : '#56A5F9'}
               stroke="white"
               strokeWidth="2"
             />
@@ -614,7 +614,7 @@ export function FeaturesSection() {
                   {String(t('features.card5.description', currentLanguage))}
                 </p>
                 <div className="w-full">
-                  <DemoRevenueChart />
+                  <DemoRevenueChart resolvedTheme={resolvedTheme} />
                 </div>
               </CardContent>
             </Card>

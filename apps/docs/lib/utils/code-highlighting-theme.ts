@@ -22,17 +22,17 @@ export const blueVsTheme = {
     fontStyle: 'italic',
   },
   keyword: {
-    color: '#3b82f6', // blue-500
+    color: '#56A5F9', // exact blue from button variant
     fontWeight: '600',
   },
   string: {
-    color: '#2563eb', // blue-600 - using blue instead of green
+    color: '#0284c7', // sky-600 for contrast
   },
   number: {
     color: '#7c3aed', // violet-600
   },
   function: {
-    color: '#3b82f6', // blue-500
+    color: '#56A5F9', // exact blue from button variant
   },
   variable: {
     color: '#1e293b', // slate-800
@@ -44,7 +44,7 @@ export const blueVsTheme = {
     color: '#6b7280', // gray-500
   },
   property: {
-    color: '#3b82f6', // blue-500
+    color: '#56A5F9', // exact blue from button variant
   },
 };
 
@@ -68,20 +68,20 @@ export const blueVsDarkTheme = {
     fontStyle: 'italic',
   },
   keyword: {
-    color: '#3b82f6', // blue-500 - exact same blue as chart in Card 5
+    color: '#0284c7', // sky-600 - exact same blue as button dark mode and chart
     fontWeight: '600',
   },
   boolean: {
     color: '#06b6d4', // cyan-500 - for true/false values
   },
   string: {
-    color: '#38bdf8', // sky-400 - sky blue for strings like the text in the JSON example
+    color: '#56A5F9', // button blue for strings in dark mode
   },
   number: {
     color: '#06b6d4', // sky-400 - blue instead of purple
   },
   function: {
-    color: '#3b82f6', // blue-500 - exact same blue as chart in Card 5
+    color: '#0284c7', // sky-600 - exact same blue as button dark mode and chart
   },
   variable: {
     color: '#cbd5e1', // slate-300 - lighter for variables
@@ -93,6 +93,6 @@ export const blueVsDarkTheme = {
     color: '#94a3b8', // slate-400
   },
   property: {
-    color: '#3b82f6', // blue-500 - exact same blue as chart in Card 5
+    color: '#0284c7', // sky-600 - exact same blue as button dark mode and chart
   },
 };

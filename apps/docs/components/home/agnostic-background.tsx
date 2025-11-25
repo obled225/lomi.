@@ -81,7 +81,7 @@ export function AgnosticBackground({ variant = 'masked', className }: AgnosticBa
                     <>
                         {/* Hero GrainGradient */}
                         <GrainGradient
-                            className="hidden md:block absolute inset-x-0 -translate-x-1 top-[100px] h-[85vh] max-h-[850px] animate-fd-fade-in duration-800 border border-border/50 rounded-sm"
+                            className="hidden md:block absolute max-w-[1255px] w-full translate-x-2 mx-auto top-[100px] h-[85vh] max-h-[850px] animate-fd-fade-in duration-800 border border-border/50 rounded-sm"
                             colors={
                                 resolvedTheme === 'dark'
                                     ? ['#0C4A6E', '#1E5A8A', '#2B77E6', '#4A9EF8', '#7DD3FC', '#E0F2FE00']

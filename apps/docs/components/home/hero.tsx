@@ -77,7 +77,6 @@ function Hero({ dashboardImage, mobileDashboardImage }: HeroProps) {
         {dashboardImage && (
           <div
             className="w-full mt-20 relative overflow-hidden"
-            style={{ height: 'calc(100vh - 120px)', maxHeight: '417.5px' }}
           >
             <Suspense
               fallback={
