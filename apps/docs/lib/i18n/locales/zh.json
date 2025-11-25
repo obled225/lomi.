@@ -1,5 +1,6 @@
 {
   "blog": {
+    "article": "文章",
     "backHome": "返回首页",
     "backToBlog": "返回文章",
     "byAuthor": "作者：{author}",
@@ -63,8 +64,21 @@
   },
   "changelog": {
     "description": "保持更新，了解我们产品的最新更新、改进和修复。",
+    "read": "阅读更新日志",
     "subtitle": "我们产品的最新更新、改进和修复。",
-    "title": "更新日志"
+    "title": "更新日志",
+    "entries": [
+      {
+        "date": "2024-10-17",
+        "version": "1.0.0",
+        "title": "发布",
+        "changes": [
+          "发布 lomi. 核心功能和单一支付方式。",
+          "实现用户认证和支付链接特性。",
+          "制作文档和网站开源。"
+        ]
+      }
+    ]
   },
   "components": {
     "business_outreach": {

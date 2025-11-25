@@ -1,5 +1,6 @@
 {
   "blog": {
+    "article": "Article",
     "backHome": "Retour à l'accueil",
     "backToBlog": "Retour au blog",
     "byAuthor": "Par {author}",
@@ -63,8 +64,21 @@
   },
   "changelog": {
     "description": "Restez à jour avec toutes les dernières mises à jour, améliorations et corrections de lomi.",
+    "read": "Lire le changelog",
     "subtitle": "Toutes les dernières mises à jour, améliorations et corrections de nos produits et services.",
-    "title": "Changelog"
+    "title": "Changelog",
+    "entries": [
+      {
+        "date": "2024-10-17",
+        "version": "1.0.0",
+        "title": "Lancement",
+        "changes": [
+          "Lancé lomi. une seule méthode de paiement.",
+          "Implémenté auth' et un feature de lien de paiement.",
+          "Documentation et site web open-source."
+        ]
+      }
+    ]
   },
   "components": {
     "business_outreach": {

@@ -7,8 +7,9 @@ import { Section } from '@/components/ui/section';
 import Link from 'next/link';
 import { playClickSound } from '@/lib/utils/sound';
 import { BlogArticlesCarousel } from './blog-articles-carousel';
+import { ChangelogCarousel } from './changelog-carousel';
 
-export function CareersSection() {
+export function UpdatesSection() {
   const { currentLanguage } = useTranslation();
 
   return (
@@ -31,6 +32,9 @@ export function CareersSection() {
 
         {/* Latest Articles Section */}
         <BlogArticlesCarousel />
+
+        {/* Latest Changelog Section */}
+        <ChangelogCarousel />
       </div>
     </Section>
   );
