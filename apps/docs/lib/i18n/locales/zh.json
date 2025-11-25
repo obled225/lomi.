@@ -510,7 +510,8 @@
   "sdks": {
     "title": "始终领先.",
     "frameworkAgnostic": "框架无关",
-    "sdksDescription": "Next.js、Sanity、Medusa、TypeScript、JavaScript、Go、Python 和 PHP 的官方支持和 SDK - 让它成为您的。"
+    "sdksDescription": "Next.js、Sanity、Medusa、TypeScript、JavaScript、Go、Python 和 PHP 的官方支持和 SDK - 让它成为您的。",
+    "communityDriven": "社区驱动"
   },
   "contributors": {
     "loading": "正在加载贡献者...",

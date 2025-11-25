@@ -4,21 +4,21 @@ import { Section, SectionHeader } from '@/components/ui/section';
 import { Card, CardContent } from '@/components/ui/card';
 import { motion } from 'framer-motion';
 import { useTranslation } from '@/lib/utils/translation-context';
-import { t } from '@/lib/i18n/translations';
-import {
-  AgnosticBackground,
-  ContentAdoptionBackground,
-} from './agnostic-background';
+import { t as translate } from '@/lib/i18n/translations';
+import { AgnosticBackground } from './agnostic-background';
 import ContributorCounter from './contributor-counter';
 import Image from 'next/image';
 
 export function AddOns() {
   const { currentLanguage } = useTranslation();
+
+  // Create t function that uses currentLanguage (same pattern as footer.tsx)
+  const t = (key: string) => String(translate(key, currentLanguage));
   return (
     <Section className="mb-8 lg:mb-28">
       <div className="max-w-7xl mx-auto pl-2 pr-4 py-2">
         <SectionHeader
-          title={String(t('sdks.title', currentLanguage))}
+          title={t('sdks.title')}
           className="mb-6 md:mb-8"
         />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -32,10 +32,10 @@ export function AddOns() {
             <Card className="relative flex flex-col overflow-hidden z-2 rounded-sm h-[400px]">
               <CardContent className="p-6 relative h-full">
                 <h3 className="text-xl font-semibold mb-6">
-                  {String(t('sdks.frameworkAgnostic', currentLanguage))}
+                  {t('sdks.frameworkAgnostic')}
                 </h3>
                 <p className="text-muted-foreground">
-                  {String(t('sdks.sdksDescription', currentLanguage))}
+                  {t('sdks.sdksDescription')}
                 </p>
                 <div className="absolute bottom-6 left-6 flex flex-row gap-2 bg-slate-50 border border-gray-200 dark:bg-zinc-800 dark:border-[0.15px] dark:border-gray-700/20 rounded-xl p-2 w-fit">
                   <svg
@@ -90,7 +90,7 @@ export function AddOns() {
           >
             <Card className="relative flex flex-col overflow-hidden z-2 rounded-sm h-[400px]">
               <CardContent className="p-6 flex flex-col h-full">
-                <h3 className="text-xl font-semibold mb-6">Community driven</h3>
+                <h3 className="text-xl font-semibold mb-6">{t('sdks.communityDriven')}</h3>
                 <div className="flex-1 flex items-center justify-center">
                   <ContributorCounter
                     repoOwner="lomiafrica"
@@ -100,15 +100,7 @@ export function AddOns() {
                   />
                 </div>
               </CardContent>
-              <div className="absolute inset-0 -z-1">
-                <ContentAdoptionBackground
-                  className="size-full"
-                  softness={0.8}
-                  intensity={0.9}
-                  noise={0.4}
-                  minPixelRatio={0.8}
-                />
-              </div>
+              <AgnosticBackground variant="sphere" />
             </Card>
           </motion.div>
         </div>

@@ -1,6 +1,6 @@
 /* @proprietary license */
 
-import React, { useRef, useEffect, useState, ComponentProps } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { useTheme } from '@/lib/hooks/use-theme';
 import dynamic from 'next/dynamic';
 
@@ -42,36 +42,13 @@ function useIsVisible(ref: React.RefObject<HTMLDivElement | null>) {
     return isVisible;
 }
 
-type BackgroundVariant = 'hero' | 'masked';
+type BackgroundVariant = 'hero' | 'masked' | 'wave' | 'sphere' | 'blob' | 'ripple';
 
 interface AgnosticBackgroundProps {
     variant?: BackgroundVariant;
     className?: string;
 }
 
-export function ContentAdoptionBackground(
-    props: ComponentProps<typeof GrainGradient>,
-) {
-    const { resolvedTheme } = useTheme();
-
-    return (
-        <GrainGradient
-            colors={
-                resolvedTheme === 'dark'
-                    ? ['#0C4A6E', '#1E5A8A', '#2B77E6', '#4A9EF8', '#7DD3FC', '#E0F2FE00']
-                    : ['#56A5F9', '#4A9EF8', '#3B82F6', '#60A5FA', '#7DD3FC', '#93C5FD', '#DBEAFE00']
-            }
-            speed={1}
-            colorBack="#00000000"
-            shape="sphere"
-            softness={0.8}
-            intensity={0.9}
-            noise={0.4}
-            minPixelRatio={0.8}
-            {...props}
-        />
-    );
-}
 
 export function AgnosticBackground({ variant = 'masked', className }: AgnosticBackgroundProps) {
     const { resolvedTheme } = useTheme();
@@ -132,6 +109,85 @@ export function AgnosticBackground({ variant = 'masked', className }: AgnosticBa
                     />
                 );
 
+            case 'wave':
+                // Wave style - GrainGradient with wave shape
+                return (
+                    <GrainGradient
+                        className="size-full"
+                        colors={
+                            resolvedTheme === 'dark'
+                                ? ['#0C4A6E', '#1E5A8A', '#2B77E6', '#4A9EF8', '#7DD3FC', '#E0F2FE00']
+                                : ['#56A5F9', '#4A9EF8', '#3B82F6', '#60A5FA', '#7DD3FC', '#93C5FD', '#DBEAFE00']
+                        }
+                        speed={visible ? 1 : 0}
+                        colorBack="#00000000"
+                        shape="wave"
+                        softness={0.8}
+                        intensity={0.9}
+                        noise={0.4}
+                        minPixelRatio={0.8}
+                    />
+                );
+
+            case 'sphere':
+                // Sphere style - GrainGradient with sphere shape
+                return (
+                    <GrainGradient
+                        className="size-full"
+                        colors={
+                            resolvedTheme === 'dark'
+                                ? ['#0C4A6E', '#1E5A8A', '#2B77E6', '#4A9EF8', '#7DD3FC', '#E0F2FE00']
+                                : ['#56A5F9', '#4A9EF8', '#3B82F6', '#60A5FA', '#7DD3FC', '#93C5FD', '#DBEAFE00']
+                        }
+                        speed={visible ? 1 : 0}
+                        colorBack="#00000000"
+                        shape="sphere"
+                        softness={0.8}
+                        intensity={0.9}
+                        noise={0.4}
+                        minPixelRatio={0.8}
+                    />
+                );
+
+            case 'blob':
+                // Blob style - GrainGradient with blob shape
+                return (
+                    <GrainGradient
+                        className="size-full"
+                        colors={
+                            resolvedTheme === 'dark'
+                                ? ['#0C4A6E', '#1E5A8A', '#2B77E6', '#4A9EF8', '#7DD3FC', '#E0F2FE00']
+                                : ['#56A5F9', '#4A9EF8', '#3B82F6', '#60A5FA', '#7DD3FC', '#93C5FD', '#DBEAFE00']
+                        }
+                        speed={visible ? 1 : 0}
+                        colorBack="#00000000"
+                        shape="blob"
+                        softness={0.8}
+                        intensity={0.9}
+                        noise={0.4}
+                        minPixelRatio={0.8}
+                    />
+                );
+
+            case 'ripple':
+                // Ripple style - GrainGradient with ripple shape
+                return (
+                    <GrainGradient
+                        className="size-full"
+                        colors={
+                            resolvedTheme === 'dark'
+                                ? ['#0C4A6E', '#1E5A8A', '#2B77E6', '#4A9EF8', '#7DD3FC', '#E0F2FE00']
+                                : ['#56A5F9', '#4A9EF8', '#3B82F6', '#60A5FA', '#7DD3FC', '#93C5FD', '#DBEAFE00']
+                        }
+                        speed={visible ? 1 : 0}
+                        colorBack="#00000000"
+                        shape="ripple"
+                        softness={0.8}
+                        intensity={0.9}
+                        noise={0.4}
+                        minPixelRatio={0.8}
+                    />
+                );
 
             default:
                 return null;

@@ -519,7 +519,8 @@
   "sdks": {
     "title": "No te quedes atrás.",
     "frameworkAgnostic": "Agnóstico de framework",
-    "sdksDescription": "Soporte oficial y SDKs para Next.js, Sanity, Medusa, TypeScript, JavaScript, Go, Python y PHP - hazlo tuyo."
+    "sdksDescription": "Soporte oficial y SDKs para Next.js, Sanity, Medusa, TypeScript, JavaScript, Go, Python y PHP - hazlo tuyo.",
+    "communityDriven": "Impulsado por la comunidad"
   },
   "contributors": {
     "loading": "Cargando colaboradores...",
