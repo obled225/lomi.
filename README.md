@@ -75,8 +75,6 @@ The platform provides instant payment confirmation and settlement, allowing you 
 
 For fellow fintechs, we built an SDK around this infrastructure: `pi-spi-sdk` - a community TypeScript SDK for the PI-SPI Business API ([apps/pi-spi-sdk](./apps/pi-spi-sdk)).
 
-For merchants operating outside UEMOA, lomi. is built on Stripe to enable international payments, including cards and cryptocurrencies.
-
 ## Documentation
 
 For comprehensive documentation, visit [docs.lomi.africa](https://docs.lomi.africa)
