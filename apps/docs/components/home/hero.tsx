@@ -61,38 +61,36 @@ function Hero({ dashboardImage, mobileDashboardImage }: HeroProps) {
 
   return (
     <section className="relative max-w-7xl mx-auto pl-2 pr-4 py-2 md:py-12 lg:py-16 xl:py-28">
-      {/* Agnostic background with hero effects */}
-      <AgnosticBackground variant="hero" />
-      <div className="relative z-10 max-w-7xl mx-auto pl-0 pr-0 py-2">
-        <div className="flex flex-col space-y-6 text-left mt-20 md:mt-12 lg:mt-0">
-          {/* Hero content */}
-          <div className="space-y-4">
+      {/* Container with fixed height and overflow-hidden for envelope effect */}
+      <div className="relative flex min-h-[600px] h-[70vh] max-h-[900px] border rounded-sm overflow-hidden bg-origin-border">
+        {/* Agnostic background with hero effects */}
+        <AgnosticBackground variant="hero" />
+
+        {/* Content overlay */}
+        <div className="flex flex-col z-10 px-4 size-full md:p-12 max-md:items-center max-md:text-center">
+          <div className="mt-20 md:mt-12 lg:mt-0">
             <h1 className="text-4xl font-normal tracking-tighter text-left text-zinc-800 dark:text-white md:text-5xl max-w-7xl whitespace-pre-line">
               {title as string}
             </h1>
           </div>
         </div>
 
-        {/* Portal Image Section */}
+        {/* Hero Image - positioned absolutely to create envelope effect */}
         {dashboardImage && (
-          <div
-            className="w-full mt-20 relative overflow-hidden"
+          <Suspense
+            fallback={
+              <div className="w-full h-full bg-gray-100 dark:bg-gray-800 animate-pulse rounded-sm" />
+            }
           >
-            <Suspense
-              fallback={
-                <div className="w-full h-full bg-gray-100 dark:bg-gray-800 animate-pulse rounded-sm" />
-              }
-            >
-              <SimpleImage
-                src={dashboardImage}
-                mobileSrc={mobileDashboardImage}
-                alt="Preview"
-                width={1200}
-                height={800}
-                className="w-full h-full object-cover rounded-sm"
-              />
-            </Suspense>
-          </div>
+            <SimpleImage
+              src={dashboardImage}
+              mobileSrc={mobileDashboardImage}
+              alt="Preview"
+              width={1200}
+              height={800}
+              className="absolute top-[400px] left-[2%] max-w-[90%] md:top-[340px] md:left-[5%] md:max-w-[80%] lg:max-w-[1200px] animate-in fade-in duration-400"
+            />
+          </Suspense>
         )}
       </div>
     </section>

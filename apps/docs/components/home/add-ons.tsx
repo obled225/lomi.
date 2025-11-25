@@ -103,10 +103,10 @@ export function AddOns() {
               <div className="absolute inset-0 -z-1">
                 <ContentAdoptionBackground
                   className="size-full"
-                  softness={1}
-                  intensity={0.8}
-                  noise={0.3}
-                  minPixelRatio={1}
+                  softness={0.8}
+                  intensity={0.9}
+                  noise={0.4}
+                  minPixelRatio={0.8}
                 />
               </div>
             </Card>

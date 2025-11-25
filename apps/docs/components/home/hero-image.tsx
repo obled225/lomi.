@@ -8,11 +8,11 @@ import { useTheme } from '@/lib/hooks/use-theme';
 
 interface SimpleImageProps {
   src:
-    | string
-    | {
-        light: string;
-        dark: string;
-      };
+  | string
+  | {
+    light: string;
+    dark: string;
+  };
   mobileSrc?: {
     light: string;
     dark: string;
@@ -59,20 +59,16 @@ export default function SimpleImage({
         : currentSrc.light;
 
   return (
-    <div className="w-full">
-      <div className="inset-shadow-2xs ring-background dark:inset-shadow-white/20 bg-background relative overflow-hidden rounded-sm border border-gray-200 dark:border-zinc-800 p-0 shadow-sm shadow-zinc-950/15 ring-1">
-        <Image
-          src={imageSrc}
-          alt={alt}
-          width={width}
-          height={height}
-          className={`w-full min-h-[500px] md:min-h-[600px] h-auto object-cover rounded-xs ${className || ''}`}
-          loading="eager"
-          decoding="async"
-          crossOrigin="anonymous"
-          priority
-        />
-      </div>
-    </div>
+    <Image
+      src={imageSrc}
+      alt={alt}
+      width={width}
+      height={height}
+      className={`rounded-xl border-2 border-gray-200 dark:border-zinc-800 shadow-lg ${className || ''}`}
+      loading="eager"
+      decoding="async"
+      crossOrigin="anonymous"
+      priority
+    />
   );
 }
