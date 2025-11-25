@@ -10,7 +10,7 @@ import { EarlyMemberPricing } from '@/components/home/early-member-pricing';
 import { useHomePageInit } from '@/lib/hooks/use-home-page-init';
 
 export function HomePageClient() {
-  const { getDashboardImage, getMobileDashboardImage, getMobileJoinUsImage } =
+  const { getDashboardImage, getMobileDashboardImage } =
     useHomePageInit();
 
   return (
@@ -22,7 +22,7 @@ export function HomePageClient() {
       />
       <FeaturesSection />
       <AddOns />
-      <CareersSection mobileJoinUsImage={getMobileJoinUsImage()} />
+      <CareersSection />
       <EarlyMemberPricing />
     </>
   );

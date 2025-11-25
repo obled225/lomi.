@@ -49,14 +49,6 @@ export function useHomePageInit() {
     };
   };
 
-  // Function to get mobile join us images (theme-based only, no language logic)
-  const getMobileJoinUsImage = () => {
-    return {
-      light: '/company/mobile/join-us-l.webp',
-      dark: '/company/mobile/join-us-d.webp',
-    };
-  };
-
   // Initialize language settings
   useEffect(() => {
     const initializeLanguage = () => {
@@ -141,7 +133,6 @@ export function useHomePageInit() {
 
   return {
     getDashboardImage,
-    getMobileDashboardImage,
-    getMobileJoinUsImage,
+    getMobileDashboardImage
   };
 }

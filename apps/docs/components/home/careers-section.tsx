@@ -2,20 +2,13 @@
 
 import { useTranslation } from '@/lib/utils/translation-context';
 import { Button } from '@/components/ui/button';
-import SimpleImage from '@/components/home/hero-image';
 import { t } from '@/lib/i18n/translations';
 import { Section } from '@/components/ui/section';
 import Link from 'next/link';
 import { playClickSound } from '@/lib/utils/sound';
+import { BlogArticlesCarousel } from './blog-articles-carousel';
 
-interface CareersSectionProps {
-  mobileJoinUsImage?: {
-    light: string;
-    dark: string;
-  };
-}
-
-export function CareersSection({ mobileJoinUsImage }: CareersSectionProps) {
+export function CareersSection() {
   const { currentLanguage } = useTranslation();
 
   return (
@@ -36,17 +29,8 @@ export function CareersSection({ mobileJoinUsImage }: CareersSectionProps) {
           </Link>
         </div>
 
-        {/* Careers Image Section */}
-        <div className="w-full mt-8 relative">
-          <SimpleImage
-            src="/company/join-us.webp"
-            mobileSrc={mobileJoinUsImage}
-            alt="Join our team"
-            width={800}
-            height={400}
-            className="w-full h-auto object-cover"
-          />
-        </div>
+        {/* Latest Articles Section */}
+        <BlogArticlesCarousel />
       </div>
     </Section>
   );
