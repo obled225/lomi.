@@ -35,6 +35,9 @@ export function Provider({ children }: { children: ReactNode }) {
       search={{
         SearchDialog,
       }}
+      theme={{
+        storageKey: 'lomi-theme',
+      }}
     >
       <TranslationProvider>
         <GithubStarsProvider>
