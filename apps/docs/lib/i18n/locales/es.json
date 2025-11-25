@@ -204,7 +204,13 @@
     "talk": "Háblanos"
   },
   "hero": {
-    "title": "Construido para hacerte rentable,\nlomi. es la mejor manera de aceptar pagos en África Occidental."
+    "titles": [
+      "Construido para hacerte rentable,\\nlomi. es la mejor manera de aceptar pagos en África Occidental.",
+      "Deja que tus clientes te paguen a su manera,\\nlomi. es la experiencia de pago que merecen.",
+      "Empieza a ganar dinero en minutos,\\nsin tarifas de configuración, sin costos mensuales, sin barreras.",
+      "Consigue que más clientes digan sí,\\ncon la experiencia de pago que convierte.",
+      "Pagos diseñados para hacer crecer su negocio,\npensados para escalar con su éxito."
+    ]
   },
   "pricing": {
     "calculator": {

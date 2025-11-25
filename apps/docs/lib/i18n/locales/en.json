@@ -204,7 +204,13 @@
     "talk": "Talk to us"
   },
   "hero": {
-    "title": "Built to make you profitable,\nlomi. is the best way to accept payments in West Africa."
+    "titles": [
+      "Built to make you profitable,\nlomi. is the best way to accept payments in West Africa.",
+      "Let your customers pay you their way,\nlomi. is the payment experience they deserve.",
+      "Start making money in minutes,\nno setup fees, no monthly costs, no barriers.",
+      "Get more customers to say yes,\nwith the checkout experience that converts.",
+      "Payments engineered to grow your business,\nbuilt to scale with your success."
+    ]
   },
   "pricing": {
     "calculator": {

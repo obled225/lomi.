@@ -204,7 +204,13 @@
     "talk": "Contactez-nous"
   },
   "hero": {
-    "title": "Conçu pour accélérer votre croissance,\nlomi. est la solution de paiement pensée pour l'Afrique de l'Ouest."
+    "titles": [
+      "Conçu pour accélérer votre croissance,\nlomi. est la solution de paiement pensée pour l'Afrique de l'Ouest.",
+      "Laissez vos clients payer comme ils le souhaitent,\nlomi. est l'expérience de paiement qu'ils méritent.",
+      "Commencez à gagner de l'argent en quelques minutes,\nsans frais de configuration, sans frais mensuels, sans barrières.",
+      "Obtenez plus de clients qui disent oui,\navec l'expérience de paiement qui convertit.",
+      "Des paiements conçus pour la performance,\npensés pour grandir avec votre succès."
+    ]
   },
   "pricing": {
     "calculator": {

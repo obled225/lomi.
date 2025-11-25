@@ -1,6 +1,6 @@
 /* @proprietary license */
 
-import { Suspense } from 'react';
+import { Suspense, useState } from 'react';
 import SimpleImage from '@/components/home/hero-image';
 import { AgnosticBackground } from '@/components/home/agnostic-background';
 import { useTranslation } from '@/lib/utils/translation-context';
@@ -19,11 +19,45 @@ interface HeroProps {
   };
 }
 
+// Function to get a random title index from session storage or generate new one
+const getSessionTitleIndex = (): number => {
+  // Check if we're in a browser environment
+  if (typeof window === 'undefined') {
+    return 0;
+  }
+
+  try {
+    // Try to get existing index from session storage
+    const stored = sessionStorage.getItem('hero-title-index');
+    if (stored !== null) {
+      const index = parseInt(stored, 10);
+      // Validate that it's a number between 0 and 4
+      if (!isNaN(index) && index >= 0 && index <= 4) {
+        return index;
+      }
+    }
+
+    // Generate a new random index (0-4) and store it
+    const randomIndex = Math.floor(Math.random() * 5);
+    sessionStorage.setItem('hero-title-index', randomIndex.toString());
+    return randomIndex;
+  } catch {
+    // Fallback if sessionStorage is not available
+    return 0;
+  }
+};
+
 function Hero({ dashboardImage, mobileDashboardImage }: HeroProps) {
   const { currentLanguage } = useTranslation();
+  // Use useState with function initializer - only runs once on mount
+  const [titleIndex] = useState<number>(() => getSessionTitleIndex());
 
   // Create t function that uses currentLanguage (same pattern as header.tsx)
   const t = (key: string) => String(translate(key, currentLanguage));
+
+  // Get all title variations
+  const titles = translate('hero.titles', currentLanguage);
+  const title = Array.isArray(titles) && titles[titleIndex] ? titles[titleIndex] : t('hero.titles.0');
 
   return (
     <section className="relative max-w-7xl mx-auto pl-2 pr-4 py-2 md:py-12 lg:py-16 xl:py-28">
@@ -34,7 +68,7 @@ function Hero({ dashboardImage, mobileDashboardImage }: HeroProps) {
           {/* Hero content */}
           <div className="space-y-4">
             <h1 className="text-4xl font-normal tracking-tighter text-left text-zinc-800 dark:text-white md:text-5xl max-w-7xl whitespace-pre-line">
-              {t('hero.title') as string}
+              {title as string}
             </h1>
           </div>
         </div>
