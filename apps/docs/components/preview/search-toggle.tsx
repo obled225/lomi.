@@ -6,7 +6,7 @@ import type { ComponentProps } from 'react';
 import type React from 'react';
 import { Search } from 'lucide-react';
 import { useSearchContext } from 'fumadocs-ui/provider';
-import { useTranslation } from '@/lib/contexts/translation-context';
+import { useTranslation } from '@/lib/utils/translation-context';
 import { t as translate } from '@/lib/i18n/translations';
 import { cn } from '@/lib/utils/cn';
 import { type ButtonProps, buttonVariants } from '@/components/ui/button';

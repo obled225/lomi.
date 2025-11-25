@@ -5,7 +5,7 @@
 import React, { type HTMLAttributes, useEffect, useState } from 'react';
 import Image from 'next/image';
 import { cn } from '@/lib/utils/cn';
-import { fetchContributors, type Contributor } from '@/lib/get-contributors';
+import { fetchContributors, type Contributor } from '@/lib/utils/get-contributors';
 import { t } from '@/lib/i18n/translations';
 
 export interface ContributorCounterProps

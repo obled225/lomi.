@@ -3,7 +3,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useTranslation } from '@/lib/contexts/translation-context';
+import { useTranslation } from '@/lib/utils/translation-context';
 import mixpanelService from '@/lib/mixpanel/client';
 
 export function useHomePageInit() {

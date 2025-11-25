@@ -3,7 +3,7 @@
 import { Section, SectionHeader } from '@/components/ui/section';
 import { Card, CardContent } from '@/components/ui/card';
 import { motion } from 'framer-motion';
-import { useTranslation } from '@/lib/contexts/translation-context';
+import { useTranslation } from '@/lib/utils/translation-context';
 import { t } from '@/lib/i18n/translations';
 import {
   AgnosticBackground,
@@ -12,7 +12,7 @@ import {
 import ContributorCounter from './contributor-counter';
 import Image from 'next/image';
 
-export function Features() {
+export function AddOns() {
   const { currentLanguage } = useTranslation();
   return (
     <Section className="mb-8 lg:mb-28">
@@ -48,35 +48,35 @@ export function Features() {
                     <path d="M18.665 21.978C16.758 23.255 14.465 24 12 24 5.377 24 0 18.623 0 12S5.377 0 12 0s12 5.377 12 12c0 3.583-1.574 6.801-4.067 9.001L9.219 7.2H7.2v9.596h1.615V9.251l9.85 12.727Zm-3.332-8.533 1.6 2.061V7.2h-1.6v6.245Z" />
                   </svg>
                   <Image
-                    src="/sdks/go.webp"
+                    src="/random/go.webp"
                     alt="Go"
                     width={24}
                     height={24}
                     className="size-6"
                   />
                   <Image
-                    src="/sdks/js.webp"
+                    src="/random/js.webp"
                     alt="JavaScript"
                     width={24}
                     height={24}
                     className="size-6"
                   />
                   <Image
-                    src="/sdks/laravel.webp"
+                    src="/random/laravel.webp"
                     alt="Laravel"
                     width={24}
                     height={24}
                     className="size-6"
                   />
                   <Image
-                    src="/sdks/python.webp"
+                    src="/random/python.webp"
                     alt="Python"
                     width={24}
                     height={24}
                     className="size-6"
                   />
                   <Image
-                    src="/sdks/ts.webp"
+                    src="/random/ts.webp"
                     alt="TypeScript"
                     width={24}
                     height={24}

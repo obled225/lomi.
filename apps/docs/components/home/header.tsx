@@ -15,7 +15,7 @@ import { IntegrationsDropdown } from '@/components/home/dropdowns/products-dropd
 import { DocumentationDropdown } from '@/components/home/dropdowns/documentation-dropdown';
 import { playClickSound } from '@/lib/utils/sound';
 import { useAuth } from '@/lib/hooks/use-auth';
-import { useTranslation } from '@/lib/contexts/translation-context';
+import { useTranslation } from '@/lib/utils/translation-context';
 import { t as translate } from '@/lib/i18n/translations';
 import { Logo } from '@/lib/utils/logo';
 import { LargeSearchToggle } from '@/components/preview/search-toggle';

@@ -10,7 +10,7 @@ import type { Post } from '@/lib/sanity/types';
 import { urlFor } from '@/lib/sanity/client';
 import { motion } from 'framer-motion';
 import type { PortableTextBlock } from '@portabletext/types';
-import { useTranslation } from '@/lib/contexts/translation-context';
+import { useTranslation } from '@/lib/utils/translation-context';
 import { t } from '@/lib/i18n/translations';
 import Spinner from '@/components/ui/spinner';
 import { Button } from '@/components/ui/button';

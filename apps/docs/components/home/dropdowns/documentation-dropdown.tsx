@@ -8,7 +8,7 @@ import { animations, LottieAnimationData } from '@/lib/utils/lottie-animations';
 import { playClickSound } from '@/lib/utils/sound';
 import { Card, CardHeader, CardContent } from '@/components/ui/card';
 import { InfoBox } from '@/components/ui/info-box';
-import { useTranslation } from '@/lib/contexts/translation-context';
+import { useTranslation } from '@/lib/utils/translation-context';
 import { t as translate } from '@/lib/i18n/translations';
 
 type DocCard = {

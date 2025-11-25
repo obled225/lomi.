@@ -7,7 +7,7 @@ import { motion } from 'framer-motion';
 import { Mail } from 'lucide-react';
 import { cn } from '@/lib/utils/cn';
 import { Button } from '@/components/ui/button';
-import { useTranslation } from '@/lib/contexts/translation-context';
+import { useTranslation } from '@/lib/utils/translation-context';
 import { t, getTranslations } from '@/lib/i18n/translations';
 import { playClickSound } from '@/lib/utils/sound';
 import {

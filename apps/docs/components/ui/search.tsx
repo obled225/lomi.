@@ -21,7 +21,7 @@ import {
 import { ChevronDown } from 'lucide-react';
 import { buttonVariants } from 'fumadocs-ui/components/ui/button';
 import { cn } from '@/lib/utils/cn';
-import { useTranslation } from '@/lib/contexts/translation-context';
+import { useTranslation } from '@/lib/utils/translation-context';
 import { t as translate } from '@/lib/i18n/translations';
 import { orama } from '@/lib/orama/client';
 import type { SortedResult } from 'fumadocs-core/server';
@@ -135,8 +135,8 @@ export default function CustomSearchDialog(props: SharedProps) {
             // Add breadcrumb context to the page title
             const breadcrumbText =
               doc.breadcrumbs &&
-              Array.isArray(doc.breadcrumbs) &&
-              doc.breadcrumbs.length > 0
+                Array.isArray(doc.breadcrumbs) &&
+                doc.breadcrumbs.length > 0
                 ? doc.breadcrumbs.join(' › ') + ' › '
                 : '';
 

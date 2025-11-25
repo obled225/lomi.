@@ -3,7 +3,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useTranslation } from '@/lib/contexts/translation-context';
+import { useTranslation } from '@/lib/utils/translation-context';
 import { t } from '@/lib/i18n/translations';
 import BusinessOutreach from '@/components/preview/business-outreach';
 import PricingDetails from './pricing-details';

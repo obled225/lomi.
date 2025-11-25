@@ -5,7 +5,7 @@
 import React, { memo, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { languages } from '@/lib/i18n/config';
-import { useTranslation } from '@/lib/contexts/translation-context';
+import { useTranslation } from '@/lib/utils/translation-context';
 import { playClickSound } from '@/lib/utils/sound';
 
 interface LanguageSwitcherProps {

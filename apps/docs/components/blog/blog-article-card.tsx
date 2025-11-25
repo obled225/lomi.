@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { urlFor } from '@/lib/sanity/client';
-import { useTranslation } from '@/lib/contexts/translation-context';
+import { useTranslation } from '@/lib/utils/translation-context';
 import { t } from '@/lib/i18n/translations';
 import Image from 'next/image';
 import Link from 'next/link';

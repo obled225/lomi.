@@ -6,7 +6,7 @@ import { RootProvider } from 'fumadocs-ui/provider';
 import dynamic from 'next/dynamic';
 import type { ReactNode } from 'react';
 import { TooltipProvider } from '@radix-ui/react-tooltip';
-import { TranslationProvider } from '@/lib/contexts/translation-context';
+import { TranslationProvider } from '@/lib/utils/translation-context';
 import { GithubStarsProvider } from '@/lib/hooks/use-github-stars';
 import { Toaster } from 'sonner';
 

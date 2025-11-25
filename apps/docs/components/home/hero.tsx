@@ -3,16 +3,16 @@
 import { Suspense } from 'react';
 import SimpleImage from '@/components/home/hero-image';
 import { AgnosticBackground } from '@/components/home/agnostic-background';
-import { useTranslation } from '@/lib/contexts/translation-context';
+import { useTranslation } from '@/lib/utils/translation-context';
 import { t as translate } from '@/lib/i18n/translations';
 
 interface HeroProps {
   dashboardImage?:
-    | string
-    | {
-        light: string;
-        dark: string;
-      };
+  | string
+  | {
+    light: string;
+    dark: string;
+  };
   mobileDashboardImage?: {
     light: string;
     dark: string;

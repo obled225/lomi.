@@ -7,7 +7,7 @@ import { animations, LottieAnimationData } from '@/lib/utils/lottie-animations';
 import { useTheme } from '@/lib/hooks/use-theme';
 import { playClickSound } from '@/lib/utils/sound';
 import { Card, CardHeader, CardContent } from '@/components/ui/card';
-import { useTranslation } from '@/lib/contexts/translation-context';
+import { useTranslation } from '@/lib/utils/translation-context';
 import { t as translate } from '@/lib/i18n/translations';
 
 type UseCase = {
@@ -272,11 +272,10 @@ export function IntegrationsDropdown({
                       </div>
                     </div>
                     <p
-                      className={`text-sm font-semibold leading-tight flex-1 ${
-                        hoveredIcon === `feature-${index}`
+                      className={`text-sm font-semibold leading-tight flex-1 ${hoveredIcon === `feature-${index}`
                           ? 'text-zinc-900 dark:text-zinc-100'
                           : 'text-zinc-600 dark:text-zinc-400'
-                      }`}
+                        }`}
                     >
                       {feature.name}
                     </p>
@@ -329,11 +328,10 @@ export function IntegrationsDropdown({
                   </div>
                   <div className="flex-1 min-w-0 pl-1.5">
                     <p
-                      className={`text-sm font-semibold leading-tight ${
-                        hoveredIcon === product.id
+                      className={`text-sm font-semibold leading-tight ${hoveredIcon === product.id
                           ? 'text-zinc-900 dark:text-zinc-100'
                           : 'text-zinc-600 dark:text-zinc-400'
-                      }`}
+                        }`}
                     >
                       {product.name}
                     </p>
@@ -342,9 +340,8 @@ export function IntegrationsDropdown({
                     </p>
                   </div>
                   <ChevronDown
-                    className={`h-3 w-3 text-muted-foreground transition-transform shrink-0 ${
-                      expandedSections.includes(product.id) ? 'rotate-180' : ''
-                    }`}
+                    className={`h-3 w-3 text-muted-foreground transition-transform shrink-0 ${expandedSections.includes(product.id) ? 'rotate-180' : ''
+                      }`}
                   />
                 </div>
               </CardHeader>

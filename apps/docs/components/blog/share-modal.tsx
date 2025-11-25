@@ -17,7 +17,7 @@ import {
   LinkedInIcon,
 } from '@/components/preview/icons';
 import { Send as Telegram, Mail, Copy, Check } from 'lucide-react';
-import { useTranslation } from '@/lib/contexts/translation-context';
+import { useTranslation } from '@/lib/utils/translation-context';
 import { t } from '@/lib/i18n/translations';
 import { toast } from '@/components/ui/toast';
 import { playCompletionSound } from '@/lib/utils/sound';

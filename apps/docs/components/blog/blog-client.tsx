@@ -6,7 +6,7 @@ import { useEffect, useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import type { Post } from '@/lib/sanity/types';
 import { motion } from 'framer-motion';
-import { useTranslation } from '@/lib/contexts/translation-context';
+import { useTranslation } from '@/lib/utils/translation-context';
 import { t } from '@/lib/i18n/translations';
 import Spinner from '@/components/ui/spinner';
 import { ChevronLeft, ChevronRight } from 'lucide-react';

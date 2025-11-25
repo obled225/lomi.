@@ -1,7 +1,7 @@
 /* @proprietary license */
 
 import Link from 'next/link';
-import { useTranslation } from '@/lib/contexts/translation-context';
+import { useTranslation } from '@/lib/utils/translation-context';
 import { t } from '@/lib/i18n/translations';
 import { playClickSound } from '@/lib/utils/sound';
 

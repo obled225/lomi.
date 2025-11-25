@@ -3,7 +3,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useTranslation } from '@/lib/contexts/translation-context';
+import { useTranslation } from '@/lib/utils/translation-context';
 import { t, getTranslations } from '@/lib/i18n/translations';
 
 export default function ChangelogClient() {

@@ -1,21 +1,66 @@
-MIT License
+  This project is mostly licensed under the GNU Affero General Public 
+License (AGPL) as described below. However, certain files within this 
+project are licensed under a different commercial license. These files 
+are clearly marked with the following comment at the top of the file: 
+/* @proprietary license */ Files with this comment are not licensed 
+under the AGPL v3, but instead are subject to the commercial license 
+terms defined later in this file.
 
-Copyright (c) 2025 lomi.
+--------------------------------------------------------------------
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+  Copyright (C) 2025 lomi. (lomi. Inc and lomi.africa S.A.R.L. collectively)
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+  This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published
+by the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+  You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/agpl-3.0.en.html>.
+
+--------------------------------------------------------------------
+
+  The lomi. Commercial License (the "Commercial License") 
+  Copyright (c) 2025—present lomi. (lomi. Inc and lomi.africa S.A.R.L. collectively)
+
+  With regard to lomi. (lomi. Inc and lomi.africa S.A.R.L. collectively)'s Software
+and its files under the "Commercial License" : This part of the software and associated
+documentation files (the "Software") may only be used in production; they are the
+property of lomi. (lomi. Inc and lomi.africa S.A.R.L. collectively), registered in
+Delaware, United States and Côte d'Ivoire, respectively. The Software is protected
+by copyright laws, if you (and any entity that you represent) have agreed to, and are
+in compliance with, the Terms available at https://lomi.africa/terms, or other agreements
+governing the use of the Software, as mutually agreed by you and lomi., and otherwise
+have a valid lomi. software account.
+
+Subject to the foregoing sentence, you are free to modify this Software and publish
+patches to the Software. You agree that lomi. and/or its licensors (as applicable)
+retain all right, title and interest in and to all such modifications and/or patches,
+and all such modifications and/or patches may only be used, copied, modified, displayed,
+distributed, or otherwise exploited as part of the lomi. payment processing
+platform, with transaction fees applied as per the lomi. pricing policy. 
+
+Notwithstanding the foregoing, you may copy and modify the Software for development
+and testing purposes, without incurring any fees. You agree that lomi. and/or
+its licensors (as applicable) retain all right, title and interest in and to all 
+such modifications. You are not granted any other rights beyond what is expressly
+stated herein.
+Subject to the foregoing, it is forbidden to copy, merge, publish, distribute, 
+sublicense, and/or sell the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+For all third party components incorporated into the lomi. Software, those
+components are licensed under the original license provided by the owner of the
+applicable component.

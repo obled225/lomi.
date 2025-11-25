@@ -5,7 +5,7 @@
 import { Hero } from '@/components/home/hero';
 import { FeaturesSection } from '@/components/home/features-section';
 import { CareersSection } from '@/components/home/careers-section';
-import { Features } from '@/components/home/features';
+import { AddOns } from '@/components/home/add-ons';
 import { EarlyMemberPricing } from '@/components/home/early-member-pricing';
 import { useHomePageInit } from '@/lib/hooks/use-home-page-init';
 
@@ -21,7 +21,7 @@ export function HomePageClient() {
         mobileDashboardImage={getMobileDashboardImage()}
       />
       <FeaturesSection />
-      <Features />
+      <AddOns />
       <CareersSection mobileJoinUsImage={getMobileJoinUsImage()} />
       <EarlyMemberPricing />
     </>

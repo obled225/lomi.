@@ -3,7 +3,7 @@
 'use client';
 
 import { ChevronDown } from 'lucide-react';
-import { useTranslation } from '@/lib/contexts/translation-context';
+import { useTranslation } from '@/lib/utils/translation-context';
 import { t as translate } from '@/lib/i18n/translations';
 import { playClickSound } from '@/lib/utils/sound';
 

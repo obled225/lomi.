@@ -7,7 +7,7 @@ import { motion } from 'framer-motion';
 import { JobApplicationForm } from './job-application-form';
 import { Badge } from '@/components/ui/badge';
 import Spinner from '@/components/ui/spinner';
-import { useTranslation } from '@/lib/contexts/translation-context';
+import { useTranslation } from '@/lib/utils/translation-context';
 import { t } from '@/lib/i18n/translations';
 import { getJobBySlug, Job } from '@/lib/supabase/queries';
 

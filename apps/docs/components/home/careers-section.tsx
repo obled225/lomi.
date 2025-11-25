@@ -1,6 +1,6 @@
 /* @proprietary license */
 
-import { useTranslation } from '@/lib/contexts/translation-context';
+import { useTranslation } from '@/lib/utils/translation-context';
 import { Button } from '@/components/ui/button';
 import SimpleImage from '@/components/home/hero-image';
 import { t } from '@/lib/i18n/translations';

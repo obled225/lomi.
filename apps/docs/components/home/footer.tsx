@@ -21,7 +21,7 @@ import {
 import { Check } from 'lucide-react';
 import { ProductHuntBadge } from '@/components/preview/product-hunt-badge';
 import { playClickSound as playSound } from '@/lib/utils/sound';
-import { useTranslation } from '@/lib/contexts/translation-context';
+import { useTranslation } from '@/lib/utils/translation-context';
 import { t as translate } from '@/lib/i18n/translations';
 
 const GITHUB_REPO_URL = 'https://github.com/lomiafrica/lomi./';
@@ -234,7 +234,7 @@ export function Footer() {
                       title="lomi. is PCI DSS level 4 certified"
                     >
                       <Image
-                        src="/regulatory/PCI_DSS.webp"
+                        src="/random/PCI_DSS.webp"
                         alt="PCI DSS Certified"
                         width={120}
                         height={70}
@@ -244,7 +244,7 @@ export function Footer() {
                     {/* SSL Icon */}
                     <div className="group" title="lomi. is SSL secure">
                       <Image
-                        src="/regulatory/SSL.webp"
+                        src="/random/SSL.webp"
                         alt="SSL Secured"
                         width={69}
                         height={27}
