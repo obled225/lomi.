@@ -60,7 +60,7 @@ type CheckoutSessions struct {
 	PriceId *string `json:"price_id,omitempty"`
 	// Unique identifier (UUID format)
 	ProductId *string `json:"product_id,omitempty"`
-	PublicDescription *string `json:"public_description,omitempty"`
+	PublicDescription *string `json:"description,omitempty"`
 	QrCodeData map[string]interface{} `json:"qr_code_data,omitempty"`
 	QrCodeType *string `json:"qr_code_type,omitempty"`
 	Quantity *float64 `json:"quantity,omitempty"`
@@ -1298,7 +1298,7 @@ func (o CheckoutSessions) ToMap() (map[string]interface{}, error) {
 		toSerialize["product_id"] = o.ProductId
 	}
 	if !IsNil(o.PublicDescription) {
-		toSerialize["public_description"] = o.PublicDescription
+		toSerialize["description"] = o.PublicDescription
 	}
 	if !IsNil(o.QrCodeData) {
 		toSerialize["qr_code_data"] = o.QrCodeData

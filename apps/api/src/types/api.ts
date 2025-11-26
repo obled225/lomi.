@@ -217,7 +217,7 @@ export interface checkout_sessions extends Record<string, unknown> {
   payment_request_id?: string;
   price_id?: string;
   product_id?: string;
-  public_description?: string;
+  description?: string;
   qr_code_data?: Record<string, unknown>;
   qr_code_type?: string;
   quantity?: number;
@@ -256,7 +256,7 @@ export interface checkout_sessions_create extends Record<string, unknown> {
   payment_request_id?: string;
   price_id?: string;
   product_id?: string;
-  public_description?: string;
+  description?: string;
   qr_code_data?: Record<string, unknown>;
   qr_code_type?: string;
   quantity?: number;
@@ -295,7 +295,7 @@ export interface checkout_sessions_update extends Record<string, unknown> {
   payment_request_id?: string;
   price_id?: string;
   product_id?: string;
-  public_description?: string;
+  description?: string;
   qr_code_data?: Record<string, unknown>;
   qr_code_type?: string;
   quantity?: number;
@@ -715,7 +715,7 @@ export interface payment_links extends Record<string, unknown> {
   price_id?: string;
   private_description?: string;
   product_id?: string;
-  public_description?: string;
+  description?: string;
   quantity?: number;
   success_url?: string;
   title?: string;
@@ -743,7 +743,7 @@ export interface payment_links_create extends Record<string, unknown> {
   price_id?: string;
   private_description?: string;
   product_id?: string;
-  public_description?: string;
+  description?: string;
   quantity?: number;
   success_url?: string;
   title?: string;
@@ -771,7 +771,7 @@ export interface payment_links_update extends Record<string, unknown> {
   price_id?: string;
   private_description?: string;
   product_id?: string;
-  public_description?: string;
+  description?: string;
   quantity?: number;
   success_url?: string;
   title?: string;

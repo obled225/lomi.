@@ -60,7 +60,7 @@ const createPaymentLinkSchema = z
     product_id: z.string().uuid().optional(),
     plan_id: z.string().uuid().optional(),
     title: z.string(),
-    public_description: z.string().optional(),
+    description: z.string().optional(),
     private_description: z.string().optional(),
     price: z.number().optional(),
     currency_code: z.nativeEnum(CurrencyCode),
@@ -105,7 +105,7 @@ const updatePaymentLinkApiSchema = z.object({
   allow_coupon_code: z.boolean().optional(),
   metadata: z.record(z.any()).optional(),
   // Explicitly exclude fields not updatable via API:
-  // title, public_description, private_description, price, allow_quantity
+  // title, description, private_description, price, allow_quantity
 });
 
 /**
@@ -192,7 +192,7 @@ export const createPaymentLink = async (req: Request, res: Response) => {
         p_link_type: paymentLinkData.link_type,
         p_title: paymentLinkData.title,
         p_currency_code: paymentLinkData.currency_code,
-        p_public_description: paymentLinkData.public_description,
+        p_description: paymentLinkData.description,
         p_private_description: paymentLinkData.private_description,
         p_price: paymentLinkData.price,
         p_allowed_providers: paymentLinkData.allowed_providers || [],
@@ -570,7 +570,7 @@ export const updatePaymentLink = async (req: Request, res: Response) => {
         // Fields NOT updatable via API - pass null to RPC:
         p_is_active: null, // Explicitly pass null for is_active
         p_title: null,
-        p_public_description: null,
+        p_description: null,
         p_private_description: null,
         p_price: null,
         p_allow_quantity: null, // Pass null for allow_quantity as well

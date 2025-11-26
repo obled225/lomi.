@@ -75,7 +75,7 @@ export type checkout_sessions = {
      * Unique identifier (UUID format)
      */
     product_id?: string;
-    public_description?: string;
+    description?: string;
     qr_code_data?: Record<string, any>;
     qr_code_type?: string;
     quantity?: number;

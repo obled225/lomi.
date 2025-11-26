@@ -37,7 +37,7 @@ Creates a new payment link of the specified type.
 | `product_id`          | string (UUID)    | Yes, if `link_type` is `product` | ID of the [Product](/docs/reference/payments/products) to link.                                   |
 | `plan_id`             | string (UUID)    | Yes, if `link_type` is `plan`    | ID of the [Plan](/docs/reference/payments/subscriptions) to link.                                 |
 | `price`               | number           | Yes, if `link_type` is `instant` | Amount to collect (smallest currency unit) for an `instant` link.                                 |
-| `public_description`  | string           | No                               | Public description displayed on the payment page.                                                 |
+| `description`  | string           | No                               | Public description displayed on the payment page.                                                 |
 | `private_description` | string           | No                               | Internal description for merchant reference (not shown to customer).                              |
 | `allowed_providers`   | array (string)   | No                               | Array of payment provider codes (e.g., `["WAVE", "ORANGE"]`). If omitted, uses merchant defaults. |
 | `allow_coupon_code`   | boolean          | No                               | Allow coupon codes to be applied (default: `false`).                                              |
@@ -55,7 +55,7 @@ Creates a new payment link of the specified type.
   "title": "Donation",
   "price": 5000,
   "currency_code": "XOF",
-  "public_description": "Support our cause!",
+  "description": "Support our cause!",
   "success_url": "https://example.com/thank-you"
 }
 ```
@@ -78,7 +78,7 @@ Creates a new payment link of the specified type.
     "plan_name": null,
     "plan_amount": null,
     "title": "Donation",
-    "public_description": "Support our cause!",
+    "description": "Support our cause!",
     "private_description": null,
     "price": 5000.0,
     "currency_code": "XOF",

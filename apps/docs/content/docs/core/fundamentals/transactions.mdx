@@ -32,7 +32,7 @@ async function createOneTimeCheckout() {
       amount: 10000, // e.g., 10.O00 XOF (15$)
       currency_code: 'XOF',
       title: 'Your Order - #ORD-12345', // Displayed on checkout page
-      public_description: 'Payment for the items in your cart.', // Displayed on checkout page
+      description: 'Payment for the items in your cart.', // Displayed on checkout page
       customer_email: 'customer@email.com', // Pre-fills email field if needed while this can be entered during checkout (optional)
       customer_name: 'John Doe', // Pre-fills name field (optional)
       customer_phone: '+2250102030405', // Pre-fills phone field (optional)
@@ -98,7 +98,7 @@ async function createProductPaymentLink() {
       product_id: YOUR_PRODUCT_ID,
       // title and currency_code are inferred from the product,
       // Optional parameters for customization:
-      public_description:
+      description:
         'Get our premium widget at a special price through this link.',
       allowed_providers: ['WAVE', 'ORANGE'],
       allow_coupon_code: true,

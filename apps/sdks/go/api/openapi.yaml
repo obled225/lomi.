@@ -4495,7 +4495,7 @@ components:
       description: checkout sessions resource object
       example:
         metadata: "{}"
-        public_description: public_description
+        description: description
         spi_qr_code_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         payment_link_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         price_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -4609,7 +4609,7 @@ components:
           description: Unique identifier (UUID format)
           format: uuid
           type: string
-        public_description:
+        description:
           type: string
         qr_code_data:
           type: object
@@ -4712,7 +4712,7 @@ components:
           description: Unique identifier (UUID format)
           format: uuid
           type: string
-        public_description:
+        description:
           type: string
         qr_code_data:
           type: object
@@ -4810,7 +4810,7 @@ components:
           description: Unique identifier (UUID format)
           format: uuid
           type: string
-        public_description:
+        description:
           type: string
         qr_code_data:
           type: object
@@ -5826,7 +5826,7 @@ components:
         metadata: "{}"
         is_active: true
         quantity: 6.027456183070403
-        public_description: public_description
+        description: description
         price_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         created_at: 2000-01-23T04:56:07.000+00:00
         allow_coupon_code: true
@@ -5905,7 +5905,7 @@ components:
           description: Unique identifier (UUID format)
           format: uuid
           type: string
-        public_description:
+        description:
           type: string
         quantity:
           format: double
@@ -5974,7 +5974,7 @@ components:
           description: Unique identifier (UUID format)
           format: uuid
           type: string
-        public_description:
+        description:
           type: string
         quantity:
           format: double
@@ -6038,7 +6038,7 @@ components:
           description: Unique identifier (UUID format)
           format: uuid
           type: string
-        public_description:
+        description:
           type: string
         quantity:
           format: double
@@ -9025,7 +9025,7 @@ components:
           limit: 0
         data:
         - metadata: "{}"
-          public_description: public_description
+          description: description
           spi_qr_code_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           payment_link_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           price_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -9060,7 +9060,7 @@ components:
           cancel_url: https://openapi-generator.tech
           status: status
         - metadata: "{}"
-          public_description: public_description
+          description: description
           spi_qr_code_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           payment_link_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           price_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -9113,7 +9113,7 @@ components:
           metadata: "{}"
           is_active: true
           quantity: 6.027456183070403
-          public_description: public_description
+          description: description
           price_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           created_at: 2000-01-23T04:56:07.000+00:00
           allow_coupon_code: true
@@ -9137,7 +9137,7 @@ components:
           metadata: "{}"
           is_active: true
           quantity: 6.027456183070403
-          public_description: public_description
+          description: description
           price_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           created_at: 2000-01-23T04:56:07.000+00:00
           allow_coupon_code: true

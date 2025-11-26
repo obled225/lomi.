@@ -57,7 +57,7 @@ export type payment_links = {
      * Unique identifier (UUID format)
      */
     product_id?: string;
-    public_description?: string;
+    description?: string;
     quantity?: number;
     /**
      * URL/URI

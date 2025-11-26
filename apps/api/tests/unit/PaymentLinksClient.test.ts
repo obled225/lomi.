@@ -23,7 +23,7 @@ describe('PaymentLinksClient', () => {
       link_type: Types.PaymentLinkType.product,
       product_id: '123e4567-e89b-12d3-a456-426614174001',
       title: 'Test Product Link',
-      public_description: 'A test payment link for a product',
+      description: 'A test payment link for a product',
       private_description: 'Internal notes about this link',
       currency_code: Types.CurrencyCode.USD,
       allowed_providers: [Types.ProviderCode.WAVE, Types.ProviderCode.ORANGE],
@@ -143,7 +143,7 @@ describe('PaymentLinksClient', () => {
       url: 'https://pay.test.com/p/123e4567',
       product_id: '123e4567-e89b-12d3-a456-426614174003',
       title: 'Test Product Link',
-      public_description: 'A test payment link',
+      description: 'A test payment link',
       private_description: 'Internal notes',
       currency_code: Types.CurrencyCode.USD,
       allowed_providers: [Types.ProviderCode.WAVE],
@@ -186,7 +186,7 @@ describe('PaymentLinksClient', () => {
     const mockLinkId = '123e4567-e89b-12d3-a456-426614174001';
     const mockUpdateData = {
       title: 'Updated Link Title',
-      public_description: 'Updated description',
+      description: 'Updated description',
       private_description: 'Updated internal notes',
       currency_code: Types.CurrencyCode.EUR,
       allowed_providers: [Types.ProviderCode.ORANGE],

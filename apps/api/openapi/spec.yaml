@@ -236,7 +236,7 @@ components:
           type: string
           format: uuid
           description: Unique identifier (UUID format)
-        public_description:
+        description:
           type: string
         qr_code_data:
           type: object
@@ -338,7 +338,7 @@ components:
           type: string
           format: uuid
           description: Unique identifier (UUID format)
-        public_description:
+        description:
           type: string
         qr_code_data:
           type: object
@@ -434,7 +434,7 @@ components:
           type: string
           format: uuid
           description: Unique identifier (UUID format)
-        public_description:
+        description:
           type: string
         qr_code_data:
           type: object
@@ -1382,7 +1382,7 @@ components:
           type: string
           format: uuid
           description: Unique identifier (UUID format)
-        public_description:
+        description:
           type: string
         quantity:
           type: number
@@ -1450,7 +1450,7 @@ components:
           type: string
           format: uuid
           description: Unique identifier (UUID format)
-        public_description:
+        description:
           type: string
         quantity:
           type: number
@@ -1512,7 +1512,7 @@ components:
           type: string
           format: uuid
           description: Unique identifier (UUID format)
-        public_description:
+        description:
           type: string
         quantity:
           type: number

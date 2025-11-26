@@ -44,7 +44,7 @@ type PaymentLinksCreate struct {
 	PrivateDescription *string `json:"private_description,omitempty"`
 	// Unique identifier (UUID format)
 	ProductId *string `json:"product_id,omitempty"`
-	PublicDescription *string `json:"public_description,omitempty"`
+	PublicDescription *string `json:"description,omitempty"`
 	Quantity *float64 `json:"quantity,omitempty"`
 	// URL/URI
 	SuccessUrl *string `json:"success_url,omitempty"`
@@ -731,7 +731,7 @@ func (o PaymentLinksCreate) ToMap() (map[string]interface{}, error) {
 		toSerialize["product_id"] = o.ProductId
 	}
 	if !IsNil(o.PublicDescription) {
-		toSerialize["public_description"] = o.PublicDescription
+		toSerialize["description"] = o.PublicDescription
 	}
 	if !IsNil(o.Quantity) {
 		toSerialize["quantity"] = o.Quantity

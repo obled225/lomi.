@@ -53,7 +53,7 @@ const checkoutSessionSchema = z.object({
   amount: z.number().positive(),
   currency_code: z.nativeEnum(CurrencyCode),
   title: z.string().optional(),
-  public_description: z.string().optional(),
+  description: z.string().optional(),
   customer_email: z.string().email().optional(),
   customer_name: z.string().optional(),
   customer_phone: z.string().optional(),
