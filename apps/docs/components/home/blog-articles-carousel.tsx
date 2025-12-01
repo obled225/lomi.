@@ -66,7 +66,7 @@ export function BlogArticlesCarousel() {
                                             <div className="grow flex flex-col">
                                                 {post.publishedAt && (
                                                     <p className="text-zinc-500 dark:text-zinc-400 text-xs mb-3">
-                                                        {translations.blog.article} ·{' '}
+                                                        {t('blog.article', currentLanguage)} ·{' '}
                                                         {new Date(post.publishedAt).toLocaleDateString(
                                                             currentLanguage === 'zh'
                                                                 ? 'zh-CN'
