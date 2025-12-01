@@ -27,6 +27,16 @@ const eslintConfig = [
   js.configs.recommended,
   ...compat.extends('next/core-web-vitals'),
   {
+    files: ['**/*.js'],
+    languageOptions: {
+      ecmaVersion: 'latest',
+      sourceType: 'module',
+    },
+    rules: {
+      'no-console': 'off',
+    },
+  },
+  {
     files: ['**/*.ts', '**/*.tsx'],
     languageOptions: {
       parser: tsParser,
@@ -45,6 +55,12 @@ const eslintConfig = [
       '@next/next/no-html-link-for-pages': 'off',
       'react/jsx-key': 'off',
       'import/no-anonymous-default-export': 'off',
+    },
+  },
+  {
+    files: ['next-env.d.ts'],
+    rules: {
+      '@typescript-eslint/triple-slash-reference': 'off',
     },
   },
 ];
