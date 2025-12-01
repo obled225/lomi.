@@ -8,11 +8,11 @@ import { t as translate } from '@/lib/i18n/translations';
 
 interface HeroProps {
   dashboardImage?:
-  | string
-  | {
-    light: string;
-    dark: string;
-  };
+    | string
+    | {
+        light: string;
+        dark: string;
+      };
   mobileDashboardImage?: {
     light: string;
     dark: string;
@@ -65,7 +65,10 @@ function Hero({ dashboardImage, mobileDashboardImage }: HeroProps) {
 
   // Get all title variations
   const titles = translate('hero.titles', currentLanguage);
-  const title = Array.isArray(titles) && titles[titleIndex] ? titles[titleIndex] : t('hero.titles.0');
+  const title =
+    Array.isArray(titles) && titles[titleIndex]
+      ? titles[titleIndex]
+      : t('hero.titles.0');
 
   return (
     <section className="relative max-w-7xl mx-auto pl-2 pr-4 py-2 md:py-12 lg:py-16 xl:py-28">

@@ -8,11 +8,11 @@ import { useTheme } from '@/lib/hooks/use-theme';
 
 interface SimpleImageProps {
   src:
-  | string
-  | {
-    light: string;
-    dark: string;
-  };
+    | string
+    | {
+        light: string;
+        dark: string;
+      };
   mobileSrc?: {
     light: string;
     dark: string;

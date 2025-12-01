@@ -10,8 +10,7 @@ import { EarlyMemberPricing } from '@/components/home/early-member-pricing';
 import { useHomePageInit } from '@/lib/hooks/use-home-page-init';
 
 export function HomePageClient() {
-  const { getDashboardImage, getMobileDashboardImage } =
-    useHomePageInit();
+  const { getDashboardImage, getMobileDashboardImage } = useHomePageInit();
 
   return (
     <>

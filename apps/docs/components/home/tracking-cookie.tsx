@@ -256,8 +256,9 @@ export default function CookieConsent() {
             <motion.div className="px-4 py-3 sm:px-5 sm:py-4 relative overflow-hidden w-full">
               <motion.div>
                 <p
-                  className={`mb-2 sm:mb-3 text-xs sm:text-sm text-left select-none ${resolvedTheme === 'dark' ? 'text-gray-300' : 'text-gray-700'
-                    }`}
+                  className={`mb-2 sm:mb-3 text-xs sm:text-sm text-left select-none ${
+                    resolvedTheme === 'dark' ? 'text-gray-300' : 'text-gray-700'
+                  }`}
                 >
                   {String(
                     t('components.tracking_cookie.message', currentLanguage),
@@ -266,8 +267,9 @@ export default function CookieConsent() {
                 <div className="flex flex-wrap gap-3 sm:gap-4">
                   <button
                     onMouseDown={handleAccept}
-                    className={`text-xs sm:text-sm hover:opacity-75 transition-colors font-medium ${resolvedTheme === 'dark' ? 'text-white' : 'text-gray-900'
-                      }`}
+                    className={`text-xs sm:text-sm hover:opacity-75 transition-colors font-medium ${
+                      resolvedTheme === 'dark' ? 'text-white' : 'text-gray-900'
+                    }`}
                   >
                     {String(
                       t('components.tracking_cookie.accept', currentLanguage),
@@ -275,10 +277,11 @@ export default function CookieConsent() {
                   </button>
                   <button
                     onMouseDown={handleDecline}
-                    className={`text-xs sm:text-sm hover:opacity-75 transition-colors ${resolvedTheme === 'dark'
+                    className={`text-xs sm:text-sm hover:opacity-75 transition-colors ${
+                      resolvedTheme === 'dark'
                         ? 'text-gray-500'
                         : 'text-gray-500'
-                      }`}
+                    }`}
                   >
                     {String(
                       t('components.tracking_cookie.decline', currentLanguage),

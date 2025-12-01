@@ -76,7 +76,9 @@ function ChangelogEntryCard({
 
             {/* Summary - First change or description */}
             <p className="text-zinc-600 dark:text-zinc-400 text-sm mb-6 line-clamp-3 grow">
-              {entry.changes.length > 0 ? entry.changes[0] : 'New release with improvements and fixes'}
+              {entry.changes.length > 0
+                ? entry.changes[0]
+                : 'New release with improvements and fixes'}
             </p>
           </div>
 
@@ -84,8 +86,11 @@ function ChangelogEntryCard({
           <div className="mt-auto flex justify-end">
             <div className="flex items-center text-primary text-sm font-normal">
               <span
-                className={`transition-all duration-300 ${hoveredCard === `changelog-${index}` ? 'opacity-100' : 'opacity-0'
-                  }`}
+                className={`transition-all duration-300 ${
+                  hoveredCard === `changelog-${index}`
+                    ? 'opacity-100'
+                    : 'opacity-0'
+                }`}
               >
                 {t('changelog.read', currentLanguage) as string}
               </span>
@@ -101,7 +106,10 @@ export function ChangelogCarousel() {
   const { currentLanguage } = useTranslation();
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
 
-  const changelogData = t('changelog.entries', currentLanguage) as unknown as ChangelogEntry[];
+  const changelogData = t(
+    'changelog.entries',
+    currentLanguage,
+  ) as unknown as ChangelogEntry[];
   const changelogEntries = changelogData || [];
 
   return (

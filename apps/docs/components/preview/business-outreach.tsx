@@ -77,8 +77,9 @@ export default function BusinessOutreach() {
             }}
           >
             <p
-              className={`mb-2 sm:mb-3 text-xs sm:text-sm text-left select-none ${resolvedTheme === 'dark' ? 'text-gray-300' : 'text-gray-700'
-                }`}
+              className={`mb-2 sm:mb-3 text-xs sm:text-sm text-left select-none ${
+                resolvedTheme === 'dark' ? 'text-gray-300' : 'text-gray-700'
+              }`}
             >
               {String(
                 t('components.business_outreach.message', currentLanguage),
@@ -87,8 +88,9 @@ export default function BusinessOutreach() {
             <div className="flex flex-wrap gap-3 sm:gap-4">
               <button
                 onMouseDown={handleReachOut}
-                className={`text-xs sm:text-sm hover:opacity-75 transition-colors font-medium ${resolvedTheme === 'dark' ? 'text-white' : 'text-gray-900'
-                  }`}
+                className={`text-xs sm:text-sm hover:opacity-75 transition-colors font-medium ${
+                  resolvedTheme === 'dark' ? 'text-white' : 'text-gray-900'
+                }`}
               >
                 {String(
                   t('components.business_outreach.reach_out', currentLanguage),
@@ -96,8 +98,9 @@ export default function BusinessOutreach() {
               </button>
               <button
                 onMouseDown={handleDismiss}
-                className={`text-xs sm:text-sm hover:opacity-75 transition-colors ${resolvedTheme === 'dark' ? 'text-gray-500' : 'text-gray-500'
-                  }`}
+                className={`text-xs sm:text-sm hover:opacity-75 transition-colors ${
+                  resolvedTheme === 'dark' ? 'text-gray-500' : 'text-gray-500'
+                }`}
               >
                 {String(
                   t('components.business_outreach.dismiss', currentLanguage),

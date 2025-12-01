@@ -349,7 +349,6 @@ export default function PricingDetails() {
                                 )}
                               </div>
                             )}
-
                           </div>
                         );
                       })}

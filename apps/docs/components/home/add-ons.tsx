@@ -17,10 +17,7 @@ export function AddOns() {
   return (
     <Section className="mb-8 lg:mb-28">
       <div className="max-w-7xl mx-auto pl-2 pr-4 py-2">
-        <SectionHeader
-          title={t('sdks.title')}
-          className="mb-6 md:mb-8"
-        />
+        <SectionHeader title={t('sdks.title')} className="mb-6 md:mb-8" />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -90,7 +87,9 @@ export function AddOns() {
           >
             <Card className="relative flex flex-col overflow-hidden z-2 rounded-sm h-[400px]">
               <CardContent className="p-6 flex flex-col h-full">
-                <h3 className="text-xl font-semibold mb-6">{t('sdks.communityDriven')}</h3>
+                <h3 className="text-xl font-semibold mb-6">
+                  {t('sdks.communityDriven')}
+                </h3>
                 <div className="flex-1 flex items-center justify-center">
                   <ContributorCounter
                     repoOwner="lomiafrica"

@@ -133,6 +133,6 @@ export function useHomePageInit() {
 
   return {
     getDashboardImage,
-    getMobileDashboardImage
+    getMobileDashboardImage,
   };
 }
