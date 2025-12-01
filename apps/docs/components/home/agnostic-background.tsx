@@ -49,6 +49,14 @@ interface AgnosticBackgroundProps {
     className?: string;
 }
 
+interface ContentAdoptionBackgroundProps {
+    className?: string;
+    softness?: number;
+    intensity?: number;
+    noise?: number;
+    minPixelRatio?: number;
+}
+
 
 export function AgnosticBackground({ variant = 'masked', className }: AgnosticBackgroundProps) {
     const { resolvedTheme } = useTheme();
@@ -201,6 +209,38 @@ export function AgnosticBackground({ variant = 'masked', className }: AgnosticBa
                 } ${className || ''}`}
         >
             {renderEffects()}
+        </div>
+    );
+}
+
+export function ContentAdoptionBackground({
+    className,
+    softness = 1,
+    intensity = 0.8,
+    noise = 0.3,
+    minPixelRatio = 1
+}: ContentAdoptionBackgroundProps) {
+    const { resolvedTheme } = useTheme();
+    const ref = useRef<HTMLDivElement>(null);
+    const visible = useIsVisible(ref);
+
+    return (
+        <div ref={ref} className={`absolute inset-0 -z-1 ${className || ''}`}>
+            <GrainGradient
+                className="size-full"
+                colors={
+                    resolvedTheme === 'dark'
+                        ? ['#0C4A6E', '#1E5A8A', '#2B77E6', '#4A9EF8', '#7DD3FC', '#E0F2FE00']
+                        : ['#56A5F9', '#4A9EF8', '#3B82F6', '#60A5FA', '#7DD3FC', '#93C5FD', '#DBEAFE00']
+                }
+                colorBack="#00000000"
+                softness={softness}
+                intensity={intensity}
+                noise={noise}
+                speed={visible ? 1 : 0}
+                shape="corners"
+                minPixelRatio={minPixelRatio}
+            />
         </div>
     );
 }

@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useTranslation } from '@/lib/utils/translation-context';
-import { getTranslations } from '@/lib/i18n/translations';
+import { t } from '@/lib/i18n/translations';
 import Link from 'next/link';
 import { playClickSound } from '@/lib/utils/sound';
 
@@ -28,7 +28,6 @@ function ChangelogEntryCard({
   onHover,
 }: ChangelogEntryCardProps) {
   const { currentLanguage } = useTranslation();
-  const translations = getTranslations(currentLanguage);
 
   return (
     <motion.div
@@ -49,7 +48,7 @@ function ChangelogEntryCard({
             {/* Date and Badge in same row */}
             <div className="flex justify-between items-center mb-3">
               <p className="text-zinc-500 dark:text-zinc-400 text-xs">
-                {translations.changelog.title} ·{' '}
+                {t('changelog.title', currentLanguage) as string} ·{' '}
                 {new Date(entry.date).toLocaleDateString(
                   currentLanguage === 'zh'
                     ? 'zh-CN'
@@ -82,16 +81,16 @@ function ChangelogEntryCard({
           </div>
 
           {/* Bottom section with read text */}
-            <div className="mt-auto flex justify-end">
-              <div className="flex items-center text-primary text-sm font-normal">
-                <span
-                  className={`transition-all duration-300 ${hoveredCard === `changelog-${index}` ? 'opacity-100' : 'opacity-0'
-                    }`}
-                >
-                  {translations.changelog.read}
-                </span>
-              </div>
+          <div className="mt-auto flex justify-end">
+            <div className="flex items-center text-primary text-sm font-normal">
+              <span
+                className={`transition-all duration-300 ${hoveredCard === `changelog-${index}` ? 'opacity-100' : 'opacity-0'
+                  }`}
+              >
+                {t('changelog.read', currentLanguage) as string}
+              </span>
             </div>
+          </div>
         </article>
       </Link>
     </motion.div>
@@ -102,11 +101,8 @@ export function ChangelogCarousel() {
   const { currentLanguage } = useTranslation();
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
 
-  const translations = getTranslations(currentLanguage);
-  const changelogData = translations.changelog as unknown as {
-    entries?: ChangelogEntry[];
-  };
-  const changelogEntries = changelogData?.entries || [];
+  const changelogData = t('changelog.entries', currentLanguage) as unknown as ChangelogEntry[];
+  const changelogEntries = changelogData || [];
 
   return (
     <div className="w-full mt-8 relative">

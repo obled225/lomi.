@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { useTranslation } from '@/lib/utils/translation-context';
-import { t, getTranslations } from '@/lib/i18n/translations';
+import { t } from '@/lib/i18n/translations';
 import Link from 'next/link';
 import { playClickSound } from '@/lib/utils/sound';
 import type { Post } from '@/lib/sanity/types';
@@ -14,7 +14,6 @@ export function BlogArticlesCarousel() {
     const { currentLanguage } = useTranslation();
     const [latestPosts, setLatestPosts] = useState<Post[]>([]);
     const [hoveredCard, setHoveredCard] = useState<string | null>(null);
-    const translations = getTranslations(currentLanguage);
 
     useEffect(() => {
         const fetchLatestPosts = async () => {
@@ -66,7 +65,7 @@ export function BlogArticlesCarousel() {
                                             <div className="grow flex flex-col">
                                                 {post.publishedAt && (
                                                     <p className="text-zinc-500 dark:text-zinc-400 text-xs mb-3">
-                                                        {t('blog.article', currentLanguage)} ·{' '}
+                                                        {t('blog.article', currentLanguage) as string} ·{' '}
                                                         {new Date(post.publishedAt).toLocaleDateString(
                                                             currentLanguage === 'zh'
                                                                 ? 'zh-CN'
