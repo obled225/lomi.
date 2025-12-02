@@ -81,7 +81,8 @@ export class CustomersService {
    * Uses direct query with organization filtering
    */
   async findOne(id: string, user: AuthContext) {
-    const { data, error } = (await this.supabase.getClient()
+    const { data, error } = (await this.supabase
+      .getClient()
       .from('customers')
       .select('*')
       .eq('customer_id', id)
@@ -161,9 +162,9 @@ export class CustomersService {
 
     // If metadata was provided, update it separately
     if (createDto.metadata) {
-      const { error: metadataError } = await (this.supabase
-        .getClient()
-        .from('customers') as any)
+      const { error: metadataError } = await (
+        this.supabase.getClient().from('customers') as any
+      )
         .update({ metadata: createDto.metadata } as CustomerUpdate)
         .eq('customer_id', customerId)
         .select('*');
@@ -236,9 +237,9 @@ export class CustomersService {
 
     // Update metadata separately if provided
     if (metadata !== undefined) {
-      const { error: metadataError } = await (this.supabase
-        .getClient()
-        .from('customers') as any)
+      const { error: metadataError } = await (
+        this.supabase.getClient().from('customers') as any
+      )
         .update({ metadata } as CustomerUpdate)
         .eq('customer_id', id)
         .eq('organization_id', user.organizationId)

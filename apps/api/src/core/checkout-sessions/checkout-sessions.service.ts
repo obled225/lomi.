@@ -54,7 +54,7 @@ export class CheckoutSessionsService {
   ) {
     const { data, error } = await this.supabase.rpc('list_checkout_sessions', {
       p_merchant_id: user.merchantId,
-      p_status: status as any || null,
+      p_status: (status as any) || null,
       p_limit: limit,
       p_offset: offset,
     });

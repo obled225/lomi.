@@ -3,7 +3,8 @@ import { SupabaseService } from '@/utils/supabase/supabase.service';
 import { AuthContext } from '@/core/common/decorators/current-user.decorator';
 import { Database } from '@/utils/types/api';
 
-type WebhookDeliveryLog = Database['public']['Tables']['webhook_delivery_logs']['Row'];
+type WebhookDeliveryLog =
+  Database['public']['Tables']['webhook_delivery_logs']['Row'];
 
 @Injectable()
 export class WebhookDeliveryLogsService {

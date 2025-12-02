@@ -2,7 +2,12 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { SupabaseService } from '@/utils/supabase/supabase.service';
 import { CreatePayoutDto } from './dto/create-payout.dto';
 import { AuthContext } from '@/core/common/decorators/current-user.decorator';
-import { CurrencyCode, ProviderCode, PayoutStatus, Database } from '@/utils/types/api';
+import {
+  CurrencyCode,
+  ProviderCode,
+  PayoutStatus,
+  Database,
+} from '@/utils/types/api';
 
 type Payout = Database['public']['Tables']['payouts']['Row'];
 
@@ -16,7 +21,7 @@ export class PayoutsService {
    * Returns immediately with pending status - completion confirmed via webhook
    */
   async create(createDto: CreatePayoutDto, user: AuthContext) {
-    const { data, error} = await this.supabase.rpc('initiate_withdrawal', {
+    const { data, error } = await this.supabase.rpc('initiate_withdrawal', {
       p_merchant_id: user.merchantId,
       p_amount: createDto.amount,
       p_payout_method_id: createDto.payout_method_id,
