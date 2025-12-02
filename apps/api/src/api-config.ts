@@ -249,3 +249,52 @@ export const API_RESOURCES: APIResourceConfig[] = [
 export function getEnabledResources(): APIResourceConfig[] {
   return API_RESOURCES.filter((r) => r.enabled);
 }
+
+
+/**
+ * Enum names that should be exposed in the API types
+ * These enums will be included in the generated api.ts file
+ */
+export const EXPOSED_ENUMS = [
+  'currency_code',
+  'payment_method_code',
+  'provider_code',
+  'transaction_status',
+  'transaction_type',
+  'refund_status',
+  'payout_status',
+  'subscription_status',
+  'product_type',
+  'pricing_model',
+  'usage_frequency',
+  'checkout_session_status',
+  'invoice_status',
+  'webhook_event',
+  'spi_payment_status',
+  'spi_account_status',
+  'spi_account_type',
+  'spi_payment_category',
+  'spi_payment_flow_type',
+  'spi_payment_request_category',
+  'spi_document_type',
+  'spi_rejection_reason',
+  'spi_webhook_event_code',
+  'organization_status',
+  'organization_verification_status',
+  'billing_interval',
+  'customer_type',
+  'discount_type',
+  'qr_code_type',
+  'link_type',
+  'failed_payment_action',
+  'first_payment_type',
+  'usage_aggregation',
+  'bnpl_status',
+];
+
+/**
+ * Check if an enum should be exposed
+ */
+export function isEnumExposed(enumName: string): boolean {
+  return EXPOSED_ENUMS.includes(enumName);
+}
