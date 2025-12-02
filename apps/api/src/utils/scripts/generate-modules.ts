@@ -460,7 +460,9 @@ async function main() {
     // SKIP - manually implemented with special logic
     if (
       resource.tableName === 'checkout_sessions' ||
-      resource.tableName === 'webhooks'
+      resource.tableName === 'webhooks' ||
+      resource.tableName === 'accounts' ||
+      resource.tableName === 'organizations'
     ) {
       console.log(
         `⏩ Skipping ${resource.tableName} (manually implemented with special logic)`,

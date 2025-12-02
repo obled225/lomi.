@@ -13,14 +13,22 @@ export class SupabaseService implements OnModuleInit {
 
   onModuleInit() {
     const supabaseUrl =
-      this.configService.get<string>('VITE_SUPABASE_URL') ||
-      process.env.VITE_SUPABASE_URL;
+      this.configService.get<string>('SUPABASE_URL') ||
+      process.env.SUPABASE_URL;
+    
+    // Use SERVICE_ROLE_KEY for API (bypasses RLS)
+    // This is secure because:
+    // 1. API Key Guard validates all requests
+    // 2. Service layer filters by organization_id
+    // 3. Service key never exposed to clients
     const supabaseKey =
-      this.configService.get<string>('VITE_SUPABASE_ANON_KEY') ||
-      process.env.VITE_SUPABASE_ANON_KEY;
+      this.configService.get<string>('SUPABASE_SERVICE_ROLE_KEY') ||
+      process.env.SUPABASE_SERVICE_ROLE_KEY;
 
     if (!supabaseUrl || !supabaseKey) {
-      throw new Error('Supabase URL or Key is missing! Check your .env file.');
+      throw new Error(
+        'Supabase URL or Service Role Key is missing! Check your .env file.',
+      );
     }
 
     this.client = createClient<Database>(supabaseUrl, supabaseKey, {
