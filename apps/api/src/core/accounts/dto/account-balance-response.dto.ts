@@ -7,7 +7,9 @@ export class AccountBalanceResponseDto {
   @ApiProperty({ example: 100000.0, description: 'Account balance' })
   balance: number;
 
-  @ApiProperty({ example: '2024-01-01T00:00:00Z', description: 'Last updated timestamp' })
+  @ApiProperty({
+    example: '2024-01-01T00:00:00Z',
+    description: 'Last updated timestamp',
+  })
   last_updated: string;
 }
-

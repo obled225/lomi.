@@ -4,7 +4,6 @@ node_modules/
 # Build
 dist/
 build/
-/src/utils/types/database.types.ts
 
 # Environment
 .env

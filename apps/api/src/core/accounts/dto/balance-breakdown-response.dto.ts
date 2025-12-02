@@ -10,19 +10,36 @@ export class BalanceBreakdownResponseDto {
   @ApiProperty({ example: 5000.0, description: 'Pending balance' })
   pending_balance: number;
 
-  @ApiProperty({ example: 105000.0, description: 'Total balance (available + pending)' })
+  @ApiProperty({
+    example: 105000.0,
+    description: 'Total balance (available + pending)',
+  })
   total_balance: number;
 
-  @ApiProperty({ example: 165.0, description: 'Converted available balance', required: false })
+  @ApiProperty({
+    example: 165.0,
+    description: 'Converted available balance',
+    required: false,
+  })
   converted_available_balance?: number;
 
-  @ApiProperty({ example: 8.25, description: 'Converted pending balance', required: false })
+  @ApiProperty({
+    example: 8.25,
+    description: 'Converted pending balance',
+    required: false,
+  })
   converted_pending_balance?: number;
 
-  @ApiProperty({ example: 173.25, description: 'Converted total balance', required: false })
+  @ApiProperty({
+    example: 173.25,
+    description: 'Converted total balance',
+    required: false,
+  })
   converted_total_balance?: number;
 
-  @ApiProperty({ example: 'USD', description: 'Target currency for conversion' })
+  @ApiProperty({
+    example: 'USD',
+    description: 'Target currency for conversion',
+  })
   target_currency: string;
 }
-

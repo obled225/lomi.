@@ -250,7 +250,6 @@ export function getEnabledResources(): APIResourceConfig[] {
   return API_RESOURCES.filter((r) => r.enabled);
 }
 
-
 /**
  * Enum names that should be exposed in the API types
  * These enums will be included in the generated api.ts file
@@ -297,4 +296,26 @@ export const EXPOSED_ENUMS = [
  */
 export function isEnumExposed(enumName: string): boolean {
   return EXPOSED_ENUMS.includes(enumName);
+}
+
+/**
+ * RPC function names that should be exposed in the API types
+ * These functions will be included in the generated api.ts file
+ */
+export const EXPOSED_FUNCTIONS = [
+  'fetch_balance_breakdown',
+  'fetch_account_balance',
+  'verify_api_key',
+  'create_checkout_session',
+  'list_checkout_sessions',
+  'get_webhook',
+  'get_webhook_by_id',
+  'log_webhook_delivery',
+];
+
+/**
+ * Check if a function should be exposed
+ */
+export function isFunctionExposed(functionName: string): boolean {
+  return EXPOSED_FUNCTIONS.includes(functionName);
 }
