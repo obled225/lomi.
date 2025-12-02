@@ -1,8 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { WebhooksService } from './webhooks.service';
-import { SupabaseService } from '../supabase/supabase.service';
+import { SupabaseService } from '../utils/supabase/supabase.service';
 import { CreateWebhookDto } from './dto/create-webhook.dto';
-import { AuthContext } from '../common/decorators/current-user.decorator';
+import { AuthContext } from '../core/common/decorators/current-user.decorator';
 
 describe('WebhooksService', () => {
   let service: WebhooksService;

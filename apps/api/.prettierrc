@@ -5,5 +5,12 @@
   "tabWidth": 2,
   "semi": true,
   "endOfLine": "auto",
-  "arrowParens": "always"
+  "arrowParens": "always",
+  "ignore": [
+    "node_modules",
+    "dist",
+    "build",
+    "pnpm-lock.yaml",
+    "coverage"
+  ]
 }

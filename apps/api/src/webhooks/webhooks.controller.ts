@@ -3,8 +3,8 @@ import { ApiTags, ApiOperation, ApiResponse, ApiSecurity } from '@nestjs/swagger
 import { WebhooksService } from './webhooks.service';
 import { UpdateWebhookDto } from './dto/update-webhook.dto';
 import { WebhookResponseDto } from './dto/webhook-response.dto';
-import { ApiKeyGuard } from '../common/guards/api-key.guard';
-import { CurrentUser, type AuthContext } from '../common/decorators/current-user.decorator';
+import { ApiKeyGuard } from '../core/common/guards/api-key.guard';
+import { CurrentUser, type AuthContext } from '../core/common/decorators/current-user.decorator';
 
 @ApiTags('Webhooks')
 @ApiSecurity('api-key')

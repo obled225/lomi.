@@ -1,5 +1,5 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { SupabaseService } from '../supabase/supabase.service';
+import { SupabaseService } from '../utils/supabase/supabase.service';
 import axios from 'axios';
 import * as crypto from 'crypto';
 import { WebhookEvent } from './enums/webhook-event.enum';

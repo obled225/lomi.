@@ -1,16 +1,16 @@
 import { Injectable } from '@nestjs/common';
-import { SupabaseService } from '../utils/supabase/supabase.service';
-import { UpdateWebhookDto } from './dto/update-webhook.dto';
-import { AuthContext } from '../core/common/decorators/current-user.decorator';
+import { SupabaseService } from '@utils/supabase/supabase.service';
+import { UpdateSubscriptionDto } from './dto/update-subscription.dto';
+import { AuthContext } from '@core/common/decorators/current-user.decorator';
 
 @Injectable()
-export class WebhooksService {
+export class SubscriptionsService {
   constructor(private readonly supabase: SupabaseService) {}
 
   async findAll(user: AuthContext) {
     const { data, error } = await this.supabase
       .getClient()
-      .from('webhooks')
+      .from('subscriptions')
       .select('*')
       .eq('organization_id', user.organizationId);
 
@@ -21,9 +21,9 @@ export class WebhooksService {
   async findOne(id: string, user: AuthContext) {
     const { data, error } = await this.supabase
       .getClient()
-      .from('webhooks')
+      .from('subscriptions')
       .select('*')
-      .eq('webhook_id', id)
+      .eq('subscription_id', id)
       .eq('organization_id', user.organizationId)
       .single();
 
@@ -31,12 +31,12 @@ export class WebhooksService {
     return data;
   }
 
-  async update(id: string, updateDto: UpdateWebhookDto, user: AuthContext) {
+  async update(id: string, updateDto: UpdateSubscriptionDto, user: AuthContext) {
     const { data, error } = await this.supabase
       .getClient()
-      .from('webhooks')
+      .from('subscriptions')
       .update(updateDto as any)
-      .eq('webhook_id', id)
+      .eq('subscription_id', id)
       .eq('organization_id', user.organizationId)
       .select()
       .single();
