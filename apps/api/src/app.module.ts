@@ -7,22 +7,21 @@ import { BullModule } from '@nestjs/bullmq';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { SupabaseModule } from './utils/supabase/supabase.module';
-import { TransactionsModule } from './transactions/transactions.module';
-import { CustomersModule } from './customers/customers.module';
-import { PaymentRequestsModule } from './payment-requests/payment-requests.module';
-import { RefundsModule } from './refunds/refunds.module';
-import { ProductsModule } from './products/products.module';
-import { PricesModule } from './prices/prices.module';
-import { SubscriptionsModule } from './subscriptions/subscriptions.module';
-import { DiscountCouponsModule } from './discount-coupons/discount-coupons.module';
-import { CustomerInvoicesModule } from './customer-invoices/customer-invoices.module';
-import { CheckoutSessionsModule } from './core/checkout-sessions/checkout-sessions.module';
-import { PaymentLinksModule } from './payment-links/payment-links.module';
-import { PayoutsModule } from './payouts/payouts.module';
-import { BeneficiaryPayoutsModule } from './beneficiary-payouts/beneficiary-payouts.module';
-import { WebhooksModule } from './webhooks/webhooks.module';
-import { WebhookDeliveryLogsModule } from './webhook-delivery-logs/webhook-delivery-logs.module';
-import { EventsModule } from './events/events.module';
+import { TransactionsModule } from '@core/transactions/transactions.module';
+import { AccountsModule } from '@core/accounts/accounts.module';
+import { OrganizationsModule } from '@core/organizations/organizations.module';
+import { CustomersModule } from '@core/customers/customers.module';
+import { PaymentRequestsModule } from '@core/payment-requests/payment-requests.module';
+import { RefundsModule } from '@core/refunds/refunds.module';
+import { ProductsModule } from '@core/products/products.module';
+import { PricesModule } from '@core/prices/prices.module';
+import { SubscriptionsModule } from '@core/subscriptions/subscriptions.module';
+import { DiscountCouponsModule } from '@core/discount-coupons/discount-coupons.module';
+import { CheckoutSessionsModule } from '@core/checkout-sessions/checkout-sessions.module';
+import { PaymentLinksModule } from '@core/payment-links/payment-links.module';
+import { PayoutsModule } from '@core/payouts/payouts.module';
+import { BeneficiaryPayoutsModule } from '@core/beneficiary-payouts/beneficiary-payouts.module';
+import { WebhookDeliveryLogsModule } from '@core/webhook-delivery-logs/webhook-delivery-logs.module';
 
 @Module({
   imports: [
@@ -44,6 +43,8 @@ import { EventsModule } from './events/events.module';
       },
     }),
     SupabaseModule,
+    AccountsModule,
+    OrganizationsModule,
     TransactionsModule,
     CustomersModule,
     PaymentRequestsModule,
@@ -52,14 +53,11 @@ import { EventsModule } from './events/events.module';
     PricesModule,
     SubscriptionsModule,
     DiscountCouponsModule,
-    CustomerInvoicesModule,
     CheckoutSessionsModule,
     PaymentLinksModule,
     PayoutsModule,
     BeneficiaryPayoutsModule,
-    WebhooksModule,
     WebhookDeliveryLogsModule,
-    EventsModule,
   ],
   controllers: [AppController],
   providers: [

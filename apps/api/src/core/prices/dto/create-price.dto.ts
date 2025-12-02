@@ -30,4 +30,5 @@ export class CreatePriceDto {
 
   @ApiProperty({ example: 'string' })
   product_id: string;
+
 }

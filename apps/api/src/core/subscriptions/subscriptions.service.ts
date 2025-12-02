@@ -1,7 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { SupabaseService } from '@utils/supabase/supabase.service';
+import { SupabaseService } from '@/utils/supabase/supabase.service';
 import { UpdateSubscriptionDto } from './dto/update-subscription.dto';
-import { AuthContext } from '@core/common/decorators/current-user.decorator';
+import { AuthContext } from '@/core/common/decorators/current-user.decorator';
+import { Database } from '@/utils/types/api';
+import { SupabaseClient } from '@supabase/supabase-js';
 
 @Injectable()
 export class SubscriptionsService {
@@ -31,15 +33,11 @@ export class SubscriptionsService {
     return data;
   }
 
-  async update(
-    id: string,
-    updateDto: UpdateSubscriptionDto,
-    user: AuthContext,
-  ) {
-    const { data, error } = await this.supabase
+  async update(id: string, updateDto: UpdateSubscriptionDto, user: AuthContext) {
+    const { data, error } = await (this.supabase
       .getClient()
-      .from('subscriptions')
-      .update(updateDto as any)
+      .from('subscriptions') as unknown as ReturnType<SupabaseClient<Database>['from']>)
+      .update(updateDto as Database['public']['Tables']['subscriptions']['Update'])
       .eq('subscription_id', id)
       .eq('organization_id', user.organizationId)
       .select()

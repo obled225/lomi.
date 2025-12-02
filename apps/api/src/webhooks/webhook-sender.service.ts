@@ -1,5 +1,5 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { SupabaseService } from '../utils/supabase/supabase.service';
+import { SupabaseService } from '@/utils/supabase/supabase.service';
 import axios from 'axios';
 import * as crypto from 'crypto';
 import { WebhookEvent } from './enums/webhook-event.enum';
@@ -144,24 +144,22 @@ export class WebhookSenderService {
     payload: any,
   ) {
     try {
-      const { error } = await this.supabase
-        .getClient()
-        .rpc('log_webhook_delivery', {
-          p_webhook_id: webhookId,
-          p_merchant_id:
-            payload.data?.merchant_id || payload.data?.organization_id,
-          p_organization_id: payload.data?.organization_id,
-          p_event_type: payload.event,
-          p_payload: payload,
-          p_response_status: status,
-          p_response_body:
-            typeof responseBody === 'string'
-              ? responseBody
-              : JSON.stringify(responseBody),
-          p_attempt_number: 1,
-          p_headers: null,
-          p_request_duration_ms: undefined,
-        });
+      const { error } = await this.supabase.rpc('log_webhook_delivery', {
+        p_webhook_id: webhookId,
+        p_merchant_id:
+          payload.data?.merchant_id || payload.data?.organization_id,
+        p_organization_id: payload.data?.organization_id,
+        p_event_type: payload.event,
+        p_payload: payload,
+        p_response_status: status,
+        p_response_body:
+          typeof responseBody === 'string'
+            ? responseBody
+            : JSON.stringify(responseBody),
+        p_attempt_number: 1,
+        p_headers: null,
+        p_request_duration_ms: undefined,
+      });
 
       if (error) {
         this.logger.error(`Failed to log webhook delivery: ${error.message}`);

@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { SupabaseService } from '@utils/supabase/supabase.service';
+import { SupabaseService } from '@/utils/supabase/supabase.service';
 import { CreateDiscountCouponDto } from './dto/create-discount-coupon.dto';
-import { AuthContext } from '@core/common/decorators/current-user.decorator';
+import { AuthContext } from '@/core/common/decorators/current-user.decorator';
 
 @Injectable()
 export class DiscountCouponsService {

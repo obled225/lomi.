@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { WebhookSenderService, Webhook } from './webhook-sender.service';
-import { SupabaseService } from '../utils/supabase/supabase.service';
+import { SupabaseService } from '@/utils/supabase/supabase.service';
 import { WebhookEvent } from './enums/webhook-event.enum';
 import axios from 'axios';
 

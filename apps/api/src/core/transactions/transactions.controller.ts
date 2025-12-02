@@ -1,17 +1,9 @@
 import { Controller, UseGuards, Get, Param } from '@nestjs/common';
-import {
-  ApiTags,
-  ApiOperation,
-  ApiResponse,
-  ApiSecurity,
-} from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiResponse, ApiSecurity } from '@nestjs/swagger';
 import { TransactionsService } from './transactions.service';
 import { TransactionResponseDto } from './dto/transaction-response.dto';
-import { ApiKeyGuard } from '@core/common/guards/api-key.guard';
-import {
-  CurrentUser,
-  type AuthContext,
-} from '@core/common/decorators/current-user.decorator';
+import { ApiKeyGuard } from '@/core/common/guards/api-key.guard';
+import { CurrentUser, type AuthContext } from '@/core/common/decorators/current-user.decorator';
 
 @ApiTags('Transactions')
 @ApiSecurity('api-key')

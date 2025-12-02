@@ -48,4 +48,5 @@ export class CreateDiscountCouponDto {
 
   @ApiProperty({ example: 'string' })
   valid_from: string;
+
 }

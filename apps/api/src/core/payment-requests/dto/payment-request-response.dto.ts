@@ -93,4 +93,5 @@ export class PaymentRequestResponseDto {
 
   @ApiProperty({ example: 'string' })
   updated_at: string;
+
 }

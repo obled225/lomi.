@@ -1,18 +1,10 @@
 import { Controller, UseGuards, Get, Param, Patch, Body } from '@nestjs/common';
-import {
-  ApiTags,
-  ApiOperation,
-  ApiResponse,
-  ApiSecurity,
-} from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiResponse, ApiSecurity } from '@nestjs/swagger';
 import { SubscriptionsService } from './subscriptions.service';
 import { UpdateSubscriptionDto } from './dto/update-subscription.dto';
 import { SubscriptionResponseDto } from './dto/subscription-response.dto';
-import { ApiKeyGuard } from '@core/common/guards/api-key.guard';
-import {
-  CurrentUser,
-  type AuthContext,
-} from '@core/common/decorators/current-user.decorator';
+import { ApiKeyGuard } from '@/core/common/guards/api-key.guard';
+import { CurrentUser, type AuthContext } from '@/core/common/decorators/current-user.decorator';
 
 @ApiTags('Subscriptions')
 @ApiSecurity('api-key')
@@ -50,11 +42,7 @@ export class SubscriptionsController {
     description: 'The subscription has been successfully updated.',
     type: SubscriptionResponseDto,
   })
-  update(
-    @Param('id') id: string,
-    @Body() updateDto: UpdateSubscriptionDto,
-    @CurrentUser() user: AuthContext,
-  ) {
+  update(@Param('id') id: string, @Body() updateDto: UpdateSubscriptionDto, @CurrentUser() user: AuthContext) {
     return this.service.update(id, updateDto, user);
   }
 }

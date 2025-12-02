@@ -39,4 +39,5 @@ export class PayoutResponseDto {
 
   @ApiProperty({ example: 'string' })
   updated_at: string;
+
 }

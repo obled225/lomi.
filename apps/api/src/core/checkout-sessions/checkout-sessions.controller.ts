@@ -5,7 +5,7 @@ import {
   ApiResponse,
   ApiSecurity,
 } from '@nestjs/swagger';
-import { CheckoutSessionsService } from '../../checkout-sessions/checkout-sessions.service';
+import { CheckoutSessionsService } from './checkout-sessions.service';
 import { CreateCheckoutSessionDto } from './dto/create-checkout-session.dto';
 import { CheckoutSessionResponseDto } from './dto/checkout-session-response.dto';
 import { ApiKeyGuard } from '../common/guards/api-key.guard';

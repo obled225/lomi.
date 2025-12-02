@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { SupabaseService } from '@utils/supabase/supabase.service';
+import { SupabaseService } from '@/utils/supabase/supabase.service';
 import { CreateBeneficiaryPayoutDto } from './dto/create-beneficiary-payout.dto';
-import { AuthContext } from '@core/common/decorators/current-user.decorator';
+import { AuthContext } from '@/core/common/decorators/current-user.decorator';
 
 @Injectable()
 export class BeneficiaryPayoutsService {

@@ -4,7 +4,7 @@ import {
   Injectable,
   UnauthorizedException,
 } from '@nestjs/common';
-import { SupabaseService } from '../../utils/supabase/supabase.service';
+import { SupabaseService } from '@/utils/supabase/supabase.service';
 import * as crypto from 'crypto';
 
 @Injectable()
@@ -21,9 +21,10 @@ export class WebhookSignatureGuard implements CanActivate {
     }
 
     // Fetch webhook config
-    const { data: webhook, error } = await this.supabase
-      .getClient()
-      .rpc('get_webhook_by_id' as any, { p_webhook_id: webhookId });
+    const { data: webhook, error } = await this.supabase.rpc(
+      'get_webhook_by_id',
+      { p_webhook_id: webhookId },
+    );
 
     if (error || !webhook || webhook.length === 0) {
       throw new UnauthorizedException('Invalid webhook configuration');
@@ -52,7 +53,7 @@ export class WebhookSignatureGuard implements CanActivate {
 
     // Attach webhook info to request
     request.webhookId = webhookId;
-    request.merchantId = webhook[0].merchant_id;
+    request.merchantId = webhook[0].created_by; // created_by is the merchant_id
     request.organizationId = webhook[0].organization_id;
 
     return true;

@@ -1,18 +1,10 @@
 import { Controller, UseGuards, Post, Body, Get, Param } from '@nestjs/common';
-import {
-  ApiTags,
-  ApiOperation,
-  ApiResponse,
-  ApiSecurity,
-} from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiResponse, ApiSecurity } from '@nestjs/swagger';
 import { CustomersService } from './customers.service';
 import { CreateCustomerDto } from './dto/create-customer.dto';
 import { CustomerResponseDto } from './dto/customer-response.dto';
-import { ApiKeyGuard } from '@core/common/guards/api-key.guard';
-import {
-  CurrentUser,
-  type AuthContext,
-} from '@core/common/decorators/current-user.decorator';
+import { ApiKeyGuard } from '@/core/common/guards/api-key.guard';
+import { CurrentUser, type AuthContext } from '@/core/common/decorators/current-user.decorator';
 
 @ApiTags('Customers')
 @ApiSecurity('api-key')
@@ -28,10 +20,7 @@ export class CustomersController {
     description: 'The customer has been successfully created.',
     type: CustomerResponseDto,
   })
-  create(
-    @Body() createDto: CreateCustomerDto,
-    @CurrentUser() user: AuthContext,
-  ) {
+  create(@Body() createDto: CreateCustomerDto, @CurrentUser() user: AuthContext) {
     return this.service.create(createDto, user);
   }
 

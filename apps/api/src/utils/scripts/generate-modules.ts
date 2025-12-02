@@ -2,10 +2,28 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { API_RESOURCES, APIResourceConfig } from '@/api-config';
 
-const PROJECT_ROOT = path.join(__dirname, '../../../');
+// Find the workspace root by looking for the 'apps' directory
+function findWorkspaceRoot(): string {
+  let currentDir = __dirname;
+  
+  // Go up from apps/api/src/utils/scripts to find workspace root
+  // Look for a marker like the 'apps' directory
+  for (let i = 0; i < 6; i++) {
+    const appsDir = path.join(currentDir, 'apps');
+    if (fs.existsSync(appsDir)) {
+      return currentDir;
+    }
+    currentDir = path.dirname(currentDir);
+  }
+  
+  throw new Error('Could not find workspace root');
+}
+
+const WORKSPACE_ROOT = findWorkspaceRoot();
+const PROJECT_ROOT = path.join(WORKSPACE_ROOT, 'apps/api');
 const SRC_ROOT = path.join(PROJECT_ROOT, 'src');
 const CORE_ROOT = path.join(SRC_ROOT, 'core');
-const DB_TYPES_PATH = path.join(SRC_ROOT, 'utils/types/database.types.ts');
+const DB_TYPES_PATH = path.join(WORKSPACE_ROOT, 'apps/dashboard/src/lib/types/database.types.ts');
 
 // Helper to convert snake_case to CamelCase
 function toCamelCase(str: string, capitalizeFirst: boolean = false): string {
@@ -53,12 +71,13 @@ function parseDatabaseTypes(): Record<string, TableDefinition> {
     const properties: Record<string, string> = {};
 
     // Parse properties
-    // Example: account_id: string;
-    // Example: amount: number | null;
-    const propRegex = /^\s{10}([a-z0-9_]+): (.*);/gm;
+    // Example: account_id: string
+    // Example: amount: number | null
+    // Note: database.types.ts doesn't use semicolons at the end of lines
+    const propRegex = /^\s{10}([a-z0-9_]+): (.*)$/gm;
     let propMatch;
     while ((propMatch = propRegex.exec(rowContent)) !== null) {
-      properties[propMatch[1]] = propMatch[2];
+      properties[propMatch[1]] = propMatch[2].trim();
     }
 
     definitions[tableName] = { properties };
@@ -149,7 +168,7 @@ function generateServiceContent(
 
   const imports = [
     `import { Injectable } from '@nestjs/common';`,
-    `import { SupabaseService } from '@utils/supabase/supabase.service';`,
+    `import { SupabaseService } from '@/utils/supabase/supabase.service';`,
   ];
 
   if (operations?.create) {
@@ -164,7 +183,7 @@ function generateServiceContent(
   }
 
   imports.push(
-    `import { AuthContext } from '@core/common/decorators/current-user.decorator';`,
+    `import { AuthContext } from '@/core/common/decorators/current-user.decorator';`,
   );
 
   const methods: string[] = [];
@@ -311,8 +330,8 @@ function generateControllerContent(
 
   imports.push(
     `import { ${responseDtoName} } from './dto/${kebabSingular}-response.dto';`,
-    `import { ApiKeyGuard } from '@core/common/guards/api-key.guard';`,
-    `import { CurrentUser, type AuthContext } from '@core/common/decorators/current-user.decorator';`,
+    `import { ApiKeyGuard } from '@/core/common/guards/api-key.guard';`,
+    `import { CurrentUser, type AuthContext } from '@/core/common/decorators/current-user.decorator';`,
   );
 
   const methods: string[] = [];

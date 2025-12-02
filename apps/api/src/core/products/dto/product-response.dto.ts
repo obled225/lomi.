@@ -51,4 +51,5 @@ export class ProductResponseDto {
 
   @ApiProperty({ example: 'string' })
   usage_unit: string;
+
 }

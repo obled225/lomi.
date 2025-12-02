@@ -102,4 +102,5 @@ export class TransactionResponseDto {
 
   @ApiProperty({ example: 'string' })
   updated_at: string;
+
 }

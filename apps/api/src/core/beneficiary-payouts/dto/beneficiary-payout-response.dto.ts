@@ -39,4 +39,5 @@ export class BeneficiaryPayoutResponseDto {
 
   @ApiProperty({ example: 'string' })
   updated_at: string;
+
 }

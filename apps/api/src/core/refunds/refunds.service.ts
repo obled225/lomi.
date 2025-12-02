@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { SupabaseService } from '@utils/supabase/supabase.service';
+import { SupabaseService } from '@/utils/supabase/supabase.service';
 import { CreateRefundDto } from './dto/create-refund.dto';
-import { AuthContext } from '@core/common/decorators/current-user.decorator';
+import { AuthContext } from '@/core/common/decorators/current-user.decorator';
 
 @Injectable()
 export class RefundsService {
@@ -13,6 +13,7 @@ export class RefundsService {
       .from('refunds')
       .insert({
         ...createDto,
+        
       } as any)
       .select()
       .single();
@@ -25,7 +26,9 @@ export class RefundsService {
     const { data, error } = await this.supabase
       .getClient()
       .from('refunds')
-      .select('*');
+      .select('*')
+      ;
+
     if (error) throw new Error(error.message);
     return data;
   }
@@ -36,7 +39,7 @@ export class RefundsService {
       .from('refunds')
       .select('*')
       .eq('refund_id', id)
-
+      
       .single();
 
     if (error) throw new Error(error.message);

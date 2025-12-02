@@ -36,4 +36,5 @@ export class CreateProductDto {
 
   @ApiProperty({ example: 'string' })
   usage_unit: string;
+
 }

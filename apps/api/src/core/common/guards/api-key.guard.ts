@@ -4,7 +4,7 @@ import {
   Injectable,
   UnauthorizedException,
 } from '@nestjs/common';
-import { SupabaseService } from '../../../utils/supabase/supabase.service';
+import { SupabaseService } from '@/utils/supabase/supabase.service';
 
 @Injectable()
 export class ApiKeyGuard implements CanActivate {
@@ -18,14 +18,12 @@ export class ApiKeyGuard implements CanActivate {
       throw new UnauthorizedException('API Key is missing');
     }
 
-    const { data, error } = await this.supabase
-      .getClient()
-      .rpc('verify_api_key', {
-        p_api_key: apiKey,
-        p_endpoint: request.url,
-        p_request_method: request.method,
-        p_ip_address: request.ip,
-      });
+    const { data, error } = await this.supabase.rpc('verify_api_key', {
+      p_api_key: apiKey,
+      p_endpoint: request.url,
+      p_request_method: request.method,
+      p_ip_address: request.ip,
+    });
 
     if (error || !data || data.length === 0 || !data[0].is_valid) {
       throw new UnauthorizedException('Invalid API Key');

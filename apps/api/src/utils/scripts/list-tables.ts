@@ -2,7 +2,25 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { API_RESOURCES } from '@/api-config';
 
-const typesPath = path.join(__dirname, '../types/database.types.ts');
+// Find the workspace root by looking for the 'apps' directory
+function findWorkspaceRoot(): string {
+  let currentDir = __dirname;
+  
+  // Go up from apps/api/src/utils/scripts to find workspace root
+  // Look for a marker like the 'apps' directory
+  for (let i = 0; i < 6; i++) {
+    const appsDir = path.join(currentDir, 'apps');
+    if (fs.existsSync(appsDir)) {
+      return currentDir;
+    }
+    currentDir = path.dirname(currentDir);
+  }
+  
+  throw new Error('Could not find workspace root');
+}
+
+const WORKSPACE_ROOT = findWorkspaceRoot();
+const typesPath = path.join(WORKSPACE_ROOT, 'apps/dashboard/src/lib/types/database.types.ts');
 
 async function listTables() {
   try {

@@ -78,4 +78,5 @@ export class CreatePaymentRequestDto {
 
   @ApiProperty({ example: 'string' })
   status: string;
+
 }

@@ -54,4 +54,5 @@ export class WebhookDeliveryLogResponseDto {
 
   @ApiProperty({ example: 'string' })
   webhook_id: string;
+
 }

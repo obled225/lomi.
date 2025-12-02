@@ -54,4 +54,5 @@ export class CreatePaymentLinkDto {
 
   @ApiProperty({ example: 'string' })
   url: string;
+
 }

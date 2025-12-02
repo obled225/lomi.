@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { SupabaseService } from '@utils/supabase/supabase.service';
-import { AuthContext } from '@core/common/decorators/current-user.decorator';
+import { SupabaseService } from '@/utils/supabase/supabase.service';
+import { AuthContext } from '@/core/common/decorators/current-user.decorator';
 
 @Injectable()
 export class OrganizationsService {
