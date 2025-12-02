@@ -35,9 +35,6 @@ export class CreatePaymentLinkDto {
   metadata: any;
 
   @ApiProperty({ example: 'string' })
-  organization_id: string;
-
-  @ApiProperty({ example: 'string' })
   price_id: string;
 
   @ApiProperty({ example: 'string' })

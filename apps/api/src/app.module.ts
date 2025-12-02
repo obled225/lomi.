@@ -1,5 +1,9 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { APP_GUARD } from '@nestjs/core';
+import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
+import { EventEmitterModule } from '@nestjs/event-emitter';
+import { BullModule } from '@nestjs/bullmq';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { SupabaseModule } from './supabase/supabase.module';
@@ -26,6 +30,19 @@ import { EventsModule } from './events/events.module';
       isGlobal: true,
       envFilePath: ['.env', '.env.local'],
     }),
+    ThrottlerModule.forRoot([
+      {
+        ttl: 900000, // 15 minutes
+        limit: 5000,
+      },
+    ]),
+    EventEmitterModule.forRoot(),
+    BullModule.forRoot({
+      connection: {
+        host: process.env.REDIS_HOST || 'localhost',
+        port: parseInt(process.env.REDIS_PORT || '6379'),
+      },
+    }),
     SupabaseModule,
     TransactionsModule,
     CustomersModule,
@@ -45,6 +62,12 @@ import { EventsModule } from './events/events.module';
     EventsModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: APP_GUARD,
+      useClass: ThrottlerGuard,
+    },
+  ],
 })
 export class AppModule {}

@@ -1,18 +1,10 @@
-import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
-import {
-  ApiTags,
-  ApiOperation,
-  ApiResponse,
-  ApiSecurity,
-} from '@nestjs/swagger';
+import { Controller, UseGuards, Post, Body, Get, Param } from '@nestjs/common';
+import { ApiTags, ApiOperation, ApiResponse, ApiSecurity } from '@nestjs/swagger';
 import { CheckoutSessionsService } from './checkout-sessions.service';
 import { CreateCheckoutSessionDto } from './dto/create-checkout-session.dto';
 import { CheckoutSessionResponseDto } from './dto/checkout-session-response.dto';
 import { ApiKeyGuard } from '../common/guards/api-key.guard';
-import {
-  CurrentUser,
-  type AuthContext,
-} from '../common/decorators/current-user.decorator';
+import { CurrentUser, type AuthContext } from '../common/decorators/current-user.decorator';
 
 @ApiTags('Checkout Sessions')
 @ApiSecurity('api-key')
@@ -28,10 +20,7 @@ export class CheckoutSessionsController {
     description: 'The checkout_session has been successfully created.',
     type: CheckoutSessionResponseDto,
   })
-  create(
-    @Body() createDto: CreateCheckoutSessionDto,
-    @CurrentUser() user: AuthContext,
-  ) {
+  create(@Body() createDto: CreateCheckoutSessionDto, @CurrentUser() user: AuthContext) {
     return this.service.create(createDto, user);
   }
 
@@ -47,7 +36,7 @@ export class CheckoutSessionsController {
   }
 
   @Get(':id')
-  @ApiOperation({ summary: 'Get a checkout_session' })
+  @ApiOperation({ summary: 'Get a checkout_session by ID' })
   @ApiResponse({
     status: 200,
     description: 'The checkout_session',

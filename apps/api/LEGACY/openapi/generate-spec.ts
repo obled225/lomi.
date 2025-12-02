@@ -3,7 +3,7 @@ import * as path from 'path';
 import {
   parseDatabaseTypes,
   tableSchemaToOpenAPI,
-} from './parse-database-types';
+} from './generate/parse-database-types';
 import {
   getEnabledResources,
   isEnumExposed,

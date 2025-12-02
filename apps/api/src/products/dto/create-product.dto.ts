@@ -26,9 +26,6 @@ export class CreateProductDto {
   name: string;
 
   @ApiProperty({ example: 'string' })
-  organization_id: string;
-
-  @ApiProperty({ example: 'string' })
   product_type: string;
 
   @ApiProperty({ example: true })

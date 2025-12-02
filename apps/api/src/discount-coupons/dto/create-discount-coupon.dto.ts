@@ -38,9 +38,6 @@ export class CreateDiscountCouponDto {
   max_uses: number;
 
   @ApiProperty({ example: 'string' })
-  organization_id: string;
-
-  @ApiProperty({ example: 'string' })
   scope_type: string;
 
   @ApiProperty({ example: 'string' })

@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { Controller, UseGuards, Post, Body, Get, Param } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiSecurity } from '@nestjs/swagger';
 import { BeneficiaryPayoutsService } from './beneficiary-payouts.service';
 import { CreateBeneficiaryPayoutDto } from './dto/create-beneficiary-payout.dto';
@@ -36,7 +36,7 @@ export class BeneficiaryPayoutsController {
   }
 
   @Get(':id')
-  @ApiOperation({ summary: 'Get a beneficiary_payout' })
+  @ApiOperation({ summary: 'Get a beneficiary_payout by ID' })
   @ApiResponse({
     status: 200,
     description: 'The beneficiary_payout',

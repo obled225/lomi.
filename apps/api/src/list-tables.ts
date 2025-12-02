@@ -1,5 +1,6 @@
 import * as fs from 'fs';
 import * as path from 'path';
+import { API_RESOURCES } from './api-config';
 
 const typesPath = path.join(__dirname, 'types/database.types.ts');
 
@@ -45,14 +46,17 @@ async function listTables() {
     console.log(`Total: ${tables.length} tables`);
 
     // Check against api-config
-    const { API_RESOURCES } = await import('./api-config.js');
     const configuredTables = new Set(
-      API_RESOURCES.map((r: any) => r.tableName),
+      API_RESOURCES.map((r) => r.tableName),
     );
 
     console.log('\n⚠️  Tables NOT in api-config.ts:');
     const missing = tables.filter((t) => !configuredTables.has(t));
-    missing.forEach((t) => console.log(`- ${t}`));
+    if (missing.length === 0) {
+      console.log('✅ All tables are configured!');
+    } else {
+      missing.forEach((t) => console.log(`- ${t}`));
+    }
   } catch (error) {
     console.error('Error reading database types:', error);
   }

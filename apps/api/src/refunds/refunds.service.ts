@@ -1,12 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { SupabaseService } from '../supabase/supabase.service';
 import { CreateRefundDto } from './dto/create-refund.dto';
+import { AuthContext } from '../common/decorators/current-user.decorator';
 
 @Injectable()
 export class RefundsService {
   constructor(private readonly supabase: SupabaseService) {}
 
-  async create(createDto: CreateRefundDto) {
+  async create(createDto: CreateRefundDto, _user: AuthContext) {
     const { data, error } = await this.supabase
       .getClient()
       .from('refunds')
@@ -21,7 +22,7 @@ export class RefundsService {
     return data;
   }
 
-  async findAll() {
+  async findAll(_user: AuthContext) {
     const { data, error } = await this.supabase
       .getClient()
       .from('refunds')
@@ -32,7 +33,7 @@ export class RefundsService {
     return data;
   }
 
-  async findOne(id: string) {
+  async findOne(id: string, _user: AuthContext) {
     const { data, error } = await this.supabase
       .getClient()
       .from('refunds')

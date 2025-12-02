@@ -69,6 +69,7 @@ function parseDatabaseTypes(): Record<string, TableDefinition> {
 function generateDtoContent(
   className: string,
   properties: Record<string, string>,
+  isUpdate = false,
 ): string {
   const imports = ["import { ApiProperty } from '@nestjs/swagger';"];
   const lines = [`export class ${className} {`];
@@ -94,8 +95,13 @@ function generateDtoContent(
     // Clean up type definition from DB types (remove nulls for DTOs or keep them?)
     // For simplicity, we'll just use the basic type
 
-    lines.push(`  @ApiProperty({ example: ${example} })`);
-    lines.push(`  ${name}: ${tsType};`);
+    if (isUpdate) {
+      lines.push(`  @ApiProperty({ required: false, example: ${example} })`);
+      lines.push(`  ${name}?: ${tsType};`);
+    } else {
+      lines.push(`  @ApiProperty({ example: ${example} })`);
+      lines.push(`  ${name}: ${tsType};`);
+    }
     lines.push('');
   }
 
@@ -107,13 +113,16 @@ function generateServiceContent(
   className: string,
   tableName: string,
   dtoName: string,
+  updateDtoName: string,
   responseDtoName: string,
   idField: string,
   properties: Record<string, string>,
+  operations: APIResourceConfig['operations'],
 ): string {
   const hasOrganizationId = 'organization_id' in properties;
   const hasMerchantId = 'merchant_id' in properties;
   const hasCreatedBy = 'created_by' in properties; // Sometimes used as merchant_id
+  const hasTenancy = hasOrganizationId || hasMerchantId || hasCreatedBy;
 
   let tenancyFilter = '';
   let insertAugmentation = '';
@@ -129,16 +138,29 @@ function generateServiceContent(
     insertAugmentation = `created_by: user.merchantId,`;
   }
 
-  return `import { Injectable } from '@nestjs/common';
-import { SupabaseService } from '../supabase/supabase.service';
-import { ${dtoName} } from './dto/create-${toKebabCase(tableName.slice(0, -1))}.dto';
-import { AuthContext } from '../common/decorators/current-user.decorator';
+  // Use _user prefix if no tenancy filter exists
+  const userParam = hasTenancy ? 'user' : '_user';
 
-@Injectable()
-export class ${className} {
-  constructor(private readonly supabase: SupabaseService) {}
+  const singularName = tableName.endsWith('s') ? tableName.slice(0, -1) : tableName;
+  const kebabSingular = toKebabCase(singularName);
 
-  async create(createDto: ${dtoName}, user: AuthContext) {
+  const imports = [`import { Injectable } from '@nestjs/common';`, `import { SupabaseService } from '../supabase/supabase.service';`];
+  
+  if (operations?.create) {
+    imports.push(`import { ${dtoName} } from './dto/create-${kebabSingular}.dto';`);
+  }
+  if (operations?.update) {
+    imports.push(`import { ${updateDtoName} } from './dto/update-${kebabSingular}.dto';`);
+  }
+  
+  imports.push(`import { AuthContext } from '../common/decorators/current-user.decorator';`);
+
+  const methods: string[] = [];
+
+  // CREATE method
+  if (operations?.create) {
+    methods.push(`
+  async create(createDto: ${dtoName}, ${userParam}: AuthContext) {
     const { data, error } = await this.supabase
       .getClient()
       .from('${tableName}')
@@ -151,9 +173,13 @@ export class ${className} {
 
     if (error) throw new Error(error.message);
     return data;
+  }`);
   }
 
-  async findAll(user: AuthContext) {
+  // LIST method
+  if (operations?.list) {
+    methods.push(`
+  async findAll(${userParam}: AuthContext) {
     const { data, error } = await this.supabase
       .getClient()
       .from('${tableName}')
@@ -162,9 +188,13 @@ export class ${className} {
 
     if (error) throw new Error(error.message);
     return data;
+  }`);
   }
 
-  async findOne(id: string, user: AuthContext) {
+  // GET method
+  if (operations?.get) {
+    methods.push(`
+  async findOne(id: string, ${userParam}: AuthContext) {
     const { data, error } = await this.supabase
       .getClient()
       .from('${tableName}')
@@ -175,7 +205,51 @@ export class ${className} {
 
     if (error) throw new Error(error.message);
     return data;
+  }`);
   }
+
+  // UPDATE method
+  if (operations?.update) {
+    methods.push(`
+  async update(id: string, updateDto: ${updateDtoName}, ${userParam}: AuthContext) {
+    const { data, error } = await this.supabase
+      .getClient()
+      .from('${tableName}')
+      .update(updateDto as any)
+      .eq('${idField}', id)
+      ${tenancyFilter}
+      .select()
+      .single();
+
+    if (error) throw new Error(error.message);
+    return data;
+  }`);
+  }
+
+  // DELETE method
+  if (operations?.delete) {
+    methods.push(`
+  async remove(id: string, ${userParam}: AuthContext) {
+    const { data, error } = await this.supabase
+      .getClient()
+      .from('${tableName}')
+      .delete()
+      .eq('${idField}', id)
+      ${tenancyFilter}
+      .select()
+      .single();
+
+    if (error) throw new Error(error.message);
+    return data;
+  }`);
+  }
+
+  return `${imports.join('\n')}
+
+@Injectable()
+export class ${className} {
+  constructor(private readonly supabase: SupabaseService) {}
+${methods.join('\n')}
 }
 `;
 }
@@ -186,6 +260,7 @@ function generateControllerContent(
   serviceFileName: string,
   tableName: string,
   dtoName: string,
+  updateDtoName: string,
   responseDtoName: string,
   resource: APIResourceConfig,
 ): string {
@@ -193,22 +268,33 @@ function generateControllerContent(
     ? tableName.slice(0, -1)
     : tableName;
   const kebabSingular = toKebabCase(singularName);
+  const operations = resource.operations || {};
 
-  return `import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiResponse, ApiSecurity } from '@nestjs/swagger';
-import { ${serviceName} } from './${serviceFileName}';
-import { ${dtoName} } from './dto/create-${kebabSingular}.dto';
-import { ${responseDtoName} } from './dto/${kebabSingular}-response.dto';
-import { ApiKeyGuard } from '../common/guards/api-key.guard';
-import { CurrentUser, type AuthContext } from '../common/decorators/current-user.decorator';
+  // Collect necessary imports based on operations
+  const nestImports = ['Controller', 'UseGuards'];
+  if (operations.create) nestImports.push('Post', 'Body');
+  if (operations.list) nestImports.push('Get');
+  if (operations.get && !operations.list) nestImports.push('Get');
+  if (operations.get || operations.update || operations.delete) nestImports.push('Param');
+  if (operations.update) nestImports.push('Patch', 'Body');
+  if (operations.delete) nestImports.push('Delete');
 
-@ApiTags('${resource.tag || toCamelCase(tableName, true)}')
-@ApiSecurity('api-key')
-@UseGuards(ApiKeyGuard)
-@Controller('${tableName}')
-export class ${controllerName} {
-  constructor(private readonly service: ${serviceName}) {}
+  const imports = [`import { ${nestImports.join(', ')} } from '@nestjs/common';`, `import { ApiTags, ApiOperation, ApiResponse, ApiSecurity } from '@nestjs/swagger';`, `import { ${serviceName} } from './${serviceFileName}';`];
 
+  if (operations.create) {
+    imports.push(`import { ${dtoName} } from './dto/create-${kebabSingular}.dto';`);
+  }
+  if (operations.update) {
+    imports.push(`import { ${updateDtoName} } from './dto/update-${kebabSingular}.dto';`);
+  }
+
+  imports.push(`import { ${responseDtoName} } from './dto/${kebabSingular}-response.dto';`, `import { ApiKeyGuard } from '../common/guards/api-key.guard';`, `import { CurrentUser, type AuthContext } from '../common/decorators/current-user.decorator';`);
+
+  const methods: string[] = [];
+
+  // CREATE endpoint
+  if (operations.create) {
+    methods.push(`
   @Post()
   @ApiOperation({ summary: 'Create a new ${singularName}' })
   @ApiResponse({
@@ -218,8 +304,12 @@ export class ${controllerName} {
   })
   create(@Body() createDto: ${dtoName}, @CurrentUser() user: AuthContext) {
     return this.service.create(createDto, user);
+  }`);
   }
 
+  // LIST endpoint
+  if (operations.list) {
+    methods.push(`
   @Get()
   @ApiOperation({ summary: 'List all ${tableName}' })
   @ApiResponse({
@@ -229,10 +319,14 @@ export class ${controllerName} {
   })
   findAll(@CurrentUser() user: AuthContext) {
     return this.service.findAll(user);
+  }`);
   }
 
+  // GET endpoint
+  if (operations.get) {
+    methods.push(`
   @Get(':id')
-  @ApiOperation({ summary: 'Get a ${singularName}' })
+  @ApiOperation({ summary: 'Get a ${singularName} by ID' })
   @ApiResponse({
     status: 200,
     description: 'The ${singularName}',
@@ -240,8 +334,68 @@ export class ${controllerName} {
   })
   findOne(@Param('id') id: string, @CurrentUser() user: AuthContext) {
     return this.service.findOne(id, user);
+  }`);
   }
+
+  // UPDATE endpoint
+  if (operations.update) {
+    methods.push(`
+  @Patch(':id')
+  @ApiOperation({ summary: 'Update a ${singularName}' })
+  @ApiResponse({
+    status: 200,
+    description: 'The ${singularName} has been successfully updated.',
+    type: ${responseDtoName},
+  })
+  update(@Param('id') id: string, @Body() updateDto: ${updateDtoName}, @CurrentUser() user: AuthContext) {
+    return this.service.update(id, updateDto, user);
+  }`);
+  }
+
+  // DELETE endpoint
+  if (operations.delete) {
+    methods.push(`
+  @Delete(':id')
+  @ApiOperation({ summary: 'Delete a ${singularName}' })
+  @ApiResponse({
+    status: 200,
+    description: 'The ${singularName} has been successfully deleted.',
+    type: ${responseDtoName},
+  })
+  remove(@Param('id') id: string, @CurrentUser() user: AuthContext) {
+    return this.service.remove(id, user);
+  }`);
+  }
+
+  return `${imports.join('\n')}
+
+@ApiTags('${resource.tag || toCamelCase(tableName, true)}')
+@ApiSecurity('api-key')
+@UseGuards(ApiKeyGuard)
+@Controller('${tableName}')
+export class ${controllerName} {
+  constructor(private readonly service: ${serviceName}) {}
+${methods.join('\n')}
 }
+`;
+}
+
+function generateModuleContent(
+  moduleName: string,
+  controllerName: string,
+  serviceName: string,
+  controllerFileName: string,
+  serviceFileName: string,
+): string {
+  return `import { Module } from '@nestjs/common';
+import { ${controllerName} } from './${controllerFileName}';
+import { ${serviceName} } from './${serviceFileName}';
+
+@Module({
+  controllers: [${controllerName}],
+  providers: [${serviceName}],
+})
+export class ${moduleName} {}
 `;
 }
 
@@ -256,10 +410,9 @@ async function main() {
   for (const resource of API_RESOURCES) {
     if (!resource.enabled) continue;
 
-    // Skip if transactions or checkout_sessions (already done manually)
+    // SKIP
     if (
-      resource.tableName === 'transactions' ||
-      resource.tableName === 'checkout_sessions'
+      resource.tableName === ''
     ) {
       console.log(`⏩ Skipping ${resource.tableName} (already exists)`);
       continue;
@@ -274,29 +427,24 @@ async function main() {
     const camelName = toCamelCase(tableName, true);
     const camelSingular = toCamelCase(singularName, true);
 
-    const _moduleName = `${camelName}Module`;
+    const moduleName = `${camelName}Module`;
     const controllerName = `${camelName}Controller`;
     const serviceName = `${camelName}Service`;
     const dtoName = `Create${camelSingular}Dto`;
+    const updateDtoName = `Update${camelSingular}Dto`;
     const responseDtoName = `${camelSingular}ResponseDto`;
 
     console.log(`\n📦 Generating module for ${tableName}...`);
 
-    // 1. Generate NestJS Resource (Module, Controller, Service)
-    try {
-      // Using execSync to run nest CLI
-      // We run module, controller, service separately to avoid interactive prompts of 'resource'
-      // execSync(`npx nest g module ${kebabName}`, { cwd: PROJECT_ROOT, stdio: 'inherit' });
-      // execSync(`npx nest g controller ${kebabName}`, { cwd: PROJECT_ROOT, stdio: 'inherit' });
-      // execSync(`npx nest g service ${kebabName}`, { cwd: PROJECT_ROOT, stdio: 'inherit' });
-    } catch (e) {
-      console.error(`❌ Failed to scaffold ${tableName}`, e);
-      continue;
+    // 1. Ensure module directory exists
+    const moduleDir = path.join(SRC_ROOT, kebabName);
+    if (!fs.existsSync(moduleDir)) {
+      fs.mkdirSync(moduleDir, { recursive: true });
     }
 
     // 2. Generate DTOs
     const dtoDir = path.join(SRC_ROOT, kebabName, 'dto');
-    if (!fs.existsSync(dtoDir)) fs.mkdirSync(dtoDir);
+    if (!fs.existsSync(dtoDir)) fs.mkdirSync(dtoDir, { recursive: true });
 
     const tableDef = dbDefinitions[tableName];
     if (!tableDef) {
@@ -313,13 +461,29 @@ async function main() {
     delete createProperties['created_at'];
     delete createProperties['updated_at'];
     delete createProperties['created_by']; // Usually handled by auth
+    delete createProperties['organization_id']; // Usually handled by auth
+    delete createProperties['merchant_id']; // Usually handled by auth
 
-    const createDtoContent = generateDtoContent(dtoName, createProperties);
-    fs.writeFileSync(
-      path.join(dtoDir, `create-${kebabSingular}.dto.ts`),
-      createDtoContent,
-    );
+    // Generate CreateDTO if create operation is enabled
+    if (resource.operations?.create) {
+      const createDtoContent = generateDtoContent(dtoName, createProperties);
+      fs.writeFileSync(
+        path.join(dtoDir, `create-${kebabSingular}.dto.ts`),
+        createDtoContent,
+      );
+    }
 
+    // Generate UpdateDTO if update operation is enabled
+    if (resource.operations?.update) {
+      // For update DTO, make all fields optional
+      const updateDtoContent = generateDtoContent(updateDtoName, createProperties, true);
+      fs.writeFileSync(
+        path.join(dtoDir, `update-${kebabSingular}.dto.ts`),
+        updateDtoContent,
+      );
+    }
+
+    // Always generate ResponseDTO
     const responseDtoContent = generateDtoContent(responseDtoName, properties);
     fs.writeFileSync(
       path.join(dtoDir, `${kebabSingular}-response.dto.ts`),
@@ -331,9 +495,11 @@ async function main() {
       serviceName,
       tableName,
       dtoName,
+      updateDtoName,
       responseDtoName,
       resource.idField || 'id',
       properties,
+      resource.operations,
     );
     fs.writeFileSync(
       path.join(SRC_ROOT, kebabName, `${kebabName}.service.ts`),
@@ -347,12 +513,26 @@ async function main() {
       `${kebabName}.service`,
       tableName,
       dtoName,
+      updateDtoName,
       responseDtoName,
       resource,
     );
     fs.writeFileSync(
       path.join(SRC_ROOT, kebabName, `${kebabName}.controller.ts`),
       controllerContent,
+    );
+
+    // 5. Generate Module file
+    const moduleContent = generateModuleContent(
+      moduleName,
+      controllerName,
+      serviceName,
+      `${kebabName}.controller`,
+      `${kebabName}.service`,
+    );
+    fs.writeFileSync(
+      path.join(SRC_ROOT, kebabName, `${kebabName}.module.ts`),
+      moduleContent,
     );
 
     console.log(`✅ ${tableName} module generated successfully!`);

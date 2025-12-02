@@ -26,9 +26,6 @@ export class CreatePriceDto {
   minimum_amount: number;
 
   @ApiProperty({ example: 'string' })
-  organization_id: string;
-
-  @ApiProperty({ example: 'string' })
   pricing_model: string;
 
   @ApiProperty({ example: 'string' })

@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { Controller, UseGuards, Post, Body, Get, Param } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiSecurity } from '@nestjs/swagger';
 import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
@@ -36,7 +36,7 @@ export class ProductsController {
   }
 
   @Get(':id')
-  @ApiOperation({ summary: 'Get a product' })
+  @ApiOperation({ summary: 'Get a product by ID' })
   @ApiResponse({
     status: 200,
     description: 'The product',

@@ -3,13 +3,13 @@ import { SupabaseService } from '../supabase/supabase.service';
 import { AuthContext } from '../common/decorators/current-user.decorator';
 
 @Injectable()
-export class TransactionsService {
+export class AccountsService {
   constructor(private readonly supabase: SupabaseService) {}
 
   async findAll(user: AuthContext) {
     const { data, error } = await this.supabase
       .getClient()
-      .from('transactions')
+      .from('accounts')
       .select('*')
       .eq('organization_id', user.organizationId);
 
@@ -20,9 +20,9 @@ export class TransactionsService {
   async findOne(id: string, user: AuthContext) {
     const { data, error } = await this.supabase
       .getClient()
-      .from('transactions')
+      .from('accounts')
       .select('*')
-      .eq('transaction_id', id)
+      .eq('account_id', id)
       .eq('organization_id', user.organizationId)
       .single();
 

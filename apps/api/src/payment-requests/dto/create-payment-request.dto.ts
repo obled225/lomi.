@@ -20,9 +20,6 @@ export class CreatePaymentRequestDto {
   expiry_date: string;
 
   @ApiProperty({ example: 'string' })
-  organization_id: string;
-
-  @ApiProperty({ example: 'string' })
   payment_link: string;
 
   @ApiProperty({ example: 'string' })

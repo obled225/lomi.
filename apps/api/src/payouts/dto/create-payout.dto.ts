@@ -17,9 +17,6 @@ export class CreatePayoutDto {
   metadata: any;
 
   @ApiProperty({ example: 'string' })
-  organization_id: string;
-
-  @ApiProperty({ example: 'string' })
   payout_method_id: string;
 
   @ApiProperty({ example: 'string' })

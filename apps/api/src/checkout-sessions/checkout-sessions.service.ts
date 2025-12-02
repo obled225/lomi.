@@ -31,7 +31,7 @@ export class CheckoutSessionsService {
         p_customer_name: createDto.customer_name,
         p_customer_phone: createDto.customer_phone,
         p_allow_coupon_code: createDto.allow_coupon_code,
-        p_expiration_minutes: createDto.expiration_minutes,
+        p_expires_at: createDto.expires_at,
         p_require_billing_address: createDto.require_billing_address,
         p_payment_link_id: createDto.payment_link_id,
       });

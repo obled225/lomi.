@@ -1,9 +1,10 @@
-import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { Controller, UseGuards, Post, Body, Get, Param } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiSecurity } from '@nestjs/swagger';
 import { RefundsService } from './refunds.service';
 import { CreateRefundDto } from './dto/create-refund.dto';
 import { RefundResponseDto } from './dto/refund-response.dto';
 import { ApiKeyGuard } from '../common/guards/api-key.guard';
+import { CurrentUser, type AuthContext } from '../common/decorators/current-user.decorator';
 
 @ApiTags('Refunds')
 @ApiSecurity('api-key')
@@ -19,8 +20,8 @@ export class RefundsController {
     description: 'The refund has been successfully created.',
     type: RefundResponseDto,
   })
-  create(@Body() createDto: CreateRefundDto) {
-    return this.service.create(createDto);
+  create(@Body() createDto: CreateRefundDto, @CurrentUser() user: AuthContext) {
+    return this.service.create(createDto, user);
   }
 
   @Get()
@@ -30,18 +31,18 @@ export class RefundsController {
     description: 'List of refunds',
     type: [RefundResponseDto],
   })
-  findAll() {
-    return this.service.findAll();
+  findAll(@CurrentUser() user: AuthContext) {
+    return this.service.findAll(user);
   }
 
   @Get(':id')
-  @ApiOperation({ summary: 'Get a refund' })
+  @ApiOperation({ summary: 'Get a refund by ID' })
   @ApiResponse({
     status: 200,
     description: 'The refund',
     type: RefundResponseDto,
   })
-  findOne(@Param('id') id: string) {
-    return this.service.findOne(id);
+  findOne(@Param('id') id: string, @CurrentUser() user: AuthContext) {
+    return this.service.findOne(id, user);
   }
 }

@@ -35,9 +35,6 @@ export class CreateCustomerDto {
   name: string;
 
   @ApiProperty({ example: 'string' })
-  organization_id: string;
-
-  @ApiProperty({ example: 'string' })
   phone_number: string;
 
   @ApiProperty({ example: 'string' })

@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { Controller, UseGuards, Post, Body, Get, Param } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiSecurity } from '@nestjs/swagger';
 import { PaymentRequestsService } from './payment-requests.service';
 import { CreatePaymentRequestDto } from './dto/create-payment-request.dto';
@@ -36,7 +36,7 @@ export class PaymentRequestsController {
   }
 
   @Get(':id')
-  @ApiOperation({ summary: 'Get a payment_request' })
+  @ApiOperation({ summary: 'Get a payment_request by ID' })
   @ApiResponse({
     status: 200,
     description: 'The payment_request',

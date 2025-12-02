@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { Controller, UseGuards, Post, Body, Get, Param } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiSecurity } from '@nestjs/swagger';
 import { DiscountCouponsService } from './discount-coupons.service';
 import { CreateDiscountCouponDto } from './dto/create-discount-coupon.dto';
@@ -36,7 +36,7 @@ export class DiscountCouponsController {
   }
 
   @Get(':id')
-  @ApiOperation({ summary: 'Get a discount_coupon' })
+  @ApiOperation({ summary: 'Get a discount_coupon by ID' })
   @ApiResponse({
     status: 200,
     description: 'The discount_coupon',

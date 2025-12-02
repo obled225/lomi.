@@ -1,34 +1,34 @@
 import { Controller, UseGuards, Get, Param } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiSecurity } from '@nestjs/swagger';
-import { WebhookDeliveryLogsService } from './webhook-delivery-logs.service';
-import { WebhookDeliveryLogResponseDto } from './dto/webhook-delivery-log-response.dto';
+import { AccountsService } from './accounts.service';
+import { AccountResponseDto } from './dto/account-response.dto';
 import { ApiKeyGuard } from '../common/guards/api-key.guard';
 import { CurrentUser, type AuthContext } from '../common/decorators/current-user.decorator';
 
-@ApiTags('Webhook Delivery Logs')
+@ApiTags('Accounts')
 @ApiSecurity('api-key')
 @UseGuards(ApiKeyGuard)
-@Controller('webhook_delivery_logs')
-export class WebhookDeliveryLogsController {
-  constructor(private readonly service: WebhookDeliveryLogsService) {}
+@Controller('accounts')
+export class AccountsController {
+  constructor(private readonly service: AccountsService) {}
 
   @Get()
-  @ApiOperation({ summary: 'List all webhook_delivery_logs' })
+  @ApiOperation({ summary: 'List all accounts' })
   @ApiResponse({
     status: 200,
-    description: 'List of webhook_delivery_logs',
-    type: [WebhookDeliveryLogResponseDto],
+    description: 'List of accounts',
+    type: [AccountResponseDto],
   })
   findAll(@CurrentUser() user: AuthContext) {
     return this.service.findAll(user);
   }
 
   @Get(':id')
-  @ApiOperation({ summary: 'Get a webhook_delivery_log by ID' })
+  @ApiOperation({ summary: 'Get a account by ID' })
   @ApiResponse({
     status: 200,
-    description: 'The webhook_delivery_log',
-    type: WebhookDeliveryLogResponseDto,
+    description: 'The account',
+    type: AccountResponseDto,
   })
   findOne(@Param('id') id: string, @CurrentUser() user: AuthContext) {
     return this.service.findOne(id, user);

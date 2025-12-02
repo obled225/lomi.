@@ -1,7 +1,7 @@
-import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { Controller, UseGuards, Get, Param, Patch, Body } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiSecurity } from '@nestjs/swagger';
 import { WebhooksService } from './webhooks.service';
-import { CreateWebhookDto } from './dto/create-webhook.dto';
+import { UpdateWebhookDto } from './dto/update-webhook.dto';
 import { WebhookResponseDto } from './dto/webhook-response.dto';
 import { ApiKeyGuard } from '../common/guards/api-key.guard';
 import { CurrentUser, type AuthContext } from '../common/decorators/current-user.decorator';
@@ -12,17 +12,6 @@ import { CurrentUser, type AuthContext } from '../common/decorators/current-user
 @Controller('webhooks')
 export class WebhooksController {
   constructor(private readonly service: WebhooksService) {}
-
-  @Post()
-  @ApiOperation({ summary: 'Create a new webhook' })
-  @ApiResponse({
-    status: 201,
-    description: 'The webhook has been successfully created.',
-    type: WebhookResponseDto,
-  })
-  create(@Body() createDto: CreateWebhookDto, @CurrentUser() user: AuthContext) {
-    return this.service.create(createDto, user);
-  }
 
   @Get()
   @ApiOperation({ summary: 'List all webhooks' })
@@ -36,7 +25,7 @@ export class WebhooksController {
   }
 
   @Get(':id')
-  @ApiOperation({ summary: 'Get a webhook' })
+  @ApiOperation({ summary: 'Get a webhook by ID' })
   @ApiResponse({
     status: 200,
     description: 'The webhook',
@@ -44,5 +33,16 @@ export class WebhooksController {
   })
   findOne(@Param('id') id: string, @CurrentUser() user: AuthContext) {
     return this.service.findOne(id, user);
+  }
+
+  @Patch(':id')
+  @ApiOperation({ summary: 'Update a webhook' })
+  @ApiResponse({
+    status: 200,
+    description: 'The webhook has been successfully updated.',
+    type: WebhookResponseDto,
+  })
+  update(@Param('id') id: string, @Body() updateDto: UpdateWebhookDto, @CurrentUser() user: AuthContext) {
+    return this.service.update(id, updateDto, user);
   }
 }
