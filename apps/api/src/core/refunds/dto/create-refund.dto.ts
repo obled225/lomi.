@@ -39,5 +39,4 @@ export class CreateRefundDto {
 
   @ApiProperty({ example: 'string' })
   transaction_id: string;
-
 }

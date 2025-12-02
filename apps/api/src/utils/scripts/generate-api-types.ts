@@ -321,21 +321,23 @@ export type Database = {
   for (const [, tableDef] of Object.entries(tables)) {
     const cleanedDef = replaceEnumReferences(tableDef);
     const lines = cleanedDef.split('\n');
-    
+
     // Find the base indentation from the first line
-    const baseIndent = lines[0] ? lines[0].length - lines[0].trimStart().length : 0;
-    
+    const baseIndent = lines[0]
+      ? lines[0].length - lines[0].trimStart().length
+      : 0;
+
     const indentedLines = lines
-      .map((line, idx) => {
+      .map((line, _idx) => {
         if (!line.trim()) return '';
-        
+
         // Calculate relative indentation from the base
         const currentIndent = line.length - line.trimStart().length;
         const relativeIndent = currentIndent - baseIndent;
-        
+
         // Target: 6 spaces base + relative indent
         const targetIndent = 6 + relativeIndent;
-        
+
         return ' '.repeat(targetIndent) + line.trimStart();
       })
       .filter((line) => line.trim());
@@ -351,21 +353,23 @@ export type Database = {
   for (const [, functionDef] of Object.entries(functions)) {
     const cleanedDef = replaceEnumReferences(functionDef);
     const lines = cleanedDef.split('\n');
-    
+
     // Find the base indentation from the first line
-    const baseIndent = lines[0] ? lines[0].length - lines[0].trimStart().length : 0;
-    
+    const baseIndent = lines[0]
+      ? lines[0].length - lines[0].trimStart().length
+      : 0;
+
     const indentedLines = lines
-      .map((line, idx) => {
+      .map((line, _idx) => {
         if (!line.trim()) return '';
-        
+
         // Calculate relative indentation from the base
         const currentIndent = line.length - line.trimStart().length;
         const relativeIndent = currentIndent - baseIndent;
-        
+
         // Target: 6 spaces base + relative indent
         const targetIndent = 6 + relativeIndent;
-        
+
         return ' '.repeat(targetIndent) + line.trimStart();
       })
       .filter((line) => line.trim());

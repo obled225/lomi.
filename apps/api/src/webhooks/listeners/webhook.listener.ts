@@ -31,11 +31,7 @@ export class WebhookListener {
     this.logger.log(
       `Handling payment.failed event for transaction ${payload.id}`,
     );
-    await this.queueWebhook(
-      payload.organization_id,
-      'PAYMENT_FAILED',
-      payload,
-    );
+    await this.queueWebhook(payload.organization_id, 'PAYMENT_FAILED', payload);
   }
 
   @OnEvent('payment.created')
@@ -65,11 +61,7 @@ export class WebhookListener {
   @OnEvent('refund.created')
   async handleRefundCreated(payload: any) {
     this.logger.log(`Handling refund.created event for refund ${payload.id}`);
-    await this.queueWebhook(
-      payload.organization_id,
-      'REFUND_CREATED',
-      payload,
-    );
+    await this.queueWebhook(payload.organization_id, 'REFUND_CREATED', payload);
   }
 
   @OnEvent('refund.completed')
@@ -85,11 +77,7 @@ export class WebhookListener {
   @OnEvent('refund.failed')
   async handleRefundFailed(payload: any) {
     this.logger.log(`Handling refund.failed event for refund ${payload.id}`);
-    await this.queueWebhook(
-      payload.organization_id,
-      'REFUND_FAILED',
-      payload,
-    );
+    await this.queueWebhook(payload.organization_id, 'REFUND_FAILED', payload);
   }
 
   @OnEvent('subscription.created')

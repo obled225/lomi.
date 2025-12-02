@@ -1,10 +1,18 @@
 import { Controller, UseGuards, Post, Body, Get, Param } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiResponse, ApiSecurity } from '@nestjs/swagger';
+import {
+  ApiTags,
+  ApiOperation,
+  ApiResponse,
+  ApiSecurity,
+} from '@nestjs/swagger';
 import { BeneficiaryPayoutsService } from './beneficiary-payouts.service';
 import { CreateBeneficiaryPayoutDto } from './dto/create-beneficiary-payout.dto';
 import { BeneficiaryPayoutResponseDto } from './dto/beneficiary-payout-response.dto';
 import { ApiKeyGuard } from '@/core/common/guards/api-key.guard';
-import { CurrentUser, type AuthContext } from '@/core/common/decorators/current-user.decorator';
+import {
+  CurrentUser,
+  type AuthContext,
+} from '@/core/common/decorators/current-user.decorator';
 
 @ApiTags('Beneficiary Payouts')
 @ApiSecurity('api-key')
@@ -20,7 +28,10 @@ export class BeneficiaryPayoutsController {
     description: 'The beneficiary_payout has been successfully created.',
     type: BeneficiaryPayoutResponseDto,
   })
-  create(@Body() createDto: CreateBeneficiaryPayoutDto, @CurrentUser() user: AuthContext) {
+  create(
+    @Body() createDto: CreateBeneficiaryPayoutDto,
+    @CurrentUser() user: AuthContext,
+  ) {
     return this.service.create(createDto, user);
   }
 

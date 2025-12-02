@@ -33,11 +33,19 @@ export class SubscriptionsService {
     return data;
   }
 
-  async update(id: string, updateDto: UpdateSubscriptionDto, user: AuthContext) {
-    const { data, error } = await (this.supabase
-      .getClient()
-      .from('subscriptions') as unknown as ReturnType<SupabaseClient<Database>['from']>)
-      .update(updateDto as Database['public']['Tables']['subscriptions']['Update'])
+  async update(
+    id: string,
+    updateDto: UpdateSubscriptionDto,
+    user: AuthContext,
+  ) {
+    const { data, error } = await (
+      this.supabase.getClient().from('subscriptions') as unknown as ReturnType<
+        SupabaseClient<Database>['from']
+      >
+    )
+      .update(
+        updateDto as Database['public']['Tables']['subscriptions']['Update'],
+      )
       .eq('subscription_id', id)
       .eq('organization_id', user.organizationId)
       .select()

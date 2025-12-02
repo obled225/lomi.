@@ -5,7 +5,7 @@ import { API_RESOURCES, APIResourceConfig } from '@/api-config';
 // Find the workspace root by looking for the 'apps' directory
 function findWorkspaceRoot(): string {
   let currentDir = __dirname;
-  
+
   // Go up from apps/api/src/utils/scripts to find workspace root
   // Look for a marker like the 'apps' directory
   for (let i = 0; i < 6; i++) {
@@ -15,7 +15,7 @@ function findWorkspaceRoot(): string {
     }
     currentDir = path.dirname(currentDir);
   }
-  
+
   throw new Error('Could not find workspace root');
 }
 
@@ -23,7 +23,10 @@ const WORKSPACE_ROOT = findWorkspaceRoot();
 const PROJECT_ROOT = path.join(WORKSPACE_ROOT, 'apps/api');
 const SRC_ROOT = path.join(PROJECT_ROOT, 'src');
 const CORE_ROOT = path.join(SRC_ROOT, 'core');
-const DB_TYPES_PATH = path.join(WORKSPACE_ROOT, 'apps/dashboard/src/lib/types/database.types.ts');
+const DB_TYPES_PATH = path.join(
+  WORKSPACE_ROOT,
+  'apps/dashboard/src/lib/types/database.types.ts',
+);
 
 // Helper to convert snake_case to CamelCase
 function toCamelCase(str: string, capitalizeFirst: boolean = false): string {

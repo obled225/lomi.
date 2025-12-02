@@ -24,5 +24,4 @@ export class CreateBeneficiaryPayoutDto {
 
   @ApiProperty({ example: 'string' })
   status: string;
-
 }

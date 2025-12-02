@@ -1,10 +1,18 @@
 import { Controller, UseGuards, Post, Body, Get, Param } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiResponse, ApiSecurity } from '@nestjs/swagger';
+import {
+  ApiTags,
+  ApiOperation,
+  ApiResponse,
+  ApiSecurity,
+} from '@nestjs/swagger';
 import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { ProductResponseDto } from './dto/product-response.dto';
 import { ApiKeyGuard } from '@/core/common/guards/api-key.guard';
-import { CurrentUser, type AuthContext } from '@/core/common/decorators/current-user.decorator';
+import {
+  CurrentUser,
+  type AuthContext,
+} from '@/core/common/decorators/current-user.decorator';
 
 @ApiTags('Products')
 @ApiSecurity('api-key')
@@ -20,7 +28,10 @@ export class ProductsController {
     description: 'The product has been successfully created.',
     type: ProductResponseDto,
   })
-  create(@Body() createDto: CreateProductDto, @CurrentUser() user: AuthContext) {
+  create(
+    @Body() createDto: CreateProductDto,
+    @CurrentUser() user: AuthContext,
+  ) {
     return this.service.create(createDto, user);
   }
 

@@ -27,5 +27,4 @@ export class UpdateSubscriptionDto {
 
   @ApiProperty({ required: false, example: 'string' })
   status?: string;
-
 }

@@ -60,6 +60,8 @@ export class SupabaseService implements OnModuleInit {
   from<TableName extends keyof Database['public']['Tables']>(
     table: TableName,
   ): ReturnType<SupabaseClient<Database>['from']> {
-    return this.client.from(table) as ReturnType<SupabaseClient<Database>['from']>;
+    return this.client.from(table) as ReturnType<
+      SupabaseClient<Database>['from']
+    >;
   }
 }

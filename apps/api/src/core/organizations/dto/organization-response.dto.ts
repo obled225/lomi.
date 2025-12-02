@@ -81,5 +81,4 @@ export class OrganizationResponseDto {
 
   @ApiProperty({ example: 'string' })
   website_url: string;
-
 }

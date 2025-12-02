@@ -24,5 +24,4 @@ export class CreatePayoutDto {
 
   @ApiProperty({ example: 'string' })
   status: string;
-
 }

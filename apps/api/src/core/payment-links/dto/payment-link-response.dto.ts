@@ -69,5 +69,4 @@ export class PaymentLinkResponseDto {
 
   @ApiProperty({ example: 'string' })
   url: string;
-
 }

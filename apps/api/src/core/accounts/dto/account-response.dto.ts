@@ -33,5 +33,4 @@ export class AccountResponseDto {
 
   @ApiProperty({ example: 'string' })
   updated_at: string;
-
 }

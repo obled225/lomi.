@@ -63,5 +63,4 @@ export class CustomerResponseDto {
 
   @ApiProperty({ example: 'string' })
   whatsapp_number: string;
-
 }

@@ -112,11 +112,7 @@ describe('WebhookSenderService', () => {
     });
 
     it('should not send if event is not subscribed', async () => {
-      const result = await service.sendWebhook(
-        webhook,
-        'PAYMENT_FAILED',
-        data,
-      );
+      const result = await service.sendWebhook(webhook, 'PAYMENT_FAILED', data);
       expect(result).toBe(false);
       expect(mockedAxios.post).not.toHaveBeenCalled();
     });

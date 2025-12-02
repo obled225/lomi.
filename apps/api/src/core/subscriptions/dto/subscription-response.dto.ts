@@ -42,5 +42,4 @@ export class SubscriptionResponseDto {
 
   @ApiProperty({ example: 'string' })
   updated_at: string;
-
 }

@@ -48,5 +48,4 @@ export class RefundResponseDto {
 
   @ApiProperty({ example: 'string' })
   updated_at: string;
-
 }
