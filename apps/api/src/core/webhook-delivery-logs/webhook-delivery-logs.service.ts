@@ -1,6 +1,9 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { SupabaseService } from '@/utils/supabase/supabase.service';
 import { AuthContext } from '@/core/common/decorators/current-user.decorator';
+import { Database } from '@/utils/types/api';
+
+type WebhookDeliveryLog = Database['public']['Tables']['webhook_delivery_logs']['Row'];
 
 @Injectable()
 export class WebhookDeliveryLogsService {
@@ -40,13 +43,13 @@ export class WebhookDeliveryLogsService {
    * Uses direct query with organization filtering
    */
   async findOne(id: string, user: AuthContext) {
-    const { data, error } = await this.supabase
+    const { data, error } = (await this.supabase
       .getClient()
       .from('webhook_delivery_logs')
       .select('*')
       .eq('log_id', id)
       .eq('organization_id', user.organizationId)
-      .single();
+      .single()) as { data: WebhookDeliveryLog | null; error: any };
 
     if (error) {
       if (error.code === 'PGRST116') {

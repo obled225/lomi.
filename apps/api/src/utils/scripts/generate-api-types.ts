@@ -283,6 +283,58 @@ function replaceEnumReferences(content: string): string {
 }
 
 /**
+ * Transform optional parameters to accept null values
+ * This allows service code to pass `value || null` for optional parameters
+ */
+function transformOptionalParametersToAcceptNull(functionDef: string): string {
+  // Match optional parameters in Args section that are strings or enums
+  // Pattern: p_param_name?: string OR p_param_name?: APIEnums["..."]
+  
+  // Split by Args section
+  const argsMatch = functionDef.match(/(Args:\s*\{)([\s\S]*?)(\};?)/);
+  
+  if (!argsMatch) {
+    return functionDef;
+  }
+  
+  const beforeArgs = functionDef.substring(0, argsMatch.index! + argsMatch[1].length);
+  const argsContent = argsMatch[2];
+  const afterArgs = functionDef.substring(argsMatch.index! + argsMatch[1].length + argsMatch[2].length);
+  
+  // Transform optional parameters: add | null if not already present
+  const transformedArgs = argsContent
+    .split('\n')
+    .map(line => {
+      // Match optional parameters: p_something?: type
+      const optionalParamMatch = line.match(/^(\s*)(p_\w+\?:\s*)(string|number|boolean|Json|APIEnums\[[^\]]+\])(\s*;?\s*)$/);
+      
+      if (optionalParamMatch) {
+        const [, indent, paramDecl, type, ending] = optionalParamMatch;
+        // Only add | null if it's not already there
+        if (!ending.includes('null')) {
+          return `${indent}${paramDecl}${type} | null${ending}`;
+        }
+      }
+      
+      // Match optional array parameters: p_something?: type[]
+      const optionalArrayMatch = line.match(/^(\s*)(p_\w+\?:\s*)(string|APIEnums\[[^\]]+\])(\[\])(\s*;?\s*)$/);
+      
+      if (optionalArrayMatch) {
+        const [, indent, paramDecl, type, brackets, ending] = optionalArrayMatch;
+        // Only add | null if it's not already there
+        if (!ending.includes('null')) {
+          return `${indent}${paramDecl}${type}${brackets} | null${ending}`;
+        }
+      }
+      
+      return line;
+    })
+    .join('\n');
+  
+  return beforeArgs + transformedArgs + afterArgs;
+}
+
+/**
  * Generate API types file content
  */
 function generateAPITypes(
@@ -352,7 +404,9 @@ export type Database = {
   // Add functions
   for (const [, functionDef] of Object.entries(functions)) {
     const cleanedDef = replaceEnumReferences(functionDef);
-    const lines = cleanedDef.split('\n');
+    // Transform optional parameters to accept null
+    const transformedDef = transformOptionalParametersToAcceptNull(cleanedDef);
+    const lines = transformedDef.split('\n');
 
     // Find the base indentation from the first line
     const baseIndent = lines[0]

@@ -3,6 +3,9 @@ import { SupabaseService } from '@/utils/supabase/supabase.service';
 import { AuthContext } from '@/core/common/decorators/current-user.decorator';
 import { CreateProductDto } from './dto/create-product.dto';
 import { AddPriceDto } from './dto/add-price.dto';
+import { Database } from '@/utils/types/api';
+
+type Product = Database['public']['Tables']['products']['Row'];
 
 @Injectable()
 export class ProductsService {
@@ -41,14 +44,14 @@ export class ProductsService {
    */
   async findOne(id: string, user: AuthContext) {
     // Get product details
-    const { data: product, error: productError } = await this.supabase
+    const { data: product, error: productError } = (await this.supabase
       .getClient()
       .from('products')
       .select('*')
       .eq('product_id', id)
       .eq('organization_id', user.organizationId)
       .eq('created_by', user.merchantId)
-      .single();
+      .single()) as { data: Product | null; error: any };
 
     if (productError || !product) {
       throw new NotFoundException(

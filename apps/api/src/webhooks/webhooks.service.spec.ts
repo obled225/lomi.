@@ -59,10 +59,18 @@ describe('WebhooksService', () => {
 
       expect(supabaseService.getClient).toHaveBeenCalled();
       expect(mockSupabaseClient.from).toHaveBeenCalledWith('webhooks');
-      expect(mockSupabaseClient.insert).toHaveBeenCalledWith({
-        ...createDto,
-        organization_id: user.organizationId,
-      });
+      expect(mockSupabaseClient.insert).toHaveBeenCalledWith(
+        expect.objectContaining({
+          url: createDto.url,
+          authorized_events: [createDto.authorized_events],
+          organization_id: user.organizationId,
+          is_active: true,
+          environment: 'live',
+          supports_spi: false,
+          metadata: null,
+          spi_event_types: null,
+        }),
+      );
       expect(result).toEqual(expectedResult);
     });
 

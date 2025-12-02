@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { SupabaseService } from '@/utils/supabase/supabase.service';
 import { CreatePaymentLinkDto } from './dto/create-payment-link.dto';
 import { AuthContext } from '@/core/common/decorators/current-user.decorator';
+import { LinkType, CurrencyCode } from '@/utils/types/api';
 
 @Injectable()
 export class PaymentLinksService {
@@ -12,28 +13,30 @@ export class PaymentLinksService {
    * Uses RPC: create_payment_link
    */
   async create(createDto: CreatePaymentLinkDto, user: AuthContext) {
-    const { data, error } = await this.supabase
-      .getClient()
-      .rpc('create_payment_link', {
-        p_organization_id: user.organizationId,
-        p_link_type: createDto.link_type,
-        p_title: createDto.title,
-        p_currency_code: createDto.currency_code,
-        p_description: createDto.description || null,
-        p_price: createDto.amount || null,
-        p_allow_coupon_code: createDto.allow_coupon_code ?? false,
-        p_allow_quantity: createDto.allow_quantity ?? false,
-        p_require_billing_address: createDto.require_billing_address ?? true,
-        p_expires_at: createDto.expires_at || null,
-        p_success_url: createDto.success_url || null,
-        p_cancel_url: createDto.cancel_url || null,
-        p_product_id: createDto.product_id || null,
-        p_price_id: createDto.price_id || null,
-        p_created_by: user.merchantId,
-        p_environment: 'live',
-      });
+    const { data, error } = await this.supabase.rpc('create_payment_link', {
+      p_organization_id: user.organizationId,
+      p_link_type: createDto.link_type as LinkType,
+      p_title: createDto.title,
+      p_currency_code: createDto.currency_code as CurrencyCode,
+      p_description: createDto.description || null,
+      p_price: createDto.amount || null,
+      p_allow_coupon_code: createDto.allow_coupon_code ?? false,
+      p_allow_quantity: createDto.allow_quantity ?? false,
+      p_require_billing_address: createDto.require_billing_address ?? true,
+      p_expires_at: createDto.expires_at || null,
+      p_success_url: createDto.success_url || null,
+      p_cancel_url: createDto.cancel_url || null,
+      p_product_id: createDto.product_id || null,
+      p_price_id: createDto.price_id || null,
+      p_created_by: user.merchantId,
+      p_environment: 'live',
+    });
 
     if (error) throw new Error(error.message);
+
+    if (!data) {
+      throw new Error('Failed to create payment link');
+    }
 
     // Fetch the created link
     return this.findOne(data, user);

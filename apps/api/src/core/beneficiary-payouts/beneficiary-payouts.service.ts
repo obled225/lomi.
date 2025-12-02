@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { SupabaseService } from '@/utils/supabase/supabase.service';
 import { CreateBeneficiaryPayoutDto } from './dto/create-beneficiary-payout.dto';
 import { AuthContext } from '@/core/common/decorators/current-user.decorator';
+import { CurrencyCode, ProviderCode, PaymentMethodCode, PayoutStatus } from '@/utils/types/api';
 
 @Injectable()
 export class BeneficiaryPayoutsService {
@@ -13,23 +14,25 @@ export class BeneficiaryPayoutsService {
    * Returns immediately with pending status - completion confirmed via webhook
    */
   async create(createDto: CreateBeneficiaryPayoutDto, user: AuthContext) {
-    const { data, error } = await this.supabase
-      .getClient()
-      .rpc('create_beneficiary_payout', {
-        p_merchant_id: user.merchantId,
-        p_amount: createDto.amount,
-        p_currency_code: createDto.currency_code,
-        p_payout_method_id: createDto.payout_method_id || null,
-        p_provider_code: createDto.provider_code || 'WAVE',
-        p_payment_method_code: createDto.payment_method_code || 'MOBILE_MONEY',
-        p_metadata: createDto.metadata || {},
-        p_status: 'pending',
-      });
+    const { data, error } = await this.supabase.rpc('create_beneficiary_payout', {
+      p_merchant_id: user.merchantId,
+      p_amount: createDto.amount,
+      p_currency_code: createDto.currency_code as CurrencyCode,
+      p_payout_method_id: createDto.payout_method_id || null,
+      p_provider_code: createDto.provider_code as ProviderCode,
+      p_payment_method_code: createDto.payment_method_code as PaymentMethodCode,
+      p_metadata: createDto.metadata || {},
+      p_status: 'pending' as PayoutStatus,
+    });
 
     if (error) throw new Error(error.message);
 
+    if (!data || data.length === 0) {
+      throw new Error('Failed to create beneficiary payout');
+    }
+
     // Return the initiated beneficiary payout details
-    return this.findOne(data, user);
+    return this.findOne(data[0].payout_id, user);
   }
 
   /**
@@ -48,17 +51,15 @@ export class BeneficiaryPayoutsService {
     const pageNumber = Math.floor(offset / limit) + 1;
     const pageSize = limit;
 
-    const { data, error } = await this.supabase
-      .getClient()
-      .rpc('fetch_beneficiary_payouts', {
-        p_merchant_id: user.merchantId,
-        p_statuses: statuses || null,
-        p_page_number: pageNumber,
-        p_page_size: pageSize,
-        p_start_date: startDate || null,
-        p_end_date: endDate || null,
-        p_currency_code: currencyCode || null,
-      });
+    const { data, error } = await this.supabase.rpc('fetch_beneficiary_payouts', {
+      p_merchant_id: user.merchantId,
+      p_statuses: statuses || null,
+      p_page_number: pageNumber,
+      p_page_size: pageSize,
+      p_start_date: startDate || null,
+      p_end_date: endDate || null,
+      p_currency_code: currencyCode as CurrencyCode,
+    });
 
     if (error) throw new Error(error.message);
 

@@ -9,8 +9,9 @@ const mockedAxios = axios as jest.Mocked<typeof axios>;
 describe('WebhookSenderService', () => {
   let service: WebhookSenderService;
 
-  const mockSupabaseClient = {
-    rpc: jest.fn(),
+  const mockSupabaseService = {
+    getClient: jest.fn(),
+    rpc: jest.fn().mockResolvedValue({ data: null, error: null }),
   };
 
   beforeEach(async () => {
@@ -19,9 +20,7 @@ describe('WebhookSenderService', () => {
         WebhookSenderService,
         {
           provide: SupabaseService,
-          useValue: {
-            getClient: jest.fn(() => mockSupabaseClient),
-          },
+          useValue: mockSupabaseService,
         },
       ],
     }).compile();
@@ -51,7 +50,7 @@ describe('WebhookSenderService', () => {
 
     it('should send webhook successfully', async () => {
       mockedAxios.post.mockResolvedValue({ status: 200, data: 'OK' });
-      mockSupabaseClient.rpc.mockResolvedValue({ data: null, error: null });
+      mockSupabaseService.rpc.mockResolvedValue({ data: null, error: null });
 
       const result = await service.sendWebhook(webhook, event, data);
 
@@ -67,7 +66,7 @@ describe('WebhookSenderService', () => {
           }),
         }),
       );
-      expect(mockSupabaseClient.rpc).toHaveBeenCalledWith(
+      expect(mockSupabaseService.rpc).toHaveBeenCalledWith(
         'log_webhook_delivery',
         expect.objectContaining({
           p_webhook_id: webhook.id,
@@ -80,7 +79,7 @@ describe('WebhookSenderService', () => {
       mockedAxios.post
         .mockRejectedValueOnce({ response: { status: 500 } })
         .mockResolvedValueOnce({ status: 200, data: 'OK' });
-      mockSupabaseClient.rpc.mockResolvedValue({ data: null, error: null });
+      mockSupabaseService.rpc.mockResolvedValue({ data: null, error: null });
 
       const result = await service.sendWebhook(webhook, event, data, 1, 10); // 1 retry, 10ms delay
 
@@ -90,13 +89,13 @@ describe('WebhookSenderService', () => {
 
     it('should fail after max retries', async () => {
       mockedAxios.post.mockRejectedValue({ response: { status: 500 } });
-      mockSupabaseClient.rpc.mockResolvedValue({ data: null, error: null });
+      mockSupabaseService.rpc.mockResolvedValue({ data: null, error: null });
 
       const result = await service.sendWebhook(webhook, event, data, 1, 10);
 
       expect(result).toBe(false);
       expect(mockedAxios.post).toHaveBeenCalledTimes(2); // Initial + 1 retry
-      expect(mockSupabaseClient.rpc).toHaveBeenCalledWith(
+      expect(mockSupabaseService.rpc).toHaveBeenCalledWith(
         'log_webhook_delivery',
         expect.objectContaining({
           p_response_status: 500,

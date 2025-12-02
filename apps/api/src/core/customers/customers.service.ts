@@ -3,6 +3,10 @@ import { SupabaseService } from '@/utils/supabase/supabase.service';
 import { AuthContext } from '@/core/common/decorators/current-user.decorator';
 import { CreateCustomerDto } from './dto/create-customer.dto';
 import { UpdateCustomerDto } from './dto/update-customer.dto';
+import { Database } from '@/utils/types/api';
+
+type Customer = Database['public']['Tables']['customers']['Row'];
+type CustomerUpdate = Database['public']['Tables']['customers']['Update'];
 
 @Injectable()
 export class CustomersService {
@@ -77,14 +81,13 @@ export class CustomersService {
    * Uses direct query with organization filtering
    */
   async findOne(id: string, user: AuthContext) {
-    const { data, error } = await this.supabase
-      .getClient()
+    const { data, error } = (await this.supabase.getClient()
       .from('customers')
       .select('*')
       .eq('customer_id', id)
       .eq('organization_id', user.organizationId)
       .eq('is_deleted', false)
-      .single();
+      .single()) as { data: Customer | null; error: any };
 
     if (error) {
       if (error.code === 'PGRST116') {
@@ -159,9 +162,8 @@ export class CustomersService {
     // If metadata was provided, update it separately
     if (createDto.metadata) {
       const { error: metadataError } = await this.supabase
-        .getClient()
         .from('customers')
-        .update({ metadata: createDto.metadata })
+        .update({ metadata: createDto.metadata } as CustomerUpdate)
         .eq('customer_id', customerId);
 
       if (metadataError) {
@@ -233,9 +235,8 @@ export class CustomersService {
     // Update metadata separately if provided
     if (metadata !== undefined) {
       const { error: metadataError } = await this.supabase
-        .getClient()
         .from('customers')
-        .update({ metadata })
+        .update({ metadata } as CustomerUpdate)
         .eq('customer_id', id)
         .eq('organization_id', user.organizationId);
 
