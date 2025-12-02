@@ -2,7 +2,7 @@ import { Injectable, Logger } from '@nestjs/common';
 import { SupabaseService } from '@/utils/supabase/supabase.service';
 import axios from 'axios';
 import * as crypto from 'crypto';
-import { WebhookEvent } from './enums/webhook-event.enum';
+import { WebhookEvent } from '@/utils/types/api';
 import { Queue } from 'bullmq';
 
 export interface Webhook {

@@ -3,7 +3,7 @@ import { OnEvent } from '@nestjs/event-emitter';
 import { InjectQueue } from '@nestjs/bullmq';
 import { Queue } from 'bullmq';
 import { WebhookSenderService } from '../webhook-sender.service';
-import { WebhookEvent } from '../enums/webhook-event.enum';
+import { WebhookEvent } from '@/utils/types/api';
 
 @Injectable()
 export class WebhookListener {
@@ -21,7 +21,7 @@ export class WebhookListener {
     );
     await this.queueWebhook(
       payload.organization_id,
-      WebhookEvent.PAYMENT_SUCCEEDED,
+      'PAYMENT_SUCCEEDED',
       payload,
     );
   }
@@ -33,7 +33,7 @@ export class WebhookListener {
     );
     await this.queueWebhook(
       payload.organization_id,
-      WebhookEvent.PAYMENT_FAILED,
+      'PAYMENT_FAILED',
       payload,
     );
   }
@@ -45,7 +45,7 @@ export class WebhookListener {
     );
     await this.queueWebhook(
       payload.organization_id,
-      WebhookEvent.PAYMENT_CREATED,
+      'PAYMENT_CREATED',
       payload,
     );
   }
@@ -57,7 +57,7 @@ export class WebhookListener {
     );
     await this.queueWebhook(
       payload.organization_id,
-      WebhookEvent.PAYMENT_CANCELED,
+      'PAYMENT_CANCELED',
       payload,
     );
   }
@@ -67,7 +67,7 @@ export class WebhookListener {
     this.logger.log(`Handling refund.created event for refund ${payload.id}`);
     await this.queueWebhook(
       payload.organization_id,
-      WebhookEvent.REFUND_CREATED,
+      'REFUND_CREATED',
       payload,
     );
   }
@@ -77,7 +77,7 @@ export class WebhookListener {
     this.logger.log(`Handling refund.completed event for refund ${payload.id}`);
     await this.queueWebhook(
       payload.organization_id,
-      WebhookEvent.REFUND_COMPLETED,
+      'REFUND_COMPLETED',
       payload,
     );
   }
@@ -87,7 +87,7 @@ export class WebhookListener {
     this.logger.log(`Handling refund.failed event for refund ${payload.id}`);
     await this.queueWebhook(
       payload.organization_id,
-      WebhookEvent.REFUND_FAILED,
+      'REFUND_FAILED',
       payload,
     );
   }
@@ -99,7 +99,7 @@ export class WebhookListener {
     );
     await this.queueWebhook(
       payload.organization_id,
-      WebhookEvent.SUBSCRIPTION_CREATED,
+      'SUBSCRIPTION_CREATED',
       payload,
     );
   }
@@ -111,7 +111,7 @@ export class WebhookListener {
     );
     await this.queueWebhook(
       payload.organization_id,
-      WebhookEvent.SUBSCRIPTION_RENEWED,
+      'SUBSCRIPTION_RENEWED',
       payload,
     );
   }
@@ -123,7 +123,7 @@ export class WebhookListener {
     );
     await this.queueWebhook(
       payload.organization_id,
-      WebhookEvent.SUBSCRIPTION_CANCELED,
+      'SUBSCRIPTION_CANCELED',
       payload,
     );
   }
@@ -135,7 +135,7 @@ export class WebhookListener {
     );
     await this.queueWebhook(
       payload.organization_id,
-      WebhookEvent.CHECKOUT_COMPLETED,
+      'CHECKOUT_COMPLETED',
       payload,
     );
   }
@@ -147,7 +147,7 @@ export class WebhookListener {
     );
     await this.queueWebhook(
       payload.organization_id,
-      WebhookEvent.PROVIDER_STATUS_CHANGED,
+      'PROVIDER_STATUS_CHANGED',
       payload,
     );
   }

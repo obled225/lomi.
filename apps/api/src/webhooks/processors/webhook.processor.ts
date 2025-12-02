@@ -1,8 +1,8 @@
 import { Processor, WorkerHost } from '@nestjs/bullmq';
 import { Job } from 'bullmq';
 import { Logger } from '@nestjs/common';
-import { WebhookSenderService } from '@/webhook-sender.service';
-import { WebhookEvent } from '@/enums/webhook-event.enum';
+import { WebhookSenderService } from '../webhook-sender.service';
+import { WebhookEvent } from '@/utils/types/api';
 
 @Processor('webhooks')
 export class WebhookQueueProcessor extends WorkerHost {

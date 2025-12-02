@@ -1,7 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { WebhookSenderService, Webhook } from './webhook-sender.service';
 import { SupabaseService } from '@/utils/supabase/supabase.service';
-import { WebhookEvent } from './enums/webhook-event.enum';
 import axios from 'axios';
 
 jest.mock('axios');
@@ -42,12 +41,12 @@ describe('WebhookSenderService', () => {
     const webhook: Webhook = {
       id: 'wh_123',
       url: 'https://example.com/webhook',
-      events: [WebhookEvent.PAYMENT_SUCCEEDED],
+      events: ['PAYMENT_SUCCEEDED'],
       secret: 'secret_123',
       active: true,
       organization_id: 'org_123',
     };
-    const event = WebhookEvent.PAYMENT_SUCCEEDED;
+    const event = 'PAYMENT_SUCCEEDED';
     const data = { id: 'tx_123' };
 
     it('should send webhook successfully', async () => {
@@ -115,7 +114,7 @@ describe('WebhookSenderService', () => {
     it('should not send if event is not subscribed', async () => {
       const result = await service.sendWebhook(
         webhook,
-        WebhookEvent.PAYMENT_FAILED,
+        'PAYMENT_FAILED',
         data,
       );
       expect(result).toBe(false);
