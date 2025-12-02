@@ -14,7 +14,6 @@ import { CustomersModule } from '@core/customers/customers.module';
 import { PaymentRequestsModule } from '@core/payment-requests/payment-requests.module';
 import { RefundsModule } from '@core/refunds/refunds.module';
 import { ProductsModule } from '@core/products/products.module';
-import { PricesModule } from '@core/prices/prices.module';
 import { SubscriptionsModule } from '@core/subscriptions/subscriptions.module';
 import { DiscountCouponsModule } from '@core/discount-coupons/discount-coupons.module';
 import { CheckoutSessionsModule } from '@core/checkout-sessions/checkout-sessions.module';
@@ -50,7 +49,6 @@ import { WebhookDeliveryLogsModule } from '@core/webhook-delivery-logs/webhook-d
     PaymentRequestsModule,
     RefundsModule,
     ProductsModule,
-    PricesModule,
     SubscriptionsModule,
     DiscountCouponsModule,
     CheckoutSessionsModule,

@@ -55,8 +55,8 @@ export const API_RESOURCES: APIResourceConfig[] = [
       list: true,
       get: true,
       create: true,
-      update: false,
-      delete: false,
+      update: true,
+      delete: true,
     },
   },
   {
@@ -117,20 +117,6 @@ export const API_RESOURCES: APIResourceConfig[] = [
     },
   },
   {
-    tableName: 'prices',
-    enabled: true,
-    tag: 'Prices',
-    idField: 'price_id',
-    description: 'Pricing tiers - manage product pricing',
-    operations: {
-      list: true,
-      get: true,
-      create: true,
-      update: false,
-      delete: false,
-    },
-  },
-  {
     tableName: 'subscriptions',
     enabled: true,
     tag: 'Subscriptions',
@@ -163,7 +149,7 @@ export const API_RESOURCES: APIResourceConfig[] = [
     tableName: 'checkout_sessions',
     enabled: true,
     tag: 'Checkout Sessions',
-    idField: 'session_id',
+    idField: 'checkout_session_id',
     description: 'Checkout sessions - create hosted payment pages',
     operations: {
       list: true,
@@ -311,6 +297,22 @@ export const EXPOSED_FUNCTIONS = [
   'get_webhook',
   'get_webhook_by_id',
   'log_webhook_delivery',
+  'create_beneficiary_payout',
+  'fetch_beneficiary_payouts',
+  'fetch_customers_with_status',
+  'create_customer',
+  'update_customer',
+  'delete_customer',
+  'fetch_customer_transactions',
+  'create_payment_link',
+  'initiate_withdrawal',
+  'fetch_payouts',
+  'fetch_products',
+  'create_product',
+  'create_price',
+  'set_default_price',
+  'create_refund',
+  'get_webhook_delivery_logs',
 ];
 
 /**

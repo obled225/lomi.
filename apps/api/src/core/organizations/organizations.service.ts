@@ -30,9 +30,7 @@ export class OrganizationsService {
   async findOne(id: string, user: AuthContext) {
     // Ensure merchant can only access their own organization
     if (id !== user.organizationId) {
-      throw new NotFoundException(
-        'Organization not found or access denied',
-      );
+      throw new NotFoundException('Organization not found or access denied');
     }
 
     const { data, error } = await this.supabase
@@ -60,12 +58,13 @@ export class OrganizationsService {
    * LTV is excluded as it's an admin-only metric
    */
   async getMetrics(user: AuthContext): Promise<OrganizationMetricsResponseDto> {
-    const { data, error } = await this.supabase
-      .getClient()
-      .rpc('fetch_organization_details' as any, {
+    const { data, error } = await this.supabase.getClient().rpc(
+      'fetch_organization_details' as any,
+      {
         p_merchant_id: user.merchantId,
         p_organization_id: user.organizationId,
-      } as any);
+      } as any,
+    );
 
     if (error) throw new Error(error.message);
 
@@ -80,9 +79,7 @@ export class OrganizationsService {
 
     // Ensure merchant is accessing their own organization
     if (result.organization_id !== user.organizationId) {
-      throw new NotFoundException(
-        'Organization not found or access denied',
-      );
+      throw new NotFoundException('Organization not found or access denied');
     }
 
     // Transform the response to match our DTO (excluding LTV - admin metric)

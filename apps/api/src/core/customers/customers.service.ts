@@ -1,48 +1,289 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { SupabaseService } from '@/utils/supabase/supabase.service';
-import { CreateCustomerDto } from './dto/create-customer.dto';
 import { AuthContext } from '@/core/common/decorators/current-user.decorator';
+import { CreateCustomerDto } from './dto/create-customer.dto';
+import { UpdateCustomerDto } from './dto/update-customer.dto';
 
 @Injectable()
 export class CustomersService {
   constructor(private readonly supabase: SupabaseService) {}
 
-  async create(createDto: CreateCustomerDto, user: AuthContext) {
-    const { data, error } = await this.supabase
-      .getClient()
-      .from('customers')
-      .insert({
-        ...createDto,
+  /**
+   * List all customers for merchant's organization
+   * Uses RPC: fetch_customers_with_status
+   * Supports filtering by: search term, customer type, activity status
+   */
+  async findAll(
+    user: AuthContext,
+    searchTerm?: string,
+    customerType?: 'business' | 'individual' | 'all',
+    activityStatus?: 'active' | 'inactive' | 'all',
+    page: number = 1,
+    pageSize: number = 50,
+  ) {
+    const offset = (page - 1) * pageSize;
+
+    const { data, error } = await this.supabase.getClient().rpc(
+      'fetch_customers_with_status' as any,
+      {
+        p_merchant_id: user.merchantId,
+        p_organization_id: user.organizationId,
+        p_search_term: searchTerm || null,
+        p_customer_type: customerType || 'all',
+        p_activity_status: activityStatus || 'all',
+        p_offset: offset,
+        p_limit: pageSize,
+        p_environment: 'live',
+      } as any,
+    );
+
+    if (error) throw new Error(error.message);
+
+    const customers = data as any[];
+
+    // Get total count from first record (if exists)
+    const totalCount =
+      customers.length > 0 ? Number(customers[0].total_count) : 0;
+
+    return {
+      customers: customers.map((c) => ({
+        customer_id: c.customer_id,
         organization_id: user.organizationId,
-      } as any)
-      .select()
-      .single();
-
-    if (error) throw new Error(error.message);
-    return data;
+        name: c.name,
+        email: c.email,
+        phone_number: c.phone_number,
+        whatsapp_number: c.whatsapp_number,
+        country: c.country,
+        city: c.city,
+        address: c.address,
+        postal_code: c.postal_code,
+        is_business: c.is_business,
+        metadata: null, // RPC doesn't return metadata
+        environment: 'live',
+        created_at: c.created_at,
+        updated_at: c.updated_at,
+      })),
+      pagination: {
+        page,
+        pageSize,
+        totalCount,
+        totalPages: Math.ceil(totalCount / pageSize),
+      },
+    };
   }
 
-  async findAll(user: AuthContext) {
-    const { data, error } = await this.supabase
-      .getClient()
-      .from('customers')
-      .select('*')
-      .eq('organization_id', user.organizationId);
-
-    if (error) throw new Error(error.message);
-    return data;
-  }
-
+  /**
+   * Get single customer by ID
+   * Uses direct query with organization filtering
+   */
   async findOne(id: string, user: AuthContext) {
     const { data, error } = await this.supabase
       .getClient()
       .from('customers')
       .select('*')
-      .eq('id', id)
+      .eq('customer_id', id)
       .eq('organization_id', user.organizationId)
+      .eq('is_deleted', false)
       .single();
 
+    if (error) {
+      if (error.code === 'PGRST116') {
+        throw new NotFoundException(
+          `Customer with ID ${id} not found or access denied`,
+        );
+      }
+      throw new Error(error.message);
+    }
+
+    if (!data) {
+      throw new NotFoundException(
+        `Customer with ID ${id} not found or access denied`,
+      );
+    }
+
+    // Validate ownership
+    if (data.organization_id !== user.organizationId) {
+      throw new NotFoundException(
+        `Customer with ID ${id} not found or access denied`,
+      );
+    }
+
+    // Filter out admin/internal fields
+    return {
+      customer_id: data.customer_id,
+      organization_id: data.organization_id,
+      name: data.name,
+      email: data.email,
+      phone_number: data.phone_number,
+      whatsapp_number: data.whatsapp_number,
+      country: data.country,
+      city: data.city,
+      address: data.address,
+      postal_code: data.postal_code,
+      is_business: data.is_business,
+      metadata: data.metadata,
+      environment: data.environment,
+      created_at: data.created_at,
+      updated_at: data.updated_at,
+    };
+  }
+
+  /**
+   * Create a new customer
+   * Uses RPC: create_customer
+   */
+  async create(createDto: CreateCustomerDto, user: AuthContext) {
+    const { data, error } = await this.supabase.getClient().rpc(
+      'create_customer' as any,
+      {
+        p_merchant_id: user.merchantId,
+        p_organization_id: user.organizationId,
+        p_name: createDto.name,
+        p_email: createDto.email || null,
+        p_phone_number: createDto.phone_number || null,
+        p_whatsapp_number: createDto.whatsapp_number || null,
+        p_country: createDto.country || '',
+        p_city: createDto.city || '',
+        p_address: createDto.address || '',
+        p_postal_code: createDto.postal_code || '',
+        p_is_business: createDto.is_business || false,
+        p_environment: 'live',
+      } as any,
+    );
+
     if (error) throw new Error(error.message);
-    return data;
+
+    // RPC returns customer_id
+    const customerId = data as string;
+
+    // If metadata was provided, update it separately
+    if (createDto.metadata) {
+      const { error: metadataError } = await this.supabase
+        .getClient()
+        .from('customers')
+        .update({ metadata: createDto.metadata })
+        .eq('customer_id', customerId);
+
+      if (metadataError) {
+        // Log error but don't fail the creation
+        console.error('Failed to update customer metadata:', metadataError);
+      }
+    }
+
+    // Fetch and return the created customer
+    return this.findOne(customerId, user);
+  }
+
+  /**
+   * Update an existing customer
+   * Uses RPC: update_customer for basic fields
+   * Direct query for metadata
+   */
+  async update(id: string, updateDto: UpdateCustomerDto, user: AuthContext) {
+    // First verify ownership
+    await this.findOne(id, user);
+
+    // Extract metadata if provided
+    const { metadata, ...basicFields } = updateDto;
+
+    // Update basic fields using RPC if any are provided
+    if (Object.keys(basicFields).length > 0) {
+      // Fetch current customer data to fill in missing fields
+      const current = await this.findOne(id, user);
+
+      const { error } = await this.supabase.getClient().rpc(
+        'update_customer' as any,
+        {
+          p_customer_id: id,
+          p_name: updateDto.name || current.name,
+          p_email:
+            updateDto.email !== undefined ? updateDto.email : current.email,
+          p_phone_number:
+            updateDto.phone_number !== undefined
+              ? updateDto.phone_number
+              : current.phone_number,
+          p_whatsapp_number:
+            updateDto.whatsapp_number !== undefined
+              ? updateDto.whatsapp_number
+              : current.whatsapp_number,
+          p_country:
+            updateDto.country !== undefined
+              ? updateDto.country
+              : current.country || '',
+          p_city:
+            updateDto.city !== undefined ? updateDto.city : current.city || '',
+          p_address:
+            updateDto.address !== undefined
+              ? updateDto.address
+              : current.address || '',
+          p_postal_code:
+            updateDto.postal_code !== undefined
+              ? updateDto.postal_code
+              : current.postal_code || '',
+          p_is_business:
+            updateDto.is_business !== undefined
+              ? updateDto.is_business
+              : current.is_business,
+        } as any,
+      );
+
+      if (error) throw new Error(error.message);
+    }
+
+    // Update metadata separately if provided
+    if (metadata !== undefined) {
+      const { error: metadataError } = await this.supabase
+        .getClient()
+        .from('customers')
+        .update({ metadata })
+        .eq('customer_id', id)
+        .eq('organization_id', user.organizationId);
+
+      if (metadataError) throw new Error(metadataError.message);
+    }
+
+    // Return updated customer
+    return this.findOne(id, user);
+  }
+
+  /**
+   * Soft delete a customer
+   * Uses RPC: delete_customer
+   */
+  async remove(id: string, user: AuthContext) {
+    // First verify ownership
+    await this.findOne(id, user);
+
+    const { error } = await this.supabase.getClient().rpc(
+      'delete_customer' as any,
+      {
+        p_customer_id: id,
+      } as any,
+    );
+
+    if (error) throw new Error(error.message);
+
+    return { message: 'Customer deleted successfully' };
+  }
+
+  /**
+   * Get customer transactions
+   * Uses RPC: fetch_customer_transactions
+   */
+  async getTransactions(id: string, user: AuthContext) {
+    // First verify ownership
+    await this.findOne(id, user);
+
+    const { data, error } = await this.supabase.getClient().rpc(
+      'fetch_customer_transactions' as any,
+      {
+        p_customer_id: id,
+        p_environment: 'live',
+      } as any,
+    );
+
+    if (error) throw new Error(error.message);
+
+    return data || [];
   }
 }

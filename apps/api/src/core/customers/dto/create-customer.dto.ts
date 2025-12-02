@@ -1,54 +1,99 @@
 import { ApiProperty } from '@nestjs/swagger';
+import {
+  IsString,
+  IsEmail,
+  IsOptional,
+  IsBoolean,
+  IsObject,
+} from 'class-validator';
 
 export class CreateCustomerDto {
-  @ApiProperty({ example: 'string' })
-  address: string;
-
-  @ApiProperty({ example: 'string' })
-  city: string;
-
-  @ApiProperty({ example: 'string' })
-  country: string;
-
-  @ApiProperty({ example: 'string' })
-  customer_id: string;
-
-  @ApiProperty({ example: 'string' })
-  deleted_at: string;
-
-  @ApiProperty({ example: 'string' })
-  email: string;
-
-  @ApiProperty({ example: 'string' })
-  environment: string;
-
-  @ApiProperty({ example: true })
-  is_business: boolean;
-
-  @ApiProperty({ example: true })
-  is_deleted: boolean;
-
-  @ApiProperty({ example: {} })
-  metadata: any;
-
-  @ApiProperty({ example: 'string' })
+  @ApiProperty({
+    example: 'John Doe',
+    description: 'Customer full name',
+  })
+  @IsString()
   name: string;
 
-  @ApiProperty({ example: 'string' })
-  phone_number: string;
+  @ApiProperty({
+    example: 'john.doe@example.com',
+    description: 'Customer email address',
+    required: false,
+  })
+  @IsEmail()
+  @IsOptional()
+  email?: string;
 
-  @ApiProperty({ example: 'string' })
-  postal_code: string;
+  @ApiProperty({
+    example: '+221771234567',
+    description: 'Customer phone number',
+    required: false,
+  })
+  @IsString()
+  @IsOptional()
+  phone_number?: string;
 
-  @ApiProperty({ example: 'string' })
-  spi_alias_mbno: string;
+  @ApiProperty({
+    example: '+221771234567',
+    description: 'Customer WhatsApp number',
+    required: false,
+  })
+  @IsString()
+  @IsOptional()
+  whatsapp_number?: string;
 
-  @ApiProperty({ example: 'string' })
-  spi_alias_shid: string;
+  @ApiProperty({
+    example: 'Senegal',
+    description: 'Customer country',
+    required: false,
+  })
+  @IsString()
+  @IsOptional()
+  country?: string;
 
-  @ApiProperty({ example: 'string' })
-  spi_primary_alias: string;
+  @ApiProperty({
+    example: 'Dakar',
+    description: 'Customer city',
+    required: false,
+  })
+  @IsString()
+  @IsOptional()
+  city?: string;
 
-  @ApiProperty({ example: 'string' })
-  whatsapp_number: string;
+  @ApiProperty({
+    example: '123 Main Street',
+    description: 'Customer street address',
+    required: false,
+  })
+  @IsString()
+  @IsOptional()
+  address?: string;
+
+  @ApiProperty({
+    example: '12345',
+    description: 'Customer postal code',
+    required: false,
+  })
+  @IsString()
+  @IsOptional()
+  postal_code?: string;
+
+  @ApiProperty({
+    example: false,
+    description: 'Whether the customer is a business',
+    required: false,
+    default: false,
+  })
+  @IsBoolean()
+  @IsOptional()
+  is_business?: boolean;
+
+  @ApiProperty({
+    example: { custom_field: 'value' },
+    description: 'Additional metadata as JSON',
+    required: false,
+  })
+  @IsObject()
+  @IsOptional()
+  metadata?: Record<string, any>;
 }

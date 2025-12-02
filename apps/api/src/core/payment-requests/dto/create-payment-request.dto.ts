@@ -1,81 +1,50 @@
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreatePaymentRequestDto {
-  @ApiProperty({ example: 123 })
+  @ApiProperty({
+    example: 10000.0,
+    description: 'Amount to request',
+  })
   amount: number;
 
-  @ApiProperty({ example: 'string' })
+  @ApiProperty({
+    example: 'XOF',
+    description: 'Currency code',
+    enum: ['XOF', 'USD', 'EUR', 'GBP'],
+  })
   currency_code: string;
 
-  @ApiProperty({ example: 'string' })
-  customer_id: string;
+  @ApiProperty({
+    example: 'Invoice #INV-2024-001',
+    description: 'Description of the payment request',
+    required: false,
+  })
+  description?: string;
 
-  @ApiProperty({ example: 'string' })
-  description: string;
+  @ApiProperty({
+    example: '123e4567-e89b-12d3-a456-426614174000',
+    description: 'Customer ID',
+    required: false,
+  })
+  customer_id?: string;
 
-  @ApiProperty({ example: 'string' })
-  environment: string;
-
-  @ApiProperty({ example: 'string' })
+  @ApiProperty({
+    example: '2024-12-31T23:59:59Z',
+    description: 'Expiration date/time for the payment request',
+  })
   expiry_date: string;
 
-  @ApiProperty({ example: 'string' })
-  payment_link: string;
+  @ApiProperty({
+    example: 'INV-2024-001',
+    description: 'Payment reference (invoice number, order ID, etc.)',
+    required: false,
+  })
+  payment_reference?: string;
 
-  @ApiProperty({ example: 'string' })
-  payment_reference: string;
-
-  @ApiProperty({ example: 'string' })
-  spi_account_number: string;
-
-  @ApiProperty({ example: 'string' })
-  spi_bulk_instruction_id: string;
-
-  @ApiProperty({ example: true })
-  spi_confirmation: boolean;
-
-  @ApiProperty({ example: 'string' })
-  spi_date_envoi: string;
-
-  @ApiProperty({ example: 'string' })
-  spi_date_irrevocabilite: string;
-
-  @ApiProperty({ example: 'string' })
-  spi_date_limite_paiement: string;
-
-  @ApiProperty({ example: 'string' })
-  spi_date_limite_reponse: string;
-
-  @ApiProperty({ example: 'string' })
-  spi_date_rejet: string;
-
-  @ApiProperty({ example: true })
-  spi_debit_differe: boolean;
-
-  @ApiProperty({ example: 'string' })
-  spi_end2end_id: string;
-
-  @ApiProperty({ example: 'string' })
-  spi_payeur_alias: string;
-
-  @ApiProperty({ example: 'string' })
-  spi_payeur_nom: string;
-
-  @ApiProperty({ example: 'string' })
-  spi_payeur_pays: string;
-
-  @ApiProperty({ example: 'string' })
-  spi_ref_doc_numero: string;
-
-  @ApiProperty({ example: 123 })
-  spi_remise_amount: number;
-
-  @ApiProperty({ example: 123 })
-  spi_remise_rate: number;
-
-  @ApiProperty({ example: 'string' })
-  spi_tx_id: string;
-
-  @ApiProperty({ example: 'string' })
-  status: string;
+  @ApiProperty({
+    example: { invoice_id: 'INV-2024-001', customer_ref: 'CUST-123' },
+    description: 'Additional metadata',
+    required: false,
+  })
+  metadata?: Record<string, any>;
 }

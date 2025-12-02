@@ -55,13 +55,14 @@ export class AccountsService {
     user: AuthContext,
     currencyCode?: string,
   ): Promise<AccountBalanceResponseDto[]> {
-    const { data, error } = await this.supabase
-      .getClient()
-      .rpc('fetch_account_balance' as any, {
+    const { data, error } = await this.supabase.getClient().rpc(
+      'fetch_account_balance' as any,
+      {
         p_merchant_id: user.merchantId,
         p_organization_id: user.organizationId,
         p_currency_code: currencyCode || null,
-      } as any);
+      } as any,
+    );
 
     if (error) throw new Error(error.message);
 
@@ -87,12 +88,13 @@ export class AccountsService {
     user: AuthContext,
     targetCurrency?: CurrencyCode,
   ): Promise<BalanceBreakdownResponseDto[]> {
-    const { data, error } = await this.supabase
-      .getClient()
-      .rpc('fetch_balance_breakdown' as any, {
+    const { data, error } = await this.supabase.getClient().rpc(
+      'fetch_balance_breakdown' as any,
+      {
         p_merchant_id: user.merchantId,
         p_target_currency: targetCurrency || null,
-      } as any);
+      } as any,
+    );
 
     if (error) throw new Error(error.message);
 
@@ -116,12 +118,13 @@ export class AccountsService {
     user: AuthContext,
     currencyCode: CurrencyCode,
   ): Promise<{ has_sufficient_balance: boolean; available_balance: number }> {
-    const { data, error } = await this.supabase
-      .getClient()
-      .rpc('check_merchant_available_balance' as any, {
+    const { data, error } = await this.supabase.getClient().rpc(
+      'check_merchant_available_balance' as any,
+      {
         p_merchant_id: user.merchantId,
         p_currency_code: currencyCode,
-      } as any);
+      } as any,
+    );
 
     if (error) throw new Error(error.message);
     return data;

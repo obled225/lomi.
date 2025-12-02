@@ -462,7 +462,19 @@ async function main() {
       resource.tableName === 'checkout_sessions' ||
       resource.tableName === 'webhooks' ||
       resource.tableName === 'accounts' ||
-      resource.tableName === 'organizations'
+      resource.tableName === 'organizations' ||
+      resource.tableName === 'customers' ||
+      resource.tableName === 'discount_coupons' ||
+      resource.tableName === 'transactions' ||
+      resource.tableName === 'webhook_delivery_logs' ||
+      resource.tableName === 'subscriptions' ||
+      resource.tableName === 'products' ||
+      resource.tableName === 'prices' ||
+      resource.tableName === 'payment_links' ||
+      resource.tableName === 'payment_requests' ||
+      resource.tableName === 'payouts' ||
+      resource.tableName === 'beneficiary_payouts' ||
+      resource.tableName === 'refunds'
     ) {
       console.log(
         `⏩ Skipping ${resource.tableName} (manually implemented with special logic)`,

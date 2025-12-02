@@ -15,7 +15,7 @@ export class SupabaseService implements OnModuleInit {
     const supabaseUrl =
       this.configService.get<string>('SUPABASE_URL') ||
       process.env.SUPABASE_URL;
-    
+
     // Use SERVICE_ROLE_KEY for API (bypasses RLS)
     // This is secure because:
     // 1. API Key Guard validates all requests

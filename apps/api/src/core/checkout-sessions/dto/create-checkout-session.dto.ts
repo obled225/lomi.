@@ -1,96 +1,139 @@
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateCheckoutSessionDto {
-  @ApiProperty({ example: true })
-  allow_coupon_code: boolean;
-
-  @ApiProperty({ example: true })
-  allow_quantity: boolean;
-
-  @ApiProperty({ example: 123 })
+  @ApiProperty({
+    example: 10000.0,
+    description: 'Amount to charge',
+  })
   amount: number;
 
-  @ApiProperty({ example: 'string' })
-  cancel_url: string;
-
-  @ApiProperty({ example: 'string' })
-  checkout_session_id: string;
-
-  @ApiProperty({ example: 'string' })
+  @ApiProperty({
+    example: 'XOF',
+    description: 'Currency code',
+    enum: ['XOF', 'USD', 'EUR', 'GBP'],
+  })
   currency_code: string;
 
-  @ApiProperty({ example: 'string' })
-  customer_email: string;
+  @ApiProperty({
+    example: 'Premium Subscription',
+    description: 'Title of the checkout session',
+    required: false,
+  })
+  title?: string;
 
-  @ApiProperty({ example: 'string' })
-  customer_id: string;
+  @ApiProperty({
+    example: 'Monthly subscription to premium features',
+    description: 'Description of what the customer is buying',
+    required: false,
+  })
+  description?: string;
 
-  @ApiProperty({ example: 'string' })
-  customer_name: string;
+  @ApiProperty({
+    example: '123e4567-e89b-12d3-a456-426614174000',
+    description: 'Customer ID (if existing customer)',
+    required: false,
+  })
+  customer_id?: string;
 
-  @ApiProperty({ example: 'string' })
-  customer_phone: string;
+  @ApiProperty({
+    example: 'john@example.com',
+    description: 'Customer email (required if no customer_id)',
+    required: false,
+  })
+  customer_email?: string;
 
-  @ApiProperty({ example: 'string' })
-  description: string;
+  @ApiProperty({
+    example: 'John Doe',
+    description: 'Customer name',
+    required: false,
+  })
+  customer_name?: string;
 
-  @ApiProperty({ example: 'string' })
-  environment: string;
+  @ApiProperty({
+    example: '+221771234567',
+    description: 'Customer phone number',
+    required: false,
+  })
+  customer_phone?: string;
 
-  @ApiProperty({ example: 'string' })
-  expires_at: string;
+  @ApiProperty({
+    example: '123e4567-e89b-12d3-a456-426614174000',
+    description: 'Product ID',
+    required: false,
+  })
+  product_id?: string;
 
-  @ApiProperty({ example: 'string' })
-  installment_plan_id: string;
+  @ApiProperty({
+    example: '321e4567-e89b-12d3-a456-426614174000',
+    description: 'Specific price ID (if product has multiple prices)',
+    required: false,
+  })
+  price_id?: string;
 
-  @ApiProperty({ example: true })
-  is_pos: boolean;
+  @ApiProperty({
+    example: '654e7890-e89b-12d3-a456-426614174000',
+    description: 'Subscription ID (if renewing/modifying subscription)',
+    required: false,
+  })
+  subscription_id?: string;
 
-  @ApiProperty({ example: true })
-  is_spi: boolean;
+  @ApiProperty({
+    example: true,
+    description: 'Allow customer to change quantity',
+    default: false,
+    required: false,
+  })
+  allow_quantity?: boolean;
 
-  @ApiProperty({ example: {} })
-  metadata: any;
+  @ApiProperty({
+    example: 1,
+    description: 'Quantity',
+    default: 1,
+    required: false,
+  })
+  quantity?: number;
 
-  @ApiProperty({ example: 'string' })
-  payment_link_id: string;
+  @ApiProperty({
+    example: 'https://example.com/success',
+    description: 'URL to redirect to on successful payment',
+    required: false,
+  })
+  success_url?: string;
 
-  @ApiProperty({ example: 'string' })
-  payment_request_id: string;
+  @ApiProperty({
+    example: 'https://example.com/cancel',
+    description: 'URL to redirect to if payment is cancelled',
+    required: false,
+  })
+  cancel_url?: string;
 
-  @ApiProperty({ example: 'string' })
-  price_id: string;
+  @ApiProperty({
+    example: true,
+    description: 'Allow customer to apply discount codes',
+    default: false,
+    required: false,
+  })
+  allow_coupon_code?: boolean;
 
-  @ApiProperty({ example: 'string' })
-  product_id: string;
+  @ApiProperty({
+    example: true,
+    description: 'Require billing address',
+    default: true,
+    required: false,
+  })
+  require_billing_address?: boolean;
 
-  @ApiProperty({ example: {} })
-  qr_code_data: any;
+  @ApiProperty({
+    example: '987e6543-e89b-12d3-a456-426614174000',
+    description: 'Payment link ID (if creating from payment link)',
+    required: false,
+  })
+  payment_link_id?: string;
 
-  @ApiProperty({ example: 'string' })
-  qr_code_type: string;
-
-  @ApiProperty({ example: 123 })
-  quantity: number;
-
-  @ApiProperty({ example: true })
-  require_billing_address: boolean;
-
-  @ApiProperty({ example: 'string' })
-  spi_account_number: string;
-
-  @ApiProperty({ example: 'string' })
-  spi_qr_code_id: string;
-
-  @ApiProperty({ example: 'string' })
-  status: string;
-
-  @ApiProperty({ example: 'string' })
-  subscription_id: string;
-
-  @ApiProperty({ example: 'string' })
-  success_url: string;
-
-  @ApiProperty({ example: 'string' })
-  title: string;
+  @ApiProperty({
+    example: { custom_field: 'value' },
+    description: 'Additional metadata',
+    required: false,
+  })
+  metadata?: Record<string, any>;
 }

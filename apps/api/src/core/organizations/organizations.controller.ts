@@ -24,7 +24,7 @@ export class OrganizationsController {
   @Get()
   @ApiOperation({
     summary: 'Get organization details',
-    description: 'Returns the authenticated merchant\'s organization details',
+    description: "Returns the authenticated merchant's organization details",
   })
   @ApiResponse({
     status: 200,

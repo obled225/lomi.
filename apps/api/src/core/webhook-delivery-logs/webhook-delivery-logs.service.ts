@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { SupabaseService } from '@/utils/supabase/supabase.service';
 import { AuthContext } from '@/core/common/decorators/current-user.decorator';
 
@@ -6,17 +6,39 @@ import { AuthContext } from '@/core/common/decorators/current-user.decorator';
 export class WebhookDeliveryLogsService {
   constructor(private readonly supabase: SupabaseService) {}
 
-  async findAll(user: AuthContext) {
-    const { data, error } = await this.supabase
-      .getClient()
-      .from('webhook_delivery_logs')
-      .select('*')
-      .eq('organization_id', user.organizationId);
+  /**
+   * List all webhook delivery logs for a specific webhook
+   * Uses RPC: get_webhook_delivery_logs
+   */
+  async findAll(
+    user: AuthContext,
+    webhookId: string,
+    successOnly: boolean = false,
+    failedOnly: boolean = false,
+    limit: number = 25,
+    offset: number = 0,
+  ) {
+    const { data, error } = await this.supabase.rpc(
+      'get_webhook_delivery_logs',
+      {
+        p_webhook_id: webhookId,
+        p_merchant_id: user.merchantId,
+        p_limit: limit,
+        p_offset: offset,
+        p_success_only: successOnly,
+        p_failed_only: failedOnly,
+      },
+    );
 
     if (error) throw new Error(error.message);
-    return data;
+
+    return data || [];
   }
 
+  /**
+   * Get single webhook delivery log by ID
+   * Uses direct query with organization filtering
+   */
   async findOne(id: string, user: AuthContext) {
     const { data, error } = await this.supabase
       .getClient()
@@ -26,7 +48,28 @@ export class WebhookDeliveryLogsService {
       .eq('organization_id', user.organizationId)
       .single();
 
-    if (error) throw new Error(error.message);
+    if (error) {
+      if (error.code === 'PGRST116') {
+        throw new NotFoundException(
+          `Webhook delivery log with ID ${id} not found or access denied`,
+        );
+      }
+      throw new Error(error.message);
+    }
+
+    if (!data) {
+      throw new NotFoundException(
+        `Webhook delivery log with ID ${id} not found or access denied`,
+      );
+    }
+
+    // Validate ownership
+    if (data.organization_id !== user.organizationId) {
+      throw new NotFoundException(
+        `Webhook delivery log with ID ${id} not found or access denied`,
+      );
+    }
+
     return data;
   }
 }

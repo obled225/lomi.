@@ -1,42 +1,29 @@
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateRefundDto {
-  @ApiProperty({ example: 123 })
+  @ApiProperty({
+    example: '123e4567-e89b-12d3-a456-426614174000',
+    description: 'Transaction ID to refund',
+  })
+  transaction_id: string;
+
+  @ApiProperty({
+    example: 5000.0,
+    description: 'Amount to refund (must be <= original transaction amount)',
+  })
   amount: number;
 
-  @ApiProperty({ example: 'string' })
-  environment: string;
+  @ApiProperty({
+    example: 'Customer requested refund',
+    description: 'Reason for refund',
+    required: false,
+  })
+  reason?: string;
 
-  @ApiProperty({ example: 123 })
-  fee_amount: number;
-
-  @ApiProperty({ example: {} })
-  metadata: any;
-
-  @ApiProperty({ example: 'string' })
-  reason: string;
-
-  @ApiProperty({ example: 123 })
-  refunded_amount: number;
-
-  @ApiProperty({ example: 'string' })
-  spi_account_number: string;
-
-  @ApiProperty({ example: 'string' })
-  spi_end2end_id: string;
-
-  @ApiProperty({ example: 'string' })
-  spi_retour_date_demande: string;
-
-  @ApiProperty({ example: 'string' })
-  spi_retour_date_irrevocabilite: string;
-
-  @ApiProperty({ example: 'string' })
-  spi_tx_id: string;
-
-  @ApiProperty({ example: 'string' })
-  status: string;
-
-  @ApiProperty({ example: 'string' })
-  transaction_id: string;
+  @ApiProperty({
+    example: { support_ticket_id: 'TICKET-123' },
+    description: 'Additional metadata',
+    required: false,
+  })
+  metadata?: Record<string, any>;
 }

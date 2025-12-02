@@ -1,57 +1,106 @@
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreatePaymentLinkDto {
-  @ApiProperty({ example: true })
-  allow_coupon_code: boolean;
-
-  @ApiProperty({ example: true })
-  allow_quantity: boolean;
-
-  @ApiProperty({ example: 123 })
-  amount: number;
-
-  @ApiProperty({ example: 'string' })
-  cancel_url: string;
-
-  @ApiProperty({ example: 'string' })
-  currency_code: string;
-
-  @ApiProperty({ example: 'string' })
-  description: string;
-
-  @ApiProperty({ example: 'string' })
-  environment: string;
-
-  @ApiProperty({ example: 'string' })
-  expires_at: string;
-
-  @ApiProperty({ example: true })
-  is_active: boolean;
-
-  @ApiProperty({ example: 'string' })
+  @ApiProperty({
+    example: 'product',
+    description: 'Type of payment link',
+    enum: ['product', 'instant'],
+  })
   link_type: string;
 
-  @ApiProperty({ example: {} })
-  metadata: any;
-
-  @ApiProperty({ example: 'string' })
-  price_id: string;
-
-  @ApiProperty({ example: 'string' })
-  product_id: string;
-
-  @ApiProperty({ example: 123 })
-  quantity: number;
-
-  @ApiProperty({ example: true })
-  require_billing_address: boolean;
-
-  @ApiProperty({ example: 'string' })
-  success_url: string;
-
-  @ApiProperty({ example: 'string' })
+  @ApiProperty({
+    example: 'Premium Subscription',
+    description: 'Title of the payment link',
+  })
   title: string;
 
-  @ApiProperty({ example: 'string' })
-  url: string;
+  @ApiProperty({
+    example: 'XOF',
+    description: 'Currency code',
+    enum: ['XOF', 'USD', 'EUR', 'GBP'],
+  })
+  currency_code: string;
+
+  @ApiProperty({
+    example: 'Monthly subscription to premium features',
+    description: 'Description',
+    required: false,
+  })
+  description?: string;
+
+  @ApiProperty({
+    example: 10000.0,
+    description:
+      'Amount (required for instant links, not allowed for product links)',
+    required: false,
+  })
+  amount?: number;
+
+  @ApiProperty({
+    example: '123e4567-e89b-12d3-a456-426614174000',
+    description:
+      'Product ID (required for product links, not allowed for instant links)',
+    required: false,
+  })
+  product_id?: string;
+
+  @ApiProperty({
+    example: '321e4567-e89b-12d3-a456-426614174000',
+    description:
+      'Specific price ID (optional, for product links with multiple prices)',
+    required: false,
+  })
+  price_id?: string;
+
+  @ApiProperty({
+    example: true,
+    description: 'Allow customers to apply discount codes',
+    default: false,
+    required: false,
+  })
+  allow_coupon_code?: boolean;
+
+  @ApiProperty({
+    example: false,
+    description: 'Allow customers to change quantity',
+    default: false,
+    required: false,
+  })
+  allow_quantity?: boolean;
+
+  @ApiProperty({
+    example: true,
+    description: 'Require billing address',
+    default: true,
+    required: false,
+  })
+  require_billing_address?: boolean;
+
+  @ApiProperty({
+    example: '2024-12-31T23:59:59Z',
+    description: 'Expiration date/time (optional)',
+    required: false,
+  })
+  expires_at?: string;
+
+  @ApiProperty({
+    example: 'https://example.com/success',
+    description: 'Success redirect URL',
+    required: false,
+  })
+  success_url?: string;
+
+  @ApiProperty({
+    example: 'https://example.com/cancel',
+    description: 'Cancel redirect URL',
+    required: false,
+  })
+  cancel_url?: string;
+
+  @ApiProperty({
+    example: { campaign: 'summer2024' },
+    description: 'Additional metadata',
+    required: false,
+  })
+  metadata?: Record<string, any>;
 }

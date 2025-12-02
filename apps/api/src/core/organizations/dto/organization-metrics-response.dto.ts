@@ -43,4 +43,3 @@ export class OrganizationMetricsResponseDto {
   })
   calculated_at: string;
 }
-

@@ -46,7 +46,17 @@ export class AccountResponseDto {
 
   @ApiProperty({
     example: 'CACC',
-    enum: ['CACC', 'CARD', 'CASH', 'CHAR', 'CISH', 'CURR', 'DPST', 'SVGS', 'ULAA'],
+    enum: [
+      'CACC',
+      'CARD',
+      'CASH',
+      'CHAR',
+      'CISH',
+      'CURR',
+      'DPST',
+      'SVGS',
+      'ULAA',
+    ],
     description: 'SPI account type',
     required: false,
   })

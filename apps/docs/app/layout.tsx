@@ -6,6 +6,7 @@ import { Body } from '@/app/layout.client';
 import { Provider } from './provider';
 import type { ReactNode } from 'react';
 import { Analytics } from '@vercel/analytics/next';
+import { ApolloTracker } from '@/components/analytics/apollo-tracker';
 
 const title = "lomi. | West Africa's Payment Processing Platform";
 const description =
@@ -185,6 +186,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <Body>
         <Provider>{children}</Provider>
         <Analytics />
+        <ApolloTracker />
       </Body>
     </html>
   );

@@ -5,8 +5,8 @@
  *
  * Generated from database.types.ts - only includes:
  * - Exposed enums (34 enums)
- * - Exposed tables (16 tables)
- * - Exposed functions (8 functions)
+ * - Exposed tables (15 tables)
+ * - Exposed functions (24 functions)
  *
  * DO NOT EDIT MANUALLY - This file is auto-generated
  * Run: npm run generate:api-types
@@ -768,82 +768,6 @@ export type Database = {
             isOneToOne: false;
             referencedRelation: 'organizations';
             referencedColumns: ['organization_id'];
-          },
-        ];
-      };
-      prices: {
-        Row: {
-          amount: number;
-          billing_interval: APIEnums['billing_interval'] | null;
-          created_at: string;
-          currency_code: APIEnums['currency_code'];
-          environment: string;
-          is_active: boolean;
-          is_default: boolean;
-          maximum_amount: number | null;
-          metadata: Json | null;
-          minimum_amount: number | null;
-          organization_id: string;
-          price_id: string;
-          pricing_model: APIEnums['pricing_model'];
-          product_id: string;
-          updated_at: string;
-        };
-        Insert: {
-          amount: number;
-          billing_interval?: APIEnums['billing_interval'] | null;
-          created_at?: string;
-          currency_code: APIEnums['currency_code'];
-          environment?: string;
-          is_active?: boolean;
-          is_default?: boolean;
-          maximum_amount?: number | null;
-          metadata?: Json | null;
-          minimum_amount?: number | null;
-          organization_id: string;
-          price_id?: string;
-          pricing_model?: APIEnums['pricing_model'];
-          product_id: string;
-          updated_at?: string;
-        };
-        Update: {
-          amount?: number;
-          billing_interval?: APIEnums['billing_interval'] | null;
-          created_at?: string;
-          currency_code?: APIEnums['currency_code'];
-          environment?: string;
-          is_active?: boolean;
-          is_default?: boolean;
-          maximum_amount?: number | null;
-          metadata?: Json | null;
-          minimum_amount?: number | null;
-          organization_id?: string;
-          price_id?: string;
-          pricing_model?: APIEnums['pricing_model'];
-          product_id?: string;
-          updated_at?: string;
-        };
-        Relationships: [
-          {
-            foreignKeyName: 'prices_currency_code_fkey';
-            columns: ['currency_code'];
-            isOneToOne: false;
-            referencedRelation: 'currencies';
-            referencedColumns: ['code'];
-          },
-          {
-            foreignKeyName: 'prices_organization_id_fkey';
-            columns: ['organization_id'];
-            isOneToOne: false;
-            referencedRelation: 'organizations';
-            referencedColumns: ['organization_id'];
-          },
-          {
-            foreignKeyName: 'prices_product_id_fkey';
-            columns: ['product_id'];
-            isOneToOne: false;
-            referencedRelation: 'products';
-            referencedColumns: ['product_id'];
           },
         ];
       };
@@ -1858,6 +1782,288 @@ export type Database = {
           p_webhook_id: string;
         };
         Returns: string;
+      };
+      create_beneficiary_payout: {
+        Args: {
+          p_amount: number;
+          p_currency_code: APIEnums['currency_code'];
+          p_merchant_id: string;
+          p_metadata?: Json;
+          p_payment_method_code?: APIEnums['payment_method_code'];
+          p_payout_method_id?: string;
+          p_provider_code?: APIEnums['provider_code'];
+          p_status?: APIEnums['payout_status'];
+        };
+        Returns: {
+          fee_amount: number;
+          message: string;
+          payout_id: string;
+          status: APIEnums['payout_status'];
+          total_deduction: number;
+        }[];
+      };
+      fetch_beneficiary_payouts: {
+        Args: {
+          p_currency_code?: APIEnums['currency_code'];
+          p_end_date?: string;
+          p_merchant_id: string;
+          p_page_number?: number;
+          p_page_size?: number;
+          p_start_date?: string;
+          p_statuses?: string[];
+        };
+        Returns: {
+          account_id: string;
+          amount: number;
+          created_at: string;
+          created_by: string;
+          currency_code: APIEnums['currency_code'];
+          metadata: Json;
+          organization_id: string;
+          payment_method_code: APIEnums['payment_method_code'];
+          payout_id: string;
+          payout_method_id: string;
+          provider_code: APIEnums['provider_code'];
+          status: APIEnums['payout_status'];
+          updated_at: string;
+        }[];
+      };
+      fetch_customers_with_status: {
+        Args: {
+          p_activity_status?: string;
+          p_customer_type?: string;
+          p_environment?: string;
+          p_limit?: number;
+          p_merchant_id: string;
+          p_offset?: number;
+          p_organization_id?: string;
+          p_search_term?: string;
+        };
+        Returns: {
+          address: string;
+          city: string;
+          country: string;
+          created_at: string;
+          customer_id: string;
+          email: string;
+          has_transactions: boolean;
+          is_business: boolean;
+          name: string;
+          phone_number: string;
+          postal_code: string;
+          total_count: number;
+          updated_at: string;
+          whatsapp_number: string;
+        }[];
+      };
+      create_customer: {
+        Args: {
+          p_address?: string;
+          p_city?: string;
+          p_country?: string;
+          p_email: string;
+          p_environment?: string;
+          p_is_business?: boolean;
+          p_merchant_id: string;
+          p_name: string;
+          p_organization_id: string;
+          p_phone_number?: string;
+          p_postal_code?: string;
+          p_whatsapp_number?: string;
+        };
+        Returns: string;
+      };
+      update_customer: {
+        Args: {
+          p_address?: string;
+          p_city?: string;
+          p_country?: string;
+          p_customer_id: string;
+          p_email: string;
+          p_is_business?: boolean;
+          p_name: string;
+          p_phone_number?: string;
+          p_postal_code?: string;
+          p_whatsapp_number?: string;
+        };
+        Returns: undefined;
+      };
+      delete_customer: { Args: { p_customer_id: string }; Returns: undefined };
+      fetch_customer_transactions: {
+        Args: { p_customer_id: string; p_environment?: string };
+        Returns: {
+          created_at: string;
+          currency_code: APIEnums['currency_code'];
+          description: string;
+          gross_amount: number;
+          status: string;
+          transaction_id: string;
+        }[];
+      };
+      create_payment_link: {
+        Args: {
+          p_allow_coupon_code?: boolean;
+          p_allow_quantity?: boolean;
+          p_cancel_url?: string;
+          p_created_by?: string;
+          p_currency_code: APIEnums['currency_code'];
+          p_description?: string;
+          p_environment?: string;
+          p_expires_at?: string;
+          p_link_type: APIEnums['link_type'];
+          p_organization_id: string;
+          p_price?: number;
+          p_price_id?: string;
+          p_product_id?: string;
+          p_require_billing_address?: boolean;
+          p_success_url?: string;
+          p_title: string;
+        };
+        Returns: string;
+      };
+      initiate_withdrawal: {
+        Args: {
+          p_amount: number;
+          p_currency_code?: APIEnums['currency_code'];
+          p_merchant_id: string;
+          p_payout_method_id: string;
+          p_provider_code?: APIEnums['provider_code'];
+        };
+        Returns: {
+          message: string;
+          success: boolean;
+        }[];
+      };
+      fetch_payouts: {
+        Args: {
+          p_end_date?: string;
+          p_merchant_id: string;
+          p_page_number?: number;
+          p_page_size?: number;
+          p_start_date?: string;
+          p_statuses?: APIEnums['payout_status'][];
+        };
+        Returns: {
+          account_id: string;
+          amount: number;
+          created_at: string;
+          currency_code: APIEnums['currency_code'];
+          merchant_id: string;
+          metadata: Json;
+          organization_id: string;
+          payout_id: string;
+          payout_method_id: string;
+          provider_code: APIEnums['provider_code'];
+          status: APIEnums['payout_status'];
+          updated_at: string;
+        }[];
+      };
+      fetch_products: {
+        Args: {
+          p_environment?: string;
+          p_is_active?: boolean;
+          p_limit?: number;
+          p_merchant_id: string;
+          p_offset?: number;
+          p_organization_id?: string;
+        };
+        Returns: {
+          created_at: string;
+          created_by: string;
+          description: string;
+          display_on_storefront: boolean;
+          fees: Json;
+          image_url: string;
+          is_active: boolean;
+          metadata: Json;
+          name: string;
+          organization_id: string;
+          prices: Json;
+          product_id: string;
+          product_type: APIEnums['product_type'];
+          total_count: number;
+          updated_at: string;
+        }[];
+      };
+      create_product: {
+        Args: {
+          p_charge_day?: number;
+          p_description: string;
+          p_display_on_storefront?: boolean;
+          p_environment?: string;
+          p_failed_payment_action?: APIEnums['failed_payment_action'];
+          p_fee_type_ids?: string[];
+          p_first_payment_type?: APIEnums['first_payment_type'];
+          p_image_url?: string;
+          p_is_active?: boolean;
+          p_merchant_id: string;
+          p_metadata?: Json;
+          p_name: string;
+          p_organization_id: string;
+          p_prices?: Json;
+          p_product_type?: APIEnums['product_type'];
+          p_trial_enabled?: boolean;
+          p_trial_period_days?: number;
+        };
+        Returns: string;
+      };
+      create_price: {
+        Args: {
+          p_amount: number;
+          p_billing_interval?: APIEnums['billing_interval'];
+          p_currency_code: APIEnums['currency_code'];
+          p_is_default?: boolean;
+          p_maximum_amount?: number;
+          p_metadata?: Json;
+          p_minimum_amount?: number;
+          p_organization_id: string;
+          p_pricing_model?: APIEnums['pricing_model'];
+          p_product_id: string;
+        };
+        Returns: string;
+      };
+      set_default_price: {
+        Args: { p_price_id: string; p_product_id: string };
+        Returns: undefined;
+      };
+      create_refund: {
+        Args: {
+          p_amount: number;
+          p_created_by?: string;
+          p_metadata?: Json;
+          p_provider_code?: APIEnums['provider_code'];
+          p_provider_merchant_id?: string;
+          p_provider_transaction_id?: string;
+          p_reason?: string;
+          p_transaction_id: string;
+        };
+        Returns: string;
+      };
+      get_webhook_delivery_logs: {
+        Args: {
+          p_failed_only?: boolean;
+          p_limit?: number;
+          p_merchant_id: string;
+          p_offset?: number;
+          p_success_only?: boolean;
+          p_webhook_id: string;
+        };
+        Returns: {
+          attempt_number: number;
+          created_at: string;
+          event_type: string;
+          headers: Json;
+          ip_address: string;
+          log_id: string;
+          organization_id: string;
+          payload: Json;
+          request_duration_ms: number;
+          response_body: string;
+          response_status: number;
+          success: boolean;
+          user_agent: string;
+          webhook_id: string;
+        }[];
       };
     };
     Enums: {
