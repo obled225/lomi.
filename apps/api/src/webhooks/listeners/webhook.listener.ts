@@ -16,95 +16,170 @@ export class WebhookListener {
 
   @OnEvent('payment.succeeded')
   async handlePaymentSucceeded(payload: any) {
-    this.logger.log(`Handling payment.succeeded event for transaction ${payload.id}`);
-    await this.queueWebhook(payload.organization_id, WebhookEvent.PAYMENT_SUCCEEDED, payload);
+    this.logger.log(
+      `Handling payment.succeeded event for transaction ${payload.id}`,
+    );
+    await this.queueWebhook(
+      payload.organization_id,
+      WebhookEvent.PAYMENT_SUCCEEDED,
+      payload,
+    );
   }
 
   @OnEvent('payment.failed')
   async handlePaymentFailed(payload: any) {
-    this.logger.log(`Handling payment.failed event for transaction ${payload.id}`);
-    await this.queueWebhook(payload.organization_id, WebhookEvent.PAYMENT_FAILED, payload);
+    this.logger.log(
+      `Handling payment.failed event for transaction ${payload.id}`,
+    );
+    await this.queueWebhook(
+      payload.organization_id,
+      WebhookEvent.PAYMENT_FAILED,
+      payload,
+    );
   }
 
   @OnEvent('payment.created')
   async handlePaymentCreated(payload: any) {
-    this.logger.log(`Handling payment.created event for transaction ${payload.id}`);
-    await this.queueWebhook(payload.organization_id, WebhookEvent.PAYMENT_CREATED, payload);
+    this.logger.log(
+      `Handling payment.created event for transaction ${payload.id}`,
+    );
+    await this.queueWebhook(
+      payload.organization_id,
+      WebhookEvent.PAYMENT_CREATED,
+      payload,
+    );
   }
 
   @OnEvent('payment.canceled')
   async handlePaymentCanceled(payload: any) {
-    this.logger.log(`Handling payment.canceled event for transaction ${payload.id}`);
-    await this.queueWebhook(payload.organization_id, WebhookEvent.PAYMENT_CANCELED, payload);
+    this.logger.log(
+      `Handling payment.canceled event for transaction ${payload.id}`,
+    );
+    await this.queueWebhook(
+      payload.organization_id,
+      WebhookEvent.PAYMENT_CANCELED,
+      payload,
+    );
   }
 
   @OnEvent('refund.created')
   async handleRefundCreated(payload: any) {
     this.logger.log(`Handling refund.created event for refund ${payload.id}`);
-    await this.queueWebhook(payload.organization_id, WebhookEvent.REFUND_CREATED, payload);
+    await this.queueWebhook(
+      payload.organization_id,
+      WebhookEvent.REFUND_CREATED,
+      payload,
+    );
   }
 
   @OnEvent('refund.completed')
   async handleRefundCompleted(payload: any) {
     this.logger.log(`Handling refund.completed event for refund ${payload.id}`);
-    await this.queueWebhook(payload.organization_id, WebhookEvent.REFUND_COMPLETED, payload);
+    await this.queueWebhook(
+      payload.organization_id,
+      WebhookEvent.REFUND_COMPLETED,
+      payload,
+    );
   }
 
   @OnEvent('refund.failed')
   async handleRefundFailed(payload: any) {
     this.logger.log(`Handling refund.failed event for refund ${payload.id}`);
-    await this.queueWebhook(payload.organization_id, WebhookEvent.REFUND_FAILED, payload);
+    await this.queueWebhook(
+      payload.organization_id,
+      WebhookEvent.REFUND_FAILED,
+      payload,
+    );
   }
 
   @OnEvent('subscription.created')
   async handleSubscriptionCreated(payload: any) {
-    this.logger.log(`Handling subscription.created event for subscription ${payload.id}`);
-    await this.queueWebhook(payload.organization_id, WebhookEvent.SUBSCRIPTION_CREATED, payload);
+    this.logger.log(
+      `Handling subscription.created event for subscription ${payload.id}`,
+    );
+    await this.queueWebhook(
+      payload.organization_id,
+      WebhookEvent.SUBSCRIPTION_CREATED,
+      payload,
+    );
   }
 
   @OnEvent('subscription.renewed')
   async handleSubscriptionRenewed(payload: any) {
-    this.logger.log(`Handling subscription.renewed event for subscription ${payload.id}`);
-    await this.queueWebhook(payload.organization_id, WebhookEvent.SUBSCRIPTION_RENEWED, payload);
+    this.logger.log(
+      `Handling subscription.renewed event for subscription ${payload.id}`,
+    );
+    await this.queueWebhook(
+      payload.organization_id,
+      WebhookEvent.SUBSCRIPTION_RENEWED,
+      payload,
+    );
   }
 
   @OnEvent('subscription.canceled')
   async handleSubscriptionCanceled(payload: any) {
-    this.logger.log(`Handling subscription.canceled event for subscription ${payload.id}`);
-    await this.queueWebhook(payload.organization_id, WebhookEvent.SUBSCRIPTION_CANCELED, payload);
+    this.logger.log(
+      `Handling subscription.canceled event for subscription ${payload.id}`,
+    );
+    await this.queueWebhook(
+      payload.organization_id,
+      WebhookEvent.SUBSCRIPTION_CANCELED,
+      payload,
+    );
   }
 
   @OnEvent('checkout.completed')
   async handleCheckoutCompleted(payload: any) {
-    this.logger.log(`Handling checkout.completed event for session ${payload.id}`);
-    await this.queueWebhook(payload.organization_id, WebhookEvent.CHECKOUT_COMPLETED, payload);
+    this.logger.log(
+      `Handling checkout.completed event for session ${payload.id}`,
+    );
+    await this.queueWebhook(
+      payload.organization_id,
+      WebhookEvent.CHECKOUT_COMPLETED,
+      payload,
+    );
   }
 
   @OnEvent('provider.status_changed')
   async handleProviderStatusChanged(payload: any) {
-    this.logger.log(`Handling provider.status_changed event for provider ${payload.provider_code}`);
-    await this.queueWebhook(payload.organization_id, WebhookEvent.PROVIDER_STATUS_CHANGED, payload);
+    this.logger.log(
+      `Handling provider.status_changed event for provider ${payload.provider_code}`,
+    );
+    await this.queueWebhook(
+      payload.organization_id,
+      WebhookEvent.PROVIDER_STATUS_CHANGED,
+      payload,
+    );
   }
 
-  private async queueWebhook(organizationId: string, event: WebhookEvent, data: any) {
+  private async queueWebhook(
+    organizationId: string,
+    event: WebhookEvent,
+    data: any,
+  ) {
     // We still need to fetch relevant webhooks first to know which ones to queue
     // Ideally this logic should be moved to a service method that returns webhooks
     // For now, we'll use the sender service to fetch and then queue individual jobs
-    
+
     // NOTE: Refactoring notifyOrganization to return webhooks instead of sending would be cleaner
     // But to minimize changes, let's just queue the organization notification job
     // and let the processor handle the fan-out or fetching.
-    
+
     // Actually, better approach:
     // 1. Fetch webhooks here (or via service)
     // 2. Queue a job for EACH webhook
-    
+
     // Let's modify WebhookSenderService to expose a method to get webhooks
-    // For now, I'll implement a simple fetch here using the existing service if possible, 
+    // For now, I'll implement a simple fetch here using the existing service if possible,
     // or just queue a "notify-organization" job and let the processor handle it.
     // However, the processor is set up to take a specific webhook.
-    
+
     // Let's change the strategy: The listener will fetch webhooks and queue jobs.
-    await this.webhookSender.queueWebhooksForOrganization(organizationId, event, data, this.webhookQueue);
+    await this.webhookSender.queueWebhooksForOrganization(
+      organizationId,
+      event,
+      data,
+      this.webhookQueue,
+    );
   }
 }

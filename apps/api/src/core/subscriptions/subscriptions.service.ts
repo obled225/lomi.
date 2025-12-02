@@ -31,7 +31,11 @@ export class SubscriptionsService {
     return data;
   }
 
-  async update(id: string, updateDto: UpdateSubscriptionDto, user: AuthContext) {
+  async update(
+    id: string,
+    updateDto: UpdateSubscriptionDto,
+    user: AuthContext,
+  ) {
     const { data, error } = await this.supabase
       .getClient()
       .from('subscriptions')

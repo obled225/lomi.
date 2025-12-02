@@ -21,7 +21,8 @@ export const API_RESOURCES: APIResourceConfig[] = [
     enabled: true,
     tag: 'Accounts',
     idField: 'account_id',
-    description: 'Account balances - view organization account balances and SPI account information',
+    description:
+      'Account balances - view organization account balances and SPI account information',
     operations: {
       list: true,
       get: true,
@@ -35,7 +36,8 @@ export const API_RESOURCES: APIResourceConfig[] = [
     enabled: true,
     tag: 'Organizations',
     idField: 'organization_id',
-    description: 'Organization metrics - view MRR, ARR, total revenue, merchant lifetime value, and other organization metrics',
+    description:
+      'Organization metrics - view MRR, ARR, total revenue, merchant lifetime value, and other organization metrics',
     operations: {
       list: true,
       get: true,

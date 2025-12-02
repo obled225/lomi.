@@ -68,7 +68,9 @@ export class WebhookSenderService {
     }
 
     if (!webhook.events.includes(event)) {
-      this.logger.log(`Webhook ${webhook.id} does not subscribe to event ${event}`);
+      this.logger.log(
+        `Webhook ${webhook.id} does not subscribe to event ${event}`,
+      );
       return false;
     }
 
@@ -108,7 +110,7 @@ export class WebhookSenderService {
       } catch (error: any) {
         lastResponseStatus = error.response?.status;
         lastResponseBody = error.response?.data || error.message;
-        
+
         this.logger.warn(
           `Webhook delivery failed (attempt ${retries + 1}/${maxRetries + 1}): ${error.message}`,
         );
@@ -128,8 +130,10 @@ export class WebhookSenderService {
       lastResponseBody,
       payload,
     );
-    
-    this.logger.error(`Webhook ${webhook.id} delivery failed after ${maxRetries} retries`);
+
+    this.logger.error(
+      `Webhook ${webhook.id} delivery failed after ${maxRetries} retries`,
+    );
     return false;
   }
 
@@ -140,18 +144,24 @@ export class WebhookSenderService {
     payload: any,
   ) {
     try {
-      const { error } = await this.supabase.getClient().rpc('log_webhook_delivery', {
-        p_webhook_id: webhookId,
-        p_merchant_id: payload.data?.merchant_id || payload.data?.organization_id,
-        p_organization_id: payload.data?.organization_id,
-        p_event_type: payload.event,
-        p_payload: payload,
-        p_response_status: status,
-        p_response_body: typeof responseBody === 'string' ? responseBody : JSON.stringify(responseBody),
-        p_attempt_number: 1,
-        p_headers: null,
-        p_request_duration_ms: undefined,
-      });
+      const { error } = await this.supabase
+        .getClient()
+        .rpc('log_webhook_delivery', {
+          p_webhook_id: webhookId,
+          p_merchant_id:
+            payload.data?.merchant_id || payload.data?.organization_id,
+          p_organization_id: payload.data?.organization_id,
+          p_event_type: payload.event,
+          p_payload: payload,
+          p_response_status: status,
+          p_response_body:
+            typeof responseBody === 'string'
+              ? responseBody
+              : JSON.stringify(responseBody),
+          p_attempt_number: 1,
+          p_headers: null,
+          p_request_duration_ms: undefined,
+        });
 
       if (error) {
         this.logger.error(`Failed to log webhook delivery: ${error.message}`);
@@ -176,7 +186,9 @@ export class WebhookSenderService {
       .eq('is_active', true);
 
     if (error) {
-      this.logger.error(`Failed to fetch webhooks for org ${organizationId}: ${error.message}`);
+      this.logger.error(
+        `Failed to fetch webhooks for org ${organizationId}: ${error.message}`,
+      );
       return;
     }
 
@@ -208,7 +220,9 @@ export class WebhookSenderService {
     }));
 
     await queue.addBulk(jobs);
-    this.logger.log(`Queued ${jobs.length} webhook jobs for org ${organizationId}`);
+    this.logger.log(
+      `Queued ${jobs.length} webhook jobs for org ${organizationId}`,
+    );
   }
 
   async notifyOrganization(
@@ -225,7 +239,9 @@ export class WebhookSenderService {
       .eq('is_active', true);
 
     if (error) {
-      this.logger.error(`Failed to fetch webhooks for org ${organizationId}: ${error.message}`);
+      this.logger.error(
+        `Failed to fetch webhooks for org ${organizationId}: ${error.message}`,
+      );
       return;
     }
 

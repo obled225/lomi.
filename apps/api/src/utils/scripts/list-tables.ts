@@ -46,9 +46,7 @@ async function listTables() {
     console.log(`Total: ${tables.length} tables`);
 
     // Check against api-config
-    const configuredTables = new Set(
-      API_RESOURCES.map((r) => r.tableName),
-    );
+    const configuredTables = new Set(API_RESOURCES.map((r) => r.tableName));
 
     console.log('\n⚠️  Tables NOT in api-config.ts:');
     const missing = tables.filter((t) => !configuredTables.has(t));

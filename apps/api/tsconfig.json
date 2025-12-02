@@ -12,7 +12,7 @@
     "allowSyntheticDefaultImports": true,
     "target": "ES2023",
     "sourceMap": true,
-    "outDir": "nest/dist",
+    "outDir": "dist",
     "baseUrl": "./",
     "paths": {
       "@/*": [
@@ -35,8 +35,6 @@
   },
   "exclude": [
     "node_modules",
-    "test",
-    "dist",
-    "**/*spec.ts"
+    "dist"
   ]
 }

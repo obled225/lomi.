@@ -142,19 +142,30 @@ function generateServiceContent(
   // Use _user prefix if no tenancy filter exists
   const userParam = hasTenancy ? 'user' : '_user';
 
-  const singularName = tableName.endsWith('s') ? tableName.slice(0, -1) : tableName;
+  const singularName = tableName.endsWith('s')
+    ? tableName.slice(0, -1)
+    : tableName;
   const kebabSingular = toKebabCase(singularName);
 
-  const imports = [`import { Injectable } from '@nestjs/common';`, `import { SupabaseService } from '@utils/supabase/supabase.service';`];
-  
+  const imports = [
+    `import { Injectable } from '@nestjs/common';`,
+    `import { SupabaseService } from '@utils/supabase/supabase.service';`,
+  ];
+
   if (operations?.create) {
-    imports.push(`import { ${dtoName} } from './dto/create-${kebabSingular}.dto';`);
+    imports.push(
+      `import { ${dtoName} } from './dto/create-${kebabSingular}.dto';`,
+    );
   }
   if (operations?.update) {
-    imports.push(`import { ${updateDtoName} } from './dto/update-${kebabSingular}.dto';`);
+    imports.push(
+      `import { ${updateDtoName} } from './dto/update-${kebabSingular}.dto';`,
+    );
   }
-  
-  imports.push(`import { AuthContext } from '@core/common/decorators/current-user.decorator';`);
+
+  imports.push(
+    `import { AuthContext } from '@core/common/decorators/current-user.decorator';`,
+  );
 
   const methods: string[] = [];
 
@@ -276,20 +287,33 @@ function generateControllerContent(
   if (operations.create) nestImports.push('Post', 'Body');
   if (operations.list) nestImports.push('Get');
   if (operations.get && !operations.list) nestImports.push('Get');
-  if (operations.get || operations.update || operations.delete) nestImports.push('Param');
+  if (operations.get || operations.update || operations.delete)
+    nestImports.push('Param');
   if (operations.update) nestImports.push('Patch', 'Body');
   if (operations.delete) nestImports.push('Delete');
 
-  const imports = [`import { ${nestImports.join(', ')} } from '@nestjs/common';`, `import { ApiTags, ApiOperation, ApiResponse, ApiSecurity } from '@nestjs/swagger';`, `import { ${serviceName} } from './${serviceFileName}';`];
+  const imports = [
+    `import { ${nestImports.join(', ')} } from '@nestjs/common';`,
+    `import { ApiTags, ApiOperation, ApiResponse, ApiSecurity } from '@nestjs/swagger';`,
+    `import { ${serviceName} } from './${serviceFileName}';`,
+  ];
 
   if (operations.create) {
-    imports.push(`import { ${dtoName} } from './dto/create-${kebabSingular}.dto';`);
+    imports.push(
+      `import { ${dtoName} } from './dto/create-${kebabSingular}.dto';`,
+    );
   }
   if (operations.update) {
-    imports.push(`import { ${updateDtoName} } from './dto/update-${kebabSingular}.dto';`);
+    imports.push(
+      `import { ${updateDtoName} } from './dto/update-${kebabSingular}.dto';`,
+    );
   }
 
-  imports.push(`import { ${responseDtoName} } from './dto/${kebabSingular}-response.dto';`, `import { ApiKeyGuard } from '@core/common/guards/api-key.guard';`, `import { CurrentUser, type AuthContext } from '@core/common/decorators/current-user.decorator';`);
+  imports.push(
+    `import { ${responseDtoName} } from './dto/${kebabSingular}-response.dto';`,
+    `import { ApiKeyGuard } from '@core/common/guards/api-key.guard';`,
+    `import { CurrentUser, type AuthContext } from '@core/common/decorators/current-user.decorator';`,
+  );
 
   const methods: string[] = [];
 
@@ -416,7 +440,9 @@ async function main() {
       resource.tableName === 'checkout_sessions' ||
       resource.tableName === 'webhooks'
     ) {
-      console.log(`⏩ Skipping ${resource.tableName} (manually implemented with special logic)`);
+      console.log(
+        `⏩ Skipping ${resource.tableName} (manually implemented with special logic)`,
+      );
       continue;
     }
 
@@ -478,7 +504,11 @@ async function main() {
     // Generate UpdateDTO if update operation is enabled
     if (resource.operations?.update) {
       // For update DTO, make all fields optional
-      const updateDtoContent = generateDtoContent(updateDtoName, createProperties, true);
+      const updateDtoContent = generateDtoContent(
+        updateDtoName,
+        createProperties,
+        true,
+      );
       fs.writeFileSync(
         path.join(dtoDir, `update-${kebabSingular}.dto.ts`),
         updateDtoContent,

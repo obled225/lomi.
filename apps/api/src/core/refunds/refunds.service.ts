@@ -13,7 +13,6 @@ export class RefundsService {
       .from('refunds')
       .insert({
         ...createDto,
-        
       } as any)
       .select()
       .single();
@@ -26,9 +25,7 @@ export class RefundsService {
     const { data, error } = await this.supabase
       .getClient()
       .from('refunds')
-      .select('*')
-      ;
-
+      .select('*');
     if (error) throw new Error(error.message);
     return data;
   }
@@ -39,7 +36,7 @@ export class RefundsService {
       .from('refunds')
       .select('*')
       .eq('refund_id', id)
-      
+
       .single();
 
     if (error) throw new Error(error.message);

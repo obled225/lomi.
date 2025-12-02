@@ -93,5 +93,4 @@ export class CreateCheckoutSessionDto {
 
   @ApiProperty({ example: 'string' })
   title: string;
-
 }

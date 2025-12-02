@@ -1,10 +1,18 @@
 import { Controller, UseGuards, Post, Body, Get, Param } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiResponse, ApiSecurity } from '@nestjs/swagger';
+import {
+  ApiTags,
+  ApiOperation,
+  ApiResponse,
+  ApiSecurity,
+} from '@nestjs/swagger';
 import { PaymentRequestsService } from './payment-requests.service';
 import { CreatePaymentRequestDto } from './dto/create-payment-request.dto';
 import { PaymentRequestResponseDto } from './dto/payment-request-response.dto';
 import { ApiKeyGuard } from '@core/common/guards/api-key.guard';
-import { CurrentUser, type AuthContext } from '@core/common/decorators/current-user.decorator';
+import {
+  CurrentUser,
+  type AuthContext,
+} from '@core/common/decorators/current-user.decorator';
 
 @ApiTags('Payment Requests')
 @ApiSecurity('api-key')
@@ -20,7 +28,10 @@ export class PaymentRequestsController {
     description: 'The payment_request has been successfully created.',
     type: PaymentRequestResponseDto,
   })
-  create(@Body() createDto: CreatePaymentRequestDto, @CurrentUser() user: AuthContext) {
+  create(
+    @Body() createDto: CreatePaymentRequestDto,
+    @CurrentUser() user: AuthContext,
+  ) {
     return this.service.create(createDto, user);
   }
 

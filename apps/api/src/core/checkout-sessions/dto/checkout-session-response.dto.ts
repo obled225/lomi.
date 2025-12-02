@@ -105,5 +105,4 @@ export class CheckoutSessionResponseDto {
 
   @ApiProperty({ example: 'string' })
   updated_at: string;
-
 }

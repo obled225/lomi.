@@ -45,5 +45,4 @@ export class CreateWebhookDto {
 
   @ApiProperty({ example: 'string' })
   verification_token: string;
-
 }

@@ -42,5 +42,4 @@ export class PriceResponseDto {
 
   @ApiProperty({ example: 'string' })
   updated_at: string;
-
 }

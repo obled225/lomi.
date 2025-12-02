@@ -1,10 +1,18 @@
 import { Controller, UseGuards, Get, Param, Patch, Body } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiResponse, ApiSecurity } from '@nestjs/swagger';
+import {
+  ApiTags,
+  ApiOperation,
+  ApiResponse,
+  ApiSecurity,
+} from '@nestjs/swagger';
 import { WebhooksService } from './webhooks.service';
 import { UpdateWebhookDto } from './dto/update-webhook.dto';
 import { WebhookResponseDto } from './dto/webhook-response.dto';
 import { ApiKeyGuard } from '../core/common/guards/api-key.guard';
-import { CurrentUser, type AuthContext } from '../core/common/decorators/current-user.decorator';
+import {
+  CurrentUser,
+  type AuthContext,
+} from '../core/common/decorators/current-user.decorator';
 
 @ApiTags('Webhooks')
 @ApiSecurity('api-key')
@@ -42,7 +50,11 @@ export class WebhooksController {
     description: 'The webhook has been successfully updated.',
     type: WebhookResponseDto,
   })
-  update(@Param('id') id: string, @Body() updateDto: UpdateWebhookDto, @CurrentUser() user: AuthContext) {
+  update(
+    @Param('id') id: string,
+    @Body() updateDto: UpdateWebhookDto,
+    @CurrentUser() user: AuthContext,
+  ) {
     return this.service.update(id, updateDto, user);
   }
 }

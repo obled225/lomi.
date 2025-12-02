@@ -1,9 +1,17 @@
 import { Controller, UseGuards, Get, Param } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiResponse, ApiSecurity } from '@nestjs/swagger';
+import {
+  ApiTags,
+  ApiOperation,
+  ApiResponse,
+  ApiSecurity,
+} from '@nestjs/swagger';
 import { OrganizationsService } from './organizations.service';
 import { OrganizationResponseDto } from './dto/organization-response.dto';
 import { ApiKeyGuard } from '@core/common/guards/api-key.guard';
-import { CurrentUser, type AuthContext } from '@core/common/decorators/current-user.decorator';
+import {
+  CurrentUser,
+  type AuthContext,
+} from '@core/common/decorators/current-user.decorator';
 
 @ApiTags('Organizations')
 @ApiSecurity('api-key')

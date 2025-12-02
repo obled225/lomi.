@@ -50,7 +50,10 @@ describe('WebhooksService', () => {
       const user: AuthContext = { organizationId: 'org_123' } as any;
       const expectedResult = { id: 'wh_123', ...createDto };
 
-      mockSupabaseClient.single.mockResolvedValue({ data: expectedResult, error: null });
+      mockSupabaseClient.single.mockResolvedValue({
+        data: expectedResult,
+        error: null,
+      });
 
       const result = await service.create(createDto, user);
 
@@ -82,13 +85,19 @@ describe('WebhooksService', () => {
       // select should return 'this' (the builder), not the result yet
       mockSupabaseClient.select.mockReturnValue(mockSupabaseClient);
       // eq should return the result promise
-      mockSupabaseClient.eq.mockResolvedValue({ data: expectedResult, error: null });
+      mockSupabaseClient.eq.mockResolvedValue({
+        data: expectedResult,
+        error: null,
+      });
 
       const result = await service.findAll(user);
 
       expect(mockSupabaseClient.from).toHaveBeenCalledWith('webhooks');
       expect(mockSupabaseClient.select).toHaveBeenCalledWith('*');
-      expect(mockSupabaseClient.eq).toHaveBeenCalledWith('organization_id', user.organizationId);
+      expect(mockSupabaseClient.eq).toHaveBeenCalledWith(
+        'organization_id',
+        user.organizationId,
+      );
       expect(result).toEqual(expectedResult);
     });
   });

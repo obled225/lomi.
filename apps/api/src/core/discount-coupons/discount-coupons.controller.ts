@@ -1,10 +1,18 @@
 import { Controller, UseGuards, Post, Body, Get, Param } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiResponse, ApiSecurity } from '@nestjs/swagger';
+import {
+  ApiTags,
+  ApiOperation,
+  ApiResponse,
+  ApiSecurity,
+} from '@nestjs/swagger';
 import { DiscountCouponsService } from './discount-coupons.service';
 import { CreateDiscountCouponDto } from './dto/create-discount-coupon.dto';
 import { DiscountCouponResponseDto } from './dto/discount-coupon-response.dto';
 import { ApiKeyGuard } from '@core/common/guards/api-key.guard';
-import { CurrentUser, type AuthContext } from '@core/common/decorators/current-user.decorator';
+import {
+  CurrentUser,
+  type AuthContext,
+} from '@core/common/decorators/current-user.decorator';
 
 @ApiTags('Discount Coupons')
 @ApiSecurity('api-key')
@@ -20,7 +28,10 @@ export class DiscountCouponsController {
     description: 'The discount_coupon has been successfully created.',
     type: DiscountCouponResponseDto,
   })
-  create(@Body() createDto: CreateDiscountCouponDto, @CurrentUser() user: AuthContext) {
+  create(
+    @Body() createDto: CreateDiscountCouponDto,
+    @CurrentUser() user: AuthContext,
+  ) {
     return this.service.create(createDto, user);
   }
 

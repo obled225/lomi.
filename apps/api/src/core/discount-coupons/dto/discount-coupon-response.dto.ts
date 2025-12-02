@@ -60,5 +60,4 @@ export class DiscountCouponResponseDto {
 
   @ApiProperty({ example: 'string' })
   valid_from: string;
-
 }
