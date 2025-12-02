@@ -161,10 +161,12 @@ export class CustomersService {
 
     // If metadata was provided, update it separately
     if (createDto.metadata) {
-      const { error: metadataError } = await this.supabase
-        .from('customers')
+      const { error: metadataError } = await (this.supabase
+        .getClient()
+        .from('customers') as any)
         .update({ metadata: createDto.metadata } as CustomerUpdate)
-        .eq('customer_id', customerId);
+        .eq('customer_id', customerId)
+        .select('*');
 
       if (metadataError) {
         // Log error but don't fail the creation
@@ -234,11 +236,13 @@ export class CustomersService {
 
     // Update metadata separately if provided
     if (metadata !== undefined) {
-      const { error: metadataError } = await this.supabase
-        .from('customers')
+      const { error: metadataError } = await (this.supabase
+        .getClient()
+        .from('customers') as any)
         .update({ metadata } as CustomerUpdate)
         .eq('customer_id', id)
-        .eq('organization_id', user.organizationId);
+        .eq('organization_id', user.organizationId)
+        .select('*');
 
       if (metadataError) throw new Error(metadataError.message);
     }

@@ -43,6 +43,41 @@ export class DiscountCouponsController {
     return this.discountCouponsService.findAll(user);
   }
 
+  @Get(':id/performance')
+  @ApiOperation({
+    summary: 'Get coupon performance metrics',
+    description:
+      'Returns performance metrics for a specific discount coupon, including usage statistics and revenue impact.',
+  })
+  @ApiParam({
+    name: 'id',
+    description: 'Coupon UUID',
+    type: String,
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Coupon performance metrics',
+    schema: {
+      properties: {
+        total_uses: { type: 'number', example: 45 },
+        total_discount_amount: { type: 'number', example: 25000.0 },
+        total_revenue: { type: 'number', example: 150000.0 },
+        average_order_value: { type: 'number', example: 3333.33 },
+      },
+    },
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'Discount coupon not found or access denied',
+  })
+  @ApiResponse({
+    status: 401,
+    description: 'Invalid or missing API key',
+  })
+  getPerformance(@Param('id') id: string, @CurrentUser() user: AuthContext) {
+    return this.discountCouponsService.getPerformance(id, user);
+  }
+
   @Get(':id')
   @ApiOperation({
     summary: 'Get discount coupon by ID',
@@ -95,40 +130,5 @@ export class DiscountCouponsController {
     @CurrentUser() user: AuthContext,
   ) {
     return this.discountCouponsService.create(createDto, user);
-  }
-
-  @Get(':id/performance')
-  @ApiOperation({
-    summary: 'Get coupon performance metrics',
-    description:
-      'Returns performance metrics for a specific discount coupon, including usage statistics and revenue impact.',
-  })
-  @ApiParam({
-    name: 'id',
-    description: 'Coupon UUID',
-    type: String,
-  })
-  @ApiResponse({
-    status: 200,
-    description: 'Coupon performance metrics',
-    schema: {
-      properties: {
-        total_uses: { type: 'number', example: 45 },
-        total_discount_amount: { type: 'number', example: 25000.0 },
-        total_revenue: { type: 'number', example: 150000.0 },
-        average_order_value: { type: 'number', example: 3333.33 },
-      },
-    },
-  })
-  @ApiResponse({
-    status: 404,
-    description: 'Discount coupon not found or access denied',
-  })
-  @ApiResponse({
-    status: 401,
-    description: 'Invalid or missing API key',
-  })
-  getPerformance(@Param('id') id: string, @CurrentUser() user: AuthContext) {
-    return this.discountCouponsService.getPerformance(id, user);
   }
 }
