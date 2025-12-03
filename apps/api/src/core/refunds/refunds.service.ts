@@ -13,20 +13,34 @@ export class RefundsService {
    * Returns immediately with pending status - completion confirmed via webhook
    */
   async create(createDto: CreateRefundDto, user: AuthContext) {
-    // First verify the transaction belongs to this organization
-    const { data: transaction, error: txError } = await this.supabase
+    // First verify the transaction belongs to this organization using RPC
+    const { data: txData, error: txError } = await this.supabase
       .getClient()
-      .from('transactions')
-      .select('transaction_id, organization_id, gross_amount')
-      .eq('transaction_id', createDto.transaction_id)
-      .eq('organization_id', user.organizationId)
-      .single<{
-        transaction_id: string;
-        organization_id: string;
-        gross_amount: number;
-      }>();
+      .rpc(
+        'get_transaction' as any,
+        {
+          p_transaction_id: createDto.transaction_id,
+          p_organization_id: user.organizationId,
+        } as any,
+      );
 
-    if (txError || !transaction) {
+    if (txError) {
+      throw new NotFoundException(
+        `Transaction with ID ${createDto.transaction_id} not found or access denied: ${txError.message}`,
+      );
+    }
+
+    // RPC functions that return TABLE return an array
+    if (!txData) {
+      throw new NotFoundException(
+        `Transaction with ID ${createDto.transaction_id} not found or access denied`,
+      );
+    }
+
+    const txResults = Array.isArray(txData) ? txData : [txData];
+    const transaction = txResults[0] as any;
+
+    if (!transaction || !transaction.transaction_id) {
       throw new NotFoundException(
         `Transaction with ID ${createDto.transaction_id} not found or access denied`,
       );
@@ -96,32 +110,39 @@ export class RefundsService {
 
   /**
    * Get single refund by ID
+   * Uses RPC: get_refund
    */
   async findOne(id: string, user: AuthContext) {
-    const { data, error } = await this.supabase
-      .getClient()
-      .from('refunds')
-      .select(
-        `
-        *,
-        transactions!inner (
-          organization_id,
-          gross_amount,
-          currency_code,
-          customer_id
-        )
-      `,
-      )
-      .eq('refund_id', id)
-      .eq('transactions.organization_id', user.organizationId)
-      .single();
+    const { data, error } = await this.supabase.getClient().rpc(
+      'get_refund' as any,
+      {
+        p_refund_id: id,
+        p_organization_id: user.organizationId,
+      } as any,
+    );
 
-    if (error || !data) {
+    if (error) {
       throw new NotFoundException(
         `Refund with ID ${id} not found or access denied`,
       );
     }
 
-    return data;
+    // RPC functions that return TABLE return an array
+    if (!data) {
+      throw new NotFoundException(
+        `Refund with ID ${id} not found or access denied`,
+      );
+    }
+
+    const results = Array.isArray(data) ? data : [data];
+    const refund = results[0] as any;
+
+    if (!refund || !refund.refund_id) {
+      throw new NotFoundException(
+        `Refund with ID ${id} not found or access denied`,
+      );
+    }
+
+    return refund;
   }
 }

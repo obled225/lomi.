@@ -25,2488 +25,2493 @@ export type Database = {
     Tables: {
       accounts: {
         Row: {
-          account_id: string
-          balance: number
-          created_at: string
-          currency_code: APIEnums["currency_code"]
-          is_spi_account: boolean
-          organization_id: string
-          spi_account_balance: number | null
-          spi_account_balance_sync_error: string | null
-          spi_account_balance_synced_at: string | null
-          spi_account_number: string | null
+          account_id: string;
+          balance: number;
+          created_at: string;
+          currency_code: APIEnums["currency_code"];
+          is_spi_account: boolean;
+          organization_id: string;
+          spi_account_balance: number | null;
+          spi_account_balance_sync_error: string | null;
+          spi_account_balance_synced_at: string | null;
+          spi_account_number: string | null;
           spi_account_status:
             | APIEnums["spi_account_status"]
-            | null
+            | null;
           spi_account_type:
             | APIEnums["spi_account_type"]
-            | null
-          updated_at: string
-        }
+            | null;
+          updated_at: string;
+        };
         Insert: {
-          account_id?: string
-          balance?: number
-          created_at?: string
-          currency_code?: APIEnums["currency_code"]
-          is_spi_account?: boolean
-          organization_id: string
-          spi_account_balance?: number | null
-          spi_account_balance_sync_error?: string | null
-          spi_account_balance_synced_at?: string | null
-          spi_account_number?: string | null
+          account_id?: string;
+          balance?: number;
+          created_at?: string;
+          currency_code?: APIEnums["currency_code"];
+          is_spi_account?: boolean;
+          organization_id: string;
+          spi_account_balance?: number | null;
+          spi_account_balance_sync_error?: string | null;
+          spi_account_balance_synced_at?: string | null;
+          spi_account_number?: string | null;
           spi_account_status?:
             | APIEnums["spi_account_status"]
-            | null
+            | null;
           spi_account_type?:
             | APIEnums["spi_account_type"]
-            | null
-          updated_at?: string
-        }
+            | null;
+          updated_at?: string;
+        };
         Update: {
-          account_id?: string
-          balance?: number
-          created_at?: string
-          currency_code?: APIEnums["currency_code"]
-          is_spi_account?: boolean
-          organization_id?: string
-          spi_account_balance?: number | null
-          spi_account_balance_sync_error?: string | null
-          spi_account_balance_synced_at?: string | null
-          spi_account_number?: string | null
+          account_id?: string;
+          balance?: number;
+          created_at?: string;
+          currency_code?: APIEnums["currency_code"];
+          is_spi_account?: boolean;
+          organization_id?: string;
+          spi_account_balance?: number | null;
+          spi_account_balance_sync_error?: string | null;
+          spi_account_balance_synced_at?: string | null;
+          spi_account_number?: string | null;
           spi_account_status?:
             | APIEnums["spi_account_status"]
-            | null
+            | null;
           spi_account_type?:
             | APIEnums["spi_account_type"]
-            | null
-          updated_at?: string
-        }
+            | null;
+          updated_at?: string;
+        };
         Relationships: [
           {
-            foreignKeyName: "accounts_currency_code_fkey"
-            columns: ["currency_code"]
-            isOneToOne: false
-            referencedRelation: "currencies"
-            referencedColumns: ["code"]
+            foreignKeyName: "accounts_currency_code_fkey";
+            columns: ["currency_code"];
+            isOneToOne: false;
+            referencedRelation: "currencies";
+            referencedColumns: ["code"];
           },
           {
-            foreignKeyName: "accounts_organization_id_fkey"
-            columns: ["organization_id"]
-            isOneToOne: false
-            referencedRelation: "organizations"
-            referencedColumns: ["organization_id"]
+            foreignKeyName: "accounts_organization_id_fkey";
+            columns: ["organization_id"];
+            isOneToOne: false;
+            referencedRelation: "organizations";
+            referencedColumns: ["organization_id"];
           },
-        ]
+        ];
       }
       organizations: {
         Row: {
-          arr: number
-          created_at: string
-          default_currency: APIEnums["currency_code"]
-          deleted_at: string | null
-          email: string
-          employee_number: string | null
-          industry: string | null
-          is_deleted: boolean
-          is_starter_business: boolean
-          logo_url: string | null
-          merchant_lifetime_value: number
-          metadata: Json | null
-          mrr: number
-          name: string
-          organization_id: string
-          phone_number: string
-          pin_code: string | null
-          slug: string | null
-          status: APIEnums["organization_status"]
-          storefront_enabled: boolean
-          total_customers: number | null
-          total_merchants: number | null
-          total_revenue: number | null
-          total_transactions: number | null
-          updated_at: string
-          verification_status: APIEnums["organization_verification_status"]
-          website_url: string | null
-        }
+          arr: number;
+          created_at: string;
+          default_currency: APIEnums["currency_code"];
+          deleted_at: string | null;
+          email: string;
+          employee_number: string | null;
+          industry: string | null;
+          is_deleted: boolean;
+          is_starter_business: boolean;
+          logo_url: string | null;
+          merchant_lifetime_value: number;
+          metadata: Json | null;
+          mrr: number;
+          name: string;
+          organization_id: string;
+          phone_number: string;
+          pin_code: string | null;
+          slug: string | null;
+          status: APIEnums["organization_status"];
+          storefront_enabled: boolean;
+          total_customers: number | null;
+          total_merchants: number | null;
+          total_revenue: number | null;
+          total_transactions: number | null;
+          updated_at: string;
+          verification_status: APIEnums["organization_verification_status"];
+          website_url: string | null;
+        };
         Insert: {
-          arr?: number
-          created_at?: string
-          default_currency?: APIEnums["currency_code"]
-          deleted_at?: string | null
-          email: string
-          employee_number?: string | null
-          industry?: string | null
-          is_deleted?: boolean
-          is_starter_business?: boolean
-          logo_url?: string | null
-          merchant_lifetime_value?: number
-          metadata?: Json | null
-          mrr?: number
-          name: string
-          organization_id?: string
-          phone_number: string
-          pin_code?: string | null
-          slug?: string | null
-          status?: APIEnums["organization_status"]
-          storefront_enabled?: boolean
-          total_customers?: number | null
-          total_merchants?: number | null
-          total_revenue?: number | null
-          total_transactions?: number | null
-          updated_at?: string
-          verification_status?: APIEnums["organization_verification_status"]
-          website_url?: string | null
-        }
+          arr?: number;
+          created_at?: string;
+          default_currency?: APIEnums["currency_code"];
+          deleted_at?: string | null;
+          email: string;
+          employee_number?: string | null;
+          industry?: string | null;
+          is_deleted?: boolean;
+          is_starter_business?: boolean;
+          logo_url?: string | null;
+          merchant_lifetime_value?: number;
+          metadata?: Json | null;
+          mrr?: number;
+          name: string;
+          organization_id?: string;
+          phone_number: string;
+          pin_code?: string | null;
+          slug?: string | null;
+          status?: APIEnums["organization_status"];
+          storefront_enabled?: boolean;
+          total_customers?: number | null;
+          total_merchants?: number | null;
+          total_revenue?: number | null;
+          total_transactions?: number | null;
+          updated_at?: string;
+          verification_status?: APIEnums["organization_verification_status"];
+          website_url?: string | null;
+        };
         Update: {
-          arr?: number
-          created_at?: string
-          default_currency?: APIEnums["currency_code"]
-          deleted_at?: string | null
-          email?: string
-          employee_number?: string | null
-          industry?: string | null
-          is_deleted?: boolean
-          is_starter_business?: boolean
-          logo_url?: string | null
-          merchant_lifetime_value?: number
-          metadata?: Json | null
-          mrr?: number
-          name?: string
-          organization_id?: string
-          phone_number?: string
-          pin_code?: string | null
-          slug?: string | null
-          status?: APIEnums["organization_status"]
-          storefront_enabled?: boolean
-          total_customers?: number | null
-          total_merchants?: number | null
-          total_revenue?: number | null
-          total_transactions?: number | null
-          updated_at?: string
-          verification_status?: APIEnums["organization_verification_status"]
-          website_url?: string | null
-        }
-        Relationships: []
+          arr?: number;
+          created_at?: string;
+          default_currency?: APIEnums["currency_code"];
+          deleted_at?: string | null;
+          email?: string;
+          employee_number?: string | null;
+          industry?: string | null;
+          is_deleted?: boolean;
+          is_starter_business?: boolean;
+          logo_url?: string | null;
+          merchant_lifetime_value?: number;
+          metadata?: Json | null;
+          mrr?: number;
+          name?: string;
+          organization_id?: string;
+          phone_number?: string;
+          pin_code?: string | null;
+          slug?: string | null;
+          status?: APIEnums["organization_status"];
+          storefront_enabled?: boolean;
+          total_customers?: number | null;
+          total_merchants?: number | null;
+          total_revenue?: number | null;
+          total_transactions?: number | null;
+          updated_at?: string;
+          verification_status?: APIEnums["organization_verification_status"];
+          website_url?: string | null;
+        };
+        Relationships: [];
       }
       customers: {
         Row: {
-          address: string | null
-          city: string | null
-          country: string | null
-          created_at: string
-          created_by: string | null
-          customer_id: string
-          deleted_at: string | null
-          email: string | null
-          environment: string
-          is_business: boolean
-          is_deleted: boolean
-          metadata: Json | null
-          name: string
-          organization_id: string
-          phone_number: string | null
-          postal_code: string | null
-          spi_alias_mbno: string | null
-          spi_alias_shid: string | null
-          spi_primary_alias: string | null
-          updated_at: string
-          whatsapp_number: string | null
-        }
+          address: string | null;
+          city: string | null;
+          country: string | null;
+          created_at: string;
+          created_by: string | null;
+          customer_id: string;
+          deleted_at: string | null;
+          email: string | null;
+          environment: string;
+          is_business: boolean;
+          is_deleted: boolean;
+          metadata: Json | null;
+          name: string;
+          organization_id: string;
+          phone_number: string | null;
+          postal_code: string | null;
+          spi_alias_mbno: string | null;
+          spi_alias_shid: string | null;
+          spi_primary_alias: string | null;
+          updated_at: string;
+          whatsapp_number: string | null;
+        };
         Insert: {
-          address?: string | null
-          city?: string | null
-          country?: string | null
-          created_at?: string
-          created_by?: string | null
-          customer_id?: string
-          deleted_at?: string | null
-          email?: string | null
-          environment?: string
-          is_business?: boolean
-          is_deleted?: boolean
-          metadata?: Json | null
-          name: string
-          organization_id: string
-          phone_number?: string | null
-          postal_code?: string | null
-          spi_alias_mbno?: string | null
-          spi_alias_shid?: string | null
-          spi_primary_alias?: string | null
-          updated_at?: string
-          whatsapp_number?: string | null
-        }
+          address?: string | null;
+          city?: string | null;
+          country?: string | null;
+          created_at?: string;
+          created_by?: string | null;
+          customer_id?: string;
+          deleted_at?: string | null;
+          email?: string | null;
+          environment?: string;
+          is_business?: boolean;
+          is_deleted?: boolean;
+          metadata?: Json | null;
+          name: string;
+          organization_id: string;
+          phone_number?: string | null;
+          postal_code?: string | null;
+          spi_alias_mbno?: string | null;
+          spi_alias_shid?: string | null;
+          spi_primary_alias?: string | null;
+          updated_at?: string;
+          whatsapp_number?: string | null;
+        };
         Update: {
-          address?: string | null
-          city?: string | null
-          country?: string | null
-          created_at?: string
-          created_by?: string | null
-          customer_id?: string
-          deleted_at?: string | null
-          email?: string | null
-          environment?: string
-          is_business?: boolean
-          is_deleted?: boolean
-          metadata?: Json | null
-          name?: string
-          organization_id?: string
-          phone_number?: string | null
-          postal_code?: string | null
-          spi_alias_mbno?: string | null
-          spi_alias_shid?: string | null
-          spi_primary_alias?: string | null
-          updated_at?: string
-          whatsapp_number?: string | null
-        }
+          address?: string | null;
+          city?: string | null;
+          country?: string | null;
+          created_at?: string;
+          created_by?: string | null;
+          customer_id?: string;
+          deleted_at?: string | null;
+          email?: string | null;
+          environment?: string;
+          is_business?: boolean;
+          is_deleted?: boolean;
+          metadata?: Json | null;
+          name?: string;
+          organization_id?: string;
+          phone_number?: string | null;
+          postal_code?: string | null;
+          spi_alias_mbno?: string | null;
+          spi_alias_shid?: string | null;
+          spi_primary_alias?: string | null;
+          updated_at?: string;
+          whatsapp_number?: string | null;
+        };
         Relationships: [
           {
-            foreignKeyName: "customers_created_by_fkey"
-            columns: ["created_by"]
-            isOneToOne: false
-            referencedRelation: "merchants"
-            referencedColumns: ["merchant_id"]
+            foreignKeyName: "customers_created_by_fkey";
+            columns: ["created_by"];
+            isOneToOne: false;
+            referencedRelation: "merchants";
+            referencedColumns: ["merchant_id"];
           },
           {
-            foreignKeyName: "customers_organization_id_fkey"
-            columns: ["organization_id"]
-            isOneToOne: false
-            referencedRelation: "organizations"
-            referencedColumns: ["organization_id"]
+            foreignKeyName: "customers_organization_id_fkey";
+            columns: ["organization_id"];
+            isOneToOne: false;
+            referencedRelation: "organizations";
+            referencedColumns: ["organization_id"];
           },
           {
-            foreignKeyName: "fk_customers_spi_alias_shid"
-            columns: ["spi_alias_shid"]
-            isOneToOne: false
-            referencedRelation: "spi_account_aliases"
-            referencedColumns: ["alias_id"]
+            foreignKeyName: "fk_customers_spi_alias_shid";
+            columns: ["spi_alias_shid"];
+            isOneToOne: false;
+            referencedRelation: "spi_account_aliases";
+            referencedColumns: ["alias_id"];
           },
-        ]
+        ];
       }
       payment_requests: {
         Row: {
-          amount: number
-          created_at: string
-          created_by: string | null
-          currency_code: APIEnums["currency_code"]
-          customer_id: string | null
-          description: string | null
-          environment: string
-          expiry_date: string
-          organization_id: string
-          payment_link: string | null
-          payment_reference: string | null
-          request_id: string
-          spi_account_number: string | null
-          spi_bulk_instruction_id: string | null
-          spi_confirmation: boolean
-          spi_date_envoi: string | null
-          spi_date_irrevocabilite: string | null
-          spi_date_limite_paiement: string | null
-          spi_date_limite_reponse: string | null
-          spi_date_rejet: string | null
-          spi_debit_differe: boolean
-          spi_end2end_id: string | null
-          spi_payeur_alias: string | null
-          spi_payeur_nom: string | null
-          spi_payeur_pays: string | null
+          amount: number;
+          created_at: string;
+          created_by: string | null;
+          currency_code: APIEnums["currency_code"];
+          customer_id: string | null;
+          description: string | null;
+          environment: string;
+          expiry_date: string;
+          organization_id: string;
+          payment_link: string | null;
+          payment_reference: string | null;
+          request_id: string;
+          spi_account_number: string | null;
+          spi_bulk_instruction_id: string | null;
+          spi_confirmation: boolean;
+          spi_date_envoi: string | null;
+          spi_date_irrevocabilite: string | null;
+          spi_date_limite_paiement: string | null;
+          spi_date_limite_reponse: string | null;
+          spi_date_rejet: string | null;
+          spi_debit_differe: boolean;
+          spi_end2end_id: string | null;
+          spi_payeur_alias: string | null;
+          spi_payeur_nom: string | null;
+          spi_payeur_pays: string | null;
           spi_payment_request_category:
             | APIEnums["spi_payment_request_category"]
-            | null
+            | null;
           spi_payment_status:
             | APIEnums["spi_payment_status"]
-            | null
-          spi_ref_doc_numero: string | null
+            | null;
+          spi_ref_doc_numero: string | null;
           spi_ref_doc_type:
             | APIEnums["spi_document_type"]
-            | null
+            | null;
           spi_rejection_reason:
             | APIEnums["spi_rejection_reason"]
-            | null
-          spi_remise_amount: number | null
-          spi_remise_rate: number | null
-          spi_tx_id: string | null
-          status: APIEnums["transaction_status"]
-          updated_at: string
-        }
+            | null;
+          spi_remise_amount: number | null;
+          spi_remise_rate: number | null;
+          spi_tx_id: string | null;
+          status: APIEnums["transaction_status"];
+          updated_at: string;
+        };
         Insert: {
-          amount: number
-          created_at?: string
-          created_by?: string | null
-          currency_code: APIEnums["currency_code"]
-          customer_id?: string | null
-          description?: string | null
-          environment?: string
-          expiry_date: string
-          organization_id: string
-          payment_link?: string | null
-          payment_reference?: string | null
-          request_id?: string
-          spi_account_number?: string | null
-          spi_bulk_instruction_id?: string | null
-          spi_confirmation?: boolean
-          spi_date_envoi?: string | null
-          spi_date_irrevocabilite?: string | null
-          spi_date_limite_paiement?: string | null
-          spi_date_limite_reponse?: string | null
-          spi_date_rejet?: string | null
-          spi_debit_differe?: boolean
-          spi_end2end_id?: string | null
-          spi_payeur_alias?: string | null
-          spi_payeur_nom?: string | null
-          spi_payeur_pays?: string | null
+          amount: number;
+          created_at?: string;
+          created_by?: string | null;
+          currency_code: APIEnums["currency_code"];
+          customer_id?: string | null;
+          description?: string | null;
+          environment?: string;
+          expiry_date: string;
+          organization_id: string;
+          payment_link?: string | null;
+          payment_reference?: string | null;
+          request_id?: string;
+          spi_account_number?: string | null;
+          spi_bulk_instruction_id?: string | null;
+          spi_confirmation?: boolean;
+          spi_date_envoi?: string | null;
+          spi_date_irrevocabilite?: string | null;
+          spi_date_limite_paiement?: string | null;
+          spi_date_limite_reponse?: string | null;
+          spi_date_rejet?: string | null;
+          spi_debit_differe?: boolean;
+          spi_end2end_id?: string | null;
+          spi_payeur_alias?: string | null;
+          spi_payeur_nom?: string | null;
+          spi_payeur_pays?: string | null;
           spi_payment_request_category?:
             | APIEnums["spi_payment_request_category"]
-            | null
+            | null;
           spi_payment_status?:
             | APIEnums["spi_payment_status"]
-            | null
-          spi_ref_doc_numero?: string | null
+            | null;
+          spi_ref_doc_numero?: string | null;
           spi_ref_doc_type?:
             | APIEnums["spi_document_type"]
-            | null
+            | null;
           spi_rejection_reason?:
             | APIEnums["spi_rejection_reason"]
-            | null
-          spi_remise_amount?: number | null
-          spi_remise_rate?: number | null
-          spi_tx_id?: string | null
-          status?: APIEnums["transaction_status"]
-          updated_at?: string
-        }
+            | null;
+          spi_remise_amount?: number | null;
+          spi_remise_rate?: number | null;
+          spi_tx_id?: string | null;
+          status?: APIEnums["transaction_status"];
+          updated_at?: string;
+        };
         Update: {
-          amount?: number
-          created_at?: string
-          created_by?: string | null
-          currency_code?: APIEnums["currency_code"]
-          customer_id?: string | null
-          description?: string | null
-          environment?: string
-          expiry_date?: string
-          organization_id?: string
-          payment_link?: string | null
-          payment_reference?: string | null
-          request_id?: string
-          spi_account_number?: string | null
-          spi_bulk_instruction_id?: string | null
-          spi_confirmation?: boolean
-          spi_date_envoi?: string | null
-          spi_date_irrevocabilite?: string | null
-          spi_date_limite_paiement?: string | null
-          spi_date_limite_reponse?: string | null
-          spi_date_rejet?: string | null
-          spi_debit_differe?: boolean
-          spi_end2end_id?: string | null
-          spi_payeur_alias?: string | null
-          spi_payeur_nom?: string | null
-          spi_payeur_pays?: string | null
+          amount?: number;
+          created_at?: string;
+          created_by?: string | null;
+          currency_code?: APIEnums["currency_code"];
+          customer_id?: string | null;
+          description?: string | null;
+          environment?: string;
+          expiry_date?: string;
+          organization_id?: string;
+          payment_link?: string | null;
+          payment_reference?: string | null;
+          request_id?: string;
+          spi_account_number?: string | null;
+          spi_bulk_instruction_id?: string | null;
+          spi_confirmation?: boolean;
+          spi_date_envoi?: string | null;
+          spi_date_irrevocabilite?: string | null;
+          spi_date_limite_paiement?: string | null;
+          spi_date_limite_reponse?: string | null;
+          spi_date_rejet?: string | null;
+          spi_debit_differe?: boolean;
+          spi_end2end_id?: string | null;
+          spi_payeur_alias?: string | null;
+          spi_payeur_nom?: string | null;
+          spi_payeur_pays?: string | null;
           spi_payment_request_category?:
             | APIEnums["spi_payment_request_category"]
-            | null
+            | null;
           spi_payment_status?:
             | APIEnums["spi_payment_status"]
-            | null
-          spi_ref_doc_numero?: string | null
+            | null;
+          spi_ref_doc_numero?: string | null;
           spi_ref_doc_type?:
             | APIEnums["spi_document_type"]
-            | null
+            | null;
           spi_rejection_reason?:
             | APIEnums["spi_rejection_reason"]
-            | null
-          spi_remise_amount?: number | null
-          spi_remise_rate?: number | null
-          spi_tx_id?: string | null
-          status?: APIEnums["transaction_status"]
-          updated_at?: string
-        }
+            | null;
+          spi_remise_amount?: number | null;
+          spi_remise_rate?: number | null;
+          spi_tx_id?: string | null;
+          status?: APIEnums["transaction_status"];
+          updated_at?: string;
+        };
         Relationships: [
           {
-            foreignKeyName: "payment_requests_created_by_fkey"
-            columns: ["created_by"]
-            isOneToOne: false
-            referencedRelation: "merchants"
-            referencedColumns: ["merchant_id"]
+            foreignKeyName: "payment_requests_created_by_fkey";
+            columns: ["created_by"];
+            isOneToOne: false;
+            referencedRelation: "merchants";
+            referencedColumns: ["merchant_id"];
           },
           {
-            foreignKeyName: "payment_requests_currency_code_fkey"
-            columns: ["currency_code"]
-            isOneToOne: false
-            referencedRelation: "currencies"
-            referencedColumns: ["code"]
+            foreignKeyName: "payment_requests_currency_code_fkey";
+            columns: ["currency_code"];
+            isOneToOne: false;
+            referencedRelation: "currencies";
+            referencedColumns: ["code"];
           },
           {
-            foreignKeyName: "payment_requests_customer_id_fkey"
-            columns: ["customer_id"]
-            isOneToOne: false
-            referencedRelation: "customers"
-            referencedColumns: ["customer_id"]
+            foreignKeyName: "payment_requests_customer_id_fkey";
+            columns: ["customer_id"];
+            isOneToOne: false;
+            referencedRelation: "customers";
+            referencedColumns: ["customer_id"];
           },
           {
-            foreignKeyName: "payment_requests_organization_id_fkey"
-            columns: ["organization_id"]
-            isOneToOne: false
-            referencedRelation: "organizations"
-            referencedColumns: ["organization_id"]
+            foreignKeyName: "payment_requests_organization_id_fkey";
+            columns: ["organization_id"];
+            isOneToOne: false;
+            referencedRelation: "organizations";
+            referencedColumns: ["organization_id"];
           },
-        ]
+        ];
       }
       transactions: {
         Row: {
-          checkout_session_id: string | null
-          created_at: string
-          currency_code: APIEnums["currency_code"]
-          customer_id: string
-          description: string | null
-          discount_amount: number
-          environment: string
-          fee_amount: number
-          fee_structure_id: string | null
-          gross_amount: number
-          is_bnpl: boolean
-          is_pos: boolean
-          metadata: Json | null
-          net_amount: number
-          organization_id: string
-          payment_method_code: APIEnums["payment_method_code"]
-          price_id: string | null
-          product_id: string | null
-          provider_code: APIEnums["provider_code"]
-          quantity: number
-          spi_account_number: string | null
-          spi_bulk_instruction_id: string | null
-          spi_date_envoi: string | null
-          spi_date_irrevocabilite: string | null
-          spi_discount_amount: number | null
-          spi_discount_rate: number | null
-          spi_end2end_id: string | null
+          checkout_session_id: string | null;
+          created_at: string;
+          currency_code: APIEnums["currency_code"];
+          customer_id: string;
+          description: string | null;
+          discount_amount: number;
+          environment: string;
+          fee_amount: number;
+          fee_structure_id: string | null;
+          gross_amount: number;
+          is_bnpl: boolean;
+          is_pos: boolean;
+          metadata: Json | null;
+          net_amount: number;
+          organization_id: string;
+          payment_method_code: APIEnums["payment_method_code"];
+          price_id: string | null;
+          product_id: string | null;
+          provider_code: APIEnums["provider_code"];
+          quantity: number;
+          spi_account_number: string | null;
+          spi_bulk_instruction_id: string | null;
+          spi_date_envoi: string | null;
+          spi_date_irrevocabilite: string | null;
+          spi_discount_amount: number | null;
+          spi_discount_rate: number | null;
+          spi_end2end_id: string | null;
           spi_payment_category:
             | APIEnums["spi_payment_category"]
-            | null
+            | null;
           spi_payment_flow_type:
             | APIEnums["spi_payment_flow_type"]
-            | null
+            | null;
           spi_payment_status:
             | APIEnums["spi_payment_status"]
-            | null
+            | null;
           spi_rejection_reason:
             | APIEnums["spi_rejection_reason"]
-            | null
-          spi_tx_id: string | null
-          status: APIEnums["transaction_status"]
-          stripe_payment_intent_id: string | null
-          subscription_id: string | null
-          transaction_id: string
-          transaction_type: APIEnums["transaction_type"]
-          updated_at: string
-        }
+            | null;
+          spi_tx_id: string | null;
+          status: APIEnums["transaction_status"];
+          stripe_payment_intent_id: string | null;
+          subscription_id: string | null;
+          transaction_id: string;
+          transaction_type: APIEnums["transaction_type"];
+          updated_at: string;
+        };
         Insert: {
-          checkout_session_id?: string | null
-          created_at?: string
-          currency_code?: APIEnums["currency_code"]
-          customer_id: string
-          description?: string | null
-          discount_amount?: number
-          environment?: string
-          fee_amount: number
-          fee_structure_id?: string | null
-          gross_amount: number
-          is_bnpl?: boolean
-          is_pos?: boolean
-          metadata?: Json | null
-          net_amount: number
-          organization_id: string
-          payment_method_code: APIEnums["payment_method_code"]
-          price_id?: string | null
-          product_id?: string | null
-          provider_code: APIEnums["provider_code"]
-          quantity?: number
-          spi_account_number?: string | null
-          spi_bulk_instruction_id?: string | null
-          spi_date_envoi?: string | null
-          spi_date_irrevocabilite?: string | null
-          spi_discount_amount?: number | null
-          spi_discount_rate?: number | null
-          spi_end2end_id?: string | null
+          checkout_session_id?: string | null;
+          created_at?: string;
+          currency_code?: APIEnums["currency_code"];
+          customer_id: string;
+          description?: string | null;
+          discount_amount?: number;
+          environment?: string;
+          fee_amount: number;
+          fee_structure_id?: string | null;
+          gross_amount: number;
+          is_bnpl?: boolean;
+          is_pos?: boolean;
+          metadata?: Json | null;
+          net_amount: number;
+          organization_id: string;
+          payment_method_code: APIEnums["payment_method_code"];
+          price_id?: string | null;
+          product_id?: string | null;
+          provider_code: APIEnums["provider_code"];
+          quantity?: number;
+          spi_account_number?: string | null;
+          spi_bulk_instruction_id?: string | null;
+          spi_date_envoi?: string | null;
+          spi_date_irrevocabilite?: string | null;
+          spi_discount_amount?: number | null;
+          spi_discount_rate?: number | null;
+          spi_end2end_id?: string | null;
           spi_payment_category?:
             | APIEnums["spi_payment_category"]
-            | null
+            | null;
           spi_payment_flow_type?:
             | APIEnums["spi_payment_flow_type"]
-            | null
+            | null;
           spi_payment_status?:
             | APIEnums["spi_payment_status"]
-            | null
+            | null;
           spi_rejection_reason?:
             | APIEnums["spi_rejection_reason"]
-            | null
-          spi_tx_id?: string | null
-          status?: APIEnums["transaction_status"]
-          stripe_payment_intent_id?: string | null
-          subscription_id?: string | null
-          transaction_id?: string
-          transaction_type: APIEnums["transaction_type"]
-          updated_at?: string
-        }
+            | null;
+          spi_tx_id?: string | null;
+          status?: APIEnums["transaction_status"];
+          stripe_payment_intent_id?: string | null;
+          subscription_id?: string | null;
+          transaction_id?: string;
+          transaction_type: APIEnums["transaction_type"];
+          updated_at?: string;
+        };
         Update: {
-          checkout_session_id?: string | null
-          created_at?: string
-          currency_code?: APIEnums["currency_code"]
-          customer_id?: string
-          description?: string | null
-          discount_amount?: number
-          environment?: string
-          fee_amount?: number
-          fee_structure_id?: string | null
-          gross_amount?: number
-          is_bnpl?: boolean
-          is_pos?: boolean
-          metadata?: Json | null
-          net_amount?: number
-          organization_id?: string
-          payment_method_code?: APIEnums["payment_method_code"]
-          price_id?: string | null
-          product_id?: string | null
-          provider_code?: APIEnums["provider_code"]
-          quantity?: number
-          spi_account_number?: string | null
-          spi_bulk_instruction_id?: string | null
-          spi_date_envoi?: string | null
-          spi_date_irrevocabilite?: string | null
-          spi_discount_amount?: number | null
-          spi_discount_rate?: number | null
-          spi_end2end_id?: string | null
+          checkout_session_id?: string | null;
+          created_at?: string;
+          currency_code?: APIEnums["currency_code"];
+          customer_id?: string;
+          description?: string | null;
+          discount_amount?: number;
+          environment?: string;
+          fee_amount?: number;
+          fee_structure_id?: string | null;
+          gross_amount?: number;
+          is_bnpl?: boolean;
+          is_pos?: boolean;
+          metadata?: Json | null;
+          net_amount?: number;
+          organization_id?: string;
+          payment_method_code?: APIEnums["payment_method_code"];
+          price_id?: string | null;
+          product_id?: string | null;
+          provider_code?: APIEnums["provider_code"];
+          quantity?: number;
+          spi_account_number?: string | null;
+          spi_bulk_instruction_id?: string | null;
+          spi_date_envoi?: string | null;
+          spi_date_irrevocabilite?: string | null;
+          spi_discount_amount?: number | null;
+          spi_discount_rate?: number | null;
+          spi_end2end_id?: string | null;
           spi_payment_category?:
             | APIEnums["spi_payment_category"]
-            | null
+            | null;
           spi_payment_flow_type?:
             | APIEnums["spi_payment_flow_type"]
-            | null
+            | null;
           spi_payment_status?:
             | APIEnums["spi_payment_status"]
-            | null
+            | null;
           spi_rejection_reason?:
             | APIEnums["spi_rejection_reason"]
-            | null
-          spi_tx_id?: string | null
-          status?: APIEnums["transaction_status"]
-          stripe_payment_intent_id?: string | null
-          subscription_id?: string | null
-          transaction_id?: string
-          transaction_type?: APIEnums["transaction_type"]
-          updated_at?: string
-        }
+            | null;
+          spi_tx_id?: string | null;
+          status?: APIEnums["transaction_status"];
+          stripe_payment_intent_id?: string | null;
+          subscription_id?: string | null;
+          transaction_id?: string;
+          transaction_type?: APIEnums["transaction_type"];
+          updated_at?: string;
+        };
         Relationships: [
           {
-            foreignKeyName: "fk_transactions_checkout_session"
-            columns: ["checkout_session_id"]
-            isOneToOne: false
-            referencedRelation: "checkout_sessions"
-            referencedColumns: ["checkout_session_id"]
+            foreignKeyName: "fk_transactions_checkout_session";
+            columns: ["checkout_session_id"];
+            isOneToOne: false;
+            referencedRelation: "checkout_sessions";
+            referencedColumns: ["checkout_session_id"];
           },
           {
-            foreignKeyName: "transactions_currency_code_fkey"
-            columns: ["currency_code"]
-            isOneToOne: false
-            referencedRelation: "currencies"
-            referencedColumns: ["code"]
+            foreignKeyName: "transactions_currency_code_fkey";
+            columns: ["currency_code"];
+            isOneToOne: false;
+            referencedRelation: "currencies";
+            referencedColumns: ["code"];
           },
           {
-            foreignKeyName: "transactions_customer_id_fkey"
-            columns: ["customer_id"]
-            isOneToOne: false
-            referencedRelation: "customers"
-            referencedColumns: ["customer_id"]
+            foreignKeyName: "transactions_customer_id_fkey";
+            columns: ["customer_id"];
+            isOneToOne: false;
+            referencedRelation: "customers";
+            referencedColumns: ["customer_id"];
           },
           {
-            foreignKeyName: "transactions_fee_structure_id_fkey"
-            columns: ["fee_structure_id"]
-            isOneToOne: false
-            referencedRelation: "organization_fee_structure"
-            referencedColumns: ["fee_structure_id"]
+            foreignKeyName: "transactions_fee_structure_id_fkey";
+            columns: ["fee_structure_id"];
+            isOneToOne: false;
+            referencedRelation: "organization_fee_structure";
+            referencedColumns: ["fee_structure_id"];
           },
           {
-            foreignKeyName: "transactions_organization_id_fkey"
-            columns: ["organization_id"]
-            isOneToOne: false
-            referencedRelation: "organizations"
-            referencedColumns: ["organization_id"]
+            foreignKeyName: "transactions_organization_id_fkey";
+            columns: ["organization_id"];
+            isOneToOne: false;
+            referencedRelation: "organizations";
+            referencedColumns: ["organization_id"];
           },
           {
-            foreignKeyName: "transactions_payment_method_code_provider_code_fkey"
-            columns: ["payment_method_code", "provider_code"]
-            isOneToOne: false
-            referencedRelation: "payment_methods"
-            referencedColumns: ["payment_method_code", "provider_code"]
+            foreignKeyName: "transactions_payment_method_code_provider_code_fkey";
+            columns: ["payment_method_code", "provider_code"];
+            isOneToOne: false;
+            referencedRelation: "payment_methods";
+            referencedColumns: ["payment_method_code", "provider_code"];
           },
           {
-            foreignKeyName: "transactions_price_id_fkey"
-            columns: ["price_id"]
-            isOneToOne: false
-            referencedRelation: "prices"
-            referencedColumns: ["price_id"]
+            foreignKeyName: "transactions_price_id_fkey";
+            columns: ["price_id"];
+            isOneToOne: false;
+            referencedRelation: "prices";
+            referencedColumns: ["price_id"];
           },
           {
-            foreignKeyName: "transactions_product_id_fkey"
-            columns: ["product_id"]
-            isOneToOne: false
-            referencedRelation: "products"
-            referencedColumns: ["product_id"]
+            foreignKeyName: "transactions_product_id_fkey";
+            columns: ["product_id"];
+            isOneToOne: false;
+            referencedRelation: "products";
+            referencedColumns: ["product_id"];
           },
           {
-            foreignKeyName: "transactions_provider_code_fkey"
-            columns: ["provider_code"]
-            isOneToOne: false
-            referencedRelation: "providers"
-            referencedColumns: ["code"]
+            foreignKeyName: "transactions_provider_code_fkey";
+            columns: ["provider_code"];
+            isOneToOne: false;
+            referencedRelation: "providers";
+            referencedColumns: ["code"];
           },
           {
-            foreignKeyName: "transactions_subscription_id_fkey"
-            columns: ["subscription_id"]
-            isOneToOne: false
-            referencedRelation: "subscriptions"
-            referencedColumns: ["subscription_id"]
+            foreignKeyName: "transactions_subscription_id_fkey";
+            columns: ["subscription_id"];
+            isOneToOne: false;
+            referencedRelation: "subscriptions";
+            referencedColumns: ["subscription_id"];
           },
-        ]
+        ];
       }
       refunds: {
         Row: {
-          amount: number
-          created_at: string
-          environment: string
-          fee_amount: number
-          metadata: Json | null
-          reason: string | null
-          refund_id: string
-          refunded_amount: number
-          spi_account_number: string | null
-          spi_end2end_id: string | null
+          amount: number;
+          created_at: string;
+          environment: string;
+          fee_amount: number;
+          metadata: Json | null;
+          reason: string | null;
+          refund_id: string;
+          refunded_amount: number;
+          spi_account_number: string | null;
+          spi_end2end_id: string | null;
           spi_fund_return_status:
             | APIEnums["spi_payment_status"]
-            | null
+            | null;
           spi_motif_code:
             | APIEnums["spi_rejection_reason"]
-            | null
+            | null;
           spi_rejection_reason:
             | APIEnums["spi_rejection_reason"]
-            | null
-          spi_retour_date_demande: string | null
-          spi_retour_date_irrevocabilite: string | null
-          spi_tx_id: string | null
-          status: APIEnums["refund_status"]
-          transaction_id: string
-          updated_at: string
-        }
+            | null;
+          spi_retour_date_demande: string | null;
+          spi_retour_date_irrevocabilite: string | null;
+          spi_tx_id: string | null;
+          status: APIEnums["refund_status"];
+          transaction_id: string;
+          updated_at: string;
+        };
         Insert: {
-          amount: number
-          created_at?: string
-          environment?: string
-          fee_amount?: number
-          metadata?: Json | null
-          reason?: string | null
-          refund_id?: string
-          refunded_amount: number
-          spi_account_number?: string | null
-          spi_end2end_id?: string | null
+          amount: number;
+          created_at?: string;
+          environment?: string;
+          fee_amount?: number;
+          metadata?: Json | null;
+          reason?: string | null;
+          refund_id?: string;
+          refunded_amount: number;
+          spi_account_number?: string | null;
+          spi_end2end_id?: string | null;
           spi_fund_return_status?:
             | APIEnums["spi_payment_status"]
-            | null
+            | null;
           spi_motif_code?:
             | APIEnums["spi_rejection_reason"]
-            | null
+            | null;
           spi_rejection_reason?:
             | APIEnums["spi_rejection_reason"]
-            | null
-          spi_retour_date_demande?: string | null
-          spi_retour_date_irrevocabilite?: string | null
-          spi_tx_id?: string | null
-          status?: APIEnums["refund_status"]
-          transaction_id: string
-          updated_at?: string
-        }
+            | null;
+          spi_retour_date_demande?: string | null;
+          spi_retour_date_irrevocabilite?: string | null;
+          spi_tx_id?: string | null;
+          status?: APIEnums["refund_status"];
+          transaction_id: string;
+          updated_at?: string;
+        };
         Update: {
-          amount?: number
-          created_at?: string
-          environment?: string
-          fee_amount?: number
-          metadata?: Json | null
-          reason?: string | null
-          refund_id?: string
-          refunded_amount?: number
-          spi_account_number?: string | null
-          spi_end2end_id?: string | null
+          amount?: number;
+          created_at?: string;
+          environment?: string;
+          fee_amount?: number;
+          metadata?: Json | null;
+          reason?: string | null;
+          refund_id?: string;
+          refunded_amount?: number;
+          spi_account_number?: string | null;
+          spi_end2end_id?: string | null;
           spi_fund_return_status?:
             | APIEnums["spi_payment_status"]
-            | null
+            | null;
           spi_motif_code?:
             | APIEnums["spi_rejection_reason"]
-            | null
+            | null;
           spi_rejection_reason?:
             | APIEnums["spi_rejection_reason"]
-            | null
-          spi_retour_date_demande?: string | null
-          spi_retour_date_irrevocabilite?: string | null
-          spi_tx_id?: string | null
-          status?: APIEnums["refund_status"]
-          transaction_id?: string
-          updated_at?: string
-        }
+            | null;
+          spi_retour_date_demande?: string | null;
+          spi_retour_date_irrevocabilite?: string | null;
+          spi_tx_id?: string | null;
+          status?: APIEnums["refund_status"];
+          transaction_id?: string;
+          updated_at?: string;
+        };
         Relationships: [
           {
-            foreignKeyName: "refunds_transaction_id_fkey"
-            columns: ["transaction_id"]
-            isOneToOne: false
-            referencedRelation: "transactions"
-            referencedColumns: ["transaction_id"]
+            foreignKeyName: "refunds_transaction_id_fkey";
+            columns: ["transaction_id"];
+            isOneToOne: false;
+            referencedRelation: "transactions";
+            referencedColumns: ["transaction_id"];
           },
-        ]
+        ];
       }
       products: {
         Row: {
-          charge_day: number | null
-          created_at: string
-          created_by: string | null
-          description: string | null
-          display_on_storefront: boolean
-          environment: string
+          charge_day: number | null;
+          created_at: string;
+          created_by: string | null;
+          description: string | null;
+          display_on_storefront: boolean;
+          environment: string;
           failed_payment_action:
             | APIEnums["failed_payment_action"]
-            | null
+            | null;
           first_payment_type:
             | APIEnums["first_payment_type"]
-            | null
-          image_url: string | null
-          is_active: boolean
-          metadata: Json | null
-          name: string
-          organization_id: string
-          product_id: string
-          product_type: APIEnums["product_type"]
-          trial_enabled: boolean
-          trial_period_days: number | null
-          updated_at: string
+            | null;
+          image_url: string | null;
+          is_active: boolean;
+          metadata: Json | null;
+          name: string;
+          organization_id: string;
+          product_id: string;
+          product_type: APIEnums["product_type"];
+          trial_enabled: boolean;
+          trial_period_days: number | null;
+          updated_at: string;
           usage_aggregation:
             | APIEnums["usage_aggregation"]
-            | null
-          usage_unit: string | null
-        }
+            | null;
+          usage_unit: string | null;
+        };
         Insert: {
-          charge_day?: number | null
-          created_at?: string
-          created_by?: string | null
-          description?: string | null
-          display_on_storefront?: boolean
-          environment?: string
+          charge_day?: number | null;
+          created_at?: string;
+          created_by?: string | null;
+          description?: string | null;
+          display_on_storefront?: boolean;
+          environment?: string;
           failed_payment_action?:
             | APIEnums["failed_payment_action"]
-            | null
+            | null;
           first_payment_type?:
             | APIEnums["first_payment_type"]
-            | null
-          image_url?: string | null
-          is_active?: boolean
-          metadata?: Json | null
-          name: string
-          organization_id: string
-          product_id?: string
-          product_type?: APIEnums["product_type"]
-          trial_enabled?: boolean
-          trial_period_days?: number | null
-          updated_at?: string
+            | null;
+          image_url?: string | null;
+          is_active?: boolean;
+          metadata?: Json | null;
+          name: string;
+          organization_id: string;
+          product_id?: string;
+          product_type?: APIEnums["product_type"];
+          trial_enabled?: boolean;
+          trial_period_days?: number | null;
+          updated_at?: string;
           usage_aggregation?:
             | APIEnums["usage_aggregation"]
-            | null
-          usage_unit?: string | null
-        }
+            | null;
+          usage_unit?: string | null;
+        };
         Update: {
-          charge_day?: number | null
-          created_at?: string
-          created_by?: string | null
-          description?: string | null
-          display_on_storefront?: boolean
-          environment?: string
+          charge_day?: number | null;
+          created_at?: string;
+          created_by?: string | null;
+          description?: string | null;
+          display_on_storefront?: boolean;
+          environment?: string;
           failed_payment_action?:
             | APIEnums["failed_payment_action"]
-            | null
+            | null;
           first_payment_type?:
             | APIEnums["first_payment_type"]
-            | null
-          image_url?: string | null
-          is_active?: boolean
-          metadata?: Json | null
-          name?: string
-          organization_id?: string
-          product_id?: string
-          product_type?: APIEnums["product_type"]
-          trial_enabled?: boolean
-          trial_period_days?: number | null
-          updated_at?: string
+            | null;
+          image_url?: string | null;
+          is_active?: boolean;
+          metadata?: Json | null;
+          name?: string;
+          organization_id?: string;
+          product_id?: string;
+          product_type?: APIEnums["product_type"];
+          trial_enabled?: boolean;
+          trial_period_days?: number | null;
+          updated_at?: string;
           usage_aggregation?:
             | APIEnums["usage_aggregation"]
-            | null
-          usage_unit?: string | null
-        }
+            | null;
+          usage_unit?: string | null;
+        };
         Relationships: [
           {
-            foreignKeyName: "products_created_by_fkey"
-            columns: ["created_by"]
-            isOneToOne: false
-            referencedRelation: "merchants"
-            referencedColumns: ["merchant_id"]
+            foreignKeyName: "products_created_by_fkey";
+            columns: ["created_by"];
+            isOneToOne: false;
+            referencedRelation: "merchants";
+            referencedColumns: ["merchant_id"];
           },
           {
-            foreignKeyName: "products_organization_id_fkey"
-            columns: ["organization_id"]
-            isOneToOne: false
-            referencedRelation: "organizations"
-            referencedColumns: ["organization_id"]
+            foreignKeyName: "products_organization_id_fkey";
+            columns: ["organization_id"];
+            isOneToOne: false;
+            referencedRelation: "organizations";
+            referencedColumns: ["organization_id"];
           },
-        ]
+        ];
       }
       subscriptions: {
         Row: {
-          created_at: string
-          created_by: string | null
-          customer_id: string
-          end_date: string | null
-          environment: string
-          metadata: Json | null
-          next_billing_date: string | null
-          organization_id: string
-          price_id: string | null
-          product_id: string
-          start_date: string
-          status: APIEnums["subscription_status"]
-          subscription_id: string
-          updated_at: string
-        }
+          created_at: string;
+          created_by: string | null;
+          customer_id: string;
+          end_date: string | null;
+          environment: string;
+          metadata: Json | null;
+          next_billing_date: string | null;
+          organization_id: string;
+          price_id: string | null;
+          product_id: string;
+          start_date: string;
+          status: APIEnums["subscription_status"];
+          subscription_id: string;
+          updated_at: string;
+        };
         Insert: {
-          created_at?: string
-          created_by?: string | null
-          customer_id: string
-          end_date?: string | null
-          environment?: string
-          metadata?: Json | null
-          next_billing_date?: string | null
-          organization_id: string
-          price_id?: string | null
-          product_id: string
-          start_date: string
-          status?: APIEnums["subscription_status"]
-          subscription_id?: string
-          updated_at?: string
-        }
+          created_at?: string;
+          created_by?: string | null;
+          customer_id: string;
+          end_date?: string | null;
+          environment?: string;
+          metadata?: Json | null;
+          next_billing_date?: string | null;
+          organization_id: string;
+          price_id?: string | null;
+          product_id: string;
+          start_date: string;
+          status?: APIEnums["subscription_status"];
+          subscription_id?: string;
+          updated_at?: string;
+        };
         Update: {
-          created_at?: string
-          created_by?: string | null
-          customer_id?: string
-          end_date?: string | null
-          environment?: string
-          metadata?: Json | null
-          next_billing_date?: string | null
-          organization_id?: string
-          price_id?: string | null
-          product_id?: string
-          start_date?: string
-          status?: APIEnums["subscription_status"]
-          subscription_id?: string
-          updated_at?: string
-        }
+          created_at?: string;
+          created_by?: string | null;
+          customer_id?: string;
+          end_date?: string | null;
+          environment?: string;
+          metadata?: Json | null;
+          next_billing_date?: string | null;
+          organization_id?: string;
+          price_id?: string | null;
+          product_id?: string;
+          start_date?: string;
+          status?: APIEnums["subscription_status"];
+          subscription_id?: string;
+          updated_at?: string;
+        };
         Relationships: [
           {
-            foreignKeyName: "subscriptions_created_by_fkey"
-            columns: ["created_by"]
-            isOneToOne: false
-            referencedRelation: "merchants"
-            referencedColumns: ["merchant_id"]
+            foreignKeyName: "subscriptions_created_by_fkey";
+            columns: ["created_by"];
+            isOneToOne: false;
+            referencedRelation: "merchants";
+            referencedColumns: ["merchant_id"];
           },
           {
-            foreignKeyName: "subscriptions_customer_id_fkey"
-            columns: ["customer_id"]
-            isOneToOne: false
-            referencedRelation: "customers"
-            referencedColumns: ["customer_id"]
+            foreignKeyName: "subscriptions_customer_id_fkey";
+            columns: ["customer_id"];
+            isOneToOne: false;
+            referencedRelation: "customers";
+            referencedColumns: ["customer_id"];
           },
           {
-            foreignKeyName: "subscriptions_organization_id_fkey"
-            columns: ["organization_id"]
-            isOneToOne: false
-            referencedRelation: "organizations"
-            referencedColumns: ["organization_id"]
+            foreignKeyName: "subscriptions_organization_id_fkey";
+            columns: ["organization_id"];
+            isOneToOne: false;
+            referencedRelation: "organizations";
+            referencedColumns: ["organization_id"];
           },
           {
-            foreignKeyName: "subscriptions_price_id_fkey"
-            columns: ["price_id"]
-            isOneToOne: false
-            referencedRelation: "prices"
-            referencedColumns: ["price_id"]
+            foreignKeyName: "subscriptions_price_id_fkey";
+            columns: ["price_id"];
+            isOneToOne: false;
+            referencedRelation: "prices";
+            referencedColumns: ["price_id"];
           },
           {
-            foreignKeyName: "subscriptions_product_id_fkey"
-            columns: ["product_id"]
-            isOneToOne: false
-            referencedRelation: "products"
-            referencedColumns: ["product_id"]
+            foreignKeyName: "subscriptions_product_id_fkey";
+            columns: ["product_id"];
+            isOneToOne: false;
+            referencedRelation: "products";
+            referencedColumns: ["product_id"];
           },
-        ]
+        ];
       }
       discount_coupons: {
         Row: {
           applies_to_product_types:
             | APIEnums["product_type"][]
-            | null
-          code: string
-          coupon_id: string
-          created_at: string
-          current_uses: number
-          customer_type: APIEnums["customer_type"]
-          description: string | null
-          discount_fixed_amount: number | null
-          discount_percentage: number | null
-          discount_type: APIEnums["discount_type"]
-          environment: string
-          expires_at: string | null
-          is_active: boolean
-          max_quantity_per_use: number | null
-          max_uses: number | null
-          organization_id: string
-          scope_type: string
-          updated_at: string
-          usage_frequency_limit: APIEnums["usage_frequency"]
-          usage_limit_value: number | null
-          valid_from: string | null
-        }
+            | null;
+          code: string;
+          coupon_id: string;
+          created_at: string;
+          current_uses: number;
+          customer_type: APIEnums["customer_type"];
+          description: string | null;
+          discount_fixed_amount: number | null;
+          discount_percentage: number | null;
+          discount_type: APIEnums["discount_type"];
+          environment: string;
+          expires_at: string | null;
+          is_active: boolean;
+          max_quantity_per_use: number | null;
+          max_uses: number | null;
+          organization_id: string;
+          scope_type: string;
+          updated_at: string;
+          usage_frequency_limit: APIEnums["usage_frequency"];
+          usage_limit_value: number | null;
+          valid_from: string | null;
+        };
         Insert: {
           applies_to_product_types?:
             | APIEnums["product_type"][]
-            | null
-          code: string
-          coupon_id?: string
-          created_at?: string
-          current_uses?: number
-          customer_type?: APIEnums["customer_type"]
-          description?: string | null
-          discount_fixed_amount?: number | null
-          discount_percentage?: number | null
-          discount_type?: APIEnums["discount_type"]
-          environment?: string
-          expires_at?: string | null
-          is_active?: boolean
-          max_quantity_per_use?: number | null
-          max_uses?: number | null
-          organization_id: string
-          scope_type?: string
-          updated_at?: string
-          usage_frequency_limit?: APIEnums["usage_frequency"]
-          usage_limit_value?: number | null
-          valid_from?: string | null
-        }
+            | null;
+          code: string;
+          coupon_id?: string;
+          created_at?: string;
+          current_uses?: number;
+          customer_type?: APIEnums["customer_type"];
+          description?: string | null;
+          discount_fixed_amount?: number | null;
+          discount_percentage?: number | null;
+          discount_type?: APIEnums["discount_type"];
+          environment?: string;
+          expires_at?: string | null;
+          is_active?: boolean;
+          max_quantity_per_use?: number | null;
+          max_uses?: number | null;
+          organization_id: string;
+          scope_type?: string;
+          updated_at?: string;
+          usage_frequency_limit?: APIEnums["usage_frequency"];
+          usage_limit_value?: number | null;
+          valid_from?: string | null;
+        };
         Update: {
           applies_to_product_types?:
             | APIEnums["product_type"][]
-            | null
-          code?: string
-          coupon_id?: string
-          created_at?: string
-          current_uses?: number
-          customer_type?: APIEnums["customer_type"]
-          description?: string | null
-          discount_fixed_amount?: number | null
-          discount_percentage?: number | null
-          discount_type?: APIEnums["discount_type"]
-          environment?: string
-          expires_at?: string | null
-          is_active?: boolean
-          max_quantity_per_use?: number | null
-          max_uses?: number | null
-          organization_id?: string
-          scope_type?: string
-          updated_at?: string
-          usage_frequency_limit?: APIEnums["usage_frequency"]
-          usage_limit_value?: number | null
-          valid_from?: string | null
-        }
+            | null;
+          code?: string;
+          coupon_id?: string;
+          created_at?: string;
+          current_uses?: number;
+          customer_type?: APIEnums["customer_type"];
+          description?: string | null;
+          discount_fixed_amount?: number | null;
+          discount_percentage?: number | null;
+          discount_type?: APIEnums["discount_type"];
+          environment?: string;
+          expires_at?: string | null;
+          is_active?: boolean;
+          max_quantity_per_use?: number | null;
+          max_uses?: number | null;
+          organization_id?: string;
+          scope_type?: string;
+          updated_at?: string;
+          usage_frequency_limit?: APIEnums["usage_frequency"];
+          usage_limit_value?: number | null;
+          valid_from?: string | null;
+        };
         Relationships: [
           {
-            foreignKeyName: "discount_coupons_organization_id_fkey"
-            columns: ["organization_id"]
-            isOneToOne: false
-            referencedRelation: "organizations"
-            referencedColumns: ["organization_id"]
+            foreignKeyName: "discount_coupons_organization_id_fkey";
+            columns: ["organization_id"];
+            isOneToOne: false;
+            referencedRelation: "organizations";
+            referencedColumns: ["organization_id"];
           },
-        ]
+        ];
       }
       checkout_sessions: {
         Row: {
-          allow_coupon_code: boolean
-          allow_quantity: boolean
-          amount: number
-          cancel_url: string | null
-          checkout_session_id: string
-          created_at: string
-          created_by: string | null
-          currency_code: APIEnums["currency_code"]
-          customer_email: string | null
-          customer_id: string | null
-          customer_name: string | null
-          customer_phone: string | null
-          description: string | null
-          environment: string
-          expires_at: string
-          installment_plan_id: string | null
-          is_pos: boolean
-          is_spi: boolean
-          metadata: Json | null
-          organization_id: string
-          payment_link_id: string | null
-          payment_request_id: string | null
-          price_id: string | null
-          product_id: string | null
-          qr_code_data: Json | null
-          qr_code_type: APIEnums["qr_code_type"] | null
-          quantity: number
-          require_billing_address: boolean
-          spi_account_number: string | null
-          spi_qr_code_id: string | null
-          status: APIEnums["checkout_session_status"]
-          subscription_id: string | null
-          success_url: string | null
-          title: string | null
-          updated_at: string
-        }
+          allow_coupon_code: boolean;
+          allow_quantity: boolean;
+          amount: number;
+          cancel_url: string | null;
+          checkout_session_id: string;
+          created_at: string;
+          created_by: string | null;
+          currency_code: APIEnums["currency_code"];
+          customer_email: string | null;
+          customer_id: string | null;
+          customer_name: string | null;
+          customer_phone: string | null;
+          description: string | null;
+          environment: string;
+          expires_at: string;
+          installment_plan_id: string | null;
+          is_pos: boolean;
+          is_spi: boolean;
+          metadata: Json | null;
+          organization_id: string;
+          payment_link_id: string | null;
+          payment_request_id: string | null;
+          price_id: string | null;
+          product_id: string | null;
+          qr_code_data: Json | null;
+          qr_code_type: APIEnums["qr_code_type"] | null;
+          quantity: number;
+          require_billing_address: boolean;
+          spi_account_number: string | null;
+          spi_qr_code_id: string | null;
+          status: APIEnums["checkout_session_status"];
+          subscription_id: string | null;
+          success_url: string | null;
+          title: string | null;
+          updated_at: string;
+        };
         Insert: {
-          allow_coupon_code?: boolean
-          allow_quantity?: boolean
-          amount: number
-          cancel_url?: string | null
-          checkout_session_id?: string
-          created_at?: string
-          created_by?: string | null
-          currency_code: APIEnums["currency_code"]
-          customer_email?: string | null
-          customer_id?: string | null
-          customer_name?: string | null
-          customer_phone?: string | null
-          description?: string | null
-          environment?: string
-          expires_at: string
-          installment_plan_id?: string | null
-          is_pos?: boolean
-          is_spi?: boolean
-          metadata?: Json | null
-          organization_id: string
-          payment_link_id?: string | null
-          payment_request_id?: string | null
-          price_id?: string | null
-          product_id?: string | null
-          qr_code_data?: Json | null
-          qr_code_type?: APIEnums["qr_code_type"] | null
-          quantity?: number
-          require_billing_address?: boolean
-          spi_account_number?: string | null
-          spi_qr_code_id?: string | null
-          status?: APIEnums["checkout_session_status"]
-          subscription_id?: string | null
-          success_url?: string | null
-          title?: string | null
-          updated_at?: string
-        }
+          allow_coupon_code?: boolean;
+          allow_quantity?: boolean;
+          amount: number;
+          cancel_url?: string | null;
+          checkout_session_id?: string;
+          created_at?: string;
+          created_by?: string | null;
+          currency_code: APIEnums["currency_code"];
+          customer_email?: string | null;
+          customer_id?: string | null;
+          customer_name?: string | null;
+          customer_phone?: string | null;
+          description?: string | null;
+          environment?: string;
+          expires_at: string;
+          installment_plan_id?: string | null;
+          is_pos?: boolean;
+          is_spi?: boolean;
+          metadata?: Json | null;
+          organization_id: string;
+          payment_link_id?: string | null;
+          payment_request_id?: string | null;
+          price_id?: string | null;
+          product_id?: string | null;
+          qr_code_data?: Json | null;
+          qr_code_type?: APIEnums["qr_code_type"] | null;
+          quantity?: number;
+          require_billing_address?: boolean;
+          spi_account_number?: string | null;
+          spi_qr_code_id?: string | null;
+          status?: APIEnums["checkout_session_status"];
+          subscription_id?: string | null;
+          success_url?: string | null;
+          title?: string | null;
+          updated_at?: string;
+        };
         Update: {
-          allow_coupon_code?: boolean
-          allow_quantity?: boolean
-          amount?: number
-          cancel_url?: string | null
-          checkout_session_id?: string
-          created_at?: string
-          created_by?: string | null
-          currency_code?: APIEnums["currency_code"]
-          customer_email?: string | null
-          customer_id?: string | null
-          customer_name?: string | null
-          customer_phone?: string | null
-          description?: string | null
-          environment?: string
-          expires_at?: string
-          installment_plan_id?: string | null
-          is_pos?: boolean
-          is_spi?: boolean
-          metadata?: Json | null
-          organization_id?: string
-          payment_link_id?: string | null
-          payment_request_id?: string | null
-          price_id?: string | null
-          product_id?: string | null
-          qr_code_data?: Json | null
-          qr_code_type?: APIEnums["qr_code_type"] | null
-          quantity?: number
-          require_billing_address?: boolean
-          spi_account_number?: string | null
-          spi_qr_code_id?: string | null
-          status?: APIEnums["checkout_session_status"]
-          subscription_id?: string | null
-          success_url?: string | null
-          title?: string | null
-          updated_at?: string
-        }
+          allow_coupon_code?: boolean;
+          allow_quantity?: boolean;
+          amount?: number;
+          cancel_url?: string | null;
+          checkout_session_id?: string;
+          created_at?: string;
+          created_by?: string | null;
+          currency_code?: APIEnums["currency_code"];
+          customer_email?: string | null;
+          customer_id?: string | null;
+          customer_name?: string | null;
+          customer_phone?: string | null;
+          description?: string | null;
+          environment?: string;
+          expires_at?: string;
+          installment_plan_id?: string | null;
+          is_pos?: boolean;
+          is_spi?: boolean;
+          metadata?: Json | null;
+          organization_id?: string;
+          payment_link_id?: string | null;
+          payment_request_id?: string | null;
+          price_id?: string | null;
+          product_id?: string | null;
+          qr_code_data?: Json | null;
+          qr_code_type?: APIEnums["qr_code_type"] | null;
+          quantity?: number;
+          require_billing_address?: boolean;
+          spi_account_number?: string | null;
+          spi_qr_code_id?: string | null;
+          status?: APIEnums["checkout_session_status"];
+          subscription_id?: string | null;
+          success_url?: string | null;
+          title?: string | null;
+          updated_at?: string;
+        };
         Relationships: [
           {
-            foreignKeyName: "checkout_sessions_created_by_fkey"
-            columns: ["created_by"]
-            isOneToOne: false
-            referencedRelation: "merchants"
-            referencedColumns: ["merchant_id"]
+            foreignKeyName: "checkout_sessions_created_by_fkey";
+            columns: ["created_by"];
+            isOneToOne: false;
+            referencedRelation: "merchants";
+            referencedColumns: ["merchant_id"];
           },
           {
-            foreignKeyName: "checkout_sessions_currency_code_fkey"
-            columns: ["currency_code"]
-            isOneToOne: false
-            referencedRelation: "currencies"
-            referencedColumns: ["code"]
+            foreignKeyName: "checkout_sessions_currency_code_fkey";
+            columns: ["currency_code"];
+            isOneToOne: false;
+            referencedRelation: "currencies";
+            referencedColumns: ["code"];
           },
           {
-            foreignKeyName: "checkout_sessions_customer_id_fkey"
-            columns: ["customer_id"]
-            isOneToOne: false
-            referencedRelation: "customers"
-            referencedColumns: ["customer_id"]
+            foreignKeyName: "checkout_sessions_customer_id_fkey";
+            columns: ["customer_id"];
+            isOneToOne: false;
+            referencedRelation: "customers";
+            referencedColumns: ["customer_id"];
           },
           {
-            foreignKeyName: "checkout_sessions_organization_id_fkey"
-            columns: ["organization_id"]
-            isOneToOne: false
-            referencedRelation: "organizations"
-            referencedColumns: ["organization_id"]
+            foreignKeyName: "checkout_sessions_organization_id_fkey";
+            columns: ["organization_id"];
+            isOneToOne: false;
+            referencedRelation: "organizations";
+            referencedColumns: ["organization_id"];
           },
           {
-            foreignKeyName: "checkout_sessions_payment_link_id_fkey"
-            columns: ["payment_link_id"]
-            isOneToOne: false
-            referencedRelation: "payment_links"
-            referencedColumns: ["link_id"]
+            foreignKeyName: "checkout_sessions_payment_link_id_fkey";
+            columns: ["payment_link_id"];
+            isOneToOne: false;
+            referencedRelation: "payment_links";
+            referencedColumns: ["link_id"];
           },
           {
-            foreignKeyName: "checkout_sessions_payment_request_id_fkey"
-            columns: ["payment_request_id"]
-            isOneToOne: false
-            referencedRelation: "payment_requests"
-            referencedColumns: ["request_id"]
+            foreignKeyName: "checkout_sessions_payment_request_id_fkey";
+            columns: ["payment_request_id"];
+            isOneToOne: false;
+            referencedRelation: "payment_requests";
+            referencedColumns: ["request_id"];
           },
           {
-            foreignKeyName: "checkout_sessions_price_id_fkey"
-            columns: ["price_id"]
-            isOneToOne: false
-            referencedRelation: "prices"
-            referencedColumns: ["price_id"]
+            foreignKeyName: "checkout_sessions_price_id_fkey";
+            columns: ["price_id"];
+            isOneToOne: false;
+            referencedRelation: "prices";
+            referencedColumns: ["price_id"];
           },
           {
-            foreignKeyName: "checkout_sessions_product_id_fkey"
-            columns: ["product_id"]
-            isOneToOne: false
-            referencedRelation: "products"
-            referencedColumns: ["product_id"]
+            foreignKeyName: "checkout_sessions_product_id_fkey";
+            columns: ["product_id"];
+            isOneToOne: false;
+            referencedRelation: "products";
+            referencedColumns: ["product_id"];
           },
           {
-            foreignKeyName: "checkout_sessions_subscription_id_fkey"
-            columns: ["subscription_id"]
-            isOneToOne: false
-            referencedRelation: "subscriptions"
-            referencedColumns: ["subscription_id"]
+            foreignKeyName: "checkout_sessions_subscription_id_fkey";
+            columns: ["subscription_id"];
+            isOneToOne: false;
+            referencedRelation: "subscriptions";
+            referencedColumns: ["subscription_id"];
           },
           {
-            foreignKeyName: "fk_checkout_sessions_installment_plan"
-            columns: ["installment_plan_id"]
-            isOneToOne: false
-            referencedRelation: "installment_plans"
-            referencedColumns: ["plan_id"]
+            foreignKeyName: "fk_checkout_sessions_installment_plan";
+            columns: ["installment_plan_id"];
+            isOneToOne: false;
+            referencedRelation: "installment_plans";
+            referencedColumns: ["plan_id"];
           },
           {
-            foreignKeyName: "fk_checkout_sessions_spi_qr_code_id"
-            columns: ["spi_qr_code_id"]
-            isOneToOne: false
-            referencedRelation: "spi_qr_codes"
-            referencedColumns: ["qr_code_id"]
+            foreignKeyName: "fk_checkout_sessions_spi_qr_code_id";
+            columns: ["spi_qr_code_id"];
+            isOneToOne: false;
+            referencedRelation: "spi_qr_codes";
+            referencedColumns: ["qr_code_id"];
           },
-        ]
+        ];
       }
       payment_links: {
         Row: {
-          allow_coupon_code: boolean
-          allow_quantity: boolean
-          amount: number | null
-          cancel_url: string | null
-          created_at: string
-          created_by: string | null
-          currency_code: APIEnums["currency_code"]
-          description: string | null
-          environment: string
-          expires_at: string | null
-          is_active: boolean
-          link_id: string
-          link_type: APIEnums["link_type"]
-          metadata: Json | null
-          organization_id: string
-          price_id: string | null
-          product_id: string | null
-          quantity: number
-          require_billing_address: boolean
-          success_url: string | null
-          title: string
-          updated_at: string
-          url: string
-        }
+          allow_coupon_code: boolean;
+          allow_quantity: boolean;
+          amount: number | null;
+          cancel_url: string | null;
+          created_at: string;
+          created_by: string | null;
+          currency_code: APIEnums["currency_code"];
+          description: string | null;
+          environment: string;
+          expires_at: string | null;
+          is_active: boolean;
+          link_id: string;
+          link_type: APIEnums["link_type"];
+          metadata: Json | null;
+          organization_id: string;
+          price_id: string | null;
+          product_id: string | null;
+          quantity: number;
+          require_billing_address: boolean;
+          success_url: string | null;
+          title: string;
+          updated_at: string;
+          url: string;
+        };
         Insert: {
-          allow_coupon_code?: boolean
-          allow_quantity?: boolean
-          amount?: number | null
-          cancel_url?: string | null
-          created_at?: string
-          created_by?: string | null
-          currency_code: APIEnums["currency_code"]
-          description?: string | null
-          environment?: string
-          expires_at?: string | null
-          is_active?: boolean
-          link_id?: string
-          link_type: APIEnums["link_type"]
-          metadata?: Json | null
-          organization_id: string
-          price_id?: string | null
-          product_id?: string | null
-          quantity?: number
-          require_billing_address?: boolean
-          success_url?: string | null
-          title: string
-          updated_at?: string
-          url: string
-        }
+          allow_coupon_code?: boolean;
+          allow_quantity?: boolean;
+          amount?: number | null;
+          cancel_url?: string | null;
+          created_at?: string;
+          created_by?: string | null;
+          currency_code: APIEnums["currency_code"];
+          description?: string | null;
+          environment?: string;
+          expires_at?: string | null;
+          is_active?: boolean;
+          link_id?: string;
+          link_type: APIEnums["link_type"];
+          metadata?: Json | null;
+          organization_id: string;
+          price_id?: string | null;
+          product_id?: string | null;
+          quantity?: number;
+          require_billing_address?: boolean;
+          success_url?: string | null;
+          title: string;
+          updated_at?: string;
+          url: string;
+        };
         Update: {
-          allow_coupon_code?: boolean
-          allow_quantity?: boolean
-          amount?: number | null
-          cancel_url?: string | null
-          created_at?: string
-          created_by?: string | null
-          currency_code?: APIEnums["currency_code"]
-          description?: string | null
-          environment?: string
-          expires_at?: string | null
-          is_active?: boolean
-          link_id?: string
-          link_type?: APIEnums["link_type"]
-          metadata?: Json | null
-          organization_id?: string
-          price_id?: string | null
-          product_id?: string | null
-          quantity?: number
-          require_billing_address?: boolean
-          success_url?: string | null
-          title?: string
-          updated_at?: string
-          url?: string
-        }
+          allow_coupon_code?: boolean;
+          allow_quantity?: boolean;
+          amount?: number | null;
+          cancel_url?: string | null;
+          created_at?: string;
+          created_by?: string | null;
+          currency_code?: APIEnums["currency_code"];
+          description?: string | null;
+          environment?: string;
+          expires_at?: string | null;
+          is_active?: boolean;
+          link_id?: string;
+          link_type?: APIEnums["link_type"];
+          metadata?: Json | null;
+          organization_id?: string;
+          price_id?: string | null;
+          product_id?: string | null;
+          quantity?: number;
+          require_billing_address?: boolean;
+          success_url?: string | null;
+          title?: string;
+          updated_at?: string;
+          url?: string;
+        };
         Relationships: [
           {
-            foreignKeyName: "payment_links_created_by_fkey"
-            columns: ["created_by"]
-            isOneToOne: false
-            referencedRelation: "merchants"
-            referencedColumns: ["merchant_id"]
+            foreignKeyName: "payment_links_created_by_fkey";
+            columns: ["created_by"];
+            isOneToOne: false;
+            referencedRelation: "merchants";
+            referencedColumns: ["merchant_id"];
           },
           {
-            foreignKeyName: "payment_links_currency_code_fkey"
-            columns: ["currency_code"]
-            isOneToOne: false
-            referencedRelation: "currencies"
-            referencedColumns: ["code"]
+            foreignKeyName: "payment_links_currency_code_fkey";
+            columns: ["currency_code"];
+            isOneToOne: false;
+            referencedRelation: "currencies";
+            referencedColumns: ["code"];
           },
           {
-            foreignKeyName: "payment_links_organization_id_fkey"
-            columns: ["organization_id"]
-            isOneToOne: false
-            referencedRelation: "organizations"
-            referencedColumns: ["organization_id"]
+            foreignKeyName: "payment_links_organization_id_fkey";
+            columns: ["organization_id"];
+            isOneToOne: false;
+            referencedRelation: "organizations";
+            referencedColumns: ["organization_id"];
           },
           {
-            foreignKeyName: "payment_links_price_id_fkey"
-            columns: ["price_id"]
-            isOneToOne: false
-            referencedRelation: "prices"
-            referencedColumns: ["price_id"]
+            foreignKeyName: "payment_links_price_id_fkey";
+            columns: ["price_id"];
+            isOneToOne: false;
+            referencedRelation: "prices";
+            referencedColumns: ["price_id"];
           },
           {
-            foreignKeyName: "payment_links_product_id_fkey"
-            columns: ["product_id"]
-            isOneToOne: false
-            referencedRelation: "products"
-            referencedColumns: ["product_id"]
+            foreignKeyName: "payment_links_product_id_fkey";
+            columns: ["product_id"];
+            isOneToOne: false;
+            referencedRelation: "products";
+            referencedColumns: ["product_id"];
           },
-        ]
+        ];
       }
       payouts: {
         Row: {
-          account_id: string
-          amount: number
-          created_at: string
-          created_by: string | null
-          currency_code: APIEnums["currency_code"]
-          environment: string
-          metadata: Json | null
-          organization_id: string
+          account_id: string;
+          amount: number;
+          created_at: string;
+          created_by: string | null;
+          currency_code: APIEnums["currency_code"];
+          environment: string;
+          metadata: Json | null;
+          organization_id: string;
           payment_method_code:
             | APIEnums["payment_method_code"]
-            | null
-          payout_id: string
-          payout_method_id: string | null
-          provider_code: APIEnums["provider_code"] | null
-          status: APIEnums["payout_status"]
-          updated_at: string
-        }
+            | null;
+          payout_id: string;
+          payout_method_id: string | null;
+          provider_code: APIEnums["provider_code"] | null;
+          status: APIEnums["payout_status"];
+          updated_at: string;
+        };
         Insert: {
-          account_id: string
-          amount: number
-          created_at?: string
-          created_by?: string | null
-          currency_code: APIEnums["currency_code"]
-          environment?: string
-          metadata?: Json | null
-          organization_id: string
+          account_id: string;
+          amount: number;
+          created_at?: string;
+          created_by?: string | null;
+          currency_code: APIEnums["currency_code"];
+          environment?: string;
+          metadata?: Json | null;
+          organization_id: string;
           payment_method_code?:
             | APIEnums["payment_method_code"]
-            | null
-          payout_id?: string
-          payout_method_id?: string | null
-          provider_code?: APIEnums["provider_code"] | null
-          status?: APIEnums["payout_status"]
-          updated_at?: string
-        }
+            | null;
+          payout_id?: string;
+          payout_method_id?: string | null;
+          provider_code?: APIEnums["provider_code"] | null;
+          status?: APIEnums["payout_status"];
+          updated_at?: string;
+        };
         Update: {
-          account_id?: string
-          amount?: number
-          created_at?: string
-          created_by?: string | null
-          currency_code?: APIEnums["currency_code"]
-          environment?: string
-          metadata?: Json | null
-          organization_id?: string
+          account_id?: string;
+          amount?: number;
+          created_at?: string;
+          created_by?: string | null;
+          currency_code?: APIEnums["currency_code"];
+          environment?: string;
+          metadata?: Json | null;
+          organization_id?: string;
           payment_method_code?:
             | APIEnums["payment_method_code"]
-            | null
-          payout_id?: string
-          payout_method_id?: string | null
-          provider_code?: APIEnums["provider_code"] | null
-          status?: APIEnums["payout_status"]
-          updated_at?: string
-        }
+            | null;
+          payout_id?: string;
+          payout_method_id?: string | null;
+          provider_code?: APIEnums["provider_code"] | null;
+          status?: APIEnums["payout_status"];
+          updated_at?: string;
+        };
         Relationships: [
           {
-            foreignKeyName: "payouts_account_id_fkey"
-            columns: ["account_id"]
-            isOneToOne: false
-            referencedRelation: "accounts"
-            referencedColumns: ["account_id"]
+            foreignKeyName: "payouts_account_id_fkey";
+            columns: ["account_id"];
+            isOneToOne: false;
+            referencedRelation: "accounts";
+            referencedColumns: ["account_id"];
           },
           {
-            foreignKeyName: "payouts_account_id_fkey"
-            columns: ["account_id"]
-            isOneToOne: false
-            referencedRelation: "merchant_balance_summary"
-            referencedColumns: ["account_id"]
+            foreignKeyName: "payouts_account_id_fkey";
+            columns: ["account_id"];
+            isOneToOne: false;
+            referencedRelation: "merchant_balance_summary";
+            referencedColumns: ["account_id"];
           },
           {
-            foreignKeyName: "payouts_created_by_fkey"
-            columns: ["created_by"]
-            isOneToOne: false
-            referencedRelation: "merchants"
-            referencedColumns: ["merchant_id"]
+            foreignKeyName: "payouts_created_by_fkey";
+            columns: ["created_by"];
+            isOneToOne: false;
+            referencedRelation: "merchants";
+            referencedColumns: ["merchant_id"];
           },
           {
-            foreignKeyName: "payouts_currency_code_fkey"
-            columns: ["currency_code"]
-            isOneToOne: false
-            referencedRelation: "currencies"
-            referencedColumns: ["code"]
+            foreignKeyName: "payouts_currency_code_fkey";
+            columns: ["currency_code"];
+            isOneToOne: false;
+            referencedRelation: "currencies";
+            referencedColumns: ["code"];
           },
           {
-            foreignKeyName: "payouts_organization_id_fkey"
-            columns: ["organization_id"]
-            isOneToOne: false
-            referencedRelation: "organizations"
-            referencedColumns: ["organization_id"]
+            foreignKeyName: "payouts_organization_id_fkey";
+            columns: ["organization_id"];
+            isOneToOne: false;
+            referencedRelation: "organizations";
+            referencedColumns: ["organization_id"];
           },
           {
-            foreignKeyName: "payouts_payout_method_id_fkey"
-            columns: ["payout_method_id"]
-            isOneToOne: false
-            referencedRelation: "payout_methods"
-            referencedColumns: ["payout_method_id"]
+            foreignKeyName: "payouts_payout_method_id_fkey";
+            columns: ["payout_method_id"];
+            isOneToOne: false;
+            referencedRelation: "payout_methods";
+            referencedColumns: ["payout_method_id"];
           },
-        ]
+        ];
       }
       beneficiary_payouts: {
         Row: {
-          account_id: string
-          amount: number
-          created_at: string
-          created_by: string | null
-          currency_code: APIEnums["currency_code"]
-          metadata: Json | null
-          organization_id: string
+          account_id: string;
+          amount: number;
+          created_at: string;
+          created_by: string | null;
+          currency_code: APIEnums["currency_code"];
+          metadata: Json | null;
+          organization_id: string;
           payment_method_code:
             | APIEnums["payment_method_code"]
-            | null
-          payout_id: string
-          payout_method_id: string | null
-          provider_code: APIEnums["provider_code"] | null
-          spi_bulk_instruction_id: string | null
-          status: APIEnums["payout_status"]
-          updated_at: string
-        }
+            | null;
+          payout_id: string;
+          payout_method_id: string | null;
+          provider_code: APIEnums["provider_code"] | null;
+          spi_bulk_instruction_id: string | null;
+          status: APIEnums["payout_status"];
+          updated_at: string;
+        };
         Insert: {
-          account_id: string
-          amount: number
-          created_at?: string
-          created_by?: string | null
-          currency_code: APIEnums["currency_code"]
-          metadata?: Json | null
-          organization_id: string
+          account_id: string;
+          amount: number;
+          created_at?: string;
+          created_by?: string | null;
+          currency_code: APIEnums["currency_code"];
+          metadata?: Json | null;
+          organization_id: string;
           payment_method_code?:
             | APIEnums["payment_method_code"]
-            | null
-          payout_id?: string
-          payout_method_id?: string | null
-          provider_code?: APIEnums["provider_code"] | null
-          spi_bulk_instruction_id?: string | null
-          status?: APIEnums["payout_status"]
-          updated_at?: string
-        }
+            | null;
+          payout_id?: string;
+          payout_method_id?: string | null;
+          provider_code?: APIEnums["provider_code"] | null;
+          spi_bulk_instruction_id?: string | null;
+          status?: APIEnums["payout_status"];
+          updated_at?: string;
+        };
         Update: {
-          account_id?: string
-          amount?: number
-          created_at?: string
-          created_by?: string | null
-          currency_code?: APIEnums["currency_code"]
-          metadata?: Json | null
-          organization_id?: string
+          account_id?: string;
+          amount?: number;
+          created_at?: string;
+          created_by?: string | null;
+          currency_code?: APIEnums["currency_code"];
+          metadata?: Json | null;
+          organization_id?: string;
           payment_method_code?:
             | APIEnums["payment_method_code"]
-            | null
-          payout_id?: string
-          payout_method_id?: string | null
-          provider_code?: APIEnums["provider_code"] | null
-          spi_bulk_instruction_id?: string | null
-          status?: APIEnums["payout_status"]
-          updated_at?: string
-        }
+            | null;
+          payout_id?: string;
+          payout_method_id?: string | null;
+          provider_code?: APIEnums["provider_code"] | null;
+          spi_bulk_instruction_id?: string | null;
+          status?: APIEnums["payout_status"];
+          updated_at?: string;
+        };
         Relationships: [
           {
-            foreignKeyName: "beneficiary_payouts_account_id_fkey"
-            columns: ["account_id"]
-            isOneToOne: false
-            referencedRelation: "accounts"
-            referencedColumns: ["account_id"]
+            foreignKeyName: "beneficiary_payouts_account_id_fkey";
+            columns: ["account_id"];
+            isOneToOne: false;
+            referencedRelation: "accounts";
+            referencedColumns: ["account_id"];
           },
           {
-            foreignKeyName: "beneficiary_payouts_account_id_fkey"
-            columns: ["account_id"]
-            isOneToOne: false
-            referencedRelation: "merchant_balance_summary"
-            referencedColumns: ["account_id"]
+            foreignKeyName: "beneficiary_payouts_account_id_fkey";
+            columns: ["account_id"];
+            isOneToOne: false;
+            referencedRelation: "merchant_balance_summary";
+            referencedColumns: ["account_id"];
           },
           {
-            foreignKeyName: "beneficiary_payouts_created_by_fkey"
-            columns: ["created_by"]
-            isOneToOne: false
-            referencedRelation: "merchants"
-            referencedColumns: ["merchant_id"]
+            foreignKeyName: "beneficiary_payouts_created_by_fkey";
+            columns: ["created_by"];
+            isOneToOne: false;
+            referencedRelation: "merchants";
+            referencedColumns: ["merchant_id"];
           },
           {
-            foreignKeyName: "beneficiary_payouts_currency_code_fkey"
-            columns: ["currency_code"]
-            isOneToOne: false
-            referencedRelation: "currencies"
-            referencedColumns: ["code"]
+            foreignKeyName: "beneficiary_payouts_currency_code_fkey";
+            columns: ["currency_code"];
+            isOneToOne: false;
+            referencedRelation: "currencies";
+            referencedColumns: ["code"];
           },
           {
-            foreignKeyName: "beneficiary_payouts_organization_id_fkey"
-            columns: ["organization_id"]
-            isOneToOne: false
-            referencedRelation: "organizations"
-            referencedColumns: ["organization_id"]
+            foreignKeyName: "beneficiary_payouts_organization_id_fkey";
+            columns: ["organization_id"];
+            isOneToOne: false;
+            referencedRelation: "organizations";
+            referencedColumns: ["organization_id"];
           },
           {
-            foreignKeyName: "beneficiary_payouts_payout_method_id_fkey"
-            columns: ["payout_method_id"]
-            isOneToOne: false
-            referencedRelation: "payout_methods"
-            referencedColumns: ["payout_method_id"]
+            foreignKeyName: "beneficiary_payouts_payout_method_id_fkey";
+            columns: ["payout_method_id"];
+            isOneToOne: false;
+            referencedRelation: "payout_methods";
+            referencedColumns: ["payout_method_id"];
           },
-        ]
+        ];
       }
       webhooks: {
         Row: {
-          authorized_events: APIEnums["webhook_event"][]
-          created_at: string
-          created_by: string | null
-          deleted_at: string | null
-          environment: string
-          is_active: boolean
-          last_payload: Json | null
-          last_response_body: string | null
-          last_response_status: number | null
-          last_triggered_at: string | null
-          metadata: Json | null
-          organization_id: string
-          retry_count: number | null
-          spi_event_types: string[] | null
-          supports_spi: boolean
-          updated_at: string
-          url: string
-          verification_token: string
-          webhook_id: string
-        }
+          authorized_events: APIEnums["webhook_event"][];
+          created_at: string;
+          created_by: string | null;
+          deleted_at: string | null;
+          environment: string;
+          is_active: boolean;
+          last_payload: Json | null;
+          last_response_body: string | null;
+          last_response_status: number | null;
+          last_triggered_at: string | null;
+          metadata: Json | null;
+          organization_id: string;
+          retry_count: number | null;
+          spi_event_types: string[] | null;
+          supports_spi: boolean;
+          updated_at: string;
+          url: string;
+          verification_token: string;
+          webhook_id: string;
+        };
         Insert: {
-          authorized_events?: APIEnums["webhook_event"][]
-          created_at?: string
-          created_by?: string | null
-          deleted_at?: string | null
-          environment?: string
-          is_active?: boolean
-          last_payload?: Json | null
-          last_response_body?: string | null
-          last_response_status?: number | null
-          last_triggered_at?: string | null
-          metadata?: Json | null
-          organization_id: string
-          retry_count?: number | null
-          spi_event_types?: string[] | null
-          supports_spi?: boolean
-          updated_at?: string
-          url: string
-          verification_token: string
-          webhook_id?: string
-        }
+          authorized_events?: APIEnums["webhook_event"][];
+          created_at?: string;
+          created_by?: string | null;
+          deleted_at?: string | null;
+          environment?: string;
+          is_active?: boolean;
+          last_payload?: Json | null;
+          last_response_body?: string | null;
+          last_response_status?: number | null;
+          last_triggered_at?: string | null;
+          metadata?: Json | null;
+          organization_id: string;
+          retry_count?: number | null;
+          spi_event_types?: string[] | null;
+          supports_spi?: boolean;
+          updated_at?: string;
+          url: string;
+          verification_token: string;
+          webhook_id?: string;
+        };
         Update: {
-          authorized_events?: APIEnums["webhook_event"][]
-          created_at?: string
-          created_by?: string | null
-          deleted_at?: string | null
-          environment?: string
-          is_active?: boolean
-          last_payload?: Json | null
-          last_response_body?: string | null
-          last_response_status?: number | null
-          last_triggered_at?: string | null
-          metadata?: Json | null
-          organization_id?: string
-          retry_count?: number | null
-          spi_event_types?: string[] | null
-          supports_spi?: boolean
-          updated_at?: string
-          url?: string
-          verification_token?: string
-          webhook_id?: string
-        }
+          authorized_events?: APIEnums["webhook_event"][];
+          created_at?: string;
+          created_by?: string | null;
+          deleted_at?: string | null;
+          environment?: string;
+          is_active?: boolean;
+          last_payload?: Json | null;
+          last_response_body?: string | null;
+          last_response_status?: number | null;
+          last_triggered_at?: string | null;
+          metadata?: Json | null;
+          organization_id?: string;
+          retry_count?: number | null;
+          spi_event_types?: string[] | null;
+          supports_spi?: boolean;
+          updated_at?: string;
+          url?: string;
+          verification_token?: string;
+          webhook_id?: string;
+        };
         Relationships: [
           {
-            foreignKeyName: "webhooks_created_by_fkey"
-            columns: ["created_by"]
-            isOneToOne: false
-            referencedRelation: "merchants"
-            referencedColumns: ["merchant_id"]
+            foreignKeyName: "webhooks_created_by_fkey";
+            columns: ["created_by"];
+            isOneToOne: false;
+            referencedRelation: "merchants";
+            referencedColumns: ["merchant_id"];
           },
           {
-            foreignKeyName: "webhooks_organization_id_fkey"
-            columns: ["organization_id"]
-            isOneToOne: false
-            referencedRelation: "organizations"
-            referencedColumns: ["organization_id"]
+            foreignKeyName: "webhooks_organization_id_fkey";
+            columns: ["organization_id"];
+            isOneToOne: false;
+            referencedRelation: "organizations";
+            referencedColumns: ["organization_id"];
           },
-        ]
+        ];
       }
       webhook_delivery_logs: {
         Row: {
-          amount: number | null
-          attempt_number: number
-          compte_paye: string | null
-          compte_payeur: string | null
-          created_at: string
-          event_type: string
-          headers: Json | null
-          ip_address: string | null
-          log_id: string
-          organization_id: string
-          payload: Json
-          request_duration_ms: number | null
-          response_body: string | null
-          response_status: number | null
+          amount: number | null;
+          attempt_number: number;
+          compte_paye: string | null;
+          compte_payeur: string | null;
+          created_at: string;
+          event_type: string;
+          headers: Json | null;
+          ip_address: string | null;
+          log_id: string;
+          organization_id: string;
+          payload: Json;
+          request_duration_ms: number | null;
+          response_body: string | null;
+          response_status: number | null;
           spi_event_code:
             | APIEnums["spi_webhook_event_code"]
-            | null
-          spi_tx_id: string | null
-          success: boolean
-          user_agent: string | null
-          webhook_id: string
-        }
+            | null;
+          spi_tx_id: string | null;
+          success: boolean;
+          user_agent: string | null;
+          webhook_id: string;
+        };
         Insert: {
-          amount?: number | null
-          attempt_number?: number
-          compte_paye?: string | null
-          compte_payeur?: string | null
-          created_at?: string
-          event_type: string
-          headers?: Json | null
-          ip_address?: string | null
-          log_id?: string
-          organization_id: string
-          payload: Json
-          request_duration_ms?: number | null
-          response_body?: string | null
-          response_status?: number | null
+          amount?: number | null;
+          attempt_number?: number;
+          compte_paye?: string | null;
+          compte_payeur?: string | null;
+          created_at?: string;
+          event_type: string;
+          headers?: Json | null;
+          ip_address?: string | null;
+          log_id?: string;
+          organization_id: string;
+          payload: Json;
+          request_duration_ms?: number | null;
+          response_body?: string | null;
+          response_status?: number | null;
           spi_event_code?:
             | APIEnums["spi_webhook_event_code"]
-            | null
-          spi_tx_id?: string | null
-          success?: boolean
-          user_agent?: string | null
-          webhook_id: string
-        }
+            | null;
+          spi_tx_id?: string | null;
+          success?: boolean;
+          user_agent?: string | null;
+          webhook_id: string;
+        };
         Update: {
-          amount?: number | null
-          attempt_number?: number
-          compte_paye?: string | null
-          compte_payeur?: string | null
-          created_at?: string
-          event_type?: string
-          headers?: Json | null
-          ip_address?: string | null
-          log_id?: string
-          organization_id?: string
-          payload?: Json
-          request_duration_ms?: number | null
-          response_body?: string | null
-          response_status?: number | null
+          amount?: number | null;
+          attempt_number?: number;
+          compte_paye?: string | null;
+          compte_payeur?: string | null;
+          created_at?: string;
+          event_type?: string;
+          headers?: Json | null;
+          ip_address?: string | null;
+          log_id?: string;
+          organization_id?: string;
+          payload?: Json;
+          request_duration_ms?: number | null;
+          response_body?: string | null;
+          response_status?: number | null;
           spi_event_code?:
             | APIEnums["spi_webhook_event_code"]
-            | null
-          spi_tx_id?: string | null
-          success?: boolean
-          user_agent?: string | null
-          webhook_id?: string
-        }
+            | null;
+          spi_tx_id?: string | null;
+          success?: boolean;
+          user_agent?: string | null;
+          webhook_id?: string;
+        };
         Relationships: [
           {
-            foreignKeyName: "fk_webhook"
-            columns: ["webhook_id"]
-            isOneToOne: false
-            referencedRelation: "webhooks"
-            referencedColumns: ["webhook_id"]
+            foreignKeyName: "fk_webhook";
+            columns: ["webhook_id"];
+            isOneToOne: false;
+            referencedRelation: "webhooks";
+            referencedColumns: ["webhook_id"];
           },
           {
-            foreignKeyName: "webhook_delivery_logs_organization_id_fkey"
-            columns: ["organization_id"]
-            isOneToOne: false
-            referencedRelation: "organizations"
-            referencedColumns: ["organization_id"]
+            foreignKeyName: "webhook_delivery_logs_organization_id_fkey";
+            columns: ["organization_id"];
+            isOneToOne: false;
+            referencedRelation: "organizations";
+            referencedColumns: ["organization_id"];
           },
           {
-            foreignKeyName: "webhook_delivery_logs_webhook_id_fkey"
-            columns: ["webhook_id"]
-            isOneToOne: false
-            referencedRelation: "webhooks"
-            referencedColumns: ["webhook_id"]
+            foreignKeyName: "webhook_delivery_logs_webhook_id_fkey";
+            columns: ["webhook_id"];
+            isOneToOne: false;
+            referencedRelation: "webhooks";
+            referencedColumns: ["webhook_id"];
           },
-        ]
+        ];
       }
     };
     Functions: {
       fetch_balance_breakdown: {
         Args: {
-          p_merchant_id: string
-          p_target_currency?: APIEnums["currency_code"] | null
-        }
+          p_merchant_id: string;
+          p_target_currency?: APIEnums["currency_code"] | null;
+        };
         Returns: {
-          available_balance: number
-          converted_available_balance: number
-          converted_pending_balance: number
-          converted_total_balance: number
-          currency_code: APIEnums["currency_code"]
-          pending_balance: number
-          target_currency: APIEnums["currency_code"]
-          total_balance: number
-        }[]
-      }
+          available_balance: number;
+          converted_available_balance: number;
+          converted_pending_balance: number;
+          converted_total_balance: number;
+          currency_code: APIEnums["currency_code"];
+          pending_balance: number;
+          target_currency: APIEnums["currency_code"];
+          total_balance: number;
+        }[];
+      };
       fetch_account_balance: {
         Args: {
-          p_currency_code?: string | null
-          p_merchant_id: string
-          p_organization_id: string
-        }
+          p_currency_code?: string | null;
+          p_merchant_id: string;
+          p_organization_id: string;
+        };
         Returns: {
-          balance: number
-          currency_code: string
-          last_updated: string
-        }[]
-      }
+          balance: number;
+          currency_code: string;
+          last_updated: string;
+        }[];
+      };
       list_accounts: {
-        Args: { p_limit?: number; p_offset?: number; p_organization_id: string }
+        Args: {
+          p_limit?: number | null;
+          p_offset?: number | null;
+          p_organization_id: string;
+        };
         Returns: {
-          account_id: string
-          balance: number
-          created_at: string
-          currency_code: APIEnums["currency_code"]
-          is_spi_account: boolean
-          organization_id: string
-          spi_account_balance: number
-          spi_account_balance_sync_error: string
-          spi_account_balance_synced_at: string
-          spi_account_number: string
-          spi_account_status: APIEnums["spi_account_status"]
-          spi_account_type: APIEnums["spi_account_type"]
-          updated_at: string
-        }[]
-      }
+          account_id: string;
+          balance: number;
+          created_at: string;
+          currency_code: APIEnums["currency_code"];
+          is_spi_account: boolean;
+          organization_id: string;
+          spi_account_balance: number;
+          spi_account_balance_sync_error: string;
+          spi_account_balance_synced_at: string;
+          spi_account_number: string;
+          spi_account_status: APIEnums["spi_account_status"];
+          spi_account_type: APIEnums["spi_account_type"];
+          updated_at: string;
+        }[];
+      };
       get_account: {
-        Args: { p_account_id: string; p_organization_id: string }
+        Args: { p_account_id: string; p_organization_id: string };
         Returns: {
-          account_id: string
-          balance: number
-          created_at: string
-          currency_code: APIEnums["currency_code"]
-          is_spi_account: boolean
-          organization_id: string
-          spi_account_balance: number
-          spi_account_balance_sync_error: string
-          spi_account_balance_synced_at: string
-          spi_account_number: string
-          spi_account_status: APIEnums["spi_account_status"]
-          spi_account_type: APIEnums["spi_account_type"]
-          updated_at: string
-        }[]
-      }
+          account_id: string;
+          balance: number;
+          created_at: string;
+          currency_code: APIEnums["currency_code"];
+          is_spi_account: boolean;
+          organization_id: string;
+          spi_account_balance: number;
+          spi_account_balance_sync_error: string;
+          spi_account_balance_synced_at: string;
+          spi_account_number: string;
+          spi_account_status: APIEnums["spi_account_status"];
+          spi_account_type: APIEnums["spi_account_type"];
+          updated_at: string;
+        }[];
+      };
       check_merchant_available_balance: {
         Args: {
-          p_currency_code: APIEnums["currency_code"]
-          p_merchant_id: string
-        }
-        Returns: number
-      }
+          p_currency_code: APIEnums["currency_code"];
+          p_merchant_id: string;
+        };
+        Returns: number;
+      };
       verify_api_key: {
         Args: {
-          p_api_key: string
-          p_endpoint: string
-          p_ip_address?: string | null
-          p_request_method?: string | null
-        }
+          p_api_key: string;
+          p_endpoint: string;
+          p_ip_address?: string | null;
+          p_request_method?: string | null;
+        };
         Returns: {
-          environment: string
-          is_valid: boolean
-          merchant_id: string
-          message: string
-          organization_id: string
-          rate_limited: boolean
-        }[]
-      }
+          environment: string;
+          is_valid: boolean;
+          merchant_id: string;
+          message: string;
+          organization_id: string;
+          rate_limited: boolean;
+        }[];
+      };
       create_checkout_session: {
         Args: {
-          p_allow_coupon_code?: boolean | null
-          p_allow_quantity?: boolean | null
-          p_amount: number
-          p_cancel_url?: string | null
-          p_created_by?: string | null
-          p_currency_code: APIEnums["currency_code"]
-          p_customer_email?: string | null
-          p_customer_id?: string | null
-          p_customer_name?: string | null
-          p_customer_phone?: string | null
-          p_description?: string | null
-          p_environment?: string | null
-          p_expiration_minutes?: number | null
-          p_metadata?: Json | null
-          p_organization_id: string
-          p_payment_link_id?: string | null
-          p_price_id?: string | null
-          p_product_id?: string | null
-          p_quantity?: number | null
-          p_require_billing_address?: boolean | null
-          p_subscription_id?: string | null
-          p_success_url?: string | null
-          p_title?: string | null
-        }
-        Returns: Json
-      }
+          p_allow_coupon_code?: boolean | null;
+          p_allow_quantity?: boolean | null;
+          p_amount: number;
+          p_cancel_url?: string | null;
+          p_created_by?: string | null;
+          p_currency_code: APIEnums["currency_code"];
+          p_customer_email?: string | null;
+          p_customer_id?: string | null;
+          p_customer_name?: string | null;
+          p_customer_phone?: string | null;
+          p_description?: string | null;
+          p_environment?: string | null;
+          p_expiration_minutes?: number | null;
+          p_metadata?: Json | null;
+          p_organization_id: string;
+          p_payment_link_id?: string | null;
+          p_price_id?: string | null;
+          p_product_id?: string | null;
+          p_quantity?: number | null;
+          p_require_billing_address?: boolean | null;
+          p_subscription_id?: string | null;
+          p_success_url?: string | null;
+          p_title?: string | null;
+        };
+        Returns: Json;
+      };
       list_checkout_sessions: {
         Args: {
-          p_limit?: number | null
-          p_merchant_id: string
-          p_offset?: number | null
-          p_status?: APIEnums["checkout_session_status"] | null
-        }
+          p_limit?: number | null;
+          p_merchant_id: string;
+          p_offset?: number | null;
+          p_status?: APIEnums["checkout_session_status"] | null;
+        };
         Returns: {
-          amount: number
-          cancel_url: string
-          checkout_session_id: string
-          created_at: string
-          currency_code: APIEnums["currency_code"]
-          customer_email: string
-          customer_id: string
-          customer_name: string
-          customer_phone: string
-          description: string
-          expires_at: string
-          merchant_id: string
-          metadata: Json
-          organization_id: string
-          payment_link_id: string
-          product_id: string
-          status: APIEnums["checkout_session_status"]
-          subscription_id: string
-          success_url: string
-          title: string
-          updated_at: string
-        }[]
-      }
+          amount: number;
+          cancel_url: string;
+          checkout_session_id: string;
+          created_at: string;
+          currency_code: APIEnums["currency_code"];
+          customer_email: string;
+          customer_id: string;
+          customer_name: string;
+          customer_phone: string;
+          description: string;
+          expires_at: string;
+          merchant_id: string;
+          metadata: Json;
+          organization_id: string;
+          payment_link_id: string;
+          product_id: string;
+          status: APIEnums["checkout_session_status"];
+          subscription_id: string;
+          success_url: string;
+          title: string;
+          updated_at: string;
+        }[];
+      };
       get_webhook: {
-        Args: { p_merchant_id: string; p_webhook_id: string }
+        Args: { p_merchant_id: string; p_webhook_id: string };
         Returns: {
-          authorized_events: APIEnums["webhook_event"][]
-          created_at: string
-          created_by: string | null
-          deleted_at: string | null
-          environment: string
-          is_active: boolean
-          last_payload: Json | null
-          last_response_body: string | null
-          last_response_status: number | null
-          last_triggered_at: string | null
-          metadata: Json | null
-          organization_id: string
-          retry_count: number | null
-          spi_event_types: string[] | null
-          supports_spi: boolean
-          updated_at: string
-          url: string
-          verification_token: string
-          webhook_id: string
-        }[]
+          authorized_events: APIEnums["webhook_event"][];
+          created_at: string;
+          created_by: string | null;
+          deleted_at: string | null;
+          environment: string;
+          is_active: boolean;
+          last_payload: Json | null;
+          last_response_body: string | null;
+          last_response_status: number | null;
+          last_triggered_at: string | null;
+          metadata: Json | null;
+          organization_id: string;
+          retry_count: number | null;
+          spi_event_types: string[] | null;
+          supports_spi: boolean;
+          updated_at: string;
+          url: string;
+          verification_token: string;
+          webhook_id: string;
+        }[];
         SetofOptions: {
-          from: "*"
-          to: "webhooks"
-          isOneToOne: false
-          isSetofReturn: true
-        }
-      }
+          from: "*";
+          to: "webhooks";
+          isOneToOne: false;
+          isSetofReturn: true;
+        };
+      };
       get_webhook_by_id: {
-        Args: { p_webhook_id: string }
+        Args: { p_webhook_id: string };
         Returns: {
-          authorized_events: APIEnums["webhook_event"][]
-          created_at: string
-          created_by: string | null
-          deleted_at: string | null
-          environment: string
-          is_active: boolean
-          last_payload: Json | null
-          last_response_body: string | null
-          last_response_status: number | null
-          last_triggered_at: string | null
-          metadata: Json | null
-          organization_id: string
-          retry_count: number | null
-          spi_event_types: string[] | null
-          supports_spi: boolean
-          updated_at: string
-          url: string
-          verification_token: string
-          webhook_id: string
-        }[]
+          authorized_events: APIEnums["webhook_event"][];
+          created_at: string;
+          created_by: string | null;
+          deleted_at: string | null;
+          environment: string;
+          is_active: boolean;
+          last_payload: Json | null;
+          last_response_body: string | null;
+          last_response_status: number | null;
+          last_triggered_at: string | null;
+          metadata: Json | null;
+          organization_id: string;
+          retry_count: number | null;
+          spi_event_types: string[] | null;
+          supports_spi: boolean;
+          updated_at: string;
+          url: string;
+          verification_token: string;
+          webhook_id: string;
+        }[];
         SetofOptions: {
-          from: "*"
-          to: "webhooks"
-          isOneToOne: false
-          isSetofReturn: true
-        }
-      }
+          from: "*";
+          to: "webhooks";
+          isOneToOne: false;
+          isSetofReturn: true;
+        };
+      };
       log_webhook_delivery: {
         Args: {
-          p_attempt_number?: number | null
-          p_event_type: string
-          p_headers?: Json | null
-          p_ip_address?: string | null
-          p_merchant_id: string
-          p_organization_id: string
-          p_payload: Json
-          p_request_duration_ms?: number | null
-          p_response_body: string
-          p_response_status: number
-          p_user_agent?: string | null
-          p_webhook_id: string
-        }
-        Returns: string
-      }
+          p_attempt_number?: number | null;
+          p_event_type: string;
+          p_headers?: Json | null;
+          p_ip_address?: string | null;
+          p_merchant_id: string;
+          p_organization_id: string;
+          p_payload: Json;
+          p_request_duration_ms?: number | null;
+          p_response_body: string;
+          p_response_status: number;
+          p_user_agent?: string | null;
+          p_webhook_id: string;
+        };
+        Returns: string;
+      };
       create_beneficiary_payout: {
         Args: {
-          p_amount: number
-          p_currency_code: APIEnums["currency_code"]
-          p_merchant_id: string
-          p_metadata?: Json | null
-          p_payment_method_code?: APIEnums["payment_method_code"] | null
-          p_payout_method_id?: string | null
-          p_provider_code?: APIEnums["provider_code"] | null
-          p_status?: APIEnums["payout_status"] | null
-        }
+          p_amount: number;
+          p_currency_code: APIEnums["currency_code"];
+          p_merchant_id: string;
+          p_metadata?: Json | null;
+          p_payment_method_code?: APIEnums["payment_method_code"] | null;
+          p_payout_method_id?: string | null;
+          p_provider_code?: APIEnums["provider_code"] | null;
+          p_status?: APIEnums["payout_status"] | null;
+        };
         Returns: {
-          fee_amount: number
-          message: string
-          payout_id: string
-          status: APIEnums["payout_status"]
-          total_deduction: number
-        }[]
-      }
+          fee_amount: number;
+          message: string;
+          payout_id: string;
+          status: APIEnums["payout_status"];
+          total_deduction: number;
+        }[];
+      };
       fetch_beneficiary_payouts: {
         Args: {
-          p_currency_code?: APIEnums["currency_code"] | null
-          p_end_date?: string | null
-          p_merchant_id: string
-          p_page_number?: number | null
-          p_page_size?: number | null
-          p_start_date?: string | null
-          p_statuses?: string[] | null
-        }
+          p_currency_code?: APIEnums["currency_code"] | null;
+          p_end_date?: string | null;
+          p_merchant_id: string;
+          p_page_number?: number | null;
+          p_page_size?: number | null;
+          p_start_date?: string | null;
+          p_statuses?: string[] | null;
+        };
         Returns: {
-          account_id: string
-          amount: number
-          created_at: string
-          created_by: string
-          currency_code: APIEnums["currency_code"]
-          metadata: Json
-          organization_id: string
-          payment_method_code: APIEnums["payment_method_code"]
-          payout_id: string
-          payout_method_id: string
-          provider_code: APIEnums["provider_code"]
-          status: APIEnums["payout_status"]
-          updated_at: string
-        }[]
-      }
+          account_id: string;
+          amount: number;
+          created_at: string;
+          created_by: string;
+          currency_code: APIEnums["currency_code"];
+          metadata: Json;
+          organization_id: string;
+          payment_method_code: APIEnums["payment_method_code"];
+          payout_id: string;
+          payout_method_id: string;
+          provider_code: APIEnums["provider_code"];
+          status: APIEnums["payout_status"];
+          updated_at: string;
+        }[];
+      };
       fetch_customers_with_status: {
         Args: {
-          p_activity_status?: string | null
-          p_customer_type?: string | null
-          p_environment?: string | null
-          p_limit?: number | null
-          p_merchant_id: string
-          p_offset?: number | null
-          p_organization_id?: string | null
-          p_search_term?: string | null
-        }
+          p_activity_status?: string | null;
+          p_customer_type?: string | null;
+          p_environment?: string | null;
+          p_limit?: number | null;
+          p_merchant_id: string;
+          p_offset?: number | null;
+          p_organization_id?: string | null;
+          p_search_term?: string | null;
+        };
         Returns: {
-          address: string
-          city: string
-          country: string
-          created_at: string
-          customer_id: string
-          email: string
-          has_transactions: boolean
-          is_business: boolean
-          name: string
-          phone_number: string
-          postal_code: string
-          total_count: number
-          updated_at: string
-          whatsapp_number: string
-        }[]
-      }
+          address: string;
+          city: string;
+          country: string;
+          created_at: string;
+          customer_id: string;
+          email: string;
+          has_transactions: boolean;
+          is_business: boolean;
+          name: string;
+          phone_number: string;
+          postal_code: string;
+          total_count: number;
+          updated_at: string;
+          whatsapp_number: string;
+        }[];
+      };
       create_customer: {
         Args: {
-          p_address?: string | null
-          p_city?: string | null
-          p_country?: string | null
-          p_email: string
-          p_environment?: string | null
-          p_is_business?: boolean | null
-          p_merchant_id: string
-          p_name: string
-          p_organization_id: string
-          p_phone_number?: string | null
-          p_postal_code?: string | null
-          p_whatsapp_number?: string | null
-        }
-        Returns: string
-      }
+          p_address?: string | null;
+          p_city?: string | null;
+          p_country?: string | null;
+          p_email: string;
+          p_environment?: string | null;
+          p_is_business?: boolean | null;
+          p_merchant_id: string;
+          p_name: string;
+          p_organization_id: string;
+          p_phone_number?: string | null;
+          p_postal_code?: string | null;
+          p_whatsapp_number?: string | null;
+        };
+        Returns: string;
+      };
       update_customer: {
         Args: {
-          p_address?: string | null
-          p_city?: string | null
-          p_country?: string | null
-          p_customer_id: string
-          p_email: string
-          p_is_business?: boolean | null
-          p_name: string
-          p_phone_number?: string | null
-          p_postal_code?: string | null
-          p_whatsapp_number?: string | null
-        }
-        Returns: undefined
-      }
-      delete_customer: { Args: { p_customer_id: string }; Returns: undefined }
+          p_address?: string | null;
+          p_city?: string | null;
+          p_country?: string | null;
+          p_customer_id: string;
+          p_email: string;
+          p_is_business?: boolean | null;
+          p_name: string;
+          p_phone_number?: string | null;
+          p_postal_code?: string | null;
+          p_whatsapp_number?: string | null;
+        };
+        Returns: undefined;
+      };
+      delete_customer: { Args: { p_customer_id: string }; Returns: undefined };
       fetch_customer_transactions: {
-        Args: { p_customer_id: string; p_environment?: string }
+        Args: { p_customer_id: string; p_environment?: string };
         Returns: {
-          created_at: string
-          currency_code: APIEnums["currency_code"]
-          description: string
-          gross_amount: number
-          status: string
-          transaction_id: string
-        }[]
-      }
+          created_at: string;
+          currency_code: APIEnums["currency_code"];
+          description: string;
+          gross_amount: number;
+          status: string;
+          transaction_id: string;
+        }[];
+      };
       create_payment_link: {
         Args: {
-          p_allow_coupon_code?: boolean | null
-          p_allow_quantity?: boolean | null
-          p_cancel_url?: string | null
-          p_created_by?: string | null
-          p_currency_code: APIEnums["currency_code"]
-          p_description?: string | null
-          p_environment?: string | null
-          p_expires_at?: string | null
-          p_link_type: APIEnums["link_type"]
-          p_organization_id: string
-          p_price?: number | null
-          p_price_id?: string | null
-          p_product_id?: string | null
-          p_require_billing_address?: boolean | null
-          p_success_url?: string | null
-          p_title: string
-        }
-        Returns: string
-      }
+          p_allow_coupon_code?: boolean | null;
+          p_allow_quantity?: boolean | null;
+          p_cancel_url?: string | null;
+          p_created_by?: string | null;
+          p_currency_code: APIEnums["currency_code"];
+          p_description?: string | null;
+          p_environment?: string | null;
+          p_expires_at?: string | null;
+          p_link_type: APIEnums["link_type"];
+          p_organization_id: string;
+          p_price?: number | null;
+          p_price_id?: string | null;
+          p_product_id?: string | null;
+          p_require_billing_address?: boolean | null;
+          p_success_url?: string | null;
+          p_title: string;
+        };
+        Returns: string;
+      };
       list_payment_links: {
         Args: {
-          p_is_active?: boolean | null
-          p_limit?: number | null
-          p_link_type?: string | null
-          p_offset?: number | null
-          p_organization_id: string
-        }
+          p_is_active?: boolean | null;
+          p_limit?: number | null;
+          p_link_type?: string | null;
+          p_offset?: number | null;
+          p_organization_id: string;
+        };
         Returns: {
-          allow_coupon_code: boolean
-          allow_quantity: boolean
-          amount: number
-          cancel_url: string
-          created_at: string
-          created_by: string
-          currency_code: APIEnums["currency_code"]
-          description: string
-          environment: string
-          expires_at: string
-          is_active: boolean
-          link_id: string
-          link_type: APIEnums["link_type"]
-          metadata: Json
-          organization_id: string
-          price_id: string
-          product_id: string
-          quantity: number
-          require_billing_address: boolean
-          success_url: string
-          title: string
-          updated_at: string
-          url: string
-        }[]
-      }
+          allow_coupon_code: boolean;
+          allow_quantity: boolean;
+          amount: number;
+          cancel_url: string;
+          created_at: string;
+          created_by: string;
+          currency_code: APIEnums["currency_code"];
+          description: string;
+          environment: string;
+          expires_at: string;
+          is_active: boolean;
+          link_id: string;
+          link_type: APIEnums["link_type"];
+          metadata: Json;
+          organization_id: string;
+          price_id: string;
+          product_id: string;
+          quantity: number;
+          require_billing_address: boolean;
+          success_url: string;
+          title: string;
+          updated_at: string;
+          url: string;
+        }[];
+      };
       list_payment_requests: {
         Args: {
-          p_customer_id?: string | null
-          p_limit?: number | null
-          p_offset?: number | null
-          p_organization_id: string
-          p_status?: string | null
-        }
+          p_customer_id?: string | null;
+          p_limit?: number | null;
+          p_offset?: number | null;
+          p_organization_id: string;
+          p_status?: string | null;
+        };
         Returns: {
-          amount: number
-          created_at: string
-          created_by: string
-          currency_code: APIEnums["currency_code"]
-          customer_id: string
-          description: string
-          environment: string
-          expiry_date: string
-          metadata: Json
-          organization_id: string
-          payment_link: string
-          payment_reference: string
-          request_id: string
-          status: string
-          updated_at: string
-        }[]
-      }
+          amount: number;
+          created_at: string;
+          created_by: string;
+          currency_code: APIEnums["currency_code"];
+          customer_id: string;
+          description: string;
+          environment: string;
+          expiry_date: string;
+          metadata: Json;
+          organization_id: string;
+          payment_link: string;
+          payment_reference: string;
+          request_id: string;
+          status: string;
+          updated_at: string;
+        }[];
+      };
       initiate_withdrawal: {
         Args: {
-          p_amount: number
-          p_currency_code?: APIEnums["currency_code"] | null
-          p_merchant_id: string
-          p_payout_method_id: string
-          p_provider_code?: APIEnums["provider_code"] | null
-        }
+          p_amount: number;
+          p_currency_code?: APIEnums["currency_code"] | null;
+          p_merchant_id: string;
+          p_payout_method_id: string;
+          p_provider_code?: APIEnums["provider_code"] | null;
+        };
         Returns: {
-          message: string
-          success: boolean
-        }[]
-      }
+          message: string;
+          success: boolean;
+        }[];
+      };
       fetch_payouts: {
         Args: {
-          p_end_date?: string | null
-          p_merchant_id: string
-          p_page_number?: number | null
-          p_page_size?: number | null
-          p_start_date?: string | null
-          p_statuses?: APIEnums["payout_status"][] | null
-        }
+          p_end_date?: string | null;
+          p_merchant_id: string;
+          p_page_number?: number | null;
+          p_page_size?: number | null;
+          p_start_date?: string | null;
+          p_statuses?: APIEnums["payout_status"][] | null;
+        };
         Returns: {
-          account_id: string
-          amount: number
-          created_at: string
-          currency_code: APIEnums["currency_code"]
-          merchant_id: string
-          metadata: Json
-          organization_id: string
-          payout_id: string
-          payout_method_id: string
-          provider_code: APIEnums["provider_code"]
-          status: APIEnums["payout_status"]
-          updated_at: string
-        }[]
-      }
+          account_id: string;
+          amount: number;
+          created_at: string;
+          currency_code: APIEnums["currency_code"];
+          merchant_id: string;
+          metadata: Json;
+          organization_id: string;
+          payout_id: string;
+          payout_method_id: string;
+          provider_code: APIEnums["provider_code"];
+          status: APIEnums["payout_status"];
+          updated_at: string;
+        }[];
+      };
       fetch_products: {
         Args: {
-          p_environment?: string | null
-          p_is_active?: boolean | null
-          p_limit?: number | null
-          p_merchant_id: string
-          p_offset?: number | null
-          p_organization_id?: string | null
-        }
+          p_environment?: string | null;
+          p_is_active?: boolean | null;
+          p_limit?: number | null;
+          p_merchant_id: string;
+          p_offset?: number | null;
+          p_organization_id?: string | null;
+        };
         Returns: {
-          created_at: string
-          created_by: string
-          description: string
-          display_on_storefront: boolean
-          fees: Json
-          image_url: string
-          is_active: boolean
-          metadata: Json
-          name: string
-          organization_id: string
-          prices: Json
-          product_id: string
-          product_type: APIEnums["product_type"]
-          total_count: number
-          updated_at: string
-        }[]
-      }
+          created_at: string;
+          created_by: string;
+          description: string;
+          display_on_storefront: boolean;
+          fees: Json;
+          image_url: string;
+          is_active: boolean;
+          metadata: Json;
+          name: string;
+          organization_id: string;
+          prices: Json;
+          product_id: string;
+          product_type: APIEnums["product_type"];
+          total_count: number;
+          updated_at: string;
+        }[];
+      };
       create_product: {
         Args: {
-          p_charge_day?: number | null
-          p_description: string
-          p_display_on_storefront?: boolean | null
-          p_environment?: string | null
-          p_failed_payment_action?: APIEnums["failed_payment_action"] | null
-          p_fee_type_ids?: string[] | null
-          p_first_payment_type?: APIEnums["first_payment_type"] | null
-          p_image_url?: string | null
-          p_is_active?: boolean | null
-          p_merchant_id: string
-          p_metadata?: Json | null
-          p_name: string
-          p_organization_id: string
-          p_prices?: Json | null
-          p_product_type?: APIEnums["product_type"] | null
-          p_trial_enabled?: boolean | null
-          p_trial_period_days?: number | null
-        }
-        Returns: string
-      }
+          p_charge_day?: number | null;
+          p_description: string;
+          p_display_on_storefront?: boolean | null;
+          p_environment?: string | null;
+          p_failed_payment_action?: APIEnums["failed_payment_action"] | null;
+          p_fee_type_ids?: string[] | null;
+          p_first_payment_type?: APIEnums["first_payment_type"] | null;
+          p_image_url?: string | null;
+          p_is_active?: boolean | null;
+          p_merchant_id: string;
+          p_metadata?: Json | null;
+          p_name: string;
+          p_organization_id: string;
+          p_prices?: Json | null;
+          p_product_type?: APIEnums["product_type"] | null;
+          p_trial_enabled?: boolean | null;
+          p_trial_period_days?: number | null;
+        };
+        Returns: string;
+      };
       create_price: {
         Args: {
-          p_amount: number
-          p_billing_interval?: APIEnums["billing_interval"] | null
-          p_currency_code: APIEnums["currency_code"]
-          p_is_default?: boolean | null
-          p_maximum_amount?: number | null
-          p_metadata?: Json | null
-          p_minimum_amount?: number | null
-          p_organization_id: string
-          p_pricing_model?: APIEnums["pricing_model"] | null
-          p_product_id: string
-        }
-        Returns: string
-      }
+          p_amount: number;
+          p_billing_interval?: APIEnums["billing_interval"] | null;
+          p_currency_code: APIEnums["currency_code"];
+          p_is_default?: boolean | null;
+          p_maximum_amount?: number | null;
+          p_metadata?: Json | null;
+          p_minimum_amount?: number | null;
+          p_organization_id: string;
+          p_pricing_model?: APIEnums["pricing_model"] | null;
+          p_product_id: string;
+        };
+        Returns: string;
+      };
       set_default_price: {
-        Args: { p_price_id: string; p_product_id: string }
-        Returns: undefined
-      }
+        Args: { p_price_id: string; p_product_id: string };
+        Returns: undefined;
+      };
       create_refund: {
         Args: {
-          p_amount: number
-          p_created_by?: string | null
-          p_metadata?: Json | null
-          p_provider_code?: APIEnums["provider_code"] | null
-          p_provider_merchant_id?: string | null
-          p_provider_transaction_id?: string | null
-          p_reason?: string | null
-          p_transaction_id: string
-        }
-        Returns: string
-      }
+          p_amount: number;
+          p_created_by?: string | null;
+          p_metadata?: Json | null;
+          p_provider_code?: APIEnums["provider_code"] | null;
+          p_provider_merchant_id?: string | null;
+          p_provider_transaction_id?: string | null;
+          p_reason?: string | null;
+          p_transaction_id: string;
+        };
+        Returns: string;
+      };
       list_refunds: {
         Args: {
-          p_end_date?: string | null
-          p_limit?: number | null
-          p_offset?: number | null
-          p_organization_id: string
-          p_start_date?: string | null
-          p_status?: APIEnums["refund_status"] | null
-        }
+          p_end_date?: string | null;
+          p_limit?: number | null;
+          p_offset?: number | null;
+          p_organization_id: string;
+          p_start_date?: string | null;
+          p_status?: APIEnums["refund_status"] | null;
+        };
         Returns: {
-          amount: number
-          created_at: string
-          fee_amount: number
-          metadata: Json
-          reason: string
-          refund_id: string
-          refunded_amount: number
-          status: APIEnums["refund_status"]
-          transaction_id: string
-          updated_at: string
-        }[]
-      }
+          amount: number;
+          created_at: string;
+          fee_amount: number;
+          metadata: Json;
+          reason: string;
+          refund_id: string;
+          refunded_amount: number;
+          status: APIEnums["refund_status"];
+          transaction_id: string;
+          updated_at: string;
+        }[];
+      };
       list_organizations: {
-        Args: { p_organization_id: string }
+        Args: { p_organization_id: string };
         Returns: {
-          arr: number
-          created_at: string
-          default_currency: APIEnums["currency_code"]
-          email: string
-          employee_number: string
-          industry: string
-          is_starter_business: boolean
-          logo_url: string
-          mrr: number
-          name: string
-          organization_id: string
-          phone_number: string
-          slug: string
-          status: string
-          storefront_enabled: boolean
-          total_customers: number
-          total_merchants: number
-          total_revenue: number
-          total_transactions: number
-          updated_at: string
-          verification_status: string
-          website_url: string
-        }[]
-      }
+          arr: number;
+          created_at: string;
+          default_currency: APIEnums["currency_code"];
+          email: string;
+          employee_number: string;
+          industry: string;
+          is_starter_business: boolean;
+          logo_url: string;
+          mrr: number;
+          name: string;
+          organization_id: string;
+          phone_number: string;
+          slug: string;
+          status: string;
+          storefront_enabled: boolean;
+          total_customers: number;
+          total_merchants: number;
+          total_revenue: number;
+          total_transactions: number;
+          updated_at: string;
+          verification_status: string;
+          website_url: string;
+        }[];
+      };
       fetch_organization_details: {
-        Args: { p_merchant_id: string; p_organization_id?: string }
+        Args: { p_merchant_id: string; p_organization_id?: string };
         Returns: {
-          arr: number
-          city: string
-          country: string
-          default_currency: APIEnums["currency_code"]
-          district: string
-          email: string
-          logo_url: string
-          mrr: number
-          name: string
-          organization_id: string
-          pin_code: string
-          postal_code: string
-          region: string
-          storefront_enabled: boolean
-          street: string
-          total_customers: number
-          total_merchants: number
-          total_revenue: number
-          total_transactions: number
-          updated_at: string
-          verification_status: APIEnums["organization_verification_status"]
-          website_url: string
-        }[]
-      }
+          arr: number;
+          city: string;
+          country: string;
+          default_currency: APIEnums["currency_code"];
+          district: string;
+          email: string;
+          logo_url: string;
+          mrr: number;
+          name: string;
+          organization_id: string;
+          pin_code: string;
+          postal_code: string;
+          region: string;
+          storefront_enabled: boolean;
+          street: string;
+          total_customers: number;
+          total_merchants: number;
+          total_revenue: number;
+          total_transactions: number;
+          updated_at: string;
+          verification_status: APIEnums["organization_verification_status"];
+          website_url: string;
+        }[];
+      };
       get_webhook_delivery_logs: {
         Args: {
-          p_failed_only?: boolean | null
-          p_limit?: number | null
-          p_merchant_id: string
-          p_offset?: number | null
-          p_success_only?: boolean | null
-          p_webhook_id: string
-        }
+          p_failed_only?: boolean | null;
+          p_limit?: number | null;
+          p_merchant_id: string;
+          p_offset?: number | null;
+          p_success_only?: boolean | null;
+          p_webhook_id: string;
+        };
         Returns: {
-          attempt_number: number
-          created_at: string
-          event_type: string
-          headers: Json
-          ip_address: string
-          log_id: string
-          organization_id: string
-          payload: Json
-          request_duration_ms: number
-          response_body: string
-          response_status: number
-          success: boolean
-          user_agent: string
-          webhook_id: string
-        }[]
-      }
+          attempt_number: number;
+          created_at: string;
+          event_type: string;
+          headers: Json;
+          ip_address: string;
+          log_id: string;
+          organization_id: string;
+          payload: Json;
+          request_duration_ms: number;
+          response_body: string;
+          response_status: number;
+          success: boolean;
+          user_agent: string;
+          webhook_id: string;
+        }[];
+      };
       get_product_api: {
-        Args: { p_organization_id: string; p_product_id: string }
+        Args: { p_organization_id: string; p_product_id: string };
         Returns: {
-          created_at: string
-          created_by: string
-          description: string
-          display_on_storefront: boolean
-          image_url: string
-          is_active: boolean
-          metadata: Json
-          name: string
-          organization_id: string
-          product_id: string
-          product_type: APIEnums["product_type"]
-          updated_at: string
-        }[]
-      }
+          created_at: string;
+          created_by: string;
+          description: string;
+          display_on_storefront: boolean;
+          image_url: string;
+          is_active: boolean;
+          metadata: Json;
+          name: string;
+          organization_id: string;
+          product_id: string;
+          product_type: APIEnums["product_type"];
+          updated_at: string;
+        }[];
+      };
       get_payment_link_api: {
-        Args: { p_link_id: string; p_organization_id: string }
+        Args: { p_link_id: string; p_organization_id: string };
         Returns: {
-          allow_coupon_code: boolean
-          allow_quantity: boolean
-          amount: number
-          cancel_url: string
-          created_at: string
-          created_by: string
-          currency_code: APIEnums["currency_code"]
-          description: string
-          environment: string
-          expires_at: string
-          is_active: boolean
-          link_id: string
-          link_type: APIEnums["link_type"]
-          metadata: Json
-          organization_id: string
-          price_id: string
-          product_id: string
-          quantity: number
-          require_billing_address: boolean
-          success_url: string
-          title: string
-          updated_at: string
-          url: string
-        }[]
-      }
+          allow_coupon_code: boolean;
+          allow_quantity: boolean;
+          amount: number;
+          cancel_url: string;
+          created_at: string;
+          created_by: string;
+          currency_code: APIEnums["currency_code"];
+          description: string;
+          environment: string;
+          expires_at: string;
+          is_active: boolean;
+          link_id: string;
+          link_type: APIEnums["link_type"];
+          metadata: Json;
+          organization_id: string;
+          price_id: string;
+          product_id: string;
+          quantity: number;
+          require_billing_address: boolean;
+          success_url: string;
+          title: string;
+          updated_at: string;
+          url: string;
+        }[];
+      };
       create_payment_request_api: {
         Args: {
-          p_amount: number
-          p_created_by: string
-          p_currency_code: APIEnums["currency_code"]
-          p_customer_id: string
-          p_description: string
-          p_environment?: string | null
-          p_expiry_date: string
-          p_organization_id: string
-          p_payment_reference: string
-        }
+          p_amount: number;
+          p_created_by: string;
+          p_currency_code: APIEnums["currency_code"];
+          p_customer_id: string;
+          p_description: string;
+          p_environment?: string | null;
+          p_expiry_date: string;
+          p_organization_id: string;
+          p_payment_reference: string;
+        };
         Returns: {
-          amount: number
-          created_at: string
-          created_by: string
-          currency_code: APIEnums["currency_code"]
-          customer_id: string
-          description: string
-          environment: string
-          expiry_date: string
-          organization_id: string
-          payment_link: string
-          payment_reference: string
-          request_id: string
-          status: APIEnums["transaction_status"]
-          updated_at: string
-        }[]
-      }
+          amount: number;
+          created_at: string;
+          created_by: string;
+          currency_code: APIEnums["currency_code"];
+          customer_id: string;
+          description: string;
+          environment: string;
+          expiry_date: string;
+          organization_id: string;
+          payment_link: string;
+          payment_reference: string;
+          request_id: string;
+          status: APIEnums["transaction_status"];
+          updated_at: string;
+        }[];
+      };
       create_discount_coupon: {
         Args: {
-          p_code: string
-          p_customer_type?: APIEnums["customer_type"] | null
-          p_description?: string | null
-          p_discount_fixed_amount?: number | null
-          p_discount_percentage?: number | null
-          p_discount_type?: APIEnums["discount_type"] | null
-          p_expires_at?: string | null
-          p_is_active?: boolean | null
-          p_max_quantity_per_use?: number | null
-          p_max_uses?: number | null
-          p_merchant_id?: string | null
-          p_organization_id: string
-          p_product_ids?: string[] | null
-          p_scope_type?: string | null
-          p_usage_frequency_limit?: APIEnums["usage_frequency"] | null
-          p_usage_limit_value?: number | null
-          p_valid_from?: string | null
-        }
-        Returns: string
-      }
+          p_code: string;
+          p_customer_type?: APIEnums["customer_type"] | null;
+          p_description?: string | null;
+          p_discount_fixed_amount?: number | null;
+          p_discount_percentage?: number | null;
+          p_discount_type?: APIEnums["discount_type"] | null;
+          p_expires_at?: string | null;
+          p_is_active?: boolean | null;
+          p_max_quantity_per_use?: number | null;
+          p_max_uses?: number | null;
+          p_merchant_id?: string | null;
+          p_organization_id: string;
+          p_product_ids?: string[] | null;
+          p_scope_type?: string | null;
+          p_usage_frequency_limit?: APIEnums["usage_frequency"] | null;
+          p_usage_limit_value?: number | null;
+          p_valid_from?: string | null;
+        };
+        Returns: string;
+      };
       get_product_prices_api: {
-        Args: { p_organization_id: string; p_product_id: string }
+        Args: { p_organization_id: string; p_product_id: string };
         Returns: {
-          amount: number
-          billing_interval: APIEnums["billing_interval"]
-          created_at: string
-          currency_code: APIEnums["currency_code"]
-          is_default: boolean
-          organization_id: string
-          price_id: string
-          product_id: string
-          updated_at: string
-        }[]
-      }
+          amount: number;
+          billing_interval: APIEnums["billing_interval"];
+          created_at: string;
+          currency_code: APIEnums["currency_code"];
+          is_default: boolean;
+          organization_id: string;
+          price_id: string;
+          product_id: string;
+          updated_at: string;
+        }[];
+      };
       get_product_fees_api: {
-        Args: { p_organization_id: string; p_product_id: string }
+        Args: { p_organization_id: string; p_product_id: string };
         Returns: {
-          fee_fixed_amount: number
-          fee_is_enabled: boolean
-          fee_name: string
-          fee_percentage: number
-          fee_type_id: string
-        }[]
-      }
+          fee_fixed_amount: number;
+          fee_is_enabled: boolean;
+          fee_name: string;
+          fee_percentage: number;
+          fee_type_id: string;
+        }[];
+      };
       get_coupon_details_for_management: {
         Args: {
-          p_coupon_id?: string | null
-          p_merchant_id?: string | null
-          p_organization_id: string
-        }
+          p_coupon_id?: string | null;
+          p_merchant_id?: string | null;
+          p_organization_id: string;
+        };
         Returns: {
-          code: string
-          coupon_id: string
-          created_at: string
-          current_uses: number
-          customer_type: APIEnums["customer_type"]
-          description: string
-          discount_fixed_amount: number
-          discount_percentage: number
-          discount_type: APIEnums["discount_type"]
-          expires_at: string
-          is_active: boolean
-          max_quantity_per_use: number
-          max_uses: number
-          plan_links: Json
-          product_links: Json
-          scope_type: string
-          updated_at: string
-          usage_frequency_limit: APIEnums["usage_frequency"]
-          usage_limit_value: number
-          valid_from: string
-        }[]
-      }
+          code: string;
+          coupon_id: string;
+          created_at: string;
+          current_uses: number;
+          customer_type: APIEnums["customer_type"];
+          description: string;
+          discount_fixed_amount: number;
+          discount_percentage: number;
+          discount_type: APIEnums["discount_type"];
+          expires_at: string;
+          is_active: boolean;
+          max_quantity_per_use: number;
+          max_uses: number;
+          organization_id: string;
+          plan_links: Json;
+          product_links: Json;
+          scope_type: string;
+          updated_at: string;
+          usage_frequency_limit: APIEnums["usage_frequency"];
+          usage_limit_value: number;
+          valid_from: string;
+        }[];
+      };
     };
     Enums: {
       billing_interval:

@@ -43,9 +43,13 @@ export class DiscountCouponsService {
       } as any,
     );
 
-    if (error) throw new Error(error.message);
+    if (error) {
+      throw new Error(error.message);
+    }
 
-    const coupon = data as any;
+    // RPC functions that return TABLE return an array
+    const results = Array.isArray(data) ? data : data ? [data] : [];
+    const coupon = results[0] as any;
 
     if (!coupon || !coupon.coupon_id) {
       throw new NotFoundException(
@@ -154,6 +158,16 @@ export class DiscountCouponsService {
 
     // RPC returns coupon_id
     const couponId = data as string;
+
+    if (!couponId) {
+      throw new Error(
+        'Failed to create discount coupon: No coupon_id returned',
+      );
+    }
+
+    // Small delay to ensure the coupon is available for retrieval
+    // This handles potential race conditions with RLS or database replication
+    await new Promise((resolve) => setTimeout(resolve, 200));
 
     // Fetch and return the created coupon
     return this.findOne(couponId, user);
