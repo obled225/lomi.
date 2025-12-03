@@ -175,13 +175,34 @@ export class WebhookSenderService {
     data: any,
     queue: Queue,
   ) {
-    // Fetch webhooks for organization
-    const { data: webhooks, error } = await this.supabase
-      .getClient()
-      .from('webhooks')
-      .select('*')
-      .eq('organization_id', organizationId)
-      .eq('is_active', true);
+    // Fetch webhooks for organization using RPC to bypass RLS
+    // Get merchant_id from organization first
+    const { data: merchantId, error: merchantError } = await this.supabase.rpc(
+      'get_merchant_from_organization',
+      {
+        p_organization_id: organizationId,
+      },
+    );
+
+    if (merchantError || !merchantId) {
+      this.logger.error(
+        `Failed to get merchant for org ${organizationId}: ${merchantError?.message || 'No merchant found'}`,
+      );
+      return;
+    }
+
+    // Use RPC function to fetch webhooks
+    const { data: webhooks, error } = await this.supabase.rpc(
+      'fetch_organization_webhooks',
+      {
+        p_merchant_id: merchantId,
+        p_organization_id: organizationId,
+        p_event: event,
+        p_is_active: true,
+        p_search_term: null,
+        p_environment: 'live',
+      },
+    );
 
     if (error) {
       this.logger.error(
@@ -190,10 +211,16 @@ export class WebhookSenderService {
       return;
     }
 
-    if (!webhooks || webhooks.length === 0) return;
+    const webhooksArray = (webhooks as any[]) || [];
+    if (webhooksArray.length === 0) {
+      this.logger.log(
+        `No webhooks found for org ${organizationId} subscribed to event ${event}`,
+      );
+      return;
+    }
 
     // Map to Webhook interface and filter by event
-    const relevantWebhooks = webhooks
+    const relevantWebhooks = webhooksArray
       .map((w: any) => ({
         id: w.webhook_id,
         url: w.url,
@@ -228,13 +255,33 @@ export class WebhookSenderService {
     event: WebhookEvent,
     data: any,
   ) {
-    // Fetch webhooks for organization
-    const { data: webhooks, error } = await this.supabase
-      .getClient()
-      .from('webhooks')
-      .select('*')
-      .eq('organization_id', organizationId)
-      .eq('is_active', true);
+    // Get merchant_id from organization
+    const { data: merchantId, error: merchantError } = await this.supabase.rpc(
+      'get_merchant_from_organization',
+      {
+        p_organization_id: organizationId,
+      },
+    );
+
+    if (merchantError || !merchantId) {
+      this.logger.error(
+        `Failed to get merchant for org ${organizationId}: ${merchantError?.message || 'No merchant found'}`,
+      );
+      return;
+    }
+
+    // Fetch webhooks for organization using RPC to bypass RLS
+    const { data: webhooks, error } = await this.supabase.rpc(
+      'fetch_organization_webhooks',
+      {
+        p_merchant_id: merchantId,
+        p_organization_id: organizationId,
+        p_event: event,
+        p_is_active: true,
+        p_search_term: null,
+        p_environment: 'live',
+      },
+    );
 
     if (error) {
       this.logger.error(
@@ -243,10 +290,16 @@ export class WebhookSenderService {
       return;
     }
 
-    if (!webhooks || webhooks.length === 0) return;
+    const webhooksArray = (webhooks as any[]) || [];
+    if (webhooksArray.length === 0) {
+      this.logger.log(
+        `No webhooks found for org ${organizationId} subscribed to event ${event}`,
+      );
+      return;
+    }
 
     // Map to Webhook interface and filter by event
-    const relevantWebhooks = webhooks
+    const relevantWebhooks = webhooksArray
       .map((w: any) => ({
         id: w.webhook_id,
         url: w.url,

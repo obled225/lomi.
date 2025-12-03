@@ -34,30 +34,6 @@ export class WebhookListener {
     await this.queueWebhook(payload.organization_id, 'PAYMENT_FAILED', payload);
   }
 
-  @OnEvent('payment.created')
-  async handlePaymentCreated(payload: any) {
-    this.logger.log(
-      `Handling payment.created event for transaction ${payload.id}`,
-    );
-    await this.queueWebhook(
-      payload.organization_id,
-      'PAYMENT_CREATED',
-      payload,
-    );
-  }
-
-  @OnEvent('payment.canceled')
-  async handlePaymentCanceled(payload: any) {
-    this.logger.log(
-      `Handling payment.canceled event for transaction ${payload.id}`,
-    );
-    await this.queueWebhook(
-      payload.organization_id,
-      'PAYMENT_CANCELED',
-      payload,
-    );
-  }
-
   @OnEvent('refund.created')
   async handleRefundCreated(payload: any) {
     this.logger.log(`Handling refund.created event for refund ${payload.id}`);
@@ -112,30 +88,6 @@ export class WebhookListener {
     await this.queueWebhook(
       payload.organization_id,
       'SUBSCRIPTION_CANCELED',
-      payload,
-    );
-  }
-
-  @OnEvent('checkout.completed')
-  async handleCheckoutCompleted(payload: any) {
-    this.logger.log(
-      `Handling checkout.completed event for session ${payload.id}`,
-    );
-    await this.queueWebhook(
-      payload.organization_id,
-      'CHECKOUT_COMPLETED',
-      payload,
-    );
-  }
-
-  @OnEvent('provider.status_changed')
-  async handleProviderStatusChanged(payload: any) {
-    this.logger.log(
-      `Handling provider.status_changed event for provider ${payload.provider_code}`,
-    );
-    await this.queueWebhook(
-      payload.organization_id,
-      'PROVIDER_STATUS_CHANGED',
       payload,
     );
   }

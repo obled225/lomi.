@@ -21,6 +21,7 @@ import { PaymentLinksModule } from '@core/payment-links/payment-links.module';
 import { PayoutsModule } from '@core/payouts/payouts.module';
 import { BeneficiaryPayoutsModule } from '@core/beneficiary-payouts/beneficiary-payouts.module';
 import { WebhookDeliveryLogsModule } from '@core/webhook-delivery-logs/webhook-delivery-logs.module';
+import { WebhooksModule } from './webhooks/webhooks.module';
 
 @Module({
   imports: [
@@ -56,6 +57,7 @@ import { WebhookDeliveryLogsModule } from '@core/webhook-delivery-logs/webhook-d
     PayoutsModule,
     BeneficiaryPayoutsModule,
     WebhookDeliveryLogsModule,
+    WebhooksModule,
   ],
   controllers: [AppController],
   providers: [

@@ -2,14 +2,14 @@
   "version": 2,
   "builds": [
     {
-      "src": "src/server.ts",
+      "src": "dist/main.js",
       "use": "@vercel/node"
     }
   ],
-  "rewrites": [
+  "routes": [
     {
-      "source": "/(.*)",
-      "destination": ""
+      "src": "/(.*)",
+      "dest": "dist/main.js"
     }
   ],
   "env": {
@@ -25,11 +25,11 @@
         },
         {
           "key": "Access-Control-Allow-Methods",
-          "value": "GET,POST,PUT,DELETE,OPTIONS"
+          "value": "GET,POST,PUT,DELETE,PATCH,OPTIONS"
         },
         {
           "key": "Access-Control-Allow-Headers",
-          "value": "X-API-KEY,Content-Type"
+          "value": "X-API-KEY,X-Lomi-Signature,X-Lomi-Event,X-Webhook-ID,X-Merchant-Signature,Content-Type,Authorization"
         }
       ]
     }
