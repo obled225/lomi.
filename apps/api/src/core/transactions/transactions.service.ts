@@ -48,19 +48,33 @@ export class TransactionsService {
 
   /**
    * Get single transaction by ID
-   * Uses RPC: get_transaction then validates ownership
+   * Uses RPC: get_transaction (with organization_id filter)
    */
   async findOne(id: string, user: AuthContext) {
     const { data, error } = await this.supabase.getClient().rpc(
       'get_transaction' as any,
       {
         p_transaction_id: id,
+        p_organization_id: user.organizationId,
       } as any,
     );
 
-    if (error) throw new Error(error.message);
+    if (error) {
+      throw new Error(`RPC Error: ${error.message || 'Unknown error'}`);
+    }
 
-    const transaction = data as any;
+    // RPC functions that return TABLE return an array
+    // Handle null, undefined, or empty responses
+    if (!data) {
+      throw new NotFoundException(
+        `Transaction with ID ${id} not found or access denied`,
+      );
+    }
+
+    // Ensure data is an array - type assertion for TypeScript
+    const dataArray = Array.isArray(data) ? data : [data];
+    const results = dataArray as any[];
+    const transaction = results[0] as any;
 
     if (!transaction || !transaction.transaction_id) {
       throw new NotFoundException(
@@ -68,13 +82,7 @@ export class TransactionsService {
       );
     }
 
-    // Validate ownership
-    if (transaction.organization_id !== user.organizationId) {
-      throw new NotFoundException(
-        `Transaction with ID ${id} not found or access denied`,
-      );
-    }
-
+    // Organization ownership is already validated by the RPC function
     return transaction;
   }
 }

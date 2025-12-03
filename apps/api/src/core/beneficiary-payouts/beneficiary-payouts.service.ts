@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  BadRequestException,
+} from '@nestjs/common';
 import { SupabaseService } from '@/utils/supabase/supabase.service';
 import { CreateBeneficiaryPayoutDto } from './dto/create-beneficiary-payout.dto';
 import { AuthContext } from '@/core/common/decorators/current-user.decorator';
@@ -34,14 +38,30 @@ export class BeneficiaryPayoutsService {
       },
     );
 
-    if (error) throw new Error(error.message);
+    if (error) {
+      throw new BadRequestException(
+        error.message || 'Failed to create beneficiary payout',
+      );
+    }
 
     if (!data || data.length === 0) {
-      throw new Error('Failed to create beneficiary payout');
+      throw new BadRequestException(
+        'Failed to create beneficiary payout: No data returned',
+      );
+    }
+
+    const result = data[0];
+
+    // Check if payout_id is null (indicates an error from the RPC, e.g., insufficient balance)
+    if (!result.payout_id) {
+      throw new BadRequestException(
+        result.message ||
+          'Failed to create beneficiary payout: payout_id is null',
+      );
     }
 
     // Return the initiated beneficiary payout details
-    return this.findOne(data[0].payout_id, user);
+    return this.findOne(result.payout_id, user);
   }
 
   /**
@@ -86,6 +106,11 @@ export class BeneficiaryPayoutsService {
    * Get single beneficiary payout by ID
    */
   async findOne(id: string, user: AuthContext) {
+    // Validate ID is not null or undefined
+    if (!id) {
+      throw new NotFoundException('Beneficiary payout ID is required');
+    }
+
     const { data, error } = await this.supabase
       .getClient()
       .from('beneficiary_payouts')
