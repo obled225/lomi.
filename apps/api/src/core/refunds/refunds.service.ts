@@ -60,6 +60,7 @@ export class RefundsService {
 
   /**
    * List all refunds with filtering
+   * Uses RPC: list_refunds
    */
   async findAll(
     user: AuthContext,
@@ -69,44 +70,25 @@ export class RefundsService {
     limit: number = 50,
     offset: number = 0,
   ) {
-    let query = this.supabase
-      .getClient()
-      .from('refunds')
-      .select(
-        `
-        *,
-        transactions!inner (
-          organization_id,
-          gross_amount,
-          currency_code,
-          customer_id
-        )
-      `,
-        { count: 'exact' },
-      )
-      .eq('transactions.organization_id', user.organizationId)
-      .order('created_at', { ascending: false })
-      .range(offset, offset + limit - 1);
-
-    if (status) {
-      query = query.eq('status', status);
-    }
-
-    if (startDate) {
-      query = query.gte('created_at', startDate);
-    }
-
-    if (endDate) {
-      query = query.lte('created_at', endDate);
-    }
-
-    const { data, error, count } = await query;
+    const { data, error } = await this.supabase.getClient().rpc(
+      'list_refunds' as any,
+      {
+        p_organization_id: user.organizationId,
+        p_status: status || null,
+        p_start_date: startDate || null,
+        p_end_date: endDate || null,
+        p_limit: limit,
+        p_offset: offset,
+      } as any,
+    );
 
     if (error) throw new Error(error.message);
 
+    const refunds = (data as any[]) || [];
+
     return {
-      data: data || [],
-      total: count || 0,
+      data: refunds,
+      total: refunds.length, // RPC doesn't return count, approximate with length
       limit,
       offset,
     };

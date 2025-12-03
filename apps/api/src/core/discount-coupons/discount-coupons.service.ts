@@ -39,6 +39,7 @@ export class DiscountCouponsService {
       {
         p_organization_id: user.organizationId,
         p_coupon_id: id,
+        p_merchant_id: user.merchantId,
       } as any,
     );
 
@@ -137,6 +138,7 @@ export class DiscountCouponsService {
         p_expires_at: createDto.expires_at || null,
         p_scope_type: createDto.scope_type || 'organization_wide',
         p_product_ids: createDto.product_ids || null,
+        p_merchant_id: user.merchantId, // Pass merchant_id for API key authentication
       } as any,
     );
 

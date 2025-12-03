@@ -132,8 +132,74 @@ export class ProductsService {
 
     if (error) throw new Error(error.message);
 
-    // Fetch the created product with all details
-    return this.findOne(productId, user);
+    // Fetch the created product with all details using API function that bypasses RLS
+    const { data: productData, error: fetchError } = await this.supabase
+      .getClient()
+      .rpc(
+        'get_product_api' as any,
+        {
+          p_product_id: productId,
+          p_organization_id: user.organizationId,
+        } as any,
+      );
+
+    if (fetchError || !productData) {
+      // Fallback to findOne if API function fails
+      return this.findOne(productId, user);
+    }
+
+    const productArray = Array.isArray(productData)
+      ? productData
+      : [productData];
+    if (productArray.length === 0) {
+      return this.findOne(productId, user);
+    }
+
+    const product = productArray[0] as any;
+
+    // Get associated prices using RPC function that bypasses RLS
+    const { data: pricesData, error: pricesError } = await this.supabase.rpc(
+      'get_product_prices_api',
+      {
+        p_product_id: productId,
+        p_organization_id: user.organizationId,
+      },
+    );
+
+    const prices = pricesError
+      ? []
+      : Array.isArray(pricesData)
+        ? pricesData
+        : [pricesData];
+
+    if (pricesError) {
+      console.error('Error fetching prices:', pricesError);
+    }
+
+    // Get associated fees using RPC function that bypasses RLS
+    const { data: feesData, error: feesError } = await this.supabase.rpc(
+      'get_product_fees_api',
+      {
+        p_product_id: productId,
+        p_organization_id: user.organizationId,
+      },
+    );
+
+    const fees = feesError
+      ? []
+      : Array.isArray(feesData)
+        ? feesData
+        : [feesData];
+
+    if (feesError) {
+      console.error('Error fetching fees:', feesError);
+    }
+
+    return {
+      ...product,
+      prices: prices || [],
+      fees: fees || [],
+    };
   }
 
   /**

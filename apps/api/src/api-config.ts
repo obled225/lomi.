@@ -291,6 +291,9 @@ export function isEnumExposed(enumName: string): boolean {
 export const EXPOSED_FUNCTIONS = [
   'fetch_balance_breakdown',
   'fetch_account_balance',
+  'list_accounts',
+  'get_account',
+  'check_merchant_available_balance',
   'verify_api_key',
   'create_checkout_session',
   'list_checkout_sessions',
@@ -305,6 +308,8 @@ export const EXPOSED_FUNCTIONS = [
   'delete_customer',
   'fetch_customer_transactions',
   'create_payment_link',
+  'list_payment_links',
+  'list_payment_requests',
   'initiate_withdrawal',
   'fetch_payouts',
   'fetch_products',
@@ -312,7 +317,17 @@ export const EXPOSED_FUNCTIONS = [
   'create_price',
   'set_default_price',
   'create_refund',
+  'list_refunds',
+  'list_organizations',
+  'fetch_organization_details',
   'get_webhook_delivery_logs',
+  'get_product_api',
+  'get_payment_link_api',
+  'create_payment_request_api',
+  'create_discount_coupon',
+  'get_product_prices_api',
+  'get_product_fees_api',
+  'get_coupon_details_for_management',
 ];
 
 /**

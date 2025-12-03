@@ -8,7 +8,6 @@ import {
   UseGuards,
   ParseIntPipe,
   DefaultValuePipe,
-  ParseBoolPipe,
 } from '@nestjs/common';
 import {
   ApiTags,
@@ -73,11 +72,16 @@ export class ProductsController {
   })
   findAll(
     @CurrentUser() user: AuthContext,
-    @Query('isActive', new DefaultValuePipe(undefined), ParseBoolPipe)
-    isActive?: boolean,
+    @Query('isActive') isActiveStr?: string,
     @Query('limit', new DefaultValuePipe(15), ParseIntPipe) limit?: number,
     @Query('offset', new DefaultValuePipe(0), ParseIntPipe) offset?: number,
   ) {
+    const isActive =
+      isActiveStr === 'true'
+        ? true
+        : isActiveStr === 'false'
+          ? false
+          : undefined;
     return this.productsService.findAll(user, isActive, limit, offset);
   }
 

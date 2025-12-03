@@ -8,7 +8,6 @@ import {
   Query,
   ParseIntPipe,
   DefaultValuePipe,
-  ParseBoolPipe,
 } from '@nestjs/common';
 import {
   ApiTags,
@@ -104,11 +103,16 @@ export class PaymentLinksController {
   findAll(
     @CurrentUser() user: AuthContext,
     @Query('linkType') linkType?: string,
-    @Query('isActive', new DefaultValuePipe(undefined), ParseBoolPipe)
-    isActive?: boolean,
+    @Query('isActive') isActiveStr?: string,
     @Query('limit', new DefaultValuePipe(20), ParseIntPipe) limit?: number,
     @Query('offset', new DefaultValuePipe(0), ParseIntPipe) offset?: number,
   ) {
+    const isActive =
+      isActiveStr === 'true'
+        ? true
+        : isActiveStr === 'false'
+          ? false
+          : undefined;
     return this.service.findAll(user, linkType, isActive, limit, offset);
   }
 

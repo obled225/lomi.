@@ -6,7 +6,7 @@
  * Generated from database.types.ts - only includes:
  * - Exposed enums (34 enums)
  * - Exposed tables (15 tables)
- * - Exposed functions (24 functions)
+ * - Exposed functions (39 functions)
  *
  * DO NOT EDIT MANUALLY - This file is auto-generated
  * Run: npm run generate:api-types
@@ -1631,6 +1631,53 @@ export type Database = {
           last_updated: string;
         }[];
       };
+      list_accounts: {
+        Args: {
+          p_limit?: number;
+          p_offset?: number;
+          p_organization_id: string;
+        };
+        Returns: {
+          account_id: string;
+          balance: number;
+          created_at: string;
+          currency_code: APIEnums['currency_code'];
+          is_spi_account: boolean;
+          organization_id: string;
+          spi_account_balance: number;
+          spi_account_balance_sync_error: string;
+          spi_account_balance_synced_at: string;
+          spi_account_number: string;
+          spi_account_status: APIEnums['spi_account_status'];
+          spi_account_type: APIEnums['spi_account_type'];
+          updated_at: string;
+        }[];
+      };
+      get_account: {
+        Args: { p_account_id: string; p_organization_id: string };
+        Returns: {
+          account_id: string;
+          balance: number;
+          created_at: string;
+          currency_code: APIEnums['currency_code'];
+          is_spi_account: boolean;
+          organization_id: string;
+          spi_account_balance: number;
+          spi_account_balance_sync_error: string;
+          spi_account_balance_synced_at: string;
+          spi_account_number: string;
+          spi_account_status: APIEnums['spi_account_status'];
+          spi_account_type: APIEnums['spi_account_type'];
+          updated_at: string;
+        }[];
+      };
+      check_merchant_available_balance: {
+        Args: {
+          p_currency_code: APIEnums['currency_code'];
+          p_merchant_id: string;
+        };
+        Returns: number;
+      };
       verify_api_key: {
         Args: {
           p_api_key: string;
@@ -1921,6 +1968,66 @@ export type Database = {
         };
         Returns: string;
       };
+      list_payment_links: {
+        Args: {
+          p_is_active?: boolean | null;
+          p_limit?: number | null;
+          p_link_type?: string | null;
+          p_offset?: number | null;
+          p_organization_id: string;
+        };
+        Returns: {
+          allow_coupon_code: boolean;
+          allow_quantity: boolean;
+          amount: number;
+          cancel_url: string;
+          created_at: string;
+          created_by: string;
+          currency_code: APIEnums['currency_code'];
+          description: string;
+          environment: string;
+          expires_at: string;
+          is_active: boolean;
+          link_id: string;
+          link_type: APIEnums['link_type'];
+          metadata: Json;
+          organization_id: string;
+          price_id: string;
+          product_id: string;
+          quantity: number;
+          require_billing_address: boolean;
+          success_url: string;
+          title: string;
+          updated_at: string;
+          url: string;
+        }[];
+      };
+      list_payment_requests: {
+        Args: {
+          p_customer_id?: string | null;
+          p_limit?: number | null;
+          p_offset?: number | null;
+          p_organization_id: string;
+          p_status?: string | null;
+        };
+        Returns: {
+          amount: number;
+          created_at: string;
+          created_by: string;
+          currency_code: APIEnums['currency_code'];
+          customer_id: string;
+          description: string;
+          environment: string;
+          expiry_date: string;
+          metadata: Json;
+          organization_id: string;
+          payment_link: string;
+          payment_reference: string;
+          request_id: string;
+          status: string;
+          updated_at: string;
+        }[];
+      };
       initiate_withdrawal: {
         Args: {
           p_amount: number;
@@ -2039,6 +2146,82 @@ export type Database = {
         };
         Returns: string;
       };
+      list_refunds: {
+        Args: {
+          p_end_date?: string | null;
+          p_limit?: number | null;
+          p_offset?: number | null;
+          p_organization_id: string;
+          p_start_date?: string | null;
+          p_status?: APIEnums['refund_status'] | null;
+        };
+        Returns: {
+          amount: number;
+          created_at: string;
+          fee_amount: number;
+          metadata: Json;
+          reason: string;
+          refund_id: string;
+          refunded_amount: number;
+          status: APIEnums['refund_status'];
+          transaction_id: string;
+          updated_at: string;
+        }[];
+      };
+      list_organizations: {
+        Args: { p_organization_id: string };
+        Returns: {
+          arr: number;
+          created_at: string;
+          default_currency: APIEnums['currency_code'];
+          email: string;
+          employee_number: string;
+          industry: string;
+          is_starter_business: boolean;
+          logo_url: string;
+          mrr: number;
+          name: string;
+          organization_id: string;
+          phone_number: string;
+          slug: string;
+          status: string;
+          storefront_enabled: boolean;
+          total_customers: number;
+          total_merchants: number;
+          total_revenue: number;
+          total_transactions: number;
+          updated_at: string;
+          verification_status: string;
+          website_url: string;
+        }[];
+      };
+      fetch_organization_details: {
+        Args: { p_merchant_id: string; p_organization_id?: string };
+        Returns: {
+          arr: number;
+          city: string;
+          country: string;
+          default_currency: APIEnums['currency_code'];
+          district: string;
+          email: string;
+          logo_url: string;
+          mrr: number;
+          name: string;
+          organization_id: string;
+          pin_code: string;
+          postal_code: string;
+          region: string;
+          storefront_enabled: boolean;
+          street: string;
+          total_customers: number;
+          total_merchants: number;
+          total_revenue: number;
+          total_transactions: number;
+          updated_at: string;
+          verification_status: APIEnums['organization_verification_status'];
+          website_url: string;
+        }[];
+      };
       get_webhook_delivery_logs: {
         Args: {
           p_failed_only?: boolean | null;
@@ -2063,6 +2246,155 @@ export type Database = {
           success: boolean;
           user_agent: string;
           webhook_id: string;
+        }[];
+      };
+      get_product_api: {
+        Args: { p_organization_id: string; p_product_id: string };
+        Returns: {
+          created_at: string;
+          created_by: string;
+          description: string;
+          display_on_storefront: boolean;
+          image_url: string;
+          is_active: boolean;
+          metadata: Json;
+          name: string;
+          organization_id: string;
+          product_id: string;
+          product_type: APIEnums['product_type'];
+          updated_at: string;
+        }[];
+      };
+      get_payment_link_api: {
+        Args: { p_link_id: string; p_organization_id: string };
+        Returns: {
+          allow_coupon_code: boolean;
+          allow_quantity: boolean;
+          amount: number;
+          cancel_url: string;
+          created_at: string;
+          created_by: string;
+          currency_code: APIEnums['currency_code'];
+          description: string;
+          environment: string;
+          expires_at: string;
+          is_active: boolean;
+          link_id: string;
+          link_type: APIEnums['link_type'];
+          metadata: Json;
+          organization_id: string;
+          price_id: string;
+          product_id: string;
+          quantity: number;
+          require_billing_address: boolean;
+          success_url: string;
+          title: string;
+          updated_at: string;
+          url: string;
+        }[];
+      };
+      create_payment_request_api: {
+        Args: {
+          p_amount: number;
+          p_created_by: string;
+          p_currency_code: APIEnums['currency_code'];
+          p_customer_id: string;
+          p_description: string;
+          p_environment?: string | null;
+          p_expiry_date: string;
+          p_organization_id: string;
+          p_payment_reference: string;
+        };
+        Returns: {
+          amount: number;
+          created_at: string;
+          created_by: string;
+          currency_code: APIEnums['currency_code'];
+          customer_id: string;
+          description: string;
+          environment: string;
+          expiry_date: string;
+          organization_id: string;
+          payment_link: string;
+          payment_reference: string;
+          request_id: string;
+          status: APIEnums['transaction_status'];
+          updated_at: string;
+        }[];
+      };
+      create_discount_coupon: {
+        Args: {
+          p_code: string;
+          p_customer_type?: APIEnums['customer_type'] | null;
+          p_description?: string | null;
+          p_discount_fixed_amount?: number | null;
+          p_discount_percentage?: number | null;
+          p_discount_type?: APIEnums['discount_type'] | null;
+          p_expires_at?: string | null;
+          p_is_active?: boolean | null;
+          p_max_quantity_per_use?: number | null;
+          p_max_uses?: number | null;
+          p_merchant_id?: string | null;
+          p_organization_id: string;
+          p_product_ids?: string[] | null;
+          p_scope_type?: string | null;
+          p_usage_frequency_limit?: APIEnums['usage_frequency'] | null;
+          p_usage_limit_value?: number | null;
+          p_valid_from?: string | null;
+        };
+        Returns: string;
+      };
+      get_product_prices_api: {
+        Args: { p_organization_id: string; p_product_id: string };
+        Returns: {
+          amount: number;
+          billing_interval: APIEnums['billing_interval'];
+          created_at: string;
+          currency_code: APIEnums['currency_code'];
+          is_default: boolean;
+          organization_id: string;
+          price_id: string;
+          product_id: string;
+          updated_at: string;
+        }[];
+      };
+      get_product_fees_api: {
+        Args: { p_organization_id: string; p_product_id: string };
+        Returns: {
+          fee_fixed_amount: number;
+          fee_is_enabled: boolean;
+          fee_name: string;
+          fee_percentage: number;
+          fee_type_id: string;
+        }[];
+      };
+      get_coupon_details_for_management: {
+        Args: {
+          p_coupon_id?: string | null;
+          p_merchant_id?: string | null;
+          p_organization_id: string;
+        };
+        Returns: {
+          code: string;
+          coupon_id: string;
+          created_at: string;
+          current_uses: number;
+          customer_type: APIEnums['customer_type'];
+          description: string;
+          discount_fixed_amount: number;
+          discount_percentage: number;
+          discount_type: APIEnums['discount_type'];
+          expires_at: string;
+          is_active: boolean;
+          max_quantity_per_use: number;
+          max_uses: number;
+          plan_links: Json;
+          product_links: Json;
+          scope_type: string;
+          updated_at: string;
+          usage_frequency_limit: APIEnums['usage_frequency'];
+          usage_limit_value: number;
+          valid_from: string;
         }[];
       };
     };

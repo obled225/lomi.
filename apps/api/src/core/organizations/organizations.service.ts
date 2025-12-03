@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  InternalServerErrorException,
+} from '@nestjs/common';
 import { SupabaseService } from '@/utils/supabase/supabase.service';
 import { AuthContext } from '@/core/common/decorators/current-user.decorator';
 import { OrganizationMetricsResponseDto } from './dto/organization-metrics-response.dto';
@@ -9,18 +13,24 @@ export class OrganizationsService {
 
   /**
    * Get organization details for the current merchant
+   * Uses RPC: list_organizations
    * Note: Merchants can only access their own organization
    */
   async findAll(user: AuthContext) {
-    const { data, error } = await this.supabase
-      .getClient()
-      .from('organizations')
-      .select('*')
-      .eq('organization_id', user.organizationId)
-      .eq('is_deleted', false);
+    const { data, error } = await this.supabase.getClient().rpc(
+      'list_organizations' as any,
+      {
+        p_organization_id: user.organizationId,
+      } as any,
+    );
 
-    if (error) throw new Error(error.message);
-    return data;
+    if (error) {
+      console.error('list_organizations RPC error:', error);
+      throw new InternalServerErrorException(
+        `Failed to fetch organizations: ${error.message}`,
+      );
+    }
+    return (data as any[]) || [];
   }
 
   /**
@@ -68,14 +78,16 @@ export class OrganizationsService {
 
     if (error) throw new Error(error.message);
 
-    const result = data as any;
+    const results = (data as any[]) || [];
 
     // Check if organization exists
-    if (!result || !result.organization_id) {
+    if (results.length === 0) {
       throw new NotFoundException(
         'Organization not found. Please contact support if this error persists.',
       );
     }
+
+    const result = results[0];
 
     // Ensure merchant is accessing their own organization
     if (result.organization_id !== user.organizationId) {

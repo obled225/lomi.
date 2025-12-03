@@ -1,4 +1,9 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  InternalServerErrorException,
+  BadRequestException,
+} from '@nestjs/common';
 import { SupabaseService } from '@/utils/supabase/supabase.service';
 import { CreatePaymentRequestDto } from './dto/create-payment-request.dto';
 import { AuthContext } from '@/core/common/decorators/current-user.decorator';
@@ -9,32 +14,41 @@ export class PaymentRequestsService {
 
   /**
    * Create a payment request
+   * Uses RPC: create_payment_request_api
    */
   async create(createDto: CreatePaymentRequestDto, user: AuthContext) {
-    const { data, error } = await this.supabase
-      .getClient()
-      .from('payment_requests')
-      .insert({
-        organization_id: user.organizationId,
-        customer_id: createDto.customer_id || null,
-        amount: createDto.amount,
-        currency_code: createDto.currency_code,
-        description: createDto.description || null,
-        status: 'pending',
-        expiry_date: createDto.expiry_date,
-        payment_reference: createDto.payment_reference || null,
-        created_by: user.merchantId,
-        environment: 'live',
-      } as any)
-      .select()
-      .single();
+    const { data, error } = await this.supabase.getClient().rpc(
+      'create_payment_request_api' as any,
+      {
+        p_organization_id: user.organizationId,
+        p_customer_id: createDto.customer_id || null,
+        p_amount: createDto.amount,
+        p_currency_code: createDto.currency_code,
+        p_description: createDto.description || null,
+        p_expiry_date: createDto.expiry_date,
+        p_payment_reference: createDto.payment_reference || null,
+        p_created_by: user.merchantId,
+        p_environment: user.environment || 'live',
+      } as any,
+    );
 
     if (error) throw new Error(error.message);
-    return data;
+
+    if (!data) {
+      throw new Error('Failed to create payment request');
+    }
+
+    const dataArray = Array.isArray(data) ? data : [data];
+    if (dataArray.length === 0) {
+      throw new Error('Failed to create payment request');
+    }
+
+    return dataArray[0];
   }
 
   /**
    * List all payment requests with filtering
+   * Uses RPC: list_payment_requests
    */
   async findAll(
     user: AuthContext,
@@ -43,29 +57,43 @@ export class PaymentRequestsService {
     limit: number = 20,
     offset: number = 0,
   ) {
-    let query = this.supabase
-      .getClient()
-      .from('payment_requests')
-      .select('*', { count: 'exact' })
-      .eq('organization_id', user.organizationId)
-      .order('created_at', { ascending: false })
-      .range(offset, offset + limit - 1);
-
-    if (status) {
-      query = query.eq('status', status);
-    }
-
+    // Validate customerId is a valid UUID if provided
+    let validatedCustomerId: string | null = null;
     if (customerId) {
-      query = query.eq('customer_id', customerId);
+      // Basic UUID validation
+      const uuidRegex =
+        /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+      if (!uuidRegex.test(customerId)) {
+        throw new BadRequestException(
+          `Invalid customer ID format: ${customerId}`,
+        );
+      }
+      validatedCustomerId = customerId;
     }
 
-    const { data, error, count } = await query;
+    const { data, error } = await this.supabase.getClient().rpc(
+      'list_payment_requests' as any,
+      {
+        p_organization_id: user.organizationId,
+        p_status: status || null,
+        p_customer_id: validatedCustomerId,
+        p_limit: limit,
+        p_offset: offset,
+      } as any,
+    );
 
-    if (error) throw new Error(error.message);
+    if (error) {
+      console.error('list_payment_requests RPC error:', error);
+      throw new InternalServerErrorException(
+        `Failed to fetch payment requests: ${error.message}`,
+      );
+    }
+
+    const requests = (data as any[]) || [];
 
     return {
-      data: data || [],
-      total: count || 0,
+      data: requests,
+      total: requests.length, // RPC doesn't return count, approximate with length
       limit,
       offset,
     };

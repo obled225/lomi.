@@ -38,12 +38,33 @@ export class PaymentLinksService {
       throw new Error('Failed to create payment link');
     }
 
-    // Fetch the created link
-    return this.findOne(data, user);
+    // Fetch the created link using API function that bypasses RLS
+    const { data: linkData, error: fetchError } = await this.supabase
+      .getClient()
+      .rpc(
+        'get_payment_link_api' as any,
+        {
+          p_link_id: data,
+          p_organization_id: user.organizationId,
+        } as any,
+      );
+
+    if (fetchError || !linkData) {
+      // Fallback to findOne if API function fails
+      return this.findOne(data, user);
+    }
+
+    const linkArray = Array.isArray(linkData) ? linkData : [linkData];
+    if (linkArray.length === 0) {
+      return this.findOne(data, user);
+    }
+
+    return linkArray[0];
   }
 
   /**
    * List all payment links with filtering
+   * Uses RPC: list_payment_links
    */
   async findAll(
     user: AuthContext,
@@ -52,29 +73,24 @@ export class PaymentLinksService {
     limit: number = 20,
     offset: number = 0,
   ) {
-    let query = this.supabase
-      .getClient()
-      .from('payment_links')
-      .select('*', { count: 'exact' })
-      .eq('organization_id', user.organizationId)
-      .order('created_at', { ascending: false })
-      .range(offset, offset + limit - 1);
-
-    if (linkType) {
-      query = query.eq('link_type', linkType);
-    }
-
-    if (isActive !== undefined) {
-      query = query.eq('is_active', isActive);
-    }
-
-    const { data, error, count } = await query;
+    const { data, error } = await this.supabase.getClient().rpc(
+      'list_payment_links' as any,
+      {
+        p_organization_id: user.organizationId,
+        p_link_type: linkType || null,
+        p_is_active: isActive !== undefined ? isActive : null,
+        p_limit: limit,
+        p_offset: offset,
+      } as any,
+    );
 
     if (error) throw new Error(error.message);
 
+    const links = (data as any[]) || [];
+
     return {
-      data: data || [],
-      total: count || 0,
+      data: links,
+      total: links.length, // RPC doesn't return count, approximate with length
       limit,
       offset,
     };

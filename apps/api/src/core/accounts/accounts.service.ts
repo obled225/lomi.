@@ -11,39 +11,43 @@ export class AccountsService {
 
   /**
    * List all accounts for the merchant's organization
-   * Uses direct table query as no RPC function exists for this
+   * Uses RPC: list_accounts
    */
   async findAll(user: AuthContext) {
-    const { data, error } = await this.supabase
-      .getClient()
-      .from('accounts')
-      .select('*')
-      .eq('organization_id', user.organizationId);
+    const { data, error } = await this.supabase.getClient().rpc(
+      'list_accounts' as any,
+      {
+        p_organization_id: user.organizationId,
+        p_limit: 100,
+        p_offset: 0,
+      } as any,
+    );
 
     if (error) throw new Error(error.message);
-    return data;
+    return data || [];
   }
 
   /**
    * Get a single account by ID
-   * Uses direct table query as no RPC function exists for this
+   * Uses RPC: get_account
    */
   async findOne(id: string, user: AuthContext) {
-    const { data, error } = await this.supabase
-      .getClient()
-      .from('accounts')
-      .select('*')
-      .eq('account_id', id)
-      .eq('organization_id', user.organizationId)
-      .single();
+    const { data, error } = await this.supabase.getClient().rpc(
+      'get_account' as any,
+      {
+        p_account_id: id,
+        p_organization_id: user.organizationId,
+      } as any,
+    );
 
-    if (error) {
-      if (error.code === 'PGRST116') {
-        throw new NotFoundException(`Account with ID ${id} not found`);
-      }
-      throw new Error(error.message);
+    if (error) throw new Error(error.message);
+
+    const accounts = (data as any[]) || [];
+    if (accounts.length === 0) {
+      throw new NotFoundException(`Account with ID ${id} not found`);
     }
-    return data;
+
+    return accounts[0];
   }
 
   /**
