@@ -1,0 +1,82 @@
+import {
+  Controller,
+  Post,
+  Headers,
+  Req,
+  HttpCode,
+  HttpStatus,
+  Logger,
+} from '@nestjs/common';
+import type { RawBodyRequest } from '@nestjs/common';
+import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { StripeWebhookService } from './stripe-webhook.service';
+import type { Request } from 'express';
+
+@ApiTags('Webhooks - Providers')
+@Controller('webhooks/stripe')
+export class StripeWebhookController {
+  private readonly logger = new Logger(StripeWebhookController.name);
+
+  constructor(private readonly stripeWebhookService: StripeWebhookService) {}
+
+  @Post()
+  @HttpCode(HttpStatus.OK)
+  @ApiOperation({
+    summary: 'Receive Stripe webhook events',
+    description:
+      'Endpoint for Stripe to send payment notifications. Verifies signature and processes events.',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Webhook received and processed successfully',
+  })
+  @ApiResponse({
+    status: 400,
+    description: 'Invalid webhook signature',
+  })
+  @ApiResponse({
+    status: 500,
+    description: 'Internal server error processing webhook',
+  })
+  async handleWebhook(
+    @Headers() headers: Record<string, string>,
+    @Req() request: RawBodyRequest<Request>,
+  ) {
+    this.logger.log('Received Stripe webhook request');
+
+    try {
+      // Get raw body for signature verification (required by Stripe)
+      const rawBody = (request as any).rawBody;
+
+      if (!rawBody) {
+        this.logger.error('No raw body found in request');
+        throw new Error('Raw body required for signature verification');
+      }
+
+      // Get signature from headers
+      const signature = headers['stripe-signature'];
+
+      if (!signature) {
+        this.logger.error('Missing Stripe signature header');
+        throw new Error('Stripe signature required');
+      }
+
+      // Process the webhook
+      const result = await this.stripeWebhookService.handleWebhook(
+        signature,
+        rawBody,
+      );
+
+      this.logger.log(`Webhook processed successfully: ${result.eventType}`);
+
+      return { received: true, ...result };
+    } catch (error) {
+      this.logger.error(
+        `Webhook processing error: ${error.message}`,
+        error.stack,
+      );
+      throw error;
+    }
+  }
+}
+

@@ -1,0 +1,530 @@
+import {
+  Injectable,
+  UnauthorizedException,
+  Logger,
+  NotFoundException,
+} from '@nestjs/common';
+import { SupabaseService } from '@/utils/supabase/supabase.service';
+import { WebhookSenderService } from '../../webhook-sender.service';
+import { WebhookEvent } from '@/utils/types/api';
+import * as crypto from 'crypto';
+
+@Injectable()
+export class WaveWebhookService {
+  private readonly logger = new Logger(WaveWebhookService.name);
+  private readonly webhookSecret = process.env.WAVE_WEBHOOK_SECRET;
+
+  constructor(
+    private readonly supabase: SupabaseService,
+    private readonly webhookSender: WebhookSenderService,
+  ) {}
+
+  /**
+   * Main webhook handler
+   */
+  async handleWebhook(
+    headers: Record<string, string>,
+    body: any,
+    rawBody: string,
+  ) {
+    // Verify webhook signature
+    if (!this.verifyWebhook(headers, body, rawBody)) {
+      throw new UnauthorizedException('Invalid webhook signature');
+    }
+
+    const event = body;
+    this.logger.log(`Processing Wave webhook: ${event.type}`);
+    this.logger.debug(`Event data: ${JSON.stringify(event, null, 2)}`);
+
+    // Handle different event types
+    switch (event.type) {
+      case 'checkout.session.completed':
+        return await this.handleCheckoutCompleted(event.data);
+
+      case 'checkout.session.payment_failed':
+        return await this.handlePaymentFailed(event.data);
+
+      case 'checkout.session.refunded':
+        return await this.handleRefund(event.data);
+
+      case 'checkout.session.expired':
+        return await this.handleExpired(event.data);
+
+      case 'test.test_event':
+        this.logger.log('Received test event from Wave');
+        return { message: 'Test event received' };
+
+      default:
+        this.logger.warn(`Unsupported event type: ${event.type}`);
+        return { message: `Event type ${event.type} not handled` };
+    }
+  }
+
+  /**
+   * Verify webhook signature using Wave's signature verification
+   */
+  private verifyWebhook(
+    headers: Record<string, string>,
+    body: any,
+    rawBody: string,
+  ): boolean {
+    // Log all headers for debugging (mask sensitive values)
+    this.logger.debug('Webhook headers received');
+    for (const [key, value] of Object.entries(headers)) {
+      const maskedValue =
+        key.toLowerCase().includes('authorization') ||
+        key.toLowerCase().includes('secret') ||
+        key.toLowerCase().includes('signature')
+          ? `${value?.substring(0, 10)}...`
+          : value;
+      this.logger.debug(`  ${key}: ${maskedValue}`);
+    }
+
+    // In dev mode without webhook secret, accept all requests
+    if (!this.webhookSecret) {
+      this.logger.warn(
+        'Wave webhook secret not configured - ACCEPTING ALL REQUESTS IN DEV MODE',
+      );
+      return process.env.NODE_ENV !== 'production';
+    }
+
+    // Try Wave-Signature header first (new method)
+    const waveSignature =
+      headers['wave-signature'] || headers['Wave-Signature'];
+
+    if (waveSignature) {
+      this.logger.debug('Found Wave-Signature header, verifying signature');
+      try {
+        // Parse signature header: t=timestamp,v1=signature
+        const [timeStamp, signature] = waveSignature.split(',');
+        const eventTime = timeStamp.split('=')[1];
+        const eventSignature = signature.split('=')[1];
+
+        // Verify timestamp is recent (within 5 minutes)
+        const now = Math.floor(Date.now() / 1000);
+        const fiveMinutesAgo = now - 5 * 60;
+
+        if (parseInt(eventTime, 10) < fiveMinutesAgo) {
+          this.logger.warn('Wave signature timestamp is too old');
+          return process.env.NODE_ENV !== 'production';
+        }
+
+        // Compute expected signature
+        const bodyString = typeof body === 'string' ? body : rawBody;
+        const expectedSignature = crypto
+          .createHmac('sha256', this.webhookSecret)
+          .update(`${timeStamp}.${bodyString}`)
+          .digest('hex');
+
+        const signatureMatches = crypto.timingSafeEqual(
+          Buffer.from(eventSignature),
+          Buffer.from(expectedSignature),
+        );
+
+        if (signatureMatches) {
+          this.logger.log('Wave signature verification successful');
+          return true;
+        } else {
+          this.logger.warn(
+            'Wave signature verification failed - ACCEPTING IN DEV MODE',
+          );
+          return process.env.NODE_ENV !== 'production';
+        }
+      } catch (error) {
+        this.logger.error('Error verifying Wave signature:', error);
+        return process.env.NODE_ENV !== 'production';
+      }
+    }
+
+    // Fallback to Authorization header (old method)
+    const authHeader =
+      headers.authorization ||
+      headers.Authorization ||
+      headers['wave-authorization'] ||
+      headers['Wave-Authorization'];
+
+    if (!authHeader) {
+      this.logger.warn('Missing authorization headers - ACCEPTING IN DEV MODE');
+      return process.env.NODE_ENV !== 'production';
+    }
+
+    try {
+      // Extract secret from "Bearer {secret}" format
+      let providedSecret = authHeader;
+
+      if (authHeader.toLowerCase().startsWith('bearer ')) {
+        const parts = authHeader.split(' ');
+        if (parts.length !== 2) {
+          this.logger.warn('Invalid Authorization header format');
+          return process.env.NODE_ENV !== 'production';
+        }
+        providedSecret = parts[1];
+      }
+
+      this.logger.debug(
+        `Authorization check with secret ending in: ${providedSecret.slice(-4)}`,
+      );
+
+      return providedSecret === this.webhookSecret;
+    } catch (error) {
+      this.logger.error('Error verifying Authorization header:', error);
+      return process.env.NODE_ENV !== 'production';
+    }
+  }
+
+  /**
+   * Handle checkout.session.completed event
+   */
+  private async handleCheckoutCompleted(data: any) {
+    const waveTxnId = data.transaction_id;
+    this.logger.log('Processing completed checkout session:', {
+      wave_session_id: data.id,
+      transaction_id: waveTxnId,
+      amount: data.amount,
+      currency: data.currency,
+      checkout_status: data.checkout_status,
+      payment_status: data.payment_status,
+    });
+
+    // Find transaction using RPC (untyped - use getClient with any cast)
+    const { data: transactions, error: txnError } = await (this.supabase
+      .getClient() as any)
+      .rpc('get_wave_transaction_by_checkout_id', {
+        p_provider_checkout_id: data.id,
+      });
+
+    if (txnError) {
+      this.logger.error('Error finding transaction:', txnError);
+      throw new Error('Error finding transaction');
+    }
+
+    const transactionsArray = transactions as any;
+
+    if (!transactionsArray || !Array.isArray(transactionsArray) || transactionsArray.length === 0) {
+      this.logger.warn(`No transaction found with provider_checkout_id: ${data.id}`);
+
+      // Try checkout_sessions table as fallback
+      const { data: checkoutSession, error: sessionError } = await (this.supabase
+        .getClient() as any)
+        .rpc('get_checkout_session_by_wave_id', {
+          p_wave_session_id: data.id,
+        });
+
+      const sessionData = checkoutSession as any;
+
+      if (sessionError || !sessionData) {
+        this.logger.error('Error finding checkout session:', sessionError);
+        throw new NotFoundException('Transaction not found');
+      }
+
+      // Update checkout session status
+      await this.updateTransactionStatus(
+        sessionData.transaction_id,
+        'completed',
+        {
+          wave_transaction_id: waveTxnId,
+          wave_payment_status: 'succeeded',
+          wave_session: {
+            id: data.id,
+            checkout_status: data.checkout_status,
+            payment_status: data.payment_status,
+            transaction_id: waveTxnId,
+            when_created: data.when_created,
+            when_expires: data.when_expires,
+            when_completed: data.when_completed,
+          },
+        },
+      );
+
+      // Update balances
+      await this.updateBalances(sessionData.transaction_id);
+
+      // Trigger merchant webhooks
+      await this.triggerMerchantWebhook(
+        sessionData.transaction_id,
+        sessionData.organization_id,
+        'PAYMENT_SUCCEEDED',
+      );
+
+      return { transaction_id: sessionData.transaction_id };
+    }
+
+    // Update transaction status
+    const transaction = transactionsArray[0];
+    await this.updateTransactionStatus(transaction.transaction_id, 'completed', {
+      wave_session_id: data.id,
+      wave_transaction_id: waveTxnId,
+      wave_session: {
+        id: data.id,
+        checkout_status: data.checkout_status,
+        payment_status: data.payment_status,
+        transaction_id: waveTxnId,
+        when_created: data.when_created,
+        when_expires: data.when_expires,
+        when_completed: data.when_completed,
+      },
+    });
+
+    // Update balances
+    await this.updateBalances(transaction.transaction_id);
+
+    // Trigger merchant webhooks
+    await this.triggerMerchantWebhook(
+      transaction.transaction_id,
+      transaction.organization_id,
+      'PAYMENT_SUCCEEDED',
+    );
+
+    return { transaction_id: transaction.transaction_id };
+  }
+
+  /**
+   * Handle checkout.session.payment_failed event
+   */
+  private async handlePaymentFailed(data: any) {
+    this.logger.log('Processing failed checkout session:', {
+      wave_session_id: data.id,
+      error: data.last_payment_error,
+    });
+
+    // Find transaction using RPC (untyped - use getClient with any cast)
+    const { data: transactions, error: txnError } = await (this.supabase
+      .getClient() as any)
+      .rpc('get_wave_transaction_by_checkout_id', {
+        p_provider_checkout_id: data.id,
+      });
+
+    const transactionsArray = transactions as any;
+
+    if (txnError || !transactionsArray || !Array.isArray(transactionsArray) || transactionsArray.length === 0) {
+      // Try checkout_sessions table as fallback
+      const { data: checkoutSession, error: sessionError } = await (this.supabase
+        .getClient() as any)
+        .rpc('get_checkout_session_by_wave_id', {
+          p_wave_session_id: data.id,
+        });
+
+      const sessionData = checkoutSession as any;
+
+      if (sessionError || !sessionData) {
+        this.logger.error('Error finding checkout session:', sessionError);
+        throw new NotFoundException('Transaction not found');
+      }
+
+      await this.updateTransactionStatus(
+        sessionData.transaction_id,
+        'failed',
+        {
+          wave_payment_status: 'failed',
+          wave_payment_error: data.last_payment_error,
+          wave_session: {
+            id: data.id,
+            checkout_status: data.checkout_status,
+            payment_status: data.payment_status,
+            last_payment_error: data.last_payment_error,
+            when_created: data.when_created,
+            when_expires: data.when_expires,
+          },
+        },
+      );
+
+      await this.triggerMerchantWebhook(
+        sessionData.transaction_id,
+        sessionData.organization_id,
+        'PAYMENT_FAILED',
+      );
+
+      return { transaction_id: sessionData.transaction_id };
+    }
+
+    const transaction = transactionsArray[0];
+    await this.updateTransactionStatus(transaction.transaction_id, 'failed', {
+      wave_session_id: data.id,
+      wave_payment_error: data.last_payment_error,
+      wave_session: {
+        id: data.id,
+        checkout_status: data.checkout_status,
+        payment_status: data.payment_status,
+        last_payment_error: data.last_payment_error,
+        when_created: data.when_created,
+        when_expires: data.when_expires,
+      },
+    });
+
+    await this.triggerMerchantWebhook(
+      transaction.transaction_id,
+      transaction.organization_id,
+      'PAYMENT_FAILED',
+    );
+
+    return { transaction_id: transaction.transaction_id };
+  }
+
+  /**
+   * Handle checkout.session.refunded event
+   */
+  private async handleRefund(data: any) {
+    this.logger.log('Processing refunded checkout session:', {
+      wave_session_id: data.id,
+      transaction_id: data.transaction_id,
+    });
+
+    const { data: transactions, error: txnError } = await (this.supabase
+      .getClient() as any)
+      .rpc('get_wave_transaction_by_checkout_id', {
+        p_provider_checkout_id: data.id,
+      });
+
+    const transactionsArray = transactions as any;
+
+    if (txnError || !transactionsArray || !Array.isArray(transactionsArray) || transactionsArray.length === 0) {
+      this.logger.error('Transaction not found for refund');
+      throw new NotFoundException('Transaction not found for refund');
+    }
+
+    const transaction = transactionsArray[0];
+    await this.updateTransactionStatus(transaction.transaction_id, 'refunded', {
+      wave_session_id: data.id,
+      wave_transaction_id: data.transaction_id,
+      wave_session: {
+        id: data.id,
+        checkout_status: data.checkout_status,
+        payment_status: 'refunded',
+        when_created: data.when_created,
+        when_expires: data.when_expires,
+        when_refunded: new Date().toISOString(),
+      },
+    });
+
+    return { transaction_id: transaction.transaction_id };
+  }
+
+  /**
+   * Handle checkout.session.expired event
+   */
+  private async handleExpired(data: any) {
+    this.logger.log('Processing expired checkout session:', {
+      wave_session_id: data.id,
+    });
+
+    const { data: transactions, error: txnError } = await (this.supabase
+      .getClient() as any)
+      .rpc('get_wave_transaction_by_checkout_id', {
+        p_provider_checkout_id: data.id,
+      });
+
+    const transactionsArray = transactions as any;
+
+    if (txnError || !transactionsArray || !Array.isArray(transactionsArray) || transactionsArray.length === 0) {
+      this.logger.error('Transaction not found for expiration');
+      throw new NotFoundException('Transaction not found for expiration');
+    }
+
+    const transaction = transactionsArray[0];
+    await this.updateTransactionStatus(transaction.transaction_id, 'expired', {
+      wave_session_id: data.id,
+      wave_session: {
+        id: data.id,
+        checkout_status: data.checkout_status,
+        payment_status: 'expired',
+        when_created: data.when_created,
+        when_expires: data.when_expires,
+        expired_at: new Date().toISOString(),
+      },
+    });
+
+    return { transaction_id: transaction.transaction_id };
+  }
+
+  /**
+   * Update transaction status using RPC
+   */
+  private async updateTransactionStatus(
+    transactionId: string,
+    status: string,
+    metadata: Record<string, any>,
+  ) {
+    const { error } = await (this.supabase
+      .getClient() as any)
+      .rpc('update_transaction_status', {
+        p_transaction_id: transactionId,
+        p_status: status,
+        p_metadata: metadata,
+      });
+
+    if (error) {
+      this.logger.error('Error updating transaction status:', error);
+      throw new Error('Failed to update transaction status');
+    }
+
+    this.logger.log(
+      `Successfully updated transaction ${transactionId} to ${status}`,
+    );
+  }
+
+  /**
+   * Update balances after transaction completion
+   */
+  private async updateBalances(transactionId: string) {
+    try {
+      this.logger.log('Starting balance update for transaction:', transactionId);
+
+      const { error: balanceError } = await (this.supabase
+        .getClient() as any)
+        .rpc('update_balances_for_transaction', {
+          p_transaction_id: transactionId,
+        });
+
+      if (balanceError) {
+        this.logger.warn(
+          'Warning: Failed to update balances but transaction is marked as completed:',
+          balanceError,
+        );
+      } else {
+        this.logger.log('Successfully updated balances for transaction');
+      }
+    } catch (error) {
+      this.logger.warn('Warning: Error updating balances:', error);
+    }
+  }
+
+  /**
+   * Trigger merchant webhook notification
+   */
+  private async triggerMerchantWebhook(
+    transactionId: string,
+    organizationId: string,
+    event: string,
+  ) {
+    try {
+      this.logger.log(
+        `Triggering merchant webhook: ${event} for txn ${transactionId}`,
+      );
+
+      // Get transaction data for webhook payload
+      const { data: txnData, error: txnError } = await this.supabase
+        .getClient()
+        .from('transactions')
+        .select('*')
+        .eq('transaction_id', transactionId)
+        .single();
+
+      if (txnError || !txnData) {
+        this.logger.error('Failed to fetch transaction for webhook:', txnError);
+        return;
+      }
+
+      // Use webhookSender.notifyOrganization instead of sendWebhook
+      await this.webhookSender.notifyOrganization(
+        organizationId,
+        event as WebhookEvent,
+        txnData,
+      );
+
+      this.logger.log('Successfully triggered merchant webhook');
+    } catch (error) {
+      this.logger.error('Error triggering merchant webhook:', error);
+      // Don't throw - webhook failures shouldn't fail the Wave webhook
+    }
+  }
+}

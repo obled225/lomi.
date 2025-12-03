@@ -331,6 +331,18 @@ export const EXPOSED_FUNCTIONS = [
   'get_product_prices_api',
   'get_product_fees_api',
   'get_coupon_details_for_management',
+  // Wave webhook functions
+  'get_wave_transaction_by_checkout_id',
+  'get_checkout_session_by_wave_id',
+  'update_transaction_status',
+  'update_balances_for_transaction',
+  // Stripe webhook functions
+  'update_stripe_checkout_status',
+  'handle_stripe_payment_success',
+  'handle_stripe_payment_failure',
+  'handle_stripe_dispute_created',
+  'handle_stripe_dispute_updated',
+  'handle_stripe_refund',
 ];
 
 /**
