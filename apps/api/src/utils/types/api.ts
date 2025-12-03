@@ -1633,8 +1633,8 @@ export type Database = {
       };
       list_accounts: {
         Args: {
-          p_limit?: number;
-          p_offset?: number;
+          p_limit?: number | null;
+          p_offset?: number | null;
           p_organization_id: string;
         };
         Returns: {
