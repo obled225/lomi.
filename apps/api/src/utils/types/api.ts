@@ -2599,7 +2599,7 @@ export type Database = {
           p_error_code?: string | null;
           p_error_message?: string | null;
           p_metadata?: Json | null;
-          p_payment_status?: APIEnums["provider_payment_status"] | null;
+          p_payment_status?: APIEnums["checkout_session_status"] | null;
           p_stripe_charge_id?: string | null;
           p_stripe_payment_intent_id: string;
         };
