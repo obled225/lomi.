@@ -1,17 +1,10 @@
 {
-  "buildCommand": "pnpm install && pnpm run build && mkdir -p public && echo '{}' > public/.gitkeep",
-  "outputDirectory": "public",
   "rewrites": [
     {
       "source": "/(.*)",
       "destination": "/api"
     }
   ],
-  "functions": {
-    "api/index.ts": {
-      "includeFiles": "dist/**"
-    }
-  },
   "env": {
     "NODE_ENV": "production"
   },
