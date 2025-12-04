@@ -8,11 +8,11 @@ import {
 import { OrganizationsService } from './organizations.service';
 import { OrganizationResponseDto } from './dto/organization-response.dto';
 import { OrganizationMetricsResponseDto } from './dto/organization-metrics-response.dto';
-import { ApiKeyGuard } from '@/core/common/guards/api-key.guard';
+import { ApiKeyGuard } from '../common/guards/api-key.guard';
 import {
   CurrentUser,
   type AuthContext,
-} from '@/core/common/decorators/current-user.decorator';
+} from '../common/decorators/current-user.decorator';
 
 @ApiTags('Organizations')
 @ApiSecurity('api-key')

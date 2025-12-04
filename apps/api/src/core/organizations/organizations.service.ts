@@ -3,8 +3,8 @@ import {
   NotFoundException,
   InternalServerErrorException,
 } from '@nestjs/common';
-import { SupabaseService } from '@/utils/supabase/supabase.service';
-import { AuthContext } from '@/core/common/decorators/current-user.decorator';
+import { SupabaseService } from '../../utils/supabase/supabase.service';
+import { AuthContext } from '../common/decorators/current-user.decorator';
 import { OrganizationMetricsResponseDto } from './dto/organization-metrics-response.dto';
 
 @Injectable()

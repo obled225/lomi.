@@ -22,11 +22,11 @@ import { ProductResponseDto } from './dto/product-response.dto';
 import { CreateProductDto } from './dto/create-product.dto';
 import { AddPriceDto } from './dto/add-price.dto';
 import { PriceResponseDto } from './dto/price-response.dto';
-import { ApiKeyGuard } from '@/core/common/guards/api-key.guard';
+import { ApiKeyGuard } from '../common/guards/api-key.guard';
 import {
   CurrentUser,
   type AuthContext,
-} from '@/core/common/decorators/current-user.decorator';
+} from '../common/decorators/current-user.decorator';
 
 @ApiTags('Products')
 @ApiSecurity('api-key')

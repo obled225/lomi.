@@ -4,7 +4,7 @@ import {
   Injectable,
   UnauthorizedException,
 } from '@nestjs/common';
-import { SupabaseService } from '@/utils/supabase/supabase.service';
+import { SupabaseService } from '../../../utils/supabase/supabase.service';
 
 @Injectable()
 export class ApiKeyGuard implements CanActivate {

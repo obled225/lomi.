@@ -1,8 +1,8 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { SupabaseService } from '@/utils/supabase/supabase.service';
+import { SupabaseService } from '../../utils/supabase/supabase.service';
 import { CreateCheckoutSessionDto } from './dto/create-checkout-session.dto';
 import { AuthContext } from '../common/decorators/current-user.decorator';
-import { CurrencyCode } from '@/utils/types/api';
+import { CurrencyCode } from '../../utils/types/api';
 
 @Injectable()
 export class CheckoutSessionsService {

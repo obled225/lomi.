@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { CheckoutSessionsService } from './checkout-sessions.service';
-import { SupabaseService } from '@/utils/supabase/supabase.service';
+import { SupabaseService } from '../../utils/supabase/supabase.service';
 import { CreateCheckoutSessionDto } from './dto/create-checkout-session.dto';
 import { AuthContext } from '../common/decorators/current-user.decorator';
 describe('CheckoutSessionsService', () => {

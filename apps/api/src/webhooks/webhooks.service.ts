@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { SupabaseService } from '@/utils/supabase/supabase.service';
+import { SupabaseService } from '../utils/supabase/supabase.service';
 import { CreateWebhookDto } from './dto/create-webhook.dto';
 import { UpdateWebhookDto } from './dto/update-webhook.dto';
-import { AuthContext } from '@/core/common/decorators/current-user.decorator';
-import { Database } from '@/utils/types/api';
+import { AuthContext } from '../core/common/decorators/current-user.decorator';
+import { Database } from '../utils/types/api';
 import { SupabaseClient } from '@supabase/supabase-js';
 
 @Injectable()

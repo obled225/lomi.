@@ -1,9 +1,9 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { SupabaseService } from '@/utils/supabase/supabase.service';
-import { AuthContext } from '@/core/common/decorators/current-user.decorator';
+import { SupabaseService } from '../../utils/supabase/supabase.service';
+import { AuthContext } from '../common/decorators/current-user.decorator';
 import { AccountBalanceResponseDto } from './dto/account-balance-response.dto';
 import { BalanceBreakdownResponseDto } from './dto/balance-breakdown-response.dto';
-import { CurrencyCode } from '@/utils/types/api';
+import { CurrencyCode } from '../../utils/types/api';
 
 @Injectable()
 export class AccountsService {

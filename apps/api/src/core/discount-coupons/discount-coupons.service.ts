@@ -3,8 +3,8 @@ import {
   NotFoundException,
   BadRequestException,
 } from '@nestjs/common';
-import { SupabaseService } from '@/utils/supabase/supabase.service';
-import { AuthContext } from '@/core/common/decorators/current-user.decorator';
+import { SupabaseService } from '../../utils/supabase/supabase.service';
+import { AuthContext } from '../common/decorators/current-user.decorator';
 import { CreateDiscountCouponDto } from './dto/create-discount-coupon.dto';
 
 @Injectable()

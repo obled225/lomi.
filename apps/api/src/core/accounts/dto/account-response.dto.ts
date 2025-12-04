@@ -3,7 +3,7 @@ import {
   type CurrencyCode,
   SpiAccountStatus,
   SpiAccountType,
-} from '@/utils/types/api';
+} from '../../../utils/types/api';
 
 export class AccountResponseDto {
   @ApiProperty({

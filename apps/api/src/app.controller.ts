@@ -1,11 +1,11 @@
 import { Controller, Get, Post, Body, UseGuards } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 import { AppService } from './app.service';
-import { ApiKeyGuard } from '@/core/common/guards/api-key.guard';
+import { ApiKeyGuard } from './core/common/guards/api-key.guard';
 import {
   CurrentUser,
   type AuthContext,
-} from '@/core/common/decorators/current-user.decorator';
+} from './core/common/decorators/current-user.decorator';
 
 @Controller()
 export class AppController {

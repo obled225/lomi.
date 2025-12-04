@@ -20,11 +20,11 @@ import {
 import { PaymentLinksService } from './payment-links.service';
 import { CreatePaymentLinkDto } from './dto/create-payment-link.dto';
 import { PaymentLinkResponseDto } from './dto/payment-link-response.dto';
-import { ApiKeyGuard } from '@/core/common/guards/api-key.guard';
+import { ApiKeyGuard } from '../common/guards/api-key.guard';
 import {
   CurrentUser,
   type AuthContext,
-} from '@/core/common/decorators/current-user.decorator';
+} from '../common/decorators/current-user.decorator';
 
 @ApiTags('Payment Links')
 @ApiSecurity('api-key')

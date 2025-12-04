@@ -20,11 +20,11 @@ import {
 import { BeneficiaryPayoutsService } from './beneficiary-payouts.service';
 import { CreateBeneficiaryPayoutDto } from './dto/create-beneficiary-payout.dto';
 import { BeneficiaryPayoutResponseDto } from './dto/beneficiary-payout-response.dto';
-import { ApiKeyGuard } from '@/core/common/guards/api-key.guard';
+import { ApiKeyGuard } from '../common/guards/api-key.guard';
 import {
   CurrentUser,
   type AuthContext,
-} from '@/core/common/decorators/current-user.decorator';
+} from '../common/decorators/current-user.decorator';
 
 @ApiTags('Beneficiary Payouts')
 @ApiSecurity('api-key')

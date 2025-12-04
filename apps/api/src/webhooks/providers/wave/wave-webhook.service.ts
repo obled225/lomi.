@@ -4,9 +4,9 @@ import {
   Logger,
   NotFoundException,
 } from '@nestjs/common';
-import { SupabaseService } from '@/utils/supabase/supabase.service';
+import { SupabaseService } from '../../../utils/supabase/supabase.service';
 import { WebhookSenderService } from '../../webhook-sender.service';
-import { WebhookEvent } from '@/utils/types/api';
+import { WebhookEvent } from '../../../utils/types/api';
 import * as crypto from 'crypto';
 
 @Injectable()

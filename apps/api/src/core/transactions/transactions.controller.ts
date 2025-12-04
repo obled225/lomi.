@@ -17,11 +17,11 @@ import {
 } from '@nestjs/swagger';
 import { TransactionsService } from './transactions.service';
 import { TransactionResponseDto } from './dto/transaction-response.dto';
-import { ApiKeyGuard } from '@/core/common/guards/api-key.guard';
+import { ApiKeyGuard } from '../common/guards/api-key.guard';
 import {
   CurrentUser,
   type AuthContext,
-} from '@/core/common/decorators/current-user.decorator';
+} from '../common/decorators/current-user.decorator';
 
 @ApiTags('Transactions')
 @ApiSecurity('api-key')

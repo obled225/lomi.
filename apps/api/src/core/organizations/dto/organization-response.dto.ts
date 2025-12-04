@@ -3,7 +3,7 @@ import {
   type CurrencyCode,
   type OrganizationStatus,
   type OrganizationVerificationStatus,
-} from '@/utils/types/api';
+} from '../../../utils/types/api';
 
 export class OrganizationResponseDto {
   @ApiProperty({

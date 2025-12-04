@@ -18,11 +18,11 @@ import {
 } from '@nestjs/swagger';
 import { WebhookDeliveryLogsService } from './webhook-delivery-logs.service';
 import { WebhookDeliveryLogResponseDto } from './dto/webhook-delivery-log-response.dto';
-import { ApiKeyGuard } from '@/core/common/guards/api-key.guard';
+import { ApiKeyGuard } from '../common/guards/api-key.guard';
 import {
   CurrentUser,
   type AuthContext,
-} from '@/core/common/decorators/current-user.decorator';
+} from '../common/decorators/current-user.decorator';
 
 @ApiTags('Webhook Delivery Logs')
 @ApiSecurity('api-key')

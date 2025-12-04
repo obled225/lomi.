@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TransactionsController } from './transactions.controller';
 import { TransactionsService } from './transactions.service';
-import { SupabaseModule } from '@/utils/supabase/supabase.module';
+import { SupabaseModule } from '../../utils/supabase/supabase.module';
 
 @Module({
   imports: [SupabaseModule],

@@ -10,12 +10,12 @@ import { AccountsService } from './accounts.service';
 import { AccountResponseDto } from './dto/account-response.dto';
 import { AccountBalanceResponseDto } from './dto/account-balance-response.dto';
 import { BalanceBreakdownResponseDto } from './dto/balance-breakdown-response.dto';
-import { ApiKeyGuard } from '@/core/common/guards/api-key.guard';
+import { ApiKeyGuard } from '../common/guards/api-key.guard';
 import {
   CurrentUser,
   type AuthContext,
-} from '@/core/common/decorators/current-user.decorator';
-import { type CurrencyCode } from '@/utils/types/api';
+} from '../common/decorators/current-user.decorator';
+import { type CurrencyCode } from '../../utils/types/api';
 
 @ApiTags('Accounts')
 @ApiSecurity('api-key')

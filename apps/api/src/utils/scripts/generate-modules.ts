@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import { API_RESOURCES, APIResourceConfig } from '@/api-config';
+import { API_RESOURCES, APIResourceConfig } from '../../api-config';
 
 // Find the workspace root by looking for the 'apps' directory
 function findWorkspaceRoot(): string {
@@ -171,7 +171,7 @@ function generateServiceContent(
 
   const imports = [
     `import { Injectable } from '@nestjs/common';`,
-    `import { SupabaseService } from '@/utils/supabase/supabase.service';`,
+    `import { SupabaseService } from '../supabase/supabase.service';`,
   ];
 
   if (operations?.create) {
@@ -186,7 +186,7 @@ function generateServiceContent(
   }
 
   imports.push(
-    `import { AuthContext } from '@/core/common/decorators/current-user.decorator';`,
+    `import { AuthContext } from '../../core/common/decorators/current-user.decorator';`,
   );
 
   const methods: string[] = [];
@@ -333,8 +333,8 @@ function generateControllerContent(
 
   imports.push(
     `import { ${responseDtoName} } from './dto/${kebabSingular}-response.dto';`,
-    `import { ApiKeyGuard } from '@/core/common/guards/api-key.guard';`,
-    `import { CurrentUser, type AuthContext } from '@/core/common/decorators/current-user.decorator';`,
+    `import { ApiKeyGuard } from '../../core/common/guards/api-key.guard';`,
+    `import { CurrentUser, type AuthContext } from '../../core/common/decorators/current-user.decorator';`,
   );
 
   const methods: string[] = [];

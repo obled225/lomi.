@@ -8,11 +8,11 @@ import {
 import { WebhooksService } from './webhooks.service';
 import { UpdateWebhookDto } from './dto/update-webhook.dto';
 import { WebhookResponseDto } from './dto/webhook-response.dto';
-import { ApiKeyGuard } from '@/core/common/guards/api-key.guard';
+import { ApiKeyGuard } from '../core/common/guards/api-key.guard';
 import {
   CurrentUser,
   type AuthContext,
-} from '@/core/common/decorators/current-user.decorator';
+} from '../core/common/decorators/current-user.decorator';
 
 @ApiTags('Webhooks')
 @ApiSecurity('api-key')

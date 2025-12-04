@@ -3,15 +3,15 @@ import {
   NotFoundException,
   BadRequestException,
 } from '@nestjs/common';
-import { SupabaseService } from '@/utils/supabase/supabase.service';
+import { SupabaseService } from '../../utils/supabase/supabase.service';
 import { CreateBeneficiaryPayoutDto } from './dto/create-beneficiary-payout.dto';
-import { AuthContext } from '@/core/common/decorators/current-user.decorator';
+import { AuthContext } from '../common/decorators/current-user.decorator';
 import {
   CurrencyCode,
   ProviderCode,
   PaymentMethodCode,
   PayoutStatus,
-} from '@/utils/types/api';
+} from '../../utils/types/api';
 
 @Injectable()
 export class BeneficiaryPayoutsService {

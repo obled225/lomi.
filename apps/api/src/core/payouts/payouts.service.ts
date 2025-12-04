@@ -1,13 +1,13 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { SupabaseService } from '@/utils/supabase/supabase.service';
+import { SupabaseService } from '../../utils/supabase/supabase.service';
 import { CreatePayoutDto } from './dto/create-payout.dto';
-import { AuthContext } from '@/core/common/decorators/current-user.decorator';
+import { AuthContext } from '../common/decorators/current-user.decorator';
 import {
   CurrencyCode,
   ProviderCode,
   PayoutStatus,
   Database,
-} from '@/utils/types/api';
+} from '../../utils/types/api';
 
 type Payout = Database['public']['Tables']['payouts']['Row'];
 

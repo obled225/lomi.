@@ -1,8 +1,8 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { SupabaseService } from '@/utils/supabase/supabase.service';
+import { SupabaseService } from '../../utils/supabase/supabase.service';
 import { CreatePaymentLinkDto } from './dto/create-payment-link.dto';
-import { AuthContext } from '@/core/common/decorators/current-user.decorator';
-import { LinkType, CurrencyCode } from '@/utils/types/api';
+import { AuthContext } from '../common/decorators/current-user.decorator';
+import { LinkType, CurrencyCode } from '../../utils/types/api';
 
 @Injectable()
 export class PaymentLinksService {

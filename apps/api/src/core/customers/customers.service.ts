@@ -1,9 +1,9 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { SupabaseService } from '@/utils/supabase/supabase.service';
-import { AuthContext } from '@/core/common/decorators/current-user.decorator';
+import { SupabaseService } from '../../utils/supabase/supabase.service';
+import { AuthContext } from '../common/decorators/current-user.decorator';
 import { CreateCustomerDto } from './dto/create-customer.dto';
 import { UpdateCustomerDto } from './dto/update-customer.dto';
-import { Database } from '@/utils/types/api';
+import { Database } from '../../utils/types/api';
 
 type Customer = Database['public']['Tables']['customers']['Row'];
 type CustomerUpdate = Database['public']['Tables']['customers']['Update'];

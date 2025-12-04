@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { StripeWebhookController } from './stripe-webhook.controller';
 import { StripeWebhookService } from './stripe-webhook.service';
-import { SupabaseModule } from '@/utils/supabase/supabase.module';
+import { SupabaseModule } from '../../../utils/supabase/supabase.module';
 import { WebhookSenderService } from '../../webhook-sender.service';
 
 @Module({

@@ -20,11 +20,11 @@ import {
 import { RefundsService } from './refunds.service';
 import { CreateRefundDto } from './dto/create-refund.dto';
 import { RefundResponseDto } from './dto/refund-response.dto';
-import { ApiKeyGuard } from '@/core/common/guards/api-key.guard';
+import { ApiKeyGuard } from '../common/guards/api-key.guard';
 import {
   CurrentUser,
   type AuthContext,
-} from '@/core/common/decorators/current-user.decorator';
+} from '../common/decorators/current-user.decorator';
 
 @ApiTags('Refunds')
 @ApiSecurity('api-key')

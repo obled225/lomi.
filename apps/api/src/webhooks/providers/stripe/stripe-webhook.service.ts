@@ -3,9 +3,9 @@ import {
   BadRequestException,
   Logger,
 } from '@nestjs/common';
-import { SupabaseService } from '@/utils/supabase/supabase.service';
+import { SupabaseService } from '../../../utils/supabase/supabase.service';
 import { WebhookSenderService } from '../../webhook-sender.service';
-import { WebhookEvent } from '@/utils/types/api';
+import { WebhookEvent } from '../../../utils/types/api';
 import Stripe from 'stripe';
 
 @Injectable()

@@ -4,9 +4,9 @@ import {
   InternalServerErrorException,
   BadRequestException,
 } from '@nestjs/common';
-import { SupabaseService } from '@/utils/supabase/supabase.service';
+import { SupabaseService } from '../../utils/supabase/supabase.service';
 import { CreatePaymentRequestDto } from './dto/create-payment-request.dto';
-import { AuthContext } from '@/core/common/decorators/current-user.decorator';
+import { AuthContext } from '../common/decorators/current-user.decorator';
 
 @Injectable()
 export class PaymentRequestsService {

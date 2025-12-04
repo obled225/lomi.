@@ -20,11 +20,11 @@ import {
 import { PaymentRequestsService } from './payment-requests.service';
 import { CreatePaymentRequestDto } from './dto/create-payment-request.dto';
 import { PaymentRequestResponseDto } from './dto/payment-request-response.dto';
-import { ApiKeyGuard } from '@/core/common/guards/api-key.guard';
+import { ApiKeyGuard } from '../common/guards/api-key.guard';
 import {
   CurrentUser,
   type AuthContext,
-} from '@/core/common/decorators/current-user.decorator';
+} from '../common/decorators/current-user.decorator';
 
 @ApiTags('Payment Requests')
 @ApiSecurity('api-key')

@@ -20,11 +20,11 @@ import {
 import { SubscriptionsService } from './subscriptions.service';
 import { SubscriptionResponseDto } from './dto/subscription-response.dto';
 import { CancelSubscriptionDto } from './dto/cancel-subscription.dto';
-import { ApiKeyGuard } from '@/core/common/guards/api-key.guard';
+import { ApiKeyGuard } from '../common/guards/api-key.guard';
 import {
   CurrentUser,
   type AuthContext,
-} from '@/core/common/decorators/current-user.decorator';
+} from '../common/decorators/current-user.decorator';
 
 @ApiTags('Subscriptions')
 @ApiSecurity('api-key')

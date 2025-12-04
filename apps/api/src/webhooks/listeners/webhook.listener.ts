@@ -3,7 +3,7 @@ import { OnEvent } from '@nestjs/event-emitter';
 import { InjectQueue } from '@nestjs/bullmq';
 import { Queue } from 'bullmq';
 import { WebhookSenderService } from '../webhook-sender.service';
-import { WebhookEvent } from '@/utils/types/api';
+import { WebhookEvent } from '../../utils/types/api';
 
 @Injectable()
 export class WebhookListener {

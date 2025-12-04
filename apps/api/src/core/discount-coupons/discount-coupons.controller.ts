@@ -9,11 +9,11 @@ import {
 import { DiscountCouponsService } from './discount-coupons.service';
 import { DiscountCouponResponseDto } from './dto/discount-coupon-response.dto';
 import { CreateDiscountCouponDto } from './dto/create-discount-coupon.dto';
-import { ApiKeyGuard } from '@/core/common/guards/api-key.guard';
+import { ApiKeyGuard } from '../common/guards/api-key.guard';
 import {
   CurrentUser,
   type AuthContext,
-} from '@/core/common/decorators/current-user.decorator';
+} from '../common/decorators/current-user.decorator';
 
 @ApiTags('Discount Coupons')
 @ApiSecurity('api-key')
