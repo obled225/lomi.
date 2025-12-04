@@ -38,6 +38,8 @@ export class CheckoutSessionsService {
       p_payment_link_id: createDto.payment_link_id || null,
     });
 
+    console.log('create_checkout_session RPC result:', { data, error });
+
     if (error) throw new Error(error.message);
     return data;
   }
