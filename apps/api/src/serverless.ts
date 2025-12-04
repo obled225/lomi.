@@ -2,11 +2,12 @@ import { NestFactory } from '@nestjs/core';
 import { ExpressAdapter } from '@nestjs/platform-express';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import express from 'express';
+import express, { Request, Response } from 'express';
+import type { INestApplication } from '@nestjs/common';
 
-let cachedApp: express.Express;
+let cachedApp: INestApplication;
 
-async function createApp(): Promise<express.Express> {
+async function createApp(): Promise<INestApplication> {
   if (cachedApp) {
     return cachedApp;
   }
@@ -40,17 +41,18 @@ async function createApp(): Promise<express.Express> {
   SwaggerModule.setup('api', app, document);
 
   await app.init();
-  cachedApp = expressApp;
+  cachedApp = app;
 
-  return expressApp;
+  return app;
 }
 
-export default async function handler(req: express.Request, res: express.Response) {
+export default async function handler(req: Request, res: Response) {
   const app = await createApp();
   
   // For Vercel serverless functions, ensure raw body is available for webhooks
   // Vercel may provide the raw body in different formats
-  if (req.url?.startsWith('/webhooks') && !(req as any).rawBody) {
+  const reqPath = (req as any).url || req.path || '';
+  if (reqPath.startsWith('/webhooks') && !(req as any).rawBody) {
     // Try to get raw body from Vercel's request object
     const vercelReq = req as any;
     if (vercelReq.body && Buffer.isBuffer(vercelReq.body)) {
@@ -63,6 +65,8 @@ export default async function handler(req: express.Request, res: express.Respons
     }
   }
   
-  app(req, res);
+  // Get the underlying Express instance and handle the request
+  const expressInstance = app.getHttpAdapter().getInstance();
+  expressInstance(req, res);
 }
 
