@@ -12,7 +12,7 @@ import Stripe from 'stripe';
 export class StripeWebhookService {
   private readonly logger = new Logger(StripeWebhookService.name);
   private readonly webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
-  private readonly stripe: Stripe;
+  private readonly stripe: Stripe | undefined;
 
   constructor(
     private readonly supabase: SupabaseService,
@@ -21,18 +21,23 @@ export class StripeWebhookService {
     const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
 
     if (!stripeSecretKey) {
-      throw new Error('STRIPE_SECRET_KEY is not configured');
+      this.logger.warn('STRIPE_SECRET_KEY is not configured - Stripe functionality disabled');
+    } else {
+      this.stripe = new Stripe(stripeSecretKey, {
+        apiVersion: '2025-11-17.clover' as any,
+      });
     }
-
-    this.stripe = new Stripe(stripeSecretKey, {
-      apiVersion: '2025-11-17.clover',
-    });
   }
 
   /**
    * Main webhook handler
    */
   async handleWebhook(signature: string, rawBody: Buffer | string) {
+    if (!this.stripe) {
+      this.logger.error('Stripe is not configured');
+      throw new BadRequestException('Stripe configuration missing');
+    }
+
     // Verify webhook signature
     const event = this.verifyWebhook(signature, rawBody);
 
@@ -93,7 +98,7 @@ export class StripeWebhookService {
    * Verify webhook signature using Stripe's library
    */
   private verifyWebhook(signature: string, rawBody: Buffer | string): Stripe.Event {
-    if (!this.webhookSecret) {
+    if (!this.webhookSecret || !this.stripe) {
       this.logger.warn(
         'Stripe webhook secret not configured - ACCEPTING ALL REQUESTS IN DEV MODE',
       );
@@ -234,6 +239,9 @@ export class StripeWebhookService {
     });
 
     try {
+      if (!this.stripe) {
+        throw new Error('Stripe client not initialized');
+      }
       // Get payment intent from charge
       const charge = await this.stripe.charges.retrieve(dispute.charge as string);
       const paymentIntentId = charge.payment_intent as string;
