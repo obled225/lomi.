@@ -4,6 +4,10 @@ import { getPostBySlug } from '@/lib/sanity/queries';
 import { urlFor } from '@/lib/sanity/client';
 import type { NextRequest } from 'next/server';
 
+// Route segment config for Next.js 16
+export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
+
 export async function GET(
   req: NextRequest,
   { params }: { params: Promise<{ slug: string }> },
