@@ -51,10 +51,11 @@ export default async function handler(req: Request, res: Response) {
   
   // For Vercel serverless functions, ensure raw body is available for webhooks
   // Vercel may provide the raw body in different formats
-  const reqPath = (req as any).url || req.path || '';
-  if (reqPath.startsWith('/webhooks') && !(req as any).rawBody) {
+  const vercelReq = req as any;
+  const reqPath = vercelReq.url || '';
+  
+  if (reqPath.startsWith('/webhooks') && !vercelReq.rawBody) {
     // Try to get raw body from Vercel's request object
-    const vercelReq = req as any;
     if (vercelReq.body && Buffer.isBuffer(vercelReq.body)) {
       vercelReq.rawBody = vercelReq.body;
     } else if (vercelReq.body && typeof vercelReq.body === 'string') {
