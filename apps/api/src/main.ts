@@ -1,9 +1,24 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { ExpressAdapter } from '@nestjs/platform-express';
+import express from 'express';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const expressApp = express();
+  
+  // Middleware to capture raw body for webhook signature verification
+  expressApp.use('/webhooks', express.raw({ type: 'application/json', limit: '10mb' }), (req, res, next) => {
+    (req as any).rawBody = req.body;
+    next();
+  });
+  
+  // Regular JSON body parser for API routes
+  expressApp.use(express.json({ limit: '10mb' }));
+  
+  const app = await NestFactory.create(AppModule, new ExpressAdapter(expressApp), {
+    bodyParser: false, // We're handling body parsing with Express middleware
+  });
 
   const config = new DocumentBuilder()
     .setTitle('lomi. API')
