@@ -1,17 +1,5 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "dist/main.js",
-      "use": "@vercel/node"
-    }
-  ],
-  "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "dist/main.js"
-    }
-  ],
+  "buildCommand": "pnpm install && pnpm run build",
   "env": {
     "NODE_ENV": "production"
   },
