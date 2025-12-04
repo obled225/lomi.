@@ -17,7 +17,7 @@ export class CheckoutSessionsService {
       p_organization_id: user.organizationId,
       p_environment: user.environment,
       p_created_by: user.merchantId,
-      p_amount: createDto.amount,
+      p_amount: (createDto.amount ?? null) as any,
       p_currency_code: createDto.currency_code as CurrencyCode,
       p_customer_id: createDto.customer_id || null,
       p_metadata: createDto.metadata || null,

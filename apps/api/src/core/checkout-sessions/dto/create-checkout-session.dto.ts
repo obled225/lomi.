@@ -3,9 +3,10 @@ import { ApiProperty } from '@nestjs/swagger';
 export class CreateCheckoutSessionDto {
   @ApiProperty({
     example: 10000.0,
-    description: 'Amount to charge',
+    description: 'Amount to charge. Optional if product_id is provided (amount will be calculated from product price).',
+    required: false,
   })
-  amount: number;
+  amount?: number;
 
   @ApiProperty({
     example: 'XOF',
