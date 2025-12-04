@@ -3,6 +3,10 @@
 import { NextResponse } from 'next/server';
 import { getAllPosts } from '@/lib/sanity/queries';
 
+// Route segment config for Next.js 16
+export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
+
 export async function GET() {
   try {
     const posts = await getAllPosts();
