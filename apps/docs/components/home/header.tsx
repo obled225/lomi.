@@ -119,7 +119,7 @@ export function Header() {
     documentationHoverTimeout.current = setTimeout(() => {
       setIsDocumentationOpen(true);
       setIsIntegrationsOpen(false);
-    }, 900);
+    }, 500);
   };
 
   const handleDocumentationMouseLeave = () => {

@@ -68,6 +68,132 @@
     "title": "Changelog",
     "entries": [
       {
+        "date": "2025-12-01",
+        "version": "1.2.0",
+        "title": "International payments",
+        "changes": [
+          "Launched credit card payment processing with Visa, Mastercard, and Amex support.",
+          "Introduced international payment acceptance for global customers.",
+          "Implemented advanced fraud detection and prevention tools in adiition to a Fraud API",
+          "Added multi-currency support with automatic currency conversion for transactions."
+        ]
+      },
+      {
+        "date": "2025-11-15",
+        "version": "1.1.8",
+        "title": "Customer portal & self-service",
+        "changes": [
+          "Launched a customer portal for subscription management.",
+          "Added self-service billing history and invoice downloads.",
+          "Introduced a customer-facing storefront for product discovery.",
+          "Implemented an order history tracking for customers.",
+          "Added subscription pause and resume functionality."
+        ]
+      },
+      {
+        "date": "2025-10-28",
+        "version": "1.1.7",
+        "title": "Analytics dashboard & insights",
+        "changes": [
+          "Released powerful analytics dashboard with revenue tracking.",
+          "Added customer lifetime value (LTV) and retention metrics.",
+          "Introduced product performance analytics and sales breakdowns.",
+          "Implemented shareable analytics charts with Open Graph support.",
+          "Added export functionality for transactions (CSV, PDF, JSON)."
+        ]
+      },
+      {
+        "date": "2025-09-20",
+        "version": "1.1.6",
+        "title": "Automatic withdrawals & payout scheduling",
+        "changes": [
+          "Introduced automatic withdrawal scheduling for your business.",
+          "Added configurable payout day and method preferences.",
+          "Implemented payout notifications and status tracking.",
+          "Added support for bulk/mass payouts to multiple beneficiaries.",
+          "Introduced payout receipts with downloadable PDFs."
+        ]
+      },
+      {
+        "date": "2025-08-15",
+        "version": "1.1.5",
+        "title": "MTN Mobile Money integration",
+        "changes": [
+          "Integrated MTN Mobile Money for Côte d'Ivoire.",
+          "Added MTN payment prompts with real-time status updates.",
+          "Implemented phone number validation for MTN transactions.",
+          "Added MTN as a payout destination for your business withdrawals."
+        ]
+      },
+      {
+        "date": "2025-07-10",
+        "version": "1.1.4",
+        "title": "Refunds & dispute management",
+        "changes": [
+          "Launched full and partial refund support from the dashboard via Mobile Money.",
+          "Implemented refund reason tracking and notifications to your customers.",
+          "Added chargeback monitoring and dispute management tools.",
+          "Introduced refund-specific transaction status tracking."
+        ]
+      },
+      {
+        "date": "2025-06-01",
+        "version": "1.1.3",
+        "title": "Subscription billing & recurring payments",
+        "changes": [
+          "Released a subscription billing product with flexible intervals.",
+          "Added support for monthly, quarterly, and yearly billing cycles.",
+          "Implemented automatic subscription renewal and retry logic.",
+          "Introduced subscription cancellation and pro-rated refunds via Mobile Money.",
+          "Added failed payment retry with customer notification."
+        ]
+      },
+      {
+        "date": "2025-03-05",
+        "version": "1.1.1",
+        "title": "Product catalog & payment links",
+        "changes": [
+          "Introduced a product catalog management with images and descriptions.",
+          "Added customizable payment links with expiration dates.",
+          "Implemented coupon codes and discounts support.",
+          "Added quantity selection for product checkouts."
+        ]
+      },
+      {
+        "date": "2025-01-15",
+        "version": "1.1.0",
+        "title": "Documentation",
+        "changes": [
+          "Launched comprehensive documentation website.",
+          "Released official SDKs for JavaScript, Python, Go, and PHP.",
+          "Added API reference with interactive examples.",
+          "Introduced webhook integration guide and event references.",
+          "Made documentation website open-source for community contributions."
+        ]
+      },
+      {
+        "date": "2024-12-10",
+        "version": "1.0.2",
+        "title": "Team management & invitations",
+        "changes": [
+          "Added team member invitation system with role-based access.",
+          "Implemented organization management for multi-user access.",
+          "Added activity feed and audit logs for team actions.",
+          "Introduced email notifications for team events."
+        ]
+      },
+      {
+        "date": "2024-11-15",
+        "version": "1.0.1",
+        "title": "Wave Mobile Money integration",
+        "changes": [
+          "Added Wave as a primary mobile money provider.",
+          "Implemented Wave balance checking and instant payments.",
+          "Added Wave payout support for your business withdrawals.",
+          "Introduced real-time transaction status updates to your customers."
+        ]
+      },
+      {
         "date": "2024-10-17",
         "version": "1.0.0",
         "title": "Launch",

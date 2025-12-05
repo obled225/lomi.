@@ -68,6 +68,129 @@
     "title": "Changelog",
     "entries": [
       {
+        "date": "2025-12-01",
+        "version": "1.2.0",
+        "title": "Paiements internationaux",
+        "changes": [
+          "Lancement du traitement des paiements internationaux avec support Visa, Mastercard et Amex.",
+          "Introduction de l'acceptation des paiements internationaux pour les clients mondiaux.",
+          "Mise en place d'outils avancés de détection et prévention de la fraude en adiition à une API de fraude.",
+          "Ajout de la prise en charge des transactions multi-devises avec conversion automatique des devises."
+        ]
+      },
+      {
+        "date": "2025-11-15",
+        "version": "1.1.8",
+        "title": "Portail client & libre-service",
+        "changes": [
+          "Lancement d'un portail client pour la gestion des abonnements.",
+          "Ajout de l'historique de facturation et téléchargement de factures en libre-service.",
+          "Introduction d'une vitrine client pour la découverte de produits.",
+          "Implémentation d'un suivi de l'historique des commandes pour les clients.",
+          "Ajout de la fonctionnalité de pause et de reprise d'abonnement."
+        ]
+      },
+      {
+        "date": "2025-10-28",
+        "version": "1.1.7",
+        "title": "Analytics",
+        "changes": [
+          "Introduction des analytics de performance produit et monitoring des ventes.",
+          "Implémentation de graphiques analytics partageables avec support Open Graph.",
+          "Ajout de la fonctionnalité d'export des transactions (CSV, PDF, JSON)."
+        ]
+      },
+      {
+        "date": "2025-09-20",
+        "version": "1.1.6",
+        "title": "Retraits automatiques & planification des paiements",
+        "changes": [
+          "Introduction de la planification automatique des retraits pour votre entreprise.",
+          "Ajout de préférences configurables pour le jour et la méthode de paiement.",
+          "Implémentation des notifications de paiement et du suivi du statut.",
+          "Ajout du support pour les paiements en masse vers plusieurs bénéficiaires.",
+          "Introduction des reçus de paiement avec PDF téléchargeables."
+        ]
+      },
+      {
+        "date": "2025-08-15",
+        "version": "1.1.5",
+        "title": "Intégration MTN Mobile Money",
+        "changes": [
+          "Intégration de MTN Mobile Money pour Côte d'Ivoire.",
+          "Ajout des invites de paiement MTN avec mises à jour de statut en temps réel.",
+          "Implémentation de la validation des numéros de téléphone pour les transactions MTN.",
+          "Ajout de MTN comme destination de paiement pour les retraits de votre entreprise."
+        ]
+      },
+      {
+        "date": "2025-07-10",
+        "version": "1.1.4",
+        "title": "Remboursements & gestion des litiges",
+        "changes": [
+          "Lancement du support des remboursements complets et partiels depuis le dashboard via Mobile Money.",
+          "Implémentation du suivi des raisons de remboursement et notifications à vos clients.",
+          "Ajout d'outils de surveillance des rétrofacturations et de gestion des litiges.",
+          "Introduction du suivi spécifique du statut des transactions de remboursement."
+        ]
+      },
+      {
+        "date": "2025-06-01",
+        "version": "1.1.3",
+        "title": "Paiements récurrents",
+        "changes": [
+          "Publication d'un produit de facturation par abonnement avec intervalles flexibles.",
+          "Ajout du support pour les cycles de facturation mensuel, trimestriel et annuel.",
+          "Implémentation du renouvellement automatique des abonnements et logique de réessai.",
+          "Introduction de l'annulation d'abonnement et remboursements au prorata via Mobile Money.",
+          "Ajout de la relance de paiement échoué avec notification à vos clients."
+        ]
+      },
+      {
+        "date": "2025-03-05",
+        "version": "1.1.1",
+        "title": "Catalogue produits & liens de paiement",
+        "changes": [
+          "Introduction de la gestion du catalogue produits avec images et descriptions.",
+          "Ajout de liens de paiement personnalisables avec dates d'expiration.",
+          "Implémentation des codes promo et support des réductions.",
+          "Ajout de la sélection de quantité pour les paiements produits."
+        ]
+      },
+      {
+        "date": "2025-01-15",
+        "version": "1.1.0",
+        "title": "Documentation",
+        "changes": [
+          "Lancement du site de documentation.",
+          "Publication des SDKs officiels pour JavaScript, Python, Go et PHP.",
+          "Ajout de la référence API avec exemples interactifs.",
+          "Introduction du guide d'intégration webhook et référence des événements."
+        ]
+      },
+      {
+        "date": "2024-12-10",
+        "version": "1.0.2",
+        "title": "Gestion d'équipe & invitations",
+        "changes": [
+          "Ajout du système d'invitation de membres d'équipe avec accès basé sur les rôles.",
+          "Implémentation de la gestion d'organisation pour l'accès multi-utilisateurs.",
+          "Ajout du fil d'activité et journaux d'audit pour les actions d'équipe.",
+          "Introduction des notifications email à vos équipes."
+        ]
+      },
+      {
+        "date": "2024-11-15",
+        "version": "1.0.1",
+        "title": "Intégration Wave Mobile Money",
+        "changes": [
+          "Ajout de Wave comme fournisseur principal de mobile money.",
+          "Implémentation de la vérification de solde Wave et paiements instantanés.",
+          "Ajout du support de paiement Wave pour les retraits de votre entreprise.",
+          "Introduction des mises à jour de statut de transaction en temps réel."
+        ]
+      },
+      {
         "date": "2024-10-17",
         "version": "1.0.0",
         "title": "Lancement",
