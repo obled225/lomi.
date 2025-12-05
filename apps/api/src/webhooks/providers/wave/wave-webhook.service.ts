@@ -187,11 +187,11 @@ export class WaveWebhookService {
     });
 
     // Find transaction using RPC (untyped - use getClient with any cast)
-    const { data: transactions, error: txnError } = await (this.supabase
-      .getClient() as any)
-      .rpc('get_wave_transaction_by_checkout_id', {
-        p_provider_checkout_id: data.id,
-      });
+    const { data: transactions, error: txnError } = await (
+      this.supabase.getClient() as any
+    ).rpc('get_wave_transaction_by_checkout_id', {
+      p_provider_checkout_id: data.id,
+    });
 
     if (txnError) {
       this.logger.error('Error finding transaction:', txnError);
@@ -200,15 +200,21 @@ export class WaveWebhookService {
 
     const transactionsArray = transactions as any;
 
-    if (!transactionsArray || !Array.isArray(transactionsArray) || transactionsArray.length === 0) {
-      this.logger.warn(`No transaction found with provider_checkout_id: ${data.id}`);
+    if (
+      !transactionsArray ||
+      !Array.isArray(transactionsArray) ||
+      transactionsArray.length === 0
+    ) {
+      this.logger.warn(
+        `No transaction found with provider_checkout_id: ${data.id}`,
+      );
 
       // Try checkout_sessions table as fallback
-      const { data: checkoutSession, error: sessionError } = await (this.supabase
-        .getClient() as any)
-        .rpc('get_checkout_session_by_wave_id', {
-          p_wave_session_id: data.id,
-        });
+      const { data: checkoutSession, error: sessionError } = await (
+        this.supabase.getClient() as any
+      ).rpc('get_checkout_session_by_wave_id', {
+        p_wave_session_id: data.id,
+      });
 
       const sessionData = checkoutSession as any;
 
@@ -251,19 +257,23 @@ export class WaveWebhookService {
 
     // Update transaction status
     const transaction = transactionsArray[0];
-    await this.updateTransactionStatus(transaction.transaction_id, 'completed', {
-      wave_session_id: data.id,
-      wave_transaction_id: waveTxnId,
-      wave_session: {
-        id: data.id,
-        checkout_status: data.checkout_status,
-        payment_status: data.payment_status,
-        transaction_id: waveTxnId,
-        when_created: data.when_created,
-        when_expires: data.when_expires,
-        when_completed: data.when_completed,
+    await this.updateTransactionStatus(
+      transaction.transaction_id,
+      'completed',
+      {
+        wave_session_id: data.id,
+        wave_transaction_id: waveTxnId,
+        wave_session: {
+          id: data.id,
+          checkout_status: data.checkout_status,
+          payment_status: data.payment_status,
+          transaction_id: waveTxnId,
+          when_created: data.when_created,
+          when_expires: data.when_expires,
+          when_completed: data.when_completed,
+        },
       },
-    });
+    );
 
     // Update balances
     await this.updateBalances(transaction.transaction_id);
@@ -288,21 +298,26 @@ export class WaveWebhookService {
     });
 
     // Find transaction using RPC (untyped - use getClient with any cast)
-    const { data: transactions, error: txnError } = await (this.supabase
-      .getClient() as any)
-      .rpc('get_wave_transaction_by_checkout_id', {
-        p_provider_checkout_id: data.id,
-      });
+    const { data: transactions, error: txnError } = await (
+      this.supabase.getClient() as any
+    ).rpc('get_wave_transaction_by_checkout_id', {
+      p_provider_checkout_id: data.id,
+    });
 
     const transactionsArray = transactions as any;
 
-    if (txnError || !transactionsArray || !Array.isArray(transactionsArray) || transactionsArray.length === 0) {
+    if (
+      txnError ||
+      !transactionsArray ||
+      !Array.isArray(transactionsArray) ||
+      transactionsArray.length === 0
+    ) {
       // Try checkout_sessions table as fallback
-      const { data: checkoutSession, error: sessionError } = await (this.supabase
-        .getClient() as any)
-        .rpc('get_checkout_session_by_wave_id', {
-          p_wave_session_id: data.id,
-        });
+      const { data: checkoutSession, error: sessionError } = await (
+        this.supabase.getClient() as any
+      ).rpc('get_checkout_session_by_wave_id', {
+        p_wave_session_id: data.id,
+      });
 
       const sessionData = checkoutSession as any;
 
@@ -311,22 +326,18 @@ export class WaveWebhookService {
         throw new NotFoundException('Transaction not found');
       }
 
-      await this.updateTransactionStatus(
-        sessionData.transaction_id,
-        'failed',
-        {
-          wave_payment_status: 'failed',
-          wave_payment_error: data.last_payment_error,
-          wave_session: {
-            id: data.id,
-            checkout_status: data.checkout_status,
-            payment_status: data.payment_status,
-            last_payment_error: data.last_payment_error,
-            when_created: data.when_created,
-            when_expires: data.when_expires,
-          },
+      await this.updateTransactionStatus(sessionData.transaction_id, 'failed', {
+        wave_payment_status: 'failed',
+        wave_payment_error: data.last_payment_error,
+        wave_session: {
+          id: data.id,
+          checkout_status: data.checkout_status,
+          payment_status: data.payment_status,
+          last_payment_error: data.last_payment_error,
+          when_created: data.when_created,
+          when_expires: data.when_expires,
         },
-      );
+      });
 
       await this.triggerMerchantWebhook(
         sessionData.transaction_id,
@@ -369,15 +380,20 @@ export class WaveWebhookService {
       transaction_id: data.transaction_id,
     });
 
-    const { data: transactions, error: txnError } = await (this.supabase
-      .getClient() as any)
-      .rpc('get_wave_transaction_by_checkout_id', {
-        p_provider_checkout_id: data.id,
-      });
+    const { data: transactions, error: txnError } = await (
+      this.supabase.getClient() as any
+    ).rpc('get_wave_transaction_by_checkout_id', {
+      p_provider_checkout_id: data.id,
+    });
 
     const transactionsArray = transactions as any;
 
-    if (txnError || !transactionsArray || !Array.isArray(transactionsArray) || transactionsArray.length === 0) {
+    if (
+      txnError ||
+      !transactionsArray ||
+      !Array.isArray(transactionsArray) ||
+      transactionsArray.length === 0
+    ) {
       this.logger.error('Transaction not found for refund');
       throw new NotFoundException('Transaction not found for refund');
     }
@@ -407,15 +423,20 @@ export class WaveWebhookService {
       wave_session_id: data.id,
     });
 
-    const { data: transactions, error: txnError } = await (this.supabase
-      .getClient() as any)
-      .rpc('get_wave_transaction_by_checkout_id', {
-        p_provider_checkout_id: data.id,
-      });
+    const { data: transactions, error: txnError } = await (
+      this.supabase.getClient() as any
+    ).rpc('get_wave_transaction_by_checkout_id', {
+      p_provider_checkout_id: data.id,
+    });
 
     const transactionsArray = transactions as any;
 
-    if (txnError || !transactionsArray || !Array.isArray(transactionsArray) || transactionsArray.length === 0) {
+    if (
+      txnError ||
+      !transactionsArray ||
+      !Array.isArray(transactionsArray) ||
+      transactionsArray.length === 0
+    ) {
       this.logger.error('Transaction not found for expiration');
       throw new NotFoundException('Transaction not found for expiration');
     }
@@ -444,13 +465,14 @@ export class WaveWebhookService {
     status: string,
     metadata: Record<string, any>,
   ) {
-    const { error } = await (this.supabase
-      .getClient() as any)
-      .rpc('update_transaction_status', {
+    const { error } = await (this.supabase.getClient() as any).rpc(
+      'update_transaction_status',
+      {
         p_transaction_id: transactionId,
         p_status: status,
         p_metadata: metadata,
-      });
+      },
+    );
 
     if (error) {
       this.logger.error('Error updating transaction status:', error);
@@ -467,13 +489,16 @@ export class WaveWebhookService {
    */
   private async updateBalances(transactionId: string) {
     try {
-      this.logger.log('Starting balance update for transaction:', transactionId);
+      this.logger.log(
+        'Starting balance update for transaction:',
+        transactionId,
+      );
 
-      const { error: balanceError } = await (this.supabase
-        .getClient() as any)
-        .rpc('update_balances_for_transaction', {
-          p_transaction_id: transactionId,
-        });
+      const { error: balanceError } = await (
+        this.supabase.getClient() as any
+      ).rpc('update_balances_for_transaction', {
+        p_transaction_id: transactionId,
+      });
 
       if (balanceError) {
         this.logger.warn(

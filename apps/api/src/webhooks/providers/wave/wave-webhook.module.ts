@@ -11,4 +11,3 @@ import { WebhookSenderService } from '../../webhook-sender.service';
   exports: [WaveWebhookService],
 })
 export class WaveWebhookModule {}
-

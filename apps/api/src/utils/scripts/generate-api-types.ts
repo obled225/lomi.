@@ -1,6 +1,10 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import { API_RESOURCES, EXPOSED_FUNCTIONS, isEnumExposed } from '../../api-config';
+import {
+  API_RESOURCES,
+  EXPOSED_FUNCTIONS,
+  isEnumExposed,
+} from '../../api-config';
 
 /**
  * Extract table names from API config

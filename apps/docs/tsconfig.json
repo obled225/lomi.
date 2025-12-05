@@ -1,12 +1,7 @@
 {
   "compilerOptions": {
     "target": "es2017",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "es6",
-      "es2021"
-    ],
+    "lib": ["dom", "dom.iterable", "es6", "es2021"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -19,9 +14,7 @@
     "jsx": "react-jsx",
     "incremental": true,
     "paths": {
-      "@/*": [
-        "./*"
-      ]
+      "@/*": ["./*"]
     },
     "plugins": [
       {
@@ -40,8 +33,5 @@
     "tailwind.config.js",
     ".next/dev/types/**/*.ts"
   ],
-  "exclude": [
-    "node_modules",
-    "../eslint.config.mjs"
-  ]
+  "exclude": ["node_modules", "../eslint.config.mjs"]
 }

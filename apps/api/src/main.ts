@@ -6,19 +6,27 @@ import express from 'express';
 
 async function bootstrap() {
   const expressApp = express();
-  
+
   // Middleware to capture raw body for webhook signature verification
-  expressApp.use('/webhooks', express.raw({ type: 'application/json', limit: '10mb' }), (req, res, next) => {
-    (req as any).rawBody = req.body;
-    next();
-  });
-  
+  expressApp.use(
+    '/webhooks',
+    express.raw({ type: 'application/json', limit: '10mb' }),
+    (req, res, next) => {
+      (req as any).rawBody = req.body;
+      next();
+    },
+  );
+
   // Regular JSON body parser for API routes
   expressApp.use(express.json({ limit: '10mb' }));
-  
-  const app = await NestFactory.create(AppModule, new ExpressAdapter(expressApp), {
-    bodyParser: false, // We're handling body parsing with Express middleware
-  });
+
+  const app = await NestFactory.create(
+    AppModule,
+    new ExpressAdapter(expressApp),
+    {
+      bodyParser: false, // We're handling body parsing with Express middleware
+    },
+  );
 
   // Enable CORS
   const allowedOrigins = process.env.CORS_ALLOWED_ORIGINS

@@ -4,11 +4,11 @@ import Script from 'next/script';
 
 /**
  * Apollo Website Tracker Component
- * 
+ *
  * Tracks company visits using Apollo's IP matching algorithm.
  * This reveals the identities of organizations that visit the website
  * and provides visualized analytics.
- * 
+ *
  * @see https://www.apollo.io
  */
 export function ApolloTracker() {
@@ -30,4 +30,3 @@ export function ApolloTracker() {
     />
   );
 }
-

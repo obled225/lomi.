@@ -11,4 +11,3 @@ import { WebhookSenderService } from '../../webhook-sender.service';
   exports: [StripeWebhookService],
 })
 export class StripeWebhookModule {}
-

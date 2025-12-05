@@ -57,13 +57,17 @@ export class WaveWebhookController {
         rawBody,
       );
 
-      this.logger.log(`Webhook processed successfully: ${body.type || 'unknown'}`);
+      this.logger.log(
+        `Webhook processed successfully: ${body.type || 'unknown'}`,
+      );
 
       return { received: true, ...result };
     } catch (error) {
-      this.logger.error(`Webhook processing error: ${error.message}`, error.stack);
+      this.logger.error(
+        `Webhook processing error: ${error.message}`,
+        error.stack,
+      );
       throw error;
     }
   }
 }
-
