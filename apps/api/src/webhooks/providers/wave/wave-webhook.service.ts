@@ -33,6 +33,21 @@ export class WaveWebhookService {
     }
 
     const event = body;
+
+    // Validate event structure
+    if (!event || typeof event !== 'object') {
+      this.logger.error('Invalid webhook payload: body is not an object');
+      this.logger.debug(`Received body type: ${typeof body}`);
+      throw new Error('Invalid webhook payload structure');
+    }
+
+    if (!event.type) {
+      this.logger.error('Missing event type in webhook payload');
+      this.logger.debug(`Event keys: ${Object.keys(event).join(', ')}`);
+      this.logger.debug(`Event content: ${JSON.stringify(event).substring(0, 500)}`);
+      throw new Error('Missing event type in webhook payload');
+    }
+
     this.logger.log(`Processing Wave webhook: ${event.type}`);
     this.logger.debug(`Event data: ${JSON.stringify(event, null, 2)}`);
 

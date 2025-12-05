@@ -48,17 +48,50 @@ export class WaveWebhookController {
 
     try {
       // Get raw body for signature verification
-      const rawBody = (request as any).rawBody || JSON.stringify(body);
+      // The raw body might be a Buffer from express.raw() middleware
+      let rawBody: string;
+      let parsedBody: any;
 
-      // Process the webhook
+      const rawBodyData = (request as any).rawBody;
+
+      if (rawBodyData) {
+        // Convert Buffer to string if needed
+        rawBody = Buffer.isBuffer(rawBodyData)
+          ? rawBodyData.toString('utf8')
+          : rawBodyData;
+
+        // Parse the raw body to get the actual JSON
+        try {
+          parsedBody = JSON.parse(rawBody);
+          this.logger.debug(
+            `Parsed webhook body - type: ${parsedBody.type}, has data: ${!!parsedBody.data}`,
+          );
+        } catch (parseError) {
+          this.logger.error(`Failed to parse raw body: ${parseError.message}`);
+          this.logger.debug(`Raw body content (first 500 chars): ${rawBody.substring(0, 500)}`);
+          parsedBody = body; // Fallback to body if parsing fails
+        }
+      } else {
+        // No raw body, use the body directly
+        parsedBody = body;
+        rawBody = JSON.stringify(body);
+        this.logger.debug('No rawBody found, using body directly');
+      }
+
+      // Log body type and content for debugging
+      this.logger.debug(
+        `Body type: ${typeof parsedBody}, isEmpty: ${!parsedBody || Object.keys(parsedBody || {}).length === 0}`,
+      );
+
+      // Process the webhook with parsed body
       const result = await this.waveWebhookService.handleWebhook(
         headers,
-        body,
+        parsedBody,
         rawBody,
       );
 
       this.logger.log(
-        `Webhook processed successfully: ${body.type || 'unknown'}`,
+        `Webhook processed successfully: ${parsedBody?.type || 'unknown'}`,
       );
 
       return { received: true, ...result };
