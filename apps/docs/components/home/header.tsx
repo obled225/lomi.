@@ -129,7 +129,7 @@ export function Header() {
           <div className="flex items-center pl-3 md:pl-4 pt-2">
             <Link href="/" onClick={playClickSound}>
               <div className="cursor-pointer hover:opacity-80 transition-opacity">
-                <Logo width={80} height={24} />
+                <Logo width={80} height={24} priority />
               </div>
             </Link>
           </div>

@@ -79,10 +79,10 @@ export const playCompletionSound = (): void => {
 };
 
 /**
- * Returns whether sound is currently enabled (defaults to true when unset, but false on mobile).
+ * Returns whether sound is currently enabled (defaults to false when unset, disabled on mobile).
  */
 export const getSoundEnabled = (): boolean => {
-  if (typeof window === 'undefined') return true;
+  if (typeof window === 'undefined') return false;
 
   // Disable sound on mobile devices
   if (
@@ -95,7 +95,7 @@ export const getSoundEnabled = (): boolean => {
   }
 
   const raw = getLocalStorageItem(Cookies.SoundEnabled);
-  if (raw === null) return true; // Default to true if not set
+  if (raw === null) return false; // Default to false if not set
   return raw === 'true';
 };
 

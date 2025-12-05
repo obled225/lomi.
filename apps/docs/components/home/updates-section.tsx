@@ -22,12 +22,6 @@ export function UpdatesSection() {
               {String(t('careers.title', currentLanguage))}
             </h2>
           </div>
-          {/* Join Us Button */}
-          <Link href="/careers" onClick={playClickSound}>
-            <Button variant="blue" size="header" className="self-start">
-              {String(t('careers.join_us', currentLanguage))}
-            </Button>
-          </Link>
         </div>
 
         {/* Latest Articles Section */}

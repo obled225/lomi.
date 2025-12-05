@@ -8,57 +8,48 @@ import { t as translate } from '@/lib/i18n/translations';
 
 interface HeroProps {
   dashboardImage?:
-    | string
-    | {
-        light: string;
-        dark: string;
-      };
+  | string
+  | {
+    light: string;
+    dark: string;
+  };
   mobileDashboardImage?: {
     light: string;
     dark: string;
   };
+  initialTitleIndex: number | null;
 }
 
-// Function to get a random title index from session storage or generate new one
-const getSessionTitleIndex = (): number => {
-  // Always return 0 on server to avoid hydration mismatch
-  if (typeof window === 'undefined') {
-    return 0;
-  }
+// Function to set the title index cookie (client-side only)
+const setTitleIndexCookie = (index: number): void => {
+  if (typeof document === 'undefined') return;
 
-  try {
-    // Try to get existing index from session storage
-    const stored = sessionStorage.getItem('hero-title-index');
-    if (stored !== null) {
-      const index = parseInt(stored, 10);
-      // Validate that it's a number between 0 and 4
-      if (!isNaN(index) && index >= 0 && index <= 4) {
-        return index;
-      }
-    }
-
-    // Generate a new random index (0-4) and store it
-    const randomIndex = Math.floor(Math.random() * 5);
-    sessionStorage.setItem('hero-title-index', randomIndex.toString());
-    return randomIndex;
-  } catch {
-    // Fallback if sessionStorage is not available
-    return 0;
-  }
+  const expires = new Date();
+  expires.setFullYear(expires.getFullYear() + 1);
+  document.cookie = `hero-title-index=${index};path=/;expires=${expires.toUTCString()}`;
 };
 
-function Hero({ dashboardImage, mobileDashboardImage }: HeroProps) {
+function Hero({
+  dashboardImage,
+  mobileDashboardImage,
+  initialTitleIndex,
+}: HeroProps) {
   const { currentLanguage } = useTranslation();
-  // Start with index 0 to ensure server/client consistency, then randomize on client
-  const [titleIndex, setTitleIndex] = useState<number>(0);
 
-  // Randomize title on client side after hydration to avoid hydration mismatch
+  // Use server-provided index, or default to 0 for SSR consistency
+  // We use 0 as SSR default when no cookie exists (first visit)
+  const [titleIndex] = useState<number>(() => initialTitleIndex ?? 0);
+  const [isFirstVisit] = useState<boolean>(() => initialTitleIndex === null);
+
+  // On first visit (no cookie), generate random index client-side and set cookie
+  // This runs after hydration so won't cause mismatch - title stays at 0 for this visit
+  // but future visits will have the cookie set
   useEffect(() => {
-    const randomIndex = getSessionTitleIndex();
-    if (randomIndex !== 0) {
-      setTitleIndex(randomIndex);
+    if (isFirstVisit) {
+      const randomIndex = Math.floor(Math.random() * 5);
+      setTitleIndexCookie(randomIndex);
     }
-  }, []);
+  }, [isFirstVisit]);
 
   // Create t function that uses currentLanguage (same pattern as header.tsx)
   const t = (key: string) => String(translate(key, currentLanguage));
