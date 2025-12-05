@@ -120,16 +120,48 @@
         "question": "Y a-t-il un montant minimum de transaction?"
       },
       "payment_methods": {
-        "answer": "Nous supportons les cartes de crédit et de débit principales, et le mobile money dans plusieurs pays africains.",
+        "answer": "Nous acceptons les principales cartes de crédit et de débit (Visa, Mastercard, Amex, GIM UEMOA), et le mobile money dans plusieurs pays africains dont Wave, MTN et les paiements instantanés via SPI.",
         "question": "Quels méthodes de paiement supportez-vous?"
       },
       "pricing": {
-        "answer": "lomi. offre un prix transparent sans frais cachés. Nous chargeons une simple taxe de 2.9% par transaction plus une petite taxe fixe en fonction de la devise. Il n'y a pas de frais d'installation, de frais mensuels ou de frais cachés.",
+        "answer": "lomi. offre des tarifs transparents sans frais cachés. Nous facturons 2% + 200 F CFA par transaction pour le mobile money, et 3,5% + 0,40 $ pour les cartes de crédit. Pas de frais d'installation et aucun frais mensuels.",
         "question": "Comment fonctionne le pricing de lomi.?"
       },
       "security": {
-        "answer": "lomi. utilise des protocoles de sécurité de l'industrie et est entièrement conforme aux exigences de PCI DSS pour le traitement des paiements avec cartes. Nous utilisons l'encryption, la tokenisation et d'autres mesures de sécurité pour protéger vos données et les informations de vos clients.",
+        "answer": "lomi. utilise des protocoles de sécurité de l'industrie et est entièrement conforme aux exigences PCI DSS pour le traitement des paiements par carte. Nous utilisons l'encryption, la tokenisation et d'autres mesures de sécurité pour protéger vos données et les informations de vos clients.",
         "question": "Quelle est la sécurité de lomi.?"
+      },
+      "getting_started": {
+        "answer": "C'est simple : créez un compte sur notre dashboard, complétez notre processus KYC, et générez un lien de paiement. Vous êtes fin prêt à accepter des paiements de vos clients et partenaires; cela ne prend que quelques minutes.",
+        "question": "Comment démarrer avec lomi.?"
+      },
+      "payouts": {
+        "answer": "Vous pouvez retirer vos fonds vers votre portefeuille mobile money ou votre compte bancaire. Les retraits au sein de l'UEMOA sont instantanés via SPI, tandis que les virements bancaires internationaux prennent 1 à 3 jours ouvrables. lomi. ne facture aucun frais supplémentaire pour les retraits, nous répercutons uniquement les frais du prestataire.",
+        "question": "Comment fonctionnent les retraits?"
+      },
+      "mobile_money": {
+        "answer": "Nous supportons Wave (populaire au Sénégal et en Côte d'Ivoire), MTN (Afrique de l'Ouest et Centrale), et SPI pour les paiements mobile money interopérables dans 8 pays de l'UEMOA : Bénin, Burkina Faso, Côte d'Ivoire, Guinée-Bissau, Mali, Niger, Sénégal et Togo.",
+        "question": "Quels fournisseurs mobile money supportez-vous?"
+      },
+      "refunds": {
+        "answer": "Vous pouvez émettre des remboursements complets et partiels directement depuis le dashboard. Les remboursements complets sont gratuits. Les remboursements partiels comportent des frais de traitement de 2% pour couvrir les coûts. Les frais de transaction initiaux ne sont pas remboursés car ils sont facturés par les réseaux de paiement.",
+        "question": "Comment fonctionnent les remboursements?"
+      },
+      "chargebacks": {
+        "answer": "Les transactions mobile money ne peuvent pas faire l'objet de rétrofacturations. Pour les litiges par carte de crédit, des frais de 15 $ par rétrofacturation s'appliquent (facturés par nos réseaux de cartes). lomi. surveille activement et aide à prévenir les rétrofacturations pour maintenir des taux bas en dessous des normes de l'industrie.",
+        "question": "Qu'en est-il des rétrofacturations et des litiges?"
+      },
+      "subscriptions": {
+        "answer": "Oui ! lomi. supporte la facturation récurrente et la gestion des abonnements. Vous pouvez créer des produits d'abonnement avec différents intervalles de facturation, gérer les abonnements clients, et gérer les upgrades, downgrades et annulations depuis votre dashboard.",
+        "question": "Puis-je configurer des paiements récurrents et des abonnements?"
+      },
+      "api_integration": {
+        "answer": "Nous fournissons des SDKs officiels pour Next.js, JavaScript, Go, Python et PHP. Notre API REST est bien documentée et vous permet d'intégrer les paiements, gérer les produits, gérer les webhooks et automatiser vos workflows de paiement de manière programmatique.",
+        "question": "Comment intégrer lomi. à mon site web ou mon application?"
+      },
+      "countries": {
+        "answer": "lomi. sert principalement l'Afrique de l'Ouest, notamment le Sénégal, la Côte d'Ivoire. Nous supportons également les paiements par carte internationaux, vous permettant d'accepter des paiements de clients du monde entier.",
+        "question": "Quels pays lomi. supporte-t-il?"
       }
     },
     "subtitle": "Trouvez des réponses aux questions courantes sur nos services.",

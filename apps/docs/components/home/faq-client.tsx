@@ -17,14 +17,14 @@ export default function FaqClient() {
 
   const faqItems = [
     {
+      key: 'getting_started',
+      question: t('faq.items.getting_started.question', currentLanguage),
+      answer: t('faq.items.getting_started.answer', currentLanguage),
+    },
+    {
       key: 'pricing',
       question: t('faq.items.pricing.question', currentLanguage),
       answer: t('faq.items.pricing.answer', currentLanguage),
-    },
-    {
-      key: 'funds',
-      question: t('faq.items.funds.question', currentLanguage),
-      answer: t('faq.items.funds.answer', currentLanguage),
     },
     {
       key: 'payment_methods',
@@ -32,14 +32,54 @@ export default function FaqClient() {
       answer: t('faq.items.payment_methods.answer', currentLanguage),
     },
     {
-      key: 'minimum_amount',
-      question: t('faq.items.minimum_amount.question', currentLanguage),
-      answer: t('faq.items.minimum_amount.answer', currentLanguage),
+      key: 'mobile_money',
+      question: t('faq.items.mobile_money.question', currentLanguage),
+      answer: t('faq.items.mobile_money.answer', currentLanguage),
+    },
+    {
+      key: 'countries',
+      question: t('faq.items.countries.question', currentLanguage),
+      answer: t('faq.items.countries.answer', currentLanguage),
+    },
+    {
+      key: 'funds',
+      question: t('faq.items.funds.question', currentLanguage),
+      answer: t('faq.items.funds.answer', currentLanguage),
+    },
+    {
+      key: 'payouts',
+      question: t('faq.items.payouts.question', currentLanguage),
+      answer: t('faq.items.payouts.answer', currentLanguage),
+    },
+    {
+      key: 'refunds',
+      question: t('faq.items.refunds.question', currentLanguage),
+      answer: t('faq.items.refunds.answer', currentLanguage),
+    },
+    {
+      key: 'chargebacks',
+      question: t('faq.items.chargebacks.question', currentLanguage),
+      answer: t('faq.items.chargebacks.answer', currentLanguage),
+    },
+    {
+      key: 'subscriptions',
+      question: t('faq.items.subscriptions.question', currentLanguage),
+      answer: t('faq.items.subscriptions.answer', currentLanguage),
+    },
+    {
+      key: 'api_integration',
+      question: t('faq.items.api_integration.question', currentLanguage),
+      answer: t('faq.items.api_integration.answer', currentLanguage),
     },
     {
       key: 'security',
       question: t('faq.items.security.question', currentLanguage),
       answer: t('faq.items.security.answer', currentLanguage),
+    },
+    {
+      key: 'minimum_amount',
+      question: t('faq.items.minimum_amount.question', currentLanguage),
+      answer: t('faq.items.minimum_amount.answer', currentLanguage),
     },
     {
       key: 'international',

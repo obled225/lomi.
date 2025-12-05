@@ -80,6 +80,8 @@ export function Header() {
   const [isDocumentationOpen, setIsDocumentationOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const leaveTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const integrationsHoverTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const documentationHoverTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Create t function that uses currentLanguage (same pattern as tracking-cookie.tsx)
   const t = (key: string) => String(translate(key, currentLanguage));
@@ -88,11 +90,19 @@ export function Header() {
     if (leaveTimeout.current) {
       clearTimeout(leaveTimeout.current);
     }
-    setIsIntegrationsOpen(true);
-    setIsDocumentationOpen(false);
+    if (documentationHoverTimeout.current) {
+      clearTimeout(documentationHoverTimeout.current);
+    }
+    integrationsHoverTimeout.current = setTimeout(() => {
+      setIsIntegrationsOpen(true);
+      setIsDocumentationOpen(false);
+    }, 900);
   };
 
   const handleIntegrationsMouseLeave = () => {
+    if (integrationsHoverTimeout.current) {
+      clearTimeout(integrationsHoverTimeout.current);
+    }
     leaveTimeout.current = setTimeout(() => {
       setIsIntegrationsOpen(false);
       setIsDocumentationOpen(false);
@@ -103,11 +113,19 @@ export function Header() {
     if (leaveTimeout.current) {
       clearTimeout(leaveTimeout.current);
     }
-    setIsDocumentationOpen(true);
-    setIsIntegrationsOpen(false);
+    if (integrationsHoverTimeout.current) {
+      clearTimeout(integrationsHoverTimeout.current);
+    }
+    documentationHoverTimeout.current = setTimeout(() => {
+      setIsDocumentationOpen(true);
+      setIsIntegrationsOpen(false);
+    }, 900);
   };
 
   const handleDocumentationMouseLeave = () => {
+    if (documentationHoverTimeout.current) {
+      clearTimeout(documentationHoverTimeout.current);
+    }
     leaveTimeout.current = setTimeout(() => {
       setIsDocumentationOpen(false);
       setIsIntegrationsOpen(false);

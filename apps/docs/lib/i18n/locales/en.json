@@ -120,16 +120,48 @@
         "question": "Is there a minimum transaction amount?"
       },
       "payment_methods": {
-        "answer": "We support major credit and debit cards, and mobile money across multiple African countries.",
+        "answer": "We support major credit and debit cards (Visa, Mastercard, Amex, GIM UEMOA), and mobile money across multiple African countries including Wave, MTN, and SPI instant payments.",
         "question": "What payment methods do you support?"
       },
       "pricing": {
-        "answer": "lomi. offers transparent pricing with no hidden fees. We charge a simple 2.9% fee per transaction plus a small fixed fee depending on the currency. There are no setup fees, monthly fees, or hidden charges.",
+        "answer": "lomi. offers transparent pricing with no hidden fees. We charge 2% + 200 F CFA per transaction for mobile money, and 3.5% + $0.40 for credit cards. There are no setup fees, no monthly fees, and any hidden charges.",
         "question": "How does lomi. pricing work?"
       },
       "security": {
         "answer": "lomi. uses industry-standard security protocols and is fully compliant with PCI DSS requirements for card payments processing. We employ encryption, tokenization, and other security measures to protect your data and your customers' information.",
         "question": "How secure is lomi.?"
+      },
+      "getting_started": {
+        "answer": "Getting started is simple: create an account on our dashboard, complete our KYC process, connect your preferred payment methods (mobile money or bank account), and you're ready to accept payments. It takes just a few minutes.",
+        "question": "How do I get started with lomi.?"
+      },
+      "payouts": {
+        "answer": "You can withdraw funds to your mobile money wallet or bank account. Withdrawals within UEMOA are instant via SPI and Mobile Money, while international bank transfers take 1-3 business days. lomi. does not charge any additional fees for payouts - we only pass through any provider fees.",
+        "question": "How do payouts work?"
+      },
+      "mobile_money": {
+        "answer": "We support Wave (popular in Senegal and Côte d'Ivoire), MTN (West and Central Africa), and SPI for interoperable mobile money payments across 8 UEMOA countries: Benin, Burkina Faso, Côte d'Ivoire, Guinea-Bissau, Mali, Niger, Senegal, and Togo.",
+        "question": "Which mobile money providers do you support?"
+      },
+      "refunds": {
+        "answer": "You can issue both full and partial refunds directly from the dashboard. Full refunds are free of charge. Partial refunds incur a 2% processing fee to cover costs. The original transaction fees are not refunded as they are charged by payment networks.",
+        "question": "How do refunds work?"
+      },
+      "chargebacks": {
+        "answer": "Mobile money transactions cannot have chargebacks. For credit card disputes, there is a $15 fee per chargeback (charged by our underlying card networks). lomi. actively monitors and helps prevent chargebacks to keep your rates low at or below industry standards.",
+        "question": "What about chargebacks and disputes?"
+      },
+      "subscriptions": {
+        "answer": "Yes! lomi. supports recurring billing and subscription management. You can create subscription products with various billing intervals, manage customer subscriptions, and handle upgrades, downgrades, and cancellations from your dashboard.",
+        "question": "Can I set up recurring payments and subscriptions?"
+      },
+      "api_integration": {
+        "answer": "We provide official SDKs for Next.js, JavaScript, Go, Python, and PHP. Our REST API is well-documented and allows you to integrate payments, manage products, handle webhooks, and automate your payment workflows programmatically.",
+        "question": "How do I integrate lomi. with my website or app?"
+      },
+      "countries": {
+        "answer": "lomi. primarily serves West Africa including Senegal, Côte d'Ivoire. We also support international card payments, allowing you to accept payments from customers worldwide.",
+        "question": "Which countries does lomi. support?"
       }
     },
     "subtitle": "Find answers to common questions about our services.",

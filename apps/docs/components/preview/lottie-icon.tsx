@@ -70,6 +70,9 @@ const LottieIconComponent = ({
       : ([0, 0, 0] as [number, number, number]); // Pure black in light mode
   }, [isDark, customColor, lightColor, darkColor]);
 
+  // Create a stable key from color to force re-processing when color changes
+  const colorKey = color.join(',');
+
   // Use external hover state if provided, otherwise use internal state
   const isHovered =
     externalHovered !== undefined ? externalHovered : internalHovered;
@@ -114,7 +117,8 @@ const LottieIconComponent = ({
       setAnimData(null);
       setIsLoading(false);
     }
-  }, [animationData, color]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [animationData, colorKey]); // Use colorKey string instead of color array for stable comparison
 
   // Set initial frame when animation loads
   useEffect(() => {
