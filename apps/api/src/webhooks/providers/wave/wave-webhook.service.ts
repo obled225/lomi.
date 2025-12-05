@@ -238,7 +238,7 @@ export class WaveWebhookService {
         throw new NotFoundException('Transaction not found');
       }
 
-      // Update checkout session status
+      // Update checkout session status (balance is now updated automatically by the DB)
       await this.updateTransactionStatus(
         sessionData.transaction_id,
         'completed',
@@ -257,8 +257,7 @@ export class WaveWebhookService {
         },
       );
 
-      // Update balances
-      await this.updateBalances(sessionData.transaction_id);
+      // Note: Balance is now automatically updated by the database when status = 'completed'
 
       // Trigger merchant webhooks
       await this.triggerMerchantWebhook(
@@ -270,7 +269,7 @@ export class WaveWebhookService {
       return { transaction_id: sessionData.transaction_id };
     }
 
-    // Update transaction status
+    // Update transaction status (balance is now updated automatically by the DB)
     const transaction = transactionsArray[0];
     await this.updateTransactionStatus(
       transaction.transaction_id,
@@ -290,8 +289,8 @@ export class WaveWebhookService {
       },
     );
 
-    // Update balances
-    await this.updateBalances(transaction.transaction_id);
+    // Note: Balance is now automatically updated by the database when status = 'completed'
+    // The update_balances_for_transaction function is called internally by update_transaction_status
 
     // Trigger merchant webhooks
     await this.triggerMerchantWebhook(
