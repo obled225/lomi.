@@ -402,12 +402,6 @@ Payment links trigger webhooks when:
 - A payment fails
 - A checkout session is created from the link
 
-Subscribe to these webhook events:
-- `checkout.session.completed`
-- `checkout.session.expired`
-- `payment.succeeded`
-- `payment.failed`
-
 ---
 
 ## Rate Limits

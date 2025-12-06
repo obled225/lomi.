@@ -45,7 +45,7 @@ describe('WebhooksService', () => {
     it('should create a webhook', async () => {
       const createDto: CreateWebhookDto = {
         url: 'https://example.com/webhook',
-        authorized_events: 'payment.succeeded',
+        authorized_events: 'PAYMENT_SUCCEEDED',
       } as any;
       const user: AuthContext = { organizationId: 'org_123' } as any;
       const expectedResult = { id: 'wh_123', ...createDto };

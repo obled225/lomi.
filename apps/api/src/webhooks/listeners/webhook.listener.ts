@@ -14,10 +14,10 @@ export class WebhookListener {
     @InjectQueue('webhooks') private readonly webhookQueue: Queue,
   ) {}
 
-  @OnEvent('payment.succeeded')
+  @OnEvent('PAYMENT_SUCCEEDED')
   async handlePaymentSucceeded(payload: any) {
     this.logger.log(
-      `Handling payment.succeeded event for transaction ${payload.id}`,
+      `Handling PAYMENT_SUCCEEDED event for transaction ${payload.id}`,
     );
     await this.queueWebhook(
       payload.organization_id,
@@ -26,23 +26,23 @@ export class WebhookListener {
     );
   }
 
-  @OnEvent('payment.failed')
+  @OnEvent('PAYMENT_FAILED')
   async handlePaymentFailed(payload: any) {
     this.logger.log(
-      `Handling payment.failed event for transaction ${payload.id}`,
+      `Handling PAYMENT_FAILED event for transaction ${payload.id}`,
     );
     await this.queueWebhook(payload.organization_id, 'PAYMENT_FAILED', payload);
   }
 
-  @OnEvent('refund.created')
+  @OnEvent('REFUND_CREATED')
   async handleRefundCreated(payload: any) {
-    this.logger.log(`Handling refund.created event for refund ${payload.id}`);
+    this.logger.log(`Handling REFUND_CREATED event for refund ${payload.id}`);
     await this.queueWebhook(payload.organization_id, 'REFUND_CREATED', payload);
   }
 
-  @OnEvent('refund.completed')
+  @OnEvent('REFUND_COMPLETED')
   async handleRefundCompleted(payload: any) {
-    this.logger.log(`Handling refund.completed event for refund ${payload.id}`);
+    this.logger.log(`Handling REFUND_COMPLETED event for refund ${payload.id}`);
     await this.queueWebhook(
       payload.organization_id,
       'REFUND_COMPLETED',
@@ -50,16 +50,16 @@ export class WebhookListener {
     );
   }
 
-  @OnEvent('refund.failed')
+  @OnEvent('REFUND_FAILED')
   async handleRefundFailed(payload: any) {
-    this.logger.log(`Handling refund.failed event for refund ${payload.id}`);
+    this.logger.log(`Handling REFUND_FAILED event for refund ${payload.id}`);
     await this.queueWebhook(payload.organization_id, 'REFUND_FAILED', payload);
   }
 
-  @OnEvent('subscription.created')
+  @OnEvent('SUBSCRIPTION_CREATED')
   async handleSubscriptionCreated(payload: any) {
     this.logger.log(
-      `Handling subscription.created event for subscription ${payload.id}`,
+      `Handling SUBSCRIPTION_CREATED event for subscription ${payload.id}`,
     );
     await this.queueWebhook(
       payload.organization_id,
@@ -68,10 +68,10 @@ export class WebhookListener {
     );
   }
 
-  @OnEvent('subscription.renewed')
+  @OnEvent('SUBSCRIPTION_RENEWED')
   async handleSubscriptionRenewed(payload: any) {
     this.logger.log(
-      `Handling subscription.renewed event for subscription ${payload.id}`,
+      `Handling SUBSCRIPTION_RENEWED event for subscription ${payload.id}`,
     );
     await this.queueWebhook(
       payload.organization_id,
@@ -80,10 +80,10 @@ export class WebhookListener {
     );
   }
 
-  @OnEvent('subscription.canceled')
+  @OnEvent('SUBSCRIPTION_CANCELED')
   async handleSubscriptionCanceled(payload: any) {
     this.logger.log(
-      `Handling subscription.canceled event for subscription ${payload.id}`,
+      `Handling SUBSCRIPTION_CANCELED event for subscription ${payload.id}`,
     );
     await this.queueWebhook(
       payload.organization_id,
