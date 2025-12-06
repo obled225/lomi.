@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { APP_GUARD } from '@nestjs/core';
+import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { BullModule } from '@nestjs/bullmq';
@@ -22,6 +22,7 @@ import { PayoutsModule } from './core/payouts/payouts.module';
 import { BeneficiaryPayoutsModule } from './core/beneficiary-payouts/beneficiary-payouts.module';
 import { WebhookDeliveryLogsModule } from './core/webhook-delivery-logs/webhook-delivery-logs.module';
 import { WebhooksModule } from './webhooks/webhooks.module';
+import { ApiLoggingInterceptor } from './core/interceptors/api-logging.interceptor';
 
 @Module({
   imports: [
@@ -65,6 +66,10 @@ import { WebhooksModule } from './webhooks/webhooks.module';
     {
       provide: APP_GUARD,
       useClass: ThrottlerGuard,
+    },
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: ApiLoggingInterceptor,
     },
   ],
 })
