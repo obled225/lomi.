@@ -233,12 +233,25 @@ export class WaveWebhookService {
         p_wave_session_id: data.id,
       });
 
-      const sessionData = checkoutSession as any;
+      // The RPC returns an array, get the first result
+      const sessionArray = Array.isArray(checkoutSession) ? checkoutSession : [checkoutSession];
+      const sessionData = sessionArray[0] as any;
 
       if (sessionError || !sessionData) {
         this.logger.error('Error finding checkout session:', sessionError);
         throw new NotFoundException('Transaction not found');
       }
+
+      // Validate that we have a transaction_id from the checkout session
+      if (!sessionData.transaction_id) {
+        this.logger.error('Checkout session found but no transaction_id associated:', {
+          checkout_session_id: sessionData.checkout_session_id,
+          wave_session_id: data.id,
+        });
+        throw new NotFoundException('No transaction associated with checkout session');
+      }
+
+      this.logger.log(`Found transaction ${sessionData.transaction_id} from checkout session ${sessionData.checkout_session_id}`);
 
       // Update checkout session status (balance is now updated automatically by the DB)
       await this.updateTransactionStatus(
