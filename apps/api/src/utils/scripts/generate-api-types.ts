@@ -20,8 +20,8 @@ function extractFunctionDefinition(
   content: string,
   functionName: string,
 ): string | null {
-  // Find the function start: "functionName: {"
-  const functionStartRegex = new RegExp(`^\\s*${functionName}:\\s*\\{`, 'm');
+  // Find the function start: "functionName:" (works for both direct and union types)
+  const functionStartRegex = new RegExp(`^\\s*${functionName}:`, 'm');
   const startMatch = content.match(functionStartRegex);
 
   if (!startMatch) {
@@ -30,8 +30,21 @@ function extractFunctionDefinition(
 
   // Start from the beginning of the match (includes function name)
   const startIndex = startMatch.index!;
-  // Find the opening brace position
-  const braceIndex = startIndex + startMatch[0].length - 1;
+
+  // Find the first opening brace after the function name
+  // This handles both "functionName: {" and "functionName:\n  | {"
+  let braceIndex = -1;
+  for (let i = startIndex + startMatch[0].length; i < content.length; i++) {
+    if (content[i] === '{') {
+      braceIndex = i;
+      break;
+    }
+  }
+
+  if (braceIndex === -1) {
+    return null;
+  }
+
   let braceCount = 1;
   let i = braceIndex + 1;
 

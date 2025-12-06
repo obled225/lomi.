@@ -244,6 +244,7 @@ export const EXPOSED_ENUMS = [
   'currency_code',
   'payment_method_code',
   'provider_code',
+  'provider_payment_status',
   'transaction_status',
   'transaction_type',
   'refund_status',

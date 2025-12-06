@@ -44,7 +44,9 @@ export class WaveWebhookService {
     if (!event.type) {
       this.logger.error('Missing event type in webhook payload');
       this.logger.debug(`Event keys: ${Object.keys(event).join(', ')}`);
-      this.logger.debug(`Event content: ${JSON.stringify(event).substring(0, 500)}`);
+      this.logger.debug(
+        `Event content: ${JSON.stringify(event).substring(0, 500)}`,
+      );
       throw new Error('Missing event type in webhook payload');
     }
 

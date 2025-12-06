@@ -68,7 +68,9 @@ export class WaveWebhookController {
           );
         } catch (parseError) {
           this.logger.error(`Failed to parse raw body: ${parseError.message}`);
-          this.logger.debug(`Raw body content (first 500 chars): ${rawBody.substring(0, 500)}`);
+          this.logger.debug(
+            `Raw body content (first 500 chars): ${rawBody.substring(0, 500)}`,
+          );
           parsedBody = body; // Fallback to body if parsing fails
         }
       } else {

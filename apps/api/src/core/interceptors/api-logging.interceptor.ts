@@ -49,11 +49,12 @@ export class ApiLoggingInterceptor implements NestInterceptor {
   ) {
     try {
       const user = request.user;
-      
-      const apiKey = 
-        request.headers['x-api-key'] || 
-        (request.headers.authorization && request.headers.authorization.startsWith('Bearer ') 
-          ? request.headers.authorization.substring(7) 
+
+      const apiKey =
+        request.headers['x-api-key'] ||
+        (request.headers.authorization &&
+        request.headers.authorization.startsWith('Bearer ')
+          ? request.headers.authorization.substring(7)
           : null);
 
       if (user && user.organizationId && apiKey) {
@@ -67,7 +68,7 @@ export class ApiLoggingInterceptor implements NestInterceptor {
             p_api_key: apiKey,
             p_endpoint: urlWithoutQuery(request.url),
             p_request_method: request.method,
-            p_request_payload: request.body ? request.body : {}, 
+            p_request_payload: request.body ? request.body : {},
             p_response_status: statusCode,
             p_response_payload: responseBody ? responseBody : {},
             p_response_time: durationMs,
