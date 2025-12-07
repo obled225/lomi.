@@ -97,29 +97,26 @@ export class WebhookListener {
     event: WebhookEvent,
     data: any,
   ) {
-    // We still need to fetch relevant webhooks first to know which ones to queue
-    // Ideally this logic should be moved to a service method that returns webhooks
-    // For now, we'll use the sender service to fetch and then queue individual jobs
-
-    // NOTE: Refactoring notifyOrganization to return webhooks instead of sending would be cleaner
-    // But to minimize changes, let's just queue the organization notification job
-    // and let the processor handle the fan-out or fetching.
-
-    // Actually, better approach:
-    // 1. Fetch webhooks here (or via service)
-    // 2. Queue a job for EACH webhook
-
-    // Let's modify WebhookSenderService to expose a method to get webhooks
-    // For now, I'll implement a simple fetch here using the existing service if possible,
-    // or just queue a "notify-organization" job and let the processor handle it.
-    // However, the processor is set up to take a specific webhook.
-
-    // Let's change the strategy: The listener will fetch webhooks and queue jobs.
-    await this.webhookSender.queueWebhooksForOrganization(
-      organizationId,
-      event,
-      data,
-      this.webhookQueue,
-    );
+    try {
+      // Try to queue webhooks via Redis (async, with retries)
+      await this.webhookSender.queueWebhooksForOrganization(
+        organizationId,
+        event,
+        data,
+        this.webhookQueue,
+      );
+    } catch (error: any) {
+      // Redis unavailable - fall back to synchronous sending
+      this.logger.warn(
+        `Redis queue unavailable, falling back to sync webhook dispatch: ${error.message}`,
+      );
+      try {
+        await this.webhookSender.notifyOrganization(organizationId, event, data);
+      } catch (syncError: any) {
+        this.logger.error(
+          `Failed to send webhooks synchronously: ${syncError.message}`,
+        );
+      }
+    }
   }
 }

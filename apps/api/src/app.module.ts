@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module, Logger } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
@@ -24,6 +24,8 @@ import { WebhookDeliveryLogsModule } from './core/webhook-delivery-logs/webhook-
 import { WebhooksModule } from './webhooks/webhooks.module';
 import { ApiLoggingInterceptor } from './core/interceptors/api-logging.interceptor';
 
+const logger = new Logger('RedisConfig');
+
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -37,10 +39,55 @@ import { ApiLoggingInterceptor } from './core/interceptors/api-logging.intercept
       },
     ]),
     EventEmitterModule.forRoot(),
-    BullModule.forRoot({
-      connection: {
-        host: process.env.REDIS_HOST || 'localhost',
-        port: parseInt(process.env.REDIS_PORT || '6379'),
+    BullModule.forRootAsync({
+      useFactory: () => {
+        const redisUrl = process.env.UPSTASH_REDIS_URL;
+
+        // If no Redis URL, fall back to localhost (dev mode)
+        if (!redisUrl) {
+          logger.warn(
+            'UPSTASH_REDIS_URL not set. Using localhost Redis. Webhooks will fall back to sync mode if unavailable.',
+          );
+          return {
+            connection: {
+              host: process.env.REDIS_HOST || 'localhost',
+              port: parseInt(process.env.REDIS_PORT || '6379'),
+              maxRetriesPerRequest: null,
+              enableReadyCheck: false,
+              retryStrategy: (times: number) => {
+                if (times > 3) {
+                  logger.error(
+                    'Redis connection failed after 3 retries. Webhooks will use sync fallback.',
+                  );
+                  return null; // Stop retrying, triggers fallback
+                }
+                return Math.min(times * 200, 2000);
+              },
+            },
+          };
+        }
+
+        // Parse Upstash Redis URL (supports both redis:// and rediss://)
+        logger.log('Connecting to Upstash Redis...');
+        const useTls = redisUrl.startsWith('rediss://');
+
+        return {
+          connection: {
+            url: redisUrl,
+            maxRetriesPerRequest: null,
+            enableReadyCheck: false,
+            tls: useTls ? { rejectUnauthorized: false } : undefined,
+            retryStrategy: (times: number) => {
+              if (times > 5) {
+                logger.error(
+                  'Upstash Redis connection failed after 5 retries. Webhooks will use sync fallback.',
+                );
+                return null;
+              }
+              return Math.min(times * 500, 5000);
+            },
+          },
+        };
       },
     }),
     SupabaseModule,

@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, UseGuards, Header } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 import { AppService } from './app.service';
 import { ApiKeyGuard } from './core/common/guards/api-key.guard';
@@ -17,6 +17,14 @@ export class AppController {
   @Get()
   getHello(): string {
     return this.appService.getHello();
+  }
+
+  @Get('robots.txt')
+  @Header('Content-Type', 'text/plain')
+  getRobots(): string {
+    return `User-agent: *
+Disallow: /
+`;
   }
 
   @Post('test/webhook-event')
