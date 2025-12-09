@@ -194,8 +194,9 @@ export class WaveWebhookService {
    */
   private async handleCheckoutCompleted(data: any) {
     const waveTxnId = data.transaction_id;
+    const sessionId = data.id;
     this.logger.log('Processing completed checkout session:', {
-      wave_session_id: data.id,
+      wave_session_id: sessionId,
       transaction_id: waveTxnId,
       amount: data.amount,
       currency: data.currency,
@@ -207,7 +208,7 @@ export class WaveWebhookService {
     const { data: transactions, error: txnError } = await (
       this.supabase.getClient() as any
     ).rpc('get_wave_transaction_by_checkout_id', {
-      p_provider_checkout_id: data.id,
+      p_provider_checkout_id: sessionId,
     });
 
     if (txnError) {
@@ -223,17 +224,17 @@ export class WaveWebhookService {
       transactionsArray.length === 0
     ) {
       this.logger.warn(
-        `No transaction found with provider_checkout_id: ${data.id}`,
+        `No transaction found with provider_checkout_id: ${sessionId}`,
       );
 
       // Try checkout_sessions table as fallback
       const { data: checkoutSession, error: sessionError } = await (
         this.supabase.getClient() as any
       ).rpc('get_checkout_session_by_wave_id', {
-        p_wave_session_id: data.id,
+        p_wave_session_id: sessionId,
       });
 
-      // The RPC returns an array, get the first result
+      // The RPC returns an array, get the first result (deterministically ordered)
       const sessionArray = Array.isArray(checkoutSession) ? checkoutSession : [checkoutSession];
       const sessionData = sessionArray[0] as any;
 
@@ -246,7 +247,7 @@ export class WaveWebhookService {
       if (!sessionData.transaction_id) {
         this.logger.error('Checkout session found but no transaction_id associated:', {
           checkout_session_id: sessionData.checkout_session_id,
-          wave_session_id: data.id,
+          wave_session_id: sessionId,
         });
         throw new NotFoundException('No transaction associated with checkout session');
       }
@@ -261,7 +262,7 @@ export class WaveWebhookService {
           wave_transaction_id: waveTxnId,
           wave_payment_status: 'succeeded',
           wave_session: {
-            id: data.id,
+            id: sessionId,
             checkout_status: data.checkout_status,
             payment_status: data.payment_status,
             transaction_id: waveTxnId,
@@ -284,16 +285,19 @@ export class WaveWebhookService {
       return { transaction_id: sessionData.transaction_id };
     }
 
-    // Update transaction status (balance is now updated automatically by the DB)
+    // Use the deterministically ordered first transaction (newest)
     const transaction = transactionsArray[0];
+    this.logger.log(`Processing transaction ${transaction.transaction_id} (created: ${transaction.created_at})`);
+
+    // Update transaction status (balance is now updated automatically by the DB)
     await this.updateTransactionStatus(
       transaction.transaction_id,
       'completed',
       {
-        wave_session_id: data.id,
+        wave_session_id: sessionId,
         wave_transaction_id: waveTxnId,
         wave_session: {
-          id: data.id,
+          id: sessionId,
           checkout_status: data.checkout_status,
           payment_status: data.payment_status,
           transaction_id: waveTxnId,
@@ -541,6 +545,7 @@ export class WaveWebhookService {
       this.logger.warn('Warning: Error updating balances:', error);
     }
   }
+
 
   /**
    * Trigger merchant webhook notification
