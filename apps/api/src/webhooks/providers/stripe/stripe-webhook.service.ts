@@ -527,13 +527,13 @@ export class StripeWebhookService {
         `Triggering merchant webhook: ${event} for payment ${paymentIntentId}`,
       );
 
-      // Get transaction data for webhook payload
-      const { data: txnData, error: txnError } = await this.supabase
-        .getClient()
-        .from('transactions')
-        .select('*')
-        .eq('stripe_payment_intent_id', paymentIntentId)
-        .single();
+      // Get transaction data for webhook payload using SECURITY DEFINER RPC
+      // This bypasses RLS issues that might prevent fetching the transaction directly
+      const { data: txnData, error: txnError } = await (
+        this.supabase.getClient() as any
+      ).rpc('get_transaction_by_stripe_intent', {
+        p_payment_intent_id: paymentIntentId,
+      });
 
       if (txnError || !txnData) {
         this.logger.error('Failed to fetch transaction for webhook:', txnError);

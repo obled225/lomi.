@@ -235,7 +235,9 @@ export class WaveWebhookService {
       });
 
       // The RPC returns an array, get the first result (deterministically ordered)
-      const sessionArray = Array.isArray(checkoutSession) ? checkoutSession : [checkoutSession];
+      const sessionArray = Array.isArray(checkoutSession)
+        ? checkoutSession
+        : [checkoutSession];
       const sessionData = sessionArray[0] as any;
 
       if (sessionError || !sessionData) {
@@ -245,14 +247,21 @@ export class WaveWebhookService {
 
       // Validate that we have a transaction_id from the checkout session
       if (!sessionData.transaction_id) {
-        this.logger.error('Checkout session found but no transaction_id associated:', {
-          checkout_session_id: sessionData.checkout_session_id,
-          wave_session_id: sessionId,
-        });
-        throw new NotFoundException('No transaction associated with checkout session');
+        this.logger.error(
+          'Checkout session found but no transaction_id associated:',
+          {
+            checkout_session_id: sessionData.checkout_session_id,
+            wave_session_id: sessionId,
+          },
+        );
+        throw new NotFoundException(
+          'No transaction associated with checkout session',
+        );
       }
 
-      this.logger.log(`Found transaction ${sessionData.transaction_id} from checkout session ${sessionData.checkout_session_id}`);
+      this.logger.log(
+        `Found transaction ${sessionData.transaction_id} from checkout session ${sessionData.checkout_session_id}`,
+      );
 
       // Update checkout session status (balance is now updated automatically by the DB)
       await this.updateTransactionStatus(
@@ -287,7 +296,9 @@ export class WaveWebhookService {
 
     // Use the deterministically ordered first transaction (newest)
     const transaction = transactionsArray[0];
-    this.logger.log(`Processing transaction ${transaction.transaction_id} (created: ${transaction.created_at})`);
+    this.logger.log(
+      `Processing transaction ${transaction.transaction_id} (created: ${transaction.created_at})`,
+    );
 
     // Update transaction status (balance is now updated automatically by the DB)
     await this.updateTransactionStatus(
@@ -545,7 +556,6 @@ export class WaveWebhookService {
       this.logger.warn('Warning: Error updating balances:', error);
     }
   }
-
 
   /**
    * Trigger merchant webhook notification

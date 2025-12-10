@@ -39,4 +39,3 @@ export class WebhookQueueProcessor extends WorkerHost {
     }
   }
 }
-

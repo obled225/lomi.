@@ -111,7 +111,11 @@ export class WebhookListener {
         `Redis queue unavailable, falling back to sync webhook dispatch: ${error.message}`,
       );
       try {
-        await this.webhookSender.notifyOrganization(organizationId, event, data);
+        await this.webhookSender.notifyOrganization(
+          organizationId,
+          event,
+          data,
+        );
       } catch (syncError: any) {
         this.logger.error(
           `Failed to send webhooks synchronously: ${syncError.message}`,
