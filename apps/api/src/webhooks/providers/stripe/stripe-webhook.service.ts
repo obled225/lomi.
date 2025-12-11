@@ -527,16 +527,22 @@ export class StripeWebhookService {
         `Triggering merchant webhook: ${event} for payment ${paymentIntentId}`,
       );
 
-      // Get transaction data for webhook payload using SECURITY DEFINER RPC
-      // This bypasses RLS issues that might prevent fetching the transaction directly
+      // Use the update_stripe_checkout_status RPC which has SECURITY DEFINER
+      // This both updates the transaction AND returns the data we need for webhooks
       const { data: txnData, error: txnError } = await (
         this.supabase.getClient() as any
-      ).rpc('get_transaction_by_stripe_intent', {
-        p_payment_intent_id: paymentIntentId,
+      ).rpc('update_stripe_checkout_status', {
+        p_stripe_payment_intent_id: paymentIntentId,
+        p_payment_status: 'succeeded'
       });
 
-      if (txnError || !txnData) {
-        this.logger.error('Failed to fetch transaction for webhook:', txnError);
+      if (txnError) {
+        this.logger.error('Failed to update transaction and get data:', txnError);
+        return;
+      }
+
+      if (!txnData) {
+        this.logger.error('No transaction data returned - transaction not found');
         return;
       }
 
