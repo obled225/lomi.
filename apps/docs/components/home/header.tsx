@@ -80,8 +80,12 @@ export function Header() {
   const [isDocumentationOpen, setIsDocumentationOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const leaveTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const integrationsHoverTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const documentationHoverTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const integrationsHoverTimeout = useRef<ReturnType<typeof setTimeout> | null>(
+    null,
+  );
+  const documentationHoverTimeout = useRef<ReturnType<
+    typeof setTimeout
+  > | null>(null);
 
   // Create t function that uses currentLanguage (same pattern as tracking-cookie.tsx)
   const t = (key: string) => String(translate(key, currentLanguage));

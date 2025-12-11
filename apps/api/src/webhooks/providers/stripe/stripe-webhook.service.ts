@@ -533,16 +533,21 @@ export class StripeWebhookService {
         this.supabase.getClient() as any
       ).rpc('update_stripe_checkout_status', {
         p_stripe_payment_intent_id: paymentIntentId,
-        p_payment_status: 'succeeded'
+        p_payment_status: 'succeeded',
       });
 
       if (txnError) {
-        this.logger.error('Failed to update transaction and get data:', txnError);
+        this.logger.error(
+          'Failed to update transaction and get data:',
+          txnError,
+        );
         return;
       }
 
       if (!txnData) {
-        this.logger.error('No transaction data returned - transaction not found');
+        this.logger.error(
+          'No transaction data returned - transaction not found',
+        );
         return;
       }
 

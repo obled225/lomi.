@@ -82,22 +82,22 @@ export function AgnosticBackground({
               colors={
                 resolvedTheme === 'dark'
                   ? [
-                    '#0C4A6E',
-                    '#1E5A8A',
-                    '#2B77E6',
-                    '#4A9EF8',
-                    '#7DD3FC',
-                    '#E0F2FE00',
-                  ]
+                      '#0C4A6E',
+                      '#1E5A8A',
+                      '#2B77E6',
+                      '#4A9EF8',
+                      '#7DD3FC',
+                      '#E0F2FE00',
+                    ]
                   : [
-                    '#56A5F9',
-                    '#4A9EF8',
-                    '#3B82F6',
-                    '#60A5FA',
-                    '#7DD3FC',
-                    '#93C5FD',
-                    '#DBEAFE00',
-                  ]
+                      '#56A5F9',
+                      '#4A9EF8',
+                      '#3B82F6',
+                      '#60A5FA',
+                      '#7DD3FC',
+                      '#93C5FD',
+                      '#DBEAFE00',
+                    ]
               }
               colorBack="#00000000"
               softness={1}
@@ -148,22 +148,22 @@ export function AgnosticBackground({
             colors={
               resolvedTheme === 'dark'
                 ? [
-                  '#0C4A6E',
-                  '#1E5A8A',
-                  '#2B77E6',
-                  '#4A9EF8',
-                  '#7DD3FC',
-                  '#E0F2FE00',
-                ]
+                    '#0C4A6E',
+                    '#1E5A8A',
+                    '#2B77E6',
+                    '#4A9EF8',
+                    '#7DD3FC',
+                    '#E0F2FE00',
+                  ]
                 : [
-                  '#56A5F9',
-                  '#4A9EF8',
-                  '#3B82F6',
-                  '#60A5FA',
-                  '#7DD3FC',
-                  '#93C5FD',
-                  '#DBEAFE00',
-                ]
+                    '#56A5F9',
+                    '#4A9EF8',
+                    '#3B82F6',
+                    '#60A5FA',
+                    '#7DD3FC',
+                    '#93C5FD',
+                    '#DBEAFE00',
+                  ]
             }
             speed={visible ? 1 : 0}
             colorBack="#00000000"
@@ -183,22 +183,22 @@ export function AgnosticBackground({
             colors={
               resolvedTheme === 'dark'
                 ? [
-                  '#0C4A6E',
-                  '#1E5A8A',
-                  '#2B77E6',
-                  '#4A9EF8',
-                  '#7DD3FC',
-                  '#E0F2FE00',
-                ]
+                    '#0C4A6E',
+                    '#1E5A8A',
+                    '#2B77E6',
+                    '#4A9EF8',
+                    '#7DD3FC',
+                    '#E0F2FE00',
+                  ]
                 : [
-                  '#56A5F9',
-                  '#4A9EF8',
-                  '#3B82F6',
-                  '#60A5FA',
-                  '#7DD3FC',
-                  '#93C5FD',
-                  '#DBEAFE00',
-                ]
+                    '#56A5F9',
+                    '#4A9EF8',
+                    '#3B82F6',
+                    '#60A5FA',
+                    '#7DD3FC',
+                    '#93C5FD',
+                    '#DBEAFE00',
+                  ]
             }
             speed={visible ? 1 : 0}
             colorBack="#00000000"
@@ -218,22 +218,22 @@ export function AgnosticBackground({
             colors={
               resolvedTheme === 'dark'
                 ? [
-                  '#0C4A6E',
-                  '#1E5A8A',
-                  '#2B77E6',
-                  '#4A9EF8',
-                  '#7DD3FC',
-                  '#E0F2FE00',
-                ]
+                    '#0C4A6E',
+                    '#1E5A8A',
+                    '#2B77E6',
+                    '#4A9EF8',
+                    '#7DD3FC',
+                    '#E0F2FE00',
+                  ]
                 : [
-                  '#56A5F9',
-                  '#4A9EF8',
-                  '#3B82F6',
-                  '#60A5FA',
-                  '#7DD3FC',
-                  '#93C5FD',
-                  '#DBEAFE00',
-                ]
+                    '#56A5F9',
+                    '#4A9EF8',
+                    '#3B82F6',
+                    '#60A5FA',
+                    '#7DD3FC',
+                    '#93C5FD',
+                    '#DBEAFE00',
+                  ]
             }
             speed={visible ? 1 : 0}
             colorBack="#00000000"
@@ -253,22 +253,22 @@ export function AgnosticBackground({
             colors={
               resolvedTheme === 'dark'
                 ? [
-                  '#0C4A6E',
-                  '#1E5A8A',
-                  '#2B77E6',
-                  '#4A9EF8',
-                  '#7DD3FC',
-                  '#E0F2FE00',
-                ]
+                    '#0C4A6E',
+                    '#1E5A8A',
+                    '#2B77E6',
+                    '#4A9EF8',
+                    '#7DD3FC',
+                    '#E0F2FE00',
+                  ]
                 : [
-                  '#56A5F9',
-                  '#4A9EF8',
-                  '#3B82F6',
-                  '#60A5FA',
-                  '#7DD3FC',
-                  '#93C5FD',
-                  '#DBEAFE00',
-                ]
+                    '#56A5F9',
+                    '#4A9EF8',
+                    '#3B82F6',
+                    '#60A5FA',
+                    '#7DD3FC',
+                    '#93C5FD',
+                    '#DBEAFE00',
+                  ]
             }
             speed={visible ? 1 : 0}
             colorBack="#00000000"
@@ -288,10 +288,11 @@ export function AgnosticBackground({
   return (
     <div
       ref={ref}
-      className={`absolute inset-0 -z-1 overflow-hidden ${variant === 'masked'
+      className={`absolute inset-0 -z-1 overflow-hidden ${
+        variant === 'masked'
           ? 'mask-[linear-gradient(to_top,white_30%,transparent_calc(100%-120px))]'
           : ''
-        } ${className || ''}`}
+      } ${className || ''}`}
     >
       {/* CSS gradient placeholder - shows immediately while shaders load */}
       {variant === 'hero' && (
@@ -323,22 +324,22 @@ export function ContentAdoptionBackground({
         colors={
           resolvedTheme === 'dark'
             ? [
-              '#0C4A6E',
-              '#1E5A8A',
-              '#2B77E6',
-              '#4A9EF8',
-              '#7DD3FC',
-              '#E0F2FE00',
-            ]
+                '#0C4A6E',
+                '#1E5A8A',
+                '#2B77E6',
+                '#4A9EF8',
+                '#7DD3FC',
+                '#E0F2FE00',
+              ]
             : [
-              '#56A5F9',
-              '#4A9EF8',
-              '#3B82F6',
-              '#60A5FA',
-              '#7DD3FC',
-              '#93C5FD',
-              '#DBEAFE00',
-            ]
+                '#56A5F9',
+                '#4A9EF8',
+                '#3B82F6',
+                '#60A5FA',
+                '#7DD3FC',
+                '#93C5FD',
+                '#DBEAFE00',
+              ]
         }
         colorBack="#00000000"
         softness={softness}

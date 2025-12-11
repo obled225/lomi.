@@ -1606,7 +1606,6 @@ export type Database = {
       fetch_balance_breakdown: {
         Args: {
           p_merchant_id: string;
-          p_organization_id?: string | null;
           p_target_currency?: APIEnums['currency_code'] | null;
         };
         Returns: {
@@ -1907,7 +1906,6 @@ export type Database = {
           p_currency_code?: APIEnums['currency_code'] | null;
           p_end_date?: string | null;
           p_merchant_id: string;
-          p_organization_id?: string | null;
           p_page_number?: number | null;
           p_page_size?: number | null;
           p_start_date?: string | null;
@@ -2099,7 +2097,6 @@ export type Database = {
         Args: {
           p_end_date?: string | null;
           p_merchant_id: string;
-          p_organization_id?: string | null;
           p_page_number?: number | null;
           p_page_size?: number | null;
           p_start_date?: string | null;
@@ -2456,6 +2453,7 @@ export type Database = {
       get_wave_transaction_by_checkout_id: {
         Args: { p_provider_checkout_id: string };
         Returns: {
+          created_at: string;
           merchant_id: string;
           organization_id: string;
           transaction_id: string;
@@ -2465,10 +2463,12 @@ export type Database = {
         Args: { p_wave_session_id: string };
         Returns: {
           checkout_session_id: string;
+          created_at: string;
           customer_id: string;
           merchant_id: string;
           metadata: Json;
           organization_id: string;
+          transaction_id: string;
         }[];
       };
       update_transaction_status: {
@@ -2492,7 +2492,7 @@ export type Database = {
           p_stripe_charge_id?: string | null;
           p_stripe_payment_intent_id: string;
         };
-        Returns: undefined;
+        Returns: Json;
       };
       handle_stripe_payment_success: {
         Args: {
