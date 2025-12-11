@@ -7,7 +7,6 @@ import { WebhookListener } from './listeners/webhook.listener';
 import { WebhookQueueProcessor } from './processors/webhook.processor';
 import { WaveWebhookModule } from './providers/wave/wave-webhook.module';
 import { StripeWebhookModule } from './providers/stripe/stripe-webhook.module';
-import { FreeWebhookModule } from './providers/free/free-webhook.module';
 
 @Module({
   imports: [
@@ -16,7 +15,6 @@ import { FreeWebhookModule } from './providers/free/free-webhook.module';
     }),
     WaveWebhookModule,
     StripeWebhookModule,
-    FreeWebhookModule,
   ],
   controllers: [WebhooksController],
   providers: [
