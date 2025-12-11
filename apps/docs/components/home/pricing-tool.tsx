@@ -96,7 +96,7 @@ export default function PricingTool() {
 
   // Custom ToggleGroup component to ensure no gap
   const CurrencyToggle = () => (
-    <div className="flex w-full sm:w-fit rounded-sm overflow-hidden border border-zinc-200 dark:border-zinc-800">
+    <div className="flex w-full sm:w-fit rounded-sm overflow-hidden border border-zinc-200 dark:border-zinc-800 min-w-[300px] max-w-[400px]">
       {(
         [
           { code: 'XOF', display: 'F CFA' },
@@ -107,12 +107,6 @@ export default function PricingTool() {
         <button
           key={curr}
           type="button"
-          className={
-            `flex-1 ${curr === 'XOF' ? 'px-5 sm:px-7' : 'px-4 sm:px-6'} py-2 transition-colors ${currency === curr
-              ? 'bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-white'
-              : 'bg-transparent hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-600 dark:text-zinc-400'
-            } ${index < arr.length - 1 ? 'border-r border-zinc-200 dark:border-zinc-800' : ''}` // Add right border except for last
-          }
           onClick={() => {
             playClickSound();
             const newLimits = getCurrencyLimits(curr);
@@ -191,6 +185,12 @@ export default function PricingTool() {
               setTransactionCount('');
             }
           }}
+          className={
+            `flex-1 px-4 sm:px-6 py-2 transition-colors ${currency === curr
+              ? 'bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-white'
+              : 'bg-transparent hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-600 dark:text-zinc-400'
+            } ${index < arr.length - 1 ? 'border-r border-zinc-200 dark:border-zinc-800' : ''}` // Add right border except for last
+          }
         >
           {display}
         </button>
