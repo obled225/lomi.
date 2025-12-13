@@ -68,26 +68,45 @@ const logger = new Logger('RedisConfig');
         }
 
         // Parse Upstash Redis URL (supports both redis:// and rediss://)
+        // Format: rediss://default:PASSWORD@HOST:PORT
         logger.log('Connecting to Upstash Redis...');
-        const useTls = redisUrl.startsWith('rediss://');
+        
+        try {
+          const url = new URL(redisUrl);
+          const host = url.hostname;
+          const port = parseInt(url.port || '6379');
+          // IMPORTANT: URL-decode the password (it may contain special chars)
+          const password = decodeURIComponent(url.password);
+          const useTls = url.protocol === 'rediss:';
 
-        return {
-          connection: {
-            url: redisUrl,
-            maxRetriesPerRequest: null,
-            enableReadyCheck: false,
-            tls: useTls ? { rejectUnauthorized: false } : undefined,
-            retryStrategy: (times: number) => {
-              if (times > 5) {
-                logger.error(
-                  'Upstash Redis connection failed after 5 retries. Webhooks will use sync fallback.',
-                );
-                return null;
-              }
-              return Math.min(times * 500, 5000);
+          logger.log(`Redis host: ${host}, port: ${port}, TLS: ${useTls}`);
+
+          return {
+            connection: {
+              host,
+              port,
+              password,
+              maxRetriesPerRequest: null, // Required for BullMQ
+              tls: useTls ? {} : undefined,
+              retryStrategy: (times: number) => {
+                if (times > 10) {
+                  logger.error(`Redis failed after ${times} retries.`);
+                  return null;
+                }
+                return Math.min(times * 500, 3000);
+              },
             },
-          },
-        };
+          };
+        } catch (parseError) {
+          logger.error(`Failed to parse UPSTASH_REDIS_URL: ${parseError}`);
+          return {
+            connection: {
+              host: 'localhost',
+              port: 6379,
+              maxRetriesPerRequest: null,
+            },
+          };
+        }
       },
     }),
     SupabaseModule,
