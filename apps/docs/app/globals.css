@@ -752,13 +752,6 @@ article img + div.text-xs {
   margin-top: 0.5rem;
 }
 
-/* Ensure the content has proper width constraints */
-.prose {
-  max-width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-}
-
 /* Media queries for better scaling */
 @media screen and (max-width: 768px) {
   .prose {
