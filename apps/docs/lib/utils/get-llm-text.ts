@@ -25,6 +25,10 @@ export async function getLLMText(page: Page) {
       cli: 'lomi. CLI (the CLI tool for automating lomi. apps)',
     }[page.slugs[0]] ?? page.slugs[0];
 
+  if (!page.absolutePath) {
+    throw new Error(`Page ${page.url} has no absolutePath`);
+  }
+
   const processed = await processor.process({
     path: page.absolutePath,
     value: await fs.readFile(page.absolutePath),

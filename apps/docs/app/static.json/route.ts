@@ -21,6 +21,14 @@ interface OramaCloudDocument {
   breadcrumbs: string[];
 }
 
+interface StructuredHeading {
+  id?: string;
+}
+
+interface StructuredContent {
+  content?: string;
+}
+
 export async function GET(): Promise<Response> {
   const results: OramaCloudDocument[] = [];
   const pages = source.getPages();
@@ -32,26 +40,30 @@ export async function GET(): Promise<Response> {
       includeRoot: true,
     });
 
-    const structuredData = page.data.structuredData;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const pageData = page.data as any;
+    const structuredData = pageData.structuredData;
     const structured = structuredData
       ? {
           // Extract heading IDs (or content) as flat string array
           // Ensure headings is an array and map to strings
           headings: Array.isArray(structuredData.headings)
             ? structuredData.headings
-                .map((h) => (typeof h === 'object' && h?.id ? h.id : String(h)))
-                .filter((h) => h.length > 0)
+                .map((h: StructuredHeading | string) =>
+                  typeof h === 'object' && h?.id ? h.id : String(h),
+                )
+                .filter((h: string) => h.length > 0)
             : [],
           // Extract content strings as flat array, filtering empty
           // Ensure contents is an array and map to strings
           contents: Array.isArray(structuredData.contents)
             ? structuredData.contents
-                .map((c) =>
+                .map((c: StructuredContent | string) =>
                   typeof c === 'object' && c?.content
                     ? c.content.trim()
                     : String(c).trim(),
                 )
-                .filter((c) => c.length > 0)
+                .filter((c: string) => c.length > 0)
             : [],
         }
       : { headings: [], contents: [] };

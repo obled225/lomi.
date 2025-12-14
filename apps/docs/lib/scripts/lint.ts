@@ -1,10 +1,9 @@
 /* @proprietary license */
 
-/* eslint-disable @typescript-eslint/no-explicit-any -- rehype plugins */
 import { glob } from 'tinyglobby';
 import { printErrors, scanURLs, validateFiles } from 'next-validate-link';
-import { createGetUrl, getSlugs, parseFilePath } from 'fumadocs-core/source';
-import { TOCItemType } from 'fumadocs-core/server';
+import { createGetUrl, getSlugs } from 'fumadocs-core/source';
+import { TOCItemType } from 'fumadocs-core/toc';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import matter from 'gray-matter';
@@ -28,18 +27,22 @@ async function readFromPath(file: string) {
 }
 
 function remarkIncludeId() {
-  return (tree: any, file: any) => {
-    file.data.ids ??= [];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  return (tree: any, file: { data: Record<string, unknown> }) => {
+    (file.data.ids as string[]) ??= [];
     visit(tree, 'mdxJsxFlowElement', (element) => {
-      if (!element.name || !element.attributes) return;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const elem = element as any;
+      if (!elem.name || !elem.attributes) return;
 
-      const attributes = element.attributes as Record<string, unknown>[];
+      const attributes = elem.attributes;
       const idAttr = attributes.find(
-        (attr) => attr.type === 'mdxJsxAttribute' && attr.name === 'id',
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (attr: any) => attr.type === 'mdxJsxAttribute' && attr.name === 'id',
       );
 
       if (idAttr) {
-        file.data.ids.push(idAttr.value);
+        (file.data.ids as string[]).push(String(idAttr.value));
       }
     });
   };
@@ -82,19 +85,19 @@ async function checkLinks() {
   );
 
   const docs = docsFiles.map(async (file) => {
-    const info = parseFilePath(path.relative('content/docs', file.path));
+    const relativePath = path.relative('content/docs', file.path);
 
     return {
-      value: getSlugs(info),
+      value: getSlugs(relativePath),
       hashes: await getHeadings(file.path, file.content),
     };
   });
 
   const blogs = blogFiles.map(async (file) => {
-    const info = parseFilePath(path.relative('content/blog', file.path));
+    const relativePath = path.relative('content/blog', file.path);
 
     return {
-      value: getSlugs(info)[0],
+      value: getSlugs(relativePath)[0],
       hashes: await getHeadings(file.path, file.content),
     };
   });
@@ -116,8 +119,8 @@ async function checkLinks() {
       scanned,
 
       pathToUrl(value) {
-        const info = parseFilePath(path.relative('content/docs', value));
-        return getUrl(getSlugs(info));
+        const relativePath = path.relative('content/docs', value);
+        return getUrl(getSlugs(relativePath));
       },
     }),
     true,

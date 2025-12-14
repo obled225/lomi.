@@ -20,9 +20,9 @@ import {
 import Link from 'fumadocs-core/link';
 import { AutoTypeTable } from 'fumadocs-typescript/ui';
 import { createGenerator } from 'fumadocs-typescript';
-import { getPageTreePeers } from 'fumadocs-core/server';
+import { getPageTreePeers } from 'fumadocs-core/page-tree';
 import { Card, Cards } from 'fumadocs-ui/components/card';
-import { APIPage } from 'fumadocs-openapi/ui';
+// import { APIPage } from 'fumadocs-openapi/ui';
 import { LLMCopyButton, ViewOptions } from '@/components/preview/page-actions';
 import * as path from 'node:path';
 import { Banner } from 'fumadocs-ui/components/banner';
@@ -128,8 +128,7 @@ export default async function Page({
             ),
             Wrapper,
             blockquote: Callout as unknown as FC<ComponentProps<'blockquote'>>,
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            APIPage: (props: any): JSX.Element => <APIPage {...props} />,
+            // APIPage: (props: any): JSX.Element => <APIPage {...props} />,
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             DocsCategory: ({ url }: any): JSX.Element => {
               return <DocsCategory url={url ?? page.url} />;

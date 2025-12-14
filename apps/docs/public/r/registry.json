@@ -1,0 +1,52 @@
+{
+  "homepage": "https://fumadocs.dev",
+  "name": "lomi. / docs",
+  "items": [
+    {
+      "extends": "none",
+      "type": "registry:block",
+      "name": "graph-view",
+      "title": "graph-view",
+      "description": "A graph to display relationships of all pages",
+      "dependencies": [
+        "react",
+        "react-force-graph-2d@^1.29.0",
+        "d3-force@^3.0.0",
+        "fumadocs-core"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [],
+      "files": []
+    },
+    {
+      "extends": "none",
+      "type": "registry:block",
+      "name": "mdx/page-actions",
+      "title": "AI Page Actions",
+      "description": "Common page actions for AI",
+      "dependencies": [
+        "react",
+        "lucide-react@^0.542.0",
+        "fumadocs-ui",
+        "class-variance-authority@^0.7.1"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [],
+      "files": []
+    },
+    {
+      "extends": "none",
+      "type": "registry:block",
+      "name": "og/mono",
+      "title": "og/mono",
+      "description": "Open graph image generation (mono-style)",
+      "dependencies": [
+        "next",
+        "react"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [],
+      "files": []
+    }
+  ]
+}

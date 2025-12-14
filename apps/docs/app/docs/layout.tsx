@@ -3,7 +3,7 @@
 import { DocsLayout } from 'fumadocs-ui/layouts/docs';
 import { baseOptions, linkItems, logo } from '@/lib/utils/layout.shared';
 import { source } from '@/lib/utils/source';
-import { LargeSearchToggle } from 'fumadocs-ui/components/layout/search-toggle';
+// import { LargeSearchToggle } from 'fumadocs-ui/components/layout/search-toggle';
 import type { ReactNode } from 'react';
 // import { Sparkles } from 'lucide-react';
 // import { AISearchTrigger } from '@/components/ai';
@@ -20,27 +20,19 @@ export default function Layout({ children }: { children: ReactNode }) {
       tree={source.pageTree}
       // just icon items
       links={linkItems.filter((item: { type: string }) => item.type === 'icon')}
-      searchToggle={{
+      searchToggle={
+        {
+          /*
         components: {
           lg: (
             <div className="flex gap-1.5 max-md:hidden">
               <LargeSearchToggle className="flex-1" />
-              {/* <AISearchTrigger
-                aria-label="Ask AI"
-                className={cn(
-                  buttonVariants({
-                    variant: 'outline',
-                    size: 'icon',
-                    className: 'text-fd-muted-foreground',
-                  }),
-                )}
-              >
-                <Sparkles className="size-4" />
-              </AISearchTrigger> */}
             </div>
           ),
         },
-      }}
+        */
+        }
+      }
       nav={{
         ...base.nav,
         title: <>{logo}</>,

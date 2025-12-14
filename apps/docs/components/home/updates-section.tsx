@@ -1,11 +1,8 @@
 /* @proprietary license */
 
 import { useTranslation } from '@/lib/utils/translation-context';
-import { Button } from '@/components/ui/button';
 import { t } from '@/lib/i18n/translations';
 import { Section } from '@/components/ui/section';
-import Link from 'next/link';
-import { playClickSound } from '@/lib/utils/sound';
 import { BlogArticlesCarousel } from './blog-articles-carousel';
 import { ChangelogCarousel } from './changelog-carousel';
 

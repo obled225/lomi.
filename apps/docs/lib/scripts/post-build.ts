@@ -6,9 +6,15 @@ import { updateSearchIndexes } from './update-orama-index';
 env.loadEnvConfig(process.cwd());
 
 async function main() {
-  await Promise.all([updateSearchIndexes()]);
+  try {
+    await Promise.all([updateSearchIndexes()]);
+  } catch (error) {
+    console.warn(
+      'Search index sync failed, but build continues:',
+      error instanceof Error ? error.message : String(error),
+    );
+    // Don't throw - allow build to succeed even if search sync fails
+  }
 }
 
-await main().catch((e) => {
-  console.error('Failed to run post build script', e);
-});
+await main();

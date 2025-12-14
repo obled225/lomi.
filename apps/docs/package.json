@@ -44,13 +44,13 @@
     "critters": "^0.0.25",
     "d3-force": "^3.0.0",
     "framer-motion": "^12.23.24",
-    "fumadocs-core": "^15.7.10",
-    "fumadocs-docgen": "^3.0.0",
-    "fumadocs-mdx": "^11.9.0",
-    "fumadocs-openapi": "^9.3.7",
-    "fumadocs-twoslash": "^3.1.7",
-    "fumadocs-typescript": "^4.0.8",
-    "fumadocs-ui": "~15.7.10",
+    "fumadocs-core": "~16.2.5",
+    "fumadocs-docgen": "^3.0.4",
+    "fumadocs-mdx": "^14.1.0",
+    "fumadocs-openapi": "^10.1.4",
+    "fumadocs-twoslash": "^3.1.10",
+    "fumadocs-typescript": "^4.0.14",
+    "fumadocs-ui": "~16.2.5",
     "katex": "^0.16.22",
     "lottie-react": "^2.4.1",
     "lucide-react": "^0.542.0",
@@ -84,6 +84,7 @@
     "@next/env": "^16.0.7",
     "@next/eslint-plugin-next": "^16.0.7",
     "@sanity/cli": "^4.13.0",
+    "@tailwindcss/container-queries": "^0.1.1",
     "@tailwindcss/postcss": "^4.1.13",
     "@types/d3-force": "^3.0.10",
     "@types/hast": "^3.0.4",
@@ -101,6 +102,7 @@
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^5.2.0",
+    "globals": "^16.5.0",
     "gray-matter": "^4.0.3",
     "next-validate-link": "^1.5.2",
     "postcss": "^8.5.6",
@@ -108,17 +110,11 @@
     "tailwindcss": "^4.1.13",
     "tailwindcss-animate": "^1.0.7",
     "tinyglobby": "^0.2.14",
+    "ts-morph": "^27.0.2",
     "tsx": "^4.19.1",
     "typescript": "^5.9.2"
   },
   "browserslist": [
     "extends browserslist-config-baseline/2024"
-  ],
-  "pnpm": {
-    "overrides": {
-      "fumadocs-ui": "~15.7.10",
-      "fumadocs-core": "~15.7.10",
-      "ts-morph": "^27.0.2"
-    }
-  }
+  ]
 }

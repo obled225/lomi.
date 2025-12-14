@@ -16,8 +16,8 @@ function selectFrom(r: Registry, component: string, filename: string) {
 export const registry: Registry = {
   dir: baseDir,
   name: 'lomi. / docs',
-  packageJson: './package.json',
-  tsconfigPath: './tsconfig.json',
+  packageJson: '../package.json',
+  tsconfigPath: '../tsconfig.json',
   onUnknownFile(absolutePath) {
     const filePath = path.relative(baseDir, absolutePath);
 
@@ -55,47 +55,7 @@ export const registry: Registry = {
       files: [
         {
           type: 'components',
-          path: 'components/ui/graph-view.tsx',
-        },
-      ],
-    },
-    {
-      name: 'feedback',
-      title: 'Feedback',
-      description: 'Component to send user feedbacks about the docs',
-      files: [
-        {
-          type: 'components',
-          path: 'components/feedback.tsx',
-        },
-      ],
-    },
-    {
-      name: 'ai/search',
-      title: 'AI Search (Next.js Only)',
-      description:
-        'Ask AI dialog for your docs, you need to configure Inkeep first',
-      files: [
-        {
-          type: 'components',
-          path: 'components/ai/index.tsx',
-        },
-        {
-          type: 'components',
-          path: 'components/ai/search.tsx',
-        },
-        {
-          type: 'components',
-          path: 'components/ai/markdown.tsx',
-        },
-        {
-          type: 'route',
-          path: 'app/api/chat/route.ts',
-          target: 'app/api/chat/route.ts',
-        },
-        {
-          type: 'lib',
-          path: 'lib/chat/inkeep-qa-schema.ts',
+          path: 'preview/graph-view.tsx',
         },
       ],
     },
@@ -106,7 +66,7 @@ export const registry: Registry = {
       files: [
         {
           type: 'components',
-          path: 'components/mdx/page-actions.tsx',
+          path: 'preview/page-actions.tsx',
         },
       ],
     },
@@ -116,15 +76,15 @@ export const registry: Registry = {
       files: [
         {
           type: 'lib',
-          path: 'lib/og/mono.tsx',
+          path: '../lib/og/mono.tsx',
         },
         {
           type: 'lib',
-          path: 'lib/og/JetBrainsMono-Bold.ttf',
+          path: '../lib/og/JetBrainsMono-Bold.ttf',
         },
         {
           type: 'lib',
-          path: 'lib/og/JetBrainsMono-Regular.ttf',
+          path: '../lib/og/JetBrainsMono-Regular.ttf',
         },
       ],
     },

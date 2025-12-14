@@ -24,7 +24,7 @@ import { cn } from '@/lib/utils/cn';
 import { useTranslation } from '@/lib/utils/translation-context';
 import { t as translate } from '@/lib/i18n/translations';
 import { orama } from '@/lib/orama/client';
-import type { SortedResult } from 'fumadocs-core/server';
+import type { SortedResult } from 'fumadocs-core/search';
 
 // Define types for Orama search results
 interface OramaHit {

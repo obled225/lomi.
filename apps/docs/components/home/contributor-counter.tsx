@@ -11,8 +11,7 @@ import {
 } from '@/lib/utils/get-contributors';
 import { t } from '@/lib/i18n/translations';
 
-export interface ContributorCounterProps
-  extends HTMLAttributes<HTMLDivElement> {
+export interface ContributorCounterProps extends HTMLAttributes<HTMLDivElement> {
   repoOwner: string;
   repoName: string;
   displayCount?: number;

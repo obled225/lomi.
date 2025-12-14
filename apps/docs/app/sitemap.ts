@@ -39,7 +39,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       const pages = source.getPages();
       return Array.isArray(pages) ? pages : [];
     })().map((page) => {
-      const { lastModified } = page.data;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const pageData = page.data as any;
+      const lastModified = pageData.lastModified;
 
       return {
         url: url(page.url),

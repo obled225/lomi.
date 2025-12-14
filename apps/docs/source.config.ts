@@ -46,11 +46,9 @@ export const blog = defineCollections({
 });
 
 export default defineConfig({
-  lastModifiedTime: 'git',
   mdxOptions: {
     rehypeCodeOptions: {
       lazy: true,
-      experimentalJSEngine: true,
       langs: ['ts', 'js', 'html', 'tsx', 'mdx'],
       inline: 'tailing-curly-colon',
       themes: {
