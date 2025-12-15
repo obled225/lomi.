@@ -44,11 +44,6 @@ const SDKS = [
         command: 'node scripts/typescript-generate.js',
     },
     {
-        name: 'JavaScript',
-        dir: 'js',
-        command: 'node scripts/javascript-generate.js',
-    },
-    {
         name: 'Python',
         dir: 'python',
         command: 'node scripts/python-generate.js',
