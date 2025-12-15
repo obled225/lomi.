@@ -1,175 +1,54 @@
-/* generated using openapi-typescript-codegen -- do not edit */
-/* istanbul ignore file */
-/* tslint:disable */
-/* eslint-disable */
-import type { products } from '../models/products';
-import type { products_create } from '../models/products_create';
-import type { products_update } from '../models/products_update';
-import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
-import { request as __request } from '../core/request';
+/**
+ * ProductsService
+ * AUTO-GENERATED - Do not edit manually
+ * 
+ * Products - manage one-time and recurring products
+ */
+
+import { request } from '../core/request.js';
+import type { Database } from '../types.js';
+
+type ProductsRow = Database['public']['Tables']['products']['Row'];
+type ProductsInsert = Database['public']['Tables']['products']['Insert'];
+type ProductsUpdate = Database['public']['Tables']['products']['Update'];
+
 export class ProductsService {
+
     /**
      * List products
-     * Product catalog - manage one-time and recurring products
-     * @returns any Successful response with paginated data
-     * @throws ApiError
+     * Products - manage one-time and recurring products
      */
-    public static listProducts({
-        limit = 20,
-        offset,
-        sort,
-    }: {
-        /**
-         * Maximum number of items to return (1-100)
-         */
-        limit?: number,
-        /**
-         * Number of items to skip for pagination
-         */
-        offset?: number,
-        /**
-         * Sort order. Format: `field:direction` (e.g., `created_at:desc`)
-         */
-        sort?: string,
-    }): CancelablePromise<{
-        data?: Array<products>;
-        pagination?: {
-            /**
-             * Number of items per page
-             */
-            limit?: number;
-            /**
-             * Number of items skipped
-             */
-            offset?: number;
-            /**
-             * Total number of items available
-             */
-            total?: number;
-        };
-    }> {
-        return __request(OpenAPI, {
+    public static async list(options?: {
+        limit?: number;
+        offset?: number;
+        [key: string]: any;
+    }): Promise<ProductsRow[]> {
+        return await request<ProductsRow[]>({
             method: 'GET',
             url: '/products',
-            query: {
-                'limit': limit,
-                'offset': offset,
-                'sort': sort,
-            },
-            errors: {
-                401: `Unauthorized - Invalid or missing API key`,
-                500: `Internal server error`,
-            },
+            query: options,
         });
     }
+
     /**
-     * Create product
-     * Product catalog - manage one-time and recurring products
-     * @returns products Product successfully created
-     * @throws ApiError
+     * Get a single product
      */
-    public static createProduct({
-        requestBody,
-    }: {
-        requestBody: products_create,
-    }): CancelablePromise<products> {
-        return __request(OpenAPI, {
+    public static async get(id: string): Promise<ProductsRow> {
+        return await request<ProductsRow>({
+            method: 'GET',
+            url: '/products/{id}',
+            path: { id },
+        });
+    }
+
+    /**
+     * Create a new product
+     */
+    public static async create(data: ProductsInsert): Promise<ProductsRow> {
+        return await request<ProductsRow>({
             method: 'POST',
             url: '/products',
-            body: requestBody,
-            mediaType: 'application/json',
-            errors: {
-                400: `Bad request - Invalid input`,
-                401: `Unauthorized - Invalid or missing API key`,
-                500: `Internal server error`,
-            },
-        });
-    }
-    /**
-     * Retrieve product
-     * Retrieve a specific product by its unique identifier.
-     * @returns products Product retrieved successfully
-     * @throws ApiError
-     */
-    public static retrieveProduct({
-        productId,
-    }: {
-        /**
-         * Unique identifier for the product
-         */
-        productId: string,
-    }): CancelablePromise<products> {
-        return __request(OpenAPI, {
-            method: 'GET',
-            url: '/products/{product_id}',
-            path: {
-                'product_id': productId,
-            },
-            errors: {
-                401: `Unauthorized - Invalid or missing API key`,
-                404: `Not found - Resource does not exist`,
-                500: `Internal server error`,
-            },
-        });
-    }
-    /**
-     * Update product
-     * Update a specific product. Only provided fields will be updated.
-     * @returns products Product successfully updated
-     * @throws ApiError
-     */
-    public static updateProduct({
-        productId,
-        requestBody,
-    }: {
-        /**
-         * Unique identifier for the product
-         */
-        productId: string,
-        requestBody: products_update,
-    }): CancelablePromise<products> {
-        return __request(OpenAPI, {
-            method: 'PATCH',
-            url: '/products/{product_id}',
-            path: {
-                'product_id': productId,
-            },
-            body: requestBody,
-            mediaType: 'application/json',
-            errors: {
-                400: `Bad request - Invalid input`,
-                401: `Unauthorized - Invalid or missing API key`,
-                404: `Not found - Resource does not exist`,
-                500: `Internal server error`,
-            },
-        });
-    }
-    /**
-     * Delete product
-     * Delete a specific product. This action cannot be undone.
-     * @returns void
-     * @throws ApiError
-     */
-    public static deleteProduct({
-        productId,
-    }: {
-        /**
-         * Unique identifier for the product
-         */
-        productId: string,
-    }): CancelablePromise<void> {
-        return __request(OpenAPI, {
-            method: 'DELETE',
-            url: '/products/{product_id}',
-            path: {
-                'product_id': productId,
-            },
-            errors: {
-                401: `Unauthorized - Invalid or missing API key`,
-                404: `Not found - Resource does not exist`,
-                500: `Internal server error`,
-            },
+            body: data,
         });
     }
 }

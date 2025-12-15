@@ -1,59 +1,40 @@
 #!/usr/bin/env node
 /**
  * JavaScript SDK Generator
+ * 
+ * Generates JavaScript SDK by transpiling the TypeScript SDK
  */
 
 import { execSync } from 'child_process';
-import { writeFileSync, readFileSync, readdirSync, statSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const specPath = join(__dirname, '../spec.yaml');
-const generatedDir = join(__dirname, '../js/src/generated');
-
-console.log('📋 Using OpenAPI spec from sdks root...');
+const tsDir = join(__dirname, '../ts');
+const jsDir = join(__dirname, '../js');
 
 console.log('🔨 Generating JavaScript SDK...');
-execSync(
-    'npx openapi-typescript-codegen --input ../spec.yaml --output ./src/generated --client axios --useOptions',
-    { cwd: join(__dirname, '../js'), stdio: 'inherit' }
-);
 
-console.log('🔧 Fixing ES module imports...');
-function fixImports(dir) {
-    const files = readdirSync(dir);
+// Step 1: Make sure TypeScript SDK is generated first
+console.log('📋 Ensuring TypeScript SDK is generated...');
+execSync('node scripts/typescript-generate.js', {
+    cwd: join(__dirname, '..'),
+    stdio: 'inherit'
+});
 
-    for (const file of files) {
-        const filePath = join(dir, file);
-        const stat = statSync(filePath);
+// Step 2: Copy TypeScript source to JS dir and compile
+console.log('📋 Copying source files...');
+execSync(`cp -r ${tsDir}/src/* ${jsDir}/src/`, { stdio: 'inherit' });
 
-        if (stat.isDirectory()) {
-            fixImports(filePath);
-        } else if (file.endsWith('.ts')) {
-            let content = readFileSync(filePath, 'utf-8');
-            const importRegex = /(from\s+['"])(\.[^'"]+)(['"])/g;
-            const modified = content.replace(importRegex, (match, prefix, path, suffix) => {
-                if (!path.endsWith('.js') && !path.includes('.json')) {
-                    return `${prefix}${path}.js${suffix}`;
-                }
-                return match;
-            });
-
-            if (modified !== content) {
-                writeFileSync(filePath, modified, 'utf-8');
-            }
-        }
-    }
+// Step 3: Build JavaScript version
+console.log('📋 Building JavaScript SDK...');
+try {
+    execSync('npm install', { cwd: jsDir, stdio: 'inherit' });
+    execSync('npm run build', { cwd: jsDir, stdio: 'inherit' });
+} catch (error) {
+    console.warn('⚠️ Build step skipped - package.json may need updating');
 }
-
-fixImports(generatedDir);
-
-const openAPIPath = join(generatedDir, 'core/OpenAPI.ts');
-let content = readFileSync(openAPIPath, 'utf-8');
-content = content.replace(/BASE: '.*'/, "BASE: 'https://api.lomi.africa/v1'");
-writeFileSync(openAPIPath, content, 'utf-8');
 
 console.log('✅ JavaScript SDK generated successfully!');

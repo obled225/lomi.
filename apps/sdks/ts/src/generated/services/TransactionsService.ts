@@ -1,91 +1,43 @@
-/* generated using openapi-typescript-codegen -- do not edit */
-/* istanbul ignore file */
-/* tslint:disable */
-/* eslint-disable */
-import type { transactions } from '../models/transactions.js';
-import type { CancelablePromise } from '../core/CancelablePromise.js';
-import { OpenAPI } from '../core/OpenAPI.js';
-import { request as __request } from '../core/request.js';
+/**
+ * TransactionsService
+ * AUTO-GENERATED - Do not edit manually
+ * 
+ * Transaction history - view completed and pending transactions
+ */
+
+import { request } from '../core/request.js';
+import type { Database } from '../types.js';
+
+type TransactionsRow = Database['public']['Tables']['transactions']['Row'];
+type TransactionsInsert = Database['public']['Tables']['transactions']['Insert'];
+type TransactionsUpdate = Database['public']['Tables']['transactions']['Update'];
+
 export class TransactionsService {
+
     /**
      * List transactions
      * Transaction history - view completed and pending transactions
-     * @returns any Successful response with paginated data
-     * @throws ApiError
      */
-    public static listTransactions({
-        limit = 20,
-        offset,
-        sort,
-    }: {
-        /**
-         * Maximum number of items to return (1-100)
-         */
-        limit?: number,
-        /**
-         * Number of items to skip for pagination
-         */
-        offset?: number,
-        /**
-         * Sort order. Format: `field:direction` (e.g., `created_at:desc`)
-         */
-        sort?: string,
-    }): CancelablePromise<{
-        data?: Array<transactions>;
-        pagination?: {
-            /**
-             * Number of items per page
-             */
-            limit?: number;
-            /**
-             * Number of items skipped
-             */
-            offset?: number;
-            /**
-             * Total number of items available
-             */
-            total?: number;
-        };
-    }> {
-        return __request(OpenAPI, {
+    public static async list(options?: {
+        limit?: number;
+        offset?: number;
+        [key: string]: any;
+    }): Promise<TransactionsRow[]> {
+        return await request<TransactionsRow[]>({
             method: 'GET',
             url: '/transactions',
-            query: {
-                'limit': limit,
-                'offset': offset,
-                'sort': sort,
-            },
-            errors: {
-                401: `Unauthorized - Invalid or missing API key`,
-                500: `Internal server error`,
-            },
+            query: options,
         });
     }
+
     /**
-     * Retrieve transaction
-     * Retrieve a specific transaction by its unique identifier.
-     * @returns transactions Transaction retrieved successfully
-     * @throws ApiError
+     * Get a single transaction
      */
-    public static retrieveTransaction({
-        transactionId,
-    }: {
-        /**
-         * Unique identifier for the transaction
-         */
-        transactionId: string,
-    }): CancelablePromise<transactions> {
-        return __request(OpenAPI, {
+    public static async get(id: string): Promise<TransactionsRow> {
+        return await request<TransactionsRow>({
             method: 'GET',
-            url: '/transactions/{transaction_id}',
-            path: {
-                'transaction_id': transactionId,
-            },
-            errors: {
-                401: `Unauthorized - Invalid or missing API key`,
-                404: `Not found - Resource does not exist`,
-                500: `Internal server error`,
-            },
+            url: '/transactions/{id}',
+            path: { id },
         });
     }
 }

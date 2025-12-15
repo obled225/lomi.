@@ -3,15 +3,13 @@
  * Master SDK Generator
  * 
  * This script:
- * 1. Syncs the OpenAPI spec from apps/api/openapi/spec.yaml to apps/sdks/spec.yaml
- * 2. Validates the spec
- * 3. Generates SDKs for all languages (TypeScript, JavaScript, Python, Go, PHP)
+ * 1. Copies API types from apps/api to apps/sdks
+ * 2. Generates SDKs for all languages (TypeScript, JavaScript, Python, Go, PHP, Next.js)
  * 
  * Run: npm run generate:all
  */
 
 import { execSync } from 'child_process';
-import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -65,13 +63,19 @@ const SDKS = [
         dir: 'php',
         command: 'node scripts/php-generate.js',
     },
+    {
+        name: 'Next.js',
+        dir: 'nextjs',
+        command: 'node scripts/nextjs-generate.js',
+    },
 ];
 
 async function generateAll() {
     console.log('🚀 lomi. Multi-Language SDK Generation\n');
     console.log('='.repeat(60));
+    console.log('📋 Using type-based generation from api.ts\n');
 
-    // Step 1: Pre-generation - Copy and validate spec
+    // Step 1: Pre-generation - Copy API types
     log.step('Running pre-generation setup...');
     const preGenSuccess = exec('node scripts/pre-generate.js', {
         cwd: path.join(__dirname, '..'),

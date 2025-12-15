@@ -4,7 +4,7 @@
  * This reads the generated services and creates a clean SDK interface
  */
 
-import { readFileSync, writeFileSync, readdirSync } from 'fs';
+import { readFileSync, writeFileSync, readdirSync, existsSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
@@ -16,11 +16,23 @@ const sdkPath = join(__dirname, '../ts/src/sdk.ts');
 
 console.log('🔧 Generating SDK wrapper from services...');
 
+if (!existsSync(servicesDir)) {
+  console.error('❌ Services directory not found:', servicesDir);
+  process.exit(1);
+}
+
 // Read all generated service files
 const serviceFiles = readdirSync(servicesDir).filter(f => f.endsWith('.ts'));
 const services = serviceFiles.map(f => f.replace('.ts', ''));
 
 console.log(`Found ${services.length} services:`, services);
+
+// Generate property names from service names (e.g., AccountsService -> accounts)
+function getPropertyName(serviceName) {
+  // Remove 'Service' suffix and convert to camelCase
+  const withoutService = serviceName.replace(/Service$/, '');
+  return withoutService.charAt(0).toLowerCase() + withoutService.slice(1);
+}
 
 // Generate the SDK class
 const sdkContent = `/**
@@ -38,7 +50,7 @@ ${services.map(s => `  ${s},`).join('\n')}
 } from './generated/index.js';
 
 export class LomiSDK {
-${services.map(s => `  public readonly ${s.charAt(0).toLowerCase() + s.slice(1, -7)}: typeof ${s};`).join('\n')}
+${services.map(s => `  public readonly ${getPropertyName(s)}: typeof ${s};`).join('\n')}
 
   /**
    * Initialize the lomi. SDK
@@ -57,8 +69,8 @@ ${services.map(s => `  public readonly ${s.charAt(0).toLowerCase() + s.slice(1, 
 
     // Assign all generated services
 ${services.map(s => {
-    const propName = s.charAt(0).toLowerCase() + s.slice(1, -7); // Remove 'Service' suffix
-    return `    this.${propName} = ${s};`;
+  const propName = getPropertyName(s);
+  return `    this.${propName} = ${s};`;
 }).join('\n')}
   }
 
@@ -83,4 +95,4 @@ ${services.map(s => {
 
 writeFileSync(sdkPath, sdkContent, 'utf-8');
 console.log('✅ SDK wrapper generated successfully!');
-console.log(`   Available services: ${services.map(s => s.charAt(0).toLowerCase() + s.slice(1, -7)).join(', ')}`);
+console.log(`   Available services: ${services.map(s => getPropertyName(s)).join(', ')}`);

@@ -1,175 +1,54 @@
-/* generated using openapi-typescript-codegen -- do not edit */
-/* istanbul ignore file */
-/* tslint:disable */
-/* eslint-disable */
-import type { checkout_sessions } from '../models/checkout_sessions';
-import type { checkout_sessions_create } from '../models/checkout_sessions_create';
-import type { checkout_sessions_update } from '../models/checkout_sessions_update';
-import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
-import { request as __request } from '../core/request';
+/**
+ * CheckoutSessionsService
+ * AUTO-GENERATED - Do not edit manually
+ * 
+ * Checkout sessions - create hosted payment pages
+ */
+
+import { request } from '../core/request.js';
+import type { Database } from '../types.js';
+
+type CheckoutSessionsRow = Database['public']['Tables']['checkout_sessions']['Row'];
+type CheckoutSessionsInsert = Database['public']['Tables']['checkout_sessions']['Insert'];
+type CheckoutSessionsUpdate = Database['public']['Tables']['checkout_sessions']['Update'];
+
 export class CheckoutSessionsService {
+
     /**
-     * List checkout sessions
+     * List checkout_sessions
      * Checkout sessions - create hosted payment pages
-     * @returns any Successful response with paginated data
-     * @throws ApiError
      */
-    public static listCheckoutSessions({
-        limit = 20,
-        offset,
-        sort,
-    }: {
-        /**
-         * Maximum number of items to return (1-100)
-         */
-        limit?: number,
-        /**
-         * Number of items to skip for pagination
-         */
-        offset?: number,
-        /**
-         * Sort order. Format: `field:direction` (e.g., `created_at:desc`)
-         */
-        sort?: string,
-    }): CancelablePromise<{
-        data?: Array<checkout_sessions>;
-        pagination?: {
-            /**
-             * Number of items per page
-             */
-            limit?: number;
-            /**
-             * Number of items skipped
-             */
-            offset?: number;
-            /**
-             * Total number of items available
-             */
-            total?: number;
-        };
-    }> {
-        return __request(OpenAPI, {
+    public static async list(options?: {
+        limit?: number;
+        offset?: number;
+        [key: string]: any;
+    }): Promise<CheckoutSessionsRow[]> {
+        return await request<CheckoutSessionsRow[]>({
             method: 'GET',
-            url: '/checkout_sessions',
-            query: {
-                'limit': limit,
-                'offset': offset,
-                'sort': sort,
-            },
-            errors: {
-                401: `Unauthorized - Invalid or missing API key`,
-                500: `Internal server error`,
-            },
+            url: '/checkout-sessions',
+            query: options,
         });
     }
+
     /**
-     * Create checkout session
-     * Checkout sessions - create hosted payment pages
-     * @returns checkout_sessions Checkout_session successfully created
-     * @throws ApiError
+     * Get a single checkout_session
      */
-    public static createCheckoutSession({
-        requestBody,
-    }: {
-        requestBody: checkout_sessions_create,
-    }): CancelablePromise<checkout_sessions> {
-        return __request(OpenAPI, {
+    public static async get(id: string): Promise<CheckoutSessionsRow> {
+        return await request<CheckoutSessionsRow>({
+            method: 'GET',
+            url: '/checkout-sessions/{id}',
+            path: { id },
+        });
+    }
+
+    /**
+     * Create a new checkout_session
+     */
+    public static async create(data: CheckoutSessionsInsert): Promise<CheckoutSessionsRow> {
+        return await request<CheckoutSessionsRow>({
             method: 'POST',
-            url: '/checkout_sessions',
-            body: requestBody,
-            mediaType: 'application/json',
-            errors: {
-                400: `Bad request - Invalid input`,
-                401: `Unauthorized - Invalid or missing API key`,
-                500: `Internal server error`,
-            },
-        });
-    }
-    /**
-     * Retrieve checkout session
-     * Retrieve a specific checkout session by its unique identifier.
-     * @returns checkout_sessions Checkout_session retrieved successfully
-     * @throws ApiError
-     */
-    public static retrieveCheckoutSession({
-        sessionId,
-    }: {
-        /**
-         * Unique identifier for the checkout session
-         */
-        sessionId: string,
-    }): CancelablePromise<checkout_sessions> {
-        return __request(OpenAPI, {
-            method: 'GET',
-            url: '/checkout_sessions/{session_id}',
-            path: {
-                'session_id': sessionId,
-            },
-            errors: {
-                401: `Unauthorized - Invalid or missing API key`,
-                404: `Not found - Resource does not exist`,
-                500: `Internal server error`,
-            },
-        });
-    }
-    /**
-     * Update checkout session
-     * Update a specific checkout session. Only provided fields will be updated.
-     * @returns checkout_sessions Checkout_session successfully updated
-     * @throws ApiError
-     */
-    public static updateCheckoutSession({
-        sessionId,
-        requestBody,
-    }: {
-        /**
-         * Unique identifier for the checkout session
-         */
-        sessionId: string,
-        requestBody: checkout_sessions_update,
-    }): CancelablePromise<checkout_sessions> {
-        return __request(OpenAPI, {
-            method: 'PATCH',
-            url: '/checkout_sessions/{session_id}',
-            path: {
-                'session_id': sessionId,
-            },
-            body: requestBody,
-            mediaType: 'application/json',
-            errors: {
-                400: `Bad request - Invalid input`,
-                401: `Unauthorized - Invalid or missing API key`,
-                404: `Not found - Resource does not exist`,
-                500: `Internal server error`,
-            },
-        });
-    }
-    /**
-     * Delete checkout session
-     * Delete a specific checkout session. This action cannot be undone.
-     * @returns void
-     * @throws ApiError
-     */
-    public static deleteCheckoutSession({
-        sessionId,
-    }: {
-        /**
-         * Unique identifier for the checkout session
-         */
-        sessionId: string,
-    }): CancelablePromise<void> {
-        return __request(OpenAPI, {
-            method: 'DELETE',
-            url: '/checkout_sessions/{session_id}',
-            path: {
-                'session_id': sessionId,
-            },
-            errors: {
-                401: `Unauthorized - Invalid or missing API key`,
-                404: `Not found - Resource does not exist`,
-                500: `Internal server error`,
-            },
+            url: '/checkout-sessions',
+            body: data,
         });
     }
 }
