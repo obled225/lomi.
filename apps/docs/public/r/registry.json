@@ -40,10 +40,7 @@
       "name": "og/mono",
       "title": "og/mono",
       "description": "Open graph image generation (mono-style)",
-      "dependencies": [
-        "next",
-        "react"
-      ],
+      "dependencies": ["next", "react"],
       "devDependencies": [],
       "registryDependencies": [],
       "files": []

@@ -1,6 +1,6 @@
 {
   "pages": [
-    "create-merchant-account",
+    "create-account",
     "setup-payment-methods",
     "api-keys",
     "setup-webhooks",

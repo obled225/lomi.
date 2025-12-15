@@ -70,7 +70,7 @@ const logger = new Logger('RedisConfig');
         // Parse Upstash Redis URL (supports both redis:// and rediss://)
         // Format: rediss://default:PASSWORD@HOST:PORT
         logger.log('Connecting to Upstash Redis...');
-        
+
         try {
           const url = new URL(redisUrl);
           const host = url.hostname;
