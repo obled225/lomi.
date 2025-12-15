@@ -7,16 +7,13 @@ We provide SDKs for multiple languages and frameworks to help you integrate with
 | Language/Framework | Package | Installation | Directory |
 |-------------------|---------|--------------|-----------|
 | **TypeScript** | `@lomi./sdk` | `npm install @lomi./sdk` | [`ts/`](./ts) |
-| **JavaScript** | `@lomi./sdk-js` | `npm install @lomi./sdk-js` | [`js/`](./js) |
 | **Next.js** | `@lomi./sdk-next` | `npm install @lomi./sdk-next` | [`nextjs/`](./nextjs) |
 | **Python** | `lomi-sdk` | `pip install lomi-sdk` | [`python/`](./python) |
 | **Go** | `github.com/lomiafrica/lomi-go-sdk` | `go get github.com/lomiafrica/lomi-go-sdk` | [`go/`](./go) |
 
 ### PHP SDK
 
-Due to our monorepo structure, the PHP SDK are **not available on Packagist**. You can install them directly from this GitHub repository.
-
-Add the following to your project's `composer.json`:
+Due to our monorepo structure, the PHP SDK is **not available on Packagist**. Install directly from GitHub:
 
 ```json
 {
@@ -32,64 +29,106 @@ Add the following to your project's `composer.json`:
 }
 ```
 
-Then run:
-```bash
-composer install
-```
-
-**Directory:** [`php/`](./php)
+Then run: `composer install`
 
 ## Quick Start
 
-Each SDK directory contains its own README with specific usage examples and documentation. Here's a quick overview:
+### TypeScript / JavaScript
 
-### TypeScript
 ```typescript
-import { LomiClient } from '@lomi./sdk';
+import { LomiSDK } from '@lomi./sdk';
 
-const client = new LomiClient({
-  apiKey: 'your-api-key'
+const lomi = new LomiSDK({
+  apiKey: 'your-api-key',
+  environment: 'live' // or 'test' for sandbox
 });
-```
 
-### JavaScript
-```javascript
-import { LomiClient } from '@lomi./sdk-js';
+// List customers
+const customers = await lomi.customers.list();
 
-const client = new LomiClient({
-  apiKey: 'your-api-key'
-});
+// Create checkout session
+const session = await lomi.checkoutSessions.create({...});
+
+// Get transactions
+const transactions = await lomi.transactions.list();
 ```
 
 ### Next.js
-```typescript
-import { LomiClient } from '@lomi./sdk-next';
 
-const client = new LomiClient({
-  apiKey: 'your-api-key'
-});
+```typescript
+import { LomiSDK, useLomiRequest } from '@lomi./sdk-next';
+
+// Client-side with hooks
+const { data, loading, error, execute } = useLomiRequest(
+  () => lomi.customers.list()
+);
+
+// Server-side
+const lomi = new LomiSDK({ apiKey: process.env.LOMI_API_KEY! });
+const customers = await lomi.customers.list();
 ``` 
 
 ### Python
+
 ```python
 from lomi import LomiClient
 
 client = LomiClient(api_key='your-api-key')
+
+# List customers
+customers = client.customers.list()
+
+# Get transaction
+transaction = client.transactions.get('txn_id')
 ```
 
 ### Go
+
 ```go
-import "github.com/lomiafrica/lomi-go-sdk"
+import lomi "github.com/lomiafrica/lomi-go-sdk"
 
 client := lomi.NewClient("your-api-key")
+
+// List customers
+customers, err := client.Customers.List(nil)
+
+// Get transaction
+transaction, err := client.Transactions.Get("txn_id")
 ```
 
 ### PHP
-```php
-use LomiSDK\Client;
 
-$client = new Client('your-api-key');
+```php
+use Lomi\LomiClient;
+
+$client = new LomiClient('your-api-key');
+
+// List customers
+$customers = $client->customers->list();
+
+// Get transaction  
+$transaction = $client->transactions->get('txn_id');
 ```
+
+## Available services
+
+All SDKs provide access to these services:
+
+- `accounts` - Balance and account operations
+- `organizations` - Organization metrics (MRR, ARR, etc.)
+- `customers` - Customer management
+- `paymentRequests` - Payment requests
+- `transactions` - Transaction history
+- `refunds` - Refund processing
+- `products` - Product catalog
+- `subscriptions` - Subscription billing
+- `discountCoupons` - Coupon management
+- `checkoutSessions` - Checkout creation
+- `paymentLinks` - Payment links
+- `payouts` - Payout management (Platform withdrawals)
+- `beneficiaryPayouts` - Beneficiary payouts
+- `webhooks` - Webhook configuration
+- `webhookDeliveryLogs` - Webhook logs
 
 ## Documentation
 
