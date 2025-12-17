@@ -32,17 +32,10 @@ export class StripeWebhookService {
    */
   async handleWebhook(signature: string, rawBody: Buffer | string) {
     if (!this.stripe) {
-      this.logger.error('Stripe is not configured');
       throw new BadRequestException('Stripe configuration missing');
     }
 
-    // Verify webhook signature
     const event = this.verifyWebhook(signature, rawBody);
-
-    this.logger.log(`Processing Stripe webhook: ${event.type}`);
-    this.logger.debug(`Event data: ${JSON.stringify(event.data, null, 2)}`);
-
-    // Handle different event types
     switch (event.type) {
       // ========================================================================
       // PAYMENT EVENTS
@@ -60,6 +53,14 @@ export class StripeWebhookService {
       case 'payment_intent.processing':
         return await this.handlePaymentProcessing(
           event.data.object as Stripe.PaymentIntent,
+        );
+
+      // ========================================================================
+      // CHARGE EVENTS
+      // ========================================================================
+      case 'charge.succeeded':
+        return await this.handleChargeSucceeded(
+          event.data.object as Stripe.Charge,
         );
 
       // ========================================================================
@@ -157,33 +158,25 @@ export class StripeWebhookService {
    * Handle payment_intent.succeeded event
    */
   private async handlePaymentSuccess(paymentIntent: Stripe.PaymentIntent) {
-    this.logger.log('Processing payment success:', {
-      payment_intent_id: paymentIntent.id,
-      amount: paymentIntent.amount,
-      currency: paymentIntent.currency,
-    });
-
     const metadata = paymentIntent.metadata || {};
 
-    // Update transaction status using RPC
-    // Get charge ID from latest_charge field
     const chargeId =
       typeof paymentIntent.latest_charge === 'string'
         ? paymentIntent.latest_charge
         : paymentIntent.latest_charge?.id || null;
 
-    await this.updateStripeCheckoutStatus(
+    const txnData = await this.updateStripeCheckoutStatus(
       paymentIntent.id,
       chargeId,
       'succeeded',
     );
 
-    // If we have transaction metadata, trigger merchant webhook
     if (metadata.organization_id) {
       await this.triggerMerchantWebhook(
         paymentIntent.id,
         metadata.organization_id,
         'PAYMENT_SUCCEEDED',
+        txnData,
       );
     }
 
@@ -197,18 +190,12 @@ export class StripeWebhookService {
    * Handle payment_intent.payment_failed event
    */
   private async handlePaymentFailure(paymentIntent: Stripe.PaymentIntent) {
-    this.logger.log('Processing payment failure:', {
-      payment_intent_id: paymentIntent.id,
-      error: paymentIntent.last_payment_error?.message,
-    });
-
     const metadata = paymentIntent.metadata || {};
     const errorCode = paymentIntent.last_payment_error?.code || 'unknown';
     const errorMessage =
       paymentIntent.last_payment_error?.message || 'Payment failed';
 
-    // Update transaction status using RPC
-    await this.updateStripeCheckoutStatus(
+    const txnData = await this.updateStripeCheckoutStatus(
       paymentIntent.id,
       null,
       'cancelled',
@@ -216,12 +203,12 @@ export class StripeWebhookService {
       errorMessage,
     );
 
-    // Trigger merchant webhook if organization exists
     if (metadata.organization_id) {
       await this.triggerMerchantWebhook(
         paymentIntent.id,
         metadata.organization_id,
         'PAYMENT_FAILED',
+        txnData,
       );
     }
 
@@ -235,10 +222,6 @@ export class StripeWebhookService {
    * Handle payment_intent.processing event
    */
   private async handlePaymentProcessing(paymentIntent: Stripe.PaymentIntent) {
-    this.logger.log('Processing payment processing:', {
-      payment_intent_id: paymentIntent.id,
-    });
-
     await this.updateStripeCheckoutStatus(paymentIntent.id, null, 'processing');
 
     return {
@@ -248,34 +231,49 @@ export class StripeWebhookService {
   }
 
   /**
+   * Handle charge.succeeded event
+   */
+  private async handleChargeSucceeded(charge: Stripe.Charge) {
+    const paymentIntentId = charge.payment_intent as string;
+
+    if (!paymentIntentId) {
+      throw new Error('Payment intent missing from charge');
+    }
+
+    await this.updateStripeCheckoutStatus(
+      paymentIntentId,
+      charge.id,
+      'succeeded',
+    );
+
+    return {
+      eventType: 'charge.succeeded',
+      charge_id: charge.id,
+      payment_intent_id: paymentIntentId,
+    };
+  }
+
+  /**
    * Handle charge.dispute.created event
    */
   private async handleDisputeCreated(dispute: Stripe.Dispute) {
-    this.logger.log('Processing dispute created:', {
-      dispute_id: dispute.id,
-      charge_id: dispute.charge,
-      amount: dispute.amount,
-      reason: dispute.reason,
-    });
-
     try {
       if (!this.stripe) {
         throw new Error('Stripe client not initialized');
       }
-      // Get payment intent from charge
+
       const charge = await this.stripe.charges.retrieve(
         dispute.charge as string,
       );
       const paymentIntentId = charge.payment_intent as string;
 
-      // Create dispute record using RPC
       const { error } = await (this.supabase.getClient() as any).rpc(
         'handle_stripe_dispute_created',
         {
           p_stripe_dispute_id: dispute.id,
           p_stripe_charge_id: dispute.charge,
           p_payment_intent_id: paymentIntentId,
-          p_amount: dispute.amount / 100, // Convert cents to currency units
+          p_amount: dispute.amount / 100,
           p_currency: dispute.currency.toUpperCase(),
           p_reason: dispute.reason,
           p_dispute_data: {
@@ -288,14 +286,10 @@ export class StripeWebhookService {
       );
 
       if (error) {
-        this.logger.error('Error creating dispute record:', error);
         throw new Error('Failed to create dispute record');
       }
-
-      this.logger.log('Successfully created dispute record');
-    } catch (error) {
-      this.logger.error('Error handling dispute creation:', error);
-      throw error;
+    } catch {
+      throw new Error('Failed to create dispute record');
     }
 
     return {
@@ -308,11 +302,6 @@ export class StripeWebhookService {
    * Handle charge.dispute.updated event
    */
   private async handleDisputeUpdated(dispute: Stripe.Dispute) {
-    this.logger.log('Processing dispute updated:', {
-      dispute_id: dispute.id,
-      status: dispute.status,
-    });
-
     try {
       const { error } = await (this.supabase.getClient() as any).rpc(
         'handle_stripe_dispute_updated',
@@ -328,14 +317,10 @@ export class StripeWebhookService {
       );
 
       if (error) {
-        this.logger.error('Error updating dispute record:', error);
         throw new Error('Failed to update dispute record');
       }
-
-      this.logger.log('Successfully updated dispute record');
-    } catch (error) {
-      this.logger.error('Error handling dispute update:', error);
-      throw error;
+    } catch {
+      throw new Error('Failed to update dispute record');
     }
 
     return {
@@ -348,12 +333,6 @@ export class StripeWebhookService {
    * Handle charge.dispute.closed event
    */
   private async handleDisputeClosed(dispute: Stripe.Dispute) {
-    this.logger.log('Processing dispute closed:', {
-      dispute_id: dispute.id,
-      status: dispute.status,
-    });
-
-    // Same as dispute.updated but with final status
     await this.handleDisputeUpdated(dispute);
 
     return {
@@ -366,17 +345,11 @@ export class StripeWebhookService {
    * Handle charge.refunded event
    */
   private async handleRefund(charge: Stripe.Charge) {
-    this.logger.log('Processing refund:', {
-      charge_id: charge.id,
-      amount_refunded: charge.amount_refunded,
-    });
-
     try {
       const paymentIntentId = charge.payment_intent as string;
       const refund = charge.refunds?.data[0];
 
       if (!refund) {
-        this.logger.warn('No refund data found in charge');
         return {
           eventType: 'charge.refunded',
           charge_id: charge.id,
@@ -395,14 +368,10 @@ export class StripeWebhookService {
       );
 
       if (error) {
-        this.logger.error('Error handling refund:', error);
         throw new Error('Failed to handle refund');
       }
-
-      this.logger.log('Successfully processed refund');
-    } catch (error) {
-      this.logger.error('Error handling refund:', error);
-      throw error;
+    } catch {
+      throw new Error('Failed to handle refund');
     }
 
     return {
@@ -415,14 +384,6 @@ export class StripeWebhookService {
    * Handle checkout.session.completed event
    */
   private async handleCheckoutCompleted(session: Stripe.Checkout.Session) {
-    this.logger.log('Processing checkout session completed:', {
-      session_id: session.id,
-      payment_intent: session.payment_intent,
-    });
-
-    // Checkout completion is handled by payment_intent.succeeded
-    // This is just a notification that checkout UI was completed
-
     return {
       eventType: 'checkout.session.completed',
       session_id: session.id,
@@ -433,11 +394,6 @@ export class StripeWebhookService {
    * Handle checkout.session.async_payment_succeeded event
    */
   private async handleAsyncPaymentSuccess(session: Stripe.Checkout.Session) {
-    this.logger.log('Processing async payment success:', {
-      session_id: session.id,
-      payment_intent: session.payment_intent,
-    });
-
     if (session.payment_intent) {
       await this.updateStripeCheckoutStatus(
         session.payment_intent as string,
@@ -456,11 +412,6 @@ export class StripeWebhookService {
    * Handle checkout.session.async_payment_failed event
    */
   private async handleAsyncPaymentFailure(session: Stripe.Checkout.Session) {
-    this.logger.log('Processing async payment failure:', {
-      session_id: session.id,
-      payment_intent: session.payment_intent,
-    });
-
     if (session.payment_intent) {
       await this.updateStripeCheckoutStatus(
         session.payment_intent as string,
@@ -485,34 +436,25 @@ export class StripeWebhookService {
     errorCode?: string,
     errorMessage?: string,
   ) {
-    try {
-      this.logger.log(
-        `Updating Stripe checkout status: ${paymentIntentId} -> ${status}`,
-      );
+    const { data, error } = await (this.supabase.getClient() as any).rpc(
+      'update_stripe_checkout_status',
+      {
+        p_stripe_payment_intent_id: paymentIntentId,
+        p_stripe_charge_id: chargeId,
+        p_payment_status: status,
+        p_error_code: errorCode || null,
+        p_error_message: errorMessage || null,
+        p_metadata: null,
+      },
+    );
 
-      const { error } = await (this.supabase.getClient() as any).rpc(
-        'update_stripe_checkout_status',
-        {
-          p_stripe_payment_intent_id: paymentIntentId,
-          p_stripe_charge_id: chargeId,
-          p_payment_status: status,
-          p_error_code: errorCode || null,
-          p_error_message: errorMessage || null,
-          p_metadata: null,
-        },
-      );
-
-      if (error) {
-        this.logger.error('Error updating Stripe checkout status:', error);
-        throw new Error('Failed to update checkout status');
-      }
-
-      this.logger.log('Successfully updated Stripe checkout status');
-    } catch (error) {
-      this.logger.error('Error updating checkout status:', error);
-      throw error;
+    if (error) {
+      throw new Error('Failed to update checkout status');
     }
+
+    return data;
   }
+
 
   /**
    * Trigger merchant webhook notification
@@ -521,45 +463,17 @@ export class StripeWebhookService {
     paymentIntentId: string,
     organizationId: string,
     event: string,
+    txnData?: any,
   ) {
+    if (!txnData) return;
+
     try {
-      this.logger.log(
-        `Triggering merchant webhook: ${event} for payment ${paymentIntentId}`,
-      );
-
-      // Use the update_stripe_checkout_status RPC which has SECURITY DEFINER
-      // This both updates the transaction AND returns the data we need for webhooks
-      const { data: txnData, error: txnError } = await (
-        this.supabase.getClient() as any
-      ).rpc('update_stripe_checkout_status', {
-        p_stripe_payment_intent_id: paymentIntentId,
-        p_payment_status: 'succeeded',
-      });
-
-      if (txnError) {
-        this.logger.error(
-          'Failed to update transaction and get data:',
-          txnError,
-        );
-        return;
-      }
-
-      if (!txnData) {
-        this.logger.error(
-          'No transaction data returned - transaction not found',
-        );
-        return;
-      }
-
       await this.webhookSender.notifyOrganization(
         organizationId,
         event as WebhookEvent,
         txnData,
       );
-
-      this.logger.log('Successfully triggered merchant webhook');
-    } catch (error) {
-      this.logger.error('Error triggering merchant webhook:', error);
+    } catch {
       // Don't throw - webhook failures shouldn't fail the Stripe webhook
     }
   }
