@@ -227,7 +227,73 @@ export class WaveWebhookService {
         `No transaction found with provider_checkout_id: ${sessionId}`,
       );
 
-      // Try checkout_sessions table as fallback
+      // 1. Try lookup by client_reference (which maps to checkout_session_id)
+      if (data.client_reference) {
+        this.logger.debug(
+          `Attempting lookup/recovery by client_reference: ${data.client_reference}`,
+        );
+
+        try {
+          // Use RPC to find OR recover the transaction
+          // This allows us to handle both "unlinked" and "missing" transaction cases
+          const { data: recoveryResult, error: rpcError } = await (
+            this.supabase.getClient() as any
+          ).rpc('recover_missing_wave_transaction', {
+            p_client_reference: data.client_reference,
+            p_wave_session_id: sessionId,
+            p_wave_transaction_id: waveTxnId,
+            p_amount: data.amount ? parseFloat(data.amount) : null,
+            p_currency: data.currency,
+          });
+
+          if (rpcError) {
+            this.logger.warn(
+              'Error executing recovery RPC:',
+              rpcError,
+            );
+          } else if (recoveryResult && recoveryResult.length > 0) {
+            const result = recoveryResult[0]; 
+            const wasRecovered = result.was_recovered;
+
+            this.logger.log(
+              `Resolved transaction ${result.transaction_id} via client_reference (Recovered: ${wasRecovered})`,
+            );
+
+            // Process completion
+            await this.updateTransactionStatus(
+              result.transaction_id,
+              'completed',
+              {
+                wave_transaction_id: waveTxnId,
+                wave_payment_status: 'succeeded',
+                wave_session: {
+                  id: sessionId,
+                  checkout_status: data.checkout_status,
+                  payment_status: data.payment_status,
+                  transaction_id: waveTxnId,
+                  when_created: data.when_created,
+                  when_expires: data.when_expires,
+                  when_completed: data.when_completed,
+                  client_reference: data.client_reference,
+                  recovered: wasRecovered,
+                },
+              },
+            );
+
+            await this.triggerMerchantWebhook(
+              result.transaction_id,
+              result.organization_id,
+              'PAYMENT_SUCCEEDED',
+            );
+
+            return { transaction_id: result.transaction_id };
+          }
+        } catch (err) {
+            this.logger.error('Unexpected error in recovery lookup:', err);
+        }
+      }
+
+      // 2. Try checkout_sessions table as fallback
       const { data: checkoutSession, error: sessionError } = await (
         this.supabase.getClient() as any
       ).rpc('get_checkout_session_by_wave_id', {
