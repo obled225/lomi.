@@ -11,3 +11,7 @@ Allow: /docs/
 
 # Sitemap
 Sitemap: https://lomi.africa/sitemap.xml
+
+# LLM Content Guide
+# See https://llmstxt.org for specification
+LLMs-Txt: https://lomi.africa/llms.txt
