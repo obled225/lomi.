@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, UseGuards, Header } from '@nestjs/common';
+import { Controller, Get, Post, Body, UseGuards, Header, HttpCode, HttpStatus } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 import { AppService } from './app.service';
 import { ApiKeyGuard } from './core/common/guards/api-key.guard';
@@ -25,6 +25,22 @@ export class AppController {
     return `User-agent: *
 Disallow: /
 `;
+  }
+
+  @Get('favicon.ico')
+  @HttpCode(HttpStatus.OK)
+  @Header('Content-Type', 'image/x-icon')
+  getFaviconIco() {
+    // Return empty response for favicon requests to avoid 404s
+    return Buffer.alloc(0);
+  }
+
+  @Get('favicon.png')
+  @HttpCode(HttpStatus.OK)
+  @Header('Content-Type', 'image/png')
+  getFaviconPng() {
+    // Return empty response for favicon requests to avoid 404s
+    return Buffer.alloc(0);
   }
 
   @Post('test/webhook-event')
