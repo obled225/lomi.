@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 interface SpinnerProps {
   className?: string;
@@ -6,10 +6,10 @@ interface SpinnerProps {
 }
 
 export default function Spinner({
-  className = "",
+  className = '',
   inline = false,
 }: SpinnerProps) {
-  const spinnerChars = ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"];
+  const spinnerChars = ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏'];
   const [currentChar, setCurrentChar] = React.useState(0);
 
   React.useEffect(() => {
@@ -26,10 +26,10 @@ export default function Spinner({
       style={{
         fontFamily:
           '"DejaVu Sans Mono", "Liberation Mono", "Courier New", monospace',
-        fontSize: "0.875rem",
-        lineHeight: "1.5",
-        fontWeight: "normal",
-        verticalAlign: "middle",
+        fontSize: '0.875rem',
+        lineHeight: '1.5',
+        fontWeight: 'normal',
+        verticalAlign: 'middle',
       }}
     >
       {spinnerChars[currentChar]}
