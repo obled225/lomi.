@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+
+# Block access to sensitive areas
+Disallow: /api/
+Disallow: /_next/
+Disallow: /studio/
+
+# Allow crawling of documentation
+Allow: /docs/
+
+# Sitemap
+Sitemap: https://lomi.africa/sitemap.xml

@@ -23,8 +23,8 @@ For local development:
 ## Documentation
 
 - [API reference](https://docs.lomi.africa/api)
-- [Getting started guide](https://docs.lomi.africa/docs/getting-started)
-- [API authentication](https://docs.lomi.africa/docs/reference/core/authentication)
+- [Getting started guide](https://docs.lomi.africa/docs/core/fundamentals/)
+- [API authentication](https://docs.lomi.africa/docs/reference/setup/authentication)
 
 ## Support
 
