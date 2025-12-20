@@ -67,7 +67,19 @@
       "destination": "/api/$1"
     }
   ],
-  "redirects": [],
+  "redirects": [
+    {
+      "source": "/((?!api/).*)",
+      "destination": "https://lomi.africa/$1",
+      "permanent": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.lomi.africa"
+        }
+      ]
+    }
+  ],
   "installCommand": "pnpm install",
   "buildCommand": "pnpm build",
   "devCommand": "next dev",
