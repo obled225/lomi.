@@ -183,12 +183,13 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <link rel="dns-prefetch" href="//mdswvokxrnfggrujsfjd.supabase.co" />
         <link rel="dns-prefetch" href="//res.cloudinary.com" />
         <link rel="dns-prefetch" href="//api.producthunt.com" />
+        {/* Structured Data JSON-LD for rich results - must be in head for crawlers */}
+        <StructuredData />
       </head>
       <Body>
         <Provider>{children}</Provider>
         <Analytics />
         <ApolloTracker />
-        <StructuredData />
       </Body>
     </html>
   );
