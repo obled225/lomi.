@@ -36,6 +36,15 @@ export class StripeWebhookService {
     }
 
     const event = this.verifyWebhook(signature, rawBody);
+    
+    // Wide Event: Log webhook receipt with structured context
+    this.logger.log({
+      message: 'stripe_webhook_received',
+      event_type: event.type,
+      event_id: event.id,
+      timestamp: new Date().toISOString(),
+    });
+
     switch (event.type) {
       // ========================================================================
       // PAYMENT EVENTS

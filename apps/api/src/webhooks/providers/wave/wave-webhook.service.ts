@@ -53,6 +53,17 @@ export class WaveWebhookService {
     this.logger.log(`Processing Wave webhook: ${event.type}`);
     this.logger.debug(`Event data: ${JSON.stringify(event, null, 2)}`);
 
+    // Wide Event: Log webhook receipt with structured context
+    this.logger.log({
+      message: 'wave_webhook_received',
+      event_type: event.type,
+      wave_session_id: event.data?.id,
+      transaction_id: event.data?.transaction_id,
+      amount: event.data?.amount,
+      currency: event.data?.currency,
+      timestamp: new Date().toISOString(),
+    });
+
     // Handle different event types
     switch (event.type) {
       case 'checkout.session.completed':
@@ -253,15 +264,15 @@ export class WaveWebhookService {
             );
           } else if (recoveryResult && recoveryResult.length > 0) {
             const result = recoveryResult[0]; 
-            const wasRecovered = result.was_recovered;
+            const wasRecovered = result.r_was_recovered;
 
             this.logger.log(
-              `Resolved transaction ${result.transaction_id} via client_reference (Recovered: ${wasRecovered})`,
+              `Resolved transaction ${result.r_transaction_id} via client_reference (Recovered: ${wasRecovered})`,
             );
 
             // Process completion
             await this.updateTransactionStatus(
-              result.transaction_id,
+              result.r_transaction_id,
               'completed',
               {
                 wave_transaction_id: waveTxnId,
@@ -281,12 +292,12 @@ export class WaveWebhookService {
             );
 
             await this.triggerMerchantWebhook(
-              result.transaction_id,
-              result.organization_id,
+              result.r_transaction_id,
+              result.r_organization_id,
               'PAYMENT_SUCCEEDED',
             );
 
-            return { transaction_id: result.transaction_id };
+            return { transaction_id: result.r_transaction_id };
           }
         } catch (err) {
             this.logger.error('Unexpected error in recovery lookup:', err);
