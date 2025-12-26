@@ -18,7 +18,7 @@ export function AddOns() {
     <Section className="mb-8 lg:mb-28">
       <div className="max-w-7xl mx-auto pl-2 pr-4 py-2">
         <SectionHeader title={t('sdks.title')} className="mb-6 md:mb-8" />
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

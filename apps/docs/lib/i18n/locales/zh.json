@@ -230,7 +230,7 @@
   "pricing": {
     "calculator": {
       "disclaimer": "估计基于您的平均交易金额和交易量。",
-      "fee_tooltip": "部分退款收取2%费用，用于覆盖处理成本。全额退款免费。",
+      "fee_tooltip": "部分退款收取2.5%费用，用于覆盖处理成本。全额退款免费。",
       "our_fee": "我们的费用",
       "see_fees": "了解我们的费用如何适用。",
       "transaction_amount": "平均交易金额",
@@ -261,7 +261,7 @@
             "subtitle": "市场上最便宜的MoR",
             "items": [
               {
-                "text": "lomi.的定价比法语西非的其他商家记录商便宜20%。移动货币每笔交易2%和200 F CFA。"
+                "text": "lomi.的定价比法语西非的其他商家记录商便宜20%。移动货币每笔交易2.5%和200 F CFA。"
               }
             ]
           },
@@ -279,7 +279,7 @@
         "title": "交易费用",
         "sections": [
           {
-            "subtitle": "每笔交易2% + 200 F CFA",
+            "subtitle": "每笔交易2.5% + 200 F CFA",
             "items": [
               {
                 "text": "lomi.目前建立在SPI之上用于移动货币支付处理，我们的定价结构旨在用我们的费用覆盖基础设施1%到1.5%的费用。"
@@ -315,8 +315,8 @@
             "table": [
               { "label": "产品价格", "value": "20 000 F CFA" },
               { "label": "交易总价值", "value": "20 000 F CFA" },
-              { "label": "交易费用（2% + 200 XOF）", "value": "600 F CFA" },
-              { "label": "您收到的金额", "value": "19 400 F CFA" }
+              { "label": "交易费用（2.5% + 200 XOF）", "value": "700 F CFA" },
+              { "label": "您收到的金额", "value": "19 300 F CFA" }
             ]
           },
           {

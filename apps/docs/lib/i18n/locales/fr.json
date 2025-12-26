@@ -247,7 +247,7 @@
         "question": "Quels méthodes de paiement supportez-vous?"
       },
       "pricing": {
-        "answer": "lomi. offre des tarifs transparents sans frais cachés. Nous facturons 2% + 200 F CFA par transaction pour le mobile money, et 3,5% + 0,40 $ pour les cartes de crédit. Pas de frais d'installation et aucun frais mensuels.",
+        "answer": "lomi. offre des tarifs transparents sans frais cachés. Nous facturons 2.5% + 200 F CFA par transaction pour le mobile money, et 3,5% + 0,40 $ pour les cartes de crédit. Pas de frais d'installation et aucun frais mensuels.",
         "question": "Comment fonctionne le pricing de lomi.?"
       },
       "security": {
@@ -415,7 +415,7 @@
             "subtitle": "Le MoR le moins cher du marché",
             "items": [
               {
-                "text": "lomi. est tarifé 20% moins cher que d'autres plateformes de paiement en Afrique de l'Ouest francophone. 2% et 200 F CFA par transaction pour le mobile money."
+                "text": "lomi. est tarifé 20% moins cher que d'autres plateformes de paiement en Afrique de l'Ouest francophone. 2.5% et 200 F CFA par transaction pour le mobile money."
               }
             ]
           },
@@ -433,7 +433,7 @@
         "title": "Frais de transaction",
         "sections": [
           {
-            "subtitle": "2% + 200 F CFA par transaction",
+            "subtitle": "2.5% + 200 F CFA par transaction",
             "items": [
               {
                 "text": "lomi. est actuellement construit sur SPI pour le traitement des paiements d'argent mobile, et notre structure tarifaire est conçue pour couvrir les frais d'infrastructure de 1% à 1.5% avec les nôtres."
@@ -473,10 +473,10 @@
                 "value": "20 000 F CFA"
               },
               {
-                "label": "Frais de transaction (2% + 200 XOF)",
-                "value": "600 F CFA"
+                "label": "Frais de transaction (2.5% + 200 XOF)",
+                "value": "700 F CFA"
               },
-              { "label": "Montant que vous recevez", "value": "19 400 F CFA" }
+              { "label": "Montant que vous recevez", "value": "19 300 F CFA" }
             ]
           },
           {

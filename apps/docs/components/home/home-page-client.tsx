@@ -6,7 +6,7 @@ import { Hero } from '@/components/home/hero';
 import { FeaturesSection } from '@/components/home/features-section';
 import { UpdatesSection } from '@/components/home/updates-section';
 import { AddOns } from '@/components/home/add-ons';
-import { EarlyMemberPricing } from '@/components/home/early-member-pricing';
+// import { EarlyMemberPricing } from '@/components/home/early-member-pricing';
 import { useHomePageInit } from '@/lib/hooks/use-home-page-init';
 
 interface HomePageClientProps {
@@ -27,7 +27,7 @@ export function HomePageClient({ initialTitleIndex }: HomePageClientProps) {
       <FeaturesSection />
       <AddOns />
       <UpdatesSection />
-      <EarlyMemberPricing />
+      {/* <EarlyMemberPricing /> */}
     </>
   );
 }

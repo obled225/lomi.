@@ -261,7 +261,7 @@
             "subtitle": "El MoR más barato del mercado",
             "items": [
               {
-                "text": "lomi. tiene un precio 20% más barato que otros proveedores de registro de comerciantes en África Occidental francófona. 2% y 200 F CFA por transacción para dinero móvil."
+                "text": "lomi. tiene un precio 20% más barato que otros proveedores de registro de comerciantes en África Occidental francófona. 2.5% y 200 F CFA por transacción para dinero móvil."
               }
             ]
           },
@@ -279,7 +279,7 @@
         "title": "Tarifas de transacción",
         "sections": [
           {
-            "subtitle": "2% + 200 F CFA por transacción",
+            "subtitle": "2.5% + 200 F CFA por transacción",
             "items": [
               {
                 "text": "lomi. está construido actualmente sobre SPI para el procesamiento de pagos con dinero móvil, y nuestra estructura de precios está diseñada para cubrir la tarifa de infraestructura del 1% al 1.5% con la nuestra."
@@ -319,10 +319,10 @@
                 "value": "20 000 F CFA"
               },
               {
-                "label": "Tarifa de transacción (2% + 200 XOF)",
-                "value": "600 F CFA"
+                "label": "Tarifa de transacción (2.5% + 200 XOF)",
+                "value": "700 F CFA"
               },
-              { "label": "Monto que recibes", "value": "19 400 F CFA" }
+              { "label": "Monto que recibes", "value": "19 300 F CFA" }
             ]
           },
           {
