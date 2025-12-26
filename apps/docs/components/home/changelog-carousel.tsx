@@ -43,10 +43,10 @@ function ChangelogEntryCard({
         className="group flex flex-col h-full"
         onMouseDown={playClickSound}
       >
-        <article className="flex flex-col bg-white dark:bg-zinc-900 rounded-sm overflow-hidden shadow-sm hover:shadow-sm transition-all duration-300 border border-zinc-200 dark:border-zinc-800 h-full p-6 min-h-[200px]">
+        <article className="flex flex-col bg-card rounded-sm overflow-hidden shadow-sm hover:shadow-sm transition-all duration-300 border border-zinc-200 dark:border-zinc-800 h-full p-6 min-h-[235px]">
           <div className="grow flex flex-col">
-            {/* Date and Badge in same row */}
-            <div className="flex justify-between items-center mb-3">
+            {/* Date */}
+            <div className="mb-3">
               <p className="text-zinc-500 dark:text-zinc-400 text-xs">
                 {t('changelog.title', currentLanguage) as string} ·{' '}
                 {new Date(entry.date).toLocaleDateString(
@@ -64,9 +64,6 @@ function ChangelogEntryCard({
                   },
                 )}
               </p>
-              <span className="px-2 py-1 text-xs font-normal rounded bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300">
-                Release
-              </span>
             </div>
 
             {/* Title */}
@@ -82,15 +79,18 @@ function ChangelogEntryCard({
             </p>
           </div>
 
-          {/* Bottom section with read text */}
-          <div className="mt-auto flex justify-end">
+          {/* Bottom section with badge and read text */}
+          <div className="mt-auto flex flex-row justify-between items-center">
+            <span className="px-2 py-1 text-xs font-normal rounded bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300">
+              {t('changelog.release', currentLanguage) as string}
+            </span>
+
             <div className="flex items-center text-primary text-sm font-normal">
               <span
-                className={`transition-all duration-300 ${
-                  hoveredCard === `changelog-${index}`
-                    ? 'opacity-100'
-                    : 'opacity-0'
-                }`}
+                className={`transition-all duration-300 ${hoveredCard === `changelog-${index}`
+                  ? 'opacity-100'
+                  : 'opacity-0'
+                  }`}
               >
                 {t('changelog.read', currentLanguage) as string}
               </span>

@@ -60,7 +60,7 @@ export function BlogArticlesCarousel() {
                     className="group flex flex-col h-full"
                     onMouseDown={playClickSound}
                   >
-                    <article className="flex flex-col bg-white dark:bg-zinc-900 rounded-sm overflow-hidden shadow-sm hover:shadow-sm transition-all duration-300 border border-zinc-200 dark:border-zinc-800 h-full p-6 min-h-[235px]">
+                    <article className="flex flex-col bg-card rounded-sm overflow-hidden shadow-sm hover:shadow-sm transition-all duration-300 border border-zinc-200 dark:border-zinc-800 h-full p-6 min-h-[235px]">
                       <div className="grow flex flex-col">
                         {post.publishedAt && (
                           <p className="text-zinc-500 dark:text-zinc-400 text-xs mb-3">
@@ -105,11 +105,10 @@ export function BlogArticlesCarousel() {
 
                         <div className="flex items-center text-primary text-sm font-normal">
                           <ArrowRight
-                            className={`ml-1 h-4 w-4 transition-all duration-300 ${
-                              hoveredCard === post._id
-                                ? 'opacity-100 translate-x-1'
-                                : 'opacity-0 -translate-x-3'
-                            }`}
+                            className={`ml-1 h-4 w-4 transition-all duration-300 ${hoveredCard === post._id
+                              ? 'opacity-100 translate-x-1'
+                              : 'opacity-0 -translate-x-3'
+                              }`}
                           />
                         </div>
                       </div>

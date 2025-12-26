@@ -65,6 +65,7 @@
   "changelog": {
     "description": "Mantente actualizado con todas las últimas actualizaciones, mejoras y correcciones a lomi.",
     "read": "Leer changelog",
+    "release": "Versión",
     "subtitle": "Todas las últimas actualizaciones, mejoras y correcciones a nuestros productos y servicios.",
     "title": "Changelog",
     "entries": [
