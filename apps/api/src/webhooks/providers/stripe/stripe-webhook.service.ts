@@ -174,10 +174,19 @@ export class StripeWebhookService {
         ? paymentIntent.latest_charge
         : paymentIntent.latest_charge?.id || null;
 
+    // Extract Payment Method ID
+    const paymentMethodId = 
+      typeof paymentIntent.payment_method === 'string'
+        ? paymentIntent.payment_method
+        : paymentIntent.payment_method?.id || null;
+
     const txnData = await this.updateStripeCheckoutStatus(
       paymentIntent.id,
       chargeId,
       'succeeded',
+      null,
+      null,
+      paymentMethodId
     );
 
     if (metadata.organization_id) {
@@ -442,8 +451,9 @@ export class StripeWebhookService {
     paymentIntentId: string,
     chargeId: string | null,
     status: string,
-    errorCode?: string,
-    errorMessage?: string,
+    errorCode?: string | null,
+    errorMessage?: string | null,
+    paymentMethodId?: string | null,
   ) {
     const { data, error } = await (this.supabase.getClient() as any).rpc(
       'update_stripe_checkout_status',
@@ -454,6 +464,7 @@ export class StripeWebhookService {
         p_error_code: errorCode || null,
         p_error_message: errorMessage || null,
         p_metadata: null,
+        p_stripe_payment_method_id: paymentMethodId || null,
       },
     );
 
