@@ -8,7 +8,6 @@
 export type payment_links_create = {
     allow_coupon_code?: boolean;
     allow_quantity?: boolean;
-    allowed_providers?: string;
     /**
      * Amount in the smallest currency unit (e.g., cents for USD, same for XOF)
      */
