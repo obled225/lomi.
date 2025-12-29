@@ -10,7 +10,7 @@ export function UpdatesSection() {
   const { currentLanguage } = useTranslation();
 
   return (
-    <Section className="mb-8 lg:mb-28">
+    <Section className="mt-4 md:mt-36 mb-8 lg:mb-28">
       <div className="max-w-7xl mx-auto pl-2 pr-4 py-2">
         <div className="flex flex-col space-y-6 text-left mt-20 md:mt-0">
           {/* Careers content */}

@@ -64,7 +64,7 @@ function Hero({
       : t('hero.titles.0');
 
   return (
-    <section className="relative max-w-7xl mx-auto pl-2 pr-4 py-2 md:py-12 lg:py-16 xl:py-28">
+    <section className="relative max-w-7xl mx-auto pl-2 pr-4 pb-12 py-2 md:py-12 lg:py-16 xl:py-28">
       {/* Container with fixed height and overflow-hidden for envelope effect */}
       <div className="relative flex min-h-[880px] h-[70vh] max-h-[880px] md:min-h-[600px] md:h-[70vh] md:max-h-[900px] border rounded-sm overflow-hidden bg-origin-border md:translate-y-0 translate-y-28">
         {/* Agnostic background with hero effects */}

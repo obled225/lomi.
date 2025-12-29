@@ -15,7 +15,7 @@ export function AddOns() {
   // Create t function that uses currentLanguage (same pattern as footer.tsx)
   const t = (key: string) => String(translate(key, currentLanguage));
   return (
-    <Section className="mb-8 lg:mb-28">
+    <Section className="mt-16 md:mt-28 mb-8 md:mb-32 lg:mb-28">
       <div className="max-w-7xl mx-auto pl-2 pr-4 py-2">
         <SectionHeader title={t('sdks.title')} className="mb-6 md:mb-8" />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

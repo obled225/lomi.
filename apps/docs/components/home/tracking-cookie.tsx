@@ -87,11 +87,32 @@ export default function CookieConsent() {
   const [mounted, setMounted] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
+  // Function to check if device is mobile
+  const checkIsMobile = useCallback(() => {
+    // Check both screen width and user agent for better mobile detection
+    const isMobileWidth = window.innerWidth < 768;
+    const isMobileUA = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent
+    );
+    return isMobileWidth || isMobileUA;
+  }, []);
+
   useEffect(() => {
     // This runs only on the client, after initial render
     setMounted(true);
-    setIsMobile(window.innerWidth < 768);
-  }, []);
+    setIsMobile(checkIsMobile());
+
+    // Add resize listener to handle orientation changes
+    const handleResize = () => {
+      setIsMobile(checkIsMobile());
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [checkIsMobile]);
 
   // Memoized handler for scroll events
   const handleScroll = useCallback(() => {
@@ -129,6 +150,11 @@ export default function CookieConsent() {
   }, [handleScroll]); // Depends on handleScroll instance
 
   useEffect(() => {
+    // Early return if on mobile - don't set up any listeners or timers to ensure banner never appears
+    if (isMobile) {
+      return;
+    }
+
     // This effect now primarily handles initial consent check and timer/listener setup
     footerRef.current =
       document.querySelector('footer') ||
@@ -181,8 +207,8 @@ export default function CookieConsent() {
       clearTimeout(timerId);
       removeScrollListener(); // Use the memoized remover
     };
-    // Dependencies: handleScroll and removeScrollListener instances
-  }, [handleScroll, removeScrollListener]);
+    // Dependencies: handleScroll, removeScrollListener instances, and isMobile for re-evaluation
+  }, [handleScroll, removeScrollListener, isMobile]);
 
   const handleAccept = () => {
     playClickSound();
@@ -256,9 +282,8 @@ export default function CookieConsent() {
             <motion.div className="px-4 py-3 sm:px-5 sm:py-4 relative overflow-hidden w-full">
               <motion.div>
                 <p
-                  className={`mb-2 sm:mb-3 text-xs sm:text-sm text-left select-none ${
-                    resolvedTheme === 'dark' ? 'text-gray-300' : 'text-gray-700'
-                  }`}
+                  className={`mb-2 sm:mb-3 text-xs sm:text-sm text-left select-none ${resolvedTheme === 'dark' ? 'text-gray-300' : 'text-gray-700'
+                    }`}
                 >
                   {String(
                     t('components.tracking_cookie.message', currentLanguage),
@@ -267,9 +292,8 @@ export default function CookieConsent() {
                 <div className="flex flex-wrap gap-3 sm:gap-4">
                   <button
                     onMouseDown={handleAccept}
-                    className={`text-xs sm:text-sm hover:opacity-75 transition-colors font-medium ${
-                      resolvedTheme === 'dark' ? 'text-white' : 'text-gray-900'
-                    }`}
+                    className={`text-xs sm:text-sm hover:opacity-75 transition-colors font-medium ${resolvedTheme === 'dark' ? 'text-white' : 'text-gray-900'
+                      }`}
                   >
                     {String(
                       t('components.tracking_cookie.accept', currentLanguage),
@@ -277,11 +301,10 @@ export default function CookieConsent() {
                   </button>
                   <button
                     onMouseDown={handleDecline}
-                    className={`text-xs sm:text-sm hover:opacity-75 transition-colors ${
-                      resolvedTheme === 'dark'
+                    className={`text-xs sm:text-sm hover:opacity-75 transition-colors ${resolvedTheme === 'dark'
                         ? 'text-gray-500'
                         : 'text-gray-500'
-                    }`}
+                      }`}
                   >
                     {String(
                       t('components.tracking_cookie.decline', currentLanguage),
