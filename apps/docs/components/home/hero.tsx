@@ -8,12 +8,14 @@ import { t as translate } from '@/lib/i18n/translations';
 
 interface HeroProps {
   dashboardImage?:
-    | string
-    | {
-        light: string;
-        dark: string;
-      };
-  mobileDashboardImage?: {
+  | string
+  | {
+    light: string;
+    dark: string;
+  };
+  mobileDashboardImage?:
+  | string
+  | {
     light: string;
     dark: string;
   };

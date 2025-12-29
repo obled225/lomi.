@@ -41,12 +41,9 @@ export function useHomePageInit() {
     };
   };
 
-  // Function to get mobile dashboard images (theme-based only, no language logic)
+  // Function to get mobile dashboard image (single image, no theme variants)
   const getMobileDashboardImage = () => {
-    return {
-      light: '/company/dashboard/mobile-l.webp',
-      dark: '/company/dashboard/mobile-d.webp',
-    };
+    return '/company/dashboard/mobile.webp';
   };
 
   // Initialize language settings
