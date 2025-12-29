@@ -686,7 +686,11 @@
     "title": "Lead the charge.",
     "frameworkAgnostic": "Framework agnostic",
     "sdksDescription": "Official support and SDKs for Next.js, Sanity, Medusa, TypeScript, JavaScript, Go, Python, and PHP - make it yours.",
-    "communityDriven": "Community driven"
+    "communityDriven": "Community driven",
+    "minimalYetPowerful": "Minimal yet powerful",
+    "documentation": "Documentation",
+    "dashboard": "Dashboard",
+    "checkout": "Checkout"
   },
   "contributors": {
     "loading": "Loading contributors...",

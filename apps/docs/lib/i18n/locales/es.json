@@ -70,13 +70,139 @@
     "title": "Changelog",
     "entries": [
       {
+        "date": "2025-12-01",
+        "version": "1.2.0",
+        "title": "Pagos internacionales",
+        "changes": [
+          "Lanzado el procesamiento de pagos con tarjetas de crédito con soporte Visa, Mastercard y Amex.",
+          "Introducido la aceptación de pagos internacionales para clientes globales.",
+          "Implementadas herramientas avanzadas de detección y prevención de fraude además de una API de fraude.",
+          "Agregado soporte multi-moneda con conversión automática de moneda para transacciones."
+        ]
+      },
+      {
+        "date": "2025-11-15",
+        "version": "1.1.8",
+        "title": "Portal de cliente y autoservicio",
+        "changes": [
+          "Lanzado un portal de cliente para gestión de suscripciones.",
+          "Agregado historial de facturación y descargas de facturas en autoservicio.",
+          "Introducido una tienda orientada al cliente para descubrimiento de productos.",
+          "Implementado seguimiento del historial de pedidos para clientes.",
+          "Agregada funcionalidad de pausa y reanudación de suscripciones."
+        ]
+      },
+      {
+        "date": "2025-10-28",
+        "version": "1.1.7",
+        "title": "Panel de análisis e información",
+        "changes": [
+          "Lanzado panel de análisis poderoso con seguimiento de ingresos.",
+          "Agregadas métricas de valor de vida del cliente (LTV) y retención.",
+          "Introducidos análisis de rendimiento de productos y desgloses de ventas.",
+          "Implementados gráficos de análisis compartibles con soporte Open Graph.",
+          "Agregada funcionalidad de exportación para transacciones (CSV, PDF, JSON)."
+        ]
+      },
+      {
+        "date": "2025-09-20",
+        "version": "1.1.6",
+        "title": "Retiros automáticos y programación de pagos",
+        "changes": [
+          "Introducida programación de retiros automáticos para tu negocio.",
+          "Agregadas preferencias configurables de día y método de pago.",
+          "Implementadas notificaciones de pagos y seguimiento de estado.",
+          "Agregado soporte para pagos masivos a múltiples beneficiarios.",
+          "Introducidos recibos de pago con PDFs descargables."
+        ]
+      },
+      {
+        "date": "2025-08-15",
+        "version": "1.1.5",
+        "title": "Integración MTN Mobile Money",
+        "changes": [
+          "Integrado MTN Mobile Money para Côte d'Ivoire.",
+          "Agregados avisos de pago MTN con actualizaciones de estado en tiempo real.",
+          "Implementada validación de números de teléfono para transacciones MTN.",
+          "Agregado MTN como destino de pago para retiros de tu negocio."
+        ]
+      },
+      {
+        "date": "2025-07-10",
+        "version": "1.1.4",
+        "title": "Reembolsos y gestión de disputas",
+        "changes": [
+          "Lanzado soporte completo y parcial de reembolsos desde el panel vía Mobile Money.",
+          "Implementado seguimiento de razones de reembolso y notificaciones a tus clientes.",
+          "Agregadas herramientas de monitoreo de contracargos y gestión de disputas.",
+          "Introducido seguimiento de estado específico para transacciones de reembolso."
+        ]
+      },
+      {
+        "date": "2025-06-01",
+        "version": "1.1.3",
+        "title": "Facturación de suscripciones y pagos recurrentes",
+        "changes": [
+          "Lanzado producto de facturación de suscripciones con intervalos flexibles.",
+          "Agregado soporte para ciclos de facturación mensuales, trimestrales y anuales.",
+          "Implementada renovación automática de suscripciones y lógica de reintento.",
+          "Introducida cancelación de suscripciones y reembolsos prorrateados vía Mobile Money.",
+          "Agregado reintento de pagos fallidos con notificación al cliente."
+        ]
+      },
+      {
+        "date": "2025-03-05",
+        "version": "1.1.1",
+        "title": "Catálogo de productos y enlaces de pago",
+        "changes": [
+          "Introducida gestión de catálogo de productos con imágenes y descripciones.",
+          "Agregados enlaces de pago personalizables con fechas de expiración.",
+          "Implementado soporte para códigos de cupón y descuentos.",
+          "Agregada selección de cantidad para checkouts de productos."
+        ]
+      },
+      {
+        "date": "2025-01-15",
+        "version": "1.1.0",
+        "title": "Documentación",
+        "changes": [
+          "Lanzado sitio web de documentación completo.",
+          "Liberados SDKs oficiales para JavaScript, Python, Go y PHP.",
+          "Agregada referencia de API con ejemplos interactivos.",
+          "Introducida guía de integración webhook y referencias de eventos.",
+          "Hecho sitio web de documentación de código abierto para contribuciones de la comunidad."
+        ]
+      },
+      {
+        "date": "2024-12-10",
+        "version": "1.0.2",
+        "title": "Gestión de equipo e invitaciones",
+        "changes": [
+          "Agregado sistema de invitación de miembros del equipo con acceso basado en roles.",
+          "Implementada gestión de organización para acceso multi-usuario.",
+          "Agregado feed de actividad y registros de auditoría para acciones del equipo.",
+          "Introducidas notificaciones por correo electrónico para eventos del equipo."
+        ]
+      },
+      {
+        "date": "2024-11-15",
+        "version": "1.0.1",
+        "title": "Integración Wave Mobile Money",
+        "changes": [
+          "Agregado Wave como proveedor principal de dinero móvil.",
+          "Implementada verificación de saldo Wave y pagos instantáneos.",
+          "Agregado soporte de pagos Wave para retiros de tu negocio.",
+          "Introducidas actualizaciones de estado de transacción en tiempo real para tus clientes."
+        ]
+      },
+      {
         "date": "2024-10-17",
         "version": "1.0.0",
         "title": "Lanzamiento",
         "changes": [
-          "Lanzado lomi. con un solo método de pago.",
-          "Implementado autenticación de usuario y característica de enlace de pago.",
-          "Hizo la documentación y el sitio web de código abierto."
+          "Lanzado lomi. con funcionalidad básica y un solo método de pago.",
+          "Implementada autenticación de usuario y característica de enlace de pago.",
+          "Hecha documentación y sitio web de código abierto."
         ]
       }
     ]
@@ -535,7 +661,11 @@
     "title": "No te quedes atrás.",
     "frameworkAgnostic": "Agnóstico de framework",
     "sdksDescription": "Soporte oficial y SDKs para Next.js, Sanity, Medusa, TypeScript, JavaScript, Go, Python y PHP - hazlo tuyo.",
-    "communityDriven": "Impulsado por la comunidad"
+    "communityDriven": "Impulsado por la comunidad",
+    "minimalYetPowerful": "Minimal pero poderoso",
+    "documentation": "Documentación",
+    "dashboard": "Panel de control",
+    "checkout": "Pago"
   },
   "contributors": {
     "loading": "Cargando colaboradores...",

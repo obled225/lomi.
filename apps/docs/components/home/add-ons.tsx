@@ -8,12 +8,161 @@ import { t as translate } from '@/lib/i18n/translations';
 import { AgnosticBackground } from './agnostic-background';
 import ContributorCounter from './contributor-counter';
 import Image from 'next/image';
+import { useState } from 'react';
+import { cn } from '@/lib/utils/cn';
+import { ComponentProps } from 'react';
+import { playClickSound } from '@/lib/utils/sound';
+import { useTheme } from '@/lib/hooks/use-theme';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import {
+  blueVsTheme,
+  blueVsDarkTheme,
+} from '@/lib/utils/code-highlighting-theme';
 
-export function AddOns() {
+export function PreviewImages(props: ComponentProps<'div'>) {
   const { currentLanguage } = useTranslation();
+  const { resolvedTheme, mounted } = useTheme();
+  const [active, setActive] = useState(0);
 
   // Create t function that uses currentLanguage (same pattern as footer.tsx)
   const t = (key: string) => String(translate(key, currentLanguage));
+
+  // Use same logic as hero component for dashboard
+  const getDashboardImage = (language: string) => {
+    if (language === 'en' || language === 'fr') {
+      return {
+        light: `/company/dashboard/main-${language}-l.webp`,
+        dark: `/company/dashboard/main-${language}-d.webp`,
+      };
+    }
+
+    if (language === 'es') {
+      return {
+        light: '/company/dashboard/main-es-l.webp',
+        dark: '/company/dashboard/main-es-d.webp',
+      };
+    }
+
+    if (language === 'zh') {
+      return {
+        light: '/company/dashboard/main-zh-l.webp',
+        dark: '/company/dashboard/main-zh-d.webp',
+      };
+    }
+
+    // Default fallback to English main
+    return {
+      light: '/company/dashboard/main-en-l.webp',
+      dark: '/company/dashboard/main-en-d.webp',
+    };
+  };
+
+  const dashboardImage = getDashboardImage(currentLanguage);
+  const currentTheme = mounted ? resolvedTheme : 'dark';
+
+  const previews = [
+    {
+      image: currentTheme === 'dark' ? '/company/add-ons/docs-d.webp' : '/company/add-ons/docs-l.webp',
+      name: t('sdks.documentation'),
+    },
+    {
+      image: currentTheme === 'dark' ? dashboardImage.dark : dashboardImage.light,
+      name: t('sdks.dashboard'),
+    },
+    {
+      image: '/company/add-ons/checkout.webp',
+      name: t('sdks.checkout'),
+    },
+  ];
+
+  return (
+    <div {...props} className={cn('relative flex flex-col gap-2', props.className)}>
+      <div className="relative w-full h-[310px]">
+        {previews.map((item, i) => (
+          <Image
+            key={i}
+            src={item.image}
+            alt="preview"
+            width={400}
+            height={300}
+            className={cn(
+              'absolute inset-0 w-full h-full select-none rounded-sm object-cover border border-border',
+              active === i ? '' : 'invisible',
+            )}
+          />
+        ))}
+      </div>
+      <div className="flex justify-center">
+        <div className="flex gap-1 rounded-sm bg-muted/30 border border-border p-1 w-[360px] h-10">
+          <button
+            type="button"
+            onClick={() => {
+              playClickSound();
+              setActive(0);
+            }}
+            className={`flex-1 px-3 pt-1.5 pb-2.5 text-sm font-normal rounded-sm transition-all duration-200 h-7.5 focus:outline-none focus:ring-0 focus:border-none ${active === 0
+              ? 'bg-[#E9EAEF] dark:bg-[#2A2B30] text-foreground shadow-sm border border-border/50'
+              : 'text-muted-foreground hover:text-foreground'
+              }`}
+          >
+            {t('sdks.documentation')}
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              playClickSound();
+              setActive(1);
+            }}
+            className={`flex-1 px-3 pt-1.5 pb-2.5 text-sm font-normal rounded-sm transition-all duration-200 h-7.5 focus:outline-none focus:ring-0 focus:border-none ${active === 1
+              ? 'bg-[#E9EAEF] dark:bg-[#2A2B30] text-foreground shadow-sm border border-border/50'
+              : 'text-muted-foreground hover:text-foreground'
+              }`}
+          >
+            {t('sdks.dashboard')}
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              playClickSound();
+              setActive(2);
+            }}
+            className={`flex-1 px-3 pt-1.5 pb-2.5 text-sm font-normal rounded-sm transition-all duration-200 h-7.5 focus:outline-none focus:ring-0 focus:border-none ${active === 2
+              ? 'bg-[#E9EAEF] dark:bg-[#2A2B30] text-foreground shadow-sm border border-border/50'
+              : 'text-muted-foreground hover:text-foreground'
+              }`}
+          >
+            {t('sdks.checkout')}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export function AddOns() {
+  const { currentLanguage } = useTranslation();
+  const { resolvedTheme, mounted } = useTheme();
+
+  // Create t function that uses currentLanguage (same pattern as footer.tsx)
+  const t = (key: string) => String(translate(key, currentLanguage));
+
+  // Usage code example for SDK integration
+  const usageCode = `import { getLomiClient } from '@lomi./sdk-next';
+
+const lomiClient = getLomiClient();
+
+const checkoutSession = await lomiClient.checkoutSessions.create({
+  amount: 50000,
+  currency_code: 'XOF',
+  price_id: 'price_12345678-1234-1234-1234-123456789abc',
+  environment: 'live',
+  allow_coupon_code: true,
+  allow_quantity: false,
+  require_billing_address: false
+});
+
+window.location.href = checkoutSession.checkout_url;`;
+
   return (
     <Section className="mt-16 md:mt-28 mb-8 md:mb-32 lg:mb-28">
       <div className="max-w-7xl mx-auto pl-2 pr-4 py-2">
@@ -100,6 +249,62 @@ export function AddOns() {
                 </div>
               </CardContent>
               <AgnosticBackground variant="sphere" />
+            </Card>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="hidden md:block size-full"
+          >
+            <Card className="relative flex flex-col overflow-hidden z-2 rounded-sm h-[400px]">
+              <CardContent className="p-6 relative h-full">
+                <PreviewImages className="flex-1" />
+              </CardContent>
+            </Card>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+            className="size-full"
+          >
+            <Card className="relative flex flex-col overflow-hidden z-2 rounded-sm h-[400px]">
+              <CardContent className="p-6 flex flex-col h-full gap-6">
+                <h3 className="text-xl font-semibold">
+                  {t('sdks.minimalYetPowerful')}
+                </h3>
+                <div className="bg-muted/50 dark:bg-blue-950/30 rounded-sm overflow-hidden shadow-sm h-[300px] md:h-[300px] overflow-y-auto hide-scrollbar">
+                  {mounted && (
+                    <SyntaxHighlighter
+                      language="typescript"
+                      style={
+                        resolvedTheme === 'dark'
+                          ? blueVsDarkTheme
+                          : blueVsTheme
+                      }
+                      customStyle={{
+                        margin: 0,
+                        padding: '1rem',
+                        fontSize: '0.75rem',
+                        lineHeight: '1.5',
+                      }}
+                      wrapLines={true}
+                      codeTagProps={{
+                        style: {
+                          whiteSpace: 'pre-wrap',
+                          wordBreak: 'break-word',
+                        },
+                      }}
+                    >
+                      {usageCode}
+                    </SyntaxHighlighter>
+                  )}
+                </div>
+              </CardContent>
             </Card>
           </motion.div>
         </div>

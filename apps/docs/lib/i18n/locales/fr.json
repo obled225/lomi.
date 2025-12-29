@@ -687,9 +687,13 @@
   },
   "sdks": {
     "title": "Gardez une longueur d'avance.",
-    "frameworkAgnostic": "Agnostique de framework",
+    "frameworkAgnostic": "Agnostique est le framework",
     "sdksDescription": "Support officiel et SDKs pour Next.js, Sanity, Medusa, TypeScript, JavaScript, Go, Python et PHP - faites-le vôtre.",
-    "communityDriven": "Maintenue par une communauté"
+    "communityDriven": "Maintenue par une communauté",
+    "minimalYetPowerful": "Minimal mais puissant",
+    "documentation": "Documentation",
+    "dashboard": "Tableau de bord",
+    "checkout": "Paiement"
   },
   "contributors": {
     "loading": "Chargement des contributeurs...",
