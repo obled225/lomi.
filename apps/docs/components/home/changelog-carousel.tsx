@@ -47,7 +47,7 @@ function ChangelogEntryCard({
         <Card className="flex flex-col overflow-hidden shadow-sm hover:shadow-sm transition-all duration-300 h-full p-4 md:p-6 min-h-[220px] md:min-h-[235px] relative z-20">
           <div className="grow flex flex-col">
             {/* Date */}
-            <div className="mb-0 md:mb-3">
+            <div className="mb-0 md:mb-0">
               <p className="text-zinc-500 dark:text-zinc-400 text-xs mb-2 md:mb-3">
                 {t('changelog.title', currentLanguage) as string} ·{' '}
                 {new Date(entry.date).toLocaleDateString(

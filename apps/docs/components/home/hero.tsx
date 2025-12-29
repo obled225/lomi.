@@ -92,7 +92,7 @@ function Hero({
               alt="Preview"
               width={1200}
               height={800}
-              className="absolute top-[270px] left-[8%] max-w-[90%] md:top-[340px] md:left-[5%] md:max-w-[80%] lg:max-w-[1200px] animate-in fade-in duration-400"
+              className="absolute top-[270px] left-[8%] max-w-[90%] md:top-[245px] md:left-[3.75%] md:max-w-[80%] lg:max-w-[1200px] animate-in fade-in duration-400"
             />
           </Suspense>
         )}

@@ -1133,7 +1133,7 @@ export function FeaturesSection() {
   "name": "Just a mug",
   "description": "A high-quality ceramic mug for your daily coffee.",
   "price": 5000,
-  "currency_code": "XOF",
+  "currency_code": "xof",
   "display_on_storefront": true,
   "image_url": "https://cdn.img.co/+++"
 }`;
@@ -1142,7 +1142,7 @@ export function FeaturesSection() {
   "name": "Pro",
   "description": "Access to all pro features, billed monthly.",
   "price": 19,99,
-  "currency_code": "EUR",
+  "currency_code": "eur",
   "billing_frequency": "monthly",
   "display_on_storefront": true
 }`;
@@ -1150,6 +1150,7 @@ export function FeaturesSection() {
   const checkoutCode = `{
   "price_id": "4348-94cj-45W3--f05x-dnc3-844d",
   "customer_email": "kwame@happy.ai",
+  "customer_name": "Kwame Ashanti",
   "allow_coupon_code": true,
   "allow_quantity": true,
   "require_billing_address": false
