@@ -6,6 +6,7 @@ import { useTranslation } from '@/lib/utils/translation-context';
 import { t } from '@/lib/i18n/translations';
 import Link from 'next/link';
 import { playClickSound } from '@/lib/utils/sound';
+import { Card } from '@/components/ui/card';
 
 interface ChangelogEntry {
   date: string;
@@ -43,11 +44,11 @@ function ChangelogEntryCard({
         className="group flex flex-col h-full"
         onMouseDown={playClickSound}
       >
-        <article className="flex flex-col bg-card rounded-sm overflow-hidden shadow-sm hover:shadow-sm transition-all duration-300 border border-zinc-200 dark:border-zinc-800 h-full p-6 min-h-[235px]">
+        <Card className="flex flex-col overflow-hidden shadow-sm hover:shadow-sm transition-all duration-300 h-full p-4 md:p-6 min-h-[220px] md:min-h-[235px] relative z-20">
           <div className="grow flex flex-col">
             {/* Date */}
-            <div className="mb-3">
-              <p className="text-zinc-500 dark:text-zinc-400 text-xs">
+            <div className="mb-0 md:mb-3">
+              <p className="text-zinc-500 dark:text-zinc-400 text-xs mb-2 md:mb-3">
                 {t('changelog.title', currentLanguage) as string} ·{' '}
                 {new Date(entry.date).toLocaleDateString(
                   currentLanguage === 'zh'
@@ -67,12 +68,12 @@ function ChangelogEntryCard({
             </div>
 
             {/* Title */}
-            <h3 className="font-normal leading-tight text-zinc-900 dark:text-white text-lg mb-4 line-clamp-2">
+            <h3 className="font-normal leading-tight text-zinc-900 dark:text-white text-base md:text-lg mb-3 md:mb-4 line-clamp-2">
               {entry.title}
             </h3>
 
             {/* Summary - First change or description */}
-            <p className="text-zinc-600 dark:text-zinc-400 text-sm mb-6 line-clamp-3 grow">
+            <p className="text-zinc-600 dark:text-zinc-400 text-sm mb-4 md:mb-6 grow md:line-clamp-3">
               {entry.changes.length > 0
                 ? entry.changes[0]
                 : 'New release with improvements and fixes'}
@@ -96,7 +97,7 @@ function ChangelogEntryCard({
               </span>
             </div>
           </div>
-        </article>
+        </Card>
       </Link>
     </motion.div>
   );
@@ -113,13 +114,13 @@ export function ChangelogCarousel() {
   const changelogEntries = changelogData || [];
 
   return (
-    <div className="w-full mt-8 relative">
+    <div className="w-full mt-4 relative">
       {/* Horizontal scrolling for all cards */}
       {changelogEntries.length > 0 && (
         <div className="overflow-x-auto pb-4 scrollbar-hide">
-          <div className="flex gap-8" style={{ width: 'max-content' }}>
+          <div className="flex gap-4 md:gap-8" style={{ width: 'max-content' }}>
             {changelogEntries.slice(0, 6).map((entry, index) => (
-              <div key={`changelog-${index}`} className="shrink-0 w-[612px]">
+              <div key={`changelog-${index}`} className="shrink-0 w-[366px] md:w-[612px] h-[220px] md:h-[235px]">
                 <ChangelogEntryCard
                   entry={entry}
                   index={index}

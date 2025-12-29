@@ -9,6 +9,7 @@ import Link from 'next/link';
 import { playClickSound } from '@/lib/utils/sound';
 import type { Post } from '@/lib/sanity/types';
 import { getPostCategory, getCategoryColor } from '@/lib/utils/blog-utils';
+import { Card } from '@/components/ui/card';
 
 export function BlogArticlesCarousel() {
   const { currentLanguage } = useTranslation();
@@ -42,14 +43,26 @@ export function BlogArticlesCarousel() {
     return (post[field as keyof Post] as string) || fallback;
   };
 
+  // Function to truncate excerpt at character limit with ellipsis
+  const getTruncatedExcerpt = (excerpt: string) => {
+    if (!excerpt) return '';
+
+    // Character limit that should fit in ~3 lines on mobile
+    const maxLength = 115;
+
+    if (excerpt.length <= maxLength) return excerpt;
+
+    return excerpt.substring(0, maxLength - 3) + '...';
+  };
+
   return (
     <div className="w-full mt-8 relative">
       {/* Horizontal scrolling for all cards */}
       {latestPosts.length > 0 && (
         <div className="overflow-x-auto pb-4 scrollbar-hide">
-          <div className="flex gap-8" style={{ width: 'max-content' }}>
+          <div className="flex gap-4 md:gap-8" style={{ width: 'max-content' }}>
             {latestPosts.map((post) => (
-              <div key={post._id} className="shrink-0 w-[612px] h-[235px]">
+              <div key={post._id} className="shrink-0 w-[366px] md:w-[612px] h-[220px] md:h-[235px]">
                 <motion.div
                   className="w-full h-full"
                   onMouseEnter={() => setHoveredCard(post._id)}
@@ -60,10 +73,10 @@ export function BlogArticlesCarousel() {
                     className="group flex flex-col h-full"
                     onMouseDown={playClickSound}
                   >
-                    <article className="flex flex-col bg-card rounded-sm overflow-hidden shadow-sm hover:shadow-sm transition-all duration-300 border border-zinc-200 dark:border-zinc-800 h-full p-6 min-h-[235px]">
+                    <Card className="flex flex-col overflow-hidden shadow-sm hover:shadow-sm transition-all duration-300 h-full p-4 md:p-4 min-h-[220px] md:min-h-[235px]">
                       <div className="grow flex flex-col">
                         {post.publishedAt && (
-                          <p className="text-zinc-500 dark:text-zinc-400 text-xs mb-3">
+                          <p className="text-zinc-500 dark:text-zinc-400 text-xs mb-2 md:mb-3">
                             {t('blog.article', currentLanguage) as string} ·{' '}
                             {new Date(post.publishedAt).toLocaleDateString(
                               currentLanguage === 'zh'
@@ -82,16 +95,16 @@ export function BlogArticlesCarousel() {
                           </p>
                         )}
 
-                        <h3 className="font-normal leading-tight text-zinc-900 dark:text-white text-lg mb-4 line-clamp-2">
+                        <h3 className="font-normal leading-tight text-zinc-900 dark:text-white text-base md:text-lg mb-3 md:mb-4 line-clamp-2">
                           {getLocalizedField(post, 'title', post.title)}
                         </h3>
 
-                        <p className="text-zinc-600 dark:text-zinc-400 text-sm mb-6 line-clamp-3 grow">
-                          {getLocalizedField(post, 'excerpt', '')}
+                        <p className="text-zinc-600 dark:text-zinc-400 text-sm mb-4 md:mb-6 grow md:line-clamp-3">
+                          {getTruncatedExcerpt(getLocalizedField(post, 'excerpt', ''))}
                         </p>
                       </div>
 
-                      <div className="mt-auto flex flex-row justify-between items-center">
+                      <div className="mt-auto flex flex-row justify-between items-center pt-2">
                         <span
                           className={`px-2 py-1 text-xs font-normal rounded ${getCategoryColor(getPostCategory(post))}`}
                         >
@@ -112,7 +125,7 @@ export function BlogArticlesCarousel() {
                           />
                         </div>
                       </div>
-                    </article>
+                    </Card>
                   </Link>
                 </motion.div>
               </div>
