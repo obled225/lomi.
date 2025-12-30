@@ -22,7 +22,7 @@ import {
 export function PreviewImages(props: ComponentProps<'div'>) {
   const { currentLanguage } = useTranslation();
   const { resolvedTheme, mounted } = useTheme();
-  const [active, setActive] = useState(0);
+  const [active, setActive] = useState(1);
 
   // Create t function that uses currentLanguage (same pattern as footer.tsx)
   const t = (key: string) => String(translate(key, currentLanguage));
