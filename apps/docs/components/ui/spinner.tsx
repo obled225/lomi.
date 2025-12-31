@@ -26,10 +26,10 @@ export default function Spinner({
       style={{
         fontFamily:
           '"DejaVu Sans Mono", "Liberation Mono", "Courier New", monospace',
-        fontSize: '0.875rem',
-        lineHeight: '1.5',
+        fontSize: '0.75rem',
+        lineHeight: '1.25',
         fontWeight: 'normal',
-        verticalAlign: 'middle',
+        verticalAlign: 'text-bottom',
       }}
     >
       {spinnerChars[currentChar]}
