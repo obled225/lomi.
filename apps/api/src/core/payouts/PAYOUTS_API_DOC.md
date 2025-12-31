@@ -9,7 +9,7 @@ The Payouts API allows you to withdraw funds from your Lomi account balance to y
 ## Base URL
 
 ```
-https://api.lomi.africa/v1/payouts
+https://api.lomi.africa/payouts
 ```
 
 ## Authentication
@@ -419,14 +419,14 @@ Triggered when payout fails.
 
 ```javascript
 // Check balance first
-const balanceRes = await fetch('https://api.lomi.africa/v1/accounts/balance', {
+const balanceRes = await fetch('https://api.lomi.africa/accounts/balance', {
   headers: { 'Authorization': 'Bearer your_api_key' }
 });
 const balance = await balanceRes.json();
 
 if (balance.available_balance >= 10000) {
   // Initiate payout
-  const response = await fetch('https://api.lomi.africa/v1/payouts', {
+  const response = await fetch('https://api.lomi.africa/payouts', {
     method: 'POST',
     headers: {
       'Authorization': 'Bearer your_api_key',
@@ -452,7 +452,7 @@ import requests
 
 # Initiate payout
 response = requests.post(
-    'https://api.lomi.africa/v1/payouts',
+    'https://api.lomi.africa/payouts',
     headers={'Authorization': 'Bearer your_api_key'},
     json={
         'amount': 10000,
@@ -468,7 +468,7 @@ print(f"Status: {payout['status']}")  # "pending"
 
 # Check status later (or better: use webhooks)
 status_response = requests.get(
-    f"https://api.lomi.africa/v1/payouts/{payout['payout_id']}",
+    f"https://api.lomi.africa/payouts/{payout['payout_id']}",
     headers={'Authorization': 'Bearer your_api_key'}
 )
 current_status = status_response.json()
@@ -479,7 +479,7 @@ print(f"Current status: {current_status['status']}")
 
 ```bash
 # Initiate payout
-curl -X POST https://api.lomi.africa/v1/payouts \
+curl -X POST https://api.lomi.africa/payouts \
   -H "Authorization: Bearer your_api_key" \
   -H "Content-Type: application/json" \
   -d '{
@@ -489,7 +489,7 @@ curl -X POST https://api.lomi.africa/v1/payouts \
   }'
 
 # Check payout status
-curl -X GET https://api.lomi.africa/v1/payouts/payout-abc123 \
+curl -X GET https://api.lomi.africa/payouts/payout-abc123 \
   -H "Authorization: Bearer your_api_key"
 ```
 

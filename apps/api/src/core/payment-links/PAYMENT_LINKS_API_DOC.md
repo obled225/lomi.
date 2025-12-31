@@ -7,7 +7,7 @@ The Payment Links API allows you to create shareable payment URLs for accepting 
 ## Base URL
 
 ```
-https://api.lomi.africa/v1/payment-links
+https://api.lomi.africa/payment-links
 ```
 
 ## Authentication
@@ -341,7 +341,7 @@ All payment links are isolated by organization. You can only:
 ### Node.js
 
 ```javascript
-const response = await fetch('https://api.lomi.africa/v1/payment-links', {
+const response = await fetch('https://api.lomi.africa/payment-links', {
   method: 'POST',
   headers: {
     'Authorization': 'Bearer your_api_key',
@@ -365,7 +365,7 @@ console.log('Share this URL:', link.url);
 import requests
 
 response = requests.post(
-    'https://api.lomi.africa/v1/payment-links',
+    'https://api.lomi.africa/payment-links',
     headers={'Authorization': 'Bearer your_api_key'},
     json={
         'link_type': 'instant',
@@ -382,7 +382,7 @@ print(f"Share this URL: {link['url']}")
 ### cURL
 
 ```bash
-curl -X POST https://api.lomi.africa/v1/payment-links \
+curl -X POST https://api.lomi.africa/payment-links \
   -H "Authorization: Bearer your_api_key" \
   -H "Content-Type: application/json" \
   -d '{

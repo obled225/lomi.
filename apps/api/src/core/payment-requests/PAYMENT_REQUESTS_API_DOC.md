@@ -7,7 +7,7 @@ The Payment Requests API allows you to create payment intents and track their st
 ## Base URL
 
 ```
-https://api.lomi.africa/v1/payment-requests
+https://api.lomi.africa/payment-requests
 ```
 
 ## Authentication
@@ -373,7 +373,7 @@ Causes:
 ### Node.js
 
 ```javascript
-const response = await fetch('https://api.lomi.africa/v1/payment-requests', {
+const response = await fetch('https://api.lomi.africa/payment-requests', {
   method: 'POST',
   headers: {
     'Authorization': 'Bearer your_api_key',
@@ -402,7 +402,7 @@ from datetime import datetime, timedelta
 expiry = (datetime.now() + timedelta(days=30)).isoformat()
 
 response = requests.post(
-    'https://api.lomi.africa/v1/payment-requests',
+    'https://api.lomi.africa/payment-requests',
     headers={'Authorization': 'Bearer your_api_key'},
     json={
         'amount': 10000,
@@ -420,7 +420,7 @@ print(f"Payment link: {request['payment_link']}")
 ### cURL
 
 ```bash
-curl -X POST https://api.lomi.africa/v1/payment-requests \
+curl -X POST https://api.lomi.africa/payment-requests \
   -H "Authorization: Bearer your_api_key" \
   -H "Content-Type: application/json" \
   -d '{

@@ -9,7 +9,7 @@ The Beneficiary Payouts API allows you to pay external parties (contractors, sup
 ## Base URL
 
 ```
-https://api.lomi.africa/v1/beneficiary-payouts
+https://api.lomi.africa/beneficiary-payouts
 ```
 
 ## Authentication
@@ -446,7 +446,7 @@ Before initiating payouts, beneficiaries must have payout methods configured:
 
 ```javascript
 // Pay a contractor
-const response = await fetch('https://api.lomi.africa/v1/beneficiary-payouts', {
+const response = await fetch('https://api.lomi.africa/beneficiary-payouts', {
   method: 'POST',
   headers: {
     'Authorization': 'Bearer your_api_key',
@@ -482,7 +482,7 @@ contractors = [
 
 for contractor in contractors:
     response = requests.post(
-        'https://api.lomi.africa/v1/beneficiary-payouts',
+        'https://api.lomi.africa/beneficiary-payouts',
         headers={'Authorization': 'Bearer your_api_key'},
         json={
             'amount': contractor['amount'],
@@ -498,7 +498,7 @@ for contractor in contractors:
 ### cURL
 
 ```bash
-curl -X POST https://api.lomi.africa/v1/beneficiary-payouts \
+curl -X POST https://api.lomi.africa/beneficiary-payouts \
   -H "Authorization: Bearer your_api_key" \
   -H "Content-Type: application/json" \
   -d '{

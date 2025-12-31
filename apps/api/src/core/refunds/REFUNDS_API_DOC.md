@@ -9,7 +9,7 @@ The Refunds API allows you to refund completed transactions. All refunds are pro
 ## Base URL
 
 ```
-https://api.lomi.africa/v1/refunds
+https://api.lomi.africa/refunds
 ```
 
 ## Authentication
@@ -530,7 +530,7 @@ Subscribe to these events for refund status updates:
 
 ```javascript
 // Full refund
-const response = await fetch('https://api.lomi.africa/v1/refunds', {
+const response = await fetch('https://api.lomi.africa/refunds', {
   method: 'POST',
   headers: {
     'Authorization': 'Bearer your_api_key',
@@ -558,7 +558,7 @@ import requests
 
 # Partial refund
 response = requests.post(
-    'https://api.lomi.africa/v1/refunds',
+    'https://api.lomi.africa/refunds',
     headers={'Authorization': 'Bearer your_api_key'},
     json={
         'transaction_id': 'tx-456',
@@ -579,7 +579,7 @@ print(f"Amount: {refund['amount']} (partial)")
 ### cURL
 
 ```bash
-curl -X POST https://api.lomi.africa/v1/refunds \
+curl -X POST https://api.lomi.africa/refunds \
   -H "Authorization: Bearer your_api_key" \
   -H "Content-Type: application/json" \
   -d '{
