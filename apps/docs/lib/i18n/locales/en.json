@@ -346,7 +346,7 @@
       "story": "Story",
       "title": "Company"
     },
-    "copyright": "Copyright © 2025 — lomi.",
+    "copyright": "Copyright © {year} — lomi.",
     "description": "lomi. is a suite of APIs powering online payment processing and e-commerce products in West Africa. Accept payments, send payouts, and automate financial workflows with ease.",
     "features": {
       "faq": "FAQ",

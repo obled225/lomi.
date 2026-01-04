@@ -315,7 +315,7 @@
       "story": "故事",
       "title": "公司"
     },
-    "copyright": "版权 © 2025 — lomi.",
+    "copyright": "版权 © {year} — lomi.",
     "description": "lomi. 是一套为西非在线支付处理和电子商务产品提供动力的API。轻松接受支付、发送付款并自动化金融工作流程。",
     "features": {
       "faq": "常见问题",

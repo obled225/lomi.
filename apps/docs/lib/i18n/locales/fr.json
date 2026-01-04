@@ -343,7 +343,7 @@
       "story": "À propos",
       "title": "Entreprise"
     },
-    "copyright": "Copyright © 2025 — lomi.",
+    "copyright": "Copyright © {year} — lomi.",
     "description": "lomi. est une suite d'APIs pour le traitement des paiements en ligne et les produits de e-commerce en Afrique de l'Ouest. Acceptez des paiements, effectuez des versements et automatisez vos flux de financiers en toute simplicité.",
     "features": {
       "faq": "FAQ",

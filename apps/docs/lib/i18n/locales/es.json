@@ -315,7 +315,7 @@
       "story": "Historia",
       "title": "Empresa"
     },
-    "copyright": "Copyright © 2025 — lomi.",
+    "copyright": "Copyright © {year} — lomi.",
     "description": "lomi. es una suite de APIs que impulsa el procesamiento de pagos en línea y los productos de comercio electrónico en África Occidental. Acepte pagos, envíe pagos y automatice sus flujos financieros con facilidad.",
     "features": {
       "faq": "FAQ",
