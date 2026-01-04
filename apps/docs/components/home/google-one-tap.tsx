@@ -169,7 +169,7 @@ export function GoogleOneTap() {
             callback: handleCredentialResponse,
             context: 'signup',
             ux_mode: 'popup',
-            auto_select: true,
+            auto_select: false,
             cancel_on_tap_outside: true,
           });
 
