@@ -258,12 +258,9 @@ export class WaveWebhookService {
           });
 
           if (rpcError) {
-            this.logger.warn(
-              'Error executing recovery RPC:',
-              rpcError,
-            );
+            this.logger.warn('Error executing recovery RPC:', rpcError);
           } else if (recoveryResult && recoveryResult.length > 0) {
-            const result = recoveryResult[0]; 
+            const result = recoveryResult[0];
             const wasRecovered = result.r_was_recovered;
 
             this.logger.log(
@@ -300,7 +297,7 @@ export class WaveWebhookService {
             return { transaction_id: result.r_transaction_id };
           }
         } catch (err) {
-            this.logger.error('Unexpected error in recovery lookup:', err);
+          this.logger.error('Unexpected error in recovery lookup:', err);
         }
       }
 

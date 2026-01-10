@@ -36,7 +36,7 @@ export class StripeWebhookService {
     }
 
     const event = this.verifyWebhook(signature, rawBody);
-    
+
     // Wide Event: Log webhook receipt with structured context
     this.logger.log({
       message: 'stripe_webhook_received',
@@ -175,7 +175,7 @@ export class StripeWebhookService {
         : paymentIntent.latest_charge?.id || null;
 
     // Extract Payment Method ID
-    const paymentMethodId = 
+    const paymentMethodId =
       typeof paymentIntent.payment_method === 'string'
         ? paymentIntent.payment_method
         : paymentIntent.payment_method?.id || null;
@@ -192,7 +192,7 @@ export class StripeWebhookService {
         'succeeded',
         null,
         null,
-        paymentMethodId
+        paymentMethodId,
       );
     } catch (statusError: any) {
       this.logger.error({
@@ -208,11 +208,14 @@ export class StripeWebhookService {
     // =========================================================================
     if (paymentMethodId && this.stripe) {
       try {
-        const paymentMethod = await this.stripe.paymentMethods.retrieve(paymentMethodId);
+        const paymentMethod =
+          await this.stripe.paymentMethods.retrieve(paymentMethodId);
         const cardCountry = paymentMethod.card?.country;
 
         // "International" = NOT France (FR). User's policy: only France is domestic.
-        const isInternational = cardCountry ? cardCountry.toUpperCase() !== 'FR' : false;
+        const isInternational = cardCountry
+          ? cardCountry.toUpperCase() !== 'FR'
+          : false;
 
         this.logger.log({
           message: 'international_card_check',
@@ -222,22 +225,21 @@ export class StripeWebhookService {
         });
 
         // Call RPC to update fee and save card details
-        const { error: feeError } = await (this.supabase.getClient() as any).rpc(
-          'update_transaction_fee_metadata',
-          {
-            p_stripe_payment_intent_id: paymentIntent.id,
-            p_payment_method_id: paymentMethodId,
-            p_card_details: {
-              brand: paymentMethod.card?.brand,
-              last4: paymentMethod.card?.last4,
-              exp_month: paymentMethod.card?.exp_month,
-              exp_year: paymentMethod.card?.exp_year,
-              country: cardCountry,
-              fingerprint: paymentMethod.card?.fingerprint || paymentMethodId,
-            },
-            p_is_international: isInternational,
+        const { error: feeError } = await (
+          this.supabase.getClient() as any
+        ).rpc('update_transaction_fee_metadata', {
+          p_stripe_payment_intent_id: paymentIntent.id,
+          p_payment_method_id: paymentMethodId,
+          p_card_details: {
+            brand: paymentMethod.card?.brand,
+            last4: paymentMethod.card?.last4,
+            exp_month: paymentMethod.card?.exp_month,
+            exp_year: paymentMethod.card?.exp_year,
+            country: cardCountry,
+            fingerprint: paymentMethod.card?.fingerprint || paymentMethodId,
           },
-        );
+          p_is_international: isInternational,
+        });
 
         if (feeError) {
           this.logger.warn({
@@ -557,7 +559,6 @@ export class StripeWebhookService {
     return data;
   }
 
-
   /**
    * Trigger merchant webhook notification
    */
@@ -618,7 +619,7 @@ export class StripeWebhookService {
         'spi_payment_status',
         'spi_rejection_reason',
         'spi_tx_id',
-        'stripe_payment_intent_id', 
+        'stripe_payment_intent_id',
       ];
 
       topLevelSensitiveKeys.forEach((key) => {
