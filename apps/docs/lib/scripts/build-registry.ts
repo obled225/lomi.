@@ -1,22 +1,16 @@
 /* @proprietary license */
 
 import {
-  build,
+  RegistryCompiler,
   writeFumadocsRegistry,
-  writeShadcnRegistry,
 } from '@fumadocs/cli/build';
 import { registry } from '@/components/preview/registry.mjs';
 
 export async function buildRegistry() {
-  const mainRegistry = await build(registry);
+  const compiler = new RegistryCompiler(registry);
+  const mainRegistry = await compiler.compile();
 
-  await Promise.all([
-    writeFumadocsRegistry(mainRegistry, {
-      dir: 'public/registry',
-    }),
-    writeShadcnRegistry(mainRegistry, {
-      dir: 'public/r',
-      baseUrl: 'https://fumadocs.dev',
-    }),
-  ]);
+  await writeFumadocsRegistry(mainRegistry, {
+    dir: 'public/registry',
+  });
 }

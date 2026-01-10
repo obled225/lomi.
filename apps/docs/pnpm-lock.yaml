@@ -96,16 +96,16 @@ importers:
         specifier: ~16.2.5
         version: 16.2.5(@mixedbread/sdk@0.27.0)(@types/react@19.2.8)(algoliasearch@5.37.0)(lucide-react@0.542.0(react@19.2.3))(next@16.1.1(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(zod@4.3.5)
       fumadocs-docgen:
-        specifier: ^3.0.4
+        specifier: ^3.0.5
         version: 3.0.5(fumadocs-core@16.2.5(@mixedbread/sdk@0.27.0)(@types/react@19.2.8)(algoliasearch@5.37.0)(lucide-react@0.542.0(react@19.2.3))(next@16.1.1(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(zod@4.3.5))
       fumadocs-mdx:
-        specifier: ^14.1.0
+        specifier: ^14.2.4
         version: 14.2.4(@fumadocs/mdx-remote@1.4.4(@types/react@19.2.8)(fumadocs-core@16.2.5(@mixedbread/sdk@0.27.0)(@types/react@19.2.8)(algoliasearch@5.37.0)(lucide-react@0.542.0(react@19.2.3))(next@16.1.1(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(zod@4.3.5))(react@19.2.3))(@types/react@19.2.8)(fumadocs-core@16.2.5(@mixedbread/sdk@0.27.0)(@types/react@19.2.8)(algoliasearch@5.37.0)(lucide-react@0.542.0(react@19.2.3))(next@16.1.1(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(zod@4.3.5))(next@16.1.1(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)(vite@7.3.1(@types/node@24.3.1)(jiti@2.6.1)(lightningcss@1.30.2)(tsx@4.21.0)(yaml@2.8.2))
       fumadocs-openapi:
-        specifier: ^10.1.4
+        specifier: ^10.2.4
         version: 10.2.4(@types/react-dom@19.2.3(@types/react@19.2.8))(@types/react@19.2.8)(fumadocs-core@16.2.5(@mixedbread/sdk@0.27.0)(@types/react@19.2.8)(algoliasearch@5.37.0)(lucide-react@0.542.0(react@19.2.3))(next@16.1.1(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(zod@4.3.5))(fumadocs-ui@16.2.5(@mixedbread/sdk@0.27.0)(@types/react-dom@19.2.3(@types/react@19.2.8))(@types/react@19.2.8)(algoliasearch@5.37.0)(lucide-react@0.542.0(react@19.2.3))(next@16.1.1(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(tailwindcss@4.1.18)(zod@4.3.5))(prettier@3.7.4)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       fumadocs-twoslash:
-        specifier: ^3.1.10
+        specifier: ^3.1.12
         version: 3.1.12(@types/react-dom@19.2.3(@types/react@19.2.8))(@types/react@19.2.8)(fumadocs-ui@16.2.5(@mixedbread/sdk@0.27.0)(@types/react-dom@19.2.3(@types/react@19.2.8))(@types/react@19.2.8)(algoliasearch@5.37.0)(lucide-react@0.542.0(react@19.2.3))(next@16.1.1(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(tailwindcss@4.1.18)(zod@4.3.5))(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(typescript@5.9.3)
       fumadocs-typescript:
         specifier: ^4.0.14
@@ -199,7 +199,7 @@ importers:
         specifier: ^9.39.2
         version: 9.39.2
       '@fumadocs/cli':
-        specifier: ^1.0.1
+        specifier: ^1.2.2
         version: 1.2.2
       '@next/env':
         specifier: ^16.1.1
