@@ -1,9 +1,6 @@
 /* @proprietary license */
 
-import {
-  RegistryCompiler,
-  writeFumadocsRegistry,
-} from '@fumadocs/cli/build';
+import { RegistryCompiler, writeFumadocsRegistry } from '@fumadocs/cli/build';
 import { registry } from '@/components/preview/registry.mjs';
 
 export async function buildRegistry() {
