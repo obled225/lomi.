@@ -189,6 +189,61 @@ export class StripeWebhookService {
       paymentMethodId
     );
 
+    // =========================================================================
+    // SERVER-SIDE INTERNATIONAL CARD FEE DETECTION
+    // =========================================================================
+    // Fetch full PaymentMethod from Stripe to get card country
+    if (paymentMethodId && this.stripe) {
+      try {
+        const paymentMethod = await this.stripe.paymentMethods.retrieve(paymentMethodId);
+        const cardCountry = paymentMethod.card?.country;
+
+        // "International" = NOT France (FR). User's policy: only France is domestic.
+        const isInternational = cardCountry ? cardCountry.toUpperCase() !== 'FR' : false;
+
+        this.logger.log({
+          message: 'international_card_check',
+          payment_intent_id: paymentIntent.id,
+          card_country: cardCountry,
+          is_international: isInternational,
+        });
+
+        // Call RPC to update fee and save card details
+        const { error: feeError } = await (this.supabase.getClient() as any).rpc(
+          'update_transaction_fee_metadata',
+          {
+            p_stripe_payment_intent_id: paymentIntent.id,
+            p_payment_method_id: paymentMethodId,
+            p_card_details: {
+              brand: paymentMethod.card?.brand,
+              last4: paymentMethod.card?.last4,
+              exp_month: paymentMethod.card?.exp_month,
+              exp_year: paymentMethod.card?.exp_year,
+              country: cardCountry,
+              fingerprint: paymentMethod.card?.fingerprint || paymentMethodId,
+            },
+            p_is_international: isInternational,
+          },
+        );
+
+        if (feeError) {
+          this.logger.warn({
+            message: 'update_transaction_fee_metadata_failed',
+            payment_intent_id: paymentIntent.id,
+            error: feeError.message,
+          });
+        }
+      } catch (pmError: any) {
+        this.logger.warn({
+          message: 'retrieve_payment_method_failed',
+          payment_intent_id: paymentIntent.id,
+          error: pmError?.message || 'Unknown error',
+        });
+        // Non-blocking: do not fail the webhook for this
+      }
+    }
+    // =========================================================================
+
     if (metadata.organization_id) {
       await this.triggerMerchantWebhook(
         paymentIntent.id,
