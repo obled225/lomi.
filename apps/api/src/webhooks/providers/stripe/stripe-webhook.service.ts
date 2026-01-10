@@ -180,19 +180,32 @@ export class StripeWebhookService {
         ? paymentIntent.payment_method
         : paymentIntent.payment_method?.id || null;
 
-    const txnData = await this.updateStripeCheckoutStatus(
-      paymentIntent.id,
-      chargeId,
-      'succeeded',
-      null,
-      null,
-      paymentMethodId
-    );
+    let txnData: any = null;
 
     // =========================================================================
-    // SERVER-SIDE INTERNATIONAL CARD FEE DETECTION
+    // 1. UPDATE TRANSACTION STATUS (Non-blocking - don't fail if this times out)
     // =========================================================================
-    // Fetch full PaymentMethod from Stripe to get card country
+    try {
+      txnData = await this.updateStripeCheckoutStatus(
+        paymentIntent.id,
+        chargeId,
+        'succeeded',
+        null,
+        null,
+        paymentMethodId
+      );
+    } catch (statusError: any) {
+      this.logger.error({
+        message: 'update_stripe_checkout_status_failed',
+        payment_intent_id: paymentIntent.id,
+        error: statusError?.message || 'Unknown error',
+      });
+      // Continue processing - don't fail the entire webhook
+    }
+
+    // =========================================================================
+    // 2. SERVER-SIDE INTERNATIONAL CARD FEE DETECTION
+    // =========================================================================
     if (paymentMethodId && this.stripe) {
       try {
         const paymentMethod = await this.stripe.paymentMethods.retrieve(paymentMethodId);
@@ -242,8 +255,10 @@ export class StripeWebhookService {
         // Non-blocking: do not fail the webhook for this
       }
     }
-    // =========================================================================
 
+    // =========================================================================
+    // 3. TRIGGER MERCHANT WEBHOOK (Always attempt, even if status update failed)
+    // =========================================================================
     if (metadata.organization_id) {
       await this.triggerMerchantWebhook(
         paymentIntent.id,
