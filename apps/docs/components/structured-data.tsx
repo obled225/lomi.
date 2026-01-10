@@ -2,8 +2,8 @@
 
 /**
  * Structured Data for SEO Rich Results
- * 
- * Uses native <script> tags with type="application/ld+json" to ensure 
+ *
+ * Uses native <script> tags with type="application/ld+json" to ensure
  * the JSON-LD is present in the initial HTML response for crawlers.
  * This is placed in <head> of layout.tsx.
  */
@@ -17,7 +17,7 @@ const organizationSchema = {
   url: 'https://lomi.africa',
   logo: 'https://lomi.africa/favicon.ico',
   description:
-    "lomi. is a suite of APIs powering online payment processing and e-commerce products in West Africa. Accept payments, send payouts, and automate financial workflows with ease.",
+    'lomi. is a suite of APIs powering online payment processing and e-commerce products in West Africa. Accept payments, send payouts, and automate financial workflows with ease.',
   foundingDate: '2024-01-17',
   areaServed: {
     '@type': 'Place',

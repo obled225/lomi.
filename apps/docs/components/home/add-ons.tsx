@@ -62,11 +62,15 @@ export function PreviewImages(props: ComponentProps<'div'>) {
 
   const previews = [
     {
-      image: currentTheme === 'dark' ? '/company/add-ons/docs-d.webp' : '/company/add-ons/docs-l.webp',
+      image:
+        currentTheme === 'dark'
+          ? '/company/add-ons/docs-d.webp'
+          : '/company/add-ons/docs-l.webp',
       name: t('sdks.documentation'),
     },
     {
-      image: currentTheme === 'dark' ? dashboardImage.dark : dashboardImage.light,
+      image:
+        currentTheme === 'dark' ? dashboardImage.dark : dashboardImage.light,
       name: t('sdks.dashboard'),
     },
     {
@@ -76,7 +80,10 @@ export function PreviewImages(props: ComponentProps<'div'>) {
   ];
 
   return (
-    <div {...props} className={cn('relative flex flex-col gap-2', props.className)}>
+    <div
+      {...props}
+      className={cn('relative flex flex-col gap-2', props.className)}
+    >
       <div className="relative w-full h-[310px]">
         {previews.map((item, i) => (
           <Image
@@ -100,10 +107,11 @@ export function PreviewImages(props: ComponentProps<'div'>) {
               playClickSound();
               setActive(0);
             }}
-            className={`flex-1 px-3 pt-1.5 pb-2.5 text-sm font-normal rounded-sm transition-all duration-200 h-7.5 focus:outline-none focus:ring-0 focus:border-none ${active === 0
-              ? 'bg-[#E9EAEF] dark:bg-[#2A2B30] text-foreground shadow-sm border border-border/50'
-              : 'text-muted-foreground hover:text-foreground'
-              }`}
+            className={`flex-1 px-3 pt-1.5 pb-2.5 text-sm font-normal rounded-sm transition-all duration-200 h-7.5 focus:outline-none focus:ring-0 focus:border-none ${
+              active === 0
+                ? 'bg-[#E9EAEF] dark:bg-[#2A2B30] text-foreground shadow-sm border border-border/50'
+                : 'text-muted-foreground hover:text-foreground'
+            }`}
           >
             {t('sdks.documentation')}
           </button>
@@ -113,10 +121,11 @@ export function PreviewImages(props: ComponentProps<'div'>) {
               playClickSound();
               setActive(1);
             }}
-            className={`flex-1 px-3 pt-1.5 pb-2.5 text-sm font-normal rounded-sm transition-all duration-200 h-7.5 focus:outline-none focus:ring-0 focus:border-none ${active === 1
-              ? 'bg-[#E9EAEF] dark:bg-[#2A2B30] text-foreground shadow-sm border border-border/50'
-              : 'text-muted-foreground hover:text-foreground'
-              }`}
+            className={`flex-1 px-3 pt-1.5 pb-2.5 text-sm font-normal rounded-sm transition-all duration-200 h-7.5 focus:outline-none focus:ring-0 focus:border-none ${
+              active === 1
+                ? 'bg-[#E9EAEF] dark:bg-[#2A2B30] text-foreground shadow-sm border border-border/50'
+                : 'text-muted-foreground hover:text-foreground'
+            }`}
           >
             {t('sdks.dashboard')}
           </button>
@@ -126,10 +135,11 @@ export function PreviewImages(props: ComponentProps<'div'>) {
               playClickSound();
               setActive(2);
             }}
-            className={`flex-1 px-3 pt-1.5 pb-2.5 text-sm font-normal rounded-sm transition-all duration-200 h-7.5 focus:outline-none focus:ring-0 focus:border-none ${active === 2
-              ? 'bg-[#E9EAEF] dark:bg-[#2A2B30] text-foreground shadow-sm border border-border/50'
-              : 'text-muted-foreground hover:text-foreground'
-              }`}
+            className={`flex-1 px-3 pt-1.5 pb-2.5 text-sm font-normal rounded-sm transition-all duration-200 h-7.5 focus:outline-none focus:ring-0 focus:border-none ${
+              active === 2
+                ? 'bg-[#E9EAEF] dark:bg-[#2A2B30] text-foreground shadow-sm border border-border/50'
+                : 'text-muted-foreground hover:text-foreground'
+            }`}
           >
             {t('sdks.checkout')}
           </button>
@@ -282,9 +292,7 @@ window.location.href = checkoutSession.checkout_url;`;
                     <SyntaxHighlighter
                       language="typescript"
                       style={
-                        resolvedTheme === 'dark'
-                          ? blueVsDarkTheme
-                          : blueVsTheme
+                        resolvedTheme === 'dark' ? blueVsDarkTheme : blueVsTheme
                       }
                       customStyle={{
                         margin: 0,

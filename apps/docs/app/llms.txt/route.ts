@@ -24,12 +24,24 @@ export async function GET() {
     'lomi. is a unified payment infrastructure built for African businesses. Our platform offers:',
   );
   lines.push('');
-  lines.push('- **Payment Processing**: Accept payments via mobile money, credit/debit cards, and bank transfers');
-  lines.push('- **Instant Payouts**: Withdraw earnings to mobile wallets or bank accounts globally');
-  lines.push('- **Subscription Management**: Create and manage recurring payment plans');
-  lines.push('- **Fraud Prevention**: Built-in fraud detection and chargeback protection');
-  lines.push('- **Developer-First**: REST APIs and SDKs for JavaScript, Python, Go, and PHP');
-  lines.push('- **Merchant of Record**: We handle tax compliance and regulatory requirements');
+  lines.push(
+    '- **Payment Processing**: Accept payments via mobile money, credit/debit cards, and bank transfers',
+  );
+  lines.push(
+    '- **Instant Payouts**: Withdraw earnings to mobile wallets or bank accounts globally',
+  );
+  lines.push(
+    '- **Subscription Management**: Create and manage recurring payment plans',
+  );
+  lines.push(
+    '- **Fraud Prevention**: Built-in fraud detection and chargeback protection',
+  );
+  lines.push(
+    '- **Developer-First**: REST APIs and SDKs for JavaScript, Python, Go, and PHP',
+  );
+  lines.push(
+    '- **Merchant of Record**: We handle tax compliance and regulatory requirements',
+  );
   lines.push('');
 
   // Pricing Information
@@ -44,7 +56,7 @@ export async function GET() {
   lines.push('## Supported Payment Methods');
   lines.push('');
   lines.push('### Mobile Money');
-  lines.push('- Wave (Senegal, Côte d\'Ivoire)');
+  lines.push("- Wave (Senegal, Côte d'Ivoire)");
   lines.push('- MTN Mobile Money (West and Central Africa)');
   lines.push('- SPI Interoperable Payments (All UEMOA countries)');
   lines.push('');
@@ -62,7 +74,10 @@ export async function GET() {
   lines.push('');
 
   // Organize documentation by categories
-  const docsMap = new Map<string, { title: string; url: string; description?: string }[]>();
+  const docsMap = new Map<
+    string,
+    { title: string; url: string; description?: string }[]
+  >();
 
   for (const page of source.getPages()) {
     const category = page.slugs[0] || 'general';
@@ -79,7 +94,9 @@ export async function GET() {
   const corePages = docsMap.get('core');
   if (corePages) {
     for (const page of corePages) {
-      lines.push(`- [${page.title}](${page.url})${page.description ? `: ${page.description}` : ''}`);
+      lines.push(
+        `- [${page.title}](${page.url})${page.description ? `: ${page.description}` : ''}`,
+      );
     }
     lines.push('');
   }
@@ -90,7 +107,9 @@ export async function GET() {
   const refPages = docsMap.get('reference');
   if (refPages) {
     for (const page of refPages) {
-      lines.push(`- [${page.title}](${page.url})${page.description ? `: ${page.description}` : ''}`);
+      lines.push(
+        `- [${page.title}](${page.url})${page.description ? `: ${page.description}` : ''}`,
+      );
     }
   }
   lines.push('');
@@ -103,7 +122,9 @@ export async function GET() {
     if (category === 'core' || category === 'reference') continue;
     lines.push(`### ${category.charAt(0).toUpperCase() + category.slice(1)}`);
     for (const page of pages) {
-      lines.push(`- [${page.title}](${page.url})${page.description ? `: ${page.description}` : ''}`);
+      lines.push(
+        `- [${page.title}](${page.url})${page.description ? `: ${page.description}` : ''}`,
+      );
     }
     lines.push('');
   }
@@ -123,16 +144,24 @@ export async function GET() {
   lines.push('## Frequently Asked Questions');
   lines.push('');
   lines.push('**Q: How do I get started with lomi.?**');
-  lines.push('A: Create an account on the dashboard, connect your payment methods, and start accepting payments in minutes.');
+  lines.push(
+    'A: Create an account on the dashboard, connect your payment methods, and start accepting payments in minutes.',
+  );
   lines.push('');
   lines.push('**Q: What countries does lomi. support?**');
-  lines.push("A: All 8 UEMOA countries: Senegal, Côte d'Ivoire, Mali, Burkina Faso, Benin, Togo, Niger, and Guinea-Bissau. Credit cards are accepted from customers worldwide.");
+  lines.push(
+    "A: All 8 UEMOA countries: Senegal, Côte d'Ivoire, Mali, Burkina Faso, Benin, Togo, Niger, and Guinea-Bissau. Credit cards are accepted from customers worldwide.",
+  );
   lines.push('');
   lines.push('**Q: How do I integrate lomi. with my app?**');
-  lines.push('A: Use our REST API or official SDKs for JavaScript/Next.js, Python, Go, and PHP. Documentation is available at https://lomi.africa/docs');
+  lines.push(
+    'A: Use our REST API or official SDKs for JavaScript/Next.js, Python, Go, and PHP. Documentation is available at https://lomi.africa/docs',
+  );
   lines.push('');
   lines.push('**Q: How secure is lomi.?**');
-  lines.push('A: lomi. is PCI DSS compliant and uses industry-standard encryption, tokenization, and fraud detection to protect transactions.');
+  lines.push(
+    'A: lomi. is PCI DSS compliant and uses industry-standard encryption, tokenization, and fraud detection to protect transactions.',
+  );
   lines.push('');
 
   return new Response(lines.join('\n'), {
@@ -142,4 +171,3 @@ export async function GET() {
     },
   });
 }
-

@@ -62,7 +62,10 @@ export function BlogArticlesCarousel() {
         <div className="overflow-x-auto pb-4 scrollbar-hide">
           <div className="flex gap-4 md:gap-8" style={{ width: 'max-content' }}>
             {latestPosts.map((post) => (
-              <div key={post._id} className="shrink-0 w-[366px] md:w-[612px] h-[220px] md:h-[235px]">
+              <div
+                key={post._id}
+                className="shrink-0 w-[366px] md:w-[612px] h-[220px] md:h-[235px]"
+              >
                 <motion.div
                   className="w-full h-full"
                   onMouseEnter={() => setHoveredCard(post._id)}
@@ -100,7 +103,9 @@ export function BlogArticlesCarousel() {
                         </h3>
 
                         <p className="text-zinc-600 dark:text-zinc-400 text-sm mb-4 md:mb-6 grow md:line-clamp-3">
-                          {getTruncatedExcerpt(getLocalizedField(post, 'excerpt', ''))}
+                          {getTruncatedExcerpt(
+                            getLocalizedField(post, 'excerpt', ''),
+                          )}
                         </p>
                       </div>
 
@@ -118,10 +123,11 @@ export function BlogArticlesCarousel() {
 
                         <div className="flex items-center text-primary text-sm font-normal">
                           <ArrowRight
-                            className={`ml-1 h-4 w-4 transition-all duration-300 ${hoveredCard === post._id
-                              ? 'opacity-100 translate-x-1'
-                              : 'opacity-0 -translate-x-3'
-                              }`}
+                            className={`ml-1 h-4 w-4 transition-all duration-300 ${
+                              hoveredCard === post._id
+                                ? 'opacity-100 translate-x-1'
+                                : 'opacity-0 -translate-x-3'
+                            }`}
                           />
                         </div>
                       </div>

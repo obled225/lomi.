@@ -88,10 +88,11 @@ function ChangelogEntryCard({
 
             <div className="flex items-center text-primary text-sm font-normal">
               <span
-                className={`transition-all duration-300 ${hoveredCard === `changelog-${index}`
-                  ? 'opacity-100'
-                  : 'opacity-0'
-                  }`}
+                className={`transition-all duration-300 ${
+                  hoveredCard === `changelog-${index}`
+                    ? 'opacity-100'
+                    : 'opacity-0'
+                }`}
               >
                 {t('changelog.read', currentLanguage) as string}
               </span>
@@ -120,7 +121,10 @@ export function ChangelogCarousel() {
         <div className="overflow-x-auto pb-4 scrollbar-hide">
           <div className="flex gap-4 md:gap-8" style={{ width: 'max-content' }}>
             {changelogEntries.slice(0, 6).map((entry, index) => (
-              <div key={`changelog-${index}`} className="shrink-0 w-[366px] md:w-[612px] h-[220px] md:h-[235px]">
+              <div
+                key={`changelog-${index}`}
+                className="shrink-0 w-[366px] md:w-[612px] h-[220px] md:h-[235px]"
+              >
                 <ChangelogEntryCard
                   entry={entry}
                   index={index}

@@ -32,7 +32,10 @@ export function Footer() {
   const { currentLanguage } = useTranslation();
 
   // Create t function that uses currentLanguage (same pattern as tracking-cookie.tsx)
-  const t = (key: string, values?: Record<string, string | number | undefined>) => String(translate(key, currentLanguage, values));
+  const t = (
+    key: string,
+    values?: Record<string, string | number | undefined>,
+  ) => String(translate(key, currentLanguage, values));
   const [hoveredTheme, setHoveredTheme] = useState(false);
 
   useEffect(() => {
