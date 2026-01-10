@@ -171,13 +171,12 @@ const LottieIconComponent = ({
 
   return (
     <div
-      role="button"
-      tabIndex={0}
       className={`inline-flex items-center justify-center ${className}`}
       style={{ width: size, height: size }}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       aria-label={ariaLabel}
+      aria-hidden={!ariaLabel}
     >
       <Lottie
         lottieRef={lottieRef}

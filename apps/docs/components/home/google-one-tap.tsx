@@ -167,7 +167,7 @@ export function GoogleOneTap() {
           window.google.accounts.id.initialize({
             client_id: clientId,
             callback: handleCredentialResponse,
-            context: 'signup',
+            context: 'signin',
             ux_mode: 'popup',
             auto_select: false,
             cancel_on_tap_outside: true,

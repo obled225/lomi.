@@ -13,11 +13,12 @@ export function GithubStars() {
 
   return (
     <Link
-      href="https://github.com/lomiafrica/lomi."
+      href="https://github.com/lomiafrica/lomi./"
       target="_blank"
       rel="noopener noreferrer"
       className="flex items-center"
       onMouseDown={() => playClickSound()}
+      aria-label="Star lomi. on GitHub"
     >
       <div className="flex items-center gap-0.5 text-amber-500 hover:text-amber-400 dark:text-amber-400 dark:hover:text-amber-300 transition-colors">
         <Star className="h-2.5 w-2.5 text-amber-500 hover:text-amber-400 dark:text-amber-400 dark:hover:text-amber-300 fill-current" />

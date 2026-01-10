@@ -44,6 +44,14 @@ const websiteSchema = {
   url: 'https://lomi.africa',
   description:
     'Payment processing platform for francophone West African businesses. Accept mobile money, credit cards, and bank transfers; send payouts and automate financial workflows with ease.',
+  potentialAction: {
+    '@type': 'SearchAction',
+    target: {
+      '@type': 'EntryPoint',
+      urlTemplate: 'https://lomi.africa/docs?search={search_term_string}',
+    },
+    'query-input': 'required name=search_term_string',
+  },
 };
 
 // SoftwareApplication Schema for the API/Platform
