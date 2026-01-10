@@ -1,0 +1,43 @@
+{
+  "name": "@lomi./embed",
+  "version": "0.1.1",
+  "description": "Lomi Embedded Checkout SDK",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lomiafrica/lomi.git",
+    "directory": "apps/sdks/embed"
+  },
+  "keywords": [
+    "lomi",
+    "payments",
+    "africa",
+    "embedded-checkout",
+    "iframe"
+  ],
+  "author": "lomi. <hello@lomi.africa> (https://lomi.africa)",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  }
+}

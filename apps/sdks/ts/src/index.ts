@@ -22,5 +22,15 @@ export {
 // Export error handler for advanced use cases
 export { handleApiError } from './error-handler.js';
 
+// Export Payment Elements for client-side card forms
+export { loadLomi, lomi } from './elements.js';
+export type { 
+  Lomi, 
+  LomiElements, 
+  LomiElementsOptions,
+  LomiPaymentResult,
+  LomiSetupResult,
+} from './elements.js';
+
 // Re-export all generated types and services
 export * from './generated/index.js';
