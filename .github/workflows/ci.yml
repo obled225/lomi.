@@ -25,53 +25,35 @@ jobs:
             docs:
               - 'apps/docs/**'
 
-  build-api:
+  deploy-api:
     needs: detect-changes
     if: needs.detect-changes.outputs.api == 'true'
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./apps/api
     steps:
-      - uses: actions/checkout@v5
-      - uses: oven-sh/setup-bun@v2
+      - uses: actions/checkout@v4
+      - name: Deploy API to Vercel
+        uses: amondnet/vercel-action@v25
         with:
-          bun-version: latest
-      - run: bun install
-      - run: bun run build
-      - run: bun test
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID_API }}
+          working-directory: ./apps/api
+          vercel-args: '--prod'
 
-  build-docs:
+  deploy-docs:
     needs: detect-changes
     if: needs.detect-changes.outputs.docs == 'true'
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./apps/docs
     steps:
-      - uses: actions/checkout@v5
-      - uses: pnpm/action-setup@v4
+      - uses: actions/checkout@v4
+      - name: Deploy Docs to Vercel
+        uses: amondnet/vercel-action@v25
         with:
-          version: 8
-      - uses: actions/setup-node@v6
-        with:
-          node-version: "18"
-          cache: "pnpm"
-          cache-dependency-path: "./apps/docs/pnpm-lock.yaml"
-      - run: pnpm install
-      - run: pnpm build
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID_DOCS }}
+          working-directory: ./apps/docs
+          vercel-args: '--prod'
 
-  deploy:
-    needs: [build-api, build-docs]
-    if: |
-      github.ref == 'refs/heads/main' && 
-      !cancelled() &&
-      (needs.build-api.result == 'success' || needs.build-api.result == 'skipped') &&
-      (needs.build-docs.result == 'success' || needs.build-docs.result == 'skipped')
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v5
-      - name: Deploy to production
-        run: |
-          echo "Deploying affected applications to production..."
+
 
