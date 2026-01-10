@@ -305,19 +305,31 @@ export class StripeWebhookService {
 
   /**
    * Handle charge.succeeded event
+   * NOTE: We do NOT update transaction status here because payment_intent.succeeded
+   * already handles it. Doing so would trigger duplicate email notifications.
+   * This handler is kept for logging/auditing the charge ID.
    */
   private async handleChargeSucceeded(charge: Stripe.Charge) {
     const paymentIntentId = charge.payment_intent as string;
 
     if (!paymentIntentId) {
-      throw new Error('Payment intent missing from charge');
+      this.logger.warn({
+        message: 'charge_succeeded_no_payment_intent',
+        charge_id: charge.id,
+      });
+      return {
+        eventType: 'charge.succeeded',
+        charge_id: charge.id,
+        payment_intent_id: null,
+      };
     }
 
-    await this.updateStripeCheckoutStatus(
-      paymentIntentId,
-      charge.id,
-      'succeeded',
-    );
+    // Log for auditing - do NOT update status (payment_intent.succeeded handles that)
+    this.logger.log({
+      message: 'charge_succeeded',
+      charge_id: charge.id,
+      payment_intent_id: paymentIntentId,
+    });
 
     return {
       eventType: 'charge.succeeded',
