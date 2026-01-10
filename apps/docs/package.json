@@ -115,6 +115,7 @@
     "typescript": "^5.9.3"
   },
   "browserslist": [
-    "extends browserslist-config-baseline/2024"
+    "defaults",
+    "not IE 11"
   ]
 }
