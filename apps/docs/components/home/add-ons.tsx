@@ -287,7 +287,7 @@ window.location.href = checkoutSession.checkout_url;`;
                 <h3 className="text-xl font-semibold">
                   {t('sdks.minimalYetPowerful')}
                 </h3>
-                <div className="bg-muted/50 dark:bg-blue-950/30 rounded-sm overflow-hidden shadow-sm h-[300px] md:h-[300px] overflow-y-auto hide-scrollbar">
+                <div className="bg-muted/50 dark:bg-blue-950/30 rounded-sm overflow-hidden shadow-sm h-[300px] md:h-[300px] hide-scrollbar">
                   {mounted && (
                     <SyntaxHighlighter
                       language="typescript"

@@ -23,7 +23,6 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { GitHubIcon } from '@/components/preview/icons';
 import { useGithubStars } from '@/lib/hooks/use-github-stars-hooks';
-import { useIsMobile } from '@/lib/hooks/use-mobile';
 import { useTheme } from '@/lib/hooks/use-theme';
 import { playClickSound } from '@/lib/utils/sound';
 
@@ -382,7 +381,6 @@ export function FeaturesSection() {
   const featuresRef = React.useRef<HTMLElement>(null);
   const isFeaturesInView = useInView(featuresRef, { once: true, amount: 0.2 });
   const starCount = useGithubStars();
-  const isMobile = useIsMobile();
 
   // Determine card order based on theme
   const currentCardOrder = React.useMemo(() => {
@@ -451,7 +449,7 @@ export function FeaturesSection() {
                 <p className="mb-4">
                   {String(t('features.card1.description', currentLanguage))}
                 </p>
-                <div className="w-full max-h-[230px] overflow-y-auto space-y-2 pr-2 hide-scrollbar">
+                <div className="w-full md:max-h-[230px] md:overflow-y-auto space-y-2 md:pr-2 hide-scrollbar">
                   {providerNames.map((name, i) => (
                     <motion.div
                       key={name}
@@ -946,9 +944,9 @@ export function FeaturesSection() {
                   </div>
                   <code className="absolute inset-0 flex items-center justify-center">
                     <code
-                      className={`cli-command-animated ${cliAnimationTriggered && !isMobile ? 'animate' : ''}`}
+                      className={`cli-command-animated ${cliAnimationTriggered ? 'animate' : ''}`}
                     >
-                      <code className="text-sm text-transparent bg-clip-text bg-linear-to-r from-blue-300 to-foreground font-medium" />
+                      <code className="text-sm text-transparent bg-clip-text bg-linear-to-r from-blue-600 to-foreground dark:from-blue-300 dark:to-foreground font-medium" />
                     </code>
                   </code>
                 </div>
