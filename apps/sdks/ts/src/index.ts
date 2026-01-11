@@ -31,6 +31,7 @@ export type {
   LomiPaymentResult,
   LomiSetupResult,
   LomiCardFormOptions,
+  LomiCardFormUpdateOptions,
   LomiCardFormResult,
 } from './elements.js';
 
