@@ -50,6 +50,9 @@ export interface LomiCardFormOptions {
     borderColor?: string;
     textColor?: string;
     placeholderColor?: string;
+    focusBorderColor?: string;
+    errorBorderColor?: string;
+    enableFocusRing?: boolean; // Opt-in: set to true to enable focus border effects
   };
 }
 
@@ -58,6 +61,7 @@ export interface LomiCardFormResult {
   cardExpiry: any;
   cardCvc: any;
   unmount: () => void;
+  update: (options: LomiCardFormOptions) => void;
 }
 
 /**
@@ -114,7 +118,6 @@ export async function loadLomi(publishableKey: string): Promise<Lomi | null> {
   }
 
   return lomiPromise;
-  return lomiPromise;
 }
 
 /**
@@ -145,6 +148,8 @@ export function mountCardForm(elements: LomiElements, options: LomiCardFormOptio
   const borderColor = options.customStyles?.borderColor || '#e5e7eb'; // Tailwind gray-200
   const textColor = options.customStyles?.textColor || '#1f2937';
   const placeholderColor = options.customStyles?.placeholderColor || '#9ca3af';
+  const focusBorderColor = options.customStyles?.focusBorderColor || '#3b82f6'; // Tailwind blue-500
+  const errorBorderColor = options.customStyles?.errorBorderColor || '#ef4444'; // Tailwind red-500
 
   // Calculate internal padding for perfect centering
   // Assuming line-height ~20px (standard for reading), remaining space split top/bottom
@@ -159,7 +164,10 @@ export function mountCardForm(elements: LomiElements, options: LomiCardFormOptio
     box-sizing: border-box;
     display: flex;
     align-items: center;
+    align-items: center;
     overflow: hidden;
+    position: relative;
+    transition: border-color 0.2s ease-in-out;
   `;
 
   // Number Container
@@ -235,10 +243,104 @@ export function mountCardForm(elements: LomiElements, options: LomiCardFormOptio
   cardExpiry.mount(expiryDiv);
   cardCvc.mount(cvcDiv);
 
+  // Helper to handle focus/blur aesthetics (optional, opt-in via enableFocusRing)
+  const attachListeners = (element: any, container: HTMLElement) => {
+    element.on('focus', () => {
+      container.style.borderColor = focusBorderColor;
+      container.style.zIndex = '10'; // Bring to top for overlapping borders
+    });
+    element.on('blur', () => {
+      container.style.borderColor = borderColor; // Reset to default (or handle error state if complex)
+      container.style.zIndex = '1';
+    });
+    element.on('change', (event: any) => {
+      if (event.error) {
+        container.style.borderColor = errorBorderColor;
+        container.style.zIndex = '10';
+      } else {
+         // If focused, keep focus color, else reset
+         // For simplicity, we just reset to default or focus if active (but simplified here)
+         container.style.borderColor = borderColor;
+         container.style.zIndex = '1';
+      }
+    });
+  };
+
+  // Only attach focus ring listeners if explicitly enabled
+  if (options.customStyles?.enableFocusRing) {
+    attachListeners(cardNumber, numberDiv);
+    attachListeners(cardExpiry, expiryDiv);
+    attachListeners(cardCvc, cvcDiv);
+  }
+
   return {
     cardNumber,
     cardExpiry,
     cardCvc,
+    update: (newOptions: LomiCardFormOptions) => {
+        // Recalculate Styles
+        const nHeight = newOptions.customStyles?.height || '40px';
+        const nBorderRadius = newOptions.customStyles?.borderRadius || '6px';
+        const nBgColor = newOptions.customStyles?.backgroundColor || '#ffffff';
+        const nBorderColor = newOptions.customStyles?.borderColor || '#e5e7eb';
+        const nTextColor = newOptions.customStyles?.textColor || '#1f2937';
+        const nPlaceholderColor = newOptions.customStyles?.placeholderColor || '#9ca3af';
+
+        const nInputContainerStyle = `
+            height: ${nHeight};
+            padding: 0 12px;
+            background: ${nBgColor};
+            border: 1px solid ${nBorderColor};
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        `;
+
+        // Update Container Styles
+        numberDiv.style.cssText = `
+            ${nInputContainerStyle}
+            border-top-left-radius: ${nBorderRadius};
+            border-top-right-radius: ${nBorderRadius};
+            border-bottom: none;
+        `;
+
+        expiryDiv.style.cssText = `
+            ${nInputContainerStyle}
+            border-bottom-left-radius: ${nBorderRadius};
+            width: 50%;
+            border-right: none;
+        `;
+
+        cvcDiv.style.cssText = `
+            ${nInputContainerStyle}
+            border-bottom-right-radius: ${nBorderRadius};
+            width: 50%;
+            border-left: 1px solid ${nBorderColor};
+        `;
+
+        // Update Elements
+        const nDefaultConfig = {
+            base: {
+                fontSize: '14px',
+                color: nTextColor,
+                fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+                fontWeight: '400',
+                '::placeholder': { color: nPlaceholderColor },
+                lineHeight: nHeight,
+            },
+            invalid: { color: '#ef4444' },
+        };
+
+        const nElementStyle = newOptions.style || nDefaultConfig;
+        if (newOptions.style && newOptions.style.base) {
+            nElementStyle.base = { ...nDefaultConfig.base, ...newOptions.style.base };
+        }
+
+        cardNumber.update({ style: nElementStyle });
+        cardExpiry.update({ style: nElementStyle });
+        cardCvc.update({ style: nElementStyle });
+    },
     unmount: () => {
       cardNumber.unmount();
       cardExpiry.unmount();
