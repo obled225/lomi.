@@ -220,10 +220,6 @@ export function mountCardForm(elements: LomiElements, options: LomiCardFormOptio
           fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
           fontWeight: '400',
           '::placeholder': { color: placeholderColor },
-          // Important for vertical alignment:
-          // Remove vertical padding to let flexbox in container handle alignment, 
-          // or set line-height to match height minus borders.
-          lineHeight: height, 
       },
       invalid: { color: '#ef4444' },
   };
@@ -319,7 +315,6 @@ export function mountCardForm(elements: LomiElements, options: LomiCardFormOptio
             border-left: 1px solid ${nBorderColor};
         `;
 
-        // Update Elements
         const nDefaultConfig = {
             base: {
                 fontSize: '14px',
@@ -327,7 +322,6 @@ export function mountCardForm(elements: LomiElements, options: LomiCardFormOptio
                 fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
                 fontWeight: '400',
                 '::placeholder': { color: nPlaceholderColor },
-                lineHeight: nHeight,
             },
             invalid: { color: '#ef4444' },
         };
