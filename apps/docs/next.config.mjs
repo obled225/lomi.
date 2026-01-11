@@ -78,7 +78,7 @@ const config = {
       },
     ],
     formats: ['image/webp', 'image/avif'],
-    minimumCacheTTL: 60,
+    minimumCacheTTL: 2419200, // 4 weeks - for efficient cache lifetime
   },
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',

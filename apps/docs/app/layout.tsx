@@ -163,6 +163,28 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={`${font.variable}`} suppressHydrationWarning>
       <head>
+        {/* Preload LCP hero images with media queries for faster loading */}
+        {/* Desktop dark theme (most common) */}
+        <link
+          rel="preload"
+          as="image"
+          href="/company/dashboard/main-en-d.webp"
+          media="(prefers-color-scheme: dark) and (min-width: 768px)"
+        />
+        {/* Desktop light theme */}
+        <link
+          rel="preload"
+          as="image"
+          href="/company/dashboard/main-en-l.webp"
+          media="(prefers-color-scheme: light) and (min-width: 768px)"
+        />
+        {/* Mobile image (theme-agnostic) */}
+        <link
+          rel="preload"
+          as="image"
+          href="/company/dashboard/mobile.webp"
+          media="(max-width: 767px)"
+        />
         {/* Preconnect to critical origins for better performance */}
         <link rel="preconnect" href="https://cdn.sanity.io" crossOrigin="" />
         <link
@@ -180,6 +202,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           href="https://api.producthunt.com"
           crossOrigin=""
         />
+        <link rel="preconnect" href="https://api.github.com" crossOrigin="" />
         <link rel="dns-prefetch" href="//cdn.sanity.io" />
         <link rel="dns-prefetch" href="//mdswvokxrnfggrujsfjd.supabase.co" />
         <link rel="dns-prefetch" href="//res.cloudinary.com" />
