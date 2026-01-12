@@ -4,9 +4,6 @@
 [submodule "apps/dashboard"]
 	path = apps/dashboard
 	url = https://github.com/lomiafrica/dashboard.git
-[submodule "apps/jumbo"]
-	path = apps/jumbo
-	url = https://github.com/princemuichkine/jumbo.git
 [submodule "apps/sdks/php"]
 	path = apps/sdks/php
 	url = https://github.com/lomiafrica/lomi-php-sdk.git
