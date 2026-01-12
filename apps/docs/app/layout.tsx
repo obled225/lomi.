@@ -7,8 +7,7 @@ import { Provider } from './provider';
 import type { ReactNode } from 'react';
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
-import { ApolloTracker } from '@/components/analytics/apollo-tracker';
-import { StructuredData } from '@/components/structured-data';
+import { StructuredData } from '@/components/home/structured-data';
 
 const title = "lomi. | West Africa's Payment Processing Platform";
 const description =
@@ -214,7 +213,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <Provider>{children}</Provider>
         <Analytics />
         <SpeedInsights />
-        <ApolloTracker />
       </Body>
     </html>
   );
