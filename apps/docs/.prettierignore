@@ -1,0 +1,10 @@
+# MDX files in content directory have special formatting requirements
+# that conflict with standard prettier formatting
+content/
+
+# Other common files to ignore
+node_modules/
+.next/
+dist/
+build/
+*.log

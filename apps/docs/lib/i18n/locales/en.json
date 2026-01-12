@@ -338,7 +338,7 @@
     "title": "Unlock your business potential."
   },
   "footer": {
-    "company_disclaimer": "<strong>lomi. Technology Africa, S.A.R.L.</strong> is an Ivoirian limited company and in fieri a licensed Payment Service Provider by the Banque des Etats d'Afrique de l'Ouest (BCEAO). Registered number: CI-ABJ-03-2024-B12-07612. Registered office: Cocody, Les Perles, Rue L82/375, Abidjan.\nBeware of Fraud Attempts. lomi. is not a peer to peer lending company and does not have personal lending products.\nlomi. will never ask you to share your PIN, password, or OTP with anyone, including our staff. \nIf you come across a fraudulent attempt using our brand, please inform us at <a href=\"mailto:hello@lomi.africa\" class=\"text-[#56A5F9] hover:text-[#52A1F8] dark:text-sky-300 dark:hover:text-sky-200 underline\">hello@lomi.africa</a>.",
+    "company_disclaimer": "<strong>lomi. Technology Africa, S.A.R.L.</strong> is an Ivoirian limited company and <em>in fieri</em> a licensed Payment Service Provider by the Banque des Etats d'Afrique de l'Ouest (BCEAO). Registered number: CI-ABJ-03-2024-B12-07612. Registered office: Cocody, Les Perles, Rue L82/375, Abidjan.\nBeware of Fraud Attempts. lomi. is not a peer to peer lending company and does not have personal lending products.\nWe will never ask you to share your PIN, password, or OTP with anyone, including our staff. \nIf you come across a fraudulent attempt using our brand, please inform us at <a href=\"mailto:hello@lomi.africa\" class=\"font-medium  hover:text-primary\">hello@lomi.africa</a>.",
     "company": {
       "blog": "Blog",
       "careers": "Careers",
