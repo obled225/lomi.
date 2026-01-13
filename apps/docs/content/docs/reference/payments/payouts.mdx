@@ -1,0 +1,200 @@
+---
+title: Payouts
+description: Withdraw funds from your account balance.
+---
+
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+import { Callout } from 'fumadocs-ui/components/callout';
+
+The Payouts API allows you to withdraw funds from your merchant account balance to your bank account or mobile money.
+
+<Callout type="warning">
+  Payouts are processed asynchronously. Use webhooks to track status (`payout.completed` or `payout.failed`).
+</Callout>
+
+## Initiate a payout
+
+Withdraw funds from your account balance.
+
+### Request Body
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `amount` | `number` | **Yes** | Amount to withdraw |
+| `currency_code` | `string` | **Yes** | Currency (`XOF`, `USD`, etc.) |
+| `payout_method_id` | `string` | **Yes** | Your payout method (bank/mobile money) |
+| `description` | `string` | No | Payout description |
+| `metadata` | `object` | No | Custom key-value pairs |
+
+<Tabs items={["TypeScript", "Python", "cURL"]}>
+
+<Tab value="TypeScript">
+```typescript
+import { LomiSDK } from '@lomi./sdk';
+
+const lomi = new LomiSDK({
+  apiKey: process.env.LOMI_API_KEY!,
+  environment: 'test',
+});
+
+const payout = await lomi.payouts.create({
+  amount: 100000,
+  currency_code: 'XOF',
+  payout_method_id: 'pm_abc123...',
+  description: 'Monthly withdrawal',
+});
+
+console.log(`Payout initiated: ${payout.id}, Status: ${payout.status}`);
+```
+</Tab>
+
+<Tab value="Python">
+```python
+from lomi import LomiClient
+import os
+
+client = LomiClient(
+    api_key=os.environ["LOMI_API_KEY"],
+    environment="test"
+)
+
+payout = client.payouts.create({
+    "amount": 100000,
+    "currency_code": "XOF",
+    "payout_method_id": "pm_abc123...",
+    "description": "Monthly withdrawal"
+})
+
+print(f"Payout initiated: {payout['id']}")
+```
+</Tab>
+
+<Tab value="cURL">
+```bash
+curl -X POST "https://api.lomi.africa/v1/payouts" \
+  -H "X-API-KEY: $LOMI_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "amount": 100000,
+    "currency_code": "XOF",
+    "payout_method_id": "pm_abc123...",
+    "description": "Monthly withdrawal"
+  }'
+```
+</Tab>
+
+</Tabs>
+
+---
+
+## List payouts
+
+Retrieve all payouts with optional filtering.
+
+### Query Parameters
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `statuses` | `string` | Comma-separated statuses: `pending`, `completed`, `failed` |
+| `startDate` | `string` | Filter from this date (ISO 8601) |
+| `endDate` | `string` | Filter up to this date (ISO 8601) |
+| `limit` | `number` | Results per page (default: `50`) |
+| `offset` | `number` | Pagination offset (default: `0`) |
+
+<Tabs items={["TypeScript", "Python", "cURL"]}>
+
+<Tab value="TypeScript">
+```typescript
+const payouts = await lomi.payouts.list({
+  statuses: 'completed',
+  startDate: '2024-01-01T00:00:00Z',
+  limit: 20,
+});
+```
+</Tab>
+
+<Tab value="Python">
+```python
+payouts = client.payouts.list(
+    statuses="completed",
+    startDate="2024-01-01T00:00:00Z",
+    limit=20
+)
+```
+</Tab>
+
+<Tab value="cURL">
+```bash
+curl -X GET "https://api.lomi.africa/v1/payouts?statuses=completed&limit=20" \
+  -H "X-API-KEY: $LOMI_API_KEY"
+```
+</Tab>
+
+</Tabs>
+
+---
+
+## Get a payout
+
+Retrieve details of a specific payout.
+
+<Tabs items={["TypeScript", "Python", "cURL"]}>
+
+<Tab value="TypeScript">
+```typescript
+const payout = await lomi.payouts.get('po_abc123...');
+console.log(`Status: ${payout.status}`);
+```
+</Tab>
+
+<Tab value="Python">
+```python
+payout = client.payouts.get('po_abc123...')
+```
+</Tab>
+
+<Tab value="cURL">
+```bash
+curl -X GET "https://api.lomi.africa/v1/payouts/po_abc123..." \
+  -H "X-API-KEY: $LOMI_API_KEY"
+```
+</Tab>
+
+</Tabs>
+
+---
+
+## Payout Object
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `id` | `string` | Unique payout identifier |
+| `amount` | `number` | Payout amount |
+| `currency_code` | `string` | Currency code |
+| `status` | `string` | `pending`, `completed`, `failed` |
+| `payout_method_id` | `string` | Payout destination |
+| `description` | `string` | Description |
+| `failure_reason` | `string` | Reason for failure (if failed) |
+| `provider_code` | `string` | Payment provider |
+| `metadata` | `object` | Custom metadata |
+| `created_at` | `string` | Creation timestamp |
+
+---
+
+## Webhooks
+
+| Event | Description |
+|-------|-------------|
+| `payout.pending` | Payout initiated |
+| `payout.completed` | Payout successfully processed |
+| `payout.failed` | Payout failed |
+
+---
+
+## Error Responses
+
+| Status | Description |
+|--------|-------------|
+| `400` | Invalid input or insufficient balance |
+| `401` | Invalid or missing API key |
+| `404` | Payout not found |

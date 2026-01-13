@@ -18,7 +18,7 @@ When you make a potentially mutating API request (like `POST`, `PATCH`, `DELETE`
 Include the `Idempotency-Key` header in your API calls. Most lomi. SDKs provide a way to pass this easily.
 
 ```typescript filename="Using idempotency key with Node.js SDK"
-import { LomiSDK } from '@lomi/sdk';
+import { LomiSDK } from '@lomi./sdk';
 import { v4 as uuidv4 } from 'uuid';
 
 const lomi = new LomiSDK({ apiKey: process.env.LOMI_API_KEY! });
@@ -27,12 +27,11 @@ const lomi = new LomiSDK({ apiKey: process.env.LOMI_API_KEY! });
 const idempotencyKey = uuidv4(); // e.g., 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
 
 try {
-  const session = await lomi.checkoutSessions.create(
+  const session = await lomi.checkoutSessions.createCheckoutSession(
     {
       merchant_id: 'your_merchant_id',
       amount: 1000,
       currency_code: 'XOF',
-      allowed_providers: ['WAVE'],
       success_url: 'https://example.com/success',
       cancel_url: 'https://example.com/cancel',
       // ... other params
@@ -58,7 +57,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 const idempotencyKey = uuidv4();
 const apiKey = process.env.LOMI_API_KEY;
-const apiUrl = 'https://api.lomi.africa/v1/checkout-sessions'; // Use correct endpoint
+const apiUrl = 'https://api.lomi.africa/checkout-sessions'; // Use correct endpoint
 
 async function createSessionDirectly() {
   try {
@@ -73,7 +72,6 @@ async function createSessionDirectly() {
         merchant_id: 'your_merchant_id',
         amount: 1000,
         currency_code: 'XOF',
-        allowed_providers: ['WAVE'],
         success_url: 'https://example.com/success',
         cancel_url: 'https://example.com/cancel',
         // ... other params

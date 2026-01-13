@@ -1,0 +1,171 @@
+---
+title: Organizations
+description: Retrieve organization details and metrics.
+---
+
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+
+The Organizations API provides access to your organization's details and business metrics.
+
+## Get organization details
+
+Retrieve details of your authenticated organization.
+
+<Tabs items={["TypeScript", "Python", "cURL"]}>
+
+<Tab value="TypeScript">
+```typescript
+import { LomiSDK } from '@lomi./sdk';
+
+const lomi = new LomiSDK({
+  apiKey: process.env.LOMI_API_KEY!,
+  environment: 'test',
+});
+
+const org = await lomi.organizations.list();
+console.log(`Organization: ${org[0].name}`);
+```
+</Tab>
+
+<Tab value="Python">
+```python
+from lomi import LomiClient
+import os
+
+client = LomiClient(
+    api_key=os.environ["LOMI_API_KEY"],
+    environment="test"
+)
+
+orgs = client.organizations.list()
+print(f"Organization: {orgs[0]['name']}")
+```
+</Tab>
+
+<Tab value="cURL">
+```bash
+curl -X GET "https://api.lomi.africa/v1/organizations" \
+  -H "X-API-KEY: $LOMI_API_KEY"
+```
+</Tab>
+
+</Tabs>
+
+---
+
+## Get organization by ID
+
+Retrieve a specific organization (must match your authenticated organization).
+
+<Tabs items={["TypeScript", "Python", "cURL"]}>
+
+<Tab value="TypeScript">
+```typescript
+const org = await lomi.organizations.get('org_abc123...');
+```
+</Tab>
+
+<Tab value="Python">
+```python
+org = client.organizations.get('org_abc123...')
+```
+</Tab>
+
+<Tab value="cURL">
+```bash
+curl -X GET "https://api.lomi.africa/v1/organizations/org_abc123..." \
+  -H "X-API-KEY: $LOMI_API_KEY"
+```
+</Tab>
+
+</Tabs>
+
+---
+
+## Get organization metrics
+
+Retrieve pre-calculated business metrics including MRR, ARR, revenue, and customer counts.
+
+<Tabs items={["TypeScript", "Python", "cURL"]}>
+
+<Tab value="TypeScript">
+```typescript
+const metrics = await lomi.organizations.getMetrics();
+
+console.log(`MRR: ${metrics.mrr} ${metrics.currency_code}`);
+console.log(`ARR: ${metrics.arr} ${metrics.currency_code}`);
+console.log(`Total Revenue: ${metrics.total_revenue}`);
+console.log(`Total Customers: ${metrics.total_customers}`);
+console.log(`Total Transactions: ${metrics.total_transactions}`);
+```
+</Tab>
+
+<Tab value="Python">
+```python
+metrics = client.organizations.get_metrics()
+
+print(f"MRR: {metrics['mrr']} {metrics['currency_code']}")
+print(f"ARR: {metrics['arr']} {metrics['currency_code']}")
+print(f"Total Revenue: {metrics['total_revenue']}")
+print(f"Total Customers: {metrics['total_customers']}")
+```
+</Tab>
+
+<Tab value="cURL">
+```bash
+curl -X GET "https://api.lomi.africa/v1/organizations/metrics" \
+  -H "X-API-KEY: $LOMI_API_KEY"
+```
+</Tab>
+
+</Tabs>
+
+### Response
+
+```json
+{
+  "mrr": 50000,
+  "arr": 600000,
+  "total_revenue": 250000,
+  "total_transactions": 1234,
+  "total_customers": 567,
+  "currency_code": "XOF",
+  "calculated_at": "2024-01-15T00:00:00Z"
+}
+```
+
+---
+
+## Metrics Object
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `mrr` | `number` | Monthly Recurring Revenue |
+| `arr` | `number` | Annual Recurring Revenue |
+| `total_revenue` | `number` | Total revenue generated |
+| `total_transactions` | `number` | Total transaction count |
+| `total_customers` | `number` | Total customer count |
+| `currency_code` | `string` | Currency for monetary values |
+| `calculated_at` | `string` | Calculation timestamp |
+
+---
+
+## Organization Object
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `id` | `string` | Unique organization identifier |
+| `name` | `string` | Organization name |
+| `email` | `string` | Contact email |
+| `country` | `string` | Country |
+| `currency_code` | `string` | Default currency |
+| `created_at` | `string` | Creation timestamp |
+
+---
+
+## Error Responses
+
+| Status | Description |
+|--------|-------------|
+| `401` | Invalid or missing API key |
+| `404` | Organization not found or access denied |

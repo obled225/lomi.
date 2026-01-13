@@ -129,7 +129,7 @@ Before deploying, run checks to ensure basic connectivity and configuration.
 
 ```typescript filename="Example pre-deployment check script"
 // scripts/pre-deploy-check.ts
-import { LomiSDK } from '@lomi/sdk'; // Assuming your SDK package name
+import { LomiSDK } from '@lomi./sdk'; // Assuming your SDK package name
 
 async function runPreDeploymentChecks(): Promise<void> {
   console.log('Running pre-deployment checks...');
@@ -148,7 +148,7 @@ async function runPreDeploymentChecks(): Promise<void> {
   try {
     // 1. Verify API connectivity (e.g., fetch providers)
     console.log('Checking API connectivity...');
-    const providers = await lomi.providers.list();
+    const providers = await lomi.providers.listProviders();
     if (!providers || providers.data.length === 0) {
       throw new Error('Failed to fetch providers or no providers available.');
     }
@@ -178,7 +178,7 @@ Write tests that simulate user flows involving lomi. interactions.
 
 ```typescript filename="Example integration test (using Jest)"
 // tests/integration/payment.test.ts
-import { LomiSDK } from '@lomi/sdk';
+import { LomiSDK } from '@lomi./sdk';
 // Assume setup/teardown logic exists elsewhere
 
 describe('Payment Integration', () => {
@@ -202,7 +202,6 @@ describe('Payment Integration', () => {
       merchant_id: process.env.TEST_MERCHANT_ID!, // Use a test merchant ID
       amount: 1000, // Min amount for testing
       currency_code: 'XOF',
-      allowed_providers: ['WAVE'], // Use a testable provider
       success_url: 'https://example.com/success',
       cancel_url: 'https://example.com/cancel',
       metadata: { test_order_id: `e2e_${Date.now()}` },
@@ -309,7 +308,7 @@ Set up automated checks for API connectivity and critical functions.
 
 ```typescript filename="Conceptual health check function"
 // monitoring/healthCheck.ts
-import { LomiSDK } from '@lomi/sdk';
+import { LomiSDK } from '@lomi./sdk';
 // import db from './database'; // Your database connection
 
 export async function checkServiceHealth(): Promise<{
@@ -324,7 +323,7 @@ export async function checkServiceHealth(): Promise<{
 
   try {
     // Check lomi. API status (e.g., list providers)
-    await lomi.providers.list();
+    await lomi.providers.listProviders();
   } catch (error: any) {
     errors.push(`lomi. API check failed: ${error.message}`);
   }

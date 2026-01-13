@@ -6,6 +6,7 @@
   "pages": [
     "---Basics---",
     "setup",
+    "sdks",
     "payments",
     "---Management---",
     "platform",

@@ -28,15 +28,14 @@ All API errors follow a consistent JSON structure:
 These occur when the request data is invalid or missing required fields.
 
 ```typescript filename="Handling validation errors (example)"
-import { LomiSDK, LomiApiError } from '@lomi/sdk'; // Assuming SDK exports error type
+import { LomiSDK, LomiError } from '@lomi./sdk'; // Assuming SDK exports error type
 
 const lomi = new LomiSDK({ apiKey: process.env.LOMI_API_KEY! });
 
 try {
-  const session = await lomi.checkoutSessions.create({
+  const session = await lomi.checkoutSessions.createCheckoutSession({
     amount: -100, // Invalid: must be positive
     currency_code: 'INVALID', // Invalid enum value
-    allowed_providers: [], // Invalid: must not be empty
     // Missing required fields like success_url, cancel_url
   });
 } catch (error) {
@@ -57,12 +56,12 @@ try {
 These occur when the `LOMI_API_KEY` is missing, invalid, or doesn't have the necessary permissions.
 
 ```typescript filename="Handling authentication errors (example)"
-import { LomiSDK, LomiApiError } from '@lomi/sdk';
+import { LomiSDK, LomiError } from '@lomi./sdk';
 
 const lomi = new LomiSDK({ apiKey: 'invalid-key' });
 
 try {
-  await lomi.providers.list(); // Example request
+  await lomi.providers.listProviders(); // Example request
 } catch (error) {
   if (error instanceof LomiApiError && error.statusCode === 401) {
     console.error('Authentication failed:', error.message);
@@ -87,13 +86,13 @@ try {
 Occur when you exceed the allowed number of requests within a given time window (e.g., 100 requests per 15 minutes).
 
 ```typescript filename="Handling rate limit errors (example)"
-import { LomiSDK, LomiApiError } from '@lomi/sdk';
+import { LomiSDK, LomiError } from '@lomi./sdk';
 
 const lomi = new LomiSDK({ apiKey: process.env.LOMI_API_KEY! });
 
 async function makeRequestWithRateLimitHandling() {
   try {
-    const response = await lomi.providers.list();
+    const response = await lomi.providers.listProviders();
     // Process successful response
   } catch (error) {
     if (error instanceof LomiApiError && error.statusCode === 429) {
@@ -142,7 +141,7 @@ These indicate a problem on lomi.'s side. These should be rare. It's generally s
         } catch (error: any) {
           attempts++;
           const isRetryable =
-            error instanceof LomiApiError &&
+            error instanceof LomiError &&
             (error.statusCode === 429 || error.statusCode >= 500);
 
           if (!isRetryable || attempts >= maxRetries) {

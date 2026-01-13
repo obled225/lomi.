@@ -204,7 +204,7 @@ First, create a webhook endpoint pointing to a test receiver (e.g., using a serv
 
 ```bash filename="Terminal"
 # Replace API_KEY and URL
-curl -X POST "https://api.lomi.africa/v1/webhooks" \
+curl -X POST "https://api.lomi.africa/webhooks" \
   -H "Content-Type: application/json" \
   -H "X-API-Key: YOUR_API_KEY" \
   -d '{
@@ -222,7 +222,7 @@ Use the `` `POST /webhooks/{id}/test` `` endpoint to send a predefined `` `test.
 
 ```bash filename="Terminal"
 # Replace WEBHOOK_ID and API_KEY
-curl -X POST "https://api.lomi.africa/v1/webhooks/YOUR_WEBHOOK_ID/test" \
+curl -X POST "https://api.lomi.africa/webhooks/YOUR_WEBHOOK_ID/test" \
   -H "X-API-Key: YOUR_API_KEY"
 ```
 
@@ -257,7 +257,7 @@ Retrieves delivery logs for a specific webhook, showing success/failure status, 
 
 ```bash
 # Replace WEBHOOK_ID and API_KEY
-curl -X GET "https://api.lomi.africa/v1/webhooks/YOUR_WEBHOOK_ID/logs?limit=10&failed=true" \
+curl -X GET "https://api.lomi.africa/webhooks/YOUR_WEBHOOK_ID/logs?limit=10&failed=true" \
   -H "X-API-Key: YOUR_API_KEY"
 ```
 
@@ -278,7 +278,7 @@ Manually triggers a retry for a specific failed delivery log entry.
 
 ```bash
 # Replace WEBHOOK_ID, LOG_ID and API_KEY
-curl -X POST "https://api.lomi.africa/v1/webhooks/YOUR_WEBHOOK_ID/logs/YOUR_LOG_ID/retry" \
+curl -X POST "https://api.lomi.africa/webhooks/YOUR_WEBHOOK_ID/logs/YOUR_LOG_ID/retry" \
   -H "X-API-Key: YOUR_API_KEY"
 ```
 

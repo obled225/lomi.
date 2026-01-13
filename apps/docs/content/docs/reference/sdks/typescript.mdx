@@ -1,0 +1,288 @@
+---
+title: TypeScript SDK
+description: Official TypeScript/JavaScript SDK for lomi. payments API.
+---
+
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+import { Callout } from 'fumadocs-ui/components/callout';
+
+Official Node.js/TypeScript SDK for the lomi. payments API. Works with Node.js, Deno, Bun, and browser environments.
+
+## Installation
+
+<Tabs items={['npm', 'pnpm', 'yarn', 'bun']}>
+  <Tab value="npm">```bash npm install @lomi./sdk ```</Tab>
+  <Tab value="pnpm">```bash pnpm add @lomi./sdk ```</Tab>
+  <Tab value="yarn">```bash yarn add @lomi./sdk ```</Tab>
+  <Tab value="bun">```bash bun add @lomi./sdk ```</Tab>
+</Tabs>
+
+## Quick Start
+
+```typescript
+import { LomiSDK } from '@lomi./sdk';
+
+const lomi = new LomiSDK({
+  apiKey: process.env.LOMI_SECRET_KEY!,
+  environment: 'test', // 'test' for sandbox, 'live' for production
+});
+```
+
+<Callout type="info">
+  **Environments:**
+  - `'test'` → `https://sandbox.api.lomi.africa/v1`
+  - `'live'` → `https://api.lomi.africa/v1`
+</Callout>
+
+---
+
+## Payment Examples
+
+### Create a Checkout Session
+
+```typescript
+const session = await lomi.checkoutSessions.create({
+  amount: 10000,
+  currency_code: 'XOF',
+  title: 'Premium Subscription',
+  description: 'Monthly access to premium features',
+  customer_email: 'customer@example.com',
+  success_url: 'https://yoursite.com/success',
+  cancel_url: 'https://yoursite.com/cancel',
+  metadata: { order_id: 'ORD-123' },
+});
+
+console.log('Redirect to:', session.checkout_url);
+```
+
+### Create a Payment Link
+
+```typescript
+const link = await lomi.paymentLinks.create({
+  link_type: 'product',
+  title: 'Pro Plan',
+  currency_code: 'XOF',
+  product_id: 'prod_abc123...',
+  allow_coupon_code: true,
+});
+
+console.log('Share this link:', link.url);
+```
+
+### List Transactions with Filters
+
+```typescript
+const transactions = await lomi.transactions.list({
+  status: 'completed',
+  provider: 'WAVE',
+  startDate: '2024-01-01T00:00:00Z',
+  pageSize: 50,
+});
+
+for (const tx of transactions) {
+  console.log(`${tx.id}: ${tx.gross_amount} ${tx.currency_code}`);
+}
+```
+
+---
+
+## Customer Management
+
+### Create a Customer
+
+```typescript
+const customer = await lomi.customers.create({
+  name: 'Amadou Ba',
+  email: 'amadou@example.com',
+  phone_number: '+221771234567',
+  country: 'Senegal',
+  city: 'Dakar',
+  metadata: { source: 'website' },
+});
+
+console.log('Customer ID:', customer.id);
+```
+
+### Get Customer Transactions
+
+```typescript
+const transactions = await lomi.customers.getTransactions('cus_abc123...');
+```
+
+---
+
+## Products & Subscriptions
+
+### Create a Product
+
+```typescript
+const product = await lomi.products.create({
+  name: 'Premium Plan',
+  description: 'Full access to all features',
+  product_type: 'recurring',
+  prices: [
+    {
+      amount: 15000,
+      currency_code: 'XOF',
+      billing_interval: 'month',
+      is_default: true,
+    },
+  ],
+  trial_enabled: true,
+  trial_period_days: 7,
+});
+```
+
+### Add a New Price
+
+```typescript
+const price = await lomi.products.addPrice('prod_abc123...', {
+  amount: 150000,
+  currency_code: 'XOF',
+  billing_interval: 'year',
+});
+```
+
+### Cancel a Subscription
+
+```typescript
+const cancelled = await lomi.subscriptions.cancel('sub_abc123...', {
+  cancel_at_period_end: true,
+  reason: 'Customer request',
+});
+```
+
+---
+
+## Payouts
+
+### Initiate a Withdrawal
+
+```typescript
+const payout = await lomi.payouts.create({
+  amount: 100000,
+  currency_code: 'XOF',
+  payout_method_id: 'pm_abc123...',
+  description: 'Monthly withdrawal',
+});
+```
+
+### Pay a Beneficiary
+
+```typescript
+const beneficiaryPayout = await lomi.beneficiaryPayouts.create({
+  amount: 50000,
+  currency_code: 'XOF',
+  beneficiary_phone: '+221771234567',
+  beneficiary_name: 'Contractor Name',
+  provider_code: 'WAVE',
+});
+```
+
+---
+
+## Account & Organization
+
+### Get Account Balance
+
+```typescript
+const balances = await lomi.accounts.getBalance();
+const xofBalance = await lomi.accounts.getBalance({ currency: 'XOF' });
+
+console.log('Available:', xofBalance.available);
+```
+
+### Get Organization Metrics
+
+```typescript
+const metrics = await lomi.organizations.getMetrics();
+
+console.log('MRR:', metrics.mrr);
+console.log('Total Customers:', metrics.total_customers);
+```
+
+---
+
+## Error Handling
+
+```typescript
+import { LomiSDK, LomiError, LomiNotFoundError } from '@lomi./sdk';
+
+try {
+  const customer = await lomi.customers.get('invalid_id');
+} catch (error) {
+  if (error instanceof LomiNotFoundError) {
+    console.error('Customer not found');
+  } else if (error instanceof LomiError) {
+    console.error(`API Error [${error.status}]: ${error.message}`);
+  } else {
+    throw error;
+  }
+}
+```
+
+---
+
+## Configuration Options
+
+```typescript
+interface LomiConfig {
+  apiKey: string;              // Your secret API key
+  environment?: 'test' | 'live'; // Sandbox or production
+  baseUrl?: string;            // Custom base URL (overrides environment)
+  headers?: Record<string, string>; // Additional request headers
+  timeout?: number;            // Request timeout in ms (default: 30000)
+}
+```
+
+---
+
+## Available Services
+
+| Service | Methods |
+|---------|---------|
+| `accounts` | `list`, `get`, `getBalance`, `getBalanceBreakdown`, `checkBalance` |
+| `beneficiaryPayouts` | `list`, `get`, `create` |
+| `checkoutSessions` | `list`, `get`, `create` |
+| `customers` | `list`, `get`, `create`, `update`, `delete`, `getTransactions` |
+| `discountCoupons` | `list`, `get`, `create`, `getPerformance` |
+| `organizations` | `list`, `get`, `getMetrics` |
+| `paymentLinks` | `list`, `get`, `create` |
+| `paymentRequests` | `list`, `get`, `create` |
+| `payouts` | `list`, `get`, `create` |
+| `products` | `list`, `get`, `create`, `addPrice`, `setDefaultPrice` |
+| `refunds` | `list`, `get`, `create` |
+| `subscriptions` | `list`, `get`, `getByCustomer`, `cancel` |
+| `transactions` | `list`, `get` |
+| `webhookDeliveryLogs` | `list`, `get` |
+| `webhooks` | `list`, `get`, `create`, `update`, `delete` |
+
+---
+
+## TypeScript Types
+
+All request and response types are exported:
+
+```typescript
+import type {
+  LomiConfig,
+  Customer,
+  CustomerCreate,
+  CheckoutSession,
+  CheckoutSessionCreate,
+  Transaction,
+  Product,
+  ProductCreate,
+  Subscription,
+  PaymentLink,
+} from '@lomi./sdk';
+```
+
+---
+
+## Resources
+
+- [Getting Started](/docs/core/fundamentals/create-account)
+- [API Reference](/docs/reference)
+- [GitHub](https://github.com/lomiafrica/lomi.)
+- [Discord Community](https://discord.gg/yb4FnBmh)

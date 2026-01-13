@@ -1,0 +1,238 @@
+---
+title: Discount Coupons
+description: Create and manage promotional discount codes.
+---
+
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+
+The Discount Coupons API allows you to create and manage promotional codes that customers can apply at checkout.
+
+## Create a discount coupon
+
+### Request Body
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `code` | `string` | **Yes** | Unique coupon code (auto-uppercased) |
+| `discount_type` | `string` | No | `percentage` or `fixed` (default: `percentage`) |
+| `discount_percentage` | `number` | If percentage | Discount percentage (0-100) |
+| `discount_fixed_amount` | `number` | If fixed | Fixed discount amount |
+| `description` | `string` | No | Coupon description |
+| `is_active` | `boolean` | No | Active status (default: `true`) |
+| `max_uses` | `number` | No | Maximum total uses |
+| `max_quantity_per_use` | `number` | No | Max quantity per use |
+| `valid_from` | `string` | No | Start date (ISO 8601) |
+| `expires_at` | `string` | No | Expiration date (ISO 8601) |
+| `customer_type` | `string` | No | `all`, `new`, `existing` |
+| `usage_frequency_limit` | `string` | No | `total`, `per_customer`, `per_customer_per_product` |
+| `usage_limit_value` | `number` | No | Limit value (if not `total`) |
+| `scope_type` | `string` | No | `organization_wide`, `specific_products`, `specific_prices` |
+| `product_ids` | `array` | No | Product IDs (if scope is specific) |
+
+<Tabs items={["TypeScript", "Python", "cURL"]}>
+
+<Tab value="TypeScript">
+```typescript
+import { LomiSDK } from '@lomi./sdk';
+
+const lomi = new LomiSDK({
+  apiKey: process.env.LOMI_API_KEY!,
+  environment: 'test',
+});
+
+// Percentage discount
+const coupon = await lomi.discountCoupons.create({
+  code: 'SAVE20',
+  discount_type: 'percentage',
+  discount_percentage: 20,
+  description: '20% off all products',
+  max_uses: 100,
+  expires_at: '2024-12-31T23:59:59Z',
+});
+
+// Fixed amount discount
+const fixedCoupon = await lomi.discountCoupons.create({
+  code: 'FLAT5000',
+  discount_type: 'fixed',
+  discount_fixed_amount: 5000,
+  description: '5000 XOF off',
+  customer_type: 'new',
+});
+
+console.log(`Coupon created: ${coupon.code}`);
+```
+</Tab>
+
+<Tab value="Python">
+```python
+from lomi import LomiClient
+import os
+
+client = LomiClient(
+    api_key=os.environ["LOMI_API_KEY"],
+    environment="test"
+)
+
+coupon = client.discount_coupons.create({
+    "code": "SAVE20",
+    "discount_type": "percentage",
+    "discount_percentage": 20,
+    "description": "20% off all products",
+    "max_uses": 100,
+    "expires_at": "2024-12-31T23:59:59Z"
+})
+
+print(f"Coupon created: {coupon['code']}")
+```
+</Tab>
+
+<Tab value="cURL">
+```bash
+curl -X POST "https://api.lomi.africa/v1/discount-coupons" \
+  -H "X-API-KEY: $LOMI_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "code": "SAVE20",
+    "discount_type": "percentage",
+    "discount_percentage": 20,
+    "description": "20% off all products",
+    "max_uses": 100,
+    "expires_at": "2024-12-31T23:59:59Z"
+  }'
+```
+</Tab>
+
+</Tabs>
+
+---
+
+## List discount coupons
+
+Retrieve all discount coupons for your organization.
+
+<Tabs items={["TypeScript", "Python", "cURL"]}>
+
+<Tab value="TypeScript">
+```typescript
+const coupons = await lomi.discountCoupons.list();
+```
+</Tab>
+
+<Tab value="Python">
+```python
+coupons = client.discount_coupons.list()
+```
+</Tab>
+
+<Tab value="cURL">
+```bash
+curl -X GET "https://api.lomi.africa/v1/discount-coupons" \
+  -H "X-API-KEY: $LOMI_API_KEY"
+```
+</Tab>
+
+</Tabs>
+
+---
+
+## Get a discount coupon
+
+Retrieve details of a specific coupon.
+
+<Tabs items={["TypeScript", "Python", "cURL"]}>
+
+<Tab value="TypeScript">
+```typescript
+const coupon = await lomi.discountCoupons.get('dc_abc123...');
+```
+</Tab>
+
+<Tab value="Python">
+```python
+coupon = client.discount_coupons.get('dc_abc123...')
+```
+</Tab>
+
+<Tab value="cURL">
+```bash
+curl -X GET "https://api.lomi.africa/v1/discount-coupons/dc_abc123..." \
+  -H "X-API-KEY: $LOMI_API_KEY"
+```
+</Tab>
+
+</Tabs>
+
+---
+
+## Get coupon performance
+
+Retrieve usage statistics and revenue impact for a coupon.
+
+<Tabs items={["TypeScript", "Python", "cURL"]}>
+
+<Tab value="TypeScript">
+```typescript
+const performance = await lomi.discountCoupons.getPerformance('dc_abc123...');
+
+console.log(`Total uses: ${performance.total_uses}`);
+console.log(`Total discounted: ${performance.total_discount_amount}`);
+console.log(`Revenue generated: ${performance.total_revenue}`);
+console.log(`Avg order value: ${performance.average_order_value}`);
+```
+</Tab>
+
+<Tab value="Python">
+```python
+performance = client.discount_coupons.get_performance('dc_abc123...')
+print(f"Total uses: {performance['total_uses']}")
+```
+</Tab>
+
+<Tab value="cURL">
+```bash
+curl -X GET "https://api.lomi.africa/v1/discount-coupons/dc_abc123.../performance" \
+  -H "X-API-KEY: $LOMI_API_KEY"
+```
+</Tab>
+
+</Tabs>
+
+### Response
+
+```json
+{
+  "total_uses": 45,
+  "total_discount_amount": 25000,
+  "total_revenue": 150000,
+  "average_order_value": 3333.33
+}
+```
+
+---
+
+## Discount Coupon Object
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `id` | `string` | Unique identifier |
+| `code` | `string` | Coupon code |
+| `discount_type` | `string` | `percentage` or `fixed` |
+| `discount_percentage` | `number` | Percentage value |
+| `discount_fixed_amount` | `number` | Fixed amount value |
+| `is_active` | `boolean` | Active status |
+| `max_uses` | `number` | Maximum uses |
+| `current_uses` | `number` | Current use count |
+| `valid_from` | `string` | Start date |
+| `expires_at` | `string` | Expiration date |
+| `scope_type` | `string` | Application scope |
+| `created_at` | `string` | Creation timestamp |
+
+---
+
+## Error Responses
+
+| Status | Description |
+|--------|-------------|
+| `400` | Invalid input or duplicate code |
+| `401` | Invalid or missing API key |
+| `404` | Coupon not found |

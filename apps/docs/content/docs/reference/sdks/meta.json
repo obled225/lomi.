@@ -1,0 +1,6 @@
+{
+  "title": "SDKs",
+  "description": "Official lomi. SDKs for TypeScript, Python, Go, PHP, and Next.js",
+  "icon": "Code",
+  "pages": ["index", "typescript", "python", "go", "php", "nextjs"]
+}

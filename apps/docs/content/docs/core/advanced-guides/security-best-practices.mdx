@@ -10,7 +10,7 @@ description: 'Implementing robust security measures is crucial when handling pay
 1.  **Secure Storage:** **Never** hardcode API keys (`LOMI_API_KEY`) in your source code or commit them to version control. Use environment variables or a secure secrets management service.
 
     ```typescript filename="Using environment variables for API key"
-    import { LomiSDK } from '@lomi/sdk';
+    import { LomiSDK } from '@lomi./sdk';
 
     // Don't hardcode API keys
     const lomi = new LomiSDK({
@@ -72,9 +72,6 @@ Validate data on your server **before** sending it to the lomi. API.
     const CheckoutSessionInputSchema = z.object({
       amount: z.number().positive('Amount must be positive'),
       currency_code: z.enum(['XOF']), // Adjust allowed currencies
-      allowed_providers: z
-        .array(z.string())
-        .min(1, 'At least one provider required'),
       merchant_id: z.string().uuid('Invalid merchant ID'),
       success_url: z.string().url('Invalid success URL'),
       cancel_url: z.string().url('Invalid cancel URL'),
@@ -149,7 +146,7 @@ function verifyWebhookSignature(
     // Avoid: Sending PII unless absolutely necessary and handled correctly
     // const badMetadata = { user_password: '...', full_address: '...' };
 
-    const session = await lomi.checkoutSessions.create({
+    const session = await lomi.checkoutSessions.createCheckoutSession({
       // ... other params
       metadata: metadata,
     });

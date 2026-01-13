@@ -1,108 +1,177 @@
 ---
-title: 'Transactions'
-description: 'The Transactions API allows you to retrieve information about payment transactions associated with your merchant account.'
+title: Transactions
+description: Retrieve transaction history and details with advanced filtering.
 ---
 
-## Authentication
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+import { Callout } from 'fumadocs-ui/components/callout';
 
-Requests require authentication using your API key in the `` `X-API-Key` `` header. See the [Authentication](/docs/reference/setup/authentication) guide.
+The Transactions API provides read-only access to transaction history for your organization. Transactions are automatically created when payments are processed through Checkout Sessions or Payment Links.
 
-## The transaction object
+## List transactions
 
-Represents a single payment transaction, including details about the amount, status, provider, customer, and related resources. See [Data Models](/docs/reference/reference/data-models#transaction-object) for the full structure.
+Retrieve all transactions with advanced filtering options.
 
-## Endpoints
+### Query Parameters
 
-### List transactions
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `provider` | `string` | Filter by payment provider (e.g., `WAVE`, `STRIPE`) |
+| `status` | `string` | Filter by status. Comma-separated for multiple (e.g., `completed,pending`) |
+| `type` | `string` | Filter by transaction type. Comma-separated (e.g., `payment,refund`) |
+| `currency` | `string` | Filter by currency code. Comma-separated (e.g., `XOF,USD`) |
+| `paymentMethod` | `string` | Filter by payment method. Comma-separated (e.g., `MOBILE_MONEY,CARDS`) |
+| `startDate` | `string` | Filter from this date (ISO 8601 format) |
+| `endDate` | `string` | Filter up to this date (ISO 8601 format) |
+| `isPos` | `boolean` | Filter POS transactions only |
+| `page` | `number` | Page number (default: `1`) |
+| `pageSize` | `number` | Items per page (default: `50`) |
 
-Retrieves a list of transactions for the authenticated merchant, with options for filtering and pagination.
+<Tabs items={["TypeScript", "Python", "cURL"]}>
 
-**Endpoint:** `` `GET /transactions` ``
+<Tab value="TypeScript">
+```typescript
+import { LomiSDK } from '@lomi./sdk';
 
-**Query parameters:**
+const lomi = new LomiSDK({
+  apiKey: process.env.LOMI_API_KEY!,
+  environment: 'test',
+});
 
-| Parameter         | Type                           | Required | Description                                                                                                                                                                                                                                  |
-| ----------------- | ------------------------------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `` `status` ``    | `` `string` `` / `` `array` `` | No       | Filter by transaction status(es). Provide a single status or comma-separated list (e.g., `` `completed` ``, `` `failed,refunded` ``). Valid statuses: `` `pending` ``, `` `completed` ``, `` `failed` ``, `` `refunded` ``, `` `expired` ``. |
-| `` `provider` ``  | `` `string` ``                 | No       | Filter by payment provider code (e.g., `` `ORANGE` ``, `` `WAVE` ``).                                                                                                                                                                        |
-| `` `from_date` `` | `` `string (ISO8601)` ``       | No       | Filter transactions created on or after this date/time (inclusive). Format: `` `YYYY-MM-DDTHH:mm:ssZ` ``.                                                                                                                                    |
-| `` `to_date` ``   | `` `string (ISO8601)` ``       | No       | Filter transactions created on or before this date/time (inclusive). Format: `` `YYYY-MM-DDTHH:mm:ssZ` ``.                                                                                                                                   |
-| `` `limit` ``     | `` `number` ``                 | No       | Maximum number of transactions to return (default: 20, max: 100).                                                                                                                                                                            |
-| `` `page` ``      | `` `number` ``                 | No       | Page number for pagination (default: 1).                                                                                                                                                                                                     |
+// List with filters
+const transactions = await lomi.transactions.list({
+  status: 'completed',
+  provider: 'WAVE',
+  startDate: '2024-01-01T00:00:00Z',
+  endDate: '2024-12-31T23:59:59Z',
+  page: 1,
+  pageSize: 50,
+});
 
-**Example request (filtering for completed Wave transactions):**
+console.log(`Found ${transactions.length} transactions`);
+```
+</Tab>
 
-```http filename="GET /transactions example request"
-GET /transactions?status=completed&provider=WAVE&limit=10
-Host: api.lomi.africa
-X-API-Key: your_api_key
+<Tab value="Python">
+```python
+from lomi import LomiClient
+import os
+
+client = LomiClient(
+    api_key=os.environ["LOMI_API_KEY"],
+    environment="test"
+)
+
+# List with filters
+transactions = client.transactions.list(
+    status="completed",
+    provider="WAVE",
+    startDate="2024-01-01T00:00:00Z",
+    endDate="2024-12-31T23:59:59Z",
+    page=1,
+    pageSize=50
+)
+
+print(f"Found {len(transactions)} transactions")
+```
+</Tab>
+
+<Tab value="cURL">
+```bash
+curl -X GET "https://api.lomi.africa/v1/transactions?status=completed&provider=WAVE&startDate=2024-01-01T00:00:00Z&page=1&pageSize=50" \
+  -H "X-API-KEY: $LOMI_API_KEY"
+```
+</Tab>
+
+</Tabs>
+
+### Response
+
+```json
+[
+  {
+    "transaction_id": "tx_abc123...",
+    "organization_id": "org_xyz789...",
+    "customer_id": "cus_def456...",
+    "gross_amount": 10000,
+    "net_amount": 9700,
+    "fee_amount": 300,
+    "currency_code": "XOF",
+    "status": "completed",
+    "type": "payment",
+    "provider_code": "WAVE",
+    "payment_method_code": "MOBILE_MONEY",
+    "description": "Payment for Order #12345",
+    "metadata": {
+      "order_id": "ORD-12345"
+    },
+    "created_at": "2024-01-15T10:30:00Z",
+    "updated_at": "2024-01-15T10:31:00Z"
+  }
+]
 ```
 
-**Example response (200 OK):**
+---
 
-```json filename="GET /transactions response"
-{
-  "success": true,
-  "data": [
-    {
-      "transaction_id": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
-      "merchant_id": "904d003c-3736-41d4-90a5-9de74d404fd7",
-      "organization_id": "0979ec77-9fb1-4c9a-8c55-d7fb6c182c9c",
-      "customer_id": "c47ac10b-58cc-4372-a567-0e02b2c3d480",
-      "gross_amount": 5000,
-      "fee_amount": 125,
-      "net_amount": 4875,
-      "fee_reference": "STANDARD_FEE",
-      "currency_code": "XOF",
-      "payment_method_code": "MOBILE_MONEY",
-      "provider_code": "WAVE",
-      "provider_transaction_id": "prov_trx_12345",
-      "transaction_type": "payment",
-      "product_id": null,
-      "subscription_id": null,
-      "status": "completed",
-      "description": "Payment for Order #5678",
-      "created_at": "2025-04-05T10:30:00.000Z",
-      "updated_at": "2025-04-05T10:30:05.000Z",
-      "metadata": { "source": "api" }
-    }
-    // ... more transaction objects
-  ],
-  "meta": {
-    "current_page": 1,
-    "per_page": 10
-    // "total": 5 // Total count may not always be present
-  },
-  "environment": "test"
-}
+## Get a transaction
+
+Retrieve details of a specific transaction by ID.
+
+<Tabs items={["TypeScript", "Python", "cURL"]}>
+
+<Tab value="TypeScript">
+```typescript
+const tx = await lomi.transactions.get('tx_abc123...');
+console.log(`Amount: ${tx.gross_amount} ${tx.currency_code}`);
+console.log(`Status: ${tx.status}`);
 ```
+</Tab>
 
-### Get transaction by ID
-
-Retrieves the details of a specific transaction by its unique ID.
-
-**Endpoint:** `` `GET /transactions/{transaction_id}` ``
-
-**Path parameters:**
-
-| Parameter              | Type                  | Required | Description                                           |
-| ---------------------- | --------------------- | -------- | ----------------------------------------------------- |
-| `` `transaction_id` `` | `` `string (UUID)` `` | Yes      | The unique identifier of the transaction to retrieve. |
-
-**Example response (200 OK):**
-
-```json filename="GET /transactions/{id} response"
-{
-  "success": true,
-  "data": {
-    "transaction_id": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
-    // ... all other transaction fields as shown in the list example
-    "metadata": { "source": "api" }
-  },
-  "environment": "test"
-}
+<Tab value="Python">
+```python
+tx = client.transactions.get('tx_abc123...')
+print(f"Amount: {tx['gross_amount']} {tx['currency_code']}")
+print(f"Status: {tx['status']}")
 ```
+</Tab>
 
-## Error handling
+<Tab value="cURL">
+```bash
+curl -X GET "https://api.lomi.africa/v1/transactions/tx_abc123..." \
+  -H "X-API-KEY: $LOMI_API_KEY"
+```
+</Tab>
 
-Common errors include `` `400 Bad Request` `` for invalid filter parameters or ID format, `` `401 Unauthorized` ``, `` `404 Not Found` `` if the transaction ID doesn't exist, and `` `500 Internal Server Error` ``. Refer to the [Errors](/docs/reference/reference/errors) guide for general structure and handling.
+</Tabs>
+
+---
+
+## Transaction Object
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `transaction_id` | `string` | Unique transaction identifier |
+| `organization_id` | `string` | Organization that owns this transaction |
+| `customer_id` | `string` | Associated customer (if any) |
+| `gross_amount` | `number` | Total amount charged |
+| `net_amount` | `number` | Amount after fees |
+| `fee_amount` | `number` | Total fees deducted |
+| `currency_code` | `string` | Currency (e.g., `XOF`, `USD`) |
+| `status` | `string` | `pending`, `completed`, `failed`, `refunded` |
+| `type` | `string` | `payment`, `refund`, `payout` |
+| `provider_code` | `string` | Payment provider (e.g., `WAVE`, `STRIPE`) |
+| `payment_method_code` | `string` | Payment method (e.g., `MOBILE_MONEY`, `CARDS`) |
+| `description` | `string` | Transaction description |
+| `metadata` | `object` | Custom metadata passed during payment |
+| `created_at` | `string` | ISO 8601 timestamp |
+| `updated_at` | `string` | ISO 8601 timestamp |
+
+---
+
+## Error Responses
+
+| Status | Description |
+|--------|-------------|
+| `401` | Invalid or missing API key |
+| `404` | Transaction not found or access denied |
+| `429` | Rate limit exceeded |

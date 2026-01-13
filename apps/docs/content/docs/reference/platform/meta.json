@@ -1,0 +1,9 @@
+{
+  "pages": [
+    "organizations",
+    "accounts",
+    "customers",
+    "webhook-delivery-logs",
+    "merchants"
+  ]
+}
