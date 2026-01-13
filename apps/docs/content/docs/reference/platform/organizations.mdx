@@ -44,7 +44,7 @@ print(f"Organization: {orgs[0]['name']}")
 
 <Tab value="cURL">
 ```bash
-curl -X GET "https://api.lomi.africa/v1/organizations" \
+curl -X GET "https://api.lomi.africa/organizations" \
   -H "X-API-KEY: $LOMI_API_KEY"
 ```
 </Tab>
@@ -73,7 +73,7 @@ org = client.organizations.get('org_abc123...')
 
 <Tab value="cURL">
 ```bash
-curl -X GET "https://api.lomi.africa/v1/organizations/org_abc123..." \
+curl -X GET "https://api.lomi.africa/organizations/org_abc123..." \
   -H "X-API-KEY: $LOMI_API_KEY"
 ```
 </Tab>
@@ -113,7 +113,7 @@ print(f"Total Customers: {metrics['total_customers']}")
 
 <Tab value="cURL">
 ```bash
-curl -X GET "https://api.lomi.africa/v1/organizations/metrics" \
+curl -X GET "https://api.lomi.africa/organizations/metrics" \
   -H "X-API-KEY: $LOMI_API_KEY"
 ```
 </Tab>

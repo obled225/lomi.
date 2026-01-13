@@ -175,11 +175,11 @@ class LomiClient:
     def __init__(
         self,
         api_key: str,
-        base_url: str = "https://api.lomi.africa/v1",
+        base_url: str = "https://api.lomi.africa",
         environment: str = "live"
     ):
         self.api_key = api_key
-        self.base_url = base_url if environment != "test" else "https://sandbox.api.lomi.africa/v1"
+        self.base_url = base_url if environment != "test" else "https://sandbox.api.lomi.africa"
         self.session = requests.Session()
         self.session.headers.update({
             "X-API-KEY": api_key,

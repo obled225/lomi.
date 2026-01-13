@@ -64,7 +64,7 @@ for sub in subscriptions:
 
 <Tab value="cURL">
 ```bash
-curl -X GET "https://api.lomi.africa/v1/subscriptions?page=1&pageSize=20" \
+curl -X GET "https://api.lomi.africa/subscriptions?page=1&pageSize=20" \
   -H "X-API-KEY: $LOMI_API_KEY"
 ```
 </Tab>
@@ -93,7 +93,7 @@ customer_subs = client.subscriptions.get_by_customer('cus_abc123...')
 
 <Tab value="cURL">
 ```bash
-curl -X GET "https://api.lomi.africa/v1/subscriptions/customer/cus_abc123..." \
+curl -X GET "https://api.lomi.africa/subscriptions/customer/cus_abc123..." \
   -H "X-API-KEY: $LOMI_API_KEY"
 ```
 </Tab>
@@ -125,7 +125,7 @@ print(f"Status: {subscription['status']}")
 
 <Tab value="cURL">
 ```bash
-curl -X GET "https://api.lomi.africa/v1/subscriptions/sub_abc123..." \
+curl -X GET "https://api.lomi.africa/subscriptions/sub_abc123..." \
   -H "X-API-KEY: $LOMI_API_KEY"
 ```
 </Tab>
@@ -177,7 +177,7 @@ scheduled_cancel = client.subscriptions.cancel('sub_abc123...', {
 
 <Tab value="cURL">
 ```bash
-curl -X POST "https://api.lomi.africa/v1/subscriptions/sub_abc123.../cancel" \
+curl -X POST "https://api.lomi.africa/subscriptions/sub_abc123.../cancel" \
   -H "X-API-KEY: $LOMI_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{

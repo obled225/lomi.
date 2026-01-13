@@ -33,7 +33,7 @@ All communication with the lomi. API **must** be over HTTPS (TLS 1.2 or higher) 
 ```typescript filename="Ensuring HTTPS base URL"
 import axios from 'axios';
 
-const LOMI_API_BASE_URL = 'https://api.lomi.africa/v1'; // Always use HTTPS
+const LOMI_API_BASE_URL = 'https://api.lomi.africa'; // Always use HTTPS
 
 const apiClient = axios.create({
   baseURL: LOMI_API_BASE_URL,
@@ -204,7 +204,7 @@ Set reasonable timeouts for requests made to the lomi. API to prevent your appli
 import axios from 'axios';
 
 const apiClient = axios.create({
-  baseURL: 'https://api.lomi.africa/v1',
+  baseURL: 'https://api.lomi.africa',
   timeout: 15000, // 15 seconds timeout
   headers: { Authorization: `Bearer ${process.env.LOMI_API_KEY}` },
 });
@@ -231,12 +231,12 @@ const apiClient = axios.create({
     ```typescript filename="Environment-specific configuration"
     const config = {
       development: {
-        apiUrl: 'https://sandbox.api.lomi.africa/v1',
+        apiUrl: 'https://sandbox.api.lomi.africa',
         apiKey: process.env.LOMI_TEST_API_KEY,
         webhookSecret: process.env.LOMI_TEST_WEBHOOK_SECRET,
       },
       production: {
-        apiUrl: 'https://api.lomi.africa/v1',
+        apiUrl: 'https://api.lomi.africa',
         apiKey: process.env.LOMI_PROD_API_KEY,
         webhookSecret: process.env.LOMI_PROD_WEBHOOK_SECRET,
       },

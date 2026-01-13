@@ -48,7 +48,7 @@ export class LomiSDK {
    */
   constructor(config: LomiConfig) {
     const baseUrl = config.environment === 'test' 
-      ? 'https://sandbox.api.lomi.africa/v1'
+      ? 'https://sandbox.api.lomi.africa'
       : config.baseUrl || DEFAULT_CONFIG.baseUrl;
 
     // Configure OpenAPI client

@@ -78,7 +78,7 @@ print(f"Found {len(transactions)} transactions")
 
 <Tab value="cURL">
 ```bash
-curl -X GET "https://api.lomi.africa/v1/transactions?status=completed&provider=WAVE&startDate=2024-01-01T00:00:00Z&page=1&pageSize=50" \
+curl -X GET "https://api.lomi.africa/transactions?status=completed&provider=WAVE&startDate=2024-01-01T00:00:00Z&page=1&pageSize=50" \
   -H "X-API-KEY: $LOMI_API_KEY"
 ```
 </Tab>
@@ -137,7 +137,7 @@ print(f"Status: {tx['status']}")
 
 <Tab value="cURL">
 ```bash
-curl -X GET "https://api.lomi.africa/v1/transactions/tx_abc123..." \
+curl -X GET "https://api.lomi.africa/transactions/tx_abc123..." \
   -H "X-API-KEY: $LOMI_API_KEY"
 ```
 </Tab>

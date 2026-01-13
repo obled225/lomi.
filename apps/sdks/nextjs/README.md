@@ -21,7 +21,7 @@ Add your lomi. API key to your `.env.local` file:
 
 ```env
 LOMI_API_KEY=your_lomi_api_key_here
-LOMI_BASE_URL=https://api.lomi.africa/v1  # Optional, defaults to production
+LOMI_BASE_URL=https://api.lomi.africa  # Optional, defaults to production
 ```
 
 ## Usage

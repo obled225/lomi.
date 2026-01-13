@@ -28,8 +28,8 @@ LOMI_SECRET_KEY=sk_test_xxxxxxxxxxxxxxxxxxxxxx
 # Required: Your webhook secret
 LOMI_WEBHOOK_SECRET=whsec_xxxxxxxxxxxxxxxxxxxxxx
 
-# Optional: Base URL (defaults to https://api.lomi.africa/v1)
-# LOMI_API_URL=https://api.lomi.africa/v1
+# Optional: Base URL (defaults to https://api.lomi.africa)
+# LOMI_API_URL=https://api.lomi.africa
 ```
 
 ## Initialization examples
@@ -74,7 +74,7 @@ configuration := lomi.NewConfiguration()
 // Override host for sandbox
 configuration.Servers = lomi.ServerConfigurations{
 {
-URL: "https://sandbox.api.lomi.africa/v1",
+URL: "https://sandbox.api.lomi.africa",
 Description: "Sandbox Environment",
 },
 }
@@ -89,7 +89,7 @@ use Lomi\Configuration;
 
 $config = Configuration::getDefaultConfiguration()
     ->setApiKey('X-API-KEY', getenv('LOMI_SECRET_KEY'))
-    ->setHost('https://sandbox.api.lomi.africa/v1');
+    ->setHost('https://sandbox.api.lomi.africa');
 ````
 
 </Tab>

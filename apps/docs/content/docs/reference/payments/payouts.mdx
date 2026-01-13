@@ -71,7 +71,7 @@ print(f"Payout initiated: {payout['id']}")
 
 <Tab value="cURL">
 ```bash
-curl -X POST "https://api.lomi.africa/v1/payouts" \
+curl -X POST "https://api.lomi.africa/payouts" \
   -H "X-API-KEY: $LOMI_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -125,7 +125,7 @@ payouts = client.payouts.list(
 
 <Tab value="cURL">
 ```bash
-curl -X GET "https://api.lomi.africa/v1/payouts?statuses=completed&limit=20" \
+curl -X GET "https://api.lomi.africa/payouts?statuses=completed&limit=20" \
   -H "X-API-KEY: $LOMI_API_KEY"
 ```
 </Tab>
@@ -155,7 +155,7 @@ payout = client.payouts.get('po_abc123...')
 
 <Tab value="cURL">
 ```bash
-curl -X GET "https://api.lomi.africa/v1/payouts/po_abc123..." \
+curl -X GET "https://api.lomi.africa/payouts/po_abc123..." \
   -H "X-API-KEY: $LOMI_API_KEY"
 ```
 </Tab>

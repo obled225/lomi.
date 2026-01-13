@@ -28,7 +28,7 @@ OpenAPI.HEADERS = {
 };
 
 // Optionally configure the base URL if not using the default production URL
-// OpenAPI.BASE = 'https://sandbox.api.lomi.africa/v1';
+// OpenAPI.BASE = 'https://sandbox.api.lomi.africa';
 
 async function createNewCustomer() {
   try {

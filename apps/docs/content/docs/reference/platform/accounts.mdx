@@ -47,7 +47,7 @@ for account in accounts:
 
 <Tab value="cURL">
 ```bash
-curl -X GET "https://api.lomi.africa/v1/accounts" \
+curl -X GET "https://api.lomi.africa/accounts" \
   -H "X-API-KEY: $LOMI_API_KEY"
 ```
 </Tab>
@@ -76,7 +76,7 @@ account = client.accounts.get('acc_abc123...')
 
 <Tab value="cURL">
 ```bash
-curl -X GET "https://api.lomi.africa/v1/accounts/acc_abc123..." \
+curl -X GET "https://api.lomi.africa/accounts/acc_abc123..." \
   -H "X-API-KEY: $LOMI_API_KEY"
 ```
 </Tab>
@@ -124,11 +124,11 @@ print(f"Available: {xof_balance['available']}")
 <Tab value="cURL">
 ```bash
 # All currencies
-curl -X GET "https://api.lomi.africa/v1/accounts/balance" \
+curl -X GET "https://api.lomi.africa/accounts/balance" \
   -H "X-API-KEY: $LOMI_API_KEY"
 
 # Specific currency
-curl -X GET "https://api.lomi.africa/v1/accounts/balance?currency=XOF" \
+curl -X GET "https://api.lomi.africa/accounts/balance?currency=XOF" \
   -H "X-API-KEY: $LOMI_API_KEY"
 ```
 </Tab>
@@ -172,7 +172,7 @@ print(f"Total in USD: {breakdown['total']}")
 
 <Tab value="cURL">
 ```bash
-curl -X GET "https://api.lomi.africa/v1/accounts/balance/breakdown?target_currency=USD" \
+curl -X GET "https://api.lomi.africa/accounts/balance/breakdown?target_currency=USD" \
   -H "X-API-KEY: $LOMI_API_KEY"
 ```
 </Tab>
@@ -209,7 +209,7 @@ print(f"Available: {check['available_balance']}")
 
 <Tab value="cURL">
 ```bash
-curl -X GET "https://api.lomi.africa/v1/accounts/balance/check/XOF" \
+curl -X GET "https://api.lomi.africa/accounts/balance/check/XOF" \
   -H "X-API-KEY: $LOMI_API_KEY"
 ```
 </Tab>

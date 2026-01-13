@@ -132,7 +132,7 @@ print(f"Product created: {product['id']}")
 
 <Tab value="cURL">
 ```bash
-curl -X POST "https://api.lomi.africa/v1/products" \
+curl -X POST "https://api.lomi.africa/products" \
   -H "X-API-KEY: $LOMI_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -186,7 +186,7 @@ products = client.products.list(isActive=True, limit=20)
 
 <Tab value="cURL">
 ```bash
-curl -X GET "https://api.lomi.africa/v1/products?isActive=true&limit=20" \
+curl -X GET "https://api.lomi.africa/products?isActive=true&limit=20" \
   -H "X-API-KEY: $LOMI_API_KEY"
 ```
 </Tab>
@@ -216,7 +216,7 @@ product = client.products.get('prod_abc123...')
 
 <Tab value="cURL">
 ```bash
-curl -X GET "https://api.lomi.africa/v1/products/prod_abc123..." \
+curl -X GET "https://api.lomi.africa/products/prod_abc123..." \
   -H "X-API-KEY: $LOMI_API_KEY"
 ```
 </Tab>
@@ -259,7 +259,7 @@ price = client.products.add_price('prod_abc123...', {
 
 <Tab value="cURL">
 ```bash
-curl -X POST "https://api.lomi.africa/v1/products/prod_abc123.../prices" \
+curl -X POST "https://api.lomi.africa/products/prod_abc123.../prices" \
   -H "X-API-KEY: $LOMI_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -294,7 +294,7 @@ product = client.products.set_default_price('prod_abc123...', 'price_def456...')
 
 <Tab value="cURL">
 ```bash
-curl -X POST "https://api.lomi.africa/v1/products/prod_abc123.../prices/price_def456.../set-default" \
+curl -X POST "https://api.lomi.africa/products/prod_abc123.../prices/price_def456.../set-default" \
   -H "X-API-KEY: $LOMI_API_KEY"
 ```
 </Tab>

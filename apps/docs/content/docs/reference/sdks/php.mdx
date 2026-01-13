@@ -52,7 +52,7 @@ $config = Configuration::getDefaultConfiguration()
     ->setApiKey('X-API-KEY', getenv('LOMI_API_KEY'));
 
 // For sandbox/testing
-// $config->setHost('https://sandbox.api.lomi.africa/v1');
+// $config->setHost('https://sandbox.api.lomi.africa');
 
 $apiClient = new ApiClient($config);
 ```

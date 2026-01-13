@@ -12,8 +12,8 @@ import (
 )
 
 const (
-	DefaultBaseURL = "https://api.lomi.africa/v1"
-	SandboxBaseURL = "https://sandbox.api.lomi.africa/v1"
+	DefaultBaseURL = "https://api.lomi.africa"
+	SandboxBaseURL = "https://sandbox.api.lomi.africa"
 )
 
 // Client is the main lomi. API client

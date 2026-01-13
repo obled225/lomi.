@@ -11,7 +11,7 @@ description: 'This guide covers best practices for integrating lomi. with your C
 # .env.ci
 LOMI_API_KEY=lomi_sk_test_... # Use a dedicated test key
 LOMI_WEBHOOK_SECRET=whsec_... # Test webhook secret
-LOMI_API_URL=https://sandbox.api.lomi.africa/v1 # Point to sandbox
+LOMI_API_URL=https://sandbox.api.lomi.africa # Point to sandbox
 LOMI_ENV=test
 ```
 
@@ -72,7 +72,7 @@ jobs:
         env:
           LOMI_API_KEY: ${{ secrets.LOMI_TEST_API_KEY }} # Use GitHub secrets
           LOMI_WEBHOOK_SECRET: ${{ secrets.LOMI_TEST_WEBHOOK_SECRET }}
-          LOMI_API_URL: 'https://sandbox.api.lomi.africa/v1'
+          LOMI_API_URL: 'https://sandbox.api.lomi.africa'
           LOMI_ENV: test
 ```
 
@@ -117,7 +117,7 @@ jobs:
         env:
           LOMI_API_KEY: ${{ secrets.LOMI_PROD_API_KEY }}
           LOMI_WEBHOOK_SECRET: ${{ secrets.LOMI_PROD_WEBHOOK_SECRET }}
-          LOMI_API_URL: 'https://api.lomi.africa/v1'
+          LOMI_API_URL: 'https://api.lomi.africa'
           LOMI_ENV: production
 ```
 
@@ -191,7 +191,7 @@ describe('Payment Integration', () => {
     }
     lomi = new LomiSDK({
       apiKey: process.env.LOMI_TEST_API_KEY,
-      baseUrl: 'https://sandbox.api.lomi.africa/v1',
+      baseUrl: 'https://sandbox.api.lomi.africa',
     });
     // await setupTestEnvironment(); // Your test setup
   });

@@ -21,40 +21,40 @@ console.log('🔨 Generating Go SDK...');
 // First ensure pre-generate has run
 console.log('📋 Running pre-generation...');
 execSync('node scripts/pre-generate.js', {
-    cwd: join(__dirname, '..'),
-    stdio: 'inherit'
+	cwd: join(__dirname, '..'),
+	stdio: 'inherit'
 });
 
 function toPascalCase(str) {
-    return str.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join('');
+	return str.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join('');
 }
 
 function toSnakeCase(str) {
-    return str.replace(/([A-Z])/g, '_$1').toLowerCase().replace(/^_/, '');
+	return str.replace(/([A-Z])/g, '_$1').toLowerCase().replace(/^_/, '');
 }
 
 /**
  * Parse API config for resources
  */
 function parseApiConfig(content) {
-    const resourcesMatch = content.match(/export const API_RESOURCES[^=]*=\s*\[([\s\S]*?)\];/);
-    if (!resourcesMatch) return [];
+	const resourcesMatch = content.match(/export const API_RESOURCES[^=]*=\s*\[([\s\S]*?)\];/);
+	if (!resourcesMatch) return [];
 
-    const resources = [];
-    const resourceBlocks = resourcesMatch[1].split(/\},\s*\{/);
+	const resources = [];
+	const resourceBlocks = resourcesMatch[1].split(/\},\s*\{/);
 
-    for (const block of resourceBlocks) {
-        const tableNameMatch = block.match(/tableName:\s*['"](\w+)['"]/);
-        const enabledMatch = block.match(/enabled:\s*(true|false)/);
+	for (const block of resourceBlocks) {
+		const tableNameMatch = block.match(/tableName:\s*['"](\w+)['"]/);
+		const enabledMatch = block.match(/enabled:\s*(true|false)/);
 
-        if (tableNameMatch && enabledMatch && enabledMatch[1] === 'true') {
-            resources.push({
-                tableName: tableNameMatch[1],
-                structName: toPascalCase(tableNameMatch[1]),
-            });
-        }
-    }
-    return resources;
+		if (tableNameMatch && enabledMatch && enabledMatch[1] === 'true') {
+			resources.push({
+				tableName: tableNameMatch[1],
+				structName: toPascalCase(tableNameMatch[1]),
+			});
+		}
+	}
+	return resources;
 }
 
 // Read config
@@ -78,8 +78,8 @@ import (
 )
 
 const (
-	DefaultBaseURL = "https://api.lomi.africa/v1"
-	SandboxBaseURL = "https://sandbox.api.lomi.africa/v1"
+	DefaultBaseURL = "https://api.lomi.africa"
+	SandboxBaseURL = "https://sandbox.api.lomi.africa"
 )
 
 // Client is the main lomi. API client
@@ -233,11 +233,11 @@ writeFileSync(join(outputDir, 'client.go'), clientContent);
 // Generate go.mod if not exists
 const goModPath = join(outputDir, 'go.mod');
 if (!existsSync(goModPath)) {
-    const goModContent = `module github.com/lomiafrica/lomi-go
+	const goModContent = `module github.com/lomiafrica/lomi-go
 
 go 1.21
 `;
-    writeFileSync(goModPath, goModContent);
+	writeFileSync(goModPath, goModContent);
 }
 
 console.log('✅ Go SDK generated successfully!');

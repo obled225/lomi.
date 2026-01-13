@@ -43,7 +43,7 @@ if (!apiKey) {
 }
 
 // Configure the OpenAPI client
-OpenAPI.BASE = baseUrl || 'https://api.lomi.africa/v1'; // Set base URL if provided
+OpenAPI.BASE = baseUrl || 'https://api.lomi.africa'; // Set base URL if provided
 OpenAPI.HEADERS = {
   'Authorization': \`Bearer ${process.env.LOMI_API_KEY || ''}\`,
 };
@@ -267,8 +267,8 @@ LOMI_API_KEY=your_api_key_here
 LOMI_WEBHOOK_SECRET=whsec_your_webhook_secret_here
 
 # API URL (defaults to production)
-# Use https://sandbox.api.lomi.africa/v1 for testing
-LOMI_API_URL=https://api.lomi.africa/v1`;
+# Use https://sandbox.api.lomi.africa for testing
+LOMI_API_URL=https://api.lomi.africa`;
 
 command
   .description('Initialize a new lomi. project with example code')
@@ -361,8 +361,8 @@ command
       // envContent = envContent.replace('whsec_your_webhook_secret_here', 'YOUR_SECRET_HERE'); // Maybe don't prompt for secret?
       if (answers.environment === 'sandbox') {
         envContent = envContent.replace(
-          'https://api.lomi.africa/v1',
-          'https://sandbox.api.lomi.africa/v1',
+          'https://api.lomi.africa',
+          'https://sandbox.api.lomi.africa',
         );
       }
       try {

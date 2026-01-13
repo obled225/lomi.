@@ -16,7 +16,7 @@ export type OpenAPIConfig = {
 };
 
 export const OpenAPI: OpenAPIConfig = {
-    BASE: 'https://api.lomi.africa/v1',
+    BASE: 'https://api.lomi.africa',
     VERSION: '1',
     WITH_CREDENTIALS: false,
     CREDENTIALS: 'include',

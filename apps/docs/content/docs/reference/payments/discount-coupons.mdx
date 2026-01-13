@@ -88,7 +88,7 @@ print(f"Coupon created: {coupon['code']}")
 
 <Tab value="cURL">
 ```bash
-curl -X POST "https://api.lomi.africa/v1/discount-coupons" \
+curl -X POST "https://api.lomi.africa/discount-coupons" \
   -H "X-API-KEY: $LOMI_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -126,7 +126,7 @@ coupons = client.discount_coupons.list()
 
 <Tab value="cURL">
 ```bash
-curl -X GET "https://api.lomi.africa/v1/discount-coupons" \
+curl -X GET "https://api.lomi.africa/discount-coupons" \
   -H "X-API-KEY: $LOMI_API_KEY"
 ```
 </Tab>
@@ -155,7 +155,7 @@ coupon = client.discount_coupons.get('dc_abc123...')
 
 <Tab value="cURL">
 ```bash
-curl -X GET "https://api.lomi.africa/v1/discount-coupons/dc_abc123..." \
+curl -X GET "https://api.lomi.africa/discount-coupons/dc_abc123..." \
   -H "X-API-KEY: $LOMI_API_KEY"
 ```
 </Tab>
@@ -190,7 +190,7 @@ print(f"Total uses: {performance['total_uses']}")
 
 <Tab value="cURL">
 ```bash
-curl -X GET "https://api.lomi.africa/v1/discount-coupons/dc_abc123.../performance" \
+curl -X GET "https://api.lomi.africa/discount-coupons/dc_abc123.../performance" \
   -H "X-API-KEY: $LOMI_API_KEY"
 ```
 </Tab>

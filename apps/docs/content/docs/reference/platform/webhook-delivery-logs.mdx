@@ -74,11 +74,11 @@ print(f"Found {len(failed_logs)} failed deliveries")
 <Tab value="cURL">
 ```bash
 # List all logs for a webhook
-curl -X GET "https://api.lomi.africa/v1/webhook-delivery-logs?webhookId=wh_abc123..." \
+curl -X GET "https://api.lomi.africa/webhook-delivery-logs?webhookId=wh_abc123..." \
   -H "X-API-KEY: $LOMI_API_KEY"
 
 # List failed deliveries only
-curl -X GET "https://api.lomi.africa/v1/webhook-delivery-logs?webhookId=wh_abc123...&failedOnly=true" \
+curl -X GET "https://api.lomi.africa/webhook-delivery-logs?webhookId=wh_abc123...&failedOnly=true" \
   -H "X-API-KEY: $LOMI_API_KEY"
 ```
 </Tab>
@@ -116,7 +116,7 @@ print(f"Duration: {log['duration_ms']}ms")
 
 <Tab value="cURL">
 ```bash
-curl -X GET "https://api.lomi.africa/v1/webhook-delivery-logs/log_abc123..." \
+curl -X GET "https://api.lomi.africa/webhook-delivery-logs/log_abc123..." \
   -H "X-API-KEY: $LOMI_API_KEY"
 ```
 </Tab>

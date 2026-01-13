@@ -94,11 +94,11 @@ func NewConfiguration() *Configuration {
 		Debug:            false,
 		Servers:          ServerConfigurations{
 			{
-				URL: "https://api.lomi.africa/v1",
+				URL: "https://api.lomi.africa",
 				Description: "Production server",
 			},
 			{
-				URL: "https://sandbox.api.lomi.africa/v1",
+				URL: "https://sandbox.api.lomi.africa",
 				Description: "Sandbox server",
 			},
 		},

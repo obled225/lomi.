@@ -56,7 +56,7 @@ Before collecting payment, create a Payment Intent on your server:
 
 ```javascript
 // Your server (Node.js example)
-const response = await fetch('https://api.lomi.africa/v1/payment-intents', {
+const response = await fetch('https://api.lomi.africa/payment-intents', {
   method: 'POST',
   headers: {
     Authorization: `Bearer ${process.env.LOMI_SECRET_KEY}`,
@@ -178,7 +178,7 @@ const { clientSecret } = await response.json();
 ### Payment Intent Endpoint
 
 ```
-POST https://api.lomi.africa/v1/payment-intents
+POST https://api.lomi.africa/payment-intents
 ```
 
 | Parameter        | Type   | Required | Description                      |

@@ -93,10 +93,10 @@ ${resources.map(r => `    public ${r.className} $${r.propertyName};`).join('\n')
     public function __construct(string $apiKey, array $options = [])
     {
         $this->apiKey = $apiKey;
-        $this->baseUrl = $options['base_url'] ?? 'https://api.lomi.africa/v1';
+        $this->baseUrl = $options['base_url'] ?? 'https://api.lomi.africa';
         
         if (($options['environment'] ?? 'live') === 'test') {
-            $this->baseUrl = 'https://sandbox.api.lomi.africa/v1';
+            $this->baseUrl = 'https://sandbox.api.lomi.africa';
         }
         
         $this->httpClient = new Client([

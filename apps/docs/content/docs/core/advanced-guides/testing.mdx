@@ -14,7 +14,7 @@ import { LomiSDK } from '@lomi./sdk'; // Your SDK package
 
 const lomi = new LomiSDK({
   apiKey: process.env.LOMI_TEST_API_KEY, // Use the TEST key from environment
-  baseUrl: 'https://sandbox.api.lomi.africa/v1', // Point to the sandbox URL
+  baseUrl: 'https://sandbox.api.lomi.africa', // Point to the sandbox URL
 });
 ```
 
@@ -55,7 +55,7 @@ describe('Checkout Session Flow', () => {
   beforeAll(() => {
     lomi = new LomiSDK({
       apiKey: process.env.LOMI_TEST_API_KEY!,
-      baseUrl: 'https://sandbox.api.lomi.africa/v1',
+      baseUrl: 'https://sandbox.api.lomi.africa',
     });
   });
 
