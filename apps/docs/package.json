@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "build": "pnpm build:pre && NODE_OPTIONS='--max-old-space-size=4096' next build && pnpm build:post",
+    "build": "pnpm build:pre && NODE_OPTIONS='--max-old-space-size=8192' next build && pnpm build:post",
     "build:pre": "bun ./lib/scripts/pre-build.ts",
     "build:post": "bun ./lib/scripts/post-build.ts",
     "clean": "rimraf .next",

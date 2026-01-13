@@ -1,8 +1,8 @@
 {
   "pages": [
     "create-account",
-    "api-keys",
-    "setup-webhooks",
+    "access-tokens",
+    "webhooks",
     "transactions"
   ]
 }
