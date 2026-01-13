@@ -284,10 +284,7 @@ export async function POST(request: Request) {
       // Update order status in database
       break;
 
-    case 'CHECKOUT_COMPLETED':
-      console.log('Checkout completed:', event.data.id);
-      // Fulfill order
-      break;
+
 
     case 'SUBSCRIPTION_RENEWED':
       console.log('Subscription renewed:', event.data.id);

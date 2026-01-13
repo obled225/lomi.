@@ -437,9 +437,7 @@ case 'PAYMENT_SUCCEEDED':
 console.log('Payment succeeded:', event.data);
 // Fulfill the order
 break;
-case 'CHECKOUT_COMPLETED':
-console.log('Checkout completed:', event.data);
-break;
+
 }
 
 res.status(200).json({ received: true });
@@ -542,7 +540,7 @@ echo json_encode(['received' => true]);
 **Remember to:**
 - Set your `LOMI_WEBHOOK_SECRET` environment variable
 - Use [ngrok](https://ngrok.com) to expose your local server during development
-- Register your webhook URL in the dashboard under **Settings → Webhooks**
+- Register your webhook URL in the dashboard under **Webhooks** to get your webhook secret and get notified when a payment is successful.
 </Step>
 </Steps>
 

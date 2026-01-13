@@ -35,16 +35,16 @@ When creating or updating a webhook, you subscribe it to specific event types. l
 
 | Event Enum                          | Description                                 | Data Payload Type       |
 | ----------------------------------- | ------------------------------------------- | ----------------------- |
-| `` `PAYMENT_SUCCEEDED` ``           | A one-time payment is successful.           | `` `Transaction` ``     |
-| `` `PAYMENT_FAILED` ``              | A one-time payment attempt failed.          | `` `Transaction` ``     |
-| `` `CHECKOUT_COMPLETED` ``          | A checkout session was completed.           | `` `CheckoutSession` `` |
-| `` `SUBSCRIPTION_CREATED` ``        | A new subscription is created.              | `` `Subscription` ``    |
-| `` `SUBSCRIPTION_RENEWED` ``        | A subscription successfully renews.         | `` `Subscription` ``    |
-| `` `SUBSCRIPTION_PAYMENT_FAILED` `` | A scheduled subscription payment failed.    | `` `Subscription` ``    |
-| `` `SUBSCRIPTION_CANCELED` ``       | A subscription is canceled.                 | `` `Subscription` ``    |
-| `` `REFUND_COMPLETED` ``            | A refund is successfully processed.         | `` `Refund` ``          |
-| `` `PROVIDER_STATUS_CHANGED` ``     | The status of a connected provider changes. | `` `ProviderSetting` `` |
-| `` `test.webhook` ``                | A test event generated via the API.         | `` `TestPayload` ``     |
+| `` `PAYMENT_CREATED` ``         | A new payment attempt has been initiated.   | `` `Transaction` ``     |
+| `` `PAYMENT_SUCCEEDED` ``       | A one-time payment is successful.           | `` `Transaction` ``     |
+| `` `PAYMENT_FAILED` ``          | A one-time payment attempt failed.          | `` `Transaction` ``     |
+| `` `SUBSCRIPTION_CREATED` ``    | A new subscription is created.              | `` `Subscription` ``    |
+| `` `SUBSCRIPTION_RENEWED` ``    | A subscription successfully renews.         | `` `Subscription` ``    |
+| `` `SUBSCRIPTION_CANCELED` ``   | A subscription is canceled.                 | `` `Subscription` ``    |
+| `` `REFUND_COMPLETED` ``        | A refund is successfully processed.         | `` `Refund` ``          |
+| `` `REFUND_FAILED` ``           | A refund attempt failed.                    | `` `Refund` ``          |
+| `` `REFUND_CREATED` ``         | A refund attempt was created.               | `` `Refund` ``          |
+| `` `test.webhook` ``            | A test event generated via the API.         | `` `TestPayload` ``     |
 
 _(Note: The specific structure of the data payload for each event type will be documented under the respective API resource, e.g., Transactions, Subscriptions.)_
 

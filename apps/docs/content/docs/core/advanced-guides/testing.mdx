@@ -209,7 +209,7 @@ Your E2E test script would typically:
 3.  **(Challenge)** Interact with the lomi. Sandbox Checkout page. This is often difficult/flaky in automated E2E tests. Consider:
     - Using specific test phone numbers/methods provided by lomi. sandbox that automatically succeed or fail.
     - Having a dedicated API endpoint in your _test environment_ that simulates the webhook callback lomi. would send upon completion (bypassing the actual sandbox UI interaction). This is often more reliable for automation.
-4.  Wait for and verify that your application receives the expected webhook (`PAYMENT_SUCCEEDED` or `CHECKOUT_COMPLETED`).
+4.  Wait for and verify that your application receives the expected webhook (`PAYMENT_SUCCEEDED`).
 5.  Verify that your application state updated correctly (e.g., order marked as paid, service provisioned).
 
 ```typescript filename="Conceptual E2E test flow (using a webhook simulator)"

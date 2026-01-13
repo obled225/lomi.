@@ -212,9 +212,7 @@ func webhookHandler(w http.ResponseWriter, r *http.Request) {
     case "PAYMENT_SUCCEEDED":
         log.Printf("Payment succeeded: %v", event.Data)
         // Handle payment
-    case "CHECKOUT_COMPLETED":
-        log.Printf("Checkout completed: %v", event.Data)
-        // Handle checkout
+
     default:
         log.Printf("Unhandled event: %s", event.Type)
     }

@@ -247,9 +247,7 @@ class LomiWebhookController extends Controller
             case 'PAYMENT_SUCCEEDED':
                 // Handle payment
                 break;
-            case 'CHECKOUT_COMPLETED':
-                // Handle checkout
-                break;
+
         }
 
         return response()->json(['received' => true]);
