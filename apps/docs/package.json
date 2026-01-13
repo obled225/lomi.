@@ -7,7 +7,7 @@
     "build:pre": "bun ./lib/scripts/pre-build.ts",
     "build:post": "bun ./lib/scripts/post-build.ts",
     "clean": "rimraf .next",
-    "dev": "next dev --turbo",
+    "dev": "NODE_OPTIONS='--max-old-space-size=8192' next dev --turbo",
     "lint": "fumadocs-mdx && bun ./lib/scripts/lint.ts && eslint .",
     "start": "next start",
     "mdx": "pnpm exec fumadocs-mdx",

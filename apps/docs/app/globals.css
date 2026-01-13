@@ -717,10 +717,13 @@ button:active:focus {
 /* Different appearance for code blocks */
 .prose pre {
   background-color: rgb(244, 244, 245);
-  padding: 1rem;
+  padding: 0;
+  padding-top: 14px;
+  padding-bottom: 14px;
   border-radius: 0.375rem;
   overflow-x: auto;
-  margin: 1.5rem 0;
+  margin-top: -14px;
+  margin-bottom: -14px;
 }
 
 .dark .prose pre {
