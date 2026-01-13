@@ -19,7 +19,7 @@ import { LomiSDK } from '@lomi./sdk';
 
 const lomi = new LomiSDK({
   apiKey: process.env.LOMI_API_KEY!,
-  environment: 'test',
+  environment: 'live',
 });
 
 const org = await lomi.organizations.list();

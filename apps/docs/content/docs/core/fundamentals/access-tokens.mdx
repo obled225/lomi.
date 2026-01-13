@@ -43,7 +43,7 @@ import { LomiSDK } from '@lomi./sdk';
 
 const lomi = new LomiSDK({
 apiKey: process.env.LOMI_SECRET_KEY!,
-environment: 'test', // or 'live'
+environment: 'live', // or 'test'
 // Optional: Custom timeout
 timeout: 30000,
 });
@@ -176,4 +176,4 @@ die('Invalid signature');
 ```
 </Tab>
 </Tabs>
-```
+
