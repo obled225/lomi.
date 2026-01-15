@@ -35,11 +35,12 @@ export class ProductResponseDto {
   product_type: string;
 
   @ApiProperty({
-    example: 'https://example.com/image.png',
-    description: 'Product image URL',
+    example: ['https://example.com/image.png'],
+    description: 'Product images URLs',
     nullable: true,
+    type: [String],
   })
-  image_url: string | null;
+  images: string[] | null;
 
   @ApiProperty({
     example: true,

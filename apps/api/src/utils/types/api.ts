@@ -4,7 +4,7 @@
  * This file contains only the types exposed through the API.
  *
  * Generated from database.types.ts - only includes:
- * - Exposed enums (35 enums)
+ * - Exposed enums (36 enums)
  * - Exposed tables (15 tables)
  * - Exposed functions (52 functions)
  *
@@ -194,6 +194,7 @@ export type Database = {
           organization_id: string;
           phone_number: string | null;
           postal_code: string | null;
+          provider_customer_id: string | null;
           spi_alias_mbno: string | null;
           spi_alias_shid: string | null;
           spi_primary_alias: string | null;
@@ -217,6 +218,7 @@ export type Database = {
           organization_id: string;
           phone_number?: string | null;
           postal_code?: string | null;
+          provider_customer_id?: string | null;
           spi_alias_mbno?: string | null;
           spi_alias_shid?: string | null;
           spi_primary_alias?: string | null;
@@ -240,6 +242,7 @@ export type Database = {
           organization_id?: string;
           phone_number?: string | null;
           postal_code?: string | null;
+          provider_customer_id?: string | null;
           spi_alias_mbno?: string | null;
           spi_alias_shid?: string | null;
           spi_primary_alias?: string | null;
@@ -431,6 +434,7 @@ export type Database = {
           fee_amount: number;
           fee_structure_id: string | null;
           gross_amount: number;
+          integration_source: APIEnums['integration_source'];
           is_bnpl: boolean;
           is_pos: boolean;
           metadata: Json | null;
@@ -471,6 +475,7 @@ export type Database = {
           fee_amount: number;
           fee_structure_id?: string | null;
           gross_amount: number;
+          integration_source?: APIEnums['integration_source'];
           is_bnpl?: boolean;
           is_pos?: boolean;
           metadata?: Json | null;
@@ -511,6 +516,7 @@ export type Database = {
           fee_amount?: number;
           fee_structure_id?: string | null;
           gross_amount?: number;
+          integration_source?: APIEnums['integration_source'];
           is_bnpl?: boolean;
           is_pos?: boolean;
           metadata?: Json | null;
@@ -690,6 +696,7 @@ export type Database = {
       products: {
         Row: {
           charge_day: number | null;
+          continue_selling_when_out_of_stock: boolean | null;
           created_at: string;
           created_by: string | null;
           description: string | null;
@@ -697,13 +704,16 @@ export type Database = {
           environment: string;
           failed_payment_action: APIEnums['failed_payment_action'] | null;
           first_payment_type: APIEnums['first_payment_type'] | null;
-          image_url: string | null;
+          images: string[] | null;
+          inventory_quantity: number | null;
           is_active: boolean;
           metadata: Json | null;
           name: string;
           organization_id: string;
           product_id: string;
           product_type: APIEnums['product_type'];
+          sku: string | null;
+          track_inventory: boolean | null;
           trial_enabled: boolean;
           trial_period_days: number | null;
           updated_at: string;
@@ -712,6 +722,7 @@ export type Database = {
         };
         Insert: {
           charge_day?: number | null;
+          continue_selling_when_out_of_stock?: boolean | null;
           created_at?: string;
           created_by?: string | null;
           description?: string | null;
@@ -719,13 +730,16 @@ export type Database = {
           environment?: string;
           failed_payment_action?: APIEnums['failed_payment_action'] | null;
           first_payment_type?: APIEnums['first_payment_type'] | null;
-          image_url?: string | null;
+          images?: string[] | null;
+          inventory_quantity?: number | null;
           is_active?: boolean;
           metadata?: Json | null;
           name: string;
           organization_id: string;
           product_id?: string;
           product_type?: APIEnums['product_type'];
+          sku?: string | null;
+          track_inventory?: boolean | null;
           trial_enabled?: boolean;
           trial_period_days?: number | null;
           updated_at?: string;
@@ -734,6 +748,7 @@ export type Database = {
         };
         Update: {
           charge_day?: number | null;
+          continue_selling_when_out_of_stock?: boolean | null;
           created_at?: string;
           created_by?: string | null;
           description?: string | null;
@@ -741,13 +756,16 @@ export type Database = {
           environment?: string;
           failed_payment_action?: APIEnums['failed_payment_action'] | null;
           first_payment_type?: APIEnums['first_payment_type'] | null;
-          image_url?: string | null;
+          images?: string[] | null;
+          inventory_quantity?: number | null;
           is_active?: boolean;
           metadata?: Json | null;
           name?: string;
           organization_id?: string;
           product_id?: string;
           product_type?: APIEnums['product_type'];
+          sku?: string | null;
+          track_inventory?: boolean | null;
           trial_enabled?: boolean;
           trial_period_days?: number | null;
           updated_at?: string;
@@ -783,6 +801,7 @@ export type Database = {
           organization_id: string;
           price_id: string | null;
           product_id: string;
+          provider_payment_method_id: string | null;
           start_date: string;
           status: APIEnums['subscription_status'];
           subscription_id: string;
@@ -799,6 +818,7 @@ export type Database = {
           organization_id: string;
           price_id?: string | null;
           product_id: string;
+          provider_payment_method_id?: string | null;
           start_date: string;
           status?: APIEnums['subscription_status'];
           subscription_id?: string;
@@ -815,6 +835,7 @@ export type Database = {
           organization_id?: string;
           price_id?: string | null;
           product_id?: string;
+          provider_payment_method_id?: string | null;
           start_date?: string;
           status?: APIEnums['subscription_status'];
           subscription_id?: string;
@@ -956,6 +977,7 @@ export type Database = {
           environment: string;
           expires_at: string;
           installment_plan_id: string | null;
+          integration_source: APIEnums['integration_source'];
           is_pos: boolean;
           is_spi: boolean;
           metadata: Json | null;
@@ -993,6 +1015,7 @@ export type Database = {
           environment?: string;
           expires_at: string;
           installment_plan_id?: string | null;
+          integration_source?: APIEnums['integration_source'];
           is_pos?: boolean;
           is_spi?: boolean;
           metadata?: Json | null;
@@ -1030,6 +1053,7 @@ export type Database = {
           environment?: string;
           expires_at?: string;
           installment_plan_id?: string | null;
+          integration_source?: APIEnums['integration_source'];
           is_pos?: boolean;
           is_spi?: boolean;
           metadata?: Json | null;
@@ -1606,6 +1630,7 @@ export type Database = {
       fetch_balance_breakdown: {
         Args: {
           p_merchant_id: string;
+          p_organization_id?: string | null;
           p_target_currency?: APIEnums['currency_code'] | null;
         };
         Returns: {
@@ -1633,8 +1658,8 @@ export type Database = {
       };
       list_accounts: {
         Args: {
-          p_limit?: number;
-          p_offset?: number;
+          p_limit?: number | null;
+          p_offset?: number | null;
           p_organization_id: string;
         };
         Returns: {
@@ -1906,6 +1931,7 @@ export type Database = {
           p_currency_code?: APIEnums['currency_code'] | null;
           p_end_date?: string | null;
           p_merchant_id: string;
+          p_organization_id?: string | null;
           p_page_number?: number | null;
           p_page_size?: number | null;
           p_start_date?: string | null;
@@ -2097,6 +2123,7 @@ export type Database = {
         Args: {
           p_end_date?: string | null;
           p_merchant_id: string;
+          p_organization_id?: string | null;
           p_page_number?: number | null;
           p_page_size?: number | null;
           p_start_date?: string | null;
@@ -2127,12 +2154,14 @@ export type Database = {
           p_organization_id?: string | null;
         };
         Returns: {
+          continue_selling_when_out_of_stock: boolean;
           created_at: string;
           created_by: string;
           description: string;
           display_on_storefront: boolean;
           fees: Json;
-          image_url: string;
+          images: string[];
+          inventory_quantity: number;
           is_active: boolean;
           metadata: Json;
           name: string;
@@ -2140,7 +2169,9 @@ export type Database = {
           prices: Json;
           product_id: string;
           product_type: APIEnums['product_type'];
+          sku: string;
           total_count: number;
+          track_inventory: boolean;
           updated_at: string;
         }[];
       };
@@ -2303,17 +2334,21 @@ export type Database = {
       get_product_api: {
         Args: { p_organization_id: string; p_product_id: string };
         Returns: {
+          continue_selling_when_out_of_stock: boolean;
           created_at: string;
           created_by: string;
           description: string;
           display_on_storefront: boolean;
-          image_url: string;
+          images: string[];
+          inventory_quantity: number;
           is_active: boolean;
           metadata: Json;
           name: string;
           organization_id: string;
           product_id: string;
           product_type: APIEnums['product_type'];
+          sku: string;
+          track_inventory: boolean;
           updated_at: string;
         }[];
       };
@@ -2491,6 +2526,7 @@ export type Database = {
           p_payment_status?: APIEnums['provider_payment_status'] | null;
           p_stripe_charge_id?: string | null;
           p_stripe_payment_intent_id: string;
+          p_stripe_payment_method_id?: string | null;
         };
         Returns: Json;
       };
@@ -2566,7 +2602,8 @@ export type Database = {
       discount_type: 'percentage' | 'fixed';
       failed_payment_action: 'cancel' | 'pause' | 'continue';
       first_payment_type: 'initial' | 'non_initial' | 'prorated';
-      invoice_status: 'sent' | 'paid' | 'overdue' | 'cancelled';
+      integration_source: 'system' | 'shopify' | 'woocommerce' | 'prestashop';
+      invoice_status: 'sent' | 'paid' | 'overdue' | 'cancelled' | 'draft';
       link_type: 'instant' | 'product';
       organization_status: 'active' | 'inactive' | 'suspended';
       organization_verification_status: 'unverified' | 'starter' | 'verified';
@@ -2719,6 +2756,7 @@ export type CustomerType = APIEnums['customer_type'];
 export type DiscountType = APIEnums['discount_type'];
 export type FailedPaymentAction = APIEnums['failed_payment_action'];
 export type FirstPaymentType = APIEnums['first_payment_type'];
+export type IntegrationSource = APIEnums['integration_source'];
 export type InvoiceStatus = APIEnums['invoice_status'];
 export type LinkType = APIEnums['link_type'];
 export type OrganizationStatus = APIEnums['organization_status'];

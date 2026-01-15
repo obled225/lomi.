@@ -1137,7 +1137,7 @@ export function FeaturesSection() {
   "price": 5000,
   "currency_code": "xof",
   "display_on_storefront": true,
-  "image_url": "https://cdn.img.co/+++"
+  "images": ["https://cdn.img.co/+++]
 }`;
 
   const subscriptionCode = `{

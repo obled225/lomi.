@@ -276,6 +276,7 @@ export const EXPOSED_ENUMS = [
   'first_payment_type',
   'usage_aggregation',
   'bnpl_status',
+  'integration_source',
 ];
 
 /**

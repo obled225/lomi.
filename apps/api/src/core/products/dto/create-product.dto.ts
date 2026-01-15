@@ -24,11 +24,12 @@ export class CreateProductDto {
   product_type: string;
 
   @ApiProperty({
-    example: 'https://example.com/image.png',
-    description: 'Product image URL',
+    example: ['https://example.com/image.png'],
+    description: 'Product images URLs',
     required: false,
+    type: [String],
   })
-  image_url?: string;
+  images?: string[];
 
   @ApiProperty({
     example: true,

@@ -115,7 +115,7 @@ export class ProductsService {
         p_name: createProductDto.name,
         p_description: createProductDto.description || null,
         p_product_type: createProductDto.product_type || 'one_time',
-        p_image_url: createProductDto.image_url || null,
+        p_images: createProductDto.images || null,
         p_is_active: createProductDto.is_active ?? true,
         p_display_on_storefront: createProductDto.display_on_storefront ?? true,
         p_prices: createProductDto.prices,
