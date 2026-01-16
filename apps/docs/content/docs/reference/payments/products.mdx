@@ -19,7 +19,7 @@ Create a new product with one or more prices. At least one price is required.
 | `name` | `string` | **Yes** | Product name |
 | `description` | `string` | No | Product description |
 | `product_type` | `string` | **Yes** | `one_time`, `recurring`, or `usage_based` |
-| `image_url` | `string` | No | Product image URL |
+| `images` | `array` | No | List of product image URLs |
 | `is_active` | `boolean` | No | Active status (default: `true`) |
 | `display_on_storefront` | `boolean` | No | Show on storefront (default: `true`) |
 | `prices` | `array` | **Yes** | Array of price objects (see below) |
@@ -312,7 +312,7 @@ curl -X POST "https://api.lomi.africa/products/prod_abc123.../prices/price_def45
 | `name` | `string` | Product name |
 | `description` | `string` | Product description |
 | `product_type` | `string` | `one_time`, `recurring`, `usage_based` |
-| `image_url` | `string` | Product image URL |
+| `images` | `array` | Product image URLs |
 | `is_active` | `boolean` | Active status |
 | `display_on_storefront` | `boolean` | Storefront visibility |
 | `prices` | `array` | Array of price objects |

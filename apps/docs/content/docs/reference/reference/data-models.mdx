@@ -204,7 +204,7 @@ Represents a product or service that can be purchased. Returned by product endpo
 | `` `description` ``           | `` `string` ``         | Description of the product (nullable).                                            |
 | `` `price` ``                 | `` `number` ``         | Price of the product (in the specified currency).                                 |
 | `` `currency_code` ``         | `` `string` ``         | Currency code for the price (e.g., `` `"XOF"` ``, `` `"USD"` ``).                 |
-| `` `image_url` ``             | `` `string` ``         | URL for the product image (nullable).                                             |
+| `` `images` ``             | `` `array (string)` `` | List of URLs for the product images.                                              |
 | `` `is_active` ``             | `` `boolean` ``        | Whether the product is currently active and can be purchased.                     |
 | `` `display_on_storefront` `` | `` `boolean` ``        | Whether the product should be displayed on a merchant storefront (if applicable). |
 | `` `fee_type_ids` ``          | `` `array (string)` `` | Array of UUIDs for associated organization fee types (may not be present).        |
@@ -222,7 +222,7 @@ Represents a product or service that can be purchased. Returned by product endpo
   "description": "An optional description of the widget.",
   "price": 19.99,
   "currency_code": "XOF",
-  "image_url": "https://example.com/image.jpg",
+  "images": ["https://example.com/image.jpg"],
   "is_active": true,
   "display_on_storefront": true,
   "created_at": "2023-10-27T10:00:00Z",
