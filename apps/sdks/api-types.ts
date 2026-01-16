@@ -2299,7 +2299,7 @@ export type Database = {
               p_failed_payment_action?: APIEnums["failed_payment_action"] | null;
               p_fee_type_ids?: string[] | null;
               p_first_payment_type?: APIEnums["first_payment_type"] | null;
-              p_image_url?: string | null;
+              p_images?: string[] | null;
               p_is_active?: boolean | null;
               p_merchant_id: string;
               p_metadata?: Json | null;
