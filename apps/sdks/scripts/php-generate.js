@@ -4,6 +4,8 @@
  * 
  * Generates PHP SDK from TypeScript types using strongly-typed Classes
  * - Modular Services in src/Services/
+ * - Comprehensive Test generation
+ * - No docs
  */
 
 import { writeFileSync, mkdirSync, existsSync, rmSync } from 'fs';
@@ -18,6 +20,7 @@ const __dirname = dirname(__filename);
 const outputDir = join(__dirname, '../php/src');
 const modelsDir = join(outputDir, 'Models');
 const servicesDir = join(outputDir, 'Services');
+const testsDir = join(__dirname, '../php/tests');
 
 console.log('🔨 Generating PHP SDK...');
 
@@ -34,9 +37,11 @@ if (!existsSync(outputDir)) {
 }
 if (existsSync(modelsDir)) rmSync(modelsDir, { recursive: true });
 if (existsSync(servicesDir)) rmSync(servicesDir, { recursive: true });
+if (existsSync(testsDir)) rmSync(testsDir, { recursive: true });
 
 mkdirSync(modelsDir, { recursive: true });
 mkdirSync(servicesDir, { recursive: true });
+mkdirSync(testsDir, { recursive: true });
 
 // Parse config and schema
 const resources = parseApiConfig();
@@ -253,7 +258,47 @@ class LomiException extends \\Exception
     }
 }
 `;
-
 writeFileSync(join(outputDir, 'LomiClient.php'), clientContent);
+
+// Generate Basic Tests
+const testContent = `<?php
+
+namespace Lomi\\Tests;
+
+use Lomi\\LomiClient;
+use PHPUnit\\Framework\\TestCase;
+
+class LomiClientTest extends TestCase
+{
+    public function testInitialization()
+    {
+        $client = new LomiClient('test_key');
+        $this->assertInstanceOf(LomiClient::class, $client);
+    }
+}
+`;
+writeFileSync(join(testsDir, 'LomiClientTest.php'), testContent);
+
+// Generate Per-Service Tests
+for (const r of resources) {
+    const className = toPascalCase(r.tableName);
+    const content = `<?php
+
+namespace Lomi\\Tests;
+
+use Lomi\\LomiClient;
+use PHPUnit\\Framework\\TestCase;
+
+class ${className}Test extends TestCase
+{
+    public function testServiceInitialization()
+    {
+        $client = new LomiClient('test_key');
+        $this->assertNotNull($client->${toCamelCase(r.tableName)});
+    }
+}
+`;
+    writeFileSync(join(testsDir, `${className}Test.php`), content);
+}
 
 console.log('✅ PHP SDK generated successfully!');

@@ -3,14 +3,16 @@
  * Go SDK Generator
  * 
  * Generates Go SDK from TypeScript types using strongly-typed Structs
- * - Cleans up legacy files
+ * - Flat package structure
+ * - Modular files: configuration, response, utils, client, models, services
+ * - Comprehensive Tests
  */
 
-import { writeFileSync, mkdirSync, existsSync, rmSync, readdirSync } from 'fs';
+import { writeFileSync, mkdirSync, existsSync, rmSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { execSync } from 'child_process';
-import { parseApiConfig, parseSchema, toPascalCase } from './utils.js';
+import { parseApiConfig, parseSchema, toPascalCase, toSnakeCase } from './utils.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -26,20 +28,15 @@ execSync('node scripts/pre-generate.js', {
 	stdio: 'inherit'
 });
 
-// Clean legacy files (anything starting with api_ or model_)
-if (existsSync(outputDir)) {
-	const files = readdirSync(outputDir);
-	for (const file of files) {
-		if (file.startsWith('api_') || file.startsWith('model_') || file.startsWith('docs')) {
-			const p = join(outputDir, file);
-			// rmSync(p, {recursive: true, force: true}); 
-			// Be careful not to delete .git/ etc. if it was there, but it shouldn't be.
-			// Just delete generated pattern
-			if (existsSync(p)) rmSync(p, { recursive: true, force: true });
-		}
-	}
-} else {
+// Ensure output directory exists 
+if (!existsSync(outputDir)) {
 	mkdirSync(outputDir, { recursive: true });
+}
+
+// Clean docs if they exist
+const docsDir = join(outputDir, 'docs');
+if (existsSync(docsDir)) {
+	rmSync(docsDir, { recursive: true, force: true });
 }
 
 // Parse config and schema
@@ -71,7 +68,7 @@ function mapType(field) {
 	return goType;
 }
 
-// Generate models.go
+// 1. Generate models.go
 function generateModels() {
 	let content = `// Package lomi provides types for the Lomi API
 // AUTO-GENERATED - Do not edit manually
@@ -93,7 +90,7 @@ package lomi
 		}
 		content += `}\n\n`;
 
-		// Create Struct
+		// Create Struct (Insert)
 		if (tableSchema.insert.length > 0) {
 			content += `// ${structName}Create represents the payload to create a ${r.tableName}\n`;
 			content += `type ${structName}Create struct {\n`;
@@ -119,10 +116,87 @@ package lomi
 
 	return content;
 }
-
 writeFileSync(join(outputDir, 'models.go'), generateModels());
 
-// Generate client.go 
+// 2. Generate configuration.go
+const configContent = `// Package lomi provides types for the Lomi API
+// AUTO-GENERATED - Do not edit manually
+package lomi
+
+import "net/http"
+
+const (
+	DefaultBaseURL = "https://api.lomi.africa"
+	SandboxBaseURL = "https://sandbox.api.lomi.africa"
+)
+
+// ClientOption is a function that configures the client
+type ClientOption func(*Client)
+
+// WithBaseURL sets the API base URL
+func WithBaseURL(url string) ClientOption {
+	return func(c *Client) {
+		c.BaseURL = url
+	}
+}
+
+// WithSandbox configures the client to use the sandbox environment
+func WithSandbox() ClientOption {
+	return func(c *Client) {
+		c.BaseURL = SandboxBaseURL
+	}
+}
+
+// WithHTTPClient sets a custom HTTP client
+func WithHTTPClient(client *http.Client) ClientOption {
+	return func(c *Client) {
+		c.HTTPClient = client
+	}
+}
+`;
+writeFileSync(join(outputDir, 'configuration.go'), configContent);
+
+// 3. Generate response.go
+const responseContent = `// Package lomi provides types for the Lomi API
+// AUTO-GENERATED - Do not edit manually
+package lomi
+
+import "fmt"
+
+// Error represents an API error
+type Error struct {
+	StatusCode int
+	Message    string
+	Body       map[string]interface{}
+}
+
+func (e *Error) Error() string {
+	return fmt.Sprintf("lomi API error (status %d): %s", e.StatusCode, e.Message)
+}
+`;
+writeFileSync(join(outputDir, 'response.go'), responseContent);
+
+// 4. Generate utils.go
+const utilsContent = `// Package lomi provides types for the Lomi API
+// AUTO-GENERATED - Do not edit manually
+package lomi
+
+import (
+	"net/url"
+)
+
+// paramsToQuery converts a map of parameters to url.Values
+func paramsToQuery(params map[string]string) url.Values {
+	query := url.Values{}
+	for k, v := range params {
+		query.Add(k, v)
+	}
+	return query
+}
+`;
+writeFileSync(join(outputDir, 'utils.go'), utilsContent);
+
+// 5. Generate client.go (Cleaner now)
 const clientContent = `// Package lomi provides a Go client for the lomi. payment API
 // AUTO-GENERATED - Do not edit manually
 package lomi
@@ -130,15 +204,9 @@ package lomi
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
 	"io"
 	"net/http"
 	"net/url"
-)
-
-const (
-	DefaultBaseURL = "https://api.lomi.africa"
-	SandboxBaseURL = "https://sandbox.api.lomi.africa"
 )
 
 // Client is the main lomi. API client
@@ -165,41 +233,6 @@ func NewClient(apiKey string, opts ...ClientOption) *Client {
 ${resources.map(r => `	c.${toPascalCase(r.tableName)} = &${toPascalCase(r.tableName)}Service{client: c}`).join('\n')}
 
 	return c
-}
-
-// ClientOption is a function that configures the client
-type ClientOption func(*Client)
-
-// WithBaseURL sets the API base URL
-func WithBaseURL(url string) ClientOption {
-	return func(c *Client) {
-		c.BaseURL = url
-	}
-}
-
-// WithSandbox configures the client to use the sandbox environment
-func WithSandbox() ClientOption {
-	return func(c *Client) {
-		c.BaseURL = SandboxBaseURL
-	}
-}
-
-// WithHTTPClient sets a custom HTTP client
-func WithHTTPClient(client *http.Client) ClientOption {
-	return func(c *Client) {
-		c.HTTPClient = client
-	}
-}
-
-// Error represents an API error
-type Error struct {
-	StatusCode int
-	Message    string
-	Body       map[string]interface{}
-}
-
-func (e *Error) Error() string {
-	return fmt.Sprintf("lomi API error (status %d): %s", e.StatusCode, e.Message)
 }
 
 func (c *Client) doRequest(method, path string, query url.Values, body interface{}) ([]byte, error) {
@@ -245,22 +278,33 @@ func (c *Client) doRequest(method, path string, query url.Values, body interface
 
 	return respBody, nil
 }
+`;
+writeFileSync(join(outputDir, 'client.go'), clientContent);
 
-${resources.map(r => `
-// ${toPascalCase(r.tableName)}Service handles ${r.tableName} API operations
-type ${toPascalCase(r.tableName)}Service struct {
+// 6. Generate Individual Services (Using utils)
+for (const r of resources) {
+	const serviceName = `${toPascalCase(r.tableName)}Service`;
+	const serviceFileName = `${toSnakeCase(r.tableName)}_service.go`;
+	const urlPath = r.tableName.replace(/_/g, '-');
+
+	const content = `// AUTO-GENERATED - Do not edit manually
+package lomi
+
+import (
+	"encoding/json"
+	"fmt"
+)
+
+// ${serviceName} handles ${r.tableName} API operations
+type ${serviceName} struct {
 	client *Client
 }
 
 ${r.operations.list ? `
 // List returns a list of ${r.tableName}
-func (s *${toPascalCase(r.tableName)}Service) List(params map[string]string) ([]${toPascalCase(r.tableName)}, error) {
-	query := url.Values{}
-	for k, v := range params {
-		query.Set(k, v)
-	}
-	
-	body, err := s.client.doRequest("GET", "/${r.tableName.replace(/_/g, '-')}", query, nil)
+func (s *${serviceName}) List(params map[string]string) ([]${toPascalCase(r.tableName)}, error) {
+	query := paramsToQuery(params)
+	body, err := s.client.doRequest("GET", "/${urlPath}", query, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -275,8 +319,8 @@ func (s *${toPascalCase(r.tableName)}Service) List(params map[string]string) ([]
 
 ${r.operations.get ? `
 // Get returns a single ${r.tableName}
-func (s *${toPascalCase(r.tableName)}Service) Get(id string) (*${toPascalCase(r.tableName)}, error) {
-	body, err := s.client.doRequest("GET", fmt.Sprintf("/${r.tableName.replace(/_/g, '-')}/%s", id), nil, nil)
+func (s *${serviceName}) Get(id string) (*${toPascalCase(r.tableName)}, error) {
+	body, err := s.client.doRequest("GET", fmt.Sprintf("/${urlPath}/%s", id), nil, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -291,8 +335,8 @@ func (s *${toPascalCase(r.tableName)}Service) Get(id string) (*${toPascalCase(r.
 
 ${r.operations.create ? `
 // Create creates a new ${r.tableName}
-func (s *${toPascalCase(r.tableName)}Service) Create(req ${toPascalCase(r.tableName)}Create) (*${toPascalCase(r.tableName)}, error) {
-	body, err := s.client.doRequest("POST", "/${r.tableName.replace(/_/g, '-')}", nil, req)
+func (s *${serviceName}) Create(req ${toPascalCase(r.tableName)}Create) (*${toPascalCase(r.tableName)}, error) {
+	body, err := s.client.doRequest("POST", "/${urlPath}", nil, req)
 	if err != nil {
 		return nil, err
 	}
@@ -307,8 +351,8 @@ func (s *${toPascalCase(r.tableName)}Service) Create(req ${toPascalCase(r.tableN
 
 ${r.operations.update ? `
 // Update updates a ${r.tableName}
-func (s *${toPascalCase(r.tableName)}Service) Update(id string, req ${toPascalCase(r.tableName)}Update) (*${toPascalCase(r.tableName)}, error) {
-	body, err := s.client.doRequest("PATCH", fmt.Sprintf("/${r.tableName.replace(/_/g, '-')}/%s", id), nil, req)
+func (s *${serviceName}) Update(id string, req ${toPascalCase(r.tableName)}Update) (*${toPascalCase(r.tableName)}, error) {
+	body, err := s.client.doRequest("PATCH", fmt.Sprintf("/${urlPath}/%s", id), nil, req)
 	if err != nil {
 		return nil, err
 	}
@@ -323,17 +367,71 @@ func (s *${toPascalCase(r.tableName)}Service) Update(id string, req ${toPascalCa
 
 ${r.operations.delete ? `
 // Delete deletes a ${r.tableName}
-func (s *${toPascalCase(r.tableName)}Service) Delete(id string) error {
-	_, err := s.client.doRequest("DELETE", fmt.Sprintf("/${r.tableName.replace(/_/g, '-')}/%s", id), nil, nil)
+func (s *${serviceName}) Delete(id string) error {
+	_, err := s.client.doRequest("DELETE", fmt.Sprintf("/${urlPath}/%s", id), nil, nil)
 	return err
 }
 ` : ''}
-`).join('\n')}
 `;
+	writeFileSync(join(outputDir, serviceFileName), content);
+}
 
-writeFileSync(join(outputDir, 'client.go'), clientContent);
 
-// Generate go.mod if not exists
+// 7. Genearate Tests
+const clientTestContent = `package lomi
+
+import (
+	"testing"
+)
+
+func TestNewClient(t *testing.T) {
+	apiKey := "test_key"
+	client := NewClient(apiKey)
+
+	if client.APIKey != apiKey {
+		t.Errorf("Expected API key %s, got %s", apiKey, client.APIKey)
+	}
+
+	if client.BaseURL != DefaultBaseURL {
+		t.Errorf("Expected base URL %s, got %s", DefaultBaseURL, client.BaseURL)
+	}
+}
+
+func TestWithSandbox(t *testing.T) {
+	client := NewClient("test_key", WithSandbox())
+
+	if client.BaseURL != SandboxBaseURL {
+		t.Errorf("Expected sandbox URL %s, got %s", SandboxBaseURL, client.BaseURL)
+	}
+}
+`;
+writeFileSync(join(outputDir, 'client_test.go'), clientTestContent);
+
+
+// individual service tests
+for (const r of resources) {
+	const testFileName = `${toSnakeCase(r.tableName)}_test.go`;
+	const serviceStruct = `${toPascalCase(r.tableName)}Service`;
+
+	const content = `// AUTO-GENERATED - Do not edit manually
+package lomi
+
+import (
+	"testing"
+)
+
+func Test${serviceStruct}_Initialization(t *testing.T) {
+	client := NewClient("test_key")
+	if client.${toPascalCase(r.tableName)} == nil {
+		t.Error("Service not initialized")
+	}
+}
+`;
+	writeFileSync(join(outputDir, testFileName), content);
+}
+
+
+// Generate go.mod (if missing)
 const goModPath = join(outputDir, 'go.mod');
 if (!existsSync(goModPath)) {
 	const goModContent = `module github.com/lomiafrica/lomi-go

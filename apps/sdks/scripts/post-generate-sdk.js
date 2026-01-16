@@ -4,7 +4,7 @@
  * This reads the generated services and creates a clean SDK interface
  */
 
-import { readFileSync, writeFileSync, readdirSync, existsSync } from 'fs';
+import { writeFileSync, readdirSync, existsSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 

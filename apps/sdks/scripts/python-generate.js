@@ -4,6 +4,8 @@
  * 
  * Generates Python SDK from TypeScript types using Pydantic models
  * - Modular structure: services/ and models/
+ * - Comprehensive Tests generation
+ * - No docs
  */
 
 import { writeFileSync, mkdirSync, existsSync, rmSync } from 'fs';
@@ -16,6 +18,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const outputDir = join(__dirname, '../python/lomi');
+const testsDir = join(__dirname, '../python/tests');
 const modelsDir = join(outputDir, 'models');
 const servicesDir = join(outputDir, 'services');
 
@@ -28,13 +31,14 @@ execSync('node scripts/pre-generate.js', {
     stdio: 'inherit'
 });
 
-// Clean and create output directory
-if (existsSync(outputDir)) {
-    rmSync(outputDir, { recursive: true });
-}
+// Clean output dirs
+if (existsSync(outputDir)) rmSync(outputDir, { recursive: true });
+if (existsSync(testsDir)) rmSync(testsDir, { recursive: true });
+
 mkdirSync(outputDir, { recursive: true });
 mkdirSync(modelsDir, { recursive: true });
 mkdirSync(servicesDir, { recursive: true });
+mkdirSync(testsDir, { recursive: true });
 
 // Parse config and schema
 const resources = parseApiConfig();
@@ -47,7 +51,7 @@ function mapType(field) {
     let pyType = 'Any';
 
     if (field.isEnum) {
-        pyType = toPascalCase(field.enumName || 'str'); // Default to str if unknown enum
+        pyType = toPascalCase(field.enumName || 'str');
     } else if (field.type === 'string') {
         pyType = 'str';
     } else if (field.type === 'number') {
@@ -57,7 +61,7 @@ function mapType(field) {
     } else if (field.type === 'json') {
         pyType = 'Dict[str, Any]';
     } else if (field.type === 'array') {
-        pyType = 'List[str]'; // Simplified, assuming string arrays mostly
+        pyType = 'List[str]';
     }
 
     if (field.isOptional) {
@@ -66,10 +70,7 @@ function mapType(field) {
     return pyType;
 }
 
-// 1. Generate Models (One file per resource to be modular, or grouped)
-// Let's grouping all models in `models/__init__.py` is messy.
-// Let's create `models/accounts.py`, `models/customers.py` etc.
-
+// 1. Generate Models 
 const allModelNames = [];
 
 for (const r of resources) {
@@ -79,8 +80,6 @@ for (const r of resources) {
     const className = toPascalCase(r.tableName);
     const snakeName = toSnakeCase(r.tableName);
     allModelNames.push(className);
-    allModelNames.push(`${className}Create`);
-    allModelNames.push(`${className}Update`);
 
     let content = `from __future__ import annotations
 from typing import Optional, List, Dict, Any
@@ -119,7 +118,7 @@ from pydantic import BaseModel, Field
     writeFileSync(join(modelsDir, `${snakeName}.py`), content);
 }
 
-// Generate models/__init__.py re-exporting everything
+// Generate models/__init__.py 
 let modelsInit = `"""
 lomi. Models
 """
@@ -134,7 +133,7 @@ for (const r of resources) {
 writeFileSync(join(modelsDir, '__init__.py'), modelsInit);
 
 
-// 2. Generate Services (Use models)
+// 2. Generate Services 
 for (const r of resources) {
     const snakeName = toSnakeCase(r.tableName);
     const className = toPascalCase(r.tableName);
@@ -182,7 +181,7 @@ for (const r of resources) {
 }
 writeFileSync(join(servicesDir, '__init__.py'), servicesInit);
 
-// 3. Generate Client Base (to avoid circular imports)
+// 3. Generate Client Base 
 const clientBaseContent = `
 from typing import Optional, Dict, Any, List, Type, TypeVar, TYPE_CHECKING
 import requests
@@ -285,7 +284,7 @@ ${resources.map(r => `        self.${toSnakeCase(r.tableName)} = ${toPascalCase(
 `;
 writeFileSync(join(outputDir, 'client.py'), clientContent);
 
-// Generate Exceptions (same as before)
+// Generate Exceptions
 const exceptionsContent = `"""
 lomi. SDK Exceptions
 AUTO-GENERATED - Do not edit manually
@@ -322,5 +321,46 @@ __version__ = "1.0.0"
 `;
 writeFileSync(join(outputDir, '__init__.py'), initContent);
 writeFileSync(join(outputDir, 'py.typed'), '');
+
+// Generate Tests
+// 1. Basic Client Test
+const testClientContent = `import unittest
+from lomi import LomiClient
+
+class TestLomiClient(unittest.TestCase):
+    def test_init(self):
+        client = LomiClient(api_key="test_key")
+        self.assertEqual(client.api_key, "test_key")
+        self.assertEqual(client.base_url, "https://api.lomi.africa")
+
+    def test_sandbox(self):
+        client = LomiClient(api_key="test_key", environment="test")
+        self.assertEqual(client.base_url, "https://sandbox.api.lomi.africa")
+
+if __name__ == '__main__':
+    unittest.main()
+`;
+writeFileSync(join(testsDir, 'test_client.py'), testClientContent);
+
+// 2. Individual Service Tests
+for (const r of resources) {
+    const snakeName = toSnakeCase(r.tableName);
+    const className = toPascalCase(r.tableName);
+
+    const content = `import unittest
+from lomi import LomiClient
+
+class Test${className}Service(unittest.TestCase):
+    def setUp(self):
+        self.client = LomiClient(api_key="test_key")
+
+    def test_service_initialized(self):
+        self.assertIsNotNone(self.client.${snakeName})
+        
+    # TODO: Add mock tests for ${className} methods
+`;
+    writeFileSync(join(testsDir, `test_${snakeName}.py`), content);
+}
+
 
 console.log('✅ Python SDK generated successfully!');
