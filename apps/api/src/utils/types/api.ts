@@ -2289,29 +2289,32 @@ export type Database = {
           updated_at: string;
         }[];
       };
-      create_product:
-        | {
-            Args: {
-              p_charge_day?: number | null;
-              p_description: string;
-              p_display_on_storefront?: boolean | null;
-              p_environment?: string | null;
-              p_failed_payment_action?: APIEnums["failed_payment_action"] | null;
-              p_fee_type_ids?: string[] | null;
-              p_first_payment_type?: APIEnums["first_payment_type"] | null;
-              p_image_url?: string | null;
-              p_is_active?: boolean | null;
-              p_merchant_id: string;
-              p_metadata?: Json | null;
-              p_name: string;
-              p_organization_id: string;
-              p_prices?: Json | null;
-              p_product_type?: APIEnums["product_type"] | null;
-              p_trial_enabled?: boolean | null;
-              p_trial_period_days?: number | null;
-            };
-            Returns: string;
-          }
+      create_product: {
+        Args: {
+          p_charge_day?: number | null;
+          p_continue_selling_when_out_of_stock?: boolean | null;
+          p_description: string;
+          p_display_on_storefront?: boolean | null;
+          p_environment?: string | null;
+          p_failed_payment_action?: APIEnums["failed_payment_action"] | null;
+          p_fee_type_ids?: string[] | null;
+          p_first_payment_type?: APIEnums["first_payment_type"] | null;
+          p_images?: string[] | null;
+          p_inventory_quantity?: number | null;
+          p_is_active?: boolean | null;
+          p_merchant_id: string;
+          p_metadata?: Json | null;
+          p_name: string;
+          p_organization_id: string;
+          p_prices?: Json | null;
+          p_product_type?: APIEnums["product_type"] | null;
+          p_sku?: string | null;
+          p_track_inventory?: boolean | null;
+          p_trial_enabled?: boolean | null;
+          p_trial_period_days?: number | null;
+        };
+        Returns: string;
+      };
       create_price: {
         Args: {
           p_amount: number;
