@@ -2,18 +2,17 @@
 /**
  * Next.js SDK Generator
  * 
- * Generates Next.js SDK with React hooks and server components
+ * Generates Next.js SDK wrapper around @lomi./sdk
  */
 
 import { execSync } from 'child_process';
-import { writeFileSync, mkdirSync, existsSync, copyFileSync, readFileSync, readdirSync } from 'fs';
+import { writeFileSync, mkdirSync, existsSync, rmSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const tsDir = join(__dirname, '../ts');
 const nextjsDir = join(__dirname, '../nextjs');
 const nextjsSrcDir = join(nextjsDir, 'src');
 
@@ -26,27 +25,12 @@ execSync('node scripts/typescript-generate.js', {
     stdio: 'inherit'
 });
 
-// Step 2: Copy TypeScript SDK as base
-console.log('📋 Copying TypeScript SDK as base...');
-if (!existsSync(nextjsSrcDir)) {
-    mkdirSync(nextjsSrcDir, { recursive: true });
+// Step 2: Clean and prepare src directory
+console.log('🧹 Cleaning Next.js SDK source...');
+if (existsSync(nextjsSrcDir)) {
+    rmSync(nextjsSrcDir, { recursive: true });
 }
-
-// Copy generated files
-const generatedSrc = join(tsDir, 'src/generated');
-const generatedDest = join(nextjsSrcDir, 'generated');
-if (existsSync(generatedSrc)) {
-    execSync(`cp -r ${generatedSrc} ${nextjsSrcDir}/`, { stdio: 'inherit' });
-}
-
-// Copy core SDK files
-const coreFiles = ['sdk.ts', 'config.ts', 'errors.ts', 'error-handler.ts', 'index.ts'];
-for (const file of coreFiles) {
-    const srcFile = join(tsDir, 'src', file);
-    if (existsSync(srcFile)) {
-        copyFileSync(srcFile, join(nextjsSrcDir, file));
-    }
-}
+mkdirSync(nextjsSrcDir, { recursive: true });
 
 // Step 3: Generate Next.js specific hooks
 console.log('📋 Generating Next.js hooks...');
@@ -58,13 +42,16 @@ const hooksContent = `/**
 'use client';
 
 import { useState, useCallback, useEffect } from 'react';
-import { LomiSDK } from './sdk.js';
-import type { LomiConfig } from './config.js';
+import { LomiSDK, type LomiConfig } from '@lomi./sdk';
 
+// Singleton instance for client-side usage
 let sdkInstance: LomiSDK | null = null;
 
 /**
  * Initialize or get the SDK instance
+ * 
+ * Usage:
+ * const sdk = useLomiSDK({ apiKey: '...' });
  */
 export function useLomiSDK(config?: LomiConfig): LomiSDK | null {
     const [sdk, setSDK] = useState<LomiSDK | null>(sdkInstance);
@@ -107,27 +94,19 @@ export function useLomiRequest<T>(
 
     return { data, loading, error, execute };
 }
-
-/**
- * Provider component for SDK context
- */
-export { LomiSDK } from './sdk.js';
-export type { LomiConfig } from './config.js';
 `;
 
 writeFileSync(join(nextjsSrcDir, 'hooks.ts'), hooksContent);
 
-// Step 4: Update index to include hooks
+// Step 4: Generate index.ts
+// Re-export everything from @lomi./sdk + hooks
 const indexContent = `/**
  * Next.js SDK Entry Point
  * AUTO-GENERATED - Do not edit manually
  */
 
 // Re-export everything from base SDK
-export * from './sdk.js';
-export * from './config.js';
-export * from './errors.js';
-export * from './generated/index.js';
+export * from '@lomi./sdk';
 
 // Export Next.js specific hooks
 export * from './hooks.js';
@@ -135,13 +114,13 @@ export * from './hooks.js';
 
 writeFileSync(join(nextjsSrcDir, 'index.ts'), indexContent);
 
-// Step 5: Build if possible
+// Step 5: Build
 console.log('📋 Building Next.js SDK...');
 try {
     execSync('npm install', { cwd: nextjsDir, stdio: 'inherit' });
     execSync('npm run build', { cwd: nextjsDir, stdio: 'inherit' });
 } catch (error) {
-    console.warn('⚠️ Build step skipped - package.json may need updating');
+    console.warn('⚠️ Build step warning (check if package.json dependencies are correct)');
 }
 
 console.log('✅ Next.js SDK generated successfully!');

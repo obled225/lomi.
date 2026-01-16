@@ -6,13 +6,16 @@
 'use client';
 
 import { useState, useCallback, useEffect } from 'react';
-import { LomiSDK } from './sdk.js';
-import type { LomiConfig } from './config.js';
+import { LomiSDK, type LomiConfig } from '@lomi./sdk';
 
+// Singleton instance for client-side usage
 let sdkInstance: LomiSDK | null = null;
 
 /**
  * Initialize or get the SDK instance
+ * 
+ * Usage:
+ * const sdk = useLomiSDK({ apiKey: '...' });
  */
 export function useLomiSDK(config?: LomiConfig): LomiSDK | null {
     const [sdk, setSDK] = useState<LomiSDK | null>(sdkInstance);
@@ -55,9 +58,3 @@ export function useLomiRequest<T>(
 
     return { data, loading, error, execute };
 }
-
-/**
- * Provider component for SDK context
- */
-export { LomiSDK } from './sdk.js';
-export type { LomiConfig } from './config.js';

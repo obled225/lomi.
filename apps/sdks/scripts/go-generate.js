@@ -2,18 +2,19 @@
 /**
  * Go SDK Generator
  * 
- * Generates Go SDK from TypeScript types
+ * Generates Go SDK from TypeScript types using strongly-typed Structs
+ * - Cleans up legacy files
  */
 
-import { readFileSync, writeFileSync, mkdirSync, existsSync, rmSync } from 'fs';
+import { writeFileSync, mkdirSync, existsSync, rmSync, readdirSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { execSync } from 'child_process';
+import { parseApiConfig, parseSchema, toPascalCase } from './utils.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const apiConfigPath = join(__dirname, '../api-config.ts');
 const outputDir = join(__dirname, '../go');
 
 console.log('🔨 Generating Go SDK...');
@@ -25,45 +26,103 @@ execSync('node scripts/pre-generate.js', {
 	stdio: 'inherit'
 });
 
-function toPascalCase(str) {
-	return str.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join('');
-}
-
-function toSnakeCase(str) {
-	return str.replace(/([A-Z])/g, '_$1').toLowerCase().replace(/^_/, '');
-}
-
-/**
- * Parse API config for resources
- */
-function parseApiConfig(content) {
-	const resourcesMatch = content.match(/export const API_RESOURCES[^=]*=\s*\[([\s\S]*?)\];/);
-	if (!resourcesMatch) return [];
-
-	const resources = [];
-	const resourceBlocks = resourcesMatch[1].split(/\},\s*\{/);
-
-	for (const block of resourceBlocks) {
-		const tableNameMatch = block.match(/tableName:\s*['"](\w+)['"]/);
-		const enabledMatch = block.match(/enabled:\s*(true|false)/);
-
-		if (tableNameMatch && enabledMatch && enabledMatch[1] === 'true') {
-			resources.push({
-				tableName: tableNameMatch[1],
-				structName: toPascalCase(tableNameMatch[1]),
-			});
+// Clean legacy files (anything starting with api_ or model_)
+if (existsSync(outputDir)) {
+	const files = readdirSync(outputDir);
+	for (const file of files) {
+		if (file.startsWith('api_') || file.startsWith('model_') || file.startsWith('docs')) {
+			const p = join(outputDir, file);
+			// rmSync(p, {recursive: true, force: true}); 
+			// Be careful not to delete .git/ etc. if it was there, but it shouldn't be.
+			// Just delete generated pattern
+			if (existsSync(p)) rmSync(p, { recursive: true, force: true });
 		}
 	}
-	return resources;
+} else {
+	mkdirSync(outputDir, { recursive: true });
 }
 
-// Read config
-const apiConfigContent = readFileSync(apiConfigPath, 'utf-8');
-const resources = parseApiConfig(apiConfigContent);
+// Parse config and schema
+const resources = parseApiConfig();
+const schema = parseSchema();
 
 console.log(`✅ Found ${resources.length} API resources`);
 
-// Generate client.go
+function mapType(field) {
+	let goType = 'interface{}';
+
+	if (field.isEnum) {
+		goType = 'string';
+	} else if (field.type === 'string') {
+		goType = 'string';
+	} else if (field.type === 'number') {
+		goType = 'float64';
+	} else if (field.type === 'boolean') {
+		goType = 'bool';
+	} else if (field.type === 'json') {
+		goType = 'map[string]interface{}';
+	} else if (field.type === 'array') {
+		goType = '[]string';
+	}
+
+	if (field.isOptional) {
+		return `*${goType}`;
+	}
+	return goType;
+}
+
+// Generate models.go
+function generateModels() {
+	let content = `// Package lomi provides types for the Lomi API
+// AUTO-GENERATED - Do not edit manually
+package lomi
+
+`;
+
+	for (const r of resources) {
+		const tableSchema = schema.tables[r.tableName];
+		if (!tableSchema) continue;
+
+		const structName = toPascalCase(r.tableName);
+
+		// Row Struct
+		content += `// ${structName} represents a ${r.tableName}\n`;
+		content += `type ${structName} struct {\n`;
+		for (const field of tableSchema.row) {
+			content += `	${toPascalCase(field.name)} ${mapType(field)} \`json:"${field.name}"\`\n`;
+		}
+		content += `}\n\n`;
+
+		// Create Struct
+		if (tableSchema.insert.length > 0) {
+			content += `// ${structName}Create represents the payload to create a ${r.tableName}\n`;
+			content += `type ${structName}Create struct {\n`;
+			for (const field of tableSchema.insert) {
+				const type = mapType(field);
+				const jsonTag = field.isOptional ? `\`json:"${field.name},omitempty"\`` : `\`json:"${field.name}"\``;
+				content += `	${toPascalCase(field.name)} ${type} ${jsonTag}\n`;
+			}
+			content += `}\n\n`;
+		}
+
+		// Update Struct
+		if (tableSchema.update.length > 0) {
+			content += `// ${structName}Update represents the payload to update a ${r.tableName}\n`;
+			content += `type ${structName}Update struct {\n`;
+			for (const field of tableSchema.update) {
+				const type = mapType({ ...field, isOptional: true });
+				content += `	${toPascalCase(field.name)} ${type} \`json:"${field.name},omitempty"\`\n`;
+			}
+			content += `}\n\n`;
+		}
+	}
+
+	return content;
+}
+
+writeFileSync(join(outputDir, 'models.go'), generateModels());
+
+// Generate client.go 
 const clientContent = `// Package lomi provides a Go client for the lomi. payment API
 // AUTO-GENERATED - Do not edit manually
 package lomi
@@ -87,7 +146,7 @@ type Client struct {
 	APIKey     string
 	BaseURL    string
 	HTTPClient *http.Client
-${resources.map(r => `	${r.structName} *${r.structName}Service`).join('\n')}
+${resources.map(r => `	${toPascalCase(r.tableName)} *${toPascalCase(r.tableName)}Service`).join('\n')}
 }
 
 // NewClient creates a new lomi. API client
@@ -103,7 +162,7 @@ func NewClient(apiKey string, opts ...ClientOption) *Client {
 	}
 
 	// Initialize services
-${resources.map(r => `	c.${r.structName} = &${r.structName}Service{client: c}`).join('\n')}
+${resources.map(r => `	c.${toPascalCase(r.tableName)} = &${toPascalCase(r.tableName)}Service{client: c}`).join('\n')}
 
 	return c
 }
@@ -188,13 +247,14 @@ func (c *Client) doRequest(method, path string, query url.Values, body interface
 }
 
 ${resources.map(r => `
-// ${r.structName}Service handles ${r.tableName} API operations
-type ${r.structName}Service struct {
+// ${toPascalCase(r.tableName)}Service handles ${r.tableName} API operations
+type ${toPascalCase(r.tableName)}Service struct {
 	client *Client
 }
 
+${r.operations.list ? `
 // List returns a list of ${r.tableName}
-func (s *${r.structName}Service) List(params map[string]string) ([]map[string]interface{}, error) {
+func (s *${toPascalCase(r.tableName)}Service) List(params map[string]string) ([]${toPascalCase(r.tableName)}, error) {
 	query := url.Values{}
 	for k, v := range params {
 		query.Set(k, v)
@@ -205,26 +265,69 @@ func (s *${r.structName}Service) List(params map[string]string) ([]map[string]in
 		return nil, err
 	}
 	
-	var result []map[string]interface{}
+	var result []${toPascalCase(r.tableName)}
 	if err := json.Unmarshal(body, &result); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
+` : ''}
 
-// Get returns a single ${r.tableName.slice(0, -1)} by ID
-func (s *${r.structName}Service) Get(id string) (map[string]interface{}, error) {
+${r.operations.get ? `
+// Get returns a single ${r.tableName}
+func (s *${toPascalCase(r.tableName)}Service) Get(id string) (*${toPascalCase(r.tableName)}, error) {
 	body, err := s.client.doRequest("GET", fmt.Sprintf("/${r.tableName.replace(/_/g, '-')}/%s", id), nil, nil)
 	if err != nil {
 		return nil, err
 	}
 	
-	var result map[string]interface{}
+	var result ${toPascalCase(r.tableName)}
 	if err := json.Unmarshal(body, &result); err != nil {
 		return nil, err
 	}
-	return result, nil
+	return &result, nil
 }
+` : ''}
+
+${r.operations.create ? `
+// Create creates a new ${r.tableName}
+func (s *${toPascalCase(r.tableName)}Service) Create(req ${toPascalCase(r.tableName)}Create) (*${toPascalCase(r.tableName)}, error) {
+	body, err := s.client.doRequest("POST", "/${r.tableName.replace(/_/g, '-')}", nil, req)
+	if err != nil {
+		return nil, err
+	}
+	
+	var result ${toPascalCase(r.tableName)}
+	if err := json.Unmarshal(body, &result); err != nil {
+		return nil, err
+	}
+	return &result, nil
+}
+` : ''}
+
+${r.operations.update ? `
+// Update updates a ${r.tableName}
+func (s *${toPascalCase(r.tableName)}Service) Update(id string, req ${toPascalCase(r.tableName)}Update) (*${toPascalCase(r.tableName)}, error) {
+	body, err := s.client.doRequest("PATCH", fmt.Sprintf("/${r.tableName.replace(/_/g, '-')}/%s", id), nil, req)
+	if err != nil {
+		return nil, err
+	}
+	
+	var result ${toPascalCase(r.tableName)}
+	if err := json.Unmarshal(body, &result); err != nil {
+		return nil, err
+	}
+	return &result, nil
+}
+` : ''}
+
+${r.operations.delete ? `
+// Delete deletes a ${r.tableName}
+func (s *${toPascalCase(r.tableName)}Service) Delete(id string) error {
+	_, err := s.client.doRequest("DELETE", fmt.Sprintf("/${r.tableName.replace(/_/g, '-')}/%s", id), nil, nil)
+	return err
+}
+` : ''}
 `).join('\n')}
 `;
 
@@ -241,4 +344,3 @@ go 1.21
 }
 
 console.log('✅ Go SDK generated successfully!');
-console.log(`   📁 Output: ${outputDir}`);
