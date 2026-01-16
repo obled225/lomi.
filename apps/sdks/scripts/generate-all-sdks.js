@@ -58,11 +58,7 @@ const SDKS = [
         dir: 'php',
         command: 'node scripts/php-generate.js',
     },
-    {
-        name: 'Next.js',
-        dir: 'nextjs',
-        command: 'node scripts/nextjs-generate.js',
-    },
+
 ];
 
 async function generateAll() {

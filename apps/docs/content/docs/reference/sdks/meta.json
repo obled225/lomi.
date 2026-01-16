@@ -1,6 +1,6 @@
 {
   "title": "SDKs",
-  "description": "Official lomi. SDKs for TypeScript, Python, Go, PHP, and Next.js",
+  "description": "Official lomi. SDKs for TypeScript, Python, Go, and PHP",
   "icon": "Code",
-  "pages": ["index", "typescript", "python", "go", "php", "nextjs"]
+  "pages": ["index", "typescript", "python", "go", "php"]
 }

@@ -7,7 +7,6 @@ We provide SDKs for multiple languages and frameworks to help you integrate with
 | Language/Framework | Package | Installation | Directory |
 |-------------------|---------|--------------|-----------|
 | **TypeScript** | `@lomi./sdk` | `npm install @lomi./sdk` | [`ts/`](./ts) |
-| **Next.js** | `@lomi./sdk-next` | `npm install @lomi./sdk-next` | [`nextjs/`](./nextjs) |
 | **Python** | `lomi-sdk` | `pip install lomi-sdk` | [`python/`](./python) |
 | **Go** | `github.com/lomiafrica/lomi-go-sdk` | `go get github.com/lomiafrica/lomi-go-sdk` | [`go/`](./go) |
 
@@ -53,20 +52,7 @@ const session = await lomi.checkoutSessions.create({...});
 const transactions = await lomi.transactions.list();
 ```
 
-### Next.js
 
-```typescript
-import { LomiSDK, useLomiRequest } from '@lomi./sdk-next';
-
-// Client-side with hooks
-const { data, loading, error, execute } = useLomiRequest(
-  () => lomi.customers.list()
-);
-
-// Server-side
-const lomi = new LomiSDK({ apiKey: process.env.LOMI_API_KEY! });
-const customers = await lomi.customers.list();
-``` 
 
 ### Python
 
