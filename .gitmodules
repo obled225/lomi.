@@ -10,3 +10,9 @@
 [submodule "apps/sdks/python"]
 	path = apps/sdks/python
 	url = https://github.com/lomiafrica/lomi-python-sdk.git
+[submodule "apps/storefront"]
+	path = apps/storefront
+	url = https://github.com/lomiafrica/storefront.git
+[submodule "apps/checkout"]
+	path = apps/checkout
+	url = https://github.com/lomiafrica/checkout.git
