@@ -1,0 +1,54 @@
+{
+  "$schema": "https://unpkg.com/knip@5/schema.json",
+  "workspaces": {
+    ".": {
+      "entry": [
+        "index.html",
+        "src/main.tsx",
+        "src/App.tsx"
+      ],
+      "project": ["src/**/*.{ts,tsx,js,jsx}"],
+      "paths": {
+        "@/*": ["src/*"],
+        "@/components/*": ["src/components/*"],
+        "@/lib/*": ["src/lib/*"],
+        "@/hooks/*": ["src/lib/hooks/*"],
+        "@/utils/*": ["src/utils/*"],
+        "@/types/*": ["src/lib/types/*"]
+      },
+      "ignore": [
+        "**/*.d.ts",
+        "**/*.config.*",
+        "**/node_modules/**",
+        "**/dist/**",
+        "**/build/**",
+        "**/.next/**",
+        "**/.nuxt/**",
+        "**/.vuepress/**",
+        "**/.cache/**",
+        "**/.temp/**",
+        "**/.tmp/**",
+        "**/coverage/**",
+        "**/*.test.{ts,tsx,js,jsx}",
+        "**/*.spec.{ts,tsx,js,jsx}",
+        "**/*.stories.{ts,tsx,js,jsx}",
+        "**/stories/**",
+        "**/__tests__/**",
+        "**/__mocks__/**",
+        "studio/**"
+      ],
+      "ignoreExportsUsedInFile": true,
+      "treatRulesAsErrors": false
+    }
+  },
+  "rules": {
+    "files": "error",
+    "exports": "warn",
+    "types": "warn",
+    "nsExports": "warn",
+    "nsTypes": "warn",
+    "enumMembers": "warn",
+    "classMembers": "warn",
+    "duplicates": "error"
+  }
+}
