@@ -37,7 +37,7 @@ export function Provider({ children }: { children: ReactNode }) {
       }}
       theme={{
         storageKey: 'lomi-theme',
-        defaultTheme: 'light',
+        defaultTheme: 'dark',
       }}
     >
       <TranslationProvider>
