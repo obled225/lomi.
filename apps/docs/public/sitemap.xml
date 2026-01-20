@@ -1,398 +1,398 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://lomi.africa/</loc>
+    <lastmod>2026-01-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
     <loc>https://lomi.africa/blog</loc>
-    <lastmod>2025-12-21</lastmod>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://lomi.africa/careers</loc>
-    <lastmod>2025-12-21</lastmod>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://lomi.africa/changelog</loc>
-    <lastmod>2025-12-21</lastmod>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://lomi.africa/faq</loc>
-    <lastmod>2025-12-21</lastmod>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://lomi.africa/pricing</loc>
-    <lastmod>2025-12-21</lastmod>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://lomi.africa/privacy</loc>
-    <lastmod>2025-12-21</lastmod>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://lomi.africa/terms</loc>
-    <lastmod>2025-12-21</lastmod>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://lomi.africa/docs/core/advanced-guides/ci-cd</loc>
-    <lastmod>2025-12-21</lastmod>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://lomi.africa/docs/core/advanced-guides/error-handling</loc>
-    <lastmod>2025-12-21</lastmod>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://lomi.africa/docs/core/advanced-guides/handling-webhooks</loc>
-    <lastmod>2025-12-21</lastmod>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://lomi.africa/docs/core/advanced-guides/idempotency-keys</loc>
-    <lastmod>2025-12-21</lastmod>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://lomi.africa/docs/core/advanced-guides/security-best-practices</loc>
-    <lastmod>2025-12-21</lastmod>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://lomi.africa/docs/core/advanced-guides/testing</loc>
-    <lastmod>2025-12-21</lastmod>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://lomi.africa/docs/core/contributing/best-practices</loc>
-    <lastmod>2025-12-21</lastmod>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://lomi.africa/docs/core/contributing/branching-strategy</loc>
-    <lastmod>2025-12-21</lastmod>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://lomi.africa/docs/core/contributing/code-of-conduct</loc>
-    <lastmod>2025-12-21</lastmod>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://lomi.africa/docs/core/contributing/code-reviews</loc>
-    <lastmod>2025-12-21</lastmod>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://lomi.africa/docs/core/contributing/overview</loc>
-    <lastmod>2025-12-21</lastmod>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://lomi.africa/docs/core/contributing/using-cli</loc>
-    <lastmod>2025-12-21</lastmod>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://lomi.africa/docs/core/contributing/versioning</loc>
-    <lastmod>2025-12-21</lastmod>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://lomi.africa/docs/core/freedom/codebase</loc>
-    <lastmod>2025-12-21</lastmod>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://lomi.africa/docs/core/freedom/open-source</loc>
-    <lastmod>2025-12-21</lastmod>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://lomi.africa/docs/core/fundamentals/api-keys</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://lomi.africa/docs/core/fundamentals/access-tokens</loc>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://lomi.africa/docs/core/fundamentals/create-account</loc>
-    <lastmod>2025-12-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://lomi.africa/docs/core/fundamentals/setup-payment-methods</loc>
-    <lastmod>2025-12-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://lomi.africa/docs/core/fundamentals/setup-webhooks</loc>
-    <lastmod>2025-12-21</lastmod>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://lomi.africa/docs/core/fundamentals/transactions</loc>
-    <lastmod>2025-12-21</lastmod>
+    <lastmod>2026-01-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://lomi.africa/docs/core/fundamentals/webhooks</loc>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://lomi.africa/docs/core/introduction/community</loc>
-    <lastmod>2025-12-21</lastmod>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://lomi.africa/docs/core/introduction/manifesto</loc>
-    <lastmod>2025-12-21</lastmod>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://lomi.africa/docs/core/introduction/what-is-lomi</loc>
-    <lastmod>2025-12-21</lastmod>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://lomi.africa/docs/core/lomi-cli/auth</loc>
-    <lastmod>2025-12-21</lastmod>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://lomi.africa/docs/core/lomi-cli/configuration</loc>
-    <lastmod>2025-12-21</lastmod>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://lomi.africa/docs/core/lomi-cli/init</loc>
-    <lastmod>2025-12-21</lastmod>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://lomi.africa/docs/core/lomi-cli/overview</loc>
-    <lastmod>2025-12-21</lastmod>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://lomi.africa/docs/core/merchant-of-record/acceptable-use</loc>
-    <lastmod>2025-12-21</lastmod>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://lomi.africa/docs/core/merchant-of-record/account-reviews</loc>
-    <lastmod>2025-12-21</lastmod>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://lomi.africa/docs/core/merchant-of-record/pricing</loc>
-    <lastmod>2025-12-21</lastmod>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://lomi.africa/docs/core/sdks/go</loc>
-    <lastmod>2025-12-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://lomi.africa/docs/core/sdks/nextjs</loc>
-    <lastmod>2025-12-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://lomi.africa/docs/core/sdks/php</loc>
-    <lastmod>2025-12-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://lomi.africa/docs/core/sdks/python</loc>
-    <lastmod>2025-12-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://lomi.africa/docs/core/sdks/typescript</loc>
-    <lastmod>2025-12-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://lomi.africa/docs/core/support/contact</loc>
-    <lastmod>2025-12-21</lastmod>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://lomi.africa/docs/reference/changelog/changelog</loc>
-    <lastmod>2025-12-21</lastmod>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://lomi.africa/docs/reference/payments/beneficiary-payouts</loc>
-    <lastmod>2025-12-21</lastmod>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://lomi.africa/docs/reference/payments/checkout-sessions</loc>
-    <lastmod>2025-12-21</lastmod>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://lomi.africa/docs/reference/payments/discount-coupons</loc>
-    <lastmod>2025-12-21</lastmod>
+    <lastmod>2026-01-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://lomi.africa/docs/reference/payments/lomi-payment-elements</loc>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://lomi.africa/docs/reference/payments/payment-links</loc>
-    <lastmod>2025-12-21</lastmod>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://lomi.africa/docs/reference/payments/payment-requests</loc>
-    <lastmod>2025-12-21</lastmod>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://lomi.africa/docs/reference/payments/payouts</loc>
-    <lastmod>2025-12-21</lastmod>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://lomi.africa/docs/reference/payments/products</loc>
-    <lastmod>2025-12-21</lastmod>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://lomi.africa/docs/reference/payments/refunds</loc>
-    <lastmod>2025-12-21</lastmod>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://lomi.africa/docs/reference/payments/subscriptions</loc>
-    <lastmod>2025-12-21</lastmod>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://lomi.africa/docs/reference/payments/transactions</loc>
-    <lastmod>2025-12-21</lastmod>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://lomi.africa/docs/reference/payments/webhooks</loc>
-    <lastmod>2025-12-21</lastmod>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://lomi.africa/docs/reference/platform/accounts</loc>
-    <lastmod>2025-12-21</lastmod>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://lomi.africa/docs/reference/platform/customer-subscriptions</loc>
-    <lastmod>2025-12-21</lastmod>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://lomi.africa/docs/reference/platform/customers</loc>
-    <lastmod>2025-12-21</lastmod>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://lomi.africa/docs/reference/platform/merchants</loc>
-    <lastmod>2025-12-21</lastmod>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://lomi.africa/docs/reference/platform/organizations</loc>
-    <lastmod>2025-12-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://lomi.africa/docs/reference/platform/providers</loc>
-    <lastmod>2025-12-21</lastmod>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://lomi.africa/docs/reference/platform/webhook-delivery-logs</loc>
-    <lastmod>2025-12-21</lastmod>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://lomi.africa/docs/reference/reference/data-models</loc>
-    <lastmod>2025-12-21</lastmod>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://lomi.africa/docs/reference/reference/errors</loc>
-    <lastmod>2025-12-21</lastmod>
+    <lastmod>2026-01-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://lomi.africa/docs/reference/sdks/go</loc>
+    <lastmod>2026-01-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://lomi.africa/docs/reference/sdks/nextjs</loc>
+    <lastmod>2026-01-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://lomi.africa/docs/reference/sdks/php</loc>
+    <lastmod>2026-01-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://lomi.africa/docs/reference/sdks/python</loc>
+    <lastmod>2026-01-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://lomi.africa/docs/reference/sdks/typescript</loc>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://lomi.africa/docs/reference/setup/authentication</loc>
-    <lastmod>2025-12-21</lastmod>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://lomi.africa/docs/reference/setup/overview</loc>
-    <lastmod>2025-12-21</lastmod>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>

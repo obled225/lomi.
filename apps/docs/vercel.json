@@ -82,6 +82,28 @@
           "value": "www.lomi.africa"
         }
       ]
+    },
+    {
+      "source": "/(.*)",
+      "destination": "https://lomi.africa/$1",
+      "permanent": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "developers.lomi.africa"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "destination": "https://lomi.africa/$1",
+      "permanent": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "docs.lomi.africa"
+        }
+      ]
     }
   ],
   "installCommand": "pnpm install",

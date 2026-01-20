@@ -13,7 +13,7 @@
     "start": "next start",
     "mdx": "pnpm exec fumadocs-mdx",
     "format": "prettier --write .",
-    "map": "tsx --env-file=.env lib/scripts/generate_sitemap.ts"
+    "map": "tsx --env-file=.env lib/scripts/core/generate_sitemap.ts"
   },
   "dependencies": {
     "@ai-sdk/openai-compatible": "^1.0.30",

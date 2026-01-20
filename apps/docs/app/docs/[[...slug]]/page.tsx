@@ -179,6 +179,9 @@ export async function generateMetadata({
   return createMetadata({
     title: page.data.title,
     description,
+    alternates: {
+      canonical: `https://lomi.africa/docs/${page.slugs.join('/')}`,
+    },
     openGraph: {
       url: `/docs/${page.slugs.join('/')}`,
       images: [image],
