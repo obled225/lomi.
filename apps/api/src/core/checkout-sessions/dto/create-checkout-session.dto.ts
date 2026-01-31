@@ -1,5 +1,32 @@
 import { ApiProperty } from '@nestjs/swagger';
 
+/**
+ * Line item for multi-product checkout
+ * Each line item represents one product with its quantity
+ */
+export class LineItemDto {
+  @ApiProperty({
+    example: '123e4567-e89b-12d3-a456-426614174000',
+    description: 'Price ID for the product. The price contains product reference and amount.',
+  })
+  price_id: string;
+
+  @ApiProperty({
+    example: 2,
+    description: 'Quantity of this product to purchase',
+    default: 1,
+    required: false,
+  })
+  quantity?: number;
+
+  @ApiProperty({
+    example: { variant: 'large', color: 'blue' },
+    description: 'Optional metadata for this line item',
+    required: false,
+  })
+  metadata?: Record<string, any>;
+}
+
 export class CreateCheckoutSessionDto {
   @ApiProperty({
     example: 10000.0,
@@ -138,4 +165,35 @@ export class CreateCheckoutSessionDto {
     required: false,
   })
   metadata?: Record<string, any>;
+
+  /**
+   * Line items for multi-product checkout.
+   * When provided, product_id, price_id, and quantity are ignored.
+   * Each line item must have a price_id (which contains product reference and amount).
+   */
+  @ApiProperty({
+    type: [LineItemDto],
+    description: `Array of line items for multi-product checkout.
+When line_items is provided:
+- product_id, price_id, and quantity at the root level are ignored
+- amount is auto-calculated from line items
+- Each line item must have a price_id belonging to the organization
+
+Example:
+{
+  "currency_code": "XOF",
+  "line_items": [
+    { "price_id": "price_abc123", "quantity": 2 },
+    { "price_id": "price_xyz789", "quantity": 1 }
+  ],
+  "success_url": "https://example.com/success"
+}`,
+    required: false,
+    example: [
+      { price_id: '123e4567-e89b-12d3-a456-426614174000', quantity: 2 },
+      { price_id: '987e6543-e89b-12d3-a456-426614174000', quantity: 1 },
+    ],
+  })
+  line_items?: LineItemDto[];
 }
+

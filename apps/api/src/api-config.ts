@@ -299,6 +299,7 @@ export const EXPOSED_FUNCTIONS = [
   'check_merchant_available_balance',
   'verify_api_key',
   'create_checkout_session',
+  'create_checkout_session_with_line_items',
   'list_checkout_sessions',
   'get_webhook',
   'get_webhook_by_id',

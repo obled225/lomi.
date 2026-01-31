@@ -6,7 +6,7 @@
  * Generated from database.types.ts - only includes:
  * - Exposed enums (36 enums)
  * - Exposed tables (15 tables)
- * - Exposed functions (52 functions)
+ * - Exposed functions (53 functions)
  * 
  * DO NOT EDIT MANUALLY - This file is auto-generated
  * Run: npm run generate:api-types
@@ -127,6 +127,7 @@ export type Database = {
           updated_at: string;
           verification_status: APIEnums["organization_verification_status"];
           website_url: string | null;
+          whatsapp_number: string | null;
         };
         Insert: {
           arr?: number;
@@ -156,6 +157,7 @@ export type Database = {
           updated_at?: string;
           verification_status?: APIEnums["organization_verification_status"];
           website_url?: string | null;
+          whatsapp_number?: string | null;
         };
         Update: {
           arr?: number;
@@ -185,6 +187,7 @@ export type Database = {
           updated_at?: string;
           verification_status?: APIEnums["organization_verification_status"];
           website_url?: string | null;
+          whatsapp_number?: string | null;
         };
         Relationships: [];
       }
@@ -780,6 +783,7 @@ export type Database = {
           first_payment_type:
             | APIEnums["first_payment_type"]
             | null;
+          image_type: string | null;
           images: string[] | null;
           inventory_quantity: number | null;
           is_active: boolean;
@@ -812,6 +816,7 @@ export type Database = {
           first_payment_type?:
             | APIEnums["first_payment_type"]
             | null;
+          image_type?: string | null;
           images?: string[] | null;
           inventory_quantity?: number | null;
           is_active?: boolean;
@@ -844,6 +849,7 @@ export type Database = {
           first_payment_type?:
             | APIEnums["first_payment_type"]
             | null;
+          image_type?: string | null;
           images?: string[] | null;
           inventory_quantity?: number | null;
           is_active?: boolean;
@@ -1867,6 +1873,28 @@ export type Database = {
           p_quantity?: number | null;
           p_require_billing_address?: boolean | null;
           p_subscription_id?: string | null;
+          p_success_url?: string | null;
+          p_title?: string | null;
+        };
+        Returns: Json;
+      };
+      create_checkout_session_with_line_items: {
+        Args: {
+          p_allow_coupon_code?: boolean | null;
+          p_cancel_url?: string | null;
+          p_created_by?: string | null;
+          p_currency_code: APIEnums["currency_code"];
+          p_customer_email?: string | null;
+          p_customer_id?: string | null;
+          p_customer_name?: string | null;
+          p_customer_phone?: string | null;
+          p_description?: string | null;
+          p_environment?: string | null;
+          p_expiration_minutes?: number | null;
+          p_line_items: Json;
+          p_metadata?: Json | null;
+          p_organization_id: string;
+          p_require_billing_address?: boolean | null;
           p_success_url?: string | null;
           p_title?: string | null;
         };
