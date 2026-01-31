@@ -1768,18 +1768,18 @@ export type Database = {
         Args: {
           p_allow_coupon_code?: boolean | null;
           p_cancel_url?: string | null;
-          p_created_by?: string | null;
+          p_created_by: string;
           p_currency_code: APIEnums['currency_code'];
           p_customer_email?: string | null;
           p_customer_id?: string | null;
           p_customer_name?: string | null;
           p_customer_phone?: string | null;
           p_description?: string | null;
-          p_environment?: string | null;
           p_expiration_minutes?: number | null;
           p_line_items: Json;
           p_metadata?: Json | null;
           p_organization_id: string;
+          p_payment_link_id?: string | null;
           p_require_billing_address?: boolean | null;
           p_success_url?: string | null;
           p_title?: string | null;
@@ -2063,6 +2063,7 @@ export type Database = {
           p_description?: string | null;
           p_environment?: string | null;
           p_expires_at?: string | null;
+          p_line_items?: Json | null;
           p_link_type: APIEnums['link_type'];
           p_organization_id: string;
           p_price?: number | null;
@@ -2398,6 +2399,7 @@ export type Database = {
           environment: string;
           expires_at: string;
           is_active: boolean;
+          line_items: Json;
           link_id: string;
           link_type: APIEnums['link_type'];
           metadata: Json;
