@@ -7,7 +7,8 @@ import { ApiProperty } from '@nestjs/swagger';
 export class LineItemDto {
   @ApiProperty({
     example: '123e4567-e89b-12d3-a456-426614174000',
-    description: 'Price ID for the product. The price contains product reference and amount.',
+    description:
+      'Price ID for the product. The price contains product reference and amount.',
   })
   price_id: string;
 
@@ -196,4 +197,3 @@ Example:
   })
   line_items?: LineItemDto[];
 }
-

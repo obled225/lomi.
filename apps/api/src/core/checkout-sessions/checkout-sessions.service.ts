@@ -17,27 +17,33 @@ export class CheckoutSessionsService {
     // Check if this is a multi-product checkout (has line_items)
     if (createDto.line_items && createDto.line_items.length > 0) {
       // Multi-product checkout - use the line items RPC
-      const { data, error } = await this.supabase.rpc('create_checkout_session_with_line_items', {
-        p_organization_id: user.organizationId,
-        p_currency_code: createDto.currency_code as CurrencyCode,
-        p_line_items: JSON.stringify(createDto.line_items),
-        p_environment: user.environment,
-        p_created_by: user.merchantId,
-        p_customer_id: createDto.customer_id || null,
-        p_metadata: createDto.metadata || null,
-        p_title: createDto.title || null,
-        p_description: createDto.description || null,
-        p_success_url: createDto.success_url || null,
-        p_cancel_url: createDto.cancel_url || null,
-        p_customer_email: createDto.customer_email || null,
-        p_customer_name: createDto.customer_name || null,
-        p_customer_phone: createDto.customer_phone || null,
-        p_allow_coupon_code: createDto.allow_coupon_code ?? false,
-        p_expiration_minutes: 60,
-        p_require_billing_address: createDto.require_billing_address ?? true,
-      });
+      const { data, error } = await this.supabase.rpc(
+        'create_checkout_session_with_line_items',
+        {
+          p_organization_id: user.organizationId,
+          p_currency_code: createDto.currency_code as CurrencyCode,
+          p_line_items: JSON.stringify(createDto.line_items),
+          p_environment: user.environment,
+          p_created_by: user.merchantId,
+          p_customer_id: createDto.customer_id || null,
+          p_metadata: createDto.metadata || null,
+          p_title: createDto.title || null,
+          p_description: createDto.description || null,
+          p_success_url: createDto.success_url || null,
+          p_cancel_url: createDto.cancel_url || null,
+          p_customer_email: createDto.customer_email || null,
+          p_customer_name: createDto.customer_name || null,
+          p_customer_phone: createDto.customer_phone || null,
+          p_allow_coupon_code: createDto.allow_coupon_code ?? false,
+          p_expiration_minutes: 60,
+          p_require_billing_address: createDto.require_billing_address ?? true,
+        },
+      );
 
-      console.log('create_checkout_session_with_line_items RPC result:', { data, error });
+      console.log('create_checkout_session_with_line_items RPC result:', {
+        data,
+        error,
+      });
 
       if (error) throw new Error(error.message);
       return data;
