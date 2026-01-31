@@ -87,6 +87,34 @@ export class CreateCheckoutSessionDto {
   customer_phone?: string;
 
   @ApiProperty({
+    example: 'Dakar',
+    description: 'Customer city',
+    required: false,
+  })
+  customer_city?: string;
+
+  @ApiProperty({
+    example: 'Senegal',
+    description: 'Customer country',
+    required: false,
+  })
+  customer_country?: string;
+
+  @ApiProperty({
+    example: '123 Main Street, Apt 4B',
+    description: 'Customer address',
+    required: false,
+  })
+  customer_address?: string;
+
+  @ApiProperty({
+    example: '12345',
+    description: 'Customer postal code',
+    required: false,
+  })
+  customer_postal_code?: string;
+
+  @ApiProperty({
     example: '123e4567-e89b-12d3-a456-426614174000',
     description: 'Product ID',
     required: false,
