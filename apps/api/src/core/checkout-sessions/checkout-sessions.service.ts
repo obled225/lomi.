@@ -40,7 +40,7 @@ export class CheckoutSessionsService {
           p_customer_postal_code: createDto.customer_postal_code || null,
           p_allow_coupon_code: createDto.allow_coupon_code ?? false,
           p_expiration_minutes: 60,
-          p_require_billing_address: createDto.require_billing_address ?? true,
+          p_require_billing_address: createDto.require_billing_address ?? false,
         },
       );
 
@@ -79,7 +79,7 @@ export class CheckoutSessionsService {
       p_customer_address: createDto.customer_address || null,
       p_customer_postal_code: createDto.customer_postal_code || null,
       p_allow_coupon_code: createDto.allow_coupon_code ?? false,
-      p_require_billing_address: createDto.require_billing_address ?? true,
+      p_require_billing_address: createDto.require_billing_address ?? false,
       p_payment_link_id: createDto.payment_link_id || null,
     });
 
