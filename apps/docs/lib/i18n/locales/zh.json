@@ -265,7 +265,6 @@
   },
   "features": {
     "card1": {
-      "crypto_description": "加密货币支付",
       "description": "接受本地和国际支付方式，无需努力。",
       "google_pay_description": "非接触式支付系统",
       "apple_pay_description": "Apple支付钱包",

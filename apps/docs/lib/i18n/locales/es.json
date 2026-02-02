@@ -265,7 +265,6 @@
   },
   "features": {
     "card1": {
-      "crypto_description": "Pagos con criptomonedas",
       "description": "Acepte métodos de pago locales e internacionales, sin esfuerzos.",
       "google_pay_description": "Sistema de pago sin contacto",
       "apple_pay_description": "Wallet de pago Apple",

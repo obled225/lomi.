@@ -296,7 +296,6 @@
   },
   "features": {
     "card1": {
-      "crypto_description": "Decentralized payment network",
       "description": "Accept local and international payment methods, seamlessly.",
       "google_pay_description": "Contactless payment system",
       "apple_pay_description": "Apple payment wallet",
