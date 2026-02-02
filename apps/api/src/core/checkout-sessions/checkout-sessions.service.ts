@@ -21,10 +21,10 @@ export class CheckoutSessionsService {
         'create_checkout_session_with_line_items',
         {
           p_organization_id: user.organizationId,
+          p_created_by: user.merchantId,
           p_currency_code: createDto.currency_code as CurrencyCode,
           p_line_items: JSON.stringify(createDto.line_items),
           p_environment: user.environment,
-          p_created_by: user.merchantId,
           p_customer_id: createDto.customer_id || null,
           p_metadata: createDto.metadata || null,
           p_title: createDto.title || null,
@@ -41,6 +41,7 @@ export class CheckoutSessionsService {
           p_allow_coupon_code: createDto.allow_coupon_code ?? false,
           p_expiration_minutes: 60,
           p_require_billing_address: createDto.require_billing_address ?? false,
+          p_payment_link_id: createDto.payment_link_id || null,
         },
       );
 
