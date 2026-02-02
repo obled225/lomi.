@@ -23,7 +23,7 @@ export class CheckoutSessionsService {
           p_organization_id: user.organizationId,
           p_created_by: user.merchantId,
           p_currency_code: createDto.currency_code as CurrencyCode,
-          p_line_items: JSON.stringify(createDto.line_items),
+          p_line_items: createDto.line_items as any,
           p_environment: user.environment,
           p_customer_id: createDto.customer_id || null,
           p_metadata: createDto.metadata || null,
