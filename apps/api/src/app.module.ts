@@ -23,6 +23,8 @@ import { BeneficiaryPayoutsModule } from './core/beneficiary-payouts/beneficiary
 import { WebhookDeliveryLogsModule } from './core/webhook-delivery-logs/webhook-delivery-logs.module';
 import { WebhooksModule } from './webhooks/webhooks.module';
 import { ApiLoggingInterceptor } from './core/interceptors/api-logging.interceptor';
+import { ChargesModule } from './core/charges/charges.module';
+
 
 const logger = new Logger('RedisConfig');
 
@@ -125,7 +127,9 @@ const logger = new Logger('RedisConfig');
     BeneficiaryPayoutsModule,
     WebhookDeliveryLogsModule,
     WebhooksModule,
+    ChargesModule,
   ],
+
   controllers: [AppController],
   providers: [
     AppService,
