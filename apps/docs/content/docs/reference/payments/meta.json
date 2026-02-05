@@ -4,6 +4,7 @@
     "payment-links",
     "payment-requests",
     "checkout-sessions",
+    "charges",
     "transactions",
     "refunds",
     "payouts",

@@ -15,7 +15,8 @@ const organizationSchema = {
   name: 'lomi.',
   legalName: 'lomi. S.A.R.L.',
   url: 'https://lomi.africa',
-  logo: 'https://lomi.africa/favicon.ico',
+  logo: 'https://lomi.africa/logo.webp',
+  alternateName: ['lomi. Africa', 'lomi. Payments', 'lomi. Financial', 'lomi. Pay'],
   description:
     'lomi. is a suite of APIs powering online payment processing and e-commerce products in West Africa. Accept payments, send payouts, and automate financial workflows with ease.',
   foundingDate: '2024-01-17',
@@ -215,6 +216,35 @@ const faqPageSchema = {
   ],
 };
 
+// SiteNavigationElement Schema - Explicitly tells Google what the main navigation is
+const siteNavigationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  itemListElement: [
+    {
+      '@type': 'SiteNavigationElement',
+      position: 1,
+      name: 'Documentation',
+      description: 'Explore our suite of payment products and services',
+      url: 'https://lomi.africa/docs',
+    },
+    {
+      '@type': 'SiteNavigationElement',
+      position: 2,
+      name: 'Pricing',
+      description: 'Transparent pricing for every business',
+      url: 'https://lomi.africa/pricing',
+    },
+    {
+      '@type': 'SiteNavigationElement',
+      position: 3,
+      name: 'Company',
+      description: 'About lomi. and our mission',
+      url: 'https://lomi.africa/docs/core/introduction/manifesto',
+    },
+  ],
+};
+
 export function StructuredData() {
   return (
     <>
@@ -245,6 +275,13 @@ export function StructuredData() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(faqPageSchema),
+        }}
+      />
+      <script
+        id="navigation-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(siteNavigationSchema),
         }}
       />
     </>
