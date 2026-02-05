@@ -6,7 +6,7 @@
  * Generated from database.types.ts - only includes:
  * - Exposed enums (36 enums)
  * - Exposed tables (15 tables)
- * - Exposed functions (53 functions)
+ * - Exposed functions (54 functions)
  *
  * DO NOT EDIT MANUALLY - This file is auto-generated
  * Run: npm run generate:api-types
@@ -2538,6 +2538,16 @@ export type Database = {
           usage_frequency_limit: APIEnums['usage_frequency'];
           usage_limit_value: number;
           valid_from: string;
+        }[];
+      };
+      fetch_wave_provider_settings: {
+        Args: { p_organization_id: string };
+        Returns: {
+          is_connected: boolean;
+          metadata: Json;
+          organization_id: string;
+          provider_code: APIEnums['provider_code'];
+          provider_merchant_id: string;
         }[];
       };
       get_wave_transaction_by_checkout_id: {

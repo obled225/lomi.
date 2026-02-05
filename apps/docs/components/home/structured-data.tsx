@@ -16,7 +16,15 @@ const organizationSchema = {
   legalName: 'lomi. S.A.R.L.',
   url: 'https://lomi.africa',
   logo: 'https://lomi.africa/logo.webp',
-  alternateName: ['lomi. Africa', 'lomi. Payments', 'lomi. Financial', 'lomi. Pay'],
+  alternateName: [
+    'lomi. Africa',
+    'lomi. Payments',
+    'lomi. Finance',
+    'lomi. POS',
+    'lomi. Tap to Pay',
+    'lomi. E-commerce',
+    'lomi. Pay',
+  ],
   description:
     'lomi. is a suite of APIs powering online payment processing and e-commerce products in West Africa. Accept payments, send payouts, and automate financial workflows with ease.',
   foundingDate: '2024-01-17',

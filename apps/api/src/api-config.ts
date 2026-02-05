@@ -334,6 +334,7 @@ export const EXPOSED_FUNCTIONS = [
   'get_product_prices_api',
   'get_product_fees_api',
   'get_coupon_details_for_management',
+  'fetch_wave_provider_settings',
   // Wave webhook functions
   'get_wave_transaction_by_checkout_id',
   'get_checkout_session_by_wave_id',

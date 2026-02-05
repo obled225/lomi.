@@ -32,43 +32,51 @@ export class ChargesService {
     } = createChargeDto;
 
     try {
-      this.logger.log(`Initiating Wave charge for organization ${organizationId}`);
+      this.logger.log(
+        `Initiating Wave charge for organization ${organizationId}`,
+      );
 
       // 1. Get or Create Customer (RPC)
-      const { data: custId, error: custError } =
-        await this.supabaseService.rpc('create_or_update_customer' as any, {
-           p_merchant_id: merchantId, 
-           p_organization_id: organizationId,
-           p_name: customer.name,
-           p_email: customer.email,
-           p_phone_number: customer.phoneNumber,
-           p_city: null,
-           p_address: null,
-           p_country: 'CI',
-           p_postal_code: null,
-           p_whatsapp_number: null,
-        });
+      const { data: custId, error: custError } = await this.supabaseService.rpc(
+        'create_or_update_customer' as any,
+        {
+          p_merchant_id: merchantId,
+          p_organization_id: organizationId,
+          p_name: customer.name,
+          p_email: customer.email,
+          p_phone_number: customer.phoneNumber,
+          p_city: null,
+          p_address: null,
+          p_country: 'CI',
+          p_postal_code: null,
+          p_whatsapp_number: null,
+        },
+      );
 
       if (custError || !custId) {
-         this.logger.error(`Failed to create/update customer: ${custError?.message}`);
-         throw new InternalServerErrorException('Failed to process customer details');
+        this.logger.error(
+          `Failed to create/update customer: ${custError?.message}`,
+        );
+        throw new InternalServerErrorException(
+          'Failed to process customer details',
+        );
       }
 
       const customerId = custId as string;
 
       // 2. Fetch Wave Aggregated Merchant ID from organization settings using RPC
-      const { data: providerSettings, error: providerError } = await this.supabaseService.rpc(
-        'fetch_wave_provider_settings' as any,
-        {
+      const { data: providerSettings, error: providerError } =
+        await this.supabaseService.rpc('fetch_wave_provider_settings' as any, {
           p_organization_id: organizationId,
-        },
-      );
+        });
 
       // The RPC returns an array of rows
       const waveSettings = providerSettings && providerSettings[0];
 
       if (providerError || !waveSettings?.provider_merchant_id) {
-        this.logger.error(`Wave provider not configured: ${providerError?.message}`);
+        this.logger.error(
+          `Wave provider not configured: ${providerError?.message}`,
+        );
         throw new BadRequestException(
           'Wave provider not configured for this organization (missing Aggregated Merchant ID)',
         );
@@ -79,66 +87,66 @@ export class ChargesService {
       );
 
       // 3. Prepare Payload for Edge Function
-      const frontendUrl = this.configService.get('FRONTEND_URL') || 'https://lomi.africa';
-      
+      const frontendUrl =
+        this.configService.get('FRONTEND_URL') || 'https://lomi.africa';
+
       const wavePayload = {
         amount: String(amount),
         currency,
-        error_url:
-          errorUrl ||
-          `${frontendUrl}/checkout/error`, 
-        success_url:
-          successUrl ||
-          `${frontendUrl}/checkout/success`,
+        error_url: errorUrl || `${frontendUrl}/checkout/error`,
+        success_url: successUrl || `${frontendUrl}/checkout/success`,
         client_reference: randomUUID(),
         aggregated_merchant_id: waveSettings.provider_merchant_id,
       };
 
       const transactionParams = {
-          p_merchant_id: merchantId,
-          p_organization_id: organizationId,
-          p_customer_id: customerId,
-          p_amount: amount,
-          p_currency_code: currency,
-          p_error_url: wavePayload.error_url,
-          p_success_url: wavePayload.success_url,
-          p_description: description,
-          p_metadata: {
-             source: 'api_direct_charge'
-          },
-          p_environment: environment,
+        p_merchant_id: merchantId,
+        p_organization_id: organizationId,
+        p_customer_id: customerId,
+        p_amount: amount,
+        p_currency_code: currency,
+        p_error_url: wavePayload.error_url,
+        p_success_url: wavePayload.success_url,
+        p_description: description,
+        p_metadata: {
+          source: 'api_direct_charge',
+        },
+        p_environment: environment,
       };
 
       // 3. Invoke Edge Function
-      const { data: edgeResponse, error: edgeError } = await this.supabaseService
-        .getClient()
-        .functions.invoke('wave', {
+      const { data: edgeResponse, error: edgeError } =
+        await this.supabaseService.getClient().functions.invoke('wave', {
           body: {
             path: '/create-atomic-checkout-session',
             method: 'POST',
             body: {
               waveParams: wavePayload,
-              transactionParams: transactionParams
-            }
-          }
+              transactionParams: transactionParams,
+            },
+          },
         });
 
       if (edgeError) {
-        this.logger.error(`Edge Function invocation failed: ${edgeError.message}`);
-        throw new InternalServerErrorException(`Payment processing failed: ${edgeError.message}`);
+        this.logger.error(
+          `Edge Function invocation failed: ${edgeError.message}`,
+        );
+        throw new InternalServerErrorException(
+          `Payment processing failed: ${edgeError.message}`,
+        );
       }
 
       if (edgeResponse?.error) {
-         this.logger.error(`Wave Edge Function returned error: ${edgeResponse.error}`);
-         throw new BadRequestException(edgeResponse.error);
+        this.logger.error(
+          `Wave Edge Function returned error: ${edgeResponse.error}`,
+        );
+        throw new BadRequestException(edgeResponse.error);
       }
 
       return edgeResponse;
-
     } catch (error) {
       this.logger.error(`Wave charge failed: ${error.message}`);
       throw error;
     }
   }
 }
-

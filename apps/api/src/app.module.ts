@@ -25,7 +25,6 @@ import { WebhooksModule } from './webhooks/webhooks.module';
 import { ApiLoggingInterceptor } from './core/interceptors/api-logging.interceptor';
 import { ChargesModule } from './core/charges/charges.module';
 
-
 const logger = new Logger('RedisConfig');
 
 @Module({
