@@ -65,7 +65,16 @@ func NewClient(apiKey string, opts ...ClientOption) *Client {
 }
 
 func (c *Client) doRequest(method, path string, query url.Values, body interface{}) ([]byte, error) {
-	u := c.BaseURL + path
+	baseURL, err := url.Parse(c.BaseURL)
+	if err != nil {
+		return nil, err
+	}
+	ref, err := url.Parse(path)
+	if err != nil {
+		return nil, err
+	}
+	u := baseURL.ResolveReference(ref).String()
+
 	if query != nil {
 		u += "?" + query.Encode()
 	}

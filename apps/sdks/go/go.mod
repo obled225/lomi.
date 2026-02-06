@@ -1,3 +1,3 @@
 module github.com/lomiafrica/lomi-go
 
-go 1.21
+go 1.24
