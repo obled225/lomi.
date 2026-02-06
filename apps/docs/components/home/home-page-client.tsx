@@ -18,7 +18,7 @@ interface HomePageClientProps {
 export function HomePageClient({
   initialTitleIndex,
   defaultDashboardImage,
-  defaultMobileDashboardImage
+  defaultMobileDashboardImage,
 }: HomePageClientProps) {
   useHomePageInit();
 
