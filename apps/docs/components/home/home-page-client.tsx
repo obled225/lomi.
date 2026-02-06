@@ -11,17 +11,26 @@ import { useHomePageInit } from '@/lib/hooks/use-home-page-init';
 
 interface HomePageClientProps {
   initialTitleIndex: number | null;
+  defaultDashboardImage: { light: string; dark: string };
+  defaultMobileDashboardImage: string;
 }
 
-export function HomePageClient({ initialTitleIndex }: HomePageClientProps) {
-  const { getDashboardImage, getMobileDashboardImage } = useHomePageInit();
+export function HomePageClient({
+  initialTitleIndex,
+  defaultDashboardImage,
+  defaultMobileDashboardImage
+}: HomePageClientProps) {
+  useHomePageInit();
+
+  // Use server-provided defaults for initial render, then hydration can take over if needed
+  // In practice, since we calculated them based on cookie, they should match
 
   return (
     <>
       {/* Hero Section */}
       <Hero
-        dashboardImage={getDashboardImage()}
-        mobileDashboardImage={getMobileDashboardImage()}
+        dashboardImage={defaultDashboardImage}
+        mobileDashboardImage={defaultMobileDashboardImage}
         initialTitleIndex={initialTitleIndex}
       />
       <FeaturesSection />

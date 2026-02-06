@@ -1,6 +1,6 @@
 /* @proprietary license */
 
-import { Suspense, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import SimpleImage from '@/components/home/hero-image';
 import { AgnosticBackground } from '@/components/home/agnostic-background';
 import { useTranslation } from '@/lib/utils/translation-context';
@@ -8,17 +8,17 @@ import { t as translate } from '@/lib/i18n/translations';
 
 interface HeroProps {
   dashboardImage?:
-    | string
-    | {
-        light: string;
-        dark: string;
-      };
+  | string
+  | {
+    light: string;
+    dark: string;
+  };
   mobileDashboardImage?:
-    | string
-    | {
-        light: string;
-        dark: string;
-      };
+  | string
+  | {
+    light: string;
+    dark: string;
+  };
   initialTitleIndex: number | null;
 }
 
@@ -81,20 +81,14 @@ function Hero({
 
         {/* Hero Image - positioned absolutely to create envelope effect */}
         {dashboardImage && (
-          <Suspense
-            fallback={
-              <div className="w-full h-full bg-gray-100 dark:bg-gray-800 animate-pulse rounded-sm" />
-            }
-          >
-            <SimpleImage
-              src={dashboardImage}
-              mobileSrc={mobileDashboardImage}
-              alt="Preview"
-              width={1200}
-              height={800}
-              className="absolute top-[270px] left-[8%] max-w-[90%] md:top-[245px] md:left-[3.75%] md:max-w-[80%] lg:max-w-[1200px] animate-in fade-in duration-400"
-            />
-          </Suspense>
+          <SimpleImage
+            src={dashboardImage}
+            mobileSrc={mobileDashboardImage}
+            alt="Preview"
+            width={1200}
+            height={800}
+            className="absolute top-[270px] left-[8%] max-w-[90%] md:top-[245px] md:left-[3.75%] md:max-w-[80%] lg:max-w-[1200px] animate-in fade-in duration-400"
+          />
         )}
       </div>
     </section>

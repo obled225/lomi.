@@ -46,6 +46,13 @@
     "type": "git",
     "url": "https://github.com/lomiafrica/lomi./"
   },
+  "pnpm": {
+    "overrides": {
+      "@isaacs/brace-expansion": "^5.0.1",
+      "diff": "^5.2.0",
+      "lodash": "^4.17.21"
+    }
+  },
   "dependencies": {
     "@nestjs/bullmq": "^11.0.4",
     "@nestjs/common": "^11.1.12",
