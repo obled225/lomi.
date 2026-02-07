@@ -2,52 +2,61 @@
 
 'use client';
 
-import { useEffect, useId, useState } from 'react';
+import { use, useEffect, useId, useState } from 'react';
 import { useTheme } from 'next-themes';
 
 export function Mermaid({ chart }: { chart: string }) {
-  const id = useId();
-  const { resolvedTheme } = useTheme();
-  const [svg, setSvg] = useState<string>('');
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    let active = true;
+    setMounted(true);
+  }, []);
 
-    const renderChart = async () => {
-      try {
-        const mermaid = (await import('mermaid')).default;
+  if (!mounted) return;
+  return <MermaidContent chart={chart} />;
+}
 
-        if (!active) return;
+const cache = new Map<string, Promise<unknown>>();
 
-        mermaid.initialize({
-          startOnLoad: false,
-          securityLevel: 'loose',
-          fontFamily: 'inherit',
-          themeCSS: 'margin: 1.5rem auto 0;',
-          theme: resolvedTheme === 'dark' ? 'dark' : 'default',
-        });
+function cachePromise<T>(
+  key: string,
+  setPromise: () => Promise<T>,
+): Promise<T> {
+  const cached = cache.get(key);
+  if (cached) return cached as Promise<T>;
 
-        const { svg } = await mermaid.render(
-          id.replace(/:/g, ''),
-          chart.replaceAll('\\n', '\n'),
-        );
+  const promise = setPromise();
+  cache.set(key, promise);
+  return promise;
+}
 
-        if (active) {
-          setSvg(svg);
-        }
-      } catch (error) {
-        console.error('Failed to render mermaid chart:', error);
-      }
-    };
+function MermaidContent({ chart }: { chart: string }) {
+  const id = useId();
+  const { resolvedTheme } = useTheme();
+  const { default: mermaid } = use(
+    cachePromise('mermaid', () => import('mermaid')),
+  );
 
-    renderChart();
+  mermaid.initialize({
+    startOnLoad: false,
+    securityLevel: 'loose',
+    fontFamily: 'inherit',
+    themeCSS: 'margin: 1.5rem auto 0;',
+    theme: resolvedTheme === 'dark' ? 'dark' : 'default',
+  });
 
-    return () => {
-      active = false;
-    };
-  }, [chart, resolvedTheme, id]);
+  const { svg, bindFunctions } = use(
+    cachePromise(`${chart}-${resolvedTheme}`, () => {
+      return mermaid.render(id, chart.replaceAll('\\n', '\n'));
+    }),
+  );
 
-  if (!svg) return null;
-
-  return <div dangerouslySetInnerHTML={{ __html: svg }} />;
+  return (
+    <div
+      ref={(container) => {
+        if (container) bindFunctions?.(container);
+      }}
+      dangerouslySetInnerHTML={{ __html: svg }}
+    />
+  );
 }
