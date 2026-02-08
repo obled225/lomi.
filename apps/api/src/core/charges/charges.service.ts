@@ -28,7 +28,7 @@ export class ChargesService {
       description,
       successUrl,
       errorUrl,
-      environment = 'live',
+      environment: _environment = 'live',
     } = createChargeDto;
 
     try {
@@ -86,43 +86,32 @@ export class ChargesService {
         `Initiating Wave charge for organization ${organizationId} with Aggregated Merchant ID ${waveSettings.provider_merchant_id}`,
       );
 
-      // 3. Prepare Payload for Edge Function
+      // Prepare URLs
       const frontendUrl =
         this.configService.get('FRONTEND_URL') || 'https://lomi.africa';
+      const finalSuccessUrl = successUrl || `${frontendUrl}/checkout/success`;
+      const finalErrorUrl = errorUrl || `${frontendUrl}/checkout/error`;
+      const clientReference = randomUUID();
 
-      const wavePayload = {
-        amount: String(amount),
-        currency,
-        error_url: errorUrl || `${frontendUrl}/checkout/error`,
-        success_url: successUrl || `${frontendUrl}/checkout/success`,
-        client_reference: randomUUID(),
-        aggregated_merchant_id: waveSettings.provider_merchant_id,
-      };
-
-      const transactionParams = {
-        p_merchant_id: merchantId,
-        p_organization_id: organizationId,
-        p_customer_id: customerId,
-        p_amount: amount,
-        p_currency_code: currency,
-        p_error_url: wavePayload.error_url,
-        p_success_url: wavePayload.success_url,
-        p_description: description,
-        p_metadata: {
-          source: 'api_direct_charge',
-        },
-        p_environment: environment,
-      };
-
-      // 3. Invoke Edge Function
+      // 3. Invoke Edge Function with simplified payload
       const { data: edgeResponse, error: edgeError } =
         await this.supabaseService.getClient().functions.invoke('wave', {
           body: {
-            path: '/create-atomic-checkout-session',
+            path: '/create-checkout-session',
             method: 'POST',
             body: {
-              waveParams: wavePayload,
-              transactionParams: transactionParams,
+              merchantId,
+              organizationId,
+              customerId,
+              amount,
+              currency,
+              successUrl: finalSuccessUrl,
+              errorUrl: finalErrorUrl,
+              description,
+              clientReference,
+              metadata: {
+                source: 'api_direct_charge',
+              },
             },
           },
         });
