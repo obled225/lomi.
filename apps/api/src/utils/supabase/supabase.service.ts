@@ -22,8 +22,8 @@ export class SupabaseService implements OnModuleInit {
     // 2. Service layer filters by organization_id
     // 3. Service key never exposed to clients
     const supabaseKey =
-      this.configService.get<string>('SUPABASE_SERVICE_ROLE_KEY') ||
-      process.env.SUPABASE_SERVICE_ROLE_KEY;
+      this.configService.get<string>('SUPABASE_SECRET_KEY') ||
+      process.env.SUPABASE_SECRET_KEY;
 
     if (!supabaseUrl || !supabaseKey) {
       throw new Error(
