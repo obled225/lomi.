@@ -2544,8 +2544,10 @@ export type Database = {
         Args: { p_organization_id: string };
         Returns: {
           is_connected: boolean;
+          is_phone_verified: boolean;
           metadata: Json;
           organization_id: string;
+          phone_number: string;
           provider_code: APIEnums['provider_code'];
           provider_merchant_id: string;
         }[];
