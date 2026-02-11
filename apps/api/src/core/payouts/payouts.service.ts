@@ -1,110 +1,103 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { SupabaseService } from '../../utils/supabase/supabase.service';
-import { CreatePayoutDto } from './dto/create-payout.dto';
-import { AuthContext } from '../common/decorators/current-user.decorator';
 import {
-  CurrencyCode,
-  ProviderCode,
-  PayoutStatus,
-  Database,
-} from '../../utils/types/api';
-
-type Payout = Database['public']['Tables']['payouts']['Row'];
+  Injectable,
+  Logger,
+  BadRequestException,
+  InternalServerErrorException,
+} from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import { SupabaseService } from '../../utils/supabase/supabase.service';
+import { CreateWavePayoutDto } from './dto/create-payout.dto';
+import { randomUUID } from 'crypto';
 
 @Injectable()
 export class PayoutsService {
-  constructor(private readonly supabase: SupabaseService) {}
+  private readonly logger = new Logger(PayoutsService.name);
 
-  /**
-   * Initiate a payout (withdrawal)
-   * Uses RPC: initiate_withdrawal
-   * Returns immediately with pending status - completion confirmed via webhook
-   */
-  async create(createDto: CreatePayoutDto, user: AuthContext) {
-    const { data, error } = await this.supabase.rpc('initiate_withdrawal', {
-      p_merchant_id: user.merchantId,
-      p_amount: createDto.amount,
-      p_payout_method_id: createDto.payout_method_id,
-      p_currency_code: createDto.currency_code as CurrencyCode,
-      p_provider_code: (createDto.provider_code as ProviderCode) || null,
-    });
+  constructor(
+    private readonly configService: ConfigService,
+    private readonly supabaseService: SupabaseService,
+  ) {}
 
-    if (error) throw new Error(error.message);
+  async createWavePayout(createPayoutDto: CreateWavePayoutDto) {
+    const {
+      amount,
+      currency,
+      beneficiary,
+      reason,
+      organizationId,
+      merchantId,
+    } = createPayoutDto;
 
-    if (!data || data.length === 0 || !data[0].success) {
-      throw new Error(data?.[0]?.message || 'Failed to initiate withdrawal');
-    }
+    // 1. Fetch Wave Provider Settings to get Aggregated Merchant ID
+    const { data: providerSettings, error: providerError } =
+      await this.supabaseService.rpc('fetch_wave_provider_settings', {
+        p_organization_id: organizationId as string,
+      });
 
-    // The RPC returns success message, but we need to fetch the payout
-    // Query by created_by and organization_id to get the latest payout
-    const { data: payouts, error: payoutError } = (await this.supabase
-      .getClient()
-      .from('payouts')
-      .select('payout_id')
-      .eq('created_by', user.merchantId)
-      .eq('organization_id', user.organizationId)
-      .order('created_at', { ascending: false })
-      .limit(1)
-      .single()) as { data: Pick<Payout, 'payout_id'> | null; error: any };
+    const waveSettings = providerSettings && (providerSettings as any)[0];
 
-    if (payoutError || !payouts) {
-      throw new Error('Payout created but could not be retrieved');
-    }
-
-    return this.findOne(payouts.payout_id, user);
-  }
-
-  /**
-   * List all payouts with filtering
-   * Uses RPC: fetch_payouts
-   */
-  async findAll(
-    user: AuthContext,
-    statuses?: string[],
-    startDate?: string,
-    endDate?: string,
-    limit: number = 50,
-    offset: number = 0,
-  ) {
-    const pageNumber = Math.floor(offset / limit) + 1;
-    const pageSize = limit;
-
-    const { data, error } = await this.supabase.rpc('fetch_payouts', {
-      p_merchant_id: user.merchantId,
-      p_statuses: statuses ? (statuses as PayoutStatus[]) : null,
-      p_page_number: pageNumber,
-      p_page_size: pageSize,
-      p_start_date: startDate || null,
-      p_end_date: endDate || null,
-    });
-
-    if (error) throw new Error(error.message);
-
-    return {
-      data: data || [],
-      limit: pageSize,
-      offset,
-    };
-  }
-
-  /**
-   * Get single payout by ID
-   */
-  async findOne(id: string, user: AuthContext) {
-    const { data, error } = await this.supabase
-      .getClient()
-      .from('payouts')
-      .select('*')
-      .eq('payout_id', id)
-      .eq('organization_id', user.organizationId)
-      .single();
-
-    if (error || !data) {
-      throw new NotFoundException(
-        `Payout with ID ${id} not found or access denied`,
+    if (providerError || !waveSettings?.provider_merchant_id) {
+      this.logger.error(
+        `Wave provider not configured for payout: ${providerError?.message}`,
+      );
+      throw new BadRequestException(
+        'Wave provider settings not found or missing Aggregated Merchant ID',
       );
     }
 
-    return data;
+    const aggregatedMerchantId = waveSettings.provider_merchant_id;
+    this.logger.log(
+      `Initiating Wave payout for org ${organizationId} via ${aggregatedMerchantId}`,
+    );
+
+    // 2. Prepare Payload for Edge Function
+    const payload = {
+      path: '/payout',
+      method: 'POST',
+      body: {
+        amount: String(amount),
+        currency,
+        beneficiary,
+        reason: reason || 'Payout',
+        aggregatedMerchantId,
+        clientReference: randomUUID(),
+        merchantId,
+        organizationId,
+      },
+    };
+
+    // 3. Call Edge Function
+    const projectRef = this.configService.get<string>('SUPABASE_PROJECT_REF');
+    const anonKey = this.configService.get<string>('SUPABASE_PUBLISHABLE_KEY');
+    const edgeFunctionUrl = `https://${projectRef}.supabase.co/functions/v1/wave`;
+
+    try {
+      const response = await fetch(edgeFunctionUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${anonKey}`,
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        this.logger.error(`Wave Payout Edge Function failed: ${errorText}`);
+        throw new BadRequestException(`Payout failed: ${errorText}`);
+      }
+
+      return await response.json();
+    } catch (error) {
+      this.logger.error(`Error processing payout: ${error.message}`);
+      // If it's already a Nest exception, rethrow it
+      if (
+        error instanceof BadRequestException ||
+        error instanceof InternalServerErrorException
+      ) {
+        throw error;
+      }
+      throw new InternalServerErrorException('Payout processing failed');
+    }
   }
 }

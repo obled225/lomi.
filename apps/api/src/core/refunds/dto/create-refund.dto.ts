@@ -1,29 +1,27 @@
+import {
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsString,
+  IsUUID,
+  Min,
+} from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
-export class CreateRefundDto {
-  @ApiProperty({
-    example: '123e4567-e89b-12d3-a456-426614174000',
-    description: 'Transaction ID to refund',
-  })
-  transaction_id: string;
+export class CreateWaveRefundDto {
+  @ApiProperty({ description: 'The transaction ID to refund' })
+  @IsUUID()
+  @IsNotEmpty()
+  transactionId: string;
 
-  @ApiProperty({
-    example: 5000.0,
-    description: 'Amount to refund (must be <= original transaction amount)',
-  })
+  @ApiProperty({ description: 'Amount to refund' })
+  @IsNumber()
+  @Min(1)
+  @IsNotEmpty()
   amount: number;
 
-  @ApiProperty({
-    example: 'Customer requested refund',
-    description: 'Reason for refund',
-    required: false,
-  })
+  @ApiProperty({ description: 'Reason for the refund', required: false })
+  @IsString()
+  @IsOptional()
   reason?: string;
-
-  @ApiProperty({
-    example: { support_ticket_id: 'TICKET-123' },
-    description: 'Additional metadata',
-    required: false,
-  })
-  metadata?: Record<string, any>;
 }
