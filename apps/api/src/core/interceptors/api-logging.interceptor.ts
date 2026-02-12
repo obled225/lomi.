@@ -3,6 +3,7 @@ import {
   NestInterceptor,
   ExecutionContext,
   CallHandler,
+  Logger,
 } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
@@ -10,6 +11,8 @@ import { SupabaseService } from '../../utils/supabase/supabase.service';
 
 @Injectable()
 export class ApiLoggingInterceptor implements NestInterceptor {
+  private readonly logger = new Logger(ApiLoggingInterceptor.name);
+
   constructor(private readonly supabase: SupabaseService) {}
 
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
@@ -75,15 +78,30 @@ export class ApiLoggingInterceptor implements NestInterceptor {
           })
           .then(({ error }) => {
             if (error) {
-              console.error('Failed to log API interaction:', error);
+              this.logger.error(
+                `Failed to log API interaction: ${error.message}`,
+                error,
+              );
             }
           })
           .catch((err) => {
-            console.error('Exception logging API interaction:', err);
+            this.logger.error(
+              `Exception logging API interaction: ${err.message}`,
+              err,
+            );
           });
+      } else {
+        // Debug log why logging was skipped (useful for troubleshooting)
+        if (apiKey && !user) {
+          this.logger.warn(
+            `Skipping API log: API key present but no user/org context. ApiKeyGuard might not have run or failed silently.`,
+          );
+        } else if (user && !apiKey) {
+           // Internal calls might have user but no API key header, which is fine to skip
+        }
       }
     } catch (e) {
-      console.error('Error in ApiLoggingInterceptor:', e);
+      this.logger.error(`Error in ApiLoggingInterceptor: ${e.message}`, e);
     }
   }
 }
