@@ -97,7 +97,7 @@ export class ApiLoggingInterceptor implements NestInterceptor {
             `Skipping API log: API key present but no user/org context. ApiKeyGuard might not have run or failed silently.`,
           );
         } else if (user && !apiKey) {
-           // Internal calls might have user but no API key header, which is fine to skip
+          // Internal calls might have user but no API key header, which is fine to skip
         }
       }
     } catch (e) {
