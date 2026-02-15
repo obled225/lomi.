@@ -427,6 +427,7 @@ export type Database = {
       };
       transactions: {
         Row: {
+          available_at: string | null;
           checkout_session_id: string | null;
           created_at: string;
           currency_code: APIEnums['currency_code'];
@@ -468,6 +469,7 @@ export type Database = {
           updated_at: string;
         };
         Insert: {
+          available_at?: string | null;
           checkout_session_id?: string | null;
           created_at?: string;
           currency_code?: APIEnums['currency_code'];
@@ -509,6 +511,7 @@ export type Database = {
           updated_at?: string;
         };
         Update: {
+          available_at?: string | null;
           checkout_session_id?: string | null;
           created_at?: string;
           currency_code?: APIEnums['currency_code'];
