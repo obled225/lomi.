@@ -2,7 +2,7 @@
 
 import { cookies } from 'next/headers';
 import { HomePageClient } from '@/components/home/home-page-client';
-import { GoogleOneTap } from '@/components/home/google-one-tap';
+// import { GoogleOneTap } from '@/components/home/google-one-tap';
 
 export default async function Page() {
   // Read title index and language from cookies
@@ -50,7 +50,7 @@ export default async function Page() {
 
   return (
     <>
-      <GoogleOneTap />
+      {/* <GoogleOneTap /> */}
       <HomePageClient
         initialTitleIndex={validTitleIndex}
         defaultDashboardImage={defaultDashboardImage}

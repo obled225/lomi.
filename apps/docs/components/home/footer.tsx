@@ -19,7 +19,6 @@ import {
   SlackIcon,
 } from '@/components/preview/icons';
 import { Check } from 'lucide-react';
-import { ProductHuntBadge } from '@/components/preview/product-hunt-badge';
 import { playClickSound as playSound } from '@/lib/utils/sound';
 import { useTranslation } from '@/lib/utils/translation-context';
 import { t as translate } from '@/lib/i18n/translations';
@@ -204,16 +203,6 @@ export function Footer() {
                     </div>
                   </div>
                 </div>
-
-                <a
-                  href="https://www.producthunt.com/posts/lomi?embed=true&utm_source=badge-featured&utm_medium=badge&utm_souce=badge-lomi"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block"
-                  onClick={playClickSound}
-                >
-                  <ProductHuntBadge />
-                </a>
 
                 <p className="hidden lg:block text-[10px] text-zinc-600 dark:text-zinc-400 max-w-xs leading-relaxed text-justify align-left mt-2">
                   {t('footer.description')}
