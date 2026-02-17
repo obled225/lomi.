@@ -12,7 +12,6 @@ import Spinner from '@/components/ui/spinner';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { BlogArticleCard } from './blog-article-card';
-import { playClickSound } from '@/lib/utils/sound';
 
 export default function BlogClient() {
   const [posts, setPosts] = useState<Post[]>([]);
@@ -166,7 +165,6 @@ export default function BlogClient() {
               <Button
                 variant="pink"
                 onClick={() => {
-                  playClickSound();
                   router.push('/');
                 }}
               >
@@ -206,7 +204,6 @@ export default function BlogClient() {
                     variant="outline"
                     size="sm"
                     onClick={() => {
-                      playClickSound();
                       setCurrentPage((prev) => Math.max(1, prev - 1));
                     }}
                     disabled={currentPage === 1}
@@ -224,7 +221,6 @@ export default function BlogClient() {
                           variant={currentPage === page ? 'default' : 'outline'}
                           size="sm"
                           onClick={() => {
-                            playClickSound();
                             setCurrentPage(page);
                           }}
                           className="w-8 h-8 p-0"
@@ -239,7 +235,6 @@ export default function BlogClient() {
                     variant="outline"
                     size="sm"
                     onClick={() => {
-                      playClickSound();
                       setCurrentPage((prev) => Math.min(totalPages, prev + 1));
                     }}
                     disabled={currentPage === totalPages}

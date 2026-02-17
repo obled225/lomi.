@@ -8,7 +8,6 @@ import { t } from '@/lib/i18n/translations';
 import Image from 'next/image';
 import Link from 'next/link';
 import type { Post } from '@/lib/sanity/types';
-import { playClickSound } from '@/lib/utils/sound';
 
 import { getPostCategory, getCategoryColor } from '@/lib/utils/blog-utils';
 
@@ -47,7 +46,6 @@ export function BlogArticleCard({
       <Link
         href={`/blog/${post.slug.current}`}
         className="group flex flex-col h-full"
-        onMouseDown={playClickSound}
       >
         <article
           className={`flex flex-col bg-white dark:bg-zinc-900 rounded-sm overflow-hidden shadow-sm hover:shadow-sm transition-all duration-300 border border-zinc-200 dark:border-zinc-800 h-full`}

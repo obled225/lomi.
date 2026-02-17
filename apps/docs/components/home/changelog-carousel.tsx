@@ -5,7 +5,6 @@ import { motion } from 'framer-motion';
 import { useTranslation } from '@/lib/utils/translation-context';
 import { t } from '@/lib/i18n/translations';
 import Link from 'next/link';
-import { playClickSound } from '@/lib/utils/sound';
 import { Card } from '@/components/ui/card';
 
 interface ChangelogEntry {
@@ -39,11 +38,7 @@ function ChangelogEntryCard({
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay: index * 0.1 }}
     >
-      <Link
-        href="/changelog"
-        className="group flex flex-col h-full"
-        onMouseDown={playClickSound}
-      >
+      <Link href="/changelog" className="group flex flex-col h-full">
         <Card className="flex flex-col overflow-hidden shadow-sm hover:shadow-sm transition-all duration-300 h-full p-4 md:p-6 min-h-[220px] md:min-h-[235px] relative z-20">
           <div className="grow flex flex-col">
             {/* Date */}

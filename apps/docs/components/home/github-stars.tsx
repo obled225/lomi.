@@ -5,7 +5,6 @@
 import React from 'react';
 import Link from 'next/link';
 import { Star } from 'lucide-react';
-import { playClickSound } from '@/lib/utils/sound';
 import { useGithubStars } from '@/lib/hooks/use-github-stars-hooks';
 
 export function GithubStars() {
@@ -17,7 +16,6 @@ export function GithubStars() {
       target="_blank"
       rel="noopener noreferrer"
       className="flex items-center"
-      onMouseDown={() => playClickSound()}
       aria-label="Star lomi. on GitHub"
     >
       <div className="flex items-center gap-0.5 text-amber-500 hover:text-amber-400 dark:text-amber-400 dark:hover:text-amber-300 transition-colors">

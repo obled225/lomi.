@@ -5,7 +5,6 @@ import { useState } from 'react';
 import { LottieIcon } from '@/components/preview/lottie-icon';
 import { animations, LottieAnimationData } from '@/lib/utils/lottie-animations';
 import { useTheme } from '@/lib/hooks/use-theme';
-import { playClickSound } from '@/lib/utils/sound';
 import { Card, CardHeader, CardContent } from '@/components/ui/card';
 import { useTranslation } from '@/lib/utils/translation-context';
 import { t as translate } from '@/lib/i18n/translations';
@@ -174,8 +173,6 @@ export function IntegrationsDropdown({
   ];
 
   const toggleSection = (id: string) => {
-    playClickSound();
-
     // Define row groups
     const rows = [
       ['payments', 'refund-api'], // Row 1
@@ -243,7 +240,6 @@ export function IntegrationsDropdown({
                 className="group relative flex flex-col h-[57px] rounded-sm transition-all cursor-pointer hover:shadow-sm overflow-hidden"
                 onMouseEnter={() => setHoveredIcon(`feature-${index}`)}
                 onMouseLeave={() => setHoveredIcon(null)}
-                onClick={playClickSound}
               >
                 <CardContent className="p-3 text-sm">
                   <div className="flex items-center gap-3 pt-1">
@@ -356,7 +352,6 @@ export function IntegrationsDropdown({
                       <Card
                         key={index}
                         className={`rounded-sm transition-all cursor-pointer hover:shadow-sm ${index === 0 ? 'mt-1' : ''}`}
-                        onClick={playClickSound}
                       >
                         <CardContent className="p-3 text-sm">
                           <p className="text-sm font-medium text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 leading-tight">

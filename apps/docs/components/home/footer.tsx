@@ -19,7 +19,6 @@ import {
   SlackIcon,
 } from '@/components/preview/icons';
 import { Check } from 'lucide-react';
-import { playClickSound as playSound } from '@/lib/utils/sound';
 import { useTranslation } from '@/lib/utils/translation-context';
 import { t as translate } from '@/lib/i18n/translations';
 
@@ -53,14 +52,9 @@ export function Footer() {
     };
   }, []);
 
-  const playClickSound = useCallback(() => {
-    playSound();
-  }, []);
-
   const handleToggleTheme = useCallback(async () => {
-    playClickSound();
     await toggleTheme();
-  }, [toggleTheme, playClickSound]);
+  }, [toggleTheme]);
 
   // Wait for theme to be mounted to prevent hydration mismatches
 
@@ -80,7 +74,6 @@ export function Footer() {
                   <div className="flex items-center gap-4.25 flex-wrap justify-center md:justify-center xl:justify-start w-full sm:w-auto">
                     <Link
                       href="/"
-                      onClick={playClickSound}
                       className="inline-flex items-center ml-2 lg:ml-2"
                     >
                       {mounted && (
@@ -109,7 +102,6 @@ export function Footer() {
                       href={GITHUB_REPO_URL}
                       target="_blank"
                       rel="noopener noreferrer"
-                      onClick={playClickSound}
                       className="text-black dark:text-white hover:text-[#5FED83] dark:hover:text-[#5FED83] inline-flex items-center transition-colors"
                       aria-label="View our GitHub"
                     >
@@ -119,7 +111,6 @@ export function Footer() {
                       href="https://twitter.com/lomiafrica"
                       target="_blank"
                       rel="noopener noreferrer"
-                      onClick={playClickSound}
                       className="text-black dark:text-white hover:text-[#000000] dark:hover:text-[#FFFFFF] inline-flex items-center transition-colors"
                       aria-label="Follow us on Twitter"
                     >
@@ -129,7 +120,6 @@ export function Footer() {
                       href="https://discord.gg/rvUFkHM2kv"
                       target="_blank"
                       rel="noopener noreferrer"
-                      onClick={playClickSound}
                       className="text-black dark:text-white hover:text-[#5865F2] dark:hover:text-[#5865F2] inline-flex items-center transition-colors"
                       aria-label="Join our Discord server"
                     >
@@ -139,7 +129,6 @@ export function Footer() {
                       href="https://www.linkedin.com/company/lomiafri"
                       target="_blank"
                       rel="noopener noreferrer"
-                      onClick={playClickSound}
                       className="text-black dark:text-white hover:text-[#0077B5] dark:hover:text-[#0077B5] inline-flex items-center transition-colors"
                       aria-label="Follow us on LinkedIn"
                     >
@@ -149,7 +138,6 @@ export function Footer() {
                       href="https://join.slack.com/t/lomi-a/shared_invite/zt-3hezykfvo-eW1jX6IkXAqht875Y1wUOw"
                       target="_blank"
                       rel="noopener noreferrer"
-                      onClick={playClickSound}
                       className="text-black dark:text-white hover:text-[#E01E5A] dark:hover:text-[#E01E5A] inline-flex items-center transition-colors"
                       aria-label="Join our Slack community"
                     >
@@ -251,7 +239,6 @@ export function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-1.5 px-2 py-1.5 text-xs h-8 bg-transparent hover:bg-[#2a2f3d]/5 rounded-sm transition-colors duration-200 justify-center dark:hover:bg-[#2a2f3d]/20 group text-[#56A5F9] hover:text-[#52A1F8] dark:text-green-300 dark:hover:text-zinc-100"
-                    onClick={playClickSound}
                   >
                     <div className="relative flex items-center justify-center w-3 h-3 shrink-0">
                       <span className="animate-ping absolute inline-flex h-2 w-2 rounded-full bg-sky-400 dark:bg-green-500/50 opacity-50"></span>
@@ -293,7 +280,6 @@ export function Footer() {
                       <Link
                         href={item.link}
                         className="text-sm text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white transition-colors inline-flex items-center gap-2"
-                        onClick={playClickSound}
                       >
                         {item.name}
                       </Link>
@@ -340,7 +326,6 @@ export function Footer() {
                         target={item.target}
                         rel={item.rel}
                         className="text-sm text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white transition-colors whitespace-nowrap"
-                        onClick={playClickSound}
                       >
                         {item.name}
                       </Link>
@@ -449,7 +434,6 @@ export function Footer() {
                         target={item.target}
                         rel={item.rel}
                         className={`text-sm ${item.color} transition-colors group flex items-center`}
-                        onClick={playClickSound}
                       >
                         <span>{item.name}</span>
                         {item.icon}

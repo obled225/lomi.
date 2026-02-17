@@ -15,7 +15,6 @@ import { useTranslation } from '@/lib/utils/translation-context';
 import { t } from '@/lib/i18n/translations';
 import { createJobApplication, uploadResume } from '@/lib/supabase/queries';
 import { toast as showToast } from '@/components/ui/toast';
-import { playCompletionSound, playClickSound } from '@/lib/utils/sound';
 
 interface JobApplicationFormProps {
   jobTitle: string;
@@ -114,7 +113,6 @@ export function JobApplicationForm({
 
       setIsSubmitted(true);
       onSubmit?.();
-      playCompletionSound();
       showToast({
         type: 'success',
         description: String(
@@ -203,7 +201,6 @@ export function JobApplicationForm({
               />
               <label
                 htmlFor="resume"
-                onClick={playClickSound}
                 className={`flex items-center justify-center rounded-sm px-3 py-2 text-sm cursor-pointer transition-colors h-8 ${
                   resume
                     ? 'bg-[#56A5F9] text-white border-[#56A5F9] dark:bg-sky-900 dark:text-sky-300'

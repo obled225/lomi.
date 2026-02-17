@@ -6,7 +6,6 @@ import { ArrowRight } from 'lucide-react';
 import { useTranslation } from '@/lib/utils/translation-context';
 import { t } from '@/lib/i18n/translations';
 import Link from 'next/link';
-import { playClickSound } from '@/lib/utils/sound';
 import type { Post } from '@/lib/sanity/types';
 import { getPostCategory, getCategoryColor } from '@/lib/utils/blog-utils';
 import { Card } from '@/components/ui/card';
@@ -74,7 +73,6 @@ export function BlogArticlesCarousel() {
                   <Link
                     href={`/blog/${post.slug.current}`}
                     className="group flex flex-col h-full"
-                    onMouseDown={playClickSound}
                   >
                     <Card className="flex flex-col overflow-hidden shadow-sm hover:shadow-sm transition-all duration-300 h-full p-4 md:p-4 min-h-[220px] md:min-h-[235px]">
                       <div className="grow flex flex-col">

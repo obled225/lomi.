@@ -3,7 +3,6 @@
 import Link from 'next/link';
 import { useTranslation } from '@/lib/utils/translation-context';
 import { t } from '@/lib/i18n/translations';
-import { playClickSound } from '@/lib/utils/sound';
 
 interface Job {
   id: string;
@@ -22,7 +21,7 @@ export default function JobCard({ job }: JobCardProps) {
   const { currentLanguage } = useTranslation();
 
   return (
-    <Link href={`/careers/${job.slug}`} onClick={playClickSound}>
+    <Link href={`/careers/${job.slug}`}>
       <div className="flex items-center justify-between rounded-sm border border-zinc-200 dark:border-zinc-800 bg-background hover:bg-muted/50 px-6 py-4 transition-colors cursor-pointer">
         <div>
           <h3 className="mb-1 text-lg font-medium text-zinc-800 dark:text-white">

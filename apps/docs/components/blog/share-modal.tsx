@@ -20,7 +20,6 @@ import { Send as Telegram, Mail, Copy, Check } from 'lucide-react';
 import { useTranslation } from '@/lib/utils/translation-context';
 import { t } from '@/lib/i18n/translations';
 import { toast } from '@/components/ui/toast';
-import { playCompletionSound } from '@/lib/utils/sound';
 
 interface ShareModalProps {
   isOpen: boolean;
@@ -92,7 +91,6 @@ export function ShareModal({ isOpen, onClose, url, title }: ShareModalProps) {
           type: 'success',
           description: `${t('blog.copiedDesc', currentLanguage) as string}`,
         });
-        playCompletionSound();
         setTimeout(() => setCopied(false), 2000); // Reset after 2 seconds
       })
       .catch((err) => {

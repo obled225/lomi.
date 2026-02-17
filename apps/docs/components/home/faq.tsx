@@ -9,7 +9,6 @@ import { cn } from '@/lib/utils/cn';
 import { Button } from '@/components/ui/button';
 import { useTranslation } from '@/lib/utils/translation-context';
 import { t, getTranslations } from '@/lib/i18n/translations';
-import { playClickSound } from '@/lib/utils/sound';
 import {
   Accordion,
   AccordionItem,
@@ -70,10 +69,7 @@ const FaqSection = React.forwardRef<HTMLElement, FaqSectionProps>(
                       'hover:bg-muted/50',
                     )}
                   >
-                    <AccordionTrigger
-                      onClick={playClickSound}
-                      className="w-full px-0 py-2 h-auto justify-between hover:bg-transparent items-start flex-wrap sm:flex-nowrap [&[data-state=open]>svg]:rotate-180"
-                    >
+                    <AccordionTrigger className="w-full px-0 py-2 h-auto justify-between hover:bg-transparent items-start flex-wrap sm:flex-nowrap [&[data-state=open]>svg]:rotate-180">
                       <h3
                         className={cn(
                           'text-base sm:text-lg font-medium transition-colors duration-200 text-left leading-relaxed',
@@ -120,7 +116,6 @@ const FaqSection = React.forwardRef<HTMLElement, FaqSectionProps>(
                   size="header"
                   onClick={() => {
                     contactInfo.onContact?.();
-                    playClickSound();
                   }}
                 >
                   {contactInfo.buttonText}

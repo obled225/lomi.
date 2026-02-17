@@ -9,7 +9,6 @@ import { t } from '@/lib/i18n/translations';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { AgnosticBackground } from '@/components/home/agnostic-background';
-import { playClickSound } from '@/lib/utils/sound';
 
 interface PricingCardProps {
   currency: 'XOF' | 'USD' | 'EUR';
@@ -69,13 +68,7 @@ export function PricingCard({ currency }: PricingCardProps) {
             </div>
           </div>
           <div className="flex justify-center gap-4 -mt-2 md:-mt-4 px-4">
-            <Button
-              type="button"
-              variant="outline"
-              size="header"
-              asChild
-              onClick={playClickSound}
-            >
+            <Button type="button" variant="outline" size="header" asChild>
               <a
                 href="docs/core/merchant-of-record/pricing"
                 target="_blank"
@@ -85,13 +78,7 @@ export function PricingCard({ currency }: PricingCardProps) {
                 {String(t('earlyMemberPricing.learnMore', currentLanguage))}
               </a>
             </Button>
-            <Button
-              type="button"
-              variant="blue"
-              size="header"
-              asChild
-              onClick={playClickSound}
-            >
+            <Button type="button" variant="blue" size="header" asChild>
               <Link href="https://dashboard.lomi.africa/sign-in">
                 {String(t('earlyMemberPricing.getStarted', currentLanguage))}
               </Link>

@@ -6,7 +6,6 @@ import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from '@/lib/utils/translation-context';
 import { t } from '@/lib/i18n/translations';
-import { playClickSound } from '@/lib/utils/sound';
 import {
   formatCurrency,
   parseFormattedNumber,
@@ -109,7 +108,6 @@ export default function PricingTool() {
           key={curr}
           type="button"
           onClick={() => {
-            playClickSound();
             const newLimits = getCurrencyLimits(curr);
             const oldCurrency = currency; // Store old currency
             const oldAmount = averageAmount; // Store old amount
@@ -564,7 +562,6 @@ export default function PricingTool() {
                                 href="https://docs.lomi.africa/docs/core/merchant-of-record/pricing"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                onClick={playClickSound}
                                 aria-label="See how our fees apply (opens in new tab)"
                                 className="text-xs text-sky-600 hover:text-sky-700 dark:text-sky-300 dark:hover:text-sky-200 inline-flex items-center ml-1"
                               >

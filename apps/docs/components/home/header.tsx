@@ -13,7 +13,6 @@ import { DockDropdown } from '@/components/preview/dock-dropdown';
 import { Button } from '@/components/ui/button';
 import { IntegrationsDropdown } from '@/components/home/dropdowns/products-dropdown';
 import { DocumentationDropdown } from '@/components/home/dropdowns/documentation-dropdown';
-import { playClickSound } from '@/lib/utils/sound';
 import { useAuth } from '@/lib/hooks/use-auth';
 import { useTranslation } from '@/lib/utils/translation-context';
 import { t as translate } from '@/lib/i18n/translations';
@@ -23,13 +22,11 @@ import { GithubStars } from '@/components/home/github-stars';
 
 const AuthButtons = ({
   isMobile = false,
-  playClickSound,
   user,
   t,
   navigate,
 }: {
   isMobile?: boolean;
-  playClickSound: () => void;
   user: User | null;
   t: (key: string) => string;
   navigate: (path: string) => void;
@@ -46,7 +43,6 @@ const AuthButtons = ({
         variant="outline"
         size="header"
         onClick={() => {
-          playClickSound();
           window.open('https://cal.com/babacar-diop', '_blank');
         }}
       >
@@ -58,7 +54,6 @@ const AuthButtons = ({
         variant={user ? 'workspace' : 'blue'}
         size="header"
         onClick={() => {
-          playClickSound();
           navigate(
             user
               ? 'https://dashboard.lomi.africa/'
@@ -149,7 +144,7 @@ export function Header() {
       <header className="bg-background/80 backdrop-blur-md border border-zinc-200 dark:border-zinc-800 rounded-sm shadow-sm select-none">
         <div className="flex items-center justify-between h-12">
           <div className="flex items-center pl-3 md:pl-4 pt-2">
-            <Link href="/" onClick={playClickSound}>
+            <Link href="/">
               <div className="cursor-pointer hover:opacity-80 transition-opacity">
                 <Logo width={80} height={24} priority />
               </div>
@@ -169,7 +164,6 @@ export function Header() {
               className="text-sm text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors"
               onMouseEnter={handleDocumentationMouseEnter}
               onMouseLeave={handleDocumentationMouseLeave}
-              onClick={playClickSound}
             >
               {t('header.documentation')}
             </Button>
@@ -179,7 +173,6 @@ export function Header() {
               className="text-sm text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors"
               onMouseEnter={handleIntegrationsMouseEnter}
               onMouseLeave={handleIntegrationsMouseLeave}
-              onClick={playClickSound}
             >
               {t('header.products')}
             </Button>
@@ -200,10 +193,7 @@ export function Header() {
                   setIsIntegrationsOpen(false);
                 }, 200);
               }}
-              onClick={() => {
-                playClickSound();
-                navigate('/pricing');
-              }}
+              onClick={() => navigate('/pricing')}
             >
               {t('header.pricing')}
             </Button>
@@ -224,10 +214,7 @@ export function Header() {
                   setIsIntegrationsOpen(false);
                 }, 200);
               }}
-              onClick={() => {
-                playClickSound();
-                navigate('/blog');
-              }}
+              onClick={() => navigate('/blog')}
             >
               {t('header.blog')}
             </Button>
@@ -239,7 +226,6 @@ export function Header() {
 
             <AuthButtons
               isMobile={false}
-              playClickSound={playClickSound}
               user={user}
               t={t}
               navigate={navigate}
@@ -251,10 +237,7 @@ export function Header() {
             variant="ghost"
             size="icon"
             className="md:hidden pr-4 pt-2 text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white transition-colors"
-            onClick={() => {
-              playClickSound();
-              toggleMobileMenu();
-            }}
+            onClick={toggleMobileMenu}
             aria-label="Toggle mobile menu"
           >
             {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
@@ -269,10 +252,7 @@ export function Header() {
                 variant="ghost"
                 size="header"
                 className="text-left text-sm text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors w-full justify-start"
-                onClick={() => {
-                  playClickSound();
-                  navigate('/pricing');
-                }}
+                onClick={() => navigate('/pricing')}
               >
                 {t('header.pricing')}
               </Button>
@@ -280,10 +260,7 @@ export function Header() {
                 variant="ghost"
                 size="header"
                 className="text-left text-sm text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors w-full justify-start"
-                onClick={() => {
-                  playClickSound();
-                  navigate('/docs/introduction/what-is-lomi');
-                }}
+                onClick={() => navigate('/docs/introduction/what-is-lomi')}
               >
                 {t('header.documentation')}
               </Button>
@@ -291,10 +268,7 @@ export function Header() {
                 variant="ghost"
                 size="header"
                 className="text-left text-sm text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors w-full justify-start"
-                onClick={() => {
-                  playClickSound();
-                  navigate('/blog');
-                }}
+                onClick={() => navigate('/blog')}
               >
                 {t('header.blog')}
               </Button>
@@ -306,7 +280,6 @@ export function Header() {
 
               <AuthButtons
                 isMobile={true}
-                playClickSound={playClickSound}
                 user={user}
                 t={t}
                 navigate={navigate}

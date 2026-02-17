@@ -5,7 +5,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from '@/lib/utils/translation-context';
 import { t } from '@/lib/i18n/translations';
 import { useTheme } from '@/lib/hooks/use-theme';
-import { playClickSound } from '@/lib/utils/sound';
 
 export default function BusinessOutreach() {
   const { currentLanguage } = useTranslation();
@@ -38,13 +37,11 @@ export default function BusinessOutreach() {
   }, []);
 
   const handleReachOut = () => {
-    playClickSound();
     window.open('https://cal.com/babacar-diop/30min', '_blank');
     setIsVisible(false);
   };
 
   const handleDismiss = () => {
-    playClickSound();
     setIsVisible(false);
   };
 

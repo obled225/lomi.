@@ -11,7 +11,6 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { cn } from '@/lib/utils/cn';
 import { ComponentProps } from 'react';
-import { playClickSound } from '@/lib/utils/sound';
 import { useTheme } from '@/lib/hooks/use-theme';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import {
@@ -104,7 +103,6 @@ export function PreviewImages(props: ComponentProps<'div'>) {
           <button
             type="button"
             onClick={() => {
-              playClickSound();
               setActive(0);
             }}
             className={`flex-1 px-3 pt-1.5 pb-2.5 text-sm font-normal rounded-sm transition-all duration-200 h-7.5 focus:outline-none focus:ring-0 focus:border-none ${
@@ -118,7 +116,6 @@ export function PreviewImages(props: ComponentProps<'div'>) {
           <button
             type="button"
             onClick={() => {
-              playClickSound();
               setActive(1);
             }}
             className={`flex-1 px-3 pt-1.5 pb-2.5 text-sm font-normal rounded-sm transition-all duration-200 h-7.5 focus:outline-none focus:ring-0 focus:border-none ${
@@ -132,7 +129,6 @@ export function PreviewImages(props: ComponentProps<'div'>) {
           <button
             type="button"
             onClick={() => {
-              playClickSound();
               setActive(2);
             }}
             className={`flex-1 px-3 pt-1.5 pb-2.5 text-sm font-normal rounded-sm transition-all duration-200 h-7.5 focus:outline-none focus:ring-0 focus:border-none ${

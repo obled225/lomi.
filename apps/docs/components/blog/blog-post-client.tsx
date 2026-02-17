@@ -16,7 +16,6 @@ import Spinner from '@/components/ui/spinner';
 import { Button } from '@/components/ui/button';
 import { Share2 } from 'lucide-react';
 import { ShareModal } from '@/components/blog/share-modal';
-import { playClickSound } from '@/lib/utils/sound';
 
 import { getPostCategory, getCategoryColor } from '@/lib/utils/blog-utils';
 
@@ -222,7 +221,6 @@ export default function BlogPostClient({ slug }: BlogPostClientProps) {
           <Button
             variant="pink"
             onClick={() => {
-              playClickSound();
               router.push('/blog');
             }}
           >
@@ -348,7 +346,6 @@ export default function BlogPostClient({ slug }: BlogPostClientProps) {
                       variant="ghost"
                       size="sm"
                       onClick={() => {
-                        playClickSound();
                         setIsShareModalOpen(true);
                       }}
                       className="text-zinc-600 dark:text-zinc-400 inline-flex items-center justify-center h-6 w-6 p-1 rounded-sm border border-transparent transition-colors duration-150 hover:bg-blue-400/10 dark:hover:bg-blue-400/20 hover:text-blue-500 dark:hover:text-blue-400 hover:border-blue-500/20 dark:hover:border-blue-400/30"

@@ -5,7 +5,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { LottieIcon } from '@/components/preview/lottie-icon';
 import { animations, LottieAnimationData } from '@/lib/utils/lottie-animations';
-import { playClickSound } from '@/lib/utils/sound';
 import { Card, CardHeader, CardContent } from '@/components/ui/card';
 import { InfoBox } from '@/components/ui/info-box';
 import { useTranslation } from '@/lib/utils/translation-context';
@@ -75,7 +74,6 @@ export function DocumentationDropdown({
         <Link
           href={featuredCard.href}
           className="group flex-1 min-w-0 rounded-sm overflow-hidden bg-background border border-border hover:border-zinc-300 dark:hover:border-zinc-700 transition-all cursor-pointer hover:shadow-sm"
-          onClick={playClickSound}
         >
           <div className="relative h-full min-h-[280px] md:min-h-[320px] flex flex-col">
             {/* Image Background */}
@@ -125,7 +123,6 @@ export function DocumentationDropdown({
               href={card.href}
               onMouseEnter={() => setHoveredIcon(card.id)}
               onMouseLeave={() => setHoveredIcon(null)}
-              onClick={playClickSound}
             >
               <Card className="group relative flex flex-col h-[155px] rounded-sm transition-all cursor-pointer hover:shadow-sm overflow-hidden">
                 {/* Image Background */}

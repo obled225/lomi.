@@ -5,7 +5,6 @@
 import { ChevronDown } from 'lucide-react';
 import { useTranslation } from '@/lib/utils/translation-context';
 import { t as translate } from '@/lib/i18n/translations';
-import { playClickSound } from '@/lib/utils/sound';
 
 export default function PricingDetails() {
   const { currentLanguage } = useTranslation();
@@ -264,7 +263,6 @@ export default function PricingDetails() {
             <button
               key={section.id}
               onClick={() => {
-                playClickSound();
                 scrollToSection(section.id);
               }}
               className="flex items-center gap-2 text-sm md:text-base font-normal text-foreground hover:text-foreground/80 transition-colors py-2 w-fit"

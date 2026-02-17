@@ -7,7 +7,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from '@/lib/utils/translation-context';
 import { t } from '@/lib/i18n/translations';
 import { useTheme } from '@/lib/hooks/use-theme';
-import { playClickSound } from '@/lib/utils/sound';
 
 // Use a more specific key that's unlikely to be cleared
 const COOKIE_CONSENT_KEY = 'lomi-cookie-consent-status';
@@ -212,7 +211,6 @@ export default function CookieConsent() {
   }, [handleScroll, removeScrollListener, isMobile]);
 
   const handleAccept = () => {
-    playClickSound();
     setAnimationType('accept');
     setShowAnimation(true);
     removeScrollListener(); // Remove listener immediately on action
@@ -227,7 +225,6 @@ export default function CookieConsent() {
   };
 
   const handleDecline = () => {
-    playClickSound();
     setAnimationType('decline');
     setShowAnimation(true);
     removeScrollListener(); // Remove listener immediately on action

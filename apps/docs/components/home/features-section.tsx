@@ -24,7 +24,6 @@ import { Button } from '@/components/ui/button';
 import { GitHubIcon } from '@/components/preview/icons';
 import { useGithubStars } from '@/lib/hooks/use-github-stars-hooks';
 import { useTheme } from '@/lib/hooks/use-theme';
-import { playClickSound } from '@/lib/utils/sound';
 
 // Demo Revenue Chart Component with Interactive Features
 const DemoRevenueChart = ({ resolvedTheme }: { resolvedTheme: string }) => {
@@ -633,7 +632,9 @@ export function FeaturesSection() {
                   {String(t('features.card5.description', currentLanguage))}
                 </p>
                 <div className="w-full">
-                  <DemoRevenueChart resolvedTheme={mounted ? resolvedTheme : 'light'} />
+                  <DemoRevenueChart
+                    resolvedTheme={mounted ? resolvedTheme : 'light'}
+                  />
                 </div>
               </CardContent>
             </Card>
@@ -766,7 +767,6 @@ export function FeaturesSection() {
                     <button
                       type="button"
                       onClick={() => {
-                        playClickSound();
                         setActiveTab('product');
                       }}
                       className={`flex-1 px-3 pt-1.5 pb-2.5 text-sm font-normal rounded-sm transition-all duration-200 h-7.5 focus:outline-none focus:ring-0 focus:border-none ${
@@ -782,7 +782,6 @@ export function FeaturesSection() {
                     <button
                       type="button"
                       onClick={() => {
-                        playClickSound();
                         setActiveTab('subscription');
                       }}
                       className={`flex-1 px-3 pt-1.5 pb-2.5 text-sm font-normal rounded-sm transition-all duration-200 h-7.5 focus:outline-none focus:ring-0 focus:border-none ${
@@ -798,7 +797,6 @@ export function FeaturesSection() {
                     <button
                       type="button"
                       onClick={() => {
-                        playClickSound();
                         setActiveTab('checkout');
                       }}
                       className={`flex-1 px-3 pt-1.5 pb-2.5 text-sm font-normal rounded-sm transition-all duration-200 h-7.5 focus:outline-none focus:ring-0 focus:border-none ${
@@ -967,7 +965,6 @@ export function FeaturesSection() {
                     href="https://github.com/lomiafrica/lomi./"
                     target="_blank"
                     rel="noopener noreferrer"
-                    onClick={playClickSound}
                     className="w-full rounded-sm font-normal border border-zinc-200 dark:border-zinc-800 flex items-center h-8 text-sm overflow-hidden"
                   >
                     <div className="inline-flex items-center justify-center gap-2 bg-transparent px-3 py-2 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white border-zinc-200 dark:border-zinc-800 h-full">
@@ -980,12 +977,7 @@ export function FeaturesSection() {
                       <Star className="h-3.5 w-3.5 text-amber-600 dark:text-amber-300 hover:text-amber-700 dark:hover:text-amber-200 fill-current shrink-0" />
                     </div>
                   </a>
-                  <Button
-                    asChild
-                    variant="outline"
-                    className="w-full h-8"
-                    onClick={playClickSound}
-                  >
+                  <Button asChild variant="outline" className="w-full h-8">
                     <a
                       href="/docs/core/introduction/what-is-lomi"
                       className="flex items-center justify-center text-foreground"

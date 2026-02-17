@@ -6,7 +6,6 @@ import React, { memo, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { languages } from '@/lib/i18n/config';
 import { useTranslation } from '@/lib/utils/translation-context';
-import { playClickSound } from '@/lib/utils/sound';
 
 interface LanguageSwitcherProps {
   onLanguageChange?: (language: string) => void;
@@ -23,8 +22,6 @@ export const LanguageSwitcher = memo(
       (e: React.MouseEvent) => {
         e.preventDefault();
         e.stopPropagation();
-
-        playClickSound();
 
         const currentIndex = languages.findIndex(
           (l) => l.code === currentLanguage,
