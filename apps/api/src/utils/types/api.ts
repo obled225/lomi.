@@ -105,6 +105,7 @@ export type Database = {
           organization_id: string;
           phone_number: string;
           pin_code: string | null;
+          pricing_plan_type: APIEnums['pricing_plan_type'] | null;
           slug: string | null;
           status: APIEnums['organization_status'];
           storefront_enabled: boolean;
@@ -135,6 +136,7 @@ export type Database = {
           organization_id?: string;
           phone_number: string;
           pin_code?: string | null;
+          pricing_plan_type?: APIEnums['pricing_plan_type'] | null;
           slug?: string | null;
           status?: APIEnums['organization_status'];
           storefront_enabled?: boolean;
@@ -165,6 +167,7 @@ export type Database = {
           organization_id?: string;
           phone_number?: string;
           pin_code?: string | null;
+          pricing_plan_type?: APIEnums['pricing_plan_type'] | null;
           slug?: string | null;
           status?: APIEnums['organization_status'];
           storefront_enabled?: boolean;
