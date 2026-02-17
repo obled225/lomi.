@@ -34,8 +34,8 @@ export default function SimpleImage({
 }: SimpleImageProps) {
   const { resolvedTheme, mounted } = useTheme();
 
-  // Use 'dark' as default during SSR (matches your theme default)
-  const currentTheme = mounted ? resolvedTheme : 'dark';
+  // Use 'light' as default during SSR and before mount (matches defaultTheme: 'light')
+  const currentTheme = mounted ? resolvedTheme : 'light';
 
   // Get image source based on theme
   const getImageSrc = (imgSrc: string | { light: string; dark: string }) => {

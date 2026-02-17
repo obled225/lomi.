@@ -50,13 +50,32 @@ export function GithubStarsProvider({
   const [isLoading, setIsLoading] = useState(!hasFetched);
 
   useEffect(() => {
-    // Only fetch once when the provider mounts
-    if (!hasFetched) {
+    if (hasFetched) return;
+
+    const scheduleFetch = () => {
       fetchStarsOnce().then((result) => {
         setStars(result);
         setIsLoading(false);
       });
+    };
+
+    let id: number | ReturnType<typeof setTimeout> | undefined;
+    let usedIdle = false;
+    if (typeof window !== 'undefined' && window.requestIdleCallback) {
+      id = window.requestIdleCallback(scheduleFetch, { timeout: 2000 });
+      usedIdle = true;
+    } else if (typeof window !== 'undefined') {
+      id = window.setTimeout(scheduleFetch, 2000);
     }
+
+    return () => {
+      if (typeof window === 'undefined' || id === undefined) return;
+      if (usedIdle && window.cancelIdleCallback) {
+        window.cancelIdleCallback(id as number);
+      } else {
+        window.clearTimeout(id);
+      }
+    };
   }, []);
 
   return (

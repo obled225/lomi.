@@ -135,7 +135,6 @@ export const metadata: Metadata = {
     'twitter:description[fr]':
       "lomi. est une suite d'APIs qui facilitent le traitement des paiements en ligne et les solutions e-commerce en Afrique de l'Ouest. Acceptez des paiements, effectuez des versements et automatisez vos flux financiers en toute simplicité.",
     'msapplication-TileColor': '#da532c',
-    preconnect: ['https://api.producthunt.com', 'https://res.cloudinary.com'],
   },
 };
 
@@ -162,51 +161,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={`${font.variable}`} suppressHydrationWarning>
       <head>
-        {/* Preload LCP hero images with media queries for faster loading */}
-        {/* Desktop dark theme (most common) */}
-        <link
-          rel="preload"
-          as="image"
-          href="/company/dashboard/main-en-d.webp"
-          media="(prefers-color-scheme: dark) and (min-width: 768px)"
-        />
-        {/* Desktop light theme */}
-        <link
-          rel="preload"
-          as="image"
-          href="/company/dashboard/main-en-l.webp"
-          media="(prefers-color-scheme: light) and (min-width: 768px)"
-        />
-        {/* Mobile image (theme-agnostic) */}
-        <link
-          rel="preload"
-          as="image"
-          href="/company/dashboard/mobile.webp"
-          media="(max-width: 767px)"
-        />
-        {/* Preconnect to critical origins for better performance */}
-        <link rel="preconnect" href="https://cdn.sanity.io" crossOrigin="" />
-        <link
-          rel="preconnect"
-          href="https://mdswvokxrnfggrujsfjd.supabase.co"
-          crossOrigin=""
-        />
-        <link
-          rel="preconnect"
-          href="https://res.cloudinary.com"
-          crossOrigin=""
-        />
-        <link
-          rel="preconnect"
-          href="https://api.producthunt.com"
-          crossOrigin=""
-        />
-        <link rel="preconnect" href="https://api.github.com" crossOrigin="" />
-        <link rel="dns-prefetch" href="//cdn.sanity.io" />
-        <link rel="dns-prefetch" href="//mdswvokxrnfggrujsfjd.supabase.co" />
-        <link rel="dns-prefetch" href="//res.cloudinary.com" />
-        <link rel="dns-prefetch" href="//api.producthunt.com" />
-        {/* Structured Data JSON-LD for rich results - must be in head for crawlers */}
         <StructuredData />
       </head>
       <Body>
