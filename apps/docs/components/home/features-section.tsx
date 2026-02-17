@@ -633,7 +633,7 @@ export function FeaturesSection() {
                   {String(t('features.card5.description', currentLanguage))}
                 </p>
                 <div className="w-full">
-                  <DemoRevenueChart resolvedTheme={resolvedTheme} />
+                  <DemoRevenueChart resolvedTheme={mounted ? resolvedTheme : 'light'} />
                 </div>
               </CardContent>
             </Card>
