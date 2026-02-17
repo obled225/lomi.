@@ -2,12 +2,22 @@
 
 'use client';
 
+import dynamic from 'next/dynamic';
 import { Hero } from '@/components/home/hero';
-import { FeaturesSection } from '@/components/home/features-section';
-import { UpdatesSection } from '@/components/home/updates-section';
-import { AddOns } from '@/components/home/add-ons';
-// import { EarlyMemberPricing } from '@/components/home/early-member-pricing';
 import { useHomePageInit } from '@/lib/hooks/use-home-page-init';
+
+const FeaturesSection = dynamic(
+  () => import('@/components/home/features-section').then((m) => ({ default: m.FeaturesSection })),
+  { ssr: true, loading: () => <section className="min-h-[500px]" aria-hidden /> }
+);
+const AddOns = dynamic(
+  () => import('@/components/home/add-ons').then((m) => ({ default: m.AddOns })),
+  { ssr: true, loading: () => <section className="min-h-[400px]" aria-hidden /> }
+);
+const UpdatesSection = dynamic(
+  () => import('@/components/home/updates-section').then((m) => ({ default: m.UpdatesSection })),
+  { ssr: true, loading: () => <section className="min-h-[400px] mt-4 md:mt-36" aria-hidden /> }
+);
 
 interface HomePageClientProps {
   initialTitleIndex: number | null;
