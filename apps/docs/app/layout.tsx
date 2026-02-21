@@ -9,7 +9,7 @@ import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { StructuredData } from '@/components/home/structured-data';
 
-const title = "lomi.";
+const title = 'lomi.';
 const description =
   'lomi. is a suite of APIs powering online payment processing and e-commerce solutions in West Africa. Accept payments, send payouts, and automate financial workflows with ease.';
 

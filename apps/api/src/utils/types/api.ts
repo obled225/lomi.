@@ -1808,7 +1808,9 @@ export type Database = {
           p_organization_id: string;
           p_payment_link_id?: string | null;
           p_require_billing_address?: boolean | null;
+          p_shipping_amount?: number | null;
           p_success_url?: string | null;
+          p_tax_amount?: number | null;
           p_title?: string | null;
         };
         Returns: Json;
