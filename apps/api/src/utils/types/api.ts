@@ -1662,10 +1662,12 @@ export type Database = {
           converted_available_balance: number;
           converted_pending_balance: number;
           converted_total_balance: number;
+          converted_unavailable_balance: number;
           currency_code: APIEnums['currency_code'];
           pending_balance: number;
           target_currency: APIEnums['currency_code'];
           total_balance: number;
+          unavailable_balance: number;
         }[];
       };
       fetch_account_balance: {
