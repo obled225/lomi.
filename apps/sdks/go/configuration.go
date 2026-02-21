@@ -1,4 +1,4 @@
-// Package lomi provides types for the Lomi API
+// Package lomi provides types for the lomi. API
 // AUTO-GENERATED - Do not edit manually
 package lomi
 

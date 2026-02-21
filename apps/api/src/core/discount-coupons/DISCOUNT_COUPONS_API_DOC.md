@@ -662,7 +662,7 @@ All fields are merchant-visible. No admin-only fields exist in the discount_coup
 
 ## Why Coupons Are Immutable
 
-Discount coupons in the Lomi API are **immutable** (cannot be updated or deleted) by design:
+Discount coupons in the lomi. API are **immutable** (cannot be updated or deleted) by design:
 
 ### Reasons:
 1. **Audit Trail**: Preserves exact coupon terms for historical transactions

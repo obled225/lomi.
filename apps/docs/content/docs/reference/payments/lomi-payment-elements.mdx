@@ -1,23 +1,23 @@
 ---
-title: Lomi Payment Elements
+title: lomi. Payment Elements
 description: Accept payments directly in your app with Lomi's white-labeled payment infrastructure.
 ---
 
 import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
 import { Callout } from 'fumadocs-ui/components/callout';
 
-# Lomi Payment Elements
+# lomi. Payment Elements
 
-Lomi Payment Elements allow you to accept card payments directly within your application without redirecting users to a hosted checkout page. This gives you full control over the user experience while Lomi handles the payment processing complexity.
+lomi. Payment Elements allow you to accept card payments directly within your application without redirecting users to a hosted checkout page. This gives you full control over the user experience while lomi. handles the payment processing complexity.
 
 <Callout type="info">
-  Lomi Payment Elements are powered by secure, PCI-compliant infrastructure. You
+  lomi. Payment Elements are powered by secure, PCI-compliant infrastructure. You
   never touch raw card data.
 </Callout>
 
 ## Overview
 
-There are three ways to integrate Lomi Payments:
+There are three ways to integrate lomi. Payments:
 
 | Method                                      | Use Case                                                   |
 | ------------------------------------------- | ---------------------------------------------------------- |
@@ -41,7 +41,7 @@ There are three ways to integrate Lomi Payments:
 
 ### 1. Get Your API Keys
 
-You'll need two keys from your [Lomi Dashboard](https://lomi.africa/dashboard/settings/api-keys):
+You'll need two keys from your [lomi. Dashboard](https://lomi.africa/dashboard/settings/api-keys):
 
 - **Publishable Key** (`lomi_pk_...`): Used client-side to initialize the SDK
 - **Secret Key** (`lomi_sk_...`): Used server-side to create Payment Intents
@@ -210,7 +210,7 @@ POST https://api.lomi.africa/payment-intents
 
 ## Webhooks
 
-After a successful payment, Lomi sends a webhook to your configured endpoint:
+After a successful payment, lomi. sends a webhook to your configured endpoint:
 
 ```json
 {

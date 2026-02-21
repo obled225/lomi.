@@ -1,7 +1,7 @@
 {
   "name": "@lomi./react-native",
   "version": "0.1.0",
-  "description": "Lomi Payment Elements for React Native",
+  "description": "lomi. Payment Elements for React Native",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {

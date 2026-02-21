@@ -551,7 +551,7 @@ The Transactions API follows a **read-only, security-first** architecture:
 
 ### Why Transactions Are Read-Only
 
-Transactions in the Lomi API are **read-only** by design:
+Transactions in the lomi. API are **read-only** by design:
 
 **Reasons:**
 1. **Data Integrity**: Transactions represent actual financial events

@@ -1,7 +1,7 @@
 /**
- * Lomi Payment Elements
+ * lomi. Payment Elements
  * 
- * Client-side payment form components for Lomi payments.
+ * Client-side payment form components for lomi. payments.
  * Fully white-labeled - no third-party branding exposed.
  * 
  * @example
@@ -9,7 +9,7 @@
  * import { loadLomi } from '@lomi./sdk';
  * import type { Lomi, LomiElements } from '@lomi./sdk';
  * 
- * const lomi: Lomi = await loadLomi('lomi_pk_...');
+ * const lomi: lomi. = await loadLomi('lomi_pk_...');
  * const elements: LomiElements = lomi.elements({ clientSecret });
  * const paymentElement = elements.create('payment');
  * paymentElement.mount('#payment-element');
@@ -27,7 +27,7 @@ import type {
 } from '@stripe/stripe-js';
 
 // White-labeled type aliases - developers see "Lomi" not "Stripe"
-export type Lomi = Stripe;
+export type lomi. = Stripe;
 export type LomiElements = StripeElements;
 export type LomiElementsOptions = StripeElementsOptions;
 export type LomiPaymentResult = PaymentIntentResult;
@@ -35,7 +35,7 @@ export type LomiSetupResult = SetupIntentResult;
 export type LomiConfirmPaymentData = ConfirmPaymentData;
 
 /**
- * Options for mounting the custom Lomi Card Form
+ * Options for mounting the custom lomi. Card Form
  */
 export interface LomiCardFormOptions {
   containerId: string;
@@ -86,7 +86,7 @@ export interface LomiCardFormResult {
 }
 
 /**
- * Lomi Platform Key
+ * lomi. Platform Key
  * 
  * Internal platform key used for payment processing infrastructure.
  * This is an immutable value - SDK updates required if changed.
@@ -94,20 +94,20 @@ export interface LomiCardFormResult {
 const LOMI_PLATFORM_KEY = 'pk_live_51Ig94GGwgS0qnVOVpvSCeUiAf5RfjFFcv4alY8MpuB1M3X7gz3gMdcAoUA7OjG6e0Y2MAOtCsaYqkdqHT0zhTcC800gRyH9ssq';
 
 // Singleton promise to avoid multiple loads
-let lomiPromise: Promise<Lomi | null> | null = null;
+let lomiPromise: Promise<lomi. | null> | null = null;
 
 /**
- * Load and initialize Lomi for payment processing.
+ * Load and initialize lomi. for payment processing.
  * 
- * @param publishableKey - Your Lomi publishable key (lomi_pk_...)
- * @returns Promise resolving to Lomi instance
+ * @param publishableKey - Your lomi. publishable key (lomi_pk_...)
+ * @returns Promise resolving to lomi. instance
  * 
  * @example
  * ```ts
  * import { loadLomi } from '@lomi./sdk';
  * import type { Lomi, LomiElements } from '@lomi./sdk';
  * 
- * const lomi: Lomi | null = await loadLomi('lomi_pk_your_key');
+ * const lomi: lomi. | null = await loadLomi('lomi_pk_your_key');
  * 
  * if (lomi) {
  *   // Create elements with client secret from your server
@@ -127,8 +127,8 @@ let lomiPromise: Promise<Lomi | null> | null = null;
  * }
  * ```
  */
-export async function loadLomi(publishableKey: string): Promise<Lomi | null> {
-  // Validate Lomi key format
+export async function loadLomi(publishableKey: string): Promise<lomi. | null> {
+  // Validate lomi. key format
   if (!publishableKey || !publishableKey.startsWith('lomi_pk_')) {
     console.warn('[Lomi] Invalid key format. Keys should start with "lomi_pk_"');
   }
@@ -143,7 +143,7 @@ export async function loadLomi(publishableKey: string): Promise<Lomi | null> {
 
 /**
  * Mounts a pre-styled "Split Fields" card form (Number, Expiry, CVC) into a container.
- * This provides the efficient "Lomi Standard" UI without manual DOM construction.
+ * This provides the efficient "lomi. Standard" UI without manual DOM construction.
  * 
  * @param elements - The LomiElements instance
  * @param options - Configuration for container and styling

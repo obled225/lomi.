@@ -1,12 +1,12 @@
 /**
- * Lomi Embedded Checkout SDK
+ * lomi. Embedded Checkout SDK
  * 
- * This SDK allows merchants to embed the Lomi checkout experience
+ * This SDK allows merchants to embed the lomi. checkout experience
  * directly in their website via an iframe modal.
  */
 
 interface LomiEmbedOptions {
-  publicKey: string;      // lomi_pk_... (your Lomi publishable key)
+  publicKey: string;      // lomi_pk_... (your lomi. publishable key)
   sessionId: string;      // Checkout Session ID from create_checkout_session
   elementId?: string;     // Optional: DOM ID to mount iframe into (for inline mode)
   mode?: 'modal' | 'inline'; // Default: 'modal'
@@ -58,7 +58,7 @@ const getModalStyles = (options: LomiEmbedOptions) => ({
 });
 
 /**
- * Load Lomi Checkout in either modal or inline mode.
+ * Load lomi. Checkout in either modal or inline mode.
  * 
  * @example Modal mode (default):
  * ```js
@@ -82,7 +82,7 @@ const getModalStyles = (options: LomiEmbedOptions) => ({
 export const loadLomiCheckout = (options: LomiEmbedOptions): LomiEmbedResult | undefined => {
   const mode = options.mode || 'modal';
   
-  // Base URL for Lomi Checkout
+  // Base URL for lomi. Checkout
   const baseUrl = typeof window !== 'undefined' && window.location.hostname === 'localhost'
     ? window.location.origin
     : 'https://lomi.africa';
@@ -145,7 +145,7 @@ export const loadLomiCheckout = (options: LomiEmbedOptions): LomiEmbedResult | u
   const messageHandler = (event: MessageEvent) => {
     if (event.data?.type === 'LOMI_RESIZE' && event.data?.height) {
       // Could adjust container height if needed
-      console.log('Lomi resize:', event.data.height);
+      console.log('lomi. resize:', event.data.height);
     }
     
     // Handle checkout completion

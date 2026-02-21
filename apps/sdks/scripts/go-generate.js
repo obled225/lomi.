@@ -70,7 +70,7 @@ function mapType(field) {
 
 // 1. Generate models.go
 function generateModels() {
-	let content = `// Package lomi provides types for the Lomi API
+	let content = `// Package lomi provides types for the lomi. API
 // AUTO-GENERATED - Do not edit manually
 package lomi
 
@@ -119,7 +119,7 @@ package lomi
 writeFileSync(join(outputDir, 'models.go'), generateModels());
 
 // 2. Generate configuration.go
-const configContent = `// Package lomi provides types for the Lomi API
+const configContent = `// Package lomi provides types for the lomi. API
 // AUTO-GENERATED - Do not edit manually
 package lomi
 
@@ -157,7 +157,7 @@ func WithHTTPClient(client *http.Client) ClientOption {
 writeFileSync(join(outputDir, 'configuration.go'), configContent);
 
 // 3. Generate response.go
-const responseContent = `// Package lomi provides types for the Lomi API
+const responseContent = `// Package lomi provides types for the lomi. API
 // AUTO-GENERATED - Do not edit manually
 package lomi
 
@@ -177,7 +177,7 @@ func (e *Error) Error() string {
 writeFileSync(join(outputDir, 'response.go'), responseContent);
 
 // 4. Generate utils.go
-const utilsContent = `// Package lomi provides types for the Lomi API
+const utilsContent = `// Package lomi provides types for the lomi. API
 // AUTO-GENERATED - Do not edit manually
 package lomi
 

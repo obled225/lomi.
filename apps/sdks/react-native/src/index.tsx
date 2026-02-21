@@ -11,7 +11,7 @@ import {
 export type { CardFieldInput } from '@stripe/stripe-react-native';
 
 /**
- * Lomi Platform Key
+ * lomi. Platform Key
  * 
  * Internal platform key used for payment processing infrastructure.
  * This is an immutable value - SDK updates required if changed.
@@ -27,7 +27,7 @@ export interface LomiProviderProps {
 }
 
 /**
- * LomiProvider - Wrap your app with this to enable Lomi payments
+ * LomiProvider - Wrap your app with this to enable lomi. payments
  * 
  * @example
  * ```tsx
@@ -50,7 +50,7 @@ export const LomiProvider: React.FC<LomiProviderProps> = ({
     children,
     ...props
 }) => {
-    // Validate Lomi key format
+    // Validate lomi. key format
     if (!publishableKey?.startsWith('lomi_pk_')) {
         console.warn('[Lomi] Invalid key format. Keys should start with "lomi_pk_"');
     }
@@ -66,7 +66,7 @@ export const LomiProvider: React.FC<LomiProviderProps> = ({
 };
 
 /**
- * useLomi - Access Lomi payment methods
+ * useLomi - Access lomi. payment methods
  * 
  * @example
  * ```tsx

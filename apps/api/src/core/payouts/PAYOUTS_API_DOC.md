@@ -2,7 +2,7 @@
 
 ## Overview
 
-The Payouts API allows you to withdraw funds from your Lomi account balance to your bank account or mobile money wallet. All payouts are processed asynchronously by payment providers (Wave, SPI, etc.) and status updates are sent via webhooks.
+The Payouts API allows you to withdraw funds from your lomi. account balance to your bank account or mobile money wallet. All payouts are processed asynchronously by payment providers (Wave, SPI, etc.) and status updates are sent via webhooks.
 
 **Important:** Payouts are **initiated** immediately but **processed asynchronously**. Always check the status via webhooks or polling.
 
