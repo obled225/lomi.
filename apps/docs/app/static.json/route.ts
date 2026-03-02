@@ -40,8 +40,12 @@ export async function GET(): Promise<Response> {
       includeRoot: true,
     });
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const pageData = page.data as any;
+    const pageData = page.data as unknown as {
+      structuredData: {
+        headings: string[];
+        contents: string[];
+      };
+    };
     const structuredData = pageData.structuredData;
     const structured = structuredData
       ? {

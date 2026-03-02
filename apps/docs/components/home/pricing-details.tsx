@@ -292,8 +292,11 @@ export default function PricingDetails() {
                     {/* Content sections */}
                     <div className="space-y-6 md:space-y-8">
                       {sectionData.sections.map((subsection, idx) => {
-                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                        const sub = subsection as any;
+                        const sub = subsection as unknown as {
+                          subtitle: string;
+                          items: { text: string; bubble?: string }[];
+                          table?: { label: string; value: string }[];
+                        };
                         return (
                           <div key={idx} className="space-y-3">
                             {/* Subtitle */}

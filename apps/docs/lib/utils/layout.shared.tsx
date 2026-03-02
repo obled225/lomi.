@@ -12,8 +12,7 @@ import { Logo } from './logo';
  */
 export const logo = <Logo />;
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const linkItems: any[] = [];
+export const linkItems: BaseLayoutProps['links'] = [];
 
 export function baseOptions(): BaseLayoutProps {
   return {

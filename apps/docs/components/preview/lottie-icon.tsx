@@ -117,8 +117,7 @@ const LottieIconComponent = ({
       setAnimData(null);
       setIsLoading(false);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [animationData, colorKey]); // Use colorKey string instead of color array for stable comparison
+  }, [animationData, color, colorKey]); // colorKey is stable string of color; re-runs when color changes
 
   // Set initial frame when animation loads
   useEffect(() => {

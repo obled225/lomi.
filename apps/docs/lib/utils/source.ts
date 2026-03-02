@@ -27,13 +27,14 @@ export const source = loader({
 export const blog = loader({
   baseUrl: '/blog',
   source: {
-    files: blogPosts.map((post) => ({
-      type: 'page',
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      path: (post as any).slug || (post as any).path,
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      data: (post as any).data || post,
-    })),
+    files: blogPosts.map((post) => {
+      const entry = post as unknown as Record<string, unknown>;
+      return {
+        type: 'page' as const,
+        path: (entry.slug ?? entry.path ?? '') as string,
+        data: (entry.data ?? post) as Record<string, unknown>,
+      };
+    }),
   },
 });
 
