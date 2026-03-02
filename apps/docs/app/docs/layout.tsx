@@ -19,7 +19,7 @@ export default function Layout({ children }: { children: ReactNode }) {
       {...base}
       tree={source.pageTree}
       // just icon items
-      links={linkItems.filter((item: { type: string }) => item.type === 'icon')}
+      links={linkItems?.filter((item) => item.type === 'icon') ?? []}
       searchToggle={
         {
           /*
