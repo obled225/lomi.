@@ -183,29 +183,13 @@ export class StripeWebhookService {
     let txnData: any = null;
 
     // =========================================================================
-    // 1. UPDATE TRANSACTION STATUS (Non-blocking - don't fail if this times out)
+    // 1. SERVER-SIDE INTERNATIONAL CARD FEE DETECTION (MUST run BEFORE balance update)
     // =========================================================================
-    try {
-      txnData = await this.updateStripeCheckoutStatus(
-        paymentIntent.id,
-        chargeId,
-        'succeeded',
-        null,
-        null,
-        paymentMethodId,
-      );
-    } catch (statusError: any) {
-      this.logger.error({
-        message: 'update_stripe_checkout_status_failed',
-        payment_intent_id: paymentIntent.id,
-        error: statusError?.message || 'Unknown error',
-      });
-      // Continue processing - don't fail the entire webhook
-    }
-
-    // =========================================================================
-    // 2. SERVER-SIDE INTERNATIONAL CARD FEE DETECTION
-    // =========================================================================
+    // CRITICAL: We must apply the international card fee to the transaction
+    // BEFORE update_stripe_checkout_status runs update_balances_for_transaction.
+    // Otherwise the balance gets credited with the pre-intl-fee amount (e.g. 11,150 XOF)
+    // while the transaction shows post-intl-fee net (e.g. 10,910 XOF), causing
+    // "En cours" to display the wrong (higher) amount.
     if (paymentMethodId && this.stripe) {
       try {
         const paymentMethod =
@@ -224,7 +208,7 @@ export class StripeWebhookService {
           is_international: isInternational,
         });
 
-        // Call RPC to update fee and save card details
+        // Call RPC to update fee and save card details BEFORE balance credit
         const { error: feeError } = await (
           this.supabase.getClient() as any
         ).rpc('update_transaction_fee_metadata', {
@@ -256,6 +240,27 @@ export class StripeWebhookService {
         });
         // Non-blocking: do not fail the webhook for this
       }
+    }
+
+    // =========================================================================
+    // 2. UPDATE TRANSACTION STATUS & CREDIT BALANCE (Non-blocking - don't fail if this times out)
+    // =========================================================================
+    try {
+      txnData = await this.updateStripeCheckoutStatus(
+        paymentIntent.id,
+        chargeId,
+        'succeeded',
+        null,
+        null,
+        paymentMethodId,
+      );
+    } catch (statusError: any) {
+      this.logger.error({
+        message: 'update_stripe_checkout_status_failed',
+        payment_intent_id: paymentIntent.id,
+        error: statusError?.message || 'Unknown error',
+      });
+      // Continue processing - don't fail the entire webhook
     }
 
     // =========================================================================
