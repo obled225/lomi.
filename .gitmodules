@@ -16,3 +16,6 @@
 [submodule "apps/checkout"]
 	path = apps/checkout
 	url = https://github.com/lomiafrica/checkout.git
+[submodule "apps/website"]
+	path = apps/website
+	url = https://github.com/lomiafrica/website.git
