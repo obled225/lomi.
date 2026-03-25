@@ -53,7 +53,7 @@ export class WebhookSenderService {
     event: WebhookEvent,
     data: any,
     maxRetries = 3,
-    retryDelay = 5000,
+    retryDelay = 3000,
   ): Promise<boolean> {
     this.logger.log({
       message: 'Attempting to send webhook',
@@ -91,7 +91,7 @@ export class WebhookSenderService {
             'X-Lomi-Event': event,
             'User-Agent': 'Lomi-Webhook/1.0',
           },
-          timeout: 10000,
+          timeout: 4000, // 4s timeout prevents Vercel from hanging and Stripe from timing out
         });
 
         lastResponseStatus = response.status;
